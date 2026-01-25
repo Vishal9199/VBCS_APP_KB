@@ -1,0 +1,26 @@
+{
+    "items": [
+        {
+            "user_name": "Muna Zahran Ali Al Maawali منى  المعولية",
+            "final_json": "[{\"application_id\":24,\"application_name\":\"NWS Custom Application\",\"application_code\":\"NWS_CUSTOM_APPLICATION\",\"role\":[{\"role_id\":\"602\",\"role_code\":\"CUSTOM_ADMIN_ROLE\",\"role_name\":\"Custom Admin Role\",\"menu\":[{\"menu_code\":\"CUSTOM_ADMIN_MENU\",\"menu_name\":\"Custom Admin Menu\",\"menu_id\":59,\"function\":[{\"function_code\":\"COMMERCIAL_EVALUATION_SUMMARY\",\"function_name\":\"Commercial Evaluation Summary\",\"fun_remarks\":\"\",\"page_url\":\"https://oic-vbcs-dhfsoictest-vb-axbrdbhb3wme.builder.eu-amsterdam-1.ocp.oraclecloud.com/ic/builder/rt/DarwishOTLUAT/live/webApps/vbredwoodapp/vp/shell/attendance\",\"menu_entry_id\":1341,\"full_access\":\"Y\",\"allow_edit\":\"Y\",\"allow_create\":\"Y\",\"allow_delete\":\"Y\",\"read_only\":\"N\",\"menu_active_flag\":\"Y\"},{\"function_code\":\"HOUSE_CONNECTION_MASTER\",\"function_name\":\"House Connection Master\",\"fun_remarks\":\"\",\"page_url\":\"https://oic-vbcs-dhfsoictest-vb-axbrdbhb3wme.builder.eu-amsterdam-1.ocp.oraclecloud.com/ic/builder/rt/DarwishOTLUAT/live/webApps/vbredwoodapp/vp/shell/attendance\",\"menu_entry_id\":1323,\"full_access\":\"Y\",\"allow_edit\":\"Y\",\"allow_create\":\"Y\",\"allow_delete\":\"Y\",\"read_only\":\"N\",\"menu_active_flag\":\"Y\"},{\"function_code\":\"HOUSE_CONNECTION_TRANSACTION\",\"function_name\":\"House Connection Transaction\",\"fun_remarks\":\"\",\"page_url\":\"https://oic-vbcs-dhfsoictest-vb-axbrdbhb3wme.builder.eu-amsterdam-1.ocp.oraclecloud.com/ic/builder/rt/DarwishOTLUAT/live/webApps/vbredwoodapp/vp/shell/attendance\",\"menu_entry_id\":1324,\"full_access\":\"Y\",\"allow_edit\":\"Y\",\"allow_create\":\"Y\",\"allow_delete\":\"Y\",\"read_only\":\"N\",\"menu_active_flag\":\"Y\"},{\"function_code\":\"PETTY_CASH\",\"function_name\":\"Petty Cash\",\"fun_remarks\":\"\",\"page_url\":\"https://oic-vbcs-owwscoicuat-vb-frg175ushz37.builder.eu-frankfurt-1.ocp.oraclecloud.com/ic/builder/rt/PettyCashSystem/live/webApps/vbredwoodapp\",\"menu_entry_id\":601,\"full_access\":\"Y\",\"allow_edit\":\"Y\",\"allow_create\":\"Y\",\"allow_delete\":\"Y\",\"read_only\":\"N\",\"menu_active_flag\":\"Y\"},{\"function_code\":\"TANKER_MASTER\",\"function_name\":\"Tanker Master\",\"fun_remarks\":\"\",\"page_url\":\"https://oic-vbcs-dhfsoictest-vb-axbrdbhb3wme.builder.eu-amsterdam-1.ocp.oraclecloud.com/ic/builder/rt/DarwishOTLUAT/live/webApps/vbredwoodapp/vp/shell/ramadancalendar\",\"menu_entry_id\":1321,\"full_access\":\"Y\",\"allow_edit\":\"Y\",\"allow_create\":\"Y\",\"allow_delete\":\"Y\",\"read_only\":\"N\",\"menu_active_flag\":\"Y\"},{\"function_code\":\"TANKER_TRANSACTION\",\"function_name\":\"Tanker Transaction\",\"fun_remarks\":\"\",\"page_url\":\"https://oic-vbcs-dhfsoictest-vb-axbrdbhb3wme.builder.eu-amsterdam-1.ocp.oraclecloud.com/ic/builder/rt/DarwishOTLUAT/live/webApps/vbredwoodapp/vp/shell/attendance\",\"menu_entry_id\":1322,\"full_access\":\"Y\",\"allow_edit\":\"Y\",\"allow_create\":\"Y\",\"allow_delete\":\"Y\",\"read_only\":\"N\",\"menu_active_flag\":\"Y\"},{\"function_code\":\"TECHNICAL_EVALUATION_SUMMARY\",\"function_name\":\"Technical Evaluation Summary\",\"fun_remarks\":\"\",\"page_url\":\"https://oic-vbcs-dhfsoictest-vb-axbrdbhb3wme.builder.eu-amsterdam-1.ocp.oraclecloud.com/ic/builder/rt/DarwishOTLUAT/live/webApps/vbredwoodapp/vp/shell/attendance\",\"menu_entry_id\":1326,\"full_access\":\"Y\",\"allow_edit\":\"Y\",\"allow_create\":\"Y\",\"allow_delete\":\"Y\",\"read_only\":\"N\",\"menu_active_flag\":\"Y\"},{\"function_code\":\"TENDER_STRATEGY\",\"function_name\":\"Tender Strategy\",\"fun_remarks\":\"\",\"page_url\":\"https://oic-vbcs-dhfsoictest-vb-axbrdbhb3wme.builder.eu-amsterdam-1.ocp.oraclecloud.com/ic/builder/rt/DarwishOTLUAT/live/webApps/vbredwoodapp/vp/shell/attendance\",\"menu_entry_id\":1325,\"full_access\":\"Y\",\"allow_edit\":\"Y\",\"allow_create\":\"Y\",\"allow_delete\":\"Y\",\"read_only\":\"N\",\"menu_active_flag\":\"Y\"}]}]}]}]"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/common/user/menu"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/common/user/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/common/user/menu"
+        }
+    ]
+}

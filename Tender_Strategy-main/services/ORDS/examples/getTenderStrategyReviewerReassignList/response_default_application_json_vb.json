@@ -1,0 +1,46 @@
+{
+    "items": [
+        {
+            "person_id": 100000005327320,
+            "person_number": "5957",
+            "person_name": "Faiza Noor Mohammed Dost Mohammed Al Balushi فائزة  البلوشية",
+            "email_id": "Faiza.Albalushi@testowwsc.nama.om"
+        },
+        {
+            "person_id": 100000005327806,
+            "person_number": "6454",
+            "person_name": "Ibrahim Abdullah Said Al Harrasi إبراهيم  الحراصي.",
+            "email_id": "Ibrahim.Al-Harassi@testowwsc.nama.om"
+        },
+        {
+            "person_id": 100000005219100,
+            "person_number": "5934",
+            "person_name": "Moosa Ali Salim Al Riyami موسى  الريامي",
+            "email_id": "Moosa.AL-Riyami@testowwsc.nama.om"
+        },
+        {
+            "person_id": 100000005219099,
+            "person_number": "4014",
+            "person_name": "Mahfouda Yahya Rashid Al Salmi محفوظة  السالمي",
+            "email_id": "mahfoudha.salmi@testowwsc.nama.om"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 4,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/tender/strategy/reviewer/reassign/list"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/tender/strategy/reviewer/reassign/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/tender/strategy/reviewer/reassign/list"
+        }
+    ]
+}

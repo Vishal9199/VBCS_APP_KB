@@ -1,0 +1,25 @@
+{
+    "items": [
+        {
+            "lov_type": "DIRECT"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/program/lovtype/list"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/metadata-catalog/program/lovtype/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/program/lovtype/list"
+        }
+    ]
+}

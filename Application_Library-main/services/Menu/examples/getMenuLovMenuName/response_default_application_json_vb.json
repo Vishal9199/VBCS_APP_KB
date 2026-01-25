@@ -1,0 +1,67 @@
+{
+    "items": [
+        {
+            "menu_id": 84,
+            "menu_code": "ADMIN_MENU",
+            "menu_name": "Administration Menu"
+        },
+        {
+            "menu_id": 228,
+            "menu_code": "TEST_2",
+            "menu_name": "TEST_2"
+        },
+        {
+            "menu_id": 223,
+            "menu_code": "ADMIN_MENU_2",
+            "menu_name": "test"
+        },
+        {
+            "menu_id": 229,
+            "menu_code": "TEST3",
+            "menu_name": "test"
+        },
+        {
+            "menu_id": 230,
+            "menu_code": "TEST4",
+            "menu_name": "test"
+        },
+        {
+            "menu_id": 231,
+            "menu_code": "TEST6",
+            "menu_name": "test"
+        },
+        {
+            "menu_id": 233,
+            "menu_code": "TEST8",
+            "menu_name": "test8"
+        },
+        {
+            "menu_id": 227,
+            "menu_code": "TEST",
+            "menu_name": "test_1"
+        },
+        {
+            "menu_id": 1,
+            "menu_code": "welcome",
+            "menu_name": "welcome"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 9,
+    "links": [
+        {
+            "rel": "self",
+            "href": "http://primaverademo.4iapps.com:8442/ords/aol/menu/lov/menu/name"
+        },
+        {
+            "rel": "describedby",
+            "href": "http://primaverademo.4iapps.com:8442/ords/aol/metadata-catalog/menu/lov/menu/item"
+        },
+        {
+            "rel": "first",
+            "href": "http://primaverademo.4iapps.com:8442/ords/aol/menu/lov/menu/name"
+        }
+    ]
+}

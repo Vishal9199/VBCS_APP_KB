@@ -1,0 +1,24 @@
+{
+  "id": "function",
+  "description": "Flow main",
+  "defaultPage": "function-start",
+  "services": {},
+  "types": {},
+  "variables": {},
+  "constants": {
+     "secretKey": {
+      "type": "string",
+      "defaultValue": "WelcomeIND4@apps"
+    },
+    "accessObj": {
+      "type": {
+        "allowDelete": "boolean",
+        "allowEdit": "boolean"
+      },
+      "defaultValue": {
+        "allowEdit": true,
+        "allowDelete": true
+      }
+    }
+  }
+}

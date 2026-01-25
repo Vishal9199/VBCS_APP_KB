@@ -1,0 +1,8 @@
+{
+    "errorCode": "PR-UT-0002",
+    "status": 404,
+    "message": "Task not found.",
+    "details": "No task found with task id: 11 ",
+    "cause": null,
+    "opcRequestId": "/6ED175B82296C71AD530D1A293D3CCDB/609156F5E0345BB58499C2FCF8E9C76B"
+}

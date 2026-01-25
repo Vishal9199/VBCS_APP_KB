@@ -1,0 +1,28 @@
+{
+    "items": [
+        {
+            "person_id": 100000001795522,
+            "person_number": "2039",
+            "full_name": "Wasfi Mohammad Abumughli ",
+            "email_address": "inactiveemp@noemail.com"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/restriction/lov/employee?searchVal=wasfi"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/metadata-catalog/restriction/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/restriction/lov/employee?searchVal=wasfi"
+        }
+    ]
+}

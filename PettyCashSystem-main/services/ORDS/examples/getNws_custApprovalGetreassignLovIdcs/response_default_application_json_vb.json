@@ -1,0 +1,114 @@
+{
+    "items": [
+        {
+            "user_id": 300000002403040,
+            "idcs_user_id": "0612f26832e74d71a39ee58d504f8694",
+            "user_name": "HCM.IMPL",
+            "person_name": "Mr. HCM IMPL,HCM IMPL"
+        },
+        {
+            "user_id": 300000002403070,
+            "idcs_user_id": "93103d66de6e4cf1abd61c0739172a9b",
+            "user_name": "SCM.IMPL",
+            "person_name": "Mr. SCM impl,SCM IMPL"
+        },
+        {
+            "user_id": 300000004339535,
+            "idcs_user_id": "93103d66de6e4cf1abd61c0739172a9b",
+            "user_name": "Sales.user",
+            "person_name": "Sales user,"
+        },
+        {
+            "user_id": 300000003204127,
+            "idcs_user_id": "439fa7c416204a38a6716503513c357e",
+            "user_name": "VBCS.Developer",
+            "person_name": "Mr. VBCS Developer,VBCS Developer"
+        },
+        {
+            "user_id": 300000002403007,
+            "idcs_user_id": "b9aeba0b272f4f1995fa8ac7e131a770",
+            "user_name": "akkhan@darwishholding.com",
+            "person_name": null
+        },
+        {
+            "user_id": 300000004339888,
+            "idcs_user_id": "0f22f6c95a5c4624a2bfe03f00e1f523",
+            "user_name": "apptestdev1@darwishholding.com",
+            "person_name": "App test Dev 1,App test Dev 1"
+        },
+        {
+            "user_id": 300000004339990,
+            "idcs_user_id": "758396cc8ceb4d0582474875a5cdd520",
+            "user_name": "apptestdev2@darwishholding.com",
+            "person_name": "App Test Dev 2,App Test Dev 2"
+        },
+        {
+            "user_id": 300000005030092,
+            "idcs_user_id": "e11b43046c3a41cc81b3ce6c5b362b83",
+            "user_name": "apptestdev3@gmail.com",
+            "person_name": "App Test Dev 3,App Test Dev 3"
+        },
+        {
+            "user_id": 300000005030194,
+            "idcs_user_id": "0c871830830244de8dc35907672ecd12",
+            "user_name": "apptestdev4@gmail.com",
+            "person_name": "App Test Dev 4,App Test Dev 4"
+        },
+        {
+            "user_id": 300000005030296,
+            "idcs_user_id": "3ad568fe1dd24299b02d21d130349792",
+            "user_name": "apptestdev5@darwishholding.com",
+            "person_name": "App Test Dev 5,App Test Dev 5"
+        },
+        {
+            "user_id": 300000003914519,
+            "idcs_user_id": "35e8d53896e04f6ab079360e99140fb0",
+            "user_name": "muthu.elumalai@4iapps.com",
+            "person_name": "Mr. Muthu  E,"
+        },
+        {
+            "user_id": 300000001992007,
+            "idcs_user_id": "a53547ed6e7948b78e2da94c315ffbb0",
+            "user_name": "mveldandi@darwishholding.com",
+            "person_name": null
+        },
+        {
+            "user_id": 300000004339815,
+            "idcs_user_id": "487a08a9e5a44db2abe7af47600589c0",
+            "user_name": "ociadmin@darwishholding.com",
+            "person_name": null
+        },
+        {
+            "user_id": 300000004339862,
+            "idcs_user_id": "487a08a9e5a44db2abe7af47600589c0",
+            "user_name": "ociadmin@darwishholding.com",
+            "person_name": null
+        },
+        {
+            "user_id": 300000002403031,
+            "idcs_user_id": "ea9c931697d04b93ad08be1f63c9fb17",
+            "user_name": "sindela@darwishholding.com",
+            "person_name": null
+        },
+        {
+            "user_id": 300000002403019,
+            "idcs_user_id": "74b6ae62fada444f8d46a41c294dca99",
+            "user_name": "sivaprakash.j@4iapps.com",
+            "person_name": null
+        }
+    ],
+    "hasMore": false,
+    "limit": 0,
+    "offset": 0,
+    "count": 16,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://dhapextest.darwishholding.com/ords/dh_cust/approval/getreassign/lov/idcs"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://dhapextest.darwishholding.com/ords/dh_cust/metadata-catalog/approval/getreassign/lov/item"
+        }
+    ]
+}

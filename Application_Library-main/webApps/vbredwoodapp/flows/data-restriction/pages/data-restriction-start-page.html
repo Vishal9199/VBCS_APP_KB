@@ -1,0 +1,184 @@
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <oj-sp-smart-search-page page-title="Data Restriction" page-subtitle=" " primary-action.label="Reset"
+        on-sp-primary-action="[[$listeners.smartSearchPageTemplateSpPrimaryAction]]" display-mode="light" id="oj-sp"
+        primary-action.display="off">
+
+        <!-- <div slot="search" class="oj-flex" style="align-items:center; gap:1rem; margin-bottom:1rem;"> -->
+          <!-- <oj-select-single style="flex:1;" on-value-item-changed="[[$listeners.selectValueItem]]" item-text="full_name"
+            value="{{ $variables.searchObjTemp.P_PERSON_ID }}" label-hint="User Name"
+            data="[[$variables.getNwsAolRestrictionLovEmployeeListSDP]]">
+            <template slot="collectionTemplate" data-oj-as="collection">
+
+              <oj-table scroll-policy="loadMoreOnScroll" horizontal-grid-visible="enabled"
+                vertical-grid-visible="enabled" selection-mode='{"row": "single"}'
+                columns-default='{"resizable": "disabled", "sortable": "disabled"}' class="oj-select-results"
+                columns='[{"headerText": "User Name", "field": "full_name"}, {"headerText": "Email Address", "field": "email_address"}]'
+                on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]"
+                selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}" display="grid">
+              </oj-table>
+            </template>
+          </oj-select-single>
+
+          <oj-select-single style="flex:1;" value="{{ $variables.searchObjTemp.P_RESTRICTION_CODE }}"
+            on-value-item-changed="[[$listeners.selectValueItem2]]" item-text="lookup_value_name"
+            label-hint="Request Name" data="[[$variables.getNwsAolRestrictionLovDataRestrictListSDP]]">
+          </oj-select-single> -->
+
+      <oj-flex class="oj-sm-padding-2x" style="padding: 0 2rem; box-sizing: border-box;">
+        <div class="oj-flex oj-sm-flex-wrap-wrap"
+          style="width: 100%; gap: 1rem; padding: 0 2rem; align-items: flex-start;">
+
+          <div style="flex: 1 1 300px; min-width: 200px;">
+            <oj-sp-smart-search class="oj-flex-item oj-sm-flex-initial"
+              search-config="[[ $variables.searchConfiguration.provider ]]"
+              search-context="[[ $variables.searchContext ]]" filter-criterion="{{ $variables.filterCriterion }}"
+              ask-hint="Search"></oj-sp-smart-search>
+          </div>
+
+            <div style="display: flex; gap: 0.5rem; flex-wrap: nowrap; align-self: flex-start;">
+              <oj-button label="Add" style="height:2.3rem; padding-left:0;" on-oj-action="[[$listeners.buttonAction2]]"
+                id="addBtn">
+                <span class="oj-ux-ico-plus" slot="startIcon" style="color: white;"></span>
+              </oj-button>
+              <oj-button label="Reset" style="height:2.3rem; padding-left:0;" id="resetBtn"
+                on-oj-action="[[$listeners.resetBtnAction]]">
+                <span class="oj-ux-ico-reset" slot="startIcon" style="color: white;"></span>
+              </oj-button>
+            </div>
+          </div>
+      </oj-flex>
+
+        <div id="sampleDemo">
+          <oj-table scroll-policy="loadMoreOnScroll" class="oj-sm-width-full oj-bg-body oj-search-table" display="grid"
+            selection-mode.row="single" selection-mode.column="single" columns="{{$constants.tableColumns}}"
+            data="[[ $variables.tableADP ]]">
+
+            <!-- <oj-paging-control page-size="10" slot="bottom" style="margin-left:400px;" data="[[ $variables.tableVar ]]">
+            </oj-paging-control> -->
+
+            <template slot="active_flag_icon">
+              <oj-bind-if test='[[ $current.data === "Y"  || $current.data === "y" || $current.data === true ]]'>
+                <img slot="startIcon" :src="[[ $application.path + 'resources/images/activeBtn.png' ]]" style="margin-left:35px">
+
+              </oj-bind-if>
+              <oj-bind-if test='[[ $current.data === "N"  || $current.data === false]]'>
+                <img slot="startIcon" :src="[[ $application.path + 'resources/images/inactive.png' ]] "style="margin-left:35px">
+              </oj-bind-if>
+            </template>
+            <template slot="Date">
+              <oj-input-date value="[[$current.data]]" readonly="true"
+                converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'></oj-input-date>
+            </template>
+            <template slot="status">
+              <oj-bind-if test="[[ $current.data == 'Y' ]]">
+                <img style="margin-left:35%;" :src="[[ $application.path + 'resources/images/activeBtn.png' ]]">
+              </oj-bind-if>
+              <oj-bind-if test="[[ $current.data != 'Y' ]]">
+                <img
+     style="margin-left:35%;" :src="[[ $application.path + 'resources/images/inactive.png' ]]">
+
+              </oj-bind-if>
+
+            </template>
+            <template slot="actions_template">
+              <div style="gap:15px" class="oj-flex oj-sm-align-items-center oj-sm-justify-content-center">
+                <span class="oj-ux-ico-trash" style="cursor: pointer;" on-click="[[$listeners.iconClick]]"></span>
+              </div>
+
+            </template>
+          </oj-table>
+          <div class="oj-flex oj-sm-justify-content-center oj-sm-align-items-center">
+            <oj-button label="Prev" style="margin-right: 10px;" disabled="[[ $variables.pagination.is_prev ]]"
+              chroming="borderless" on-oj-action="[[$listeners.buttonAction7]]">
+              <span class="oj-ux-ico-back" slot="startIcon"></span>
+            </oj-button>
+            <oj-button label="Next" style="margin-left: 10px;" disabled="[[ $variables.pagination.is_next ]]"
+              chroming="borderless" on-oj-action="[[$listeners.buttonAction8]]">
+              <span class="oj-ux-ico-forward-next" slot="endIcon"></span>
+            </oj-button>
+        </div>
+      </oj-sp-smart-search-page>
+    </div>
+  </div>
+</div>
+
+<oj-dialog dialog-title="Data" id="oj-dialog--1193926869-1" cancel-behavior="icon" style="overflow: hidden;">
+  <div slot="body">
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-sm-12 oj-md-12">
+        <oj-form-layout label-edge='start' style="margin-top: 35px;" class="oj-formlayout-full-width">
+          <oj-select-single style="flex:1;" on-value-item-changed="[[$listeners.selectValueItem]]" item-text="full_name"
+            value="{{ $variables.payload.person_id }}" label-hint="User Name"
+            data="[[ $variables.getNwsAolRestrictionLovEmployeeListSDP ]]">
+
+
+            <template slot="collectionTemplate" data-oj-as="collection">
+
+              <oj-table scroll-policy="loadMoreOnScroll" horizontal-grid-visible="enabled"
+                vertical-grid-visible="enabled" selection-mode='{"row": "single"}'
+                columns-default='{"resizable": "disabled", "sortable": "disabled"}' class="oj-select-results" columns='[
+        {
+          "headerText": "User Name",
+          "field": "full_name"
+        },
+         {
+          "headerText": "Email Address",
+          "field": "email_address"
+         }
+      ]' on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]"
+                selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}" display="grid">
+
+              </oj-table>
+
+            </template>
+
+          </oj-select-single>
+
+
+          <oj-select-single style="flex:1;" on-value-item-changed="[[$listeners.selectValueItem2]]"
+            data="[[ $variables.getNwsAolRestrictionLovDataRestrictListSDP ]]" item-text="lookup_value_name"
+            value="{{ $variables.payload.restriction_code }}" label-hint="Restriction Name">
+
+          </oj-select-single>
+
+          <oj-switch label-hint="Status" value="{{ $variables.payload.active_flag=='Y'?true:false }}"
+            on-value-changed="[[$listeners.switchValue]]"></oj-switch>
+
+
+        </oj-form-layout>
+      </div>
+
+
+    </div>
+  </div>
+  <div slot="footer">
+
+    <oj-button on-oj-action="[[$listeners.buttonAction4]]">Save & Add Another</oj-button>
+    <oj-button on-oj-action="[[$listeners.buttonAction3]]">Save & Close</oj-button>
+    <oj-button on-oj-action="[[$listeners.buttonAction5]]">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<oj-dialog style="display:none; width: 500px; overflow: hidden;" dialog-title="Warning" id="delete_dialog"
+  cancel-behavior="icon">
+  <div slot="body">
+    <div class="oj-flex">Are you sure you want to Delete This record?</div>
+  </div>
+  <div slot="footer">
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction]]">Yes</oj-button>
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction6]]">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<oj-dialog id="loadingDialog" dialog-title="Loading..." cancel-behavior="none"
+  style="width: 250px; min-width: 250px; height: 150px; overflow: hidden;">
+  <div style="text-align: center;" slot="body">
+    <oj-progress-bar value="-1" style="margin-top: 20px;"></oj-progress-bar>
+    <p style="margin-top: 10px;">Loading, please wait...</p>
+  </div>
+</oj-dialog>
+
+
+<!-- //test line for commit/push -->

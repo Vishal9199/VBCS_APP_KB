@@ -1,0 +1,8 @@
+{
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "editor.renderWhitespace": "none",
+  "editor.cursorStyle": "line",
+  "editor.fontSize": 14,
+  "editor.minimap.size": "fit"
+}

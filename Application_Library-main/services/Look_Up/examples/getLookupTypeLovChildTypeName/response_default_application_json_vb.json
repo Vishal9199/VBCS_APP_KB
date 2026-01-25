@@ -1,0 +1,36 @@
+{
+    "items": [
+        {
+            "lookup_type_id": 19,
+            "lookup_type_code": "APPROVER_CATEGORY",
+            "lookup_type_name": "Approver Category",
+            "application_code": "TEST1234",
+            "application_name": "Test123"
+        },
+        {
+            "lookup_type_id": 5,
+            "lookup_type_code": "LOV_EMP",
+            "lookup_type_name": "Lov Emp",
+            "application_code": "TEST1234",
+            "application_name": "Test123"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 2,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/lookup/type/lov/child/type/name?p_lookup_type_code=APPROVER_TYPE"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/metadata-catalog/lookup/type/lov/child/type/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/lookup/type/lov/child/type/name?p_lookup_type_code=APPROVER_TYPE"
+        }
+    ]
+}

@@ -1,0 +1,49 @@
+{
+  "description": "",
+  "eventListeners": {
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "openAC"
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "closeAC"
+        }
+      ]
+    },
+    "buttonAction3": {
+      "chains": [
+        {
+          "chain": "flowAC",
+          "parameters": {
+            "current": "[[ $current.data ]]"
+          }
+        }
+      ]
+    }
+  },
+  "events": {},
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-drawer-popup": {
+        "path": "ojs/ojdrawerpopup"
+      }
+    }
+  },
+  "types": {},
+  "variables": {
+    "popupOpen": {
+      "type": "boolean"
+    }
+  }
+}

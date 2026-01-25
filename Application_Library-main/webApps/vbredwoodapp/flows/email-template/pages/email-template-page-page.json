@@ -1,0 +1,969 @@
+{
+  "metadata": {},
+  "title": "Email Template",
+  "description": "Comprehensive Email Template Management Add/Edit page with Email Template header form, Section table management with popup editing, and Field table view functionality.",
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-option": {
+        "path": "ojs/ojoption"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "oj-sp/simple-create-edit/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      },
+      "oj-switch": {
+        "path": "ojs/ojswitch"
+      }
+
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/addEditHeader.css"
+    ]
+  },
+  "types": {
+    "@decorators.getEmailLovFieldNameResponse2": {
+      "endpoint": "getEmailLovFieldName",
+      "service": "Application",
+      "path": "response"
+    },
+    "@decorators.getEmailLovFieldNameResponse3": {
+      "endpoint": "getEmailLovFieldName",
+      "service": "Application",
+      "path": "response"
+    },
+    "@decorators.getEmailLovFieldNameResponse4": {
+      "endpoint": "getEmailLovFieldName",
+      "service": "Application",
+      "path": "response"
+    },
+    "@decorators.getEmailLovViewname": {
+      "endpoint": "getEmailLovViewname",
+      "service": "Application",
+      "path": "response"
+    },
+    "@decorators.getEmailLovViewname1": {
+      "endpoint": "getEmailLovViewname",
+      "service": "Application",
+      "path": "response"
+    },
+    "@decorators.getEmailLovViewnameResponse": {
+      "endpoint": "getEmailLovViewname",
+      "service": "ORDS_AOL",
+      "path": "response"
+    },
+    "@decorators.postEmailFieldSearchResponse": {
+      "endpoint": "postEmailFieldSearch",
+      "service": "Application",
+      "path": "response"
+    },
+    "getEmailLovFieldNameResponse2": {
+      "items": [
+        {
+          "column_id": "string",
+          "column_name": "string"
+        }
+      ]
+    },
+    "getEmailLovFieldNameResponse3": {
+      "items": [
+        {
+          "column_id": "string",
+          "column_name": "string",
+          "data_type": "string"
+        }
+      ]
+    },
+    "getEmailLovFieldNameResponse4": {
+      "items": [
+        {
+          "column_id": "string",
+          "column_name": "string",
+          "data_type": "string"
+        }
+      ]
+    },
+    "getEmailLovViewname": {
+      "items": [
+        {
+          "header_view_name": "string"
+        }
+      ]
+    },
+    "getEmailLovViewname1": {
+      "items": [
+        {
+          "header_view_name": "string"
+        }
+      ]
+    },
+    "getEmailLovViewnameResponse": {
+      "items": [
+        {
+          "header_view_name": "string"
+        }
+      ]
+    },
+    "EmailTemplate": {
+      "template_id": "number",
+      "template_code": "string",
+      "template_name": "string",
+      "header_view_name": "string",
+      "header_primary_key": "string",
+      "approve_url_template": "string",
+      "reject_url_template": "string",
+      "report_url_template": "string",
+      "is_active": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "EmailSection": {
+      "section_id": "number",
+      "template_id": "number",
+      "section_code": "string",
+      "section_title": "string",
+      "section_type": "string",
+      "section_order": "number",
+      "view_name": "string",
+      "join_type": "string",
+      "join_column": "string",
+      "is_active": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "EmailField": {
+      "field_id": "number",
+      "section_id": "number",
+      "field_code": "string",
+      "field_label": "string",
+      "field_order": "number",
+      "column_name": "string",
+      "display_format": "string",
+      "is_active": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "postEmailFieldSearchResponse": {
+      "P_OUTPUT": [
+        {
+          "column_name": "string",
+          "display_format": "string",
+          "field_code": "string",
+          "field_id": "number",
+          "field_label": "string",
+          "field_order": "number",
+          "is_active": "string",
+          "section_code": "string",
+          "section_id": "number",
+          "template_code": "string",
+          "template_id": "number"
+        }
+      ]
+    }
+
+  },
+  "variables": {
+    "emailFieldColumnLovVar": {
+      "type": "string"
+    },
+    "emailFieldVar": {
+      "type": "EmailField"
+    },
+    "encryptedBody": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "fieldCodeCustomMsg": {
+      "type": "object[]"
+    },
+    "getEmailLovFieldNameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "itemsPath": "items",
+        "responseType": "getEmailLovFieldNameResponse2",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "column_name"
+          ]
+        },
+        "fetchChain": "getEmailLovFieldNameFetch2",
+        "keyAttributes": "column_name"
+      }
+    },
+    "getEmailLovFieldNameListSDP2": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "itemsPath": "items",
+        "responseType": "getEmailLovFieldNameResponse3",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "column_name"
+          ]
+        },
+        "fetchChain": "getEmailLovFieldNameFetch",
+        "keyAttributes": "column_name"
+      }
+    },
+    "getEmailLovFieldNameListSDP3": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "itemsPath": "items",
+        "responseType": "getEmailLovFieldNameResponse4",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "column_name"
+          ]
+        },
+        "fetchChain": "getEmailLovFieldNameFetch3",
+        "keyAttributes": "column_name"
+      }
+    },
+    "getEmailLovViewnameHeaderListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getEmailLovViewname",
+        "itemsPath": "items",
+        "keyAttributes": "header_view_name",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "header_view_name"
+          ]
+        },
+        "fetchChain": "getEmailLovViewnameFetch2"
+      }
+    },
+    "getEmailLovViewnameDialogListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getEmailLovViewname1",
+        "itemsPath": "items",
+        "keyAttributes": "header_view_name",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "header_view_name"
+          ]
+        },
+        "fetchChain": "getEmailLovViewnameFetch"
+      }
+    },
+    "isFieldFormValid": {
+      "type": "string"
+    },
+    "isSectionFormValid": {
+      "type": "string"
+    },
+   "deleteSectionData": {
+  "type": "EmailSection"
+},
+    "searchSectionObj": {
+      "type": {
+        "IN_LIMIT": "number",
+        "IN_OFFSET": "number",
+        "TEMPLATE_ID": "string"
+      },
+      "defaultValue": {
+        "IN_LIMIT": 4,
+        "IN_OFFSET": 0,
+        "TEMPLATE_ID": ""
+      }
+    },
+    "searchFieldObj": {
+      "type": {
+        "IN_LIMIT": "number",
+        "IN_OFFSET": "number",
+        "P_FIELD_ID": "string",
+        "P_SECTION_ID": "string"
+
+      },
+      "defaultValue": {
+        "IN_LIMIT": 4,
+        "IN_OFFSET": 0,
+        "P_SECTION_ID": ""
+      }
+    },
+    "paginationSection": {
+      "type": {
+        "next": "boolean",
+        "prev": "boolean"
+      },
+      "defaultValue": {
+        "next": false,
+        "prev": false
+      }
+    },
+     "paginationField": {
+      "type": {
+        "next": "boolean",
+        "prev": "boolean"
+      },
+      "defaultValue": {
+        "next": false,
+        "prev": false
+      }
+    },
+    "key": {
+      "type": "number",
+      "input": "fromUrl"
+    },
+    
+    "emailTemplateVar": {
+      "type": "EmailTemplate",
+      "defaultValue": {
+        "is_active": "Y"
+      },
+      "input": "none",
+      "required": false,
+      "dirtyDataBehavior": "track"
+    },
+    "ADPemailSection": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "EmailSection",
+        "keyAttributes": "section_id"
+      }
+    },
+    "ADPemailField": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "EmailField",
+        "keyAttributes": "field_id"
+      }
+    },
+    "emailSectionVar": {
+      "type": "EmailSection",
+      "defaultValue": {
+        "is_active": "N"
+      }
+    },
+    "sectionCodeCustomMsg": {
+      "type": "object[]"
+    },
+    "sectionEdit": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "selectedSectionId": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "isFormValid": {
+      "type": "string"
+    },
+    "sectionTypeADP": {
+    "type": "vb/ArrayDataProvider2",
+    "defaultValue": {
+      "data": [
+        {"value": "FORM", "label": "Form"},
+        {"value": "TABLE", "label": "Table"},
+        {"value": "HISTORY", "label": "History"}
+      ],
+      "keyAttributes": "value"
+    }
+  },
+  "joinTypeADP": {
+    "type": "vb/ArrayDataProvider2",
+    "defaultValue": {
+      "data": [
+        {"value": "SINGLE", "label": "Single"},
+        {"value": "LOOP", "label": "Loop"}
+      ],
+      "keyAttributes": "value"
+    }
+  },
+    "method": {
+      "type": "string",
+      "defaultValue": "POST",
+      "input": "fromUrl"
+    },
+    "switchflagfield": {
+      "type": "boolean",
+      "defaultValue": true
+    },
+    "switchflagsection": {
+      "type": "boolean",
+      "defaultValue": true
+    },
+    "templateCodeCustomMsg": {
+      "type": "object[]"
+    }
+
+  },
+  "eventListeners": {
+    "addSectionBtnAction2": {
+      "chains": [
+        {
+          "chain": "addEmailFieldAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteSectionYesAction2": {
+      "chains": [
+        {
+          "chain": "deleteOkFieldAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "dialogSectionActiveValue": {
+      "chains": [
+        {
+          "chain": "SwitchValueChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "dialogSectionCodeValue": {
+      "chains": [
+        {
+          "chain": "sectionCodeChangeAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "emailFieldCancelAction": {
+      "chains": [
+        {
+          "chain": "cancelEmailFieldAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "emailFieldCodeValue": {
+      "chains": [
+        {
+          "chain": "sectionCodeChangeAC2",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "emailFieldSaveAction": {
+      "chains": [
+        {
+          "chain": "saveCloseEmailFieldAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "emailFieldSaveCloseAction": {
+      "chains": [
+        {
+          "chain": "saveFieldAddAnotherAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "headerPrimaryKeyValueItem": {
+      "chains": [
+        {
+          "chain": "fieldCodeChangeAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "headerViewNameValueItem": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "iconClick": {
+      "chains": [
+        {
+          "chain": "onClickDeleteEmailFieldAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}",
+            "rowData": "{{ $current.row }}"
+          }
+        }
+      ]
+    },
+    "iconClick2": {
+      "chains": [
+        {
+          "chain": "editFieldAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}",
+            "rowData": "{{ $current.row }}"
+          }
+        }
+      ]
+    },
+    "refreshSectionBtnAction2": {
+      "chains": [
+        {
+          "chain": "refreshEmailFieldAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "sectionNxtBtnAction": {
+      "chains": [
+        {
+          "chain": "sectionNxtBtnAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "sectionNxtBtnAction2": {
+      "chains": [
+        {
+          "chain": "fieldNextBtn",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "sectionPreBtnAction": {
+      "chains": [
+        {
+          "chain": "sectionPreBtnAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "sectionPreBtnAction2": {
+      "chains": [
+        {
+          "chain": "fieldPrevbtn",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "sectionTableFirstSelectedRow": {
+      "chains": [
+        {
+          "chain": "fieldLoadOnTableClickAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "rowKey": "{{$event.detail.value.key}}",
+            "rowData": "{{$event.detail.value.data}}",
+            "firstSelectedRow": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "addSectionBtnAction": {
+      "chains": [
+{
+          "chain": "addSectionBtnAC"
+        }
+      ]
+    },
+    "refreshSectionBtnAction": {
+      "chains": [
+{
+          "chain": "refreshLineTableAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "editSectionIconClick": {
+      "chains": [
+        {
+          "chain": "editEmailSectionAC",
+          "parameters": {
+            "rowData": "{{ $current.row }}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "deleteSectionIconClick": {
+      "chains": [
+        {
+          "chain": "deleteSectionActionAC",
+          "parameters": {
+                   "rowData": "{{ $current.row }}"
+          }
+        }
+      ]
+    },
+    "sectionDialogViewNameChanged": {
+      "chains": [
+        {
+          "chain": "sectionViewNameChangeAC",
+          "parameters": {
+            "value": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "sectionSaveAction": {
+      "chains": [
+        {
+          "chain": "saveCloseSectionAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "sectionSaveAddAction": {
+      "chains": [
+        {
+          "chain": "saveSectionAddAnotherAC"
+        }
+      ]
+    },
+    "sectionCancelAction": {
+      "chains": [
+{
+          "chain": "emailSectionCancelAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteSectionYesAction": {
+      "chains": [
+        {
+          "chain": "okDeleteSectionAC"
+        }
+      ]
+    },
+    "deleteSectionNoAction": {
+      "chains": [
+        {
+          "chain": "cancelDeleteSectionAC"
+        }
+      ]
+    },
+    "sectionNextBtnAction": {
+      "chains": [
+        {
+          "chain": "sectionNextBtnAC"
+        }
+      ]
+    },
+    "sectionPrevBtnAction": {
+      "chains": [
+        {
+          "chain": "sectionPrevBtnAC"
+        }
+      ]
+    },
+    "templateCodeValue": {
+      "chains": [
+        {
+          "chain": "templateCodeChangeAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    },
+    "emailTemplateSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpSecondaryActionChain",
+          "parameters": {
+            "actionId": "[[ $event.detail.secondaryItem ]]"
+          }
+        }
+      ]
+    },
+    "emailTemplateSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpPrimaryActionChain"
+        }
+      ]
+    },
+    "emailTemplateSpCancel": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpCancelChain"
+        }
+      ]
+    },
+    "proceedExitBtnAction": {
+      "chains": [
+        {
+          "chain": "leavePageAC"
+        }
+      ]
+    },
+    "cancelExitBtnAction": {
+      "chains": [
+        {
+          "chain": "cancelLeavePageAC"
+        }
+      ]
+    }
+
+  },
+  "constants": {
+    "sectionTypeOptions": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "value": "FORM",
+          "label": "Form"
+        },
+        {
+          "value": "TABLE",
+          "label": "Table"
+        },
+        {
+          "value": "HISTORY",
+          "label": "History"
+        }
+      ]
+    },
+    "joinTypeOptions": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "value": "SINGLE",
+          "label": "Single"
+        },
+        {
+          "value": "LOOP",
+          "label": "Loop"
+        }
+      ]
+    },
+    "sectionColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "width": 100,
+          "sortable": "disabled",
+          "template": "section_actions_template",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "S. No",
+          "field": "section_order",
+          "resizable": "enabled",
+          "width": 60,
+          "template": "section_order_template",
+          "headerStyle": "white-space: normal; min-width: 130px;",
+          "style": ""
+        },
+        {
+          "headerText": "Section Title",
+          "field": "section_title",
+          "resizable": "enabled",
+          "template": "section_title_template",
+          "headerStyle": "white-space: normal; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Section Type",
+          "field": "section_type",
+          "resizable": "enabled",
+          "width": 120,
+          "template": "section_type_template",
+          "headerStyle": "white-space: normal; min-width: 120px;",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "is_active",
+          "resizable": "enabled",
+          "width": 80,
+          "sortable": "disabled",
+          "template": "active_flag",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 80px;",
+          "style": "text-align: center; vertical-align: middle;"
+
+        }
+      ]
+    },
+    "fieldColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "width": 100,
+          "sortable": "disabled",
+          "template": "field_actions_template",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+
+        },
+        {
+          "headerText": "S. No",
+          "field": "field_order",
+          "resizable": "enabled",
+          "width": 60,
+          "template": "field_order_template",
+          "headerStyle": "white-space: normal; min-width: 120px;",
+          "style": ""
+        },
+        {
+          "headerText": "Field Label",
+          "field": "field_label",
+          "resizable": "enabled",
+          "template": "field_label_template",
+          "headerStyle": "white-space: normal; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "is_active",
+          "resizable": "enabled",
+          "width": 80,
+          "sortable": "disabled",
+          "template": "field_status_template",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 80px;",
+          "style": "text-align: center; vertical-align: middle;"
+
+        }
+      ]
+    }
+  }
+}

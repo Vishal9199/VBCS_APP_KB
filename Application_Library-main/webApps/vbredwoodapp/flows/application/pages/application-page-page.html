@@ -1,0 +1,84 @@
+
+
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div>
+        <oj-sp-simple-create-edit id="app_page" page-title="Application"
+          display-options.responsive-padding="on" primary-action.label="Save and Close"
+          secondary-actions='[{"label":"Save","id":"save"}]'
+          on-sp-secondary-action="[[$listeners.appPageSpSecondaryAction]]"
+          on-sp-primary-action="[[$listeners.appPageSpPrimaryAction]]" on-sp-cancel="[[$listeners.appPageSpCancel]]"
+          badge.status="info" badge.text="[[ $variables.applicationManagementVar.application_name ]]">
+
+          <div slot="main" style="padding-top: 0; margin-top: 0;">
+            <div style="margin-top: 0;">
+
+              <!-- Main Form Section - Application Management -->
+              <div class="oj-panel oj-panel-shadow-md oj-selected">
+                <oj-validation-group valid="{{ $variables.isFormValid }}" id="application-validation">
+                  <oj-form-layout max-columns="2" label-edge="start" label-width="45%"
+                    user-assistance-density="compact" direction="column">
+
+                    <!-- Application Code - Auto Convert to Upper Case -->
+
+                    <oj-input-text id="application-code" label-hint="Application Code" placeholder="Application Code"
+                      value="{{ $variables.applicationManagementVar.application_code }}" required="true"
+                      messages-custom="{{ $variables.applicationCodeCustomMsg }}"
+                      on-value-changed="[[$listeners.applicationCodeValue2]]" readonly="[[ !$variables.canEdit ]]"
+                      length.max="30">
+                      <div slot="end">
+                        <oj-bind-if test="[[ !$variables.canEdit ]]">
+                          <oj-button display="icons" chroming="borderless" label="Button"
+                            on-oj-action="[[$listeners.buttonAction]]">
+                            <span class="oj-ux-ico-edit" id="span--655749004-1" slot="startIcon"></span>
+                          </oj-button>
+                        </oj-bind-if>
+                      </div>
+                    </oj-input-text>
+
+
+                    <oj-input-text id="application-name" label-hint="Application Name" placeholder="Application Name"
+                      value="{{ $variables.applicationManagementVar.application_name }}" required="true"
+                      length.max="240">
+                    </oj-input-text>
+
+
+                    <oj-switch id="active-flag-switch"
+                      value="{{ $variables.applicationManagementVar.active_flag === 'Y' }}" label-hint="Status"
+                      on-value-changed="[[$listeners.activeFlagSwitchValue]]">
+                    </oj-switch>
+
+
+                    <oj-text-area id="remarks" label-hint="Remarks" placeholder="Remarks"
+                      value="{{ $variables.applicationManagementVar.remarks }}" rows="4" length.counter="remaining"
+                      length.max="250">
+                    </oj-text-area>
+
+
+                  </oj-form-layout>
+                </oj-validation-group>
+              </div>
+
+            </div>
+          </div>
+
+        </oj-sp-simple-create-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Unsaved Changes Dialog -->
+<oj-dialog dialog-title="Unsaved Changes" id="unsavedChangesDialog" cancel-behavior="icon">
+  <div slot="body">
+    <h6 id="unsavedChangesText" style="font-size:medium; font-weight: bold;">Are you sure you want to leave this page?
+      Your changes will be lost.
+    </h6>
+  </div>
+  <div slot="footer">
+    <oj-button id="proceedExitBtn" chroming="outlined" on-oj-action="[[$listeners.proceedExitBtnAction]]">Leave</oj-button>
+    <oj-button id="cancelExitBtn" chroming="outlined" on-oj-action="[[$listeners.cancelExitBtnAction]]">Cancel
+    </oj-button>
+  </div>
+</oj-dialog>

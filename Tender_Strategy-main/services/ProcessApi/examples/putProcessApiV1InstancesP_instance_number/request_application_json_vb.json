@@ -1,0 +1,8 @@
+{
+    "action": "ALTER_FLOW",
+    "instanceActionProps": {
+        "sourceActivityId": "flow_a5e1282d-d62a-fff8-2eb8-0078f283082d",
+        "destinationActivityId": "flow_88b2bd50-0af3-11ee-8126-9b05c7119143",
+        "reason": "Reassign"
+    }
+}

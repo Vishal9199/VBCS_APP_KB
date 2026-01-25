@@ -1,0 +1,214 @@
+{
+  "metadata": {},
+  "title": "Application",
+  "description": "Application Management Add/Edit page for managing application configurations with form validation and CRUD operations.",
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "oj-sp/simple-create-edit/loader"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-switch": {
+        "path": "ojs/ojswitch"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/addEditHeader.css"
+    ]
+  },
+  "types": {
+    "ApplicationManagement": {
+      "application_id": "number",
+      "object_version_num": "number",
+      "application_code": "string",
+      "application_name": "string",
+      "remarks": "string",
+      "active_flag": "string",
+      "attribute_json": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    }
+  },
+  "variables": {
+    "applicationCodeCustomMsg": {
+      "type": "object[]"
+    },
+    "applicationManagementVar": {
+      "type": "ApplicationManagement",
+      "defaultValue": {
+        "active_flag": "Y",
+        "application_id": 0,
+        "object_version_num": 0,
+        "attribute_json": "[{\\\"attribute\\\":1}]"
+      },
+      "input": "none",
+      "dirtyDataBehavior": "track"
+    },
+    "canEdit": {
+      "type": "boolean",
+      "defaultValue": "[[ $variables.op === \"POST\" ]]"
+    },
+    "encryptedBody": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "isFormValid": {
+      "type": "string"
+    },
+    "key": {
+      "type": "string",
+      "defaultValue": "0",
+      "input": "fromUrl"
+    },
+    "op": {
+      "type": "string",
+      "defaultValue": "POST",
+      "input": "fromUrl"
+    },
+    "searchObj": {
+      "type": {
+        "ACTIVE_FLAG": "string",
+        "APPLICATION_CODE": "string",
+        "APPLICATION_NAME": "string",
+        "IN_LIMIT": "string",
+        "IN_OFFSET": "string",
+        "P_APPLICATION_ID": "string"
+      },
+      "defaultValue": {
+        "IN_LIMIT": "8",
+        "IN_OFFSET": "0",
+        "APPLICATION_CODE": "",
+        "APPLICATION_NAME": "",
+        "ACTIVE_FLAG": "",
+        "P_APPLICATION_ID": ""
+      }
+    }
+  },
+  "eventListeners": {
+    "activeFlagSwitchValue": {
+      "chains": [
+        {
+          "chain": "SwitchValueChangeChain",
+          "parameters": {
+            "value": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "enableEditAC"
+        }
+      ]
+    },
+    "applicationCodeValue2": {
+      "chains": [
+        {
+          "chain": "applicationCodeAC",
+          "parameters": {
+            "value": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "cancelExitBtnAction": {
+      "chains": [
+        {
+          "chain": "ButtonActionChain1",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "proceedExitBtnAction": {
+      "chains": [
+        {
+          "chain": "ButtonActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbBeforeExit": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbBeforeExitListener"
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    },
+    "appPageSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpSecondaryActionChain",
+          "parameters": {
+            "actionId": "[[ $event.detail.secondaryItem ]]"
+          }
+        }
+      ]
+    },
+    "appPageSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpPrimaryActionChain"
+        }
+      ]
+    },
+    "appPageSpCancel": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpCancelChain"
+        }
+      ]
+    }
+
+  }
+}

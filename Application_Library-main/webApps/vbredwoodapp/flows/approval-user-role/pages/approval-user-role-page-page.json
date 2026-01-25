@@ -1,0 +1,637 @@
+{
+  "metadata": {},
+  "title": "Approval Role",
+  "description": "Comprehensive Approval Role Management Add/Edit page with Approval Role form and Approval Role User table management with popup editing functionality.",
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-label": {
+        "path": "ojs/ojlabel"
+      },
+      "oj-option": {
+        "path": "ojs/ojoption"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "oj-sp/simple-create-edit/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-switch": {
+        "path": "ojs/ojswitch"
+      }
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/addEditHeader.css"
+    ]
+  },
+  "types": {
+    "@decorators.getAolUsrRoleLovUserNameResponse": {
+      "endpoint": "getAol_usrRoleLovUserName",
+      "service": "User",
+      "path": "response"
+    },
+    "@decorators.getApproverRoleLovUserNameResponse": {
+      "endpoint": "getApproverRoleLovUserName",
+      "service": "ApprovalUserRole",
+      "path": "response"
+    },
+    "ApprovalRole": {
+      "approval_role_id": "number",
+      "object_version_num": "number",
+      "approval_role_code": "string",
+      "approval_role_name": "string",
+      "remarks": "string",
+      "active_flag": "string",
+      "attribute_json": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "ApprovalRoleUser": {
+      "approval_role_user_id": "number",
+      "object_version_num": "number",
+      "approval_role_id": "number",
+      "user_id": "number",
+      "user_name": "string",
+      "order_number": "number",
+      "person_id": "number",
+      "person_number": "string",
+      "person_name": "string",
+      "remarks": "string",
+      "active_flag": "string",
+      "attribute_json": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "getAolUsrRoleLovUserNameResponse": {
+      "items": [
+        {
+          "email_address": "string",
+          "person_full_name": "string",
+          "person_id": "number",
+          "person_name": "string",
+          "person_number": "string",
+          "user_id": "number",
+          "user_name": "string"
+        }
+      ]
+    },
+    "getApproverRoleLovUserNameResponse": {
+      "items": [
+        {
+          "email_address": "string",
+          "person_full_name": "string",
+          "person_id": "number",
+          "person_name": "string",
+          "person_number": "string",
+          "user_id": "number",
+          "user_name": "string"
+        }
+      ]
+    }
+  },
+  "variables": {
+    "encryptedBody": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "approvalRoleCodeCustomMsg": {
+      "type": "object[]"
+    },
+    "getApproverRoleLovUserNameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "user_id",
+        "itemsPath": "items",
+        "responseType": "getApproverRoleLovUserNameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "user_name"
+          ]
+        },
+        "fetchChain": "getApproverRoleLovUserNameFetch"
+      }
+    },
+    "searchObj": {
+      "type": {
+        "IN_LIMIT": "number",
+        "IN_OFFSET": "number",
+        "P_APPROVAL_ROLE_ID": "string",
+        "APPROVAL_ROLE_CODE": "string",
+        "APPROVAL_ROLE_NAME": "string",
+        "ACTIVE_FLAG": "string"
+      },
+      "defaultValue": {
+        "IN_LIMIT": 8,
+        "IN_OFFSET": 0,
+        "P_APPROVAL_ROLE_ID": "",
+        "APPROVAL_ROLE_CODE": "",
+        "APPROVAL_ROLE_NAME": "",
+        "ACTIVE_FLAG": ""
+      }
+    },
+    "searchUserObj": {
+      "type": {
+        "IN_LIMIT": "number",
+        "IN_OFFSET": "number",
+        "P_APPROVAL_ROLE_USER_ID": "string",
+        "APPROVAL_ROLE_ID": "string",
+        "USER_ID": "string",
+        "PERSON_ID": "string",
+        "ORDER_NUMBER": "string",
+        "ACTIVE_FLAG": "string"
+      },
+      "defaultValue": {
+        "IN_LIMIT": 6,
+        "IN_OFFSET": 0,
+        "P_APPROVAL_ROLE_USER_ID": "",
+        "APPROVAL_ROLE_ID": "",
+        "USER_ID": "",
+        "PERSON_ID": "",
+        "ORDER_NUMBER": "",
+        "ACTIVE_FLAG": ""
+      }
+    },
+    "pagination": {
+      "type": {
+        "next": "boolean",
+        "prev": "boolean"
+      },
+      "defaultValue": {
+        "next": false,
+        "prev": false
+      }
+    },
+    "key": {
+      "type": "string",
+      "input": "fromUrl"
+    },
+    "approvalRoleVar": {
+      "type": "ApprovalRole",
+      "defaultValue": {
+        "active_flag": "Y"
+      },
+      "input": "none",
+      "required": false,
+      "dirtyDataBehavior": "track"
+    },
+    "ADPapprovalRoleUser": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "ApprovalRoleUser",
+        "keyAttributes": "approval_role_user_id"
+      }
+    },
+    "approvalRoleUserVar": {
+      "type": "ApprovalRoleUser",
+      "defaultValue": {
+        "active_flag": "Y",
+        "object_version_num": 0,
+        "approval_role_user_id": 0,
+        "remarks": " ",
+        "attribute_json": "null"
+      }
+    },
+    "canEdit": {
+      "type": "boolean",
+      "defaultValue": "[[ $variables.method === \"POST\" ]]"
+    },
+    "method": {
+      "type": "string",
+      "defaultValue": "POST",
+      "input": "fromUrl"
+    },
+    "validationGroupVars": {
+      "type": {
+        "childTableFormId": "string",
+        "headerFormId": "string",
+        "isChildTableFormValid": "string",
+        "isHeaderFormValid": "string"
+      },
+      "defaultValue": {
+        "childTableFormId": "approvalRoleUserForm",
+        "headerFormId": "approval-role-validation"
+      }
+    }
+
+  },
+  "eventListeners": {
+    "activeFlagSwitchValue": {
+      "chains": [
+        {
+          "chain": "SwitchValueChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "addBtnAction": {
+      "chains": [
+        {
+          "chain": "addUserAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "approvalRoleCodeValue": {
+      "chains": [
+        {
+          "chain": "headerCodeAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "approvalRolePageSpCancel": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpCancelChain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "approvalRolePageSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpPrimaryActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "feedbackEnabled": "{{$event.detail.feedbackEnabled}}"
+          }
+        }
+      ]
+    },
+    "approvalRolePageSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpSecondaryActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "dsf"
+          }
+        }
+      ]
+    },
+    "approvalRoleUserDialogClose": {
+      "chains": [
+        {
+          "chain": "DialogCloseChain",
+          "parameters": {
+            "event": "{{$event.detail.event}}"
+          }
+        }
+      ]
+    },
+    "cancelAction": {
+      "chains": [
+        {
+          "chain": "cancelAdd_EditUserAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "cancelExitBtnAction": {
+      "chains": [
+        {
+          "chain": "cancelLeavePageAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnNoAction": {
+      "chains": [
+        {
+          "chain": "cancelDeleteUserAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnYesAction": {
+      "chains": [
+        {
+          "chain": "okDeleteUserAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "editIconBtnAction": {
+      "chains": [
+        {
+          "chain": "enableEditAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "iconClick": {
+      "chains": [
+        {
+          "chain": "editChildAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "iconClick2": {
+      "chains": [
+        {
+          "chain": "deleteUserAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "nxtBtnAction": {
+      "chains": [
+        {
+          "chain": "nextBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "preBtnAction": {
+      "chains": [
+        {
+          "chain": "prevBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "proceedExitBtnAction": {
+      "chains": [
+        {
+          "chain": "leavePageAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "saveAddAnotherAction": {
+      "chains": [
+        {
+          "chain": "save_AddAnotherUserAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "saveCloseAction": {
+      "chains": [
+        {
+          "chain": "save_CloseUserAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "selectValueItem": {
+      "chains": [
+        {
+          "chain": "userAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "vbBeforeExit": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbBeforeExitListener"
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+  },
+  "constants": {
+    "approvalRoleUserColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "User Name",
+          "field": "user_name",
+          "resizable": "enabled",
+          "width": 186,
+          "template": "user_name_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Person Name",
+          "field": "person_name",
+          "resizable": "enabled",
+          "width": 284,
+          "template": "person_name_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Order Number",
+          "field": "order_number",
+          "resizable": "enabled",
+          "width": 130,
+          "template": "order_number_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "active_flag",
+          "resizable": "enabled",
+          "width": 80,
+          "template": "active_flag_template",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Remarks",
+          "field": "remarks",
+          "resizable": "enabled",
+          "width": "",
+          "template": "remarks_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }
+      ]
+    },
+    "approvalRoleUserColumnsWithActions": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "width": 80,
+          "template": "approval_role_user_actions_template",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "User Name",
+          "field": "user_name",
+          "resizable": "enabled",
+          "width": 186,
+          "template": "user_name_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Person Name",
+          "field": "person_name",
+          "resizable": "enabled",
+          "width": 284,
+          "template": "person_name_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Order Number",
+          "field": "order_number",
+          "resizable": "enabled",
+          "width": 130,
+          "template": "order_number_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "active_flag",
+          "resizable": "enabled",
+          "width": 80,
+          "template": "active_flag_template",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Remarks",
+          "field": "remarks",
+          "resizable": "enabled",
+          "width": "",
+          "template": "remarks_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }
+      ]
+    }
+  }
+}

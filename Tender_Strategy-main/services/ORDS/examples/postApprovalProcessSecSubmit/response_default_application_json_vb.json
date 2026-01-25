@@ -1,0 +1,5 @@
+{
+    "P_ERR_CODE": "E",
+    "P_ERR_MSG": "Failed: Minimum 1 attachment(s) required for HC_BANK. Current count: 0",
+    "P_ACTION_ID": "House Connection Master Error"
+}

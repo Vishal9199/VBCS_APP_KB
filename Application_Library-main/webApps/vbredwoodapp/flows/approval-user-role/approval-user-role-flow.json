@@ -1,0 +1,20 @@
+{
+  "id": "approval-user-role",
+  "description": "Flow main",
+  "defaultPage": "approval-user-role-start",
+  "services": {},
+  "types": {},
+  "variables": {},
+  "constants": {
+    "accessObj": {
+      "type": {
+        "allowDelete": "boolean",
+        "allowEdit": "boolean"
+      },
+      "defaultValue": {
+        "allowEdit": true,
+        "allowDelete": true
+      }
+    }
+  }
+}

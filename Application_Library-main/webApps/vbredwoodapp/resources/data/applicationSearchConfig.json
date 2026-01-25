@@ -1,0 +1,14 @@
+{
+  "filters": {
+    "ApplicationNameFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Application Name",
+      "options": {
+        "field": "applicationName",
+        "optionsData": "[[ $search.filters.ApplicationNameFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.ApplicationNameFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    }
+  }
+}

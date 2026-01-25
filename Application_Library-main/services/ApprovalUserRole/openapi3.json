@@ -1,0 +1,595 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "ORDS",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "vb-catalog://backends/ORDS_AOL",
+            "description": "ORDS"
+        }
+    ],
+    "paths": {
+        "/approver/role/search": {
+            "post": {
+                "operationId": "postApproverRoleSearch",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostApproverRoleSearchRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postApproverRoleSearch/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostApproverRoleSearchResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postApproverRoleSearch/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/approver/role/lov/rolecode": {
+            "get": {
+                "operationId": "getApproverRoleLovRolecode",
+                "parameters": [
+                    {
+                        "name": "search_var",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetApproverRoleLovRolecode"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getApproverRoleLovRolecode/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/approver/role/process": {
+            "post": {
+                "operationId": "postApproverRoleProcess",
+                "parameters": [
+                    {
+                        "name": "X-cache-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "X-cache-code",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostApproverRoleProcessRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postApproverRoleProcess/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostApproverRoleProcessResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postApproverRoleProcess/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "custom",
+                    "headers": {}
+                }
+            }
+        },
+        "/approver/role/user/search": {
+            "post": {
+                "operationId": "postApproverRoleUserSearch",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostApproverRoleUserSearchRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postApproverRoleUserSearch/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostApproverRoleUserSearchResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postApproverRoleUserSearch/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/approver/role/user/process": {
+            "post": {
+                "operationId": "postApproverRoleUserProcess",
+                "parameters": [
+                    {
+                        "name": "X-cache-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "X-cache-code",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostApproverRoleUserProcessRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "summary": "Example stored by VB User",
+                                    "externalValue": "./examples/postApproverRoleUserProcess/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostApproverRoleUserProcessResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postApproverRoleUserProcess/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/approver/role/lov/user/name": {
+            "get": {
+                "operationId": "getApproverRoleLovUserName",
+                "parameters": [
+                    {
+                        "name": "P_APPROVAL_ROLE_ID",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "search_var",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetApproverRoleLovUserName"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getApproverRoleLovUserName/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PostApproverRoleSearchRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostApproverRoleSearchResponse": {
+                "type": "object",
+                "properties": {
+                    "OUT_COUNT": {
+                        "type": "integer"
+                    },
+                    "OUT_DESCRIPTION": {
+                        "type": "string"
+                    },
+                    "OUT_HAS_NEXT": {
+                        "type": "string"
+                    },
+                    "OUT_STATUS": {
+                        "type": "string"
+                    },
+                    "OUT_TOTAL_COUNT": {
+                        "type": "integer"
+                    },
+                    "P_OUTPUT": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "approval_role_id": {
+                                    "type": "integer"
+                                },
+                                "object_version_num": {
+                                    "type": "integer"
+                                },
+                                "approval_role_code": {
+                                    "type": "string"
+                                },
+                                "approval_role_name": {
+                                    "type": "string"
+                                },
+                                "remarks": {
+                                    "type": "string"
+                                },
+                                "active_flag": {
+                                    "type": "string"
+                                },
+                                "attribute_json": {
+                                    "type": "string"
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "created_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_updated_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_login": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetApproverRoleLovRolecode": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "approval_role_id": {
+                                    "type": "integer"
+                                },
+                                "approval_role_code": {
+                                    "type": "string"
+                                },
+                                "approval_role_name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostApproverRoleProcessRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostApproverRoleProcessResponse": {
+                "type": "object",
+                "properties": {
+                    "P_ERR_CODE": {
+                        "type": "string"
+                    },
+                    "P_ERR_MSG": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostApproverRoleUserSearchRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostApproverRoleUserSearchResponse": {
+                "type": "object",
+                "properties": {
+                    "OUT_COUNT": {
+                        "type": "integer"
+                    },
+                    "OUT_DESCRIPTION": {
+                        "type": "string"
+                    },
+                    "OUT_HAS_NEXT": {
+                        "type": "string"
+                    },
+                    "OUT_STATUS": {
+                        "type": "string"
+                    },
+                    "OUT_TOTAL_COUNT": {
+                        "type": "integer"
+                    },
+                    "P_OUTPUT": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "approval_role_user_id": {
+                                    "type": "integer"
+                                },
+                                "object_version_num": {
+                                    "type": "integer"
+                                },
+                                "approval_role_id": {
+                                    "type": "integer"
+                                },
+                                "user_id": {
+                                    "type": "integer"
+                                },
+                                "user_name": {
+                                    "nullable": true
+                                },
+                                "order_number": {
+                                    "type": "integer"
+                                },
+                                "person_id": {
+                                    "nullable": true
+                                },
+                                "person_number": {
+                                    "nullable": true
+                                },
+                                "person_name": {
+                                    "nullable": true
+                                },
+                                "remarks": {
+                                    "type": "string"
+                                },
+                                "active_flag": {
+                                    "type": "string"
+                                },
+                                "attribute_json": {
+                                    "type": "string"
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "created_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_updated_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_login": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostApproverRoleUserProcessRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostApproverRoleUserProcessResponse": {
+                "type": "object",
+                "properties": {
+                    "P_ERR_CODE": {
+                        "type": "string"
+                    },
+                    "P_ERR_MSG": {
+                        "type": "string"
+                    }
+                }
+            },
+            "GetApproverRoleLovUserName": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "user_id": {
+                                    "type": "integer"
+                                },
+                                "user_name": {
+                                    "type": "string"
+                                },
+                                "person_id": {
+                                    "type": "integer"
+                                },
+                                "person_number": {
+                                    "type": "string"
+                                },
+                                "person_full_name": {
+                                    "type": "string"
+                                },
+                                "person_name": {
+                                    "type": "string"
+                                },
+                                "email_address": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,1025 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "askHint": {
+      "type": "string",
+      "defaultValue": "Search"
+    },
+    "clobMessage": {
+      "type": "string"
+    },
+    "currentPage": {
+      "type": "number",
+      "defaultValue": 1
+    },
+    "currentRow_Key": {
+      "type": "string"
+    },
+    "currentUser_Email": {
+      "type": "string"
+    },
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "getCommonEmployeeManagerDtlListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "email_address",
+        "itemsPath": "items",
+        "responseType": "getCommonEmployeeManagerDtlResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "full_name"
+          ]
+        },
+        "fetchChain": "getCommonEmployeeManagerDtl2Fetch"
+      }
+    },
+    "getContractHolderLovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "responseType": "getTenderStrategyLovContractHolder",
+        "itemsPath": "items",
+        "keyAttributes": "person_id",
+        "fetchChain": "getTenderStrategyLovContractHolderFetch"
+      }
+    },
+    "getContractOwnerLovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "responseType": "getTenderStrategyLovContractOwner",
+        "itemsPath": "items",
+        "keyAttributes": "person_id",
+        "fetchChain": "getTenderStrategyLovContractOwnerFetch"
+      }
+    },
+    "passDeleteKey": {
+      "type": "string"
+    },
+    "passMethod": {
+      "type": "string"
+    },
+    "post_Nws_SearchVar": {
+      "type": "post_Nws_Search"
+    },
+    "postPayloadVarVar": {
+      "type": "postPayloadVar",
+      "defaultValue": {
+        "created_by": "[[ $application.user.username ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_by": "[[ $application.user.username ]]",
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "object_version_num": 0,
+        "request_date": "[[ $application.functions.getSysdate() ]]",
+        "tender_type": "OPEN",
+        "tender_category": "OPEX",
+        "currency": "OMR",
+        "tender_category_des": "[[ $variables.postPayloadVarVar.tender_category === \"CAPEX\" ? \"Capital project infrastructure\" : \"If OPEX\tOperations & Expenses\" ]]",
+        "person_id": "[[ $application.variables.getEmployeeDetailTypeVar.person_id ]]"
+      }
+    },
+    "postTenderVar_CLOB": {
+      "type": {
+        "strategy_hdr_id": "number",
+        "object_version_num": "number",
+        "tender_objective": "string",
+        "tender_background": "string",
+        "tender_scope_work": "string",
+        "tender_cost_estimate": "string",
+        "tender_technical_criteria": "string",
+        "tender_commercial_criteria": "string",
+        "tender_icv_minimum_info": "string",
+        "tender_division_info": "string"
+      }
+    },
+    "postTenderVar_Normal": {
+      "type": {
+        "strategy_hdr_id": "number",
+        "object_version_num": "number",
+        "request_number": "string",
+        "request_date": "string",
+        "status_id": "number",
+        "person_id": "number",
+        "comments": "string",
+        "scm_team": "string",
+        "tender_type": "string",
+        "tender_category": "string",
+        "tender_category_des": "string",
+        "tender_committe": "string",
+        "pr_number": "string",
+        "pr_title": "string",
+        "pr_estimated_value": "string",
+        "currency": "string",
+        "contract_holder_id": "number",
+        "contract_owner_id": "number",
+        "procurement_plan": "string",
+        "created_by": "string",
+        "created_date": "string",
+        "last_updated_by": "string",
+        "last_updated_date": "string",
+        "last_updated_login": "string"
+      },
+      "defaultValue": {
+        "created_by": "[[ $application.user.username ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_by": "[[ $application.user.username ]]",
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "object_version_num": 0,
+        "request_date": "[[ $application.functions.getSysdate() ]]",
+        "tender_type": "OPEN",
+        "tender_category": "OPEX",
+        "tender_category_des": "Operations & Expenses",
+        "person_id": "[[ $application.variables.getEmployeeDetailTypeVar.person_id ]]",
+        "scm_team": "Procurement",
+        "tender_committe": "Major",
+        "procurement_plan": "Y",
+        "comments": "[[ $application.functions.getSysdate() + '_Comment' ]]"
+      },
+      "description": "{\n    \"created_by\": \"[[ $application.user.username ]]\",\n    \"created_date\": \"[[ $application.functions.getSysdate() ]]\",\n    \"currency\": \"OMR\",\n    \"last_updated_by\": \"[[ $application.user.username ]]\",\n    \"last_updated_date\": \"[[ $application.functions.getSysdate() ]]\",\n    \"last_updated_login\": \"[[ $application.user.email ]]\",\n    \"object_version_num\": 0,\n    \"request_date\": \"[[ $application.functions.getSysdate() ]]\",\n    \"tender_type\": \"OPEN\",\n    \"tender_category\": \"OPEX\",\n    \"tender_category_des\": \"Operations & Expenses\",\n    \"person_id\": \"[[ $application.variables.getEmployeeDetailTypeVar.person_id ]]\",\n    \"contract_owner_id\": 100000001703302,\n    \"pr_number\": \"PR-001-13-12-2025\",\n    \"pr_title\": \"PR-ABC-Title-001\",\n    \"pr_estimated_value\": \"150001\",\n    \"scm_team\": \"Contract\",\n    \"tender_committe\": \"Major\",\n    \"procurement_plan\": \"Y\",\n    \"contract_holder_id\": 100000001703302,\n    \"comments\": \"[[ $application.functions.getSysdate() + '_Comment' ]]\"\n}"
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/mysearchconfiguration.json' ]]"
+      }
+    },
+    "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "EmployeeFilter": {
+              "label": "Employee",
+              "options": {
+                "optionsData": "[[ $page.variables.getCommonEmployeeManagerDtlListSDP ]]",
+                "optionsKeys": {
+                  "label": "full_name",
+                  "value": "email_address"
+                }
+              }
+            },
+            "ContractHolderFilter": {
+              "label": "Contract Holder",
+              "options": {
+                "optionsData": "[[ $page.variables.getContractHolderLovSDP ]]",
+                "optionsKeys": {
+                  "label": "display_name",
+                  "value": "person_id"
+                }
+              }
+            },
+            "ContractOwnerFilter": {
+              "label": "Contract Owner",
+              "options": {
+                "optionsData": "[[ $page.variables.getContractOwnerLovSDP ]]",
+                "optionsKeys": {
+                  "label": "display_name",
+                  "value": "person_id"
+                }
+              }
+            },
+            "StatusFilter": {
+              "label": "Status",
+              "options": {
+                "optionsData": "[[ $page.variables.statusLov_SDP]]",
+                "optionsKeys": {
+                  "label": "lookup_value_name",
+                  "value": "lookup_value_id"
+                }
+              }
+            },
+            "TenderTypeFilter": {
+              "label": "Tender Type",
+              "options": {
+                "optionsData": "[[ $flow.variables.tenderTypeADP ]]",
+                "optionsKeys": {
+                  "label": "label",
+                  "value": "id"
+                }
+              }
+            },
+            "TenderCategoryFilter": {
+              "label": "Tender Category",
+              "options": {
+                "optionsData": "[[ $flow.variables.tenderCategoryADP ]]",
+                "optionsKeys": {
+                  "label": "label",
+                  "value": "id"
+                }
+              }
+            },
+            "VariationTypeFilter": {
+              "label": "Variation Type",
+              "options": {
+                "optionsData": "[[ $flow.variables.variationTypeADP ]]",
+                "optionsKeys": {
+                  "label": "label",
+                  "value": "id"
+                }
+              }
+            },
+            "RequestDateRangeFilter": {
+              "label": "Request Date Range"
+            }
+          }
+        }
+      }
+    },
+    "SearchObj": {
+      "type": {
+        "in_limit": "string",
+        "in_offset": "string",
+        "p_strategy_hdr_id": "string",
+        "p_pr_number": "string",
+        "p_tender_type": "string",
+        "p_tender_category": "string",
+        "p_status_id": "string",
+        "p_contract_owner_id": "string",
+        "p_created_by": "string",
+        "p_from_date": "string",
+        "p_to_date": "string",
+        "p_keyword": "string",
+        "p_variation_type": "string"
+      },
+      "defaultValue": {
+        "in_limit": "10",
+        "in_offset": "0",
+        "p_strategy_hdr_id": "",
+        "p_pr_number": "",
+        "p_tender_type": "",
+        "p_tender_category": "",
+        "p_status_id": "",
+        "p_contract_owner_id": "",
+        "p_created_by": "",
+        "p_from_date": "",
+        "p_to_date": "",
+        "p_keyword": ""
+      }
+    },
+    "statusLov_SDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "responseType": "getCommonLovLookup2",
+        "itemsPath": "items",
+        "keyAttributes": "lookup_value_id",
+        "fetchChain": "getCommonLovLookup2Fetch"
+      }
+    },
+    "tableHeaderADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "post_Nws_Search",
+        "keyAttributes": "strategy_hdr_id"
+      }
+    },
+    "totalRecords": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "triggerSmartSearchActionChain": {
+      "type": "boolean",
+      "defaultValue": true
+    },
+    "trx_end_date": {
+      "type": "string",
+      "defaultValue": "2075-07-21"
+    },
+    "trx_start_date": {
+      "type": "string",
+      "defaultValue": "2020-07-21"
+    },
+    "about": {
+      "type": {
+        "created_by": "string",
+        "created_date": "string",
+        "last_updated_by": "string",
+        "last_updated_date": "string",
+        "last_updated_login": "string"
+      }
+    },
+    "encPayload": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "encSearchObj": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "pagination": {
+      "type": {
+        "is_next": "boolean",
+        "is_prev": "boolean"
+      },
+      "defaultValue": {
+        "is_next": true,
+        "is_prev": true
+      }
+    },
+    "vShowFragment": {
+      "type": "boolean",
+      "defaultValue": false
+    }
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getCommonEmployeeManagerDtlResponse": {
+      "endpoint": "getCommonEmployeeManagerDtl2",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.getCommonLovEmployeeDetailResponse": {
+      "endpoint": "getCommonLovEmployeeDetail",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.getCommonLovLookup2": {
+      "endpoint": "getCommonLovLookup2",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.getTenderStrategyLovContractHolder": {
+      "endpoint": "getTenderStrategyLovContractHolder",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.getTenderStrategyLovContractOwner": {
+      "endpoint": "getTenderStrategyLovContractOwner",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.post_Nws_Search": {
+      "endpoint": "post_Nws_Search",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.post_Nws_Search2": {
+      "endpoint": "post_Nws_Search",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "action": {
+      "id": "string",
+      "label": "string",
+      "display": "string",
+      "icon": "string"
+    },
+    "getCommonEmployeeManagerDtlResponse": {
+      "items": [
+        {
+          "action": "string",
+          "department_id": "number",
+          "department_name": "string",
+          "directorate": "string",
+          "division": "any",
+          "email_address": "string",
+          "emp_region": "any",
+          "full_name": "string",
+          "gender": "string",
+          "grade_id": "number",
+          "grade_name": "string",
+          "job_group": "string",
+          "job_id": "number",
+          "job_name": "string",
+          "location_id": "number",
+          "location_name": "string",
+          "person_id": "number",
+          "person_number": "string",
+          "position_id": "number",
+          "position_name": "string",
+          "senior_directorate": "any",
+          "supervisor_id": "number",
+          "supervisor_name": "string",
+          "user_id": "number",
+          "user_name": "string",
+          "work_phone_number": "string",
+          "work_phone_off_extension": "any",
+          "working_pattern": "string"
+        }
+      ]
+    },
+    "getCommonLovEmployeeDetailResponse": {
+      "items": [
+        {
+          "action": "string",
+          "department_id": "number",
+          "department_name": "string",
+          "directorate": "string",
+          "division": "string",
+          "email_address": "string",
+          "emp_region": "string",
+          "full_name": "string",
+          "gender": "string",
+          "grade_id": "number",
+          "grade_name": "string",
+          "job_group": "string",
+          "job_id": "number",
+          "job_name": "string",
+          "location_id": "number",
+          "location_name": "string",
+          "person_id": "number",
+          "person_number": "string",
+          "position_id": "number",
+          "position_name": "string",
+          "senior_directorate": "string",
+          "supervisor_id": "number",
+          "supervisor_name": "string",
+          "user_id": "number",
+          "user_name": "string",
+          "work_phone_number": "string",
+          "work_phone_off_extension": "number",
+          "working_pattern": "string"
+        }
+      ]
+    },
+    "getCommonLovLookup2": {
+      "items": [
+        {
+          "active_flag": "string",
+          "display_order": "number",
+          "lookup_type_code": "string",
+          "lookup_type_id": "number",
+          "lookup_type_name": "string",
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getTenderStrategyLovContractHolder": {
+      "items": [
+        {
+          "display_name": "string",
+          "email_address": "string",
+          "full_name": "string",
+          "person_id": "number",
+          "person_number": "string"
+        }
+      ]
+    },
+    "getTenderStrategyLovContractOwner": {
+      "items": [
+        {
+          "display_name": "string",
+          "email_address": "string",
+          "full_name": "string",
+          "person_id": "number",
+          "person_number": "string"
+        }
+      ]
+    },
+    "post_Nws_Search": {
+      "comments": "string",
+      "contract_holder_id": "number",
+      "contract_owner_id": "number",
+      "created_by": "string",
+      "created_date": "string",
+      "currency": "string",
+      "department_name": "string",
+      "directorate": "string",
+      "division": "any",
+      "full_name": "string",
+      "gender": "string",
+      "grade_name": "string",
+      "holder_full_name": "string",
+      "job_name": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "location_name": "string",
+      "mom_end_time": "any",
+      "mom_notify": "any",
+      "mom_number": "any",
+      "mom_schedule_date": "any",
+      "mom_start_time": "any",
+      "object_version_num": "number",
+      "owner_full_name": "string",
+      "person_id": "number",
+      "person_number": "string",
+      "po_number": "any",
+      "position_name": "string",
+      "pr_estimated_value": "number",
+      "pr_number": "string",
+      "pr_title": "string",
+      "procurement_plan": "string",
+      "request_date": "string",
+      "request_number": "string",
+      "scm_team": "string",
+      "senior_directorate": "any",
+      "status_code": "string",
+      "status_id": "number",
+      "status_name": "string",
+      "strategy_hdr_id": "number",
+      "tender_category": "string",
+      "tender_category_des": "string",
+      "tender_committe": "string",
+      "tender_rfq_number": "any",
+      "tender_type": "string",
+      "variation_type": "any"
+    },
+    "post_Nws_Search2": {
+      "comments": "string",
+      "contract_holder_id": "number",
+      "contract_owner_id": "number",
+      "created_by": "string",
+      "created_date": "string",
+      "currency": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "object_version_num": "number",
+      "person_id": "number",
+      "pr_estimated_value": "number",
+      "pr_number": "string",
+      "pr_title": "string",
+      "procurement_plan": "string",
+      "request_date": "string",
+      "request_number": "string",
+      "scm_team": "string",
+      "status_code": "string",
+      "status_id": "number",
+      "status_name": "string",
+      "strategy_hdr_id": "number",
+      "tender_background": "any",
+      "tender_category": "string",
+      "tender_category_des": "string",
+      "tender_commercial_criteria": "string",
+      "tender_committe": "string",
+      "tender_cost_estimate": "any",
+      "tender_division_info": "any",
+      "tender_icv_minimum_info": "string",
+      "tender_objective": "any",
+      "tender_scope_work": "string",
+      "tender_technical_criteria": "string",
+      "tender_type": "string"
+    },
+    "postPayloadVar": {
+      "strategy_hdr_id": "number",
+      "object_version_num": "number",
+      "request_number": "string",
+      "request_date": "string",
+      "status_id": "number",
+      "person_id": "number",
+      "comments": "string",
+      "scm_team": "string",
+      "tender_type": "string",
+      "tender_category": "string",
+      "tender_category_des": "string",
+      "tender_committe": "string",
+      "pr_number": "string",
+      "pr_title": "string",
+      "pr_estimated_value": "string",
+      "currency": "string",
+      "contract_holder_id": "number",
+      "contract_owner_id": "number",
+      "procurement_plan": "string",
+      "tender_objective": "string",
+      "tender_background": "string",
+      "tender_scope_work": "string",
+      "tender_cost_estimate": "string",
+      "tender_technical_criteria": "string",
+      "tender_commercial_criteria": "string",
+      "tender_icv_minimum_info": "string",
+      "tender_division_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    }
+  },
+  "eventListeners": {
+    "aboutBtnAction": {
+      "chains": [
+        {
+          "chain": "aboutBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "cancelCopy_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "ok_CreateCopy_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction4": {
+      "chains": [
+        {
+          "chain": "cancelDeleteBtn_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction5": {
+      "chains": [
+        {
+          "chain": "deleteDialogYesAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction6": {
+      "chains": [
+        {
+          "chain": "okAboutDialog_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "cancelBtnAction": {
+      "chains": [
+        {
+          "chain": "cancel_create_Dialog",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "copyBtnAction": {
+      "chains": [
+        {
+          "chain": "copy_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "saveBtnAction": {
+      "chains": [
+        {
+          "chain": "ok_createBtn_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    },
+    "nextBtnAction": {
+      "chains": [
+        {
+          "chain": "nextBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "pendingCancelBtnAction": {
+      "chains": [
+        {
+          "chain": "cancelPending_Dialog_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "preBtnAction": {
+      "chains": [
+        {
+          "chain": "prevBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "resetBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "addBtnAction": {
+      "chains": [
+        {
+          "chain": "createAC"
+        }
+      ]
+    },
+    "buttonAction3": {
+      "chains": [
+        {
+          "chain": "pendingWith_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "deleteBtnAction": {
+      "chains": [
+        {
+          "chain": "deleteAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "editBtnAction": {
+      "chains": [
+        {
+          "chain": "editAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "exportBtnAction": {
+      "chains": [
+        {
+          "chain": "exportHeader_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    }
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-label": {
+        "path": "ojs/ojlabel"
+      },
+      "oj-list-view": {
+        "path": "ojs/ojlistview"
+      },
+      "oj-progress-bar": {
+        "path": "ojs/ojprogress-bar"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-collection-container": {
+        "path": "oj-sp/collection-container/loader"
+      },
+      "oj-sp-empty-state": {
+        "path": "oj-sp/empty-state/loader"
+      },
+      "oj-sp-list-item-template": {
+        "path": "oj-sp/list-item-template/loader"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+    },
+    "modules": {
+      "xlsx": {
+        "path": "https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"
+      },
+      "exceljs": {
+        "path": "https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"
+      },
+      "ojConverterNumber": {
+        "path": "ojs/ojconverter-number"
+      },
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      },
+      "ojValidationNumber": {
+        "path": "ojs/ojvalidation-number"
+      }
+    },
+    "css": [
+      "/resources/css/smart_search.css"
+    ]
+  },
+  "constants": {
+    "headerColumns": {
+      "type": "object[]",
+      "description": "{\n        \"headerText\": \"Tender Status Comments\",\n        \"field\": \"tender_status_comments\",\n        \"resizable\": \"enabled\",\n        \"width\": 220,\n        \"template\": \"status_comments_template\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 220px;\",\n        \"style\": \"\"\n    },\n{\n        \"headerText\": \"Pending With\",\n        \"field\": \"\",\n        \"resizable\": \"enabled\",\n        \"width\": 180,\n        \"template\": \"pending_with_template\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\",\n        \"style\": \"\"\n    },",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "frozenEdge": "start",
+          "sortable": "disabled",
+          "width": 120,
+          "template": "actions",
+          "headerStyle": "white-space: nowrap; min-width: 120px;",
+          "style": ""
+        },
+        {
+          "headerText": "Request Number",
+          "field": "request_number",
+          "resizable": "enabled",
+          "frozenEdge": "start",
+          "width": 160,
+          "template": "edit_link_template",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": ""
+        },
+        {
+          "headerText": "Requestor",
+          "field": "full_name",
+          "resizable": "enabled",
+          "template": "requestor_name",
+          "width": 240
+        },
+        {
+          "headerText": "Request Date",
+          "field": "request_date",
+          "resizable": "enabled",
+          "width": 140,
+          "template": "date",
+          "headerStyle": "white-space: nowrap; min-width: 130px;",
+          "style": "",
+          "className": "oj-helper-text-align-center"
+        },
+        {
+          "headerText": "Tender Type",
+          "field": "tender_type",
+          "resizable": "enabled",
+          "width": 150,
+          "template": "uppercase",
+          "headerStyle": "white-space: nowrap; min-width: 150px;",
+          "style": "",
+          "className": "oj-helper-text-align-center"
+        },
+        {
+          "headerText": "Tender Category",
+          "field": "tender_category",
+          "resizable": "enabled",
+          "width": 160,
+          "template": "uppercase",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": "",
+          "className": "oj-helper-text-align-center"
+        },
+        {
+          "headerText": "Variation Type",
+          "field": "variation_type",
+          "resizable": "enabled",
+          "width": 160,
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "status_name",
+          "resizable": "enabled",
+          "width": 150,
+          "template": "status_badge",
+          "headerStyle": "white-space: nowrap; min-width: 150px;",
+          "style": "",
+          "className": "oj-helper-text-align-center"
+        },
+        {
+          "headerText": "PR Number",
+          "field": "pr_number",
+          "resizable": "enabled",
+          "width": 175,
+          "template": "pr_number_template",
+          "headerStyle": "white-space: nowrap; min-width: 150px;",
+          "style": ""
+        },
+        {
+          "headerText": "Pending With",
+          "field": "",
+          "resizable": "enabled",
+          "sortable": "disabled",
+          "width": 180,
+          "template": "pending_with_template",
+          "headerStyle": "white-space: nowrap; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "About",
+          "field": "",
+          "resizable": "enabled",
+          "sortable": "disabled",
+          "width": 100,
+          "template": "about",
+          "headerStyle": "white-space: nowrap; min-width: 220px;",
+          "style": ""
+        }
+      ]
+    }
+  }
+}

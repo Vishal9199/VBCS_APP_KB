@@ -1,0 +1,14 @@
+{
+    "vbcs.dt.version": "20250610-25.10.1",
+    "dependencies": {
+        "upgrade": "none",
+        "paths": {
+            "jet": "https://static.oracle.com/cdn/jet/18.1.0-2510.3",
+            "telemetry": "https://static.oracle.com/cdn/trace/10.2.2",
+            "visualRuntime": "https://static.oracle.com/cdn/vb/2510.0.0-rc3.0"
+        }
+    },
+    "source.version": "2510",
+    "rootURL": "PettyCashSystem",
+    "version": "2.8"
+}

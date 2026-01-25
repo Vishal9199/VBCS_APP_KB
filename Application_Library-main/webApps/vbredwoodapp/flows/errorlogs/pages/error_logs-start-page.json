@@ -1,0 +1,384 @@
+{
+  "title": "Error Log ",
+  "description": "",
+  "variables": {
+    "errorcode": {
+      "type": "string"
+    },
+    "errorLogADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "data": [],
+        "keyAttributes": "err_id",
+        "itemType": "errorLogType"
+      }
+    },
+    "getStgScheduleLovTableNameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "table_name",
+        "itemsPath": "items",
+        "responseType": "getStgScheduleLovTableNameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "table_name"
+          ]
+        },
+        "fetchChain": "getStgScheduleLovTableNameFetch"
+      }
+    },
+    "merge_query": {
+      "type": "string"
+    },
+    "pagingButton": {
+      "type": {
+        "previous": "boolean",
+        "next": "boolean"
+      },
+      "defaultValue": {
+        "previous": false,
+        "next": false
+      }
+    },
+    "searchObj": {
+      "type": {
+        "LIMIT": "string",
+        "OFFSET": "string",
+        "TABLE_NAME": "string"
+
+      },
+      "defaultValue": {
+        "LIMIT": "5",
+        "OFFSET": "0",
+        "TABLE_NAME": ""
+
+      }
+    },
+    "encryptPayload": {
+      "type": {
+        "payload": "string"
+      },
+      "defaultValue": {
+        "payload": ""
+      }
+    },
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionAC"
+          }
+        ]
+      }
+    },
+     "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/error_log.json' ]]"
+      }
+    }, "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "TableNameFilter": {
+              "label": "Table Name",
+              "options": {
+                "optionsData": "[[ $page.variables.getStgScheduleLovTableNameListSDP]]",
+                "optionsKeys": {
+                  "label": "table_name",
+                  "value": "table_name"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+  },
+  "types": {
+    "@decorators.getStgScheduleLovTableNameResponse": {
+      "endpoint": "getStgScheduleLovTableName",
+      "service": "ErrorLog",
+      "path": "response"
+    },
+    "errorLogType": {
+      "err_id": "number",
+      "table_name": "string",
+      "merge_query": "string",
+      "schedule_id": "number",
+      "schedule_list_id": "number",
+      "err_code": "string",
+      "err_msg": "string",
+      "creation_date": "string",
+      "err_status": "string"
+    },
+    "getStgScheduleLovTableNameResponse": {
+      "items": [
+        {
+          "table_name": "string"
+        }
+      ]
+    }
+  },
+  "constants": {
+    "tableColumns": {
+      "type": "object[]",
+      "defaultValue": [
+          {
+            "headerText": "Table Name",
+            "field": "table_name",
+            "template": "table_name",
+            "width": "",
+            "sortable": "disabled",
+            "resizable": "enabled",
+            "headerStyle": "white-space: nowrap; min-width: 180px;"
+          },
+          {
+            "headerText": "Merge Query",
+            "field": "merge_query",
+            "template": "merge_query",
+            "width": 140,
+            "sortable": "disabled",
+            "resizable": "enabled",
+            "headerStyle": "white-space: nowrap; min-width: 300px;"
+          },
+          {
+            "headerText": "Schedule ID",
+            "field": "schedule_id",
+            "template": "schedule_id",
+            "width": 140,
+            "sortable": "disabled",
+            "resizable": "enabled",
+            "headerStyle": "white-space: nowrap; min-width: 140px;"
+          },
+          {
+            "headerText": "Schedule List ID",
+            "field": "schedule_list_id",
+            "template": "schedule_list_id",
+            "width": 160,
+            "sortable": "disabled",
+            "resizable": "enabled",
+            "headerStyle": "white-space: nowrap; min-width: 160px;"
+          },
+          {
+            "headerText": "Error Code",
+            "field": "err_code",
+            "template": "err_code",
+            "width": 140,
+            "sortable": "disabled",
+            "resizable": "enabled",
+            "headerStyle": "white-space: nowrap; min-width: 140px;"
+          },
+          {
+            "headerText": "Error Message",
+            "field": "err_msg",
+            "template": "err_msg",
+            "width": 160,
+            "sortable": "disabled",
+            "resizable": "enabled",
+            "headerStyle": "white-space: nowrap; min-width: 300px;"
+          },
+          {
+            "headerText": "Creation Date",
+            "field": "creation_date",
+            "template": "creation_date",
+            "width": 160,
+            "sortable": "disabled",
+            "resizable": "enabled",
+            "headerStyle": "white-space: nowrap; min-width: 160px;"
+          },
+          {
+            "headerText": "Error Status",
+            "field": "err_status",
+            "template": "err_status",
+            "width": 140,
+            "sortable": "disabled",
+            "resizable": "enabled",
+            "headerStyle": "white-space: nowrap; min-width: 140px;"
+          }
+        ]    }
+  },
+  "eventListeners": {
+
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "mergeQuerycloseAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction3": {
+      "chains": [
+        {
+          "chain": "errorcodeCloseAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "copyButtonAction": {
+      "chains": [
+        {
+          "chain": "mergeQueryCopyAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "copyButtonMouseover": {
+      "chains": [
+        {
+          "chain": "errorCodeCopyAC",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "deleteIconClick": {
+      "chains": [
+        {
+          "chain": "mergedialogOpenAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "iconMouseover": {
+      "chains": [
+        {
+          "chain": "IconMouseoverChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "nxtBtnAction": {
+      "chains": [
+        {
+          "chain": "nextAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "preBtnAction": {
+      "chains": [
+        {
+          "chain": "previousButtonAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "resetAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "onloadAC"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-avatar": {
+        "path": "ojs/ojavatar"
+      },
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-popup": {
+        "path": "ojs/ojpopup"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      }
+
+    },
+    "css": [
+      "/resources/css/smartSearch.css"
+    ],
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    }
+  }
+}

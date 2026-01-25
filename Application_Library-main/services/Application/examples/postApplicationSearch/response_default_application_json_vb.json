@@ -1,0 +1,65 @@
+{
+    "OUT_COUNT": 4,
+    "OUT_DESCRIPTION": "Successfully fetched application records",
+    "OUT_HAS_NEXT": "N",
+    "OUT_STATUS": "SUCCESS",
+    "OUT_TOTAL_COUNT": 4,
+    "P_OUTPUT": [
+        {
+            "application_id": 130,
+            "object_version_num": 2,
+            "application_code": "abcde",
+            "application_name": "abc i apps1",
+            "remarks": "testUpdated",
+            "active_flag": "Y",
+            "attribute_json": null,
+            "created_by": "api",
+            "created_date": "2025-09-04T09:49:20Z",
+            "last_updated_by": "api",
+            "last_updated_date": "2025-09-04T09:49:20Z",
+            "last_updated_login": "api"
+        },
+        {
+            "application_id": 128,
+            "object_version_num": 3,
+            "application_code": "abcd",
+            "application_name": "abc i apps1",
+            "remarks": "testUpdated2",
+            "active_flag": "Y",
+            "attribute_json": null,
+            "created_by": "api",
+            "created_date": "2025-09-04T09:15:09Z",
+            "last_updated_by": "api",
+            "last_updated_date": "2025-08-28T00:00:00Z",
+            "last_updated_login": "api"
+        },
+        {
+            "application_id": 114,
+            "object_version_num": 3,
+            "application_code": "abc",
+            "application_name": "abc i apps1",
+            "remarks": "testUpdated",
+            "active_flag": "Y",
+            "attribute_json": null,
+            "created_by": "api",
+            "created_date": "2025-09-04T08:51:39Z",
+            "last_updated_by": "api",
+            "last_updated_date": "2025-08-28T00:00:00Z",
+            "last_updated_login": "api"
+        },
+        {
+            "application_id": 95,
+            "object_version_num": 2,
+            "application_code": "sdf",
+            "application_name": "abc ie apps1",
+            "remarks": "test5555",
+            "active_flag": "Y",
+            "attribute_json": null,
+            "created_by": "apiy",
+            "created_date": "2025-09-04T06:55:46Z",
+            "last_updated_by": "api",
+            "last_updated_date": "2025-09-04T00:00:00Z",
+            "last_updated_login": "apiy"
+        }
+    ]
+}

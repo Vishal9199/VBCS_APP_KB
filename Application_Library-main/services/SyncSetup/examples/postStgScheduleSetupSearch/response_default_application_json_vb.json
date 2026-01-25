@@ -1,0 +1,17 @@
+{
+    "OUT_COUNT": 1,
+    "OUT_DESCRIPTION": "Successfully retrieved configuration",
+    "OUT_HAS_NEXT": "N",
+    "OUT_STATUS": "SUCCESS",
+    "OUT_TOTAL_COUNT": 1,
+    "P_OUTPUT": [
+        {
+            "setup_id": 1,
+            "fusion_domain": "iabpbn-test.fa.ocs.oraclecloud.com",
+            "fusion_username": "fin impl",
+            "fusion_password": "***",
+            "mail_notification": "N",
+            "authentication_type": "basic"
+        }
+    ]
+}

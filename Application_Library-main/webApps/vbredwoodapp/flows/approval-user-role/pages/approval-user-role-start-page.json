@@ -1,0 +1,391 @@
+{
+  "title": "Approval Role",
+  "description": "Smart Search page for Approval Role management with filters and comprehensive role information display",
+  "variables": {
+    "encryptedBody": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "getApproverRoleLovRolecodeListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "approval_role_code",
+        "itemsPath": "items",
+        "responseType": "getApproverRoleLovRolecodeResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "approval_role_name"
+          ]
+        },
+        "fetchChain": "getApproverRoleLovRolecodeFetch"
+      }
+    },
+    "pagination": {
+      "type": {
+        "next": "boolean",
+        "prev": "boolean"
+      },
+      "defaultValue": {
+        "next": false,
+        "prev": false
+      }
+    },
+    "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "ApprovalRoleNameFilter": {
+              "label": "Approval Role Name",
+              "options": {
+                "optionsData": "[[ $page.variables.getApproverRoleLovRolecodeListSDP ]]",
+                "optionsKeys": {
+                  "label": "approval_role_name",
+                  "value": "approval_role_code"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/approvalUserRoleSearchConfig.json' ]]"
+      }
+    },
+    "searchObj": {
+      "type": {
+        "IN_LIMIT": "number",
+        "IN_OFFSET": "number",
+        "KEYWORD": "string",
+        "P_APPROVAL_ROLE_ID": "string",
+        "APPROVAL_ROLE_CODE": "string",
+        "APPROVAL_ROLE_NAME": "string",
+        "ACTIVE_FLAG": "string"
+      },
+      "defaultValue": {
+        "IN_LIMIT": 8,
+        "IN_OFFSET": 0,
+        "P_APPROVAL_ROLE_ID": "",
+        "APPROVAL_ROLE_CODE": "",
+        "APPROVAL_ROLE_NAME": "",
+        "ACTIVE_FLAG": ""
+      }
+    },
+    "approvalRoleRequestADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "ApprovalRoleManagementType",
+        "keyAttributes": "approval_role_id"
+      }
+    }
+  },
+  "metadata": {},
+  "types": {
+
+    "@decorators.getApproverRoleLovRolecodeResponse": {
+      "endpoint": "getApproverRoleLovRolecode",
+      "service": "ApprovalUserRole",
+      "path": "response"
+    },
+    "ApprovalRoleManagementType": {
+      "approval_role_id": "number",
+      "object_version_num": "number",
+      "approval_role_code": "string",
+      "approval_role_name": "string",
+      "remarks": "string",
+      "active_flag": "string",
+      "attribute_json": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "getApproverRoleLovRolecodeResponse": {
+      "items": [
+        {
+          "approval_role_code": "string",
+          "approval_role_name": "string"
+        }
+      ]
+    }
+  },
+  "chains": {},
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-date-time": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      }
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/smartSearch.css"
+    ]
+  },
+  "constants": {
+    "tableColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Approval Role Code",
+          "field": "approval_role_code",
+          "resizable": "enabled",
+          "width": 272,
+          "sortable": "enabled",
+          "template": "approval_role_code",
+          "headerStyle": "white-space: normal; min-width: 272px;",
+          "style": ""
+        },
+        {
+          "headerText": "Approval Role Name",
+          "field": "approval_role_name",
+          "resizable": "enabled",
+          "width": 272,
+          "sortable": "enabled",
+          "template": "approval_role_name",
+          "headerStyle": "white-space: normal; min-width: 272px;",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "active_flag",
+          "resizable": "enabled",
+          "width": 70,
+          "sortable": "disabled",
+          "template": "active_flag",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 70px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Remarks",
+          "field": "remarks",
+          "resizable": "enabled",
+          "width": "",
+          "sortable": "disabled",
+          "template": "remarks",
+          "headerStyle": "white-space: normal; min-width: 200px;",
+          "style": ""
+        }
+      ]
+    },
+    "tableColumnsWithActions": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "width": 75,
+          "sortable": "disabled",
+          "template": "actions",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 75px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Approval Role Code",
+          "field": "approval_role_code",
+          "resizable": "enabled",
+          "width": 272,
+          "sortable": "enabled",
+          "template": "approval_role_code",
+          "headerStyle": "white-space: normal; min-width: 272px;",
+          "style": ""
+        },
+        {
+          "headerText": "Approval Role Name",
+          "field": "approval_role_name",
+          "resizable": "enabled",
+          "width": 272,
+          "sortable": "enabled",
+          "template": "approval_role_name",
+          "headerStyle": "white-space: normal; min-width: 272px;",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "active_flag",
+          "resizable": "enabled",
+          "width": 70,
+          "sortable": "disabled",
+          "template": "active_flag",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 70px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Remarks",
+          "field": "remarks",
+          "resizable": "enabled",
+          "width": "",
+          "sortable": "disabled",
+          "template": "remarks",
+          "headerStyle": "white-space: normal; min-width: 200px;",
+          "style": ""
+        }
+      ]
+    }
+  },
+  "eventListeners": {
+    "addBtnAction": {
+      "chains": [
+        {
+          "chain": "addApprovalUserRoleAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnNoAction": {
+      "chains": [
+        {
+          "chain": "cancelDeleteAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnYesAction": {
+      "chains": [
+        {
+          "chain": "okDeleteAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "iconClick": {
+      "chains": [
+        {
+          "chain": "deleteActionAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "iconClick2": {
+      "chains": [
+        {
+          "chain": "IconClickChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "nxtBtnAction": {
+      "chains": [
+        {
+          "chain": "nextBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "preBtnAction": {
+      "chains": [
+        {
+          "chain": "prevBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "resetBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,108 @@
+
+
+
+<div style="" class="demo-padding demo-container">
+  <div style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+
+      <div>
+       <oj-sp-simple-create-edit id="function_page" page-title="Function" display-options.responsive-padding="on"
+         primary-action.label="Save and Close" badge.status="info" on-sp-cancel="[[$listeners.functionPageSpCancel]]"
+         on-sp-primary-action="[[$listeners.functionPageSpPrimaryAction]]" display-options.save="on"
+         on-sp-save="[[$listeners.functionPageSpSave]]" page-subtitle="  " badge.text="[[ $variables.functionDetailsVar.function_name ]]" >
+          <div slot="main" >
+            <div style="margin-top: 0;">
+              <div class="oj-panel oj-panel-shadow-md oj-selected">
+
+              <!-- === Function Management: 2 Columns × 3 Rows with Full-Width Remarks === -->
+              <oj-validation-group id="fid_function_form_group">
+                <oj-form-layout max-columns="2" label-edge="start" label-width="45%" user-assistance-density="compact"
+                  style="margin: 1rem; column-gap: 2rem; row-gap: 1rem;" direction="column">
+
+                  <!-- Row 1 -->
+                  <!-- Function Code -->
+                  <!-- Function Code Input -->
+                  <oj-input-text label-hint="Function Code" placeholder="Function Code"
+                    value="{{ $variables.functionDetailsVar.function_code }}"
+                    readonly="{{ $variables.isFunctionCodeReadOnly }}" required="true"
+                    on-value-changed="[[$listeners.fidFunctionCodeValue2]]" length.max="30">
+
+                    <!-- Pencil Icon at End -->
+                    <span slot="end">
+                      <oj-bind-if test="{{ $variables.isFunctionCodeReadOnly }}">
+                        <oj-button display="icons" chroming="borderless" on-oj-action="[[$listeners.buttonAction]]">
+                          <span slot="startIcon" class="oj-ux-ico-edit"></span>
+                        </oj-button>
+                      </oj-bind-if>
+                    </span>
+                  </oj-input-text>
+
+                  <!-- Function Name -->
+                  <oj-input-text label-hint="Function Name" placeholder="Function Name"
+                    value="{{ $variables.functionDetailsVar.function_name }}" required="true" length.max="200">
+                  </oj-input-text>
+
+                  <!-- Application Name -->
+                  <oj-select-single label-hint="Application Name" item-text="application_name"
+                    on-value-item-changed="[[$listeners.selectValueItem2]]"
+                    value="{{ $variables.functionDetailsVar.application_id }}"
+                    data="[[$variables.getApplicationLovActiveApplicationListSDP]]" required="true">
+                  </oj-select-single>
+
+                  <!-- URL Input with Validation -->
+  <oj-input-text virtual-keyboard="url" label-hint="URL" 
+    validators='[[ [    {        "type": "regexp",        "options": {            "pattern": "^(https?:\\/\\/).*",            "messageDetail": "Value must start with http:// or https://"        }    }] ]]'
+    value="{{ $variables.functionDetailsVar.page_url }}"></oj-input-text>
+
+              
+
+                
+    
+                  <oj-switch label-hint="Status" value="{{ $variables.functionDetailsVar.active_flag === 'Y' }}"
+                    style="width: 18rem;" on-value-changed="[[$listeners.switchValue]]">
+                  </oj-switch>
+
+                  <!-- Remarks (full width) -->
+                  <oj-text-area label-hint="Remarks" placeholder="Remarks"
+                    value="{{ $variables.functionDetailsVar.remarks }}" 
+                    style="width: 100%; min-height: 5rem;" length.counter="remaining" length.max="250">
+                  </oj-text-area>
+
+                </oj-form-layout>
+              </oj-validation-group>
+
+              <!-- Unsaved Changes Dialog -->
+              <oj-dialog dialog-title="Unsaved Changes" cancel-behavior="icon">
+                <div slot="body">
+                  <h6 style="font-size:medium; font-weight: bold;">Are you sure you want to leave this page?
+                    Your changes will be lost.
+                  </h6>
+                </div>
+                <div slot="footer">
+                  <oj-button chroming="danger" on-oj-action="[[$listeners.proceedExitBtnAction]]">Leave without Saving</oj-button>
+                  <oj-button chroming="outlined" on-oj-action="[[$listeners.cancelExitBtnAction]]">Cancel</oj-button>
+                </div>
+              </oj-dialog>
+
+            </div>
+          </div>
+        </oj-sp-simple-create-edit>
+      </div>
+    </div>
+  </div>
+</div>
+<oj-dialog dialog-title="Unsaved Changes" id="unsavedChangesDialog" cancel-behavior="icon">
+  <div slot="body">
+    <h6 id="unsavedChangesText" style="font-size:medium; font-weight: bold;">Are you sure you want to leave this page?
+      Your changes will be lost.
+    </h6>
+  </div>
+  <div slot="footer">
+    <oj-button id="proceedExitBtn" chroming="outlined" on-oj-action="[[$listeners.proceedExitBtnAction]]">Leave </oj-button>
+    <oj-button id="cancelExitBtn" chroming="outlined" on-oj-action="[[$listeners.cancelExitBtnAction]]">Cancel
+    </oj-button>
+  </div>
+</oj-dialog>
+
+
+

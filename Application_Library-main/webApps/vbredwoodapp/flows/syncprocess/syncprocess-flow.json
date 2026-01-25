@@ -1,0 +1,8 @@
+{
+  "id": "syncprocess",
+  "description": "Flow main",
+  "defaultPage": "sync_process-start",
+  "services": {},
+  "types": {},
+  "variables": {}
+}

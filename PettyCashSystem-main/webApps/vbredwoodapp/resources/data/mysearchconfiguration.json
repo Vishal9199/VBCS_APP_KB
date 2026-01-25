@@ -1,0 +1,55 @@
+{
+  "description": "Claims smart search configuration",
+  "filters": {
+    "GovernateFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Governate",
+      "options": {
+        "field": "petty_cash_governate",
+        "optionsData": "[[ $search.filters.GovernateFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.GovernateFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+    "DateFilter": {
+      "type": "oj-sp/smart-search/default-filters/DateRangeFilter",
+      "label": "Date",
+      "options": {
+        "field": "request_date",
+        "startDate": "[[ $page.variables.trx_start_date ]]",
+        "endDate": "[[ $page.variables.trx_end_date ]]",
+        "value": "",
+        "converter": {
+          "type": "datetime",
+          "options": {
+            "pattern": "dd-MMM-yyyy"
+          }
+        }
+      },
+      "data": {
+        "start": "2020-01-01",
+        "end": "[[ $application.functions.getSysdate() ]]"
+      }
+    },
+    "SupplierNameFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Supplier Name",
+      "options": {
+        "field": "supplier_name",
+        "optionsData": "[[ $search.filters.SupplierNameFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.SupplierNameFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+    "StatusFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Status",
+      "options": {
+        "field": "lookup_value_id",
+        "optionsData": "[[ $search.filters.StatusFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.StatusFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    }
+  }
+}

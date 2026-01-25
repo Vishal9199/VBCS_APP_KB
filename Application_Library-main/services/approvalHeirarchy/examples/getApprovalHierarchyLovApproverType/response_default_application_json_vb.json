@@ -1,0 +1,68 @@
+{
+    "items": [
+        {
+            "lookup_value_id": 837,
+            "object_version_num": 0,
+            "lookup_type_id": 835,
+            "lookup_type_code": "APPROVER_TYPE",
+            "lookup_type_name": "Approver Type",
+            "lookup_value_code": "APPROVER_TYPE",
+            "lookup_value_name": "Approver Type",
+            "remarks": null,
+            "child_lookup_type_id": null,
+            "child_lookup_type_code": null,
+            "child_lookup_type_name": null,
+            "display_order": 2,
+            "active_flag": "Y",
+            "effective_start_date": "2025-10-06T00:00:00Z",
+            "effective_end_date": "4712-12-31T00:00:00Z",
+            "attribute_json": null,
+            "created_by": "Yohasree S",
+            "created_date": "2025-10-06T06:22:34Z",
+            "last_updated_by": "Yohasree S",
+            "last_updated_date": "2025-10-06T06:22:34Z",
+            "last_updated_login": "Yohasree S"
+        },
+        {
+            "lookup_value_id": 836,
+            "object_version_num": 0,
+            "lookup_type_id": 835,
+            "lookup_type_code": "APPROVER_TYPE",
+            "lookup_type_name": "Approver Type",
+            "lookup_value_code": "USER_GROUP",
+            "lookup_value_name": "User Group",
+            "remarks": null,
+            "child_lookup_type_id": null,
+            "child_lookup_type_code": null,
+            "child_lookup_type_name": null,
+            "display_order": 1,
+            "active_flag": "Y",
+            "effective_start_date": "2025-10-06T00:00:00Z",
+            "effective_end_date": "4712-12-31T00:00:00Z",
+            "attribute_json": null,
+            "created_by": "Yohasree S",
+            "created_date": "2025-10-06T06:22:24Z",
+            "last_updated_by": "Yohasree S",
+            "last_updated_date": "2025-10-06T06:22:24Z",
+            "last_updated_login": "Yohasree S"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 2,
+    "links": [
+        {
+            "rel": "self",
+            "href": "http://primaverademo.4iapps.com:8442/ords/aol/approval/hierarchy/lov/approver/type"
+        },
+        {
+            "rel": "describedby",
+            "href": "http://primaverademo.4iapps.com:8442/ords/aol/metadata-catalog/approval/hierarchy/lov/approver/item"
+        },
+        {
+            "rel": "first",
+            "href": "http://primaverademo.4iapps.com:8442/ords/aol/approval/hierarchy/lov/approver/type"
+        }
+    ]
+}

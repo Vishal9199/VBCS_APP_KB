@@ -1,0 +1,297 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "adpSearch": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "postApprovalHistory",
+        "keyAttributes": "action_history_id"
+      }
+    },
+    "encrySearchObj": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "lv_appr_request_code": {
+      "type": "string",
+      "input": "fromCaller"
+    },
+    "lv_title": {
+      "type": "string",
+      "input": "fromCaller"
+    },
+    "lv_transaction_id": {
+      "type": "string",
+      "input": "fromCaller"
+    },
+    "searchObj": {
+      "type": {
+        "IN_LIMIT": "string",
+        "IN_OFFSET": "string",
+        "P_APPR_REQUEST_CODE": "string",
+        "P_TRANSACTION_ID": "string"
+      },
+      "defaultValue": {
+        "IN_LIMIT": "15",
+        "IN_OFFSET": "0"
+      }
+    },
+    "vHasMoreRecords": {
+      "type": "boolean",
+      "defaultValue": false
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.postApprovalHistory": {
+      "endpoint": "postApprovalHistory",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "postApprovalHistory": {
+          "action_comments": "string",
+          "action_date": "string",
+          "action_history_id": "number",
+          "action_id": "number",
+          "action_sequence_num": "number",
+          "action_type": "string",
+          "action_type_code": "string",
+          "action_type_id": "number",
+          "appr_category_code": "string",
+          "appr_category_id": "number",
+          "appr_category_name": "string",
+          "appr_hierarchy_id": "number",
+          "appr_level": "number",
+          "appr_request_code": "string",
+          "appr_request_name": "string",
+          "appr_type_code": "string",
+          "appr_type_id": "number",
+          "appr_type_name": "string",
+          "approval_pcs_instance_num": "string",
+          "approver_email_id": "string",
+          "approver_user_name": "string",
+          "created_by": "string",
+          "creation_date": "string",
+          "last_update_date": "string",
+          "last_update_login": "string",
+          "last_updated_by": "string",
+          "requester_email_address": "string",
+          "requester_email_disp_name": "string",
+          "requester_user": "string",
+          "requester_user_id": "number",
+          "response_user": "string",
+          "response_user_id": "number",
+          "status_code": "string",
+          "transaction_id": "number",
+          "transaction_num": "string"
+    }
+  },
+  "eventListeners": {
+    "approvalHistorySpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "SmartSearchPageTemplateSpPrimaryActionChain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "approvalHistorySpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "SmartSearchPageTemplateSpSecondaryActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "nxtBtnAction": {
+      "chains": [
+        {
+          "chain": "onClickNextBtn"
+        }
+      ]
+    },
+    "preBtnAction": {
+      "chains": [
+        {
+          "chain": "onClickPreviousBtn"
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-input-date-time": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-paging-control": {
+        "path": "ojs/ojpagingcontrol"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      }
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/smartSearch.css"
+    ]
+  },
+  "constants": {
+    "column": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Seq.No",
+          "field": "action_sequence_num",
+          "resizable": "enabled",
+          "width": "68"
+        },
+        {
+          "headerText": "Category",
+          "field": "appr_category_name",
+          "width": "171",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Requester Name",
+          "field": "requester_user",
+          "width": "250",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Approver Name",
+          "field": "response_user",
+          "width": "250",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Level",
+          "field": "appr_level",
+          "width": "78",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Action",
+          "field": "action_type",
+          "width": "181",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Action Date",
+          "field": "action_date",
+          "template": "Date",
+          "width": "192",
+          "resizable": "enabled"
+
+        },
+        {
+          "headerText": "Comments",
+          "field": "action_comments",
+          "resizable": "enabled",
+          "width": "380"
+        }
+      ],
+      "uniqueItems": true
+    },
+    "columnBkp": {
+      "defaultValue": [
+        {
+          "headerText": "Seq.No",
+          "field": "action_sequence_num",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Requester Name",
+          "field": "requester_user",
+          "width": "200px",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Requester User Name",
+          "field": "requester_email_address",
+          "width": "250px",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Request Type",
+          "field": "appr_request_name",
+          "width": "250px",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Approver Name",
+          "field": "response_user",
+          "width": "200px",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Approver User Name",
+          "field": "approver_email_id",
+          "width": "250px",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Level",
+          "field": "appr_level",
+          "width": "150px",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Category",
+          "field": "appr_category_name",
+          "width": "150px",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Action",
+          "field": "action_type",
+          "width": "150px",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Action Date",
+          "field": "action_date",
+          "template": "Date",
+          "width": "200px",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Comments",
+          "field": "action_comments",
+          "resizable": "enabled"
+        }
+      ],
+      "uniqueItems": true,
+      "type": "object[]"
+    }
+  }
+}

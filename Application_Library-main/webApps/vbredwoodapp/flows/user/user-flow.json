@@ -1,0 +1,25 @@
+{
+  "id": "user",
+  "description": "Flow main",
+  "defaultPage": "user-start",
+  "services": {},
+  "types": {},
+  "variables": {
+    "enddate": {
+      "type": "boolean",
+      "defaultValue": false
+    }
+  },  
+  "constants": {
+      "accessObj": {
+      "type": {
+        "allowDelete": "boolean",
+        "allowEdit": "boolean"
+      },
+      "defaultValue": {
+        "allowEdit": true,
+        "allowDelete": true
+      }
+    }
+  }
+}

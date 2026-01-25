@@ -1,0 +1,496 @@
+{
+  "title": "Lookup",
+  "description": "Smart Search page for Lookup Type management with filters for Application Name, Lookup Type, and Effective Date Range",
+  "variables": {
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "encryptedBody": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "getApplicationLovAppCodeListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "application_code",
+        "itemsPath": "items",
+        "responseType": "getApplicationLovAppCodeResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "application_name"
+          ]
+        },
+        "fetchChain": "getApplicationLovAppCodeFetch"
+      }
+    },
+    "getLookupTypeLovTypeNameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "lookup_type_code",
+        "itemsPath": "items",
+        "responseType": "getLookupTypeLovTypeNameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_type_name"
+          ]
+        },
+        "fetchChain": "getLookupTypeLovTypeNameFetch"
+      }
+    },
+    "pagination": {
+      "type": {
+        "next": "boolean",
+        "prev": "boolean"
+      },
+      "defaultValue": {
+        "next": false,
+        "prev": false
+      }
+    },
+    "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "ApplicationNameFilter": {
+              "label": "Application Name",
+              "options": {
+                "optionsData": "[[ $page.variables.getApplicationLovAppCodeListSDP ]]",
+                "optionsKeys": {
+                  "label": "application_name",
+                  "value": "application_code"
+                }
+              }
+            },
+            "LookupTypeFilter": {
+              "label": "Lookup Type",
+              "options": {
+                "optionsData": "[[ $page.variables.getLookupTypeLovTypeNameListSDP ]]",
+                "optionsKeys": {
+                  "label": "lookup_type_name",
+                  "value": "lookup_type_code"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/lookupSearchConfig.json' ]]"
+      }
+    },
+    "searchObj": {
+      "type": {
+        "IN_LIMIT": "number",
+        "IN_OFFSET": "number",
+        "KEYWORD": "string",
+        "P_LOOKUP_TYPE_ID": "string",
+        "LOOKUP_TYPE_CODE": "string",
+        "LOOKUP_TYPE_NAME": "string",
+        "ACTIVE_FLAG": "string",
+        "APPLICATION_ID": "string",
+        "APPLICATION_CODE": "string"
+
+      },
+      "defaultValue": {
+        "IN_LIMIT": 8,
+        "IN_OFFSET": 0,
+        "P_LOOKUP_TYPE_ID": "",
+        "LOOKUP_TYPE_CODE": "",
+        "LOOKUP_TYPE_NAME": "",
+        "APPLICATION_ID": "",
+        "APPLICATION_CODE": ""
+      }
+    },
+    "lookupRequestADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "LookupManagementType",
+        "keyAttributes": "lookup_type_id"
+      }
+    }
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getApplicationLovAppCodeResponse": {
+      "endpoint": "getApplicationLovAppCode",
+      "service": "Application",
+      "path": "response"
+    },
+    "@decorators.getLookupTypeLovTypeNameResponse": {
+      "endpoint": "getLookupTypeLovTypeName",
+      "service": "Look_Up",
+      "path": "response"
+    },
+    "getApplicationLovAppCodeResponse": {
+      "items": [
+        {
+          "application_code": "string",
+          "application_name": "string"
+        }
+      ]
+    },
+    "getLookupTypeLovTypeNameResponse": {
+      "items": [
+        {
+          "lookup_type_code": "string",
+          "lookup_type_name": "string"
+        }
+      ]
+    },
+    "LookupManagementType": {
+      "lookup_type_id": "number",
+      "object_version_num": "number",
+      "lookup_type_code": "string",
+      "lookup_type_name": "string",
+      "remarks": "string",
+      "active_flag": "string",
+      "effective_start_date": "string",
+      "effective_end_date": "string",
+      "application_id": "number",
+      "application_name": "string",
+      "attribute_json": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    }
+  },
+  "chains": {},
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-date-time": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      }
+
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/smartSearch.css"
+    ]
+  },
+  "constants": {
+    "tableColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Lookup Type Code",
+          "field": "lookup_type_code",
+          "resizable": "enabled",
+          "width": "",
+          "sortable": "enabled",
+          "template": "lookup_type_code",
+          "headerStyle": "white-space: normal; min-width: 160px;",
+          "style": ""
+        },
+        {
+          "headerText": "Lookup Type Name",
+          "field": "lookup_type_name",
+          "resizable": "enabled",
+          "width": "",
+          "sortable": "enabled",
+          "template": "lookup_type_name",
+          "headerStyle": "white-space: normal; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Application Name",
+          "field": "application_name",
+          "resizable": "enabled",
+          "width": "",
+          "template": "application_name",
+          "headerStyle": "white-space: normal; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Effective Start Date",
+          "field": "effective_start_date",
+          "resizable": "enabled",
+          "width": 182,
+          "template": "effective_start_date",
+          "headerStyle": "white-space: normal; min-width: 170px;",
+          "style": ""
+        },
+        {
+          "headerText": "Effective End Date",
+          "field": "effective_end_date",
+          "resizable": "enabled",
+          "width": 182,
+          "template": "effective_end_date",
+          "headerStyle": "white-space: normal; min-width: 160px;",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "active_flag",
+          "resizable": "enabled",
+          "width": 70,
+          "sortable": "disabled",
+          "template": "active_flag",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+
+        },
+        {
+          "headerText": "Remarks",
+          "field": "remarks",
+          "resizable": "enabled",
+          "width": "",
+          "sortable": "disabled",
+          "template": "remarks",
+          "headerStyle": "white-space: normal; min-width: 200px;",
+          "style": ""
+
+        }
+      ]
+    },
+    "tableColumnsWithActions": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "width": 75,
+          "sortable": "disabled",
+          "template": "actions",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+
+        },
+        {
+          "headerText": "Lookup Type Code",
+          "field": "lookup_type_code",
+          "resizable": "enabled",
+          "width": "",
+          "sortable": "enabled",
+          "template": "lookup_type_code",
+          "headerStyle": "white-space: normal; min-width: 160px;",
+          "style": ""
+        },
+        {
+          "headerText": "Lookup Type Name",
+          "field": "lookup_type_name",
+          "resizable": "enabled",
+          "width": "",
+          "sortable": "enabled",
+          "template": "lookup_type_name",
+          "headerStyle": "white-space: normal; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Application Name",
+          "field": "application_name",
+          "resizable": "enabled",
+          "width": "",
+          "template": "application_name",
+          "headerStyle": "white-space: normal; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Effective Start Date",
+          "field": "effective_start_date",
+          "resizable": "enabled",
+          "width": 182,
+          "template": "effective_start_date",
+          "headerStyle": "white-space: normal; min-width: 170px;",
+          "style": ""
+        },
+        {
+          "headerText": "Effective End Date",
+          "field": "effective_end_date",
+          "resizable": "enabled",
+          "width": 182,
+          "template": "effective_end_date",
+          "headerStyle": "white-space: normal; min-width: 160px;",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "active_flag",
+          "resizable": "enabled",
+          "width": 70,
+          "sortable": "disabled",
+          "template": "active_flag",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+
+        },
+        {
+          "headerText": "Remarks",
+          "field": "remarks",
+          "resizable": "enabled",
+          "width": "",
+          "sortable": "disabled",
+          "template": "remarks",
+          "headerStyle": "white-space: normal; min-width: 200px;",
+          "style": ""
+
+        }
+      ]
+    }
+  },
+  "eventListeners": {
+    "addBtnAction": {
+      "chains": [
+        {
+          "chain": "addLookupTypeAC"
+        }
+      ]
+    },
+    "deleteBtnNoAction": {
+      "chains": [
+        {
+          "chain": "cancelDeleteAC"
+        }
+      ]
+    },
+    "deleteBtnYesAction": {
+      "chains": [
+        {
+          "chain": "okDeleteAC"
+        }
+      ]
+    },
+    "hyperlinkClick": {
+      "chains": [
+        {
+          "chain": "HyperlinkClickChain",
+          "parameters": {
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "hyperlinkClick2": {
+      "chains": [
+        {
+          "chain": "appNameClickAC",
+          "parameters": {
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "iconClick": {
+      "chains": [
+        {
+          "chain": "deleteActionAC",
+          "parameters": {
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "iconClick2": {
+      "chains": [
+        {
+          "chain": "HyperlinkClickChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "nxtBtnAction": {
+      "chains": [
+        {
+          "chain": "nextBtnAC"
+        }
+      ]
+    },
+    "preBtnAction": {
+      "chains": [
+        {
+          "chain": "prevBtnAC"
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshBtn",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "resetAC"
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "chain": "PageVbEnterChain"
+        }
+      ]
+    }
+
+  }
+}

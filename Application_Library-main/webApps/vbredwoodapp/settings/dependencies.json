@@ -1,0 +1,28 @@
+{
+  "component-dependencies": {
+    "oj-sp": {
+      "version": "2507.0.3",
+      "components": {
+        "messages-banner": "2507.0.3",
+        "messages-toast": "2507.0.3",
+        "smart-search-page": "2507.0.3",
+        "smart-search": "2507.0.3",
+        "collection-container": "2507.0.3",
+        "list-item-template": "2507.0.3",
+        "empty-state": "2507.0.3",
+        "simple-create-edit": "2507.0.3",
+        "input-url": "2507.0.3",
+        "section": "2507.0.3",
+        "advanced-create-edit": "2507.0.3",
+        "vertical-anchor-navigator": "2507.0.3",
+        "message-unsaved-changes": "2507.0.3"
+      }
+    },
+    "oj-dynamic": {
+      "version": "18.0.3",
+      "components": {
+        "form": "18.0.3"
+      }
+    }
+  }
+ }

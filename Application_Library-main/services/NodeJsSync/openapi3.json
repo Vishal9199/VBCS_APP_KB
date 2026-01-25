@@ -1,0 +1,87 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "NWS NODE JS",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "vb-catalog://backends/NWS_NODE_JS",
+            "description": "NWS NODE JS"
+        }
+    ],
+    "paths": {
+        "/scheduler/stop": {
+            "get": {
+                "operationId": "getSchedulerStop",
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetSchedulerStop"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getSchedulerStop/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/scheduler/start": {
+            "get": {
+                "operationId": "getSchedulerStart",
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetSchedulerStart"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getSchedulerStart/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "GetSchedulerStop": {
+                "type": "object",
+                "properties": {
+                    "messeage": {
+                        "type": "string"
+                    }
+                }
+            },
+            "GetSchedulerStart": {
+                "type": "object",
+                "properties": {
+                    "messeage": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

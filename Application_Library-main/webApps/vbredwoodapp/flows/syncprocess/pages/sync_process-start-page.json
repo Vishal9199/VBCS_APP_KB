@@ -1,0 +1,472 @@
+{
+  "title": "Schedule Management",
+  "description": "Smart Search page for Schedule Management with filter for Schedule Name",
+  "variables": {
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "encryptedBody": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "getStgScheduleLovScheduleNameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "schedule_id",
+        "itemsPath": "items",
+        "responseType": "getStgScheduleLovScheduleNameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "schedule_name"
+          ]
+        },
+        "fetchChain": "getStgScheduleLovScheduleNameFetch"
+      }
+    },
+    "pagination": {
+      "type": {
+        "next": "boolean",
+        "prev": "boolean"
+      },
+      "defaultValue": {
+        "next": false,
+        "prev": false
+      }
+    },
+    "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "ScheduleNameFilter": {
+              "label": "Schedule Name",
+              "options": {
+                "optionsData": "[[ $page.variables.getStgScheduleLovScheduleNameListSDP ]]",
+                "optionsKeys": {
+                  "label": "schedule_name",
+                  "value": "schedule_id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/scheduleSearchConfig.json' ]]"
+      }
+    },
+    "searchObj": {
+      "type": {
+        "LIMIT": "string",
+        "OFFSET": "string",
+        "SCHEDULE_ID": "string",
+        "SCHEDULE_NAME": "string"
+
+      },
+      "defaultValue": {
+        "OFFSET": "0",
+        "LIMIT": "10",
+        "SCHEDULE_NAME": ""
+
+      }
+    },
+    "scheduleRequestADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "ScheduleManagementType",
+        "keyAttributes": "schedule_id"
+      }
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getScheduleNameLovResponse": {
+      "endpoint": "getScheduleNameLov",
+      "service": "Schedule",
+      "path": "response"
+    },
+    "@decorators.getStgScheduleLovScheduleNameResponse": {
+      "endpoint": "getStgScheduleLovScheduleName",
+      "service": "SynProcessLog",
+      "path": "response"
+    },
+    "@decorators.postStgScheduleSyncSearchResponse": {
+      "endpoint": "postStgScheduleSyncSearch",
+      "service": "ScheduleProcess",
+      "path": "response"
+    },
+    "getScheduleNameLovResponse": {
+      "items": [
+        {
+          "schedule_id": "number",
+          "schedule_name": "string"
+        }
+      ]
+    },
+    "getStgScheduleLovScheduleNameResponse": {
+      "items": [
+        {
+          "schedule_id": "number",
+          "schedule_name": "string"
+        }
+      ]
+    },
+    "postStgScheduleSyncSearchResponse": {
+      "P_OUTPUT": [
+        {
+          "schedule_id": "number",
+          "schedule_name": "string"
+        }
+      ]
+    },
+    "ScheduleManagementType": {
+      "schedule_id": "number",
+      "schedule_name": "string",
+      "frequency_min": "number",
+      "bi_report_path": "string",
+      "bi_report_name": "string",
+      "db_table_name": "string",
+      "db_column_names": "string",
+      "operation": "string",
+      "package_to_run_after_process": "string",
+      "run_package_at_last_seq": "string",
+      "status": "string",
+      "reset_data": "string",
+      "created_by": "string",
+      "creation_date": "string",
+      "last_updated_by": "string",
+      "last_update_date": "string",
+      "last_update_login": "string"
+    }
+
+  },
+  "chains": {},
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      }
+
+    },
+    "css": [
+      "/resources/css/smartSearch.css"
+    ]
+  },
+  "constants": {
+
+    "tableColumnsWithActions": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "width": 75,
+          "sortable": "disabled",
+          "template": "actions",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Schedule Name",
+          "field": "schedule_name",
+          "resizable": "enabled",
+          "width": "",
+          "sortable": "enabled",
+          "template": "schedule_name",
+          "headerStyle": "white-space: normal; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Frequency (Min)",
+          "field": "frequency_min",
+          "resizable": "enabled",
+          "width": 140,
+          "sortable": "enabled",
+          "template": "frequency_min",
+          "headerStyle": "white-space: normal; min-width: 140px;",
+          "style": ""
+        },
+        {
+          "headerText": "BI Report Path",
+          "field": "bi_report_path",
+          "resizable": "enabled",
+          "width": "",
+          "sortable": "enabled",
+          "template": "bi_report_path",
+          "headerStyle": "white-space: normal; min-width: 200px;",
+          "style": ""
+        },
+        {
+          "headerText": "BI Report Name",
+          "field": "bi_report_name",
+          "resizable": "enabled",
+          "width": "",
+          "sortable": "enabled",
+          "template": "bi_report_name",
+          "headerStyle": "white-space: normal; min-width: 200px;",
+          "style": ""
+        },
+        {
+          "headerText": "DB Table Name",
+          "field": "db_table_name",
+          "resizable": "enabled",
+          "width": "",
+          "sortable": "enabled",
+          "template": "db_table_name",
+          "headerStyle": "white-space: normal; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "DB Column Names",
+          "field": "db_column_names",
+          "resizable": "enabled",
+          "width": "",
+          "sortable": "enabled",
+          "template": "db_column_names",
+          "headerStyle": "white-space: normal; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Operation",
+          "field": "operation",
+          "resizable": "enabled",
+          "width": 120,
+          "sortable": "enabled",
+          "template": "operation",
+          "headerStyle": "white-space: normal; min-width: 120px;",
+          "style": ""
+        },
+        {
+          "headerText": "Package to Run After",
+          "field": "package_to_run_after_process",
+          "resizable": "enabled",
+          "width": "",
+          "sortable": "disabled",
+          "template": "package_to_run_after_process",
+          "headerStyle": "white-space: normal; min-width: 200px;",
+          "style": ""
+        },
+        {
+          "headerText": "Run at Last Seq",
+          "field": "run_package_at_last_seq",
+          "resizable": "enabled",
+          "width": 140,
+          "sortable": "disabled",
+          "template": "run_package_at_last_seq",
+          "headerStyle": "white-space: normal; min-width: 140px;",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "status",
+          "resizable": "enabled",
+          "width": 70,
+          "sortable": "disabled",
+          "template": "status",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Reset Data",
+          "field": "reset_data",
+          "resizable": "enabled",
+          "width": 120,
+          "sortable": "disabled",
+          "template": "reset_data",
+          "headerStyle": "white-space: normal; min-width: 120px;",
+          "style": ""
+        }
+      ]
+    }
+  },
+  "eventListeners": {
+    "addBtnAction": {
+      "chains": [
+        {
+          "chain": "addBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnNoAction": {
+      "chains": [
+        {
+          "chain": "cancelDeleteAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnYesAction": {
+      "chains": [
+        {
+          "chain": "okDeleteAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "iconClick": {
+      "chains": [
+        {
+          "chain": "editClickAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "iconClick2": {
+      "chains": [
+        {
+          "chain": "deleteClickAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "nxtBtnAction": {
+      "chains": [
+        {
+          "chain": "nextBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "preBtnAction": {
+      "chains": [
+        {
+          "chain": "PrevBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "processBtnAction": {
+      "chains": [
+        {
+          "chain": "onClickProcessLog",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "resetBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "startBtnAction": {
+      "chains": [
+        {
+          "chain": "startBtn",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "stopBtnAction": {
+      "chains": [
+        {
+          "chain": "ButtonActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    }
+
+  }
+}

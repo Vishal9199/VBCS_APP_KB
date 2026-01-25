@@ -1,0 +1,32 @@
+{
+    "items": [
+        {
+            "restriction_id": 201,
+            "restriction_code": "W_PC_AL_DAKHLIYA_REGION",
+            "restriction_name": "Water Petty Cash Al Dakhliya Region",
+            "person_id": 100000001703242,
+            "person_number": "3068",
+            "full_name": "Nasr Hamed Saif Al Amri ",
+            "email_address": "nasr.amri@testowwsc.nama.om",
+            "active_flag": "Y"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/pettycash/lov/datarestriction?p_user=nasr.amri%40testowwsc.nama.om"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/metadata-catalog/pettycash/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/pettycash/lov/datarestriction?p_user=nasr.amri%40testowwsc.nama.om"
+        }
+    ]
+}

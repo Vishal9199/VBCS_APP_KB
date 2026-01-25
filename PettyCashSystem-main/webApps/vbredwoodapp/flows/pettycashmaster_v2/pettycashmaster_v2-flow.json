@@ -1,0 +1,10 @@
+{
+
+  "id": "pettycashmaster_v2",
+  "description": "Flow main",
+  "defaultPage": "main-start",
+  "chains": {},
+  "services": {},
+  "types": {},
+  "variables": {}
+}

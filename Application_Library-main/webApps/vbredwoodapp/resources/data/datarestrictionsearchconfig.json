@@ -1,0 +1,25 @@
+{
+  "description": "Employee Exception smart search configuration",
+  "filters": {
+    "RestrictionFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Restriction Name",
+      "options": {
+        "field": "lookup_value_code",
+        "optionsData": "[[ $search.filters.RestrictionFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.RestrictionFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+    "PersonFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Person Name",
+      "options": {
+        "field": "full_name",
+        "optionsData": "[[ $search.filters.PersonFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.PersonFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    }
+  }
+}

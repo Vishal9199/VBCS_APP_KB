@@ -1,0 +1,283 @@
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div>
+        <oj-sp-simple-create-edit id="approval_hierarchy_page" page-title="Approval Hierarchy"
+          display-options.responsive-padding="on" primary-action.label="Save and Close"
+          secondary-actions='[{"label":"Save","id":"save"}]' badge.status="info"
+          badge.text="[[ $variables.approvalHierarchyVar.hierarchy_name ]]"
+          on-sp-secondary-action="[[$listeners.approvalHierarchyPageSpSecondaryAction]]"
+          on-sp-primary-action="[[$listeners.approvalHierarchyPageSpPrimaryAction]]"
+          on-sp-cancel="[[$listeners.approvalHierarchyPageSpCancel]]">
+
+          <div slot="main" style="background-color:white;">
+            <div style="margin-top: 0;">
+
+              <!-- Main Form Section - Approval Hierarchy -->
+              <div class="oj-panel oj-panel-shadow-md oj-selected">
+                <oj-validation-group valid="{{ $variables.validationGroupVars.isHeaderFormValid }}"
+                  :id="[[ $variables.validationGroupVars.headerFormId ]]">
+                  <oj-form-layout max-columns="2" label-edge="start" label-width="45%" user-assistance-density="compact"
+                    direction="column">
+
+                    <!-- Hierarchy Code - Auto Convert to Upper Case -->
+                    <oj-input-text id="hierarchy-code" label-hint="Hierarchy Code" placeholder="Hierarchy Code"
+                      value="{{ $variables.approvalHierarchyVar.hierarchy_code }}" required="true"
+                      messages-custom="{{ $variables.hierarchyCodeCustomMsg }}" readonly="[[ !$variables.canEdit ]]"
+                      length.max="200" on-value-changed="[[$listeners.hierarchyCodeValue]]">
+                      <div slot="end">
+                        <oj-bind-if test="[[ !$variables.canEdit ]]">
+                          <oj-button display="icons" chroming="borderless" label="Button"
+                            style="background-color:transparent;" id="iconOnlyBtn"
+                            on-oj-action="[[$listeners.iconOnlyBtnAction]]">
+                            <span class="oj-ux-ico-edit" id="span--655749004-1" slot="startIcon"></span>
+                          </oj-button>
+                        </oj-bind-if>
+                      </div>
+                    </oj-input-text>
+                    <oj-input-text id="hierarchy-name" label-hint="Hierarchy Name" placeholder="Hierarchy Name"
+                      value="{{ $variables.approvalHierarchyVar.hierarchy_name }}" required="true" length.max="200">
+                    </oj-input-text>
+
+                    <oj-select-single id="function-id" label-hint="Function"
+                      value="{{ $variables.approvalHierarchyVar.function_id }}" item-text="function_name"
+                      required="true" data="[[$variables.getFunctionLovFunctionNameListSDP]]">
+                    </oj-select-single>
+
+
+
+                    <oj-select-single id="business-unit-id" label-hint="Business Unit"
+                      value="{{ $variables.approvalHierarchyVar.business_unit_id }}" item-text="bu_name"
+                      data="[[$variables.getAolUsrRoleLovBuNameListSDP]]">
+                    </oj-select-single>
+
+                    <oj-switch id="active-flag-switch" value="{{ $variables.approvalHierarchyVar.active_flag === 'Y' }}"
+                      label-hint="Status" on-value-changed="[[$listeners.activeFlagSwitchValue]]">
+                    </oj-switch>
+
+                    <oj-text-area id="remarks" label-hint="Remarks" placeholder="Remarks"
+                      value="{{ $variables.approvalHierarchyVar.remarks }}" rows="4" length.counter="remaining"
+                      length.max="250">
+                    </oj-text-area>
+
+                  </oj-form-layout>
+                </oj-validation-group>
+              </div>
+
+              <!-- Approval Hierarchy List Table Section -->
+              <div>
+                <!-- Action Buttons for Approval Hierarchy List Table -->
+                <div
+                  style="color: #02474e; font-size: larger; font-weight: bold;margin-bottom:0rem; padding : 10px 15px;"
+                  class="oj-flex oj-sm-justify-content-space-between oj-sm-align-items-center">
+                  <oj-bind-text value="Approval Hierarchy List"></oj-bind-text>
+                  <div class="oj-flex oj-sm-justify-content-space-around oj-sm-align-items-center" style="gap:10px;">
+                    <oj-button style="margin:0.125rem;" label="Refresh" chroming="outlined" id="refreshBtn"
+                      on-oj-action="[[$listeners.refreshBtnAction]]">
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/Refresh.png' ]]">
+                    </oj-button>
+
+                    <oj-button label="Add" class="oj-flex-bar-end oj-helper-justify-content-flex-end"
+                      chroming="outlined" id="addBtn" on-oj-action="[[$listeners.addBtnAction]]">
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/Create (1).png' ]]">
+                    </oj-button>
+                  </div>
+                </div>
+                <!-- Approval Hierarchy List Table -->
+                <oj-table id="approval-hierarchy-list-table" data="{{ $variables.ADPapprovalHierarchyList }}"
+                  columns="{{ ($flow.constants.accessObj.allowDelete || $flow.constants.accessObj.allowEdit) ? $constants.hierarchyListColumnsWithActions : $constants.hierarchyListColumns }}"
+                  columns-default.sortable="disabled" columns-default.resizable="enabled"
+                  class="oj-sm-width-full oj-bg-body" display="grid" selection-mode.row="none">
+
+                  <template slot="hierarchy_list_actions_template">
+                    <div class="oj-flex oj-sm-align-items-center oj-sm-justify-content-center" style="gap:15px;">
+                      <span class="oj-ux-ico-trash"
+                      style="cursor:pointer; font-size:20px;" on-click="[[$listeners.iconClick2]]"></span>
+                      <span class="oj-ux-ico-edit"
+                      style="cursor:pointer; font-size:20px;" on-click="[[$listeners.iconClick]]" ></span>
+                    </div>
+                  </template>
+
+                  <template slot="hierarchy_list_id_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="level_num_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="category_name_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="type_name_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="user_name_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="person_name_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="user_role_name_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="from_limit_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="to_limit_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="active_flag_template">
+                    <oj-bind-if test='[[ $current.data === "Y" ]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/activeBtn.png' ]]">
+                    </oj-bind-if>
+                    <oj-bind-if test='[[ $current.data === "N" ]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/inactive.png' ]]">
+                    </oj-bind-if>
+                  </template>
+
+                  <template slot="remarks_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                </oj-table>
+
+                <!-- Pagination Section -->
+                <div class="oj-flex oj-sm-justify-content-center">
+                  <oj-bind-if test="[[true]]">
+                    <oj-toolbar chroming="solid" class="oj-flex-item oj-sm-flex-initial">
+
+                      <oj-button label="Previous" chroming="borderless" disabled="[[ !$variables.pagination.prev ]]"
+                        id="preBtn" on-oj-action="[[$listeners.preBtnAction]]">
+                        <span slot="startIcon" class="oj-ux-ico-back"></span>
+                      </oj-button>
+
+                      <oj-button label="Next" chroming="borderless" disabled="[[ !$variables.pagination.next ]]"
+                        id="nxtBtn" on-oj-action="[[$listeners.nxtBtnAction]]">
+                        <span slot="endIcon" class="oj-ux-ico-forward-next"></span>
+                      </oj-button>
+
+                    </oj-toolbar>
+                  </oj-bind-if>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </oj-sp-simple-create-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Approval Hierarchy List Dialog -->
+<oj-dialog dialog-title="Approval Hierarchy List" id="approvalHierarchyListDialog" cancel-behavior="icon"
+  resize-behavior="resizable" drag-affordance="title-bar" modality="modeless" style="width:1111px;"
+  on-oj-close="[[$listeners.approvalHierarchyListDialogClose]]">
+  <div slot="body" style="padding-top:10px; background-color:white;">
+    <div class="oj-panel oj-panel-shadow-md oj-selected">
+      <oj-validation-group valid="{{ $variables.validationGroupVars.isChildTableFormValid }}"
+        :id="[[ $variables.validationGroupVars.childTableFormId ]]">
+        <oj-form-layout label-edge="start" direction="column" id="approvalHierarchyListFormLayout" max-columns="2"
+          user-assistance-density="compact">
+
+          <oj-select-single id="dialog-category-id" label-hint="Category"
+            value="{{ $variables.approvalHierarchyListVar.category_id }}" item-text="lookup_value_name"
+            style="width: 16rem;" data="[[$variables.getApprovalHierarchyLovApproverCategoryListSDP]]" required="true">
+          </oj-select-single>
+
+          <oj-select-single id="dialog-type-id" label-hint="Type"
+            value="{{ $variables.approvalHierarchyListVar.type_code }}" item-text="lookup_value_name"
+            style="width: 16rem;" data="[[$variables.getApprovalHierarchyLovApproverTypeListSDP]]"
+            on-value-item-changed="[[$listeners.dialogTypeIdValueItem]]" required="true">
+          </oj-select-single>
+
+
+          <oj-bind-if test='[[ $variables.approvalHierarchyListVar.type_code === "EMPLOYEE" ]]'>
+            <oj-select-single id="dialog-user-id" label-hint="User"
+              value="{{ $variables.approvalHierarchyListVar.user_id }}" item-text="user_name" style="width: 16rem;"
+              data="[[$variables.getAolUsrRoleLovUserNameListSDP]]"
+              on-value-item-changed="[[$listeners.dialogUserIdValueItem]]" required="true">
+            </oj-select-single>
+          </oj-bind-if>
+
+
+          <oj-bind-if test='[[ $variables.approvalHierarchyListVar.type_code === "USER_GROUP" ]]'>
+            <oj-select-single id="dialog-user-role-id" label-hint="User Role"
+              value="{{ $variables.approvalHierarchyListVar.user_role_id }}" item-text="approval_role_name"
+              style="width: 16rem;" data="[[$variables.getApproverRoleLovRolecodeListSDP]]" required="true">
+            </oj-select-single>
+          </oj-bind-if>
+
+          <oj-input-number id="dialog-level-num" label-hint="Level Number" placeholder="Level Number"
+            value="{{ $variables.approvalHierarchyListVar.level_num }}" required="true" style="width: 16rem;" min="1"
+            step="1">
+          </oj-input-number>
+
+          <oj-input-number id="dialog-from-limit" label-hint="From Limit" placeholder="From Limit"
+            value="{{ $variables.approvalHierarchyListVar.from_limit }}" style="width: 16rem;" step="10" min="0"
+            max="[[ $variables.approvalHierarchyListVar.to_limit ? $variables.approvalHierarchyListVar.to_limit : null ]]">
+          </oj-input-number>
+
+          <oj-input-number id="dialog-to-limit" label-hint="To Limit" placeholder="To Limit"
+            value="{{ $variables.approvalHierarchyListVar.to_limit }}" style="width: 16rem;" step="10"
+            min="[[ $variables.approvalHierarchyListVar.from_limit ? $variables.approvalHierarchyListVar.from_limit : null ]]">
+          </oj-input-number>
+
+          <oj-switch id="dialog-active-flag" label-hint="Status"
+            value="{{ $variables.approvalHierarchyListVar.active_flag === 'Y' }}"
+            on-value-changed="[[$listeners.dialogActiveFlagValue]]">
+          </oj-switch>
+
+          <oj-text-area id="dialog-remarks" label-hint="Remarks" placeholder="Remarks"
+            value="{{ $variables.approvalHierarchyListVar.remarks }}" style="width: 16rem;" length.counter="remaining"
+            length.max="250">
+          </oj-text-area>
+        </oj-form-layout>
+      </oj-validation-group>
+    </div>
+  </div>
+  <div slot="footer" style="background-color:white;">
+    <oj-button id="save-add-another" chroming="outlined" on-oj-action="[[$listeners.saveAddAnotherAction]]">Save & Add
+    </oj-button>
+    <oj-button id="save-close" chroming="outlined" on-oj-action="[[$listeners.saveCloseAction]]">Save & Close
+    </oj-button>
+    <oj-button id="cancel" chroming="outlined" on-oj-action="[[$listeners.cancelAction]]">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="Delete" id="deleteApprovalHierarchyListDialog" cancel-behavior="icon">
+  <div slot="body">
+    <h6 id="deletehid" style="font-size:medium; font-weight: bold;">Are you sure you want to delete this approval
+      hierarchy list item?
+    </h6>
+  </div>
+  <div slot="footer">
+    <oj-button id="deleteBtnYes" chroming="outlined" on-oj-action="[[$listeners.deleteBtnYesAction]]">Yes</oj-button>
+    <oj-button id="deleteBtnNo" chroming="outlined" on-oj-action="[[$listeners.deleteBtnNoAction]]">No</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Unsaved Changes Dialog -->
+<oj-dialog dialog-title="Unsaved Changes" id="unsavedChangesDialog" cancel-behavior="icon">
+  <div slot="body">
+    <h6 id="unsavedChangesText" style="font-size:medium; font-weight: bold;">Are you sure you want to leave this page?
+      Your changes will be lost.
+    </h6>
+  </div>
+  <div slot="footer">
+    <oj-button id="proceedExitBtn" chroming="outlined" on-oj-action="[[$listeners.proceedExitBtnAction]]">Leave
+    </oj-button>
+    <oj-button id="cancelExitBtn" chroming="outlined" on-oj-action="[[$listeners.cancelExitBtnAction]]">Cancel
+    </oj-button>
+  </div>
+</oj-dialog>

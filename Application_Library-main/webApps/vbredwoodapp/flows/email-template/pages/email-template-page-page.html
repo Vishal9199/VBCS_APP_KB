@@ -1,0 +1,495 @@
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div>
+        <oj-sp-simple-create-edit id="email_template_page" page-title="Email Template" 
+          display-options.responsive-padding="on"
+          primary-action.label="Save and Close" 
+          secondary-actions='[{"label":"Save","id":"save"}]'
+          on-sp-secondary-action="[[$listeners.emailTemplateSpSecondaryAction]]"
+          on-sp-primary-action="[[$listeners.emailTemplateSpPrimaryAction]]"
+          on-sp-cancel="[[$listeners.emailTemplateSpCancel]]" 
+          badge.status="info"
+          badge.text="[[ $variables.emailTemplateVar.template_name ]]">
+
+          <div slot="main" style="background-color:white; padding: 1rem;">
+            <div style="margin-top: 0;">
+
+              <!-- Main Form Section - Email Template Header -->
+              <div class="oj-panel oj-panel-shadow-md oj-selected" style="margin-bottom: 1rem;">
+                <oj-validation-group valid="{{ $variables.isFormValid }}" id="email-template-validation">
+                  <oj-form-layout max-columns="2" label-edge="start" user-assistance-density="compact"
+                    direction="column" class="oj-formlayout-full-width">
+
+                    <!-- Template Code -->
+                    <oj-input-text id="template-code" label-hint="Template Code" placeholder="Template Code"
+                      value="{{ $variables.emailTemplateVar.template_code }}" required="true" length.max="60"
+                      on-value-changed="[[$listeners.templateCodeValue]]">
+                    </oj-input-text>
+
+                    <!-- Template Name -->
+                    <oj-input-text id="template-name" label-hint="Template Name" placeholder="Template Name"
+                      value="{{ $variables.emailTemplateVar.template_name }}" required="true" length.max="240">
+                    </oj-input-text>
+
+                    <!-- Header View Name - LOV with dependent HEADER_PRIMARY_KEY -->
+                    <oj-select-single id="header-view-name" label-hint="Header View Name"
+                      value="{{ $variables.emailTemplateVar.header_view_name }}" required="true"
+                      data="[[$variables.getEmailLovViewnameHeaderListSDP]]" item-text="header_view_name"
+                      on-value-item-changed="[[$listeners.headerViewNameValueItem]]" placeholder="Header View Name">
+                    </oj-select-single>
+
+                    <!-- Header Primary Key - Dependent LOV -->
+                    <oj-select-single id="header-primary-key" label-hint="Header Primary Key"
+                      value="{{ $variables.emailTemplateVar.header_primary_key }}" item-text="column_name"
+                      data="[[$variables.getEmailLovFieldNameListSDP]]" placeholder="Header Primary Key">
+                    </oj-select-single>
+
+                    <!-- Status Switch -->
+                    <oj-switch id="is-active-switch" value="{{ $variables.emailTemplateVar.is_active === 'Y' }}"
+                      label-hint="Status">
+                    </oj-switch>
+
+                    <!-- Approve URL Template -->
+                    <oj-text-area id="approve-url-template" label-hint="Approve URL Template" 
+                      placeholder="Approve URL Template"
+                      value="{{ $variables.emailTemplateVar.approve_url_template }}" rows="3" 
+                      length.max="1000">
+                    </oj-text-area>
+
+                    <!-- Reject URL Template -->
+                    <oj-text-area id="reject-url-template" label-hint="Reject URL Template" 
+                      placeholder="Reject URL Template"
+                      value="{{ $variables.emailTemplateVar.reject_url_template }}" rows="3" 
+                      length.max="1000">
+                    </oj-text-area>
+
+                    <!-- Report URL Template -->
+                    <oj-text-area id="report-url-template" label-hint="Report URL Template" 
+                      placeholder="Report URL Template"
+                      value="{{ $variables.emailTemplateVar.report_url_template }}" rows="3" 
+                      length.max="1000">
+                    </oj-text-area>
+
+                  </oj-form-layout>
+                </oj-validation-group>
+              </div>
+
+              <!-- Side-by-Side Tables Section -->
+              <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                
+  <!-- Section Table (Left Side - 50%) -->
+  <div style="flex: 1; min-width: 0; display: flex; flex-direction: column;">
+    <div class="oj-panel oj-panel-shadow-md" style="display: flex; flex-direction: column;">
+      
+      <!-- Section Table Header -->
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+        <h6 style="margin: 0; color: #01474d; font-size: larger; font-weight: bold;">Email Section</h6>
+        <div style="display: flex; gap: 0.5rem;">
+          <oj-button style="margin: 0.125rem; color:white;" label="Refresh"
+            chroming="outlined" id="refreshSectionBtn"
+            on-oj-action="[[$listeners.refreshSectionBtnAction]]" class="oj-color-invert">
+            <img slot="startIcon" :src="[[ $application.path + 'resources/images/Refresh.png' ]]">
+          </oj-button>
+          <oj-button style="margin: 0.125rem; color:white;" label="Add" chroming="outlined"
+            on-oj-action="[[$listeners.addSectionBtnAction]]" id="addSectionBtn" class="oj-color-invert">
+            <img slot="startIcon" :src="[[ $application.path + 'resources/images/Create (1).png' ]]">
+          </oj-button>
+        </div>
+      </div>
+
+      <!-- Section Table -->
+      <div style="min-height: 200px; max-height: 600px; overflow: auto;">
+        <oj-table 
+          id="section-table" 
+          style="width: 100%;"
+          data="{{ $variables.ADPemailSection }}"
+          columns="{{ $constants.sectionColumns }}"
+          columns-default.sortable="disabled" 
+          columns-default.resizable="enabled"
+          selection-mode.row="single"
+          class="oj-sm-width-full oj-bg-body" 
+          display="grid"
+          on-first-selected-row-changed="[[$listeners.sectionTableFirstSelectedRow]]">
+
+          <!-- Actions Template (Edit/Delete Icons) -->
+          <template slot="section_actions_template">
+            <div class="oj-flex oj-sm-align-items-center oj-sm-justify-content-center" style="gap: 15px;">
+              <span class="oj-ux-ico-edit" 
+                on-click="[[$listeners.editSectionIconClick]]"
+                style="cursor: pointer; font-size: 20px; color: #0066cc;">
+              </span>
+              <span class="oj-ux-ico-trash" 
+                on-click="[[$listeners.deleteSectionIconClick]]"
+                style="cursor: pointer; font-size: 20px; color: #dc3545;">
+              </span>
+            </div>
+          </template>
+
+          <!-- Section Order Template -->
+          <template slot="section_order_template">
+            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+          </template>
+
+          <!-- Section Code Template -->
+          <template slot="section_code_template">
+            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+          </template>
+
+          <!-- Section Title Template -->
+          <template slot="section_title_template">
+            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+          </template>
+
+          <!-- Section Type Template -->
+          <template slot="section_type_template">
+            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+          </template>
+
+          <!-- View Name Template -->
+          <template slot="view_name_template">
+            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+          </template>
+
+          <!-- Join Type Template -->
+          <template slot="join_type_template">
+            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+          </template>
+
+          <!-- Join Column Template -->
+          <template slot="join_column_template">
+            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+          </template>
+
+          <!-- Status Template (Switch) -->
+          <template slot="section_status_template">
+            <oj-switch readonly="true" value="[[ $current.data === 'Y' ? true : false ]]"></oj-switch>
+          </template>
+
+          <template slot="active_flag">
+                    <oj-bind-if test='[[ $current.data === "Y" ]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/activeBtn.png' ]]">
+                    </oj-bind-if>
+                    <oj-bind-if test='[[ $current.data === "N" ]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/inactive.png' ]]">
+                    </oj-bind-if>
+                  </template>
+
+        </oj-table>
+      </div>
+
+      <!-- Section Pagination -->
+      <div style="padding: 0.5rem; border-top: 1px solid #dee2e6; background-color: #f8f9fa; display: flex; justify-content: center;">
+        <oj-toolbar chroming="solid">
+          <oj-button label="Previous" chroming="borderless" 
+            disabled="[[ !$variables.paginationSection.prev ]]" id="sectionPreBtn" 
+            on-oj-action="[[$listeners.sectionPreBtnAction]]">
+            <span slot="startIcon" class="oj-ux-ico-arrow-left"></span>
+          </oj-button>
+          <oj-button label="Next" chroming="borderless" 
+            disabled="[[ !$variables.paginationSection.next ]]" id="sectionNxtBtn" 
+            on-oj-action="[[$listeners.sectionNxtBtnAction]]">
+            <span slot="endIcon" class="oj-ux-ico-arrow-right"></span>
+          </oj-button>
+        </oj-toolbar>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Field Table (Right Side - 50%) - View Only -->
+  <div style="flex: 1; min-width: 0; display: flex; flex-direction: column;">
+    <div class="oj-panel oj-panel-shadow-md" style="display: flex; flex-direction: column;">
+      
+      <!-- Field Table Header -->
+      <!-- <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+        <h6 style="margin: 0; color: #01474d; font-size: larger; font-weight: bold;">Email Field</h6>
+        <div style="display: flex; gap: 0.5rem;">
+          <span style="opacity: 0;">.</span>
+        </div>
+      </div> -->
+
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+        <h6 style="margin: 0; color: #01474d; font-size: larger; font-weight: bold;">Email Field</h6>
+        <oj-bind-if test="[[ $variables.emailFieldColumnLovVar ]]">
+        <div style="display: flex; gap: 0.5rem;">
+          <oj-button style="margin: 0.125rem; color:white;" label="Refresh"
+            chroming="outlined" id="refreshSectionBtn"
+            class="oj-color-invert" on-oj-action="[[$listeners.refreshSectionBtnAction2]]">
+            <img slot="startIcon" :src="[[ $application.path + 'resources/images/Refresh.png' ]]">
+          </oj-button>
+          <oj-button style="margin: 0.125rem; color:white;" label="Add" chroming="outlined"
+             id="addSectionBtn" class="oj-color-invert" on-oj-action="[[$listeners.addSectionBtnAction2]]">
+            <img slot="startIcon" :src="[[ $application.path + 'resources/images/Create (1).png' ]]">
+          </oj-button>
+        </div>
+        </oj-bind-if>
+      </div>
+
+      <!-- Field Table - View Only -->
+      <div style="min-height: 200px; max-height: 600px; overflow: auto;">
+        <oj-table 
+          id="field-table" 
+          data="{{ $variables.ADPemailField }}"
+          style="width: 100%;"
+          columns="{{ $constants.fieldColumns }}"
+          columns-default.sortable="disabled" 
+          columns-default.resizable="enabled"
+          class="oj-sm-width-full oj-bg-body" 
+          display="grid" 
+          selection-mode.row="none">
+
+
+          <template slot="field_actions_template">
+            <div class="oj-flex oj-sm-align-items-center oj-sm-justify-content-center" style="gap: 15px;">
+              <span class="oj-ux-ico-edit"
+                
+                style="cursor: pointer; font-size: 20px; color: #0066cc;"
+                title="Edit Field" on-click="[[$listeners.iconClick2]]">
+              </span>
+              <span class="oj-ux-ico-trash" style="cursor: pointer; font-size: 20px; color: #dc3545;"
+                title="Delete Field" on-click="[[$listeners.iconClick]]">
+              </span>
+            </div>
+          </template>
+
+          <template slot="field_order_template">
+            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+          </template>
+
+          <template slot="field_code_template">
+            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+          </template>
+
+          <template slot="field_label_template">
+            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+          </template>
+
+          <template slot="column_name_template">
+            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+          </template>
+
+          <template slot="display_format_template">
+            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+          </template>
+
+          <template slot="field_status_template">
+            <oj-switch readonly="true" value="[[ $current.data === 'Y' ? true : false ]]"></oj-switch>
+          </template>
+
+        </oj-table>
+      </div>
+
+      <!-- Field Pagination -->
+      <div style="padding: 0.5rem; border-top: 1px solid #dee2e6; background-color: #f8f9fa; display: flex; justify-content: center; min-height: 48px;">
+        <oj-toolbar chroming="solid">
+         <oj-button label="Previous" chroming="borderless"
+                          disabled="[[ !$variables.paginationField.prev ]]" id="sectionPreBtn"
+                          on-oj-action="[[$listeners.sectionPreBtnAction2]]" 
+                          >
+                          <span slot="startIcon" class="oj-ux-ico-arrow-left"></span>
+                        </oj-button>
+                        <oj-button label="Next" chroming="borderless" disabled="[[ !$variables.paginationField.next ]]"
+                          id="sectionNxtBtn" on-oj-action="[[$listeners.sectionNxtBtnAction2]]" 
+                          >
+                          <span slot="endIcon" class="oj-ux-ico-arrow-right"></span>
+                        </oj-button>
+        </oj-toolbar>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+            </div>
+          </div>
+
+        </oj-sp-simple-create-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Section Add/Edit Dialog -->
+<oj-dialog dialog-title="Email Section" id="sectionDialog" cancel-behavior="icon" resize-behavior="resizable"
+  drag-affordance="title-bar" style="width:900px;">
+  <div slot="body" style="padding-top:10px; background-color:white;">
+    <div class="oj-panel oj-panel-shadow-md oj-selected">
+      <oj-validation-group id="sectionForm" valid="{{ $variables.isSectionFormValid }}">
+        <oj-form-layout label-edge="start" direction="column" id="sectionFormLayout" max-columns="2"
+          user-assistance-density="compact">
+
+          <!-- Section Code -->
+          <oj-input-text id="dialog-section-code" label-hint="Section Code" placeholder="Section Code"
+            value="{{ $variables.emailSectionVar.section_code }}" required="true" style="width: 16rem;" 
+            length.max="60" on-value-changed="[[$listeners.dialogSectionCodeValue]]">
+          </oj-input-text>
+
+          <!-- Section Title -->
+          <oj-input-text id="dialog-section-title" label-hint="Section Title" placeholder="Section Title"
+            value="{{ $variables.emailSectionVar.section_title }}" required="true" style="width: 16rem;" 
+            length.max="240">
+          </oj-input-text>
+
+          <!-- Section Type - Static LOV -->
+          <oj-select-single id="dialog-section-type" label-hint="Section Type"
+  value="{{ $variables.emailSectionVar.section_type }}" 
+  data="[[ $variables.sectionTypeADP ]]"
+  item-text="label"
+  required="true" 
+  style="width: 16rem;" placeholder="Section Type">
+</oj-select-single>
+
+          <!-- Section Order -->
+          
+
+          <!-- View Name - LOV with dependent JOIN_COLUMN -->
+          <oj-select-single id="dialog-view-name" label-hint="View Name"
+            value="{{ $variables.emailSectionVar.view_name }}" required="true"
+            data="[[$variables.getEmailLovViewnameDialogListSDP]]" item-text="header_view_name"
+            style="width: 16rem;" placeholder="View Name">
+          </oj-select-single>
+
+          <!-- Join Type - Static LOV -->
+          <oj-select-single id="dialog-join-type" label-hint="Join Type"
+  value="{{ $variables.emailSectionVar.join_type }}" 
+  data="[[ $variables.joinTypeADP ]]"
+  item-text="label"
+  required="true" 
+  style="width: 16rem;" placeholder="Join Type">
+</oj-select-single>
+
+
+          <!-- Join Column - Dependent LOV -->
+          <oj-select-single id="dialog-join-column" label-hint="Join Column"
+            value="{{ $variables.emailSectionVar.join_column }}" item-text="column_name" style="width: 16rem;"
+            data="[[$variables.getEmailLovFieldNameListSDP2]]" placeholder="Join Column">
+          </oj-select-single>
+
+          <!-- Status Switch -->
+         <oj-switch id="dialog-section-active" label-hint="Status"
+    value="{{ $variables.switchflagsection }}" on-value-changed="[[$listeners.dialogSectionActiveValue]]">
+</oj-switch>
+
+        </oj-form-layout>
+      </oj-validation-group>
+    </div>
+  </div>
+  <div slot="footer" style="background-color:white;">
+    <oj-button id="section-save-add" on-oj-action="[[$listeners.sectionSaveAddAction]]" chroming="outlined">
+      Save & Add
+    </oj-button>
+    <oj-button id="section-save-close" chroming="outlined" on-oj-action="[[$listeners.sectionSaveAction]]">
+      Save & Close
+    </oj-button>
+    <oj-button id="section-cancel" on-oj-action="[[$listeners.sectionCancelAction]]" chroming="danger">
+      Cancel
+    </oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Delete Section Confirmation Dialog -->
+<oj-dialog dialog-title="Delete Section" id="deleteSectionDialog" cancel-behavior="icon">
+  <div slot="body">
+    <h6 id="deleteSectionText" style="font-size:medium; font-weight: bold;">
+      Are you sure you want to delete this email section?
+    </h6>
+  </div>
+  <div slot="footer">
+    <oj-button id="deleteSectionYes" on-oj-action="[[$listeners.deleteSectionYesAction]]" chroming="outlined">
+      Yes
+    </oj-button>
+    <oj-button id="deleteSectionNo" on-oj-action="[[$listeners.deleteSectionNoAction]]" chroming="outlined">
+      No
+    </oj-button>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="Delete Field" id="deleteFieldDialog" cancel-behavior="icon">
+  <div slot="body">
+    <h6 id="deleteSectionText" style="font-size:medium; font-weight: bold;">
+      Are you sure you want to delete this email field?
+    </h6>
+  </div>
+  <div slot="footer">
+    <oj-button id="deleteSectionYes" chroming="outlined" on-oj-action="[[$listeners.deleteSectionYesAction2]]">
+      Yes
+    </oj-button>
+    <oj-button id="deleteSectionNo"  chroming="outlined">
+      No
+    </oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Unsaved Changes Dialog -->
+<oj-dialog dialog-title="Unsaved Changes" id="unsavedChangesDialog" cancel-behavior="icon">
+  <div slot="body">
+    <h6 id="unsavedChangesText" style="font-size:medium; font-weight: bold;">
+      Are you sure you want to leave this page? Your changes will be lost.
+    </h6>
+  </div>
+  <div slot="footer">
+    <oj-button id="proceedExitBtn" chroming="outlined" on-oj-action="[[$listeners.proceedExitBtnAction]]">
+      Leave
+    </oj-button>
+    <oj-button id="cancelExitBtn" chroming="outlined" on-oj-action="[[$listeners.cancelExitBtnAction]]">
+      Cancel
+    </oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Email Field Dialog -->
+<oj-dialog dialog-title="Email Field Add/Edit" id="emailFieldDialog" cancel-behavior="icon" 
+  resize-behavior="resizable" drag-affordance="title-bar" style="width:900px;">
+  <div slot="body" style="padding-top:10px; background-color:white;">
+    <div class="oj-panel oj-panel-shadow-md oj-selected">
+      <oj-validation-group id="fieldForm" valid="{{$variables.isFieldFormValid}}"> 
+        <oj-form-layout label-edge="start" direction="column" id="emailFieldFormLayout" max-columns="2"
+          user-assistance-density="compact">
+          
+          <!-- Column Name -->
+          <oj-select-single id="header-primary-key" label-hint="Column Name"
+            value="{{ $variables.emailFieldVar.column_name }}" item-text="column_name" required="true"
+            data="[[$variables.getEmailLovFieldNameListSDP3]]" style="width: 16rem;"
+            on-value-item-changed="[[$listeners.headerPrimaryKeyValueItem]]" disabled="[[ $variables.sectionEdit ]]"
+            placeholder="Column Name">
+          </oj-select-single>
+
+          <!-- Field Label -->
+          <oj-input-text id="email-field-label" label-hint="Field Label" placeholder="Field Label"
+            value="{{ $variables.emailFieldVar.field_label }}" required="true" style="width: 16rem;">
+          </oj-input-text>
+
+          <!-- Field Code -->
+          <oj-input-text id="email-field-code" label-hint="Field Code" placeholder="Field Code"
+            value="{{ $variables.emailFieldVar.field_code }}" required="true" style="width: 16rem;"
+            on-value-changed="[[$listeners.emailFieldCodeValue]]" disabled="[[ $variables.sectionEdit ]]">
+          </oj-input-text>
+        
+
+          <!-- Display Format -->
+          <oj-input-text id="display-format" label-hint="Display Format" placeholder="Display Format"
+            value="{{ $variables.emailFieldVar.display_format }}" style="width: 16rem;">
+          </oj-input-text>
+          
+          <!-- Status Switch -->
+          <oj-switch id="is-active-switch" label-hint="Status" value="{{ $variables.switchflagfield }}">
+          </oj-switch>
+
+        </oj-form-layout>
+      </oj-validation-group>
+    </div>
+  </div>
+  <div slot="footer" style="background-color:white;">
+    <oj-button id="email-field-save-add" on-oj-action="[[$listeners.emailFieldSaveCloseAction]]" chroming="outlined">
+      Save &amp; Add
+    </oj-button>
+    <oj-button id="email-field-save-close" chroming="outlined" on-oj-action="[[$listeners.emailFieldSaveAction]]">
+      Save &amp; Close
+    </oj-button>
+    <oj-button id="email-field-cancel" on-oj-action="[[$listeners.emailFieldCancelAction]]" chroming="danger">
+      Cancel
+    </oj-button>
+  </div>
+</oj-dialog>

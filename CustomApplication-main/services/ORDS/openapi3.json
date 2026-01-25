@@ -1,0 +1,191 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "OrdsCustom",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "vb-catalog://backends/ORDS_CUST",
+            "description": "OrdsCustom"
+        }
+    ],
+    "paths": {
+        "/common/user/menu": {
+            "get": {
+                "operationId": "getUserMenu",
+                "parameters": [
+                    {
+                        "name": "x-cache-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "x-vb": {
+                            "defaultValue": "BBrdZ4GC8w0RJIctuaI7Fhl/7HwQki6hFP4/gBipEnxjCAF8IR5RJrjUOrEnO1I5rGYjQ+KF2XJUvN79g5zekA=="
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetGenericUserMenu"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getUserMenu/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "GetGenericUserMenu": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "user_name": {
+                                    "type": "string"
+                                },
+                                "final_json": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "application_id": {
+                                                "type": "integer"
+                                            },
+                                            "application_name": {
+                                                "type": "string"
+                                            },
+                                            "application_code": {
+                                                "type": "string"
+                                            },
+                                            "role": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "role_id": {
+                                                            "type": "string"
+                                                        },
+                                                        "role_code": {
+                                                            "type": "string"
+                                                        },
+                                                        "role_name": {
+                                                            "type": "string"
+                                                        },
+                                                        "menu": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "menu_code": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "menu_name": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "menu_id": {
+                                                                        "type": "integer"
+                                                                    },
+                                                                    "function": {
+                                                                        "type": "array",
+                                                                        "items": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "menu_active_flag": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "full_access": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "fun_remarks": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "function_code": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "allow_delete": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "function_name": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "page_url": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "allow_edit": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "menu_entry_id": {
+                                                                                    "type": "integer"
+                                                                                },
+                                                                                "read_only": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "allow_create": {
+                                                                                    "type": "string"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

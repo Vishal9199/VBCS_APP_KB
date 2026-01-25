@@ -1,0 +1,156 @@
+:root {
+  --user-primary-color: #01474d;
+  /* default background */
+  --user-button-hover: #116971;
+  /* hover shade */
+  --user-button-active: #003337;
+  /* click/active shade */
+  --user-button-text: #ffffff;
+  /* text color */
+  --oj-button-height: 2rem;
+}
+
+/* Fit to Page in redwood */
+.oj-sp-public-primary-content-container {
+  min-height: fit-content !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  box-sizing: border-box !important;
+}
+
+/* Smart Search CSS */
+/* removing padding behind the header to reduce the height */
+oj-sp-header-general-overview .oj-sp-header-general-overview-outer-padding-vertical {
+  padding-bottom: 0px;
+}
+
+/* page title color */
+oj-sp-header-general-overview .oj-sp-header-general-overview-page-title {
+  color: var(--user-primary-color);
+}
+
+/* heade background color */
+oj-sp-header-general-overview .oj-sp-header-general-overview-bg-light {
+  background-color: white !important;
+}
+
+.oj-sp-header-general-overview-header-strip {
+  display: none;
+}
+
+.oj-ux-ico-oracle-o::before {
+  content: '\f345';
+  color: black;
+}
+
+/* Dialog Styling */
+.oj-dialog .oj-dialog-header {
+  background-color: var(--user-primary-color);
+  color: white;
+  font-weight: bold;
+}
+
+.oj-dialog .oj-dialog-header .oj-dialog-title {
+  color: white;
+}
+
+.oj-dialog .oj-fwk-icon {
+  color: white;
+}
+
+/* Buttons CSS Start */
+
+/* Group all button IDs together */
+#refreshBtn.oj-button.oj-button-outlined-chrome .oj-button-button,
+#resetBtn.oj-button.oj-button-outlined-chrome .oj-button-button,
+#addBtn.oj-button.oj-button-outlined-chrome .oj-button-button,
+#deleteBtnYes.oj-button.oj-button-outlined-chrome .oj-button-button,
+#deleteBtnNo.oj-button.oj-button-outlined-chrome .oj-button-button {
+  background-color: var(--user-primary-color) !important;
+  color: var(--user-button-text) !important;
+  border-color: var(--user-primary-color) !important;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* Buttons CSS End */
+
+
+
+/*All Page Table - Start */
+.oj-table-column-header-cell {
+  color: white;
+  background-color: var(--user-primary-color);
+  font-weight: bold;
+  border-color: #ededed;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+}
+
+.oj-table-column-header-cell * {
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+}
+
+.oj-table th,
+.oj-table-column-header-cell,
+.oj-table-column-header {
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+  flex-wrap: nowrap !important;
+}
+
+oj-table .oj-table-column-header-cell {
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+}
+
+.oj-table {
+  position: relative;
+  line-height: normal;
+  min-width: 240px;
+  min-height: auto;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.oj-table-column-header {
+  font-size: initial;
+  position: relative;
+  float: none;
+  text-overflow: inherit;
+  overflow: inherit;
+  white-space: nowrap !important;
+  display: inline-flex;
+  align-items: center;
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  flex-wrap: nowrap !important;
+}
+
+.oj-table-sort-icon-container:hover .oj-component-icon {
+  color: #fff;
+  cursor: pointer;
+}
+
+
+.oj-table-sort-icon-container .oj-component-icon {
+  font-size: 14px;
+  height: 16px;
+  width: 16px;
+  color: #ccc;
+  transition: color 0.2s ease;
+}
+span.oj-ux-ico-edit{
+  font-size: 20px;
+  cursor: pointer;
+}
+
+span.oj-ux-ico-trash {
+  font-size: 20px;
+  cursor: pointer;
+}

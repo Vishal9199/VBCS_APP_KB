@@ -1,0 +1,76 @@
+{
+    "items": [
+        {
+            "header_view_name": "FS_ATTACHMENT_V"
+        },
+        {
+            "header_view_name": "NWS_APPROVAL_DETAIL_V"
+        },
+        {
+            "header_view_name": "NWS_CUSTOM_EVALUATION_V"
+        },
+        {
+            "header_view_name": "NWS_HOUSE_CONN_HEADER_V"
+        },
+        {
+            "header_view_name": "NWS_HOUSE_CONN_LINE_V"
+        },
+        {
+            "header_view_name": "NWS_HOUSE_CONN_MASTER_HIST_V"
+        },
+        {
+            "header_view_name": "NWS_HOUSE_CONN_MASTER_V"
+        },
+        {
+            "header_view_name": "NWS_HOUSE_CONN_PAYMENT_SUMMARY_V"
+        },
+        {
+            "header_view_name": "NWS_PETTY_CASH_HEADER_V"
+        },
+        {
+            "header_view_name": "NWS_PETTY_CASH_LINE_V"
+        },
+        {
+            "header_view_name": "NWS_PETTY_CASH_RECEIPT_V"
+        },
+        {
+            "header_view_name": "NWS_TANKER_HEADER_V"
+        },
+        {
+            "header_view_name": "NWS_TANKER_LINE_V"
+        },
+        {
+            "header_view_name": "NWS_TANKER_MASTER_HISTORY_V"
+        },
+        {
+            "header_view_name": "NWS_TANKER_MASTER_V"
+        },
+        {
+            "header_view_name": "NWS_TANKER_PAYMENT_SUMMARY_V"
+        },
+        {
+            "header_view_name": "NWS_TENDER_STRATEGY_V"
+        },
+        {
+            "header_view_name": "NWS_TENDER_TEMPLATE_SETUP_V"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 18,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/email/lov/viewname"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/metadata-catalog/email/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/email/lov/viewname"
+        }
+    ]
+}

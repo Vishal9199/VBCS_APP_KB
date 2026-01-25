@@ -1,0 +1,373 @@
+{
+  "title": "Application",
+  "description": "",
+  "variables": {
+    "encryptedBody": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "getApplicationLovAppCodeListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "application_code",
+        "itemsPath": "items",
+        "responseType": "getApplicationLovAppCodeResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "application_name"
+          ]
+        },
+        "fetchChain": "getApplicationLovAppCodeFetch"
+      }
+    },
+    "pagination": {
+      "type": {
+        "next": "boolean",
+        "prev": "boolean"
+      },
+      "defaultValue": {
+        "next": false,
+        "prev": false
+      }
+    },
+    "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "ApplicationNameFilter": {
+              "label": "Application Name",
+              "options": {
+                "optionsData": "[[ $page.variables.getApplicationLovAppCodeListSDP ]]",
+                "optionsKeys": {
+                  "label": "application_name",
+                  "value": "application_id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/applicationSearchConfig.json' ]]"
+      }
+    },
+    "searchObj": {
+      "type": {
+        "ACTIVE_FLAG": "string",
+        "APPLICATION_CODE": "string",
+        "APPLICATION_NAME": "string",
+        "IN_LIMIT": "string",
+        "IN_OFFSET": "string",
+        "KEYWORD": "string",
+        "P_APPLICATION_ID": "string"
+
+      },
+      "defaultValue": {
+        "IN_LIMIT": "8",
+        "IN_OFFSET": "0",
+        "APPLICATION_CODE": "",
+        "APPLICATION_NAME": "",
+        "ACTIVE_FLAG": "",
+        "P_APPLICATION_ID": ""
+      }
+    },
+    "applicationRequestADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "ApplicationManagementType",
+        "keyAttributes": "application_id"
+      }
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getApplicationLovAppCodeResponse": {
+      "endpoint": "getApplicationLovAppCode",
+      "service": "Application",
+      "path": "response"
+    },
+    "ApplicationManagementType": {
+      "application_id": "number",
+      "object_version_num": "number",
+      "application_code": "string",
+      "application_name": "string",
+      "remarks": "string",
+      "active_flag": "string",
+      "attribute_json": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "getApplicationLovAppCodeResponse": {
+      "items": [
+        {
+          "application_code": "string",
+          "application_name": "string"
+        }
+      ]
+    }
+  },
+  "chains": {},
+  "eventListeners": {
+    "addBtnAction": {
+      "chains": [
+        {
+          "chain": "addBtnAC"
+        }
+      ]
+    },
+    "deleteBtnAction": {
+      "chains": [
+        {
+          "chain": "deleteActionAC",
+          "parameters": {
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "deleteBtnNoAction": {
+      "chains": [
+        {
+          "chain": "noDeleteAC"
+        }
+      ]
+    },
+    "deleteBtnYesAction": {
+      "chains": [
+        {
+          "chain": "okDeleteAC"
+        }
+      ]
+    },
+    "hyperlinkClick": {
+      "chains": [
+        {
+          "chain": "editAC",
+          "parameters": {
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "iconClick": {
+      "chains": [
+        {
+          "chain": "deleteActionAC",
+          "parameters": {
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "iconClick2": {
+      "chains": [
+        {
+          "chain": "editAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "nxtBtnAction": {
+      "chains": [
+        {
+          "chain": "nextBtnAC"
+        }
+      ]
+    },
+    "preBtnAction": {
+      "chains": [
+        {
+          "chain": "prevBtnAC"
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshBtn",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "resetAC"
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "chain": "PageVbEnterChain"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      }
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/smartSearch.css"
+    ]
+  },
+  "constants": {
+    "tableColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Application Code",
+          "field": "application_code",
+          "resizable": "enabled",
+          "sortable": "enabled",
+          "template": "application_code",
+          "style": ""
+
+        },
+        {
+          "headerText": "Application Name",
+          "field": "application_name",
+          "resizable": "enabled",
+          "sortable": "enabled",
+          "template": "application_name",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "active_flag",
+          "resizable": "enabled",
+          "width": 70,
+          "sortable": "disabled",
+          "template": "active_flag",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+
+        },
+        {
+          "headerText": "Remarks",
+          "field": "remarks",
+          "resizable": "enabled",
+          "template": "remarks",
+          "style": ""
+        }
+      ]
+    },
+    "tableColumnsWithActions": {
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "width": 100,
+          "template": "actions",
+          "sortable": "disabled",
+          "headerStyle": "text-align: center; white-space: normal;",
+          "style": "text-align: center; vertical-align: middle;"
+
+        },
+        {
+          "headerText": "Application Code",
+          "field": "application_code",
+          "resizable": "enabled",
+          "sortable": "enabled",
+          "template": "application_code",
+          "style": ""
+        },
+        {
+          "headerText": "Application Name",
+          "field": "application_name",
+          "resizable": "enabled",
+          "sortable": "enabled",
+          "template": "application_name",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "active_flag",
+          "resizable": "enabled",
+          "width": 70,
+          "sortable": "disabled",
+          "template": "active_flag",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+
+        },
+        {
+          "headerText": "Remarks",
+          "field": "remarks",
+          "resizable": "enabled",
+          "template": "remarks",
+          "style": ""
+        }
+      ],
+      "type": "object[]"
+    }
+  }
+}

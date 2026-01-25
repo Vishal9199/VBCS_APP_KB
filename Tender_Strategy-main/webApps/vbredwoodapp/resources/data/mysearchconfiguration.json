@@ -1,0 +1,85 @@
+{
+  "description": "Smart Search Configuration for NWS Tender Strategy Application",
+  "filters": {
+    "ContractOwnerFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Contract Owner",
+      "options": {
+        "field": "person_id",
+        "optionsData": "[[ $search.filters.ContractOwnerFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.ContractOwnerFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+    "StatusFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Status",
+      "options": {
+        "field": "status_id",
+        "optionsData": "[[ $search.filters.StatusFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.StatusFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+    "TenderTypeFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Tender Type",
+      "options": {
+        "field": "id",
+        "optionsData": "[[ $search.filters.TenderTypeFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.TenderTypeFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+    "TenderCategoryFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Tender Category",
+      "options": {
+        "field": "id",
+        "optionsData": "[[ $search.filters.TenderCategoryFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.TenderCategoryFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+    "VariationTypeFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Variation Type",
+      "options": {
+        "field": "id",
+        "optionsData": "[[ $search.filters.VariationTypeFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.VariationTypeFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+    "RequestDateRangeFilter": {
+      "type": "oj-sp/smart-search/default-filters/DateRangeFilter",
+      "label": "Date",
+      "options": {
+        "field": "request_date",
+        "startDate": "[[ $page.variables.p_start_date ]]",
+        "endDate": "[[ $page.variables.p_end_date ]]",
+        "value": "",
+        "converter": {
+          "type": "datetime",
+          "options": {
+            "pattern": "dd-MMM-yyyy"
+          }
+        }
+      },
+      "data": {
+        "start": "[[ $application.functions.getSysdate() ]]",
+        "end": "[[ $application.functions.getSysdate() ]]"
+      }
+    },
+    "EmployeeFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Employee",
+      "options": {
+        "field": "email_address",
+        "optionsData": "[[ $search.filters.EmployeeFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.EmployeeFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    }
+  }
+}

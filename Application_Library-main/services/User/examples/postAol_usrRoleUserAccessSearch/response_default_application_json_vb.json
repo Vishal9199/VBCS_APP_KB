@@ -1,0 +1,45 @@
+{
+    "OUT_COUNT": 2,
+    "OUT_DESCRIPTION": "Successfully fetched user access records",
+    "OUT_HAS_NEXT": "N",
+    "OUT_STATUS": "SUCCESS=>SELECT * FROM fs_users_stg_t WHERE 1=1 AND START_DATE >= TO_DATE('2018-08-01', 'YYYY-MM-DD') AND START_DATE <= TO_DATE('2018-08-05', 'YYYY-MM-DD') ORDER BY USER_ID DESC OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY",
+    "OUT_TOTAL_COUNT": 2,
+    "P_OUTPUT": [
+        {
+            "user_id": 300000008759999,
+            "user_name": "Mohamed Younis Abdelaziz Soliman.Abuhamar",
+            "user_guid": "3CD2984CD7B2F3DFE063B11E12AC245C",
+            "business_group_id": 1,
+            "active_flag": "Y",
+            "start_date": "2018-08-05T00:00:00Z",
+            "end_date": null,
+            "person_id": 300000007778179,
+            "email_address": "TESTMYounis@Darwishholding.com",
+            "trx_source": "Fusion",
+            "source_rowid": "AAA3sXAAMAAB+zjAAD",
+            "created_by": "FUSION_APPS_HCM_ESS_APPID",
+            "created_date": "2025-09-07T13:20:22.1Z",
+            "last_updated_by": "FIN IMPL",
+            "last_updated_date": "2025-09-07T13:21:43.25Z",
+            "last_updated_login": "3E36AA0DCDE45AE2E063BE1F0A0A60A8"
+        },
+        {
+            "user_id": 300000008759585,
+            "user_name": "Yolanda.Lebut",
+            "user_guid": "3CD2984CD7A4F3DFE063B11E12AC245C",
+            "business_group_id": 1,
+            "active_flag": "Y",
+            "start_date": "2018-08-01T00:00:00Z",
+            "end_date": null,
+            "person_id": 300000007750361,
+            "email_address": "TESTyolanda.tolentin88@yahoo.com",
+            "trx_source": "Fusion",
+            "source_rowid": "AAA3sXAAMAAB+zjAAA",
+            "created_by": "FUSION_APPS_HCM_ESS_APPID",
+            "created_date": "2025-09-07T13:20:19.72Z",
+            "last_updated_by": "FIN IMPL",
+            "last_updated_date": "2025-09-07T13:22:15.31Z",
+            "last_updated_login": "3E36AA0DCDE45AE2E063BE1F0A0A60A8"
+        }
+    ]
+}

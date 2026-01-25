@@ -1,0 +1,306 @@
+{
+  "metadata": {},
+  "title": "Lov",
+  "description": "LOV Configuration Add/Edit page for managing List of Values configurations with form validation and CRUD operations.",
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "oj-sp/simple-create-edit/loader"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-switch": {
+        "path": "ojs/ojswitch"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/addEditHeader.css"
+    ]
+  },
+  "types": {
+    "@decorators.getLovTypeLovResponse": {
+      "endpoint": "getLovTypeLov",
+      "service": "LovConfiguration", 
+      "path": "response"
+    },
+    "@decorators.getProgramLovtypeListResponse": {
+      "endpoint": "getProgramLovtypeList",
+      "service": "Program",
+      "path": "response"
+    },
+    "getProgramLovtypeListResponse": {
+      "items": [
+        {
+          "lov_type": "string"
+        }
+      ]
+    },
+    "LovConfiguration": {
+      "lov_config_id": "number",
+      "object_version_num": "number",
+      "lov_code": "string",
+      "lov_name": "string",
+      "lov_description": "string",
+      "lov_type": "string",
+      "lov_type_display": "string",
+      "query_text": "string",
+      "bind_parameters": "string",
+      "return_value_column": "string",
+      "display_column": "string",
+      "description_column": "string",
+      "order_by_clause": "string",
+      "active_flag": "string",
+      "active_status": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "created_date_display": "string",
+      "last_updated_date_display": "string",
+      "parameter_usage_count": "number",
+      "search_text": "string"
+    },
+    "getLovTypeLovResponse": {
+      "items": [
+        {
+          "lov_type": "string",
+          "lov_type_display": "string"
+        }
+      ]
+    }
+
+  },
+  "variables": {
+
+    "lovCodeCustomMsg": {
+      "type": "object[]"
+    },
+    "lovConfigurationVar": {
+      "type": "LovConfiguration",
+      "defaultValue": {
+        "active_flag": "Y",
+        "lov_config_id": 0,
+        "object_version_num": 0,
+        "parameter_usage_count": 0
+      },
+      "input": "none",
+      "dirtyDataBehavior": "track"
+    },
+    "canEdit": {
+      "type": "boolean",
+      "defaultValue": "[[ $variables.op === \"POST\" ]]"
+    },
+    "encryptedBody": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "isFormValid": {
+      "type": "string"
+    },
+    "key": {
+      "type": "string",
+      "defaultValue": "0",
+      "input": "fromUrl"
+    },
+    "lovTypeADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "data": "{{ $constants.lovTypeArray }}",
+        "keyAttributes": "value"
+      }
+    },
+    "op": {
+      "type": "string",
+      "defaultValue": "POST",
+      "input": "fromUrl"
+    },
+    "searchObj": {
+      "type": {
+        "in_limit": "number",
+        "in_offset": "number",
+        "p_keyword": "string",
+        "p_lov_config_id": "string",
+        "p_lov_type": "string",
+        "p_active_flag": "string"
+      },
+      "defaultValue": {
+        "in_limit": 3,
+        "in_offset": 0,
+        "p_keyword": "",
+        "p_lov_config_id": "",
+        "p_lov_type": "",
+        "p_active_flag": ""
+      }
+    }
+
+  },
+  "eventListeners": {
+    "activeFlagSwitchValue": {
+      "chains": [
+        {
+          "chain": "SwitchValueChangeChain",
+          "parameters": {
+            "value": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "enableEditAC"
+        }
+      ]
+    },
+    "cancelExitBtnAction": {
+      "chains": [
+        {
+          "chain": "ButtonActionChain1",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "lovCodeValue": {
+      "chains": [
+        {
+          "chain": "lovCodeAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "proceedExitBtnAction": {
+      "chains": [
+        {
+          "chain": "ButtonActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "selectValueItem": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "vbBeforeExit": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbBeforeExitListener"
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    },
+    "lovPageSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpSecondaryActionChain",
+          "parameters": {
+            "actionId": "[[ $event.detail.secondaryItem ]]"
+          }
+        }
+      ]
+    },
+    "lovPageSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpPrimaryActionChain"
+        }
+      ]
+    },
+    "lovPageSpCancel": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpCancelChain"
+        }
+      ]
+    }
+
+  },
+  "constants": {
+    "lovTypeArray": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "DIRECT",
+          "value": "DIRECT"
+        },
+        {
+          "label": "DEPENDENT",
+          "value": "DEPENDENT"
+        },
+        {
+          "label": "STATIC",
+          "value": "STATIC"
+        }
+      ]
+    }
+  },
+  "@dt": {
+    "chains": {
+      "loadHeaderAC": {
+        "showInDiagram": "full"
+      }
+    }
+  }
+}

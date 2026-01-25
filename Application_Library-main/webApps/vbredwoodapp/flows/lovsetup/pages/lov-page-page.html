@@ -1,0 +1,110 @@
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div>
+        <oj-sp-simple-create-edit id="lov_page" page-title="LOV Configuration" display-options.responsive-padding="on"
+          primary-action.label="Save and Close" on-sp-secondary-action="[[$listeners.lovPageSpSecondaryAction]]"
+          on-sp-primary-action="[[$listeners.lovPageSpPrimaryAction]]" on-sp-cancel="[[$listeners.lovPageSpCancel]]"
+          badge.status="info" badge.text="[[ $variables.lovConfigurationVar.lov_code ]]">
+
+          <div slot="main" style="padding-top: 0; margin-top: 0;">
+            <div style="margin-top: 0;">
+
+              <!-- LOV Configuration Form -->
+              <div class="oj-panel oj-panel-shadow-md oj-selected">
+                <oj-validation-group valid="{{ $variables.isFormValid }}" id="lov-validation">
+                  <oj-form-layout id="lov_formLayout" class="oj-formlayout-full-width" label-edge="start" columns="2"
+                    max-columns="3" direction="column" user-assistance-density="compact">
+
+                    <!-- LOV Code -->
+                    <oj-input-text id="lov_code" label-hint="LOV Code"
+                      value="{{ $variables.lovConfigurationVar.lov_code }}" required="true"
+                      on-value-changed="[[$listeners.lovCodeValue]]" class="" disabled="[[ !$variables.canEdit ]]"
+                      style="width:21rem; margin-bottom:3px;">
+                      <div slot="end">
+                        <oj-bind-if test="[[ !$variables.canEdit ]]">
+                          <oj-button label="Button" display="icons">
+                            <span class="oj-ux-ico-edit" slot="startIcon" on-click="[[$listeners.buttonAction]]"></span>
+                          </oj-button>
+                        </oj-bind-if>
+                      </div>
+                    </oj-input-text>
+
+                    <!-- LOV Name -->
+                    <oj-input-text id="lov_name" label-hint="LOV Name" style="width:21rem; margin-bottom:3px;"
+                      value="{{ $variables.lovConfigurationVar.lov_name }}" required="true">
+                    </oj-input-text>
+
+                    <!-- LOV Type -->
+                    <oj-select-single label-hint="LOV Type" style="width:21rem; margin-bottom:3px;"
+                      data="[[ $variables.lovTypeADP ]]" value="{{ $variables.lovConfigurationVar.lov_type }}"
+                      required="true" on-value-item-changed="[[$listeners.selectValueItem]]" >
+                    </oj-select-single>
+
+                    <!-- LOV Description -->
+                    <oj-input-text id="lov_description" label-hint="LOV Description"
+                      style="width:21rem; margin-bottom:3px;"
+                      value="{{ $variables.lovConfigurationVar.lov_description }}">
+                    </oj-input-text>
+
+                    <!-- Status -->
+                    <oj-switch id="lov_activeFlag" label-hint="Status"
+                      value='{{ $variables.lovConfigurationVar.active_flag==="Y"?true:false}}'
+                      on-value-changed="[[$listeners.activeFlagSwitchValue]]">
+                    </oj-switch>
+
+                    <!-- Query Text -->
+                    <oj-text-area id="lov_queryText" label-hint="Query Text" style="width:21rem; margin-bottom:3px;"
+                      value="{{ $variables.lovConfigurationVar.query_text }}" rows="4">
+                    </oj-text-area>
+
+                    <!-- Return Value Column -->
+                    
+
+                    <!-- Display Column -->
+                    
+
+                    <!-- Description Column -->
+                    
+
+                    <!-- Bind Parameters - Conditional Display -->
+                    <oj-bind-if test='[[ ($variables.lovConfigurationVar.lov_type==="DEPENDENT")?true:false ]]'>
+                      <oj-input-text id="lov_bindParameters" label-hint="Bind Parameters"
+                        style="width:21rem; margin-bottom:3px;"
+                        value="{{ $variables.lovConfigurationVar.bind_parameters }}">
+                      </oj-input-text>
+                    </oj-bind-if>
+
+                    <!-- Order By Clause -->
+                    <oj-text-area id="lov_orderByClause" label-hint="Order By Clause"
+                      style="width:21rem; margin-bottom:3px;"
+                      value="{{ $variables.lovConfigurationVar.order_by_clause }}">
+                    </oj-text-area>
+
+                  </oj-form-layout>
+                </oj-validation-group>
+              </div>
+
+            </div>
+          </div>
+
+        </oj-sp-simple-create-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Unsaved Changes Dialog -->
+<oj-dialog dialog-title="Unsaved Changes" id="unsavedChangesDialog" cancel-behavior="icon">
+  <div slot="body">
+    <h6 id="unsavedChangesText" style="font-size:medium; font-weight: bold;">Are you sure you want to leave this page?
+      Your changes will be lost.
+    </h6>
+  </div>
+  <div slot="footer">
+    <oj-button id="proceedExitBtn" chroming="outlined" on-oj-action="[[$listeners.proceedExitBtnAction]]">Leave
+    </oj-button>
+    <oj-button id="cancelExitBtn" chroming="outlined" on-oj-action="[[$listeners.cancelExitBtnAction]]">Cancel
+    </oj-button>
+  </div>
+</oj-dialog>

@@ -1,0 +1,54 @@
+{
+    "items": [
+        {
+            "bu_id": 300000002405880,
+            "bu_name": "Bader Abdullah Darwish & Partners"
+        },
+        {
+            "bu_id": 300000002405906,
+            "bu_name": "Darwish Charity"
+        },
+        {
+            "bu_id": 300000002405932,
+            "bu_name": "Darwish Consumer"
+        },
+        {
+            "bu_id": 300000002405854,
+            "bu_name": "Darwish Corporate"
+        },
+        {
+            "bu_id": 300000002405841,
+            "bu_name": "Darwish Holding"
+        },
+        {
+            "bu_id": 300000002405919,
+            "bu_name": "Darwish Homes"
+        },
+        {
+            "bu_id": 300000002405893,
+            "bu_name": "Lagoona Company"
+        },
+        {
+            "bu_id": 300000002405867,
+            "bu_name": "Modern Home"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 8,
+    "links": [
+        {
+            "rel": "self",
+            "href": "http://primaverademo.4iapps.com:8442/ords/aol_usr/role/lov/bu/name"
+        },
+        {
+            "rel": "describedby",
+            "href": "http://primaverademo.4iapps.com:8442/ords/aol_usr/metadata-catalog/role/lov/bu/item"
+        },
+        {
+            "rel": "first",
+            "href": "http://primaverademo.4iapps.com:8442/ords/aol_usr/role/lov/bu/name"
+        }
+    ]
+}

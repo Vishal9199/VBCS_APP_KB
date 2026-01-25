@@ -1,0 +1,4 @@
+{
+    "P_ERR_CODE": "E",
+    "P_ERR_MSG": "Duplicate record: RESTRICTION_CODE and PERSON_ID combination already exists"
+}

@@ -1,0 +1,22 @@
+{
+
+  "id": "application",
+  "description": "Flow main",
+  "defaultPage": "application-start",
+  "chains": {},
+  "services": {},
+  "types": {},
+  "variables": {},
+  "constants": {
+    "accessObj": {
+      "type": {
+        "allowDelete": "boolean",
+        "allowEdit": "boolean"
+      },
+      "defaultValue": {
+        "allowEdit": false,
+        "allowDelete": true
+      }
+    }
+  }
+}

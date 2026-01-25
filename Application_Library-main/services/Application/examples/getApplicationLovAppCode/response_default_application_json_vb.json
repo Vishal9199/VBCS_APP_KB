@@ -1,0 +1,97 @@
+{
+    "items": [
+        {
+            "application_id": 164,
+            "application_code": "testing",
+            "application_name": "testing application"
+        },
+        {
+            "application_id": 1,
+            "application_code": "sdf",
+            "application_name": "abc ie apps1"
+        },
+        {
+            "application_id": 128,
+            "application_code": "abcd",
+            "application_name": "abc i apps1"
+        },
+        {
+            "application_id": 114,
+            "application_code": "abc",
+            "application_name": "abc i apps1"
+        },
+        {
+            "application_id": 186,
+            "application_code": "TESTING_7",
+            "application_name": "Testing App"
+        },
+        {
+            "application_id": 178,
+            "application_code": "TESTING_5",
+            "application_name": "Testing App"
+        },
+        {
+            "application_id": 177,
+            "application_code": "TESTING_4",
+            "application_name": "Testing App"
+        },
+        {
+            "application_id": 175,
+            "application_code": "TESTING_3",
+            "application_name": "Testing App"
+        },
+        {
+            "application_id": 173,
+            "application_code": "TESTING_2",
+            "application_name": "Testing App"
+        },
+        {
+            "application_id": 171,
+            "application_code": "TESTING_1",
+            "application_name": "Testing App"
+        },
+        {
+            "application_id": 189,
+            "application_code": "RAI_JAS",
+            "application_name": "Ok App"
+        },
+        {
+            "application_id": 198,
+            "application_code": "NBVN",
+            "application_name": "test"
+        },
+        {
+            "application_id": 196,
+            "application_code": "JSHJ_HS",
+            "application_name": "Testing App"
+        },
+        {
+            "application_id": 187,
+            "application_code": "GJGJ_HZKX",
+            "application_name": "Testing App"
+        },
+        {
+            "application_id": 188,
+            "application_code": "DHZGJDFHZ_LAJHF",
+            "application_name": "Testing App"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 15,
+    "links": [
+        {
+            "rel": "self",
+            "href": "http://primaverademo.4iapps.com:8442/ords/aol/application/lov/app/code"
+        },
+        {
+            "rel": "describedby",
+            "href": "http://primaverademo.4iapps.com:8442/ords/aol/metadata-catalog/application/lov/app/item"
+        },
+        {
+            "rel": "first",
+            "href": "http://primaverademo.4iapps.com:8442/ords/aol/application/lov/app/code"
+        }
+    ]
+}

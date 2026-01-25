@@ -1,0 +1,8 @@
+{
+  "id": "approvalhistory",
+  "description": "Flow main",
+  "defaultPage": "approvalhistory-start",
+  "services": {},
+  "types": {},
+  "variables": {}
+}

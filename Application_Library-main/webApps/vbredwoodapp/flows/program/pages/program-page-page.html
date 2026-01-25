@@ -1,0 +1,458 @@
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div>
+        <oj-sp-simple-create-edit id="program_management_page" page-title="Program"
+          display-options.responsive-padding="on" primary-action.label="Save and Close"
+          secondary-actions='[{"label":"Save","id":"save"}]'
+          on-sp-primary-action="[[$listeners.programManagementPageSpPrimaryAction]]"
+          on-sp-secondary-action="[[$listeners.programManagementPageSpSecondaryAction]]"
+          on-sp-cancel="[[$listeners.programManagementPageSpCancel]]" badge.status="info"
+          badge.text="[[ $variables.programVar.program_code ]]">
+
+          <div slot="main" style="padding-top: 0; margin-top: 0;">
+            <div style="margin-top: 0;">
+
+              <!-- Main Form Section - Program Header Information -->
+              <div class="oj-panel oj-panel-shadow-md oj-selected">
+                <oj-validation-group valid="{{ $variables.validationGroupVars.isHeaderFormValid }}"
+                  :id="[[ $variables.validationGroupVars.headerFormId ]]">
+                  <oj-form-layout max-columns="2" label-edge="start" label-width="45%" user-assistance-density="compact"
+                    direction="column">
+
+                    <!-- Application Name -->
+                    <oj-select-single id="application-name" label-hint="Application Name"
+                      value="{{ $variables.programVar.application_id }}" item-text="application_name" required="true"
+                      style="width: 16rem;" data="[[$variables.getApplicationLovActiveApplicationListSDP]]">
+                      <template slot="collectionTemplate" data-oj-as="collection">
+                        <oj-table scroll-policy="loadMoreOnScroll" horizontal-grid-visible="enabled"
+                          vertical-grid-visible="enabled"
+                          columns-default='{"resizable": "disabled","sortable": "disabled"}' class="oj-select-results"
+                          columns='[{"headerText":"Code","field":"application_code"},{"headerText":"Name","field":"application_name"}]'
+                          data="[[collection.data]]" selected.row="[[collection.selected]]"
+                          on-oj-row-action="[[collection.handleRowAction]]" current-row="{{collection.currentRow}}"
+                          display="grid" selection-mode.row="single"></oj-table>
+                      </template>
+                    </oj-select-single>
+
+                    <!-- Program Code -->
+                    <oj-input-text id="program-code" label-hint="Code" placeholder="Program Code"
+                      value="{{ $variables.programVar.program_code }}" required="true"
+                      messages-custom="{{ $variables.programCodeCustomMsg }}" length.max="200" style="width: 16rem;"
+                      on-value-changed="[[$listeners.programCodeValue]]">
+                    </oj-input-text>
+
+                    <!-- Program Name -->
+                    <oj-input-text id="program-name" label-hint="Name" placeholder="Program Name"
+                      value="{{ $variables.programVar.program_name }}" required="true" length.max="200"
+                      style="width: 16rem;">
+                    </oj-input-text>
+
+                    <!-- Column Alignment -->
+                    <oj-input-number id="column-alignment" label-hint="Column Alignment" placeholder="Column Alignment"
+                      value="{{ $variables.programVar.column_per_row }}" max="4" min="1" style="width: 16rem;">
+                    </oj-input-number>
+
+                    <!-- Program Type -->
+                    <oj-select-single id="program-type" label-hint="Type" placeholder="Select Type"
+                      value="{{ $variables.programVar.program_type }}" item-text="program_type" required="true"
+                      data="[[ $variables.programTypeLOV ]]" style="width: 16rem;">
+                    </oj-select-single>
+
+                    <!-- Upload Section (for Report type only) -->
+                    <!-- <oj-bind-if test="[[ $variables.programVar.program_type === 'Report' ]]">
+                      <div style="width: 16rem;">
+                        <oj-label style="font-weight: bold; margin-top: 40px;" show-required="true">Upload</oj-label>
+                        <oj-file-picker style="min-width: 20rem; min-height:6rem;" id="file-picker-report"
+                          selection-mode="single">
+                        </oj-file-picker>
+                      </div>
+                    </oj-bind-if> -->
+
+                    <!-- RTF Path / Integration Path -->
+                    <oj-input-text id="rtf-path"
+                      label-hint="[[ $variables.programVar.program_type === 'Report' ? 'RTF Path' : 'Integration Path' ]]"
+                      placeholder="[[ $variables.programVar.program_type === 'Report' ? 'RTF Path' : 'Integration Path' ]]"
+                      value="{{ $variables.programVar.rtf_path }}" style="width: 16rem;">
+                      <!-- <div slot="end">
+                        <oj-bind-if test="[[ $variables.programVar.rtf_name !== null ]]">
+                          <oj-button display="icons" chroming="borderless">
+                            <img slot="endIcon" width="25" height="25" src="/resources/images/download.png">
+                          </oj-button>
+                        </oj-bind-if>
+                      </div> -->
+                    </oj-input-text>
+
+                    <!-- RTF Name / Integration Name -->
+                    <oj-input-text id="rtf-name"
+                      label-hint="[[ $variables.programVar.program_type === 'Report' ? 'RTF Name' : 'Integration Name' ]]"
+                      placeholder="[[ $variables.programVar.program_type === 'Report' ? 'RTF Name' : 'Integration Name' ]]"
+                      value="{{ $variables.programVar.rtf_name }}" style="width: 16rem;">
+                    </oj-input-text>
+
+                    <!-- XML Query / DB Function Name -->
+                    <oj-input-text id="db-function-name"
+                      label-hint="[[ $variables.programVar.program_type === 'Report' ? 'XML Query' : 'DB Function Name' ]]"
+                      placeholder="[[ $variables.programVar.program_type === 'Report' ? 'XML Query' : 'DB Function Name' ]]"
+                      value="{{ $variables.programVar.db_function_name }}" style="width: 16rem;">
+                    </oj-input-text>
+
+                    <!-- Output Type -->
+                    <oj-select-single id="output-type" label-hint="Output Type" placeholder="Select Output Type"
+                      value="{{ $variables.programVar.output_type }}" item-text="output_type"
+                      data="[[ $variables.outputTypeLOV ]]" style="width: 16rem;">
+                    </oj-select-single>
+
+                    <!-- Active Status -->
+                    <oj-switch id="active-flag-switch" value="{{ $variables.programVar.active_flag === 'Y' }}"
+                      label-hint="Status" on-value-changed="[[$listeners.activeFlagSwitchValue]]">
+                    </oj-switch>
+
+                    <!-- Remarks -->
+                    <oj-text-area id="remarks" label-hint="Remarks" placeholder="Remarks"
+                      value="{{ $variables.programVar.remarks }}" rows="4" length.counter="remaining" length.max="250"
+                      style="width: 16rem;">
+                    </oj-text-area>
+
+                  </oj-form-layout>
+                </oj-validation-group>
+              </div>
+
+              <!-- Parameter Configuration Table Section -->
+              <div>
+                <!-- Action Buttons for Parameter Configuration Table -->
+                <div
+                  style="color: #02474e; font-size: larger; font-weight: bold; margin-bottom:0rem; padding: 10px 15px;"
+                  class="oj-flex oj-sm-justify-content-space-between oj-sm-align-items-center">
+                  <oj-bind-text value="Parameter Configuration"></oj-bind-text>
+                  <div class="oj-flex oj-sm-justify-content-space-around oj-sm-align-items-center" style="gap:10px;">
+                    <oj-button style="margin:0.125rem;" label="Refresh" chroming="outlined" id="refreshBtn"
+                      on-oj-action="[[$listeners.refreshBtnAction]]">
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/Refresh.png' ]]">
+                    </oj-button>
+
+                    <oj-button label="Add Parameter" class="oj-flex-bar-end oj-helper-justify-content-flex-end"
+                      chroming="outlined" id="addBtn" on-oj-action="[[$listeners.addBtnAction]]">
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/Create (1).png' ]]">
+                    </oj-button>
+                  </div>
+                </div>
+
+                <!-- Parameter Configuration Table -->
+                <oj-table id="parameter-configuration-table" data="{{ $variables.ADPprogramParameters }}"
+                  columns="{{ $constants.parameterColumns }}" columns-default.sortable="disabled"
+                  columns-default.resizable="enabled" class="oj-sm-width-full oj-bg-body" display="grid"
+                  selection-mode.row="none">
+
+                  <template slot="parameter_actions_template">
+                    <div class="oj-flex oj-sm-align-items-center oj-sm-justify-content-center" style="gap:15px;">
+                      <span class="oj-ux-ico-trash"
+                        style="cursor:pointer; font-size:20px;" on-click="[[$listeners.iconClick]]">
+                      </span>
+                      <span class="oj-ux-ico-edit"
+                        style="cursor:pointer; font-size:20px;" on-click="[[$listeners.iconClick2]]">
+                      </span>
+                    </div>
+                  </template>
+
+                  <template slot="param_code_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="param_name_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="param_label_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="param_seq_num_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="param_data_type_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="field_type_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="default_value_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="placeholder_text_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+
+                  <template slot="active_flag_template">
+                    <oj-bind-if test='[[ $current.data === "Y" ]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/activeBtn.png' ]]">
+                    </oj-bind-if>
+                    <oj-bind-if test='[[ $current.data === "N" ]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/inactive.png' ]]">
+                    </oj-bind-if>
+                  </template>
+
+                  <template slot="required_flag_template">
+
+                    <oj-bind-if test='[[ $current.data === "Y" ]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/activeBtn.png' ]]">
+                    </oj-bind-if>
+                    <oj-bind-if test='[[ $current.data === "N" ]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/inactive.png' ]]">
+                    </oj-bind-if>
+                  </template>
+
+                  <template slot="read_only_flag_template">
+
+                    <oj-bind-if test='[[ $current.data === "Y" ]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/activeBtn.png' ]]">
+                    </oj-bind-if>
+                    <oj-bind-if test='[[ $current.data === "N" ]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/inactive.png' ]]">
+                    </oj-bind-if>
+                  </template>
+
+                  <template slot="disable_flag_template">
+
+                    <oj-bind-if test='[[ $current.data === "Y" ]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/activeBtn.png' ]]">
+                    </oj-bind-if>
+                    <oj-bind-if test='[[ $current.data === "N" ]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/inactive.png' ]]">
+                    </oj-bind-if>
+                  </template>
+
+                  <template slot="visible_flag_template">
+                    <oj-bind-if test='[[ $current.data === "Y" ]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/activeBtn.png' ]]">
+                    </oj-bind-if>
+                    <oj-bind-if test='[[ $current.data === "N" ]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/inactive.png' ]]">
+                    </oj-bind-if>
+                  </template>
+
+                  <template slot="remarks_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                </oj-table>
+
+                <!-- Pagination Section -->
+                <div class="oj-flex oj-sm-justify-content-center">
+                  <oj-bind-if test="[[true]]">
+                    <oj-toolbar chroming="solid" class="oj-flex-item oj-sm-flex-initial">
+
+                      <oj-button label="Previous" chroming="borderless" disabled="[[ !$variables.pagination.prev ]]"
+                        id="preBtn" on-oj-action="[[$listeners.prevParameterBtnAction]]">
+                        <span slot="startIcon" class="oj-ux-ico-back"></span>
+                      </oj-button>
+
+                      <oj-button label="Next" chroming="borderless" disabled="[[ !$variables.pagination.next ]]"
+                        id="nxtBtn" on-oj-action="[[$listeners.nextParameterBtnAction]]">
+                        <span slot="endIcon" class="oj-ux-ico-forward-next"></span>
+                      </oj-button>
+
+                    </oj-toolbar>
+                  </oj-bind-if>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </oj-sp-simple-create-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Parameter Configuration Dialog -->
+<oj-dialog dialog-title="Parameter Configuration" id="parameterConfigDialog" cancel-behavior="icon"
+  resize-behavior="resizable" drag-affordance="title-bar" modality="modeless" style="width:1200px;"
+  on-oj-close="[[$listeners.parameterConfigDialogClose]]">
+  <div slot="body" style="padding-top:10px; background-color:white;">
+    <div class="oj-panel oj-panel-shadow-md oj-selected">
+      <oj-validation-group valid="{{ $variables.validationGroupVars.isChildTableFormValid }}"
+        :id="[[ $variables.validationGroupVars.childTableFormId ]]">
+        <oj-form-layout label-edge="start" direction="column" id="parameterFormLayout" max-columns="2"
+          user-assistance-density="compact">
+
+          <!-- Parameter Code -->
+          <oj-input-text id="dialog-param-code" label-hint="Parameter Code" placeholder="Parameter Code"
+            value="{{ $variables.parameterVar.param_code }}" required="true" style="width: 16rem;"
+            messages-custom="{{ $variables.paramCodeCustomMsg }}">
+          </oj-input-text>
+
+          <!-- Parameter Label -->
+          <oj-input-text id="dialog-param-label" label-hint="Parameter Label" placeholder="Parameter Label"
+            value="{{ $variables.parameterVar.param_label }}" required="true" style="width: 16rem;"
+            on-value-changed="[[$listeners.dialogParamLabelValue]]">
+          </oj-input-text>
+
+          <!-- Parameter Data Type -->
+          <oj-select-single id="dialog-param-data-type" label-hint="Parameter Data Type"
+            value="{{ $variables.parameterVar.param_data_type }}" required="true"
+            data="[[ $variables.paramDataTypeADP ]]" item-text="label" style="width: 16rem;"
+            on-value-item-changed="[[$listeners.dialogParamDataTypeValueItem]]">
+          </oj-select-single>
+
+          <!-- Field Type -->
+          <oj-select-single id="dialog-field-type" label-hint="Field Type" required="true" item-text="label"
+            style="width: 16rem;" data="[[ $variables.fieldTypeADP ]]" value="{{ $variables.parameterVar.field_type }}">
+          </oj-select-single>
+
+          <!-- Conditional Fields: LOV -->
+          <oj-bind-if
+            test="[[ $variables.parameterVar.field_type === 'LOV' || $variables.parameterVar.field_type === 'DEPENDENT_LOV' ]]">
+            <oj-select-single id="dialog-lov-code" label-hint="LOV Code" value="{{ $variables.parameterVar.lov_code }}"
+              style="width:16rem;" item-text="lov_name" data="[[$variables.getProgramLovcodeListListSDP]]"
+              required="true">
+            </oj-select-single>
+          </oj-bind-if>
+
+          <oj-bind-if test="[[ $variables.parameterVar.field_type === 'DEPENDENT_LOV' ]]">
+            <oj-select-single id="dialog-parlov-code" label-hint="Parent LOV Name"
+              value="{{ $variables.parameterVar.parent_parameter_code }}" style="width:16rem;" item-text="param_name"
+              required="true" data="[[$variables.getProgramParentLovListSDP]]">
+            </oj-select-single>
+          </oj-bind-if>
+
+          <!-- Default Value -->
+          <oj-input-text id="dialog-default-value" label-hint="Default Value" placeholder="Default Value"
+            value="{{ $variables.parameterVar.default_value }}" style="width: 16rem;">
+          </oj-input-text>
+
+          <!-- Order Number -->
+          <!-- <oj-input-number id="dialog-param-seq-num" label-hint="Order Number" placeholder="Order Number"
+            value="{{ $variables.parameterVar.param_seq_num }}" required="true" style="width: 16rem;" min="1" step="1">
+          </oj-input-number> -->
+
+          <!-- Visible Flag -->
+          <oj-switch id="dialog-visible-flag" label-hint="Visible"
+            value="{{ $variables.parameterVar.visible_flag === 'Y' }}"
+            on-value-changed="[[$listeners.dialogVisibleFlagValue]]">
+          </oj-switch>
+
+          <!-- Required Flag -->
+          <oj-switch id="dialog-required-flag" label-hint="Required"
+            value="{{ $variables.parameterVar.required_flag === 'Y' }}"
+            on-value-changed="[[$listeners.dialogRequiredFlagValue]]">
+          </oj-switch>
+
+          <!-- Read Only Flag -->
+          <oj-switch id="dialog-read-only-flag" label-hint="Read Only"
+            value="{{ $variables.parameterVar.read_only_flag === 'Y' }}"
+            on-value-changed="[[$listeners.dialogReadOnlyFlagValue]]">
+          </oj-switch>
+
+          <!-- Disable Flag -->
+          <oj-switch id="dialog-disable-flag" label-hint="Disabled"
+            value="{{ $variables.parameterVar.disable_flag === 'Y' }}"
+            on-value-changed="[[$listeners.dialogDisableFlagValue]]">
+          </oj-switch>
+
+          <!-- Active Flag -->
+          <oj-switch id="dialog-active-flag" label-hint="Active"
+            value="{{ $variables.parameterVar.active_flag === 'Y' }}"
+            on-value-changed="[[$listeners.dialogActiveFlagValue]]">
+          </oj-switch>
+
+          <!-- Validation Rule -->
+          <oj-input-text id="dialog-validation-rule" label-hint="Validation Rule" placeholder="Validation Rule"
+            value="{{ $variables.parameterVar.validation_rule }}" style="width: 16rem;">
+          </oj-input-text>
+
+          <!-- Validation Message -->
+          <oj-text-area id="dialog-validation-message" label-hint="Validation Message" placeholder="Validation Message"
+            value="{{ $variables.parameterVar.validation_message }}" style="width: 16rem;" length.counter="remaining"
+            length.max="500">
+          </oj-text-area>
+
+          <!-- Conditional Fields: Min/Max Value (Only for NUMBER) -->
+          <oj-bind-if test="[[ $variables.parameterVar.field_type === 'NUMBER' ]]">
+            <oj-input-number id="dialog-min-value" label-hint="Minimum Value" placeholder="Minimum Value"
+              value="{{ $variables.parameterVar.min_value }}" style="width:16rem;">
+            </oj-input-number>
+          </oj-bind-if>
+
+          <oj-bind-if test="[[ $variables.parameterVar.field_type === 'NUMBER' ]]">
+            <oj-input-number id="dialog-max-value" label-hint="Maximum Value" placeholder="Maximum Value"
+              value="{{ $variables.parameterVar.max_value }}" style="width:16rem;">
+            </oj-input-number>
+          </oj-bind-if>
+
+          <!-- Conditional Fields: Min/Max Length (Only for TEXTAREA or TEXT) -->
+          <oj-bind-if
+            test="[[ ($variables.parameterVar.field_type === 'TEXTAREA' || $variables.parameterVar.field_type === 'STRING') ]]">
+            <oj-input-number id="dialog-min-length" label-hint="Minimum Length" placeholder="Minimum Length"
+              value="{{ $variables.parameterVar.min_length }}" style="width:16rem;">
+            </oj-input-number>
+          </oj-bind-if>
+
+          <oj-bind-if
+            test="[[ ($variables.parameterVar.field_type === 'TEXTAREA' || $variables.parameterVar.field_type === 'STRING') ]]">
+            <oj-input-number id="dialog-max-length" label-hint="Maximum Length" placeholder="Maximum Length"
+              value="{{ $variables.parameterVar.max_length }}" style="width:16rem;">
+            </oj-input-number>
+          </oj-bind-if>
+
+          <!-- Placeholder Text -->
+          <oj-input-text id="dialog-placeholder-text" label-hint="Placeholder Text" placeholder="Placeholder Text"
+            value="{{ $variables.parameterVar.placeholder_text }}" style="width: 16rem;">
+          </oj-input-text>
+
+          <!-- Help Text -->
+          <oj-input-text id="dialog-help-text" label-hint="Help Text" placeholder="Help Text"
+            value="{{ $variables.parameterVar.help_text }}" style="width: 16rem;">
+          </oj-input-text>
+
+          <!-- Remarks -->
+          <oj-text-area id="dialog-remarks" label-hint="Remarks" placeholder="Remarks"
+            value="{{ $variables.parameterVar.remarks }}" style="width: 16rem;" length.counter="remaining"
+            length.max="2000">
+          </oj-text-area>
+
+        </oj-form-layout>
+      </oj-validation-group>
+    </div>
+  </div>
+  <div slot="footer" style="background-color:white;">
+    <oj-button id="parameter-save-add-another" chroming="outlined"
+      on-oj-action="[[$listeners.parameterSaveAddAnotherAction]]">Save & Add Another</oj-button>
+    <oj-button id="parameter-save-close" chroming="outlined" on-oj-action="[[$listeners.parameterSaveCloseAction]]">Save
+      & Close</oj-button>
+    <oj-button id="parameter-cancel" chroming="outlined" on-oj-action="[[$listeners.parameterCancelAction]]">Cancel
+    </oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Delete Parameter Dialog -->
+<oj-dialog dialog-title="Delete Parameter" id="deleteParameterDialog" cancel-behavior="icon">
+  <div slot="body">
+    <h6 style="font-size:medium; font-weight: bold;">Are you sure you want to delete this parameter configuration?
+    </h6>
+  </div>
+  <div slot="footer">
+    <oj-button id="deleteParameterYes" chroming="outlined" on-oj-action="[[$listeners.deleteParameterYesAction]]">Yes</oj-button>
+    <oj-button id="deleteParameterNo" chroming="outlined" on-oj-action="[[$listeners.deleteParameterNoAction]]">No</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Unsaved Changes Dialog -->
+<oj-dialog dialog-title="Unsaved Changes" id="unsavedChangesDialog" cancel-behavior="icon">
+  <div slot="body">
+    <h6 style="font-size:medium; font-weight: bold;">Are you sure you want to leave this page?
+      Your changes will be lost.
+    </h6>
+  </div>
+  <div slot="footer">
+    <oj-button id="proceedExitBtn" chroming="outlined">Leave</oj-button>
+    <oj-button id="cancelExitBtn" chroming="outlined">Cancel</oj-button>
+  </div>
+</oj-dialog>

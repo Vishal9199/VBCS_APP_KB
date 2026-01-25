@@ -1,0 +1,31 @@
+{
+    "items": [
+        {
+            "table_name": "FS_ABSENCE_STG_T"
+        },
+        {
+            "table_name": "FS_BANK_STG_T"
+        },
+        {
+            "table_name": "FS_ITEM_ONHAND_STG_T"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 3,
+    "links": [
+        {
+            "rel": "self",
+            "href": "http://primaverademo.4iapps.com:8442/ords/stg/schedule/lov/table/name"
+        },
+        {
+            "rel": "describedby",
+            "href": "http://primaverademo.4iapps.com:8442/ords/stg/metadata-catalog/schedule/lov/table/item"
+        },
+        {
+            "rel": "first",
+            "href": "http://primaverademo.4iapps.com:8442/ords/stg/schedule/lov/table/name"
+        }
+    ]
+}

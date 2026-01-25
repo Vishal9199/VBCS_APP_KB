@@ -1,0 +1,113 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "dataExist": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "encryptedBody": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "isFormValid": {
+      "type": "string"
+    },
+    "mailSwitchVar": {
+      "type": "boolean"
+    },
+    "method": {
+      "type": "string"
+    },
+    "postStgScheduleSetupSearchVar": {
+      "type": "postStgScheduleSetupSearch"
+    },
+    "saveFlag": {
+      "type": "boolean"
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.postStgScheduleSetupSearch": {
+      "endpoint": "postStgScheduleSetupSearch",
+      "service": "SyncSetup",
+      "path": "response"
+    },
+    "postStgScheduleSetupSearch": {
+      "authentication_type": "string",
+      "fusion_domain": "string",
+      "fusion_password": "string",
+      "fusion_username": "string",
+      "mail_notification": "string",
+      "setup_id": "number"
+    }
+  },
+  "eventListeners": {
+    "appPageSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "onSaveBtn",
+          "parameters": {
+            "event": "{{$event}}",
+            "feedbackEnabled": "{{$event.detail.feedbackEnabled}}"
+          }
+        }
+      ]
+    },
+    "appPageSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "onClickEditBtn",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-password": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "oj-sp/simple-create-edit/loader"
+      },
+      "oj-switch": {
+        "path": "ojs/ojswitch"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+    },
+    "css": [
+      "/resources/css/addEditHeader.css"
+    ]
+  }
+}

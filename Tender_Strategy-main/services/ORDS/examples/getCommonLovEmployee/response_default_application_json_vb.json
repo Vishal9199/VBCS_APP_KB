@@ -1,0 +1,176 @@
+{
+    "items": [
+        {
+            "person_id": 100000001787186,
+            "person_number": "1007",
+            "full_name": "Ibrahim Said Masoud Al Suleimani ",
+            "email_address": "inactiveemp@noemail.com"
+        },
+        {
+            "person_id": 100000001787187,
+            "person_number": "2002",
+            "full_name": "Sulaiman Khamis Hamed Al Qasmi ",
+            "email_address": "inactiveemp@noemail.com"
+        },
+        {
+            "person_id": 100000001790730,
+            "person_number": "2004",
+            "full_name": "Khalid Saeed Malik ",
+            "email_address": "inactiveemp@noemail.com"
+        },
+        {
+            "person_id": 100000001787189,
+            "person_number": "2005",
+            "full_name": "Mohamed Salim Majid AlHakawati ",
+            "email_address": "inactiveemp@noemail.com"
+        },
+        {
+            "person_id": 100000001787190,
+            "person_number": "2007",
+            "full_name": "Ashraf Sameh ElSayed Ibrahim ",
+            "email_address": "inactiveemp@noemail.com"
+        },
+        {
+            "person_id": 100000001662506,
+            "person_number": "2008",
+            "full_name": "Nehad Abdulld Zahir Al Bimani ",
+            "email_address": "nihad.bimani@testowwsc.nama.om"
+        },
+        {
+            "person_id": 100000001795504,
+            "person_number": "2009",
+            "full_name": "Abdullah Mohamed Abdullah Al Hashimi ",
+            "email_address": "inactiveemp@noemail.com"
+        },
+        {
+            "person_id": 100000001787192,
+            "person_number": "2010",
+            "full_name": "Farah Sulaiman Azzan Al Busaidi ",
+            "email_address": "inactiveemp@noemail.com"
+        },
+        {
+            "person_id": 100000001795554,
+            "person_number": "2012",
+            "full_name": "Alan William Cameron ",
+            "email_address": "inactiveemp@noemail.com"
+        },
+        {
+            "person_id": 100000001787194,
+            "person_number": "2013",
+            "full_name": "Abdul Salam Salim Hamed Al Sinawi ",
+            "email_address": "inactiveemp@noemail.com"
+        },
+        {
+            "person_id": 100000001787195,
+            "person_number": "2014",
+            "full_name": "Mohammed Ziauddin ",
+            "email_address": "inactiveemp@noemail.com"
+        },
+        {
+            "person_id": 100000001795555,
+            "person_number": "2015",
+            "full_name": "Salah Gul Mohamed Doshambeh Al Bulushi ",
+            "email_address": "inactiveemp@noemail.com"
+        },
+        {
+            "person_id": 100000001787197,
+            "person_number": "2016",
+            "full_name": "Arumugham Ponniah Kabali Eswarar ",
+            "email_address": "inactiveemp@noemail.com"
+        },
+        {
+            "person_id": 100000001795556,
+            "person_number": "2017",
+            "full_name": "Ibrahim Ali Abdullah Al Akhzami ",
+            "email_address": "inactiveemp@noemail.com"
+        },
+        {
+            "person_id": 100000001787199,
+            "person_number": "2018",
+            "full_name": "Saber Ibrahim Khalil ",
+            "email_address": "inactiveemp@noemail.com"
+        },
+        {
+            "person_id": 100000001787200,
+            "person_number": "2019",
+            "full_name": "Mohammed Bensaoua ",
+            "email_address": "inactiveemp@noemail.com"
+        },
+        {
+            "person_id": 100000001790648,
+            "person_number": "2021",
+            "full_name": "Tomislav Nesovanovic ",
+            "email_address": "inactiveemp@noemail.com"
+        },
+        {
+            "person_id": 100000001795574,
+            "person_number": "2023",
+            "full_name": "Essam Ibrahim ELSyed Abu Allif ",
+            "email_address": "inactiveemp@noemail.com"
+        },
+        {
+            "person_id": 100000001787203,
+            "person_number": "2025",
+            "full_name": "Kholoud Ayoub Aqrabawi ",
+            "email_address": "inactiveemp@noemail.com"
+        },
+        {
+            "person_id": 100000001787204,
+            "person_number": "2026",
+            "full_name": "Nayef Mohd Salim Al Kouz ",
+            "email_address": "inactiveemp@noemail.com"
+        },
+        {
+            "person_id": 100000001795503,
+            "person_number": "2027",
+            "full_name": "Biju Titty George ",
+            "email_address": "inactiveemp@noemail.com"
+        },
+        {
+            "person_id": 100000001787206,
+            "person_number": "2030",
+            "full_name": "Khaled Abdallah Hasan Abuarqob ",
+            "email_address": "inactiveemp@noemail.com"
+        },
+        {
+            "person_id": 100000001787207,
+            "person_number": "2032",
+            "full_name": "Venkatesh Babu Srinivasalu ",
+            "email_address": "inactiveemp@noemail.com"
+        },
+        {
+            "person_id": 100000001795589,
+            "person_number": "2033",
+            "full_name": "Murugappan Annamalai ",
+            "email_address": "inactiveemp@noemail.com"
+        },
+        {
+            "person_id": 100000001787209,
+            "person_number": "2035",
+            "full_name": "Sulayem Ali Sulayem Al Hikmani ",
+            "email_address": "inactiveemp@noemail.com"
+        }
+    ],
+    "hasMore": true,
+    "limit": 25,
+    "offset": 0,
+    "count": 25,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/common/lov/employee"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/metadata-catalog/common/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/common/lov/employee"
+        },
+        {
+            "rel": "next",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/common/lov/employee?offset=25"
+        }
+    ]
+}

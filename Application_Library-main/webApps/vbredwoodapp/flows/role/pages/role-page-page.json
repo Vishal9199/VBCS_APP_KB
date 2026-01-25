@@ -1,0 +1,904 @@
+{
+  "title": "Role Management Add/Edit",
+  "description": "Advanced Role Management Add/Edit page with header form and child table functionality",
+  "variables": {
+    "childSearch": {
+      "type": "usertypesearch",
+      "defaultValue": {
+        "IN_OFFSET": 0,
+        "IN_LIMIT": 3
+      }
+    },
+    "childUser": {
+      "type": "roleuser",
+      "defaultValue": {
+        "object_version_num": 0,
+        "effective_end_date": "4712-12-31"
+      }
+    },
+    "enddate": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "getAolUsrRoleLovBuNameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "bu_id",
+        "itemsPath": "items",
+        "responseType": "getAolUsrRoleLovBuNameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "bu_name"
+          ]
+        },
+        "fetchChain": "getAol_usrRoleLovBuNameFetch"
+      }
+    },
+    "getAolUsrRoleLovUserNameListSDP3": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "user_id",
+        "itemsPath": "items",
+        "responseType": "getAolUsrRoleLovUserNameResponse4",
+        "headers": {
+          "P_ROLE_ID": "{{ $variables.roleManagementVar.role_id }}"
+        },
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "user_name"
+          ]
+        },
+        "fetchChain": "getAol_usrRoleLovUserNameFetch2"
+
+      }
+    },
+    "getApplicationLovAppCodeListSDP2": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "application_id",
+        "itemsPath": "items",
+        "responseType": "getApplicationLovAppCodeResponse2",
+        "fetchChain": "getApplicationLovAppCodeFetch"
+      }
+    },
+    "getMenuLovMenuNameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "menu_id",
+        "itemsPath": "items",
+        "responseType": "getMenuLovMenuNameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "menu_name"
+          ]
+        },
+        "fetchChain": "getMenuLovMenuNameFetch"
+      }
+    },
+    "isUserRoleReadOnly": {
+      "type": "boolean",
+      "defaultValue": true
+    },
+    "minDate": {
+      "type": "string"
+    },
+    "P_METHOD": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "P_PRIMARY_KEY": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "roleCustomMessage": {
+      "type": "object[]"
+    },
+    "searchObj": {
+      "type": "SearchParametersType",
+      "defaultValue": {
+        "IN_LIMIT": "5",
+        "IN_OFFSET": "0"
+      }
+    }, "encryptPayload": {
+      "type": {
+        "payload": "string"
+      }
+    },  "validform": {
+      "type": {
+        "isChildFormValid": "string",
+        "isHeaderFormValid": "string"
+      }
+    },
+    "roleManagementVar": {
+      "type": "RoleManagementType",
+      "dirtyDataBehavior": "track",
+      "defaultValue": {
+        "object_version_num": 0
+      }
+    },
+    "isRoleCodeReadOnly": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "pagination": {
+      "type": "object",
+      "defaultValue": {
+        "prev": false,
+        "next": false
+      }
+    },
+    "getRequestGroupLovListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "RoleManagementService/getRequestGroupLov",
+        "keyAttributes": "request_group_name",
+        "itemsPath": "items",
+        "responseType": "getRequestGroupLovResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "request_group_name"
+          ]
+        }
+      }
+    },
+    "user_field_hide": {
+      "type": "string"
+    },
+    "userADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "roleuser",
+        "keyAttributes": "user_access_id"
+      }
+    }
+
+  },
+  "types": {
+    "@decorators.getAolUsrRoleLovBuNameResponse": {
+      "endpoint": "getAol_usrRoleLovBuName",
+      "service": "Role",
+      "path": "response"
+    },
+    "@decorators.getAolUsrRoleLovUserNameResponse": {
+      "endpoint": "getAol_usrRoleLovUserName",
+      "service": "User",
+      "path": "response"
+    },
+    "@decorators.getAolUsrRoleLovUserNameResponse2": {
+      "endpoint": "getAol_usrRoleLovUserName",
+      "service": "User",
+      "path": "response"
+    },
+    "@decorators.getAolUsrRoleLovUserNameResponse3": {
+      "endpoint": "getAol_usrRoleLovUserName",
+      "service": "User",
+      "path": "response"
+    },
+    "@decorators.getAolUsrRoleLovUserNameResponse4": {
+      "endpoint": "getAol_usrRoleLovUserName",
+      "service": "User",
+      "path": "response"
+    },
+    "@decorators.getApplicationLovActiveApplicationResponse": {
+      "endpoint": "getApplicationLovActiveApplication",
+      "service": "Application",
+      "path": "response"
+    },
+    "@decorators.getApplicationLovActiveApplicationResponse2": {
+      "endpoint": "getApplicationLovActiveApplication",
+      "service": "Application",
+      "path": "response"
+    },
+    "@decorators.getApplicationLovActiveApplicationResponse3": {
+      "endpoint": "getApplicationLovActiveApplication",
+      "service": "Application",
+      "path": "response"
+    },
+    "@decorators.getApplicationLovAppCodeResponse": {
+      "endpoint": "getApplicationLovAppCode",
+      "service": "Application",
+      "path": "response"
+    },
+    "@decorators.getApplicationLovAppCodeResponse2": {
+      "endpoint": "getApplicationLovAppCode",
+      "service": "Application",
+      "path": "response"
+    },
+    "@decorators.getMenuLovMenuNameResponse": {
+      "endpoint": "getMenuLovMenuName",
+      "service": "Menu",
+      "path": "response"
+    },
+    "@decorators.getRequestGroupLovResponse": {
+      "endpoint": "getRequestGroupLov",
+      "service": "RoleManagementService",
+      "path": "response"
+    },
+    "getAolUsrRoleLovBuNameResponse": {
+      "items": [
+        {
+          "bu_id": "number",
+          "bu_name": "string"
+        }
+      ]
+    },
+    "getAolUsrRoleLovUserNameResponse": {
+      "items": [
+        {
+          "user_id": "number",
+          "user_name": "string"
+        }
+      ]
+    },
+    "getAolUsrRoleLovUserNameResponse2": {
+      "items": [
+        {
+          "user_id": "number",
+          "user_name": "string"
+        }
+      ]
+    },
+    "getAolUsrRoleLovUserNameResponse3": {
+      "items": [
+        {
+          "user_id": "number",
+          "user_name": "string"
+        }
+      ]
+    },
+    "getAolUsrRoleLovUserNameResponse4": {
+      "items": [
+        {
+          "user_id": "number",
+          "user_name": "string"
+        }
+      ]
+    },
+    "getApplicationLovActiveApplicationResponse": {
+      "items": [
+        {
+          "application_id": "number",
+          "application_name": "string"
+        }
+      ]
+    },
+    "getApplicationLovActiveApplicationResponse2": {
+      "items": [
+        {
+          "application_id": "number",
+          "application_name": "string"
+        }
+      ]
+    },
+    "getApplicationLovActiveApplicationResponse3": {
+      "items": [
+        {
+          "application_id": "number",
+          "application_name": "string"
+        }
+      ]
+    },
+    "getApplicationLovAppCodeResponse": {
+      "items": [
+        {
+          "application_id": "number",
+          "application_name": "string"
+        }
+      ]
+    },
+    "getApplicationLovAppCodeResponse2": {
+      "items": [
+        {
+          "application_code": "string",
+          "application_id": "number",
+          "application_name": "string"
+        }
+      ]
+    },
+    "getMenuLovMenuNameResponse": {
+      "items": [
+        {
+          "menu_id": "number",
+          "menu_name": "string"
+        }
+      ]
+    },
+    "getRequestGroupLovResponse": {
+      "items": [
+        {
+          "request_group_name": "string"
+        }
+      ]
+    },
+    "RoleManagementType": {
+      "role_id": "number",
+      "object_version_num": "number",
+      "role_code": "string",
+      "role_name": "string",
+      "remarks": "string",
+      "menu_id": "number",
+      "menu_code": "string",
+      "menu_name": "string",
+      "request_group_id": "number",
+      "request_group_code": "string",
+      "request_group_name": "string",
+      "active_flag": "string",
+      "application_id": "number",
+      "application_code": "string",
+      "application_name": "string",
+      "business_unit_id": "number",
+      "business_unit_name": "string",
+      "attribute_json": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },  "SearchParametersType": {
+      "IN_LIMIT": "string",
+      "IN_OFFSET": "string",
+      "P_ROLE_ID": "string",
+      "ROLE_CODE": "string",
+      "ROLE_NAME": "string",
+      "MENU_ID": "string",
+      "APPLICATION_ID": "string"
+    },
+    "roleuser": {
+      "user_access_id": "number",
+      "object_version_num": "number",
+      "user_id": "number",
+      "user_name": "string",
+      "role_id": "number",
+      "role_code": "string",
+      "role_name": "string",
+      "application_id": "number",
+      "application_name": "string",
+      "remarks": "string",
+      "effective_start_date": "string",
+      "effective_end_date": "string",
+      "active_flag": "string",
+      "attribute_json": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+     "usertypesearch": {
+      "IN_LIMIT": "number",
+      "IN_OFFSET": "number",
+      "P_ROLE_ID": "number",
+      "P_USER_ACCESS_ID": "number",
+      "USER_ID": "number",
+      "ROLE_CODE": "string",
+      "APPLICATION_ID": "number",
+      "ACTIVE_FLAG": "string",
+      "EFFECTIVE_START_DATE": "string",
+      "EFFECTIVE_END_DATE": "string"
+
+    }
+
+  },
+  "metadata": {},
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-option": {
+        "path": "ojs/ojoption"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "oj-sp/simple-create-edit/loader"
+      },
+      "oj-switch": {
+        "path": "ojs/ojswitch"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/addEditHeader.css"
+    ]
+  },
+  "eventListeners": {
+    "addBtnAction2": {
+      "chains": [
+        {
+          "chain": "childAddAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "cancelExitBtnAction": {
+      "chains": [
+        {
+          "chain": "leaveCancelAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnNoAction": {
+      "chains": [
+        {
+          "chain": "deleteNoAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnYesAction": {
+      "chains": [
+        {
+          "chain": "deleteYesAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "editClick": {
+      "chains": [
+        {
+          "chain": "childEditAc",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "effectiveStartDateValue": {
+      "chains": [
+        {
+          "chain": "InputDateValueChangeChain1",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "hyperlinkClick": {
+      "chains": [
+        {
+          "chain": "application_nav_ac",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "iconClick": {
+      "chains": [
+        {
+          "chain": "hederRoleEditAC",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "iconClick2": {
+      "chains": [
+        {
+          "chain": "nextAC",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "nxtBtnAction": {
+      "chains": [
+        {
+          "chain": "nextButtonAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "ojSsce1SpCancel": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpCancelChain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "ojSsce1SpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpPrimaryActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "feedbackEnabled": "{{$event.detail.feedbackEnabled}}"
+          }
+        }
+      ]
+    },
+    "ojSsce1SpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpSecondaryActionChain2",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "df"
+          }
+        }
+      ]
+    },
+    "preBtnAction": {
+      "chains": [
+        {
+          "chain": "previousAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "proceedExitBtnAction": {
+      "chains": [
+        {
+          "chain": "leaveWithoutSavingAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "roleCodeValue": {
+      "chains": [
+        {
+          "chain": "formatterAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "roleuserCancelAction": {
+      "chains": [
+        {
+          "chain": "childCancelAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "roleuserSaveAction": {
+      "chains": [
+        {
+          "chain": "childSaveAndSaveAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "roleuserSaveCloseAction": {
+      "chains": [
+        {
+          "chain": "childSaveAndAddAnotherAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "selectClick": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain3"
+        }
+      ]
+    },
+    "selectValueItem": {
+      "chains": [
+        {
+          "chain": "applicationNameFetchAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "selectValueItem2": {
+      "chains": [
+        {
+          "chain": "selectSingleUserNameAC",
+          "parameters": {
+
+            "data": "{{$event.detail.value.data}}",
+            "event": "{{$event}}",
+            "key": "{{$event.detail.value.key}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "value": "{{$event.detail.value}}",
+            "valueItem": "{{$event.detail.value}}"
+          }
+        }
+      ]
+    },
+    "switchValue": {
+      "chains": [
+        {
+          "chain": "SwitchValueChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "switchValue2": {
+      "chains": [
+        {
+          "chain": "switchStatusOnValueChangeAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "trahClick": {
+      "chains": [
+        {
+          "chain": "childDeleteOpenDialog",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "userDialogClose": {
+      "chains": [
+        {
+          "chain": "DialogCloseChain",
+          "parameters": {
+            "event": "{{$event.detail.event}}"
+          }
+        }
+      ]
+    },
+    "vbBeforeExit": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbBeforeExitListener"
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+
+  },
+  "constants": {
+    "tableColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "User Name",
+          "field": "user_name",
+          "resizable": "enabled",
+          "template": "user_name_link",
+          "headerStyle": "white-space: nowrap; min-width: 150px;",
+          "style": "",
+          "sortable": "enabled"
+        },
+        {
+          "headerText": "Effective Start Date",
+          "field": "effective_start_date",
+          "width": 200,
+          "template": "effective_start_date_template",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": "",
+          "sortable": "enabled"
+        },
+        {
+          "headerText": "Effective End Date",
+          "field": "effective_end_date",
+          "width": 200,
+          "template": "effective_end_date_template",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": "",
+          "sortable": "enabled"
+        },
+        {
+          "headerText": "Status",
+          "field": "active_flag",
+          "resizable": "enabled",
+          "width": 70,
+          "sortable": "disabled",
+          "template": "active_flag_icon",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+
+        },
+        {
+          "headerText": "Remarks",
+          "field": "remarks",
+          "resizable": "enabled",
+          "width": "",
+          "template": "remarks_template",
+          "headerStyle": "white-space: nowrap;",
+          "style": "",
+          "sortable": "enabled"
+        }
+      ]
+    },
+    "tableColumnWithActions": {
+      "type": "object[]",
+      "defaultValue": [
+          {
+            "headerText": "Actions",
+            "field": "",
+            "resizable": "enabled",
+            "width": 100,
+            "template": "actions_template",
+            "sortable": "disabled",
+            "headerStyle": "text-align: center; white-space: normal;",
+            "style": "text-align: center; vertical-align: middle;"
+          },
+          {
+            "headerText": "User Name",
+            "field": "user_name",
+            "resizable": "enabled",
+            "template": "user_name_link",
+            "headerStyle": "white-space: nowrap; min-width: 150px;",
+            "style": "",
+            "sortable": "enabled"
+          },
+          {
+            "headerText": "Effective Start Date",
+            "field": "effective_start_date",
+            "width": 200,
+            "template": "effective_start_date_template",
+            "headerStyle": "white-space: nowrap; min-width: 160px;",
+            "style": "",
+            "sortable": "enabled"
+          },
+          {
+            "headerText": "Effective End Date",
+            "field": "effective_end_date",
+            "width": 200,
+            "template": "effective_end_date_template",
+            "headerStyle": "white-space: nowrap; min-width: 160px;",
+            "style": "",
+            "sortable": "enabled"
+          },
+          {
+            "headerText": "Status",
+            "field": "active_flag",
+            "resizable": "enabled",
+            "width": 70,
+            "sortable": "disabled",
+            "template": "active_flag_icon",
+            "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+            "style": "text-align: center; vertical-align: middle;"
+          },
+          {
+            "headerText": "Remarks",
+            "field": "remarks",
+            "resizable": "enabled",
+            "width": "",
+            "template": "remarks_template",
+            "headerStyle": "white-space: nowrap;",
+            "style": "",
+            "sortable": "enabled"
+          }
+        ]    }
+  }
+}

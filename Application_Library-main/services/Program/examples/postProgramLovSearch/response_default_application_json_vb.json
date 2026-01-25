@@ -1,0 +1,35 @@
+{
+    "OUT_COUNT": 1,
+    "OUT_DESCRIPTION": "Successfully fetched records",
+    "OUT_HAS_NEXT": "N",
+    "OUT_STATUS": "SUCCESS",
+    "OUT_TOTAL_COUNT": 1,
+    "P_OUTPUT": [
+        {
+            "lov_config_id": 2325,
+            "object_version_num": 1,
+            "lov_code": "DEPARTMENTS_LOV",
+            "lov_name": "Departments List",
+            "lov_description": "List of all active departments in the organization",
+            "lov_type": "DIRECT",
+            "lov_type_display": "Direct Query",
+            "query_text": "SELECT dept_id, dept_name, dept_code FROM fs_departments_v WHERE active_flag = 'Y'",
+            "bind_parameters": null,
+            "return_value_column": "dept_id",
+            "display_column": "dept_name",
+            "description_column": "dept_code",
+            "order_by_clause": "dept_name ASC",
+            "active_flag": "Y",
+            "active_status": "Active",
+            "created_by": "ADMIN",
+            "created_date": "2025-12-24T10:43:22.409446Z",
+            "last_updated_by": "ADMIN",
+            "last_updated_date": "2025-12-24T10:43:22.409446Z",
+            "last_updated_login": "ADMIN",
+            "created_date_display": "24-DEC-2025 10:43:22",
+            "last_updated_date_display": "24-DEC-2025 10:43:22",
+            "parameter_usage_count": 0,
+            "search_text": "DEPARTMENTS_LOV DEPARTMENTS LIST DIRECT"
+        }
+    ]
+}

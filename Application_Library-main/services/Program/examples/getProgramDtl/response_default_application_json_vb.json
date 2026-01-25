@@ -1,0 +1,21 @@
+{
+    "items": [],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 0,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/program/dtl"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/metadata-catalog/program/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/program/dtl"
+        }
+    ]
+}

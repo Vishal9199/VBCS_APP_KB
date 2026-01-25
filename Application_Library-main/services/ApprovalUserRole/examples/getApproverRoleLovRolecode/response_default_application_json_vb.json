@@ -1,0 +1,27 @@
+{
+    "items": [
+        {
+            "approval_role_id": 15,
+            "approval_role_code": "APPROVAL_ROLE_CODE",
+            "approval_role_name": "Approval Role Code"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/approver/role/lov/rolecode"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/metadata-catalog/approver/role/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/approver/role/lov/rolecode"
+        }
+    ]
+}

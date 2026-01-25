@@ -1,0 +1,256 @@
+{
+  "id": "main",
+  "description": "Flow main",
+  "defaultPage": "admin-page",
+  "chains": {},
+  "services": {},
+  "types": {
+    "@decorators.getApprovalProcessEmployeeListResponse": {
+      "endpoint": "getApprovalProcessEmployeeList",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "getApprovalProcessEmployeeListResponse": {
+      "items": [
+        {
+          "custom": "string",
+          "email_address": "string",
+          "full_name": "string",
+          "person_id": "number",
+          "person_number": "string"
+        }
+      ]
+    },
+    "postInstances": {
+      "dataObject": {
+        "submitFormArgs": {
+          "callSubmitPackage": "string",
+          "p_ACTION_ID": "string",
+          "p_APPR_PROCESS": "string",
+          "p_TRX_ID": "string",
+          "p_TYPE": "string",
+          "p_USER_ID": "string"
+        }
+      },
+      "params": {
+        "applicationName": "string",
+        "applicationVersion": "string",
+        "processName": "string"
+      }
+    },
+    "putProcessTerminate": {
+      "action": "string",
+      "instanceActionProps": {
+        "reason": "string"
+      }
+    }
+  },
+  "variables": {
+    "alterFlowObj": {
+      "type": {
+        "action": "string",
+        "instanceActionProps": {
+          "destinationActivityId": "string",
+          "reason": "string",
+          "sourceActivityId": "string"
+        }
+      },
+      "defaultValue": {
+        "action": "ALTER_FLOW"
+      }
+    },
+    "processTerminateVar": {
+      "type": "putProcessTerminate",
+      "defaultValue": {
+        "action": "TERMINATE"
+      }
+    },
+    "responseComments": {
+      "type": "string"
+    },
+    "submitAction": {
+      "type": {
+        "P_APPR_PROCESS": "string",
+        "P_TRX_ID": "string",
+        "P_TYPE": "string",
+        "P_USER_ID": "string"
+      }
+    },
+    "submitInstance": {
+      "type": "postInstances",
+      "defaultValue": {
+        "dataObject": {
+          "submitFormArgs": {
+            "callSubmitPackage": "NO"
+          }
+        },
+        "params": {
+          "applicationName": "SelfService",
+          "processName": "Process",
+          "applicationVersion": "1.1"
+        }
+      }
+    },
+    "suspendObj": {
+      "type": {
+        "action": "string",
+        "instanceActionProps": {
+          "reason": "string"
+        }
+      },
+      "defaultValue": {
+        "action": "SUSPEND",
+        "instanceActionProps": {
+          "reason": "Suspending for performing the alter flow by the system."
+        }
+      }
+    },
+    "updateActionObj": {
+      "type": {
+        "p_action_id": "string",
+        "p_action_user_email": "string",
+        "p_action_code": "string",
+        "p_comments": "string",
+        "p_approver_idcs_id": "string",
+        "p_from_person_email": "string",
+        "p_to_person_id": "string",
+        "p_appr_level": "string",
+        "p_instance_number": "string",
+        "p_more_info_type": "string",
+        "p_trx_id": "string"
+      }
+    },
+    "updateTask": {
+      "type": {
+        "comment": "string",
+        "outcome": "string"
+      }
+    },
+    "actionValidation": {
+      "type": {
+
+        "isRpaFormValid": "string",
+        "isRpaResponseFormValid": "string",
+        "rejectValidation": "string",
+        "isRejectFormValid": "string",
+        "approveFormValid": "string",
+        "isApproveFormValid": "string",
+        "rpaResponseValidation": "string",
+        "rpaValidation": "string",
+        "withdrawValidation": "string",
+        "isWithdrawFormValid": "string",
+        "reassignValidation": "string",
+        "isReassignFormValid": "string",
+        "moreInfoValidation": "string",
+        "isMoreInfoFormValid": "string",
+        "isApproveMOMFormValid":"string",
+        "approveMOMFormValidation":"string",
+        "approveReassignValidation":"string",
+        "isApproveReassignValid":"string"
+
+      },
+      "defaultValue": {
+
+        "rejectValidation": "reject-validation",
+        "approveFormValid": "approve-validation",
+        "withdrawValidation": "withdraw-validation",
+        "reassignValidation": "reassign-validation",
+        "moreInfoValidation": "moreInfo-validation",
+        "rpaResponseValidation": "rparesponse-validation",
+        "rpaValidation": "rpa-validation",
+        "approveMOMFormValidation":"approve-mom-validation",
+        "approveReassignValidation":"approve-reassign-validation"
+
+      }
+    },
+    "getApprovalProcessEmployeeListListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "person_id",
+        "itemsPath": "items",
+        "responseType": "getApprovalProcessEmployeeListResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "full_name"
+          ]
+        },
+        "fetchChain": "getApprovalProcessEmployeeListFetch2"
+      }
+    },
+    "tenderCategoryADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "data": "{{ $constants.tenderCategoryArray }}",
+        "keyAttributes": "id",
+        "textFilterAttributes": [
+          "label"
+        ]
+      }
+    },
+    "tenderTypeADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "data": "{{ $constants.tenderTypeArray }}",
+        "keyAttributes": "id",
+        "textFilterAttributes": [
+          "label"
+        ]
+      }
+    },
+    "variationTypeADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "data": "{{ $constants.variationTypeArray }}",
+        "keyAttributes": "id",
+        "textFilterAttributes": [
+          "label"
+        ]
+      }
+    }
+  },
+  "constants": {
+    "tenderCategoryArray": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "id": "CAPEX",
+          "label": "CAPEX"
+        },
+        {
+          "id": "OPEX",
+          "label": "OPEX"
+        }
+      ]
+    },
+    "tenderTypeArray": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "id": "SINGLE",
+          "label": "Single"
+        },
+        {
+          "id": "OPEN",
+          "label": "Open"
+        }
+      ]
+    },
+    "variationTypeArray": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "id": "EXTENSION_VO",
+          "label": "Extension VO"
+        },
+        {
+          "id": "ADD_VO",
+          "label": "Add VO"
+        },
+        {
+          "id": "DELETE_VO",
+          "label": "Delete VO"
+        }
+      ]
+    }
+  }
+}

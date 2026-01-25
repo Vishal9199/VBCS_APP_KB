@@ -1,0 +1,17 @@
+{
+    "params": {
+		"applicationName": "CustomEvaluation",
+        "processName": "Process",
+        "applicationVersion": "1.0"
+    },
+    "dataObject": {
+        "startFormArgs": {
+            "p_PACKAGE_CALL": "NO",
+            "p_appr_process": "TECHNICAL_EVALUATION",
+            "p_TRX_ID": "291",
+            "p_PERSON_ID": "100000001703622",
+            "p_ACTION_ID": "3503",
+            "p_TYPE": ""
+        }
+    }
+}

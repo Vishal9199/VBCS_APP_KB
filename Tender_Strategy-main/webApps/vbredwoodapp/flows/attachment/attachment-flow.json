@@ -1,0 +1,8 @@
+{
+  "id": "attachment",
+  "description": "Flow main",
+  "defaultPage": "attachment-start",
+  "services": {},
+  "types": {},
+  "variables": {}
+}

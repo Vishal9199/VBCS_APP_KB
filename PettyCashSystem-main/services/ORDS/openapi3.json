@@ -1,0 +1,4336 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "ORDS CUST",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "vb-catalog://backends/ORDS_CUST",
+            "description": "ORDS CUST"
+        }
+    ],
+    "paths": {
+        "/pettycash/header/process": {
+            "post": {
+                "operationId": "postPettycashHeaderProcess",
+                "parameters": [
+                    {
+                        "name": "X-session-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "X-session-code",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostPettycashHeaderProcessRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "summary": "Example stored by VB User",
+                                    "externalValue": "./examples/postPettycashHeaderProcess/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostPettycashHeaderProcessResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postPettycashHeaderProcess/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pettycash/header/search": {
+            "post": {
+                "operationId": "postPettycashHeaderSearch",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostNws_custPettycashHeaderSearchRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "summary": "Example stored by VB User",
+                                    "externalValue": "./examples/postPettycashHeaderSearch/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostNws_custPettycashHeaderSearchResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postPettycashHeaderSearch/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pettycash/line/process": {
+            "post": {
+                "operationId": "postPettycashLineProcess",
+                "parameters": [
+                    {
+                        "name": "x-session-code",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-session-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostPettycashLineProcessRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postPettycashLineProcess/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostPettycashLineProcessResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postPettycashLineProcess/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pettycash/line/search": {
+            "post": {
+                "operationId": "postPettycashLineSearch",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostPettycashLineSearchRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postPettycashLineSearch/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostNws_custPettycashLineSearchResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postPettycashLineSearch/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pettycash/receipt/process": {
+            "post": {
+                "operationId": "postPettycashReceiptProcess",
+                "parameters": [
+                    {
+                        "name": "x-session-code",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-session-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostPettycashReceiptProcessRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postPettycashReceiptProcess/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostPettycashReceiptProcessResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postPettycashReceiptProcess/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pettycash/receipt/search": {
+            "post": {
+                "operationId": "postPettycashReceiptSearch",
+                "parameters": [],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postPettycashReceiptSearch/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostNws_custPettycashReceiptSearchResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postPettycashReceiptSearch/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pettycash/lov/governate": {
+            "get": {
+                "operationId": "getNws_custPettyCashLovGovernate",
+                "parameters": [
+                    {
+                        "name": "searchVal",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetNws_custPettycashLovGovernate"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getNws_custPettyCashLovGovernate/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pettycash/lov/supplier": {
+            "get": {
+                "operationId": "getNws_custPettyCashLovSupplier",
+                "parameters": [
+                    {
+                        "name": "searchVal",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "p_governate",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetNws_custPettycashLovSupplier"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getNws_custTankerLovWilayatName/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pettycash/lov/datarestriction": {
+            "get": {
+                "operationId": "getNws_custPettycashLovDatarestriction",
+                "parameters": [
+                    {
+                        "name": "searchVal",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "p_user",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetNws_custPettycashLovDatarestriction"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getNws_custPettycashLovDatarestriction/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/common/lov/employee/detail": {
+            "get": {
+                "operationId": "getNws_custCommonLovEmployeeDetail",
+                "parameters": [
+                    {
+                        "name": "searchVal",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetNws_custCommonLovEmployeeDetail"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getNws_custCommonLovEmployeeDetail/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/common/lov/currency": {
+            "get": {
+                "operationId": "getNws_custCommonLovCurrency2",
+                "parameters": [
+                    {
+                        "name": "searchVal",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetNws_custCommonLovCurrency"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getNws_custCommonLovCurrency2/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/common/lov/lookup": {
+            "get": {
+                "operationId": "getNws_custCommonLovLookup",
+                "parameters": [
+                    {
+                        "name": "p_lookup_type_code",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetNws_custCommonLovLookup"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getNws_custCommonLovLookup/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany",
+                    "headers": {}
+                }
+            }
+        },
+        "/pettycash/header/dtl": {
+            "get": {
+                "operationId": "getNws_custPettycashHeaderDtl",
+                "parameters": [
+                    {
+                        "name": "x-session-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetNws_custPettycashHeaderDtl"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getNws_custPettycashHeaderDtl/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pettycash/lov/user/role": {
+            "get": {
+                "operationId": "getNws_custPettycashLovUserRole2",
+                "parameters": [
+                    {
+                        "name": "p_email_address",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetPettycashLovUserRole"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getNws_custPettycashLovUserRole2/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pettycash/lov/expense/account": {
+            "get": {
+                "operationId": "getNws_custPettycashLovExpenseAccount",
+                "parameters": [
+                    {
+                        "name": "searchVal",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetNws_custPettycashLovExpenseAccount"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getNws_custPettycashLovExpenseAccount/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pettycash/lov/department": {
+            "get": {
+                "operationId": "getNws_custPettycashLovDepartment",
+                "parameters": [
+                    {
+                        "name": "searchVal",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetNws_custPettycashLovDepartment"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getNws_custPettycashLovDepartment/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pettycash/lov/geography": {
+            "get": {
+                "operationId": "getNws_custPettycashLovGeography",
+                "parameters": [
+                    {
+                        "name": "searchVal",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetNws_custPettycashLovGeography"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getNws_custPettycashLovGeography/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/attachment/process": {
+            "post": {
+                "operationId": "postNws_custAttachmentProcess",
+                "parameters": [
+                    {
+                        "name": "X-cache-applcode",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "X-cache-category",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "X-cache-createdby",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "X-cache-description",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "X-cache-doctype",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "X-cache-name",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "X-cache-referenceid",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "X-cache-referencetype",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "X-cache-title",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "X-cache-transactionid",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "X-cache-type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "X-cache-url",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostAttachmentProcessRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postNws_custAttachmentProcess/request_application_json_vb.json"
+                                }
+                            }
+                     }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostNws_custAttachmentProcessResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postNws_custAttachmentProcess/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/attachment/search": {
+            "post": {
+                "operationId": "postNws_custAttachmentSearch",
+                "parameters": [
+                    {
+                        "name": "X-cache-applicationcode",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "X-cache-documentid",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "X-cache-transactionid",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+{
+                        "name": "X-cache-type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+{
+                        "name": "X-document-category",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "X-referenceid",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostNws_custAttachmentSearchResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postNws_custAttachmentSearch/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostAttachmentSearchRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postNws_custAttachmentSearch/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/attachment/download": {
+            "post": {
+                "operationId": "postNws_custAttachmentDownload",
+                "parameters": [
+                    {
+                        "name": "X-cache-documentid",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+{
+                        "name": "X-cache-transactionid",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "X-cache-referenceid",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostNws_custAttachmentDownloadResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postNws_custAttachmentDownload/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostAttachmentDownloadRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postNws_custAttachmentDownload/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/attachment/delete": {
+            "post": {
+                "operationId": "postNws_custAttachmentDelete",
+                "parameters": [
+                    {
+                        "name": "x-cache-doc-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-cache-trans-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostNws_custAttachmentDeleteResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postNws_custAttachmentDelete/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostAttachmentDeleteRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postNws_custAttachmentDelete/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/approval/action/history": {
+            "post": {
+                "operationId": "postNws_custApprovalActionHistory",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostNws_custApprovalActionHistoryRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postNws_custApprovalActionHistory/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostNws_custApprovalActionHistoryResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/postNws_custApprovalActionHistory/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/approval/process/employee/list": {
+            "parameters": [],
+            "get": {
+                "operationId": "getApprovalProcessEmployeeList",
+                "parameters": [
+                    {
+                        "name": "searchVal",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetApprovalProcessEmployeeList"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getApprovalProcessEmployeeList/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/approval/process/sec/update": {
+            "post": {
+                "operationId": "postApprovalProcessSecUpdate",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostApprovalProcessSecUpdateRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postApprovalProcessSecUpdate/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostApprovalProcessSecUpdateResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/postApprovalProcessSecUpdate/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/approval/process/sec/submit": {
+            "post": {
+                "operationId": "postApprovalProcessSecSubmit",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostApprovalProcessSecSubmitRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postApprovalProcessSecSubmit/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostApprovalProcessSecSubmitResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/postApprovalProcessSecSubmit/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/common/validation": {
+            "post": {
+                "operationId": "postCommonValidation",
+                "parameters": [
+                    {
+                        "name": "x-session-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-app-code",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostCommonValidationRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postCommonValidation/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostCommonValidationResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/postCommonValidation/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/common/lov/employee": {
+            "get": {
+                "operationId": "getCommonLovEmployee",
+                "parameters": [
+                    {
+                        "name": "searchVal",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetCommonLovEmployee"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/getCommonLovEmployee/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/common/user/menu": {
+            "get": {
+                "summary": "getCommonUserMenu",
+                "operationId": "getUserMenu",
+                "parameters": [
+                    {
+                        "name": "x-cache-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetCommonUserMenu"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getCommonUserMenu/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/approval/process/user/dtl": {
+            "get": {
+                "operationId": "getApprovalProcessUserDtl",
+                "parameters": [
+                    {
+                        "name": "x-session-user-mail",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetApprovalProcessUserDtl"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getApprovalProcessUserDtl/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pettycash/site/line/dtl": {
+            "get": {
+                "operationId": "getPettycashSiteLineDtl",
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetPettycashSiteLineDtl"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getPettycashSiteLineDtl/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/common/process/sec/action/list": {
+            "get": {
+                "operationId": "getApprovalProcessSecActionList",
+                "parameters": [],
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetApprovalProcessSecActionList"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/getApprovalProcessSecActionList/response_default_application_json_vb.json",
+                                        "summary": "Example stored by VB User"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            },
+            "parameters": [
+                {
+                    "name": "x-session-id",
+                    "in": "header",
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ]
+        },
+        "/common/previous/approval/list": {
+            "get": {
+                "operationId": "getCommonPreviousApprovalList",
+                "parameters": [
+                    {
+                        "name": "x-session-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetCommonPreviousApprovalList"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getCommonPreviousApprovalList/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PostPettycashHeaderProcessRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostPettycashHeaderProcessResponse": {
+                "type": "object",
+                "properties": {
+                    "P_ERR_CODE": {
+                        "type": "string"
+                    },
+                    "P_ERR_MSG": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostPettycashHeaderSearchRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostPettycashHeaderSearchResponse": {
+                "type": "object",
+                "properties": {
+                    "OUT_COUNT": {
+                        "type": "integer"
+                    },
+                    "OUT_DESCRIPTION": {
+                        "type": "string"
+                    },
+                    "OUT_HAS_NEXT": {
+                        "type": "string"
+                    },
+                    "OUT_STATUS": {
+                        "type": "string"
+                    },
+                    "OUT_TOTAL_COUNT": {
+                        "type": "integer"
+                    },
+                    "P_OUTPUT": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "claim_header_id": {
+                                    "type": "integer"
+                                },
+                                "object_version_num": {
+                                    "type": "integer"
+                                },
+                                "claim_number": {
+                                    "type": "string"
+                                },
+                                "request_date": {
+                                    "type": "string"
+                                },
+                                "petty_cash_type": {
+                                    "type": "string"
+                                },
+                                "governorate": {
+                                    "type": "string"
+                                },
+                                "supplier_id": {
+                                    "type": "integer"
+                                },
+                                "supplier_name": {
+                                    "type": "string"
+                                },
+                                "supplier_number": {
+                                    "type": "string"
+                                },
+                                "status_id": {
+                                    "type": "integer"
+                                },
+                                "status_code": {
+                                    "type": "string"
+                                },
+                                "status_name": {
+                                    "type": "string"
+                                },
+                                "open_balance_amt": {
+                                    "type": "integer"
+                                },
+                                "receipt_amt": {
+                                    "type": "integer"
+                                },
+                                "claim_amt": {
+                                    "type": "number"
+                                },
+                                "staff_iou_amt": {
+                                    "type": "integer"
+                                },
+                                "close_balance_amt": {
+                                    "type": "integer"
+                                },
+                                "cash_in_hand": {
+                                    "type": "number"
+                                },
+                                "comments": {
+                                    "type": "string"
+                                },
+                                "saas_transaction_id": {
+                                    "type": "integer"
+                                },
+                                "saas_transaction_number": {
+                                    "type": "string"
+                                },
+                                "integration_status_id": {
+                                    "type": "integer"
+                                },
+                                "integration_status_code": {
+                                    "type": "string"
+                                },
+                                "integration_status_name": {
+                                    "type": "string"
+                                },
+                                "integration_err_message": {
+                                    "nullable": true
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "created_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_updated_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_login": {
+                                    "type": "string"
+                                },
+                                "line_count": {
+                                    "type": "integer"
+                                },
+                                "receipt_count": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostPettycashLineProcessRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostPettycashLineProcessResponse": {
+                "type": "object",
+                "properties": {
+                    "P_ERR_CODE": {
+                        "type": "string"
+                    },
+                    "P_ERR_MSG": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostPettycashLineSearchRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostPettycashLineSearchResponse": {
+                "type": "object",
+                "properties": {
+                    "OUT_COUNT": {
+                        "type": "integer"
+                    },
+                    "OUT_DESCRIPTION": {
+                        "type": "string"
+                    },
+                    "OUT_HAS_NEXT": {
+                        "type": "string"
+                    },
+                    "OUT_STATUS": {
+                        "type": "string"
+                    },
+                    "OUT_TOTAL_COUNT": {
+                        "type": "integer"
+                    },
+                    "P_OUTPUT": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "claim_line_id": {
+                                    "type": "integer"
+                                },
+                                "claim_header_id": {
+                                    "type": "integer"
+                                },
+                                "object_version_num": {
+                                    "type": "integer"
+                                },
+                                "line_number": {
+                                    "type": "integer"
+                                },
+                                "governorate_segment": {
+                                    "type": "string"
+                                },
+                                "geography_segment": {
+                                    "type": "string"
+                                },
+                                "business_activities_segment": {
+                                    "type": "string"
+                                },
+                                "cost_center_segment": {
+                                    "type": "string"
+                                },
+                                "accounts_segment": {
+                                    "type": "string"
+                                },
+                                "assets_segment": {
+                                    "type": "string"
+                                },
+                                "inter_company_segment": {
+                                    "type": "string"
+                                },
+                                "future1_segment": {
+                                    "type": "string"
+                                },
+                                "charge_account": {
+                                    "type": "string"
+                                },
+                                "currency": {
+                                    "type": "string"
+                                },
+                                "amount": {
+                                    "type": "integer"
+                                },
+                                "exchange_rate_type": {
+                                    "type": "string"
+                                },
+                                "exchange_rate_date": {
+                                    "type": "string"
+                                },
+                                "exchange_rate": {
+                                    "type": "integer"
+                                },
+                                "line_amount": {
+                                    "type": "integer"
+                                },
+                                "brief_narration": {
+                                    "type": "string"
+                                },
+                                "budget_status": {
+                                    "type": "string"
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "created_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_updated_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_login": {
+                                    "type": "string"
+                                },
+                                "claim_number": {
+                                    "type": "string"
+                                },
+                                "request_date": {
+                                    "type": "string"
+                                },
+                                "supplier_name": {
+                                    "type": "string"
+                                },
+                                "status_id": {
+                                    "type": "integer"
+                                },
+                                "header_status_name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostPettycashReceiptProcessRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostPettycashReceiptProcessResponse": {
+                "type": "object",
+                "properties": {
+                    "P_ERR_CODE": {
+                        "type": "string"
+                    },
+                    "P_ERR_MSG": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostPettycashReceiptSearchResponse": {
+                "type": "object",
+                "properties": {
+                    "OUT_COUNT": {
+                        "type": "integer"
+                    },
+                    "OUT_DESCRIPTION": {
+                        "type": "string"
+                    },
+                    "OUT_HAS_NEXT": {
+                        "type": "string"
+                    },
+                    "OUT_STATUS": {
+                        "type": "string"
+                    },
+                    "OUT_TOTAL_COUNT": {
+                        "type": "integer"
+                    },
+                    "P_OUTPUT": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "claim_receipt_id": {
+                                    "type": "integer"
+                                },
+                                "claim_header_id": {
+                                    "type": "integer"
+                                },
+                                "object_version_num": {
+                                    "type": "integer"
+                                },
+                                "mode_of_payment": {
+                                    "type": "string"
+                                },
+                                "payment_received_date": {
+                                    "type": "string"
+                                },
+                                "reference_number": {
+                                    "type": "string"
+                                },
+                                "currency": {
+                                    "type": "string"
+                                },
+                                "amount": {
+                                    "type": "integer"
+                                },
+                                "exchange_rate_type": {
+                                    "type": "string"
+                                },
+                                "exchange_rate_date": {
+                                    "type": "string"
+                                },
+                                "exchange_rate": {
+                                    "type": "integer"
+                                },
+                                "receipt_line_amount": {
+                                    "type": "integer"
+                                },
+                                "brief_narration": {
+                                    "type": "string"
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "created_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_updated_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_login": {
+                                    "type": "string"
+                                },
+                                "claim_number": {
+                                    "type": "string"
+                                },
+                                "request_date": {
+                                    "type": "string"
+                                },
+                                "supplier_name": {
+                                    "type": "string"
+                                },
+                                "status_id": {
+                                    "type": "integer"
+                                },
+                                "header_status_name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostNws_custPettycashHeaderSearchRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostNws_custPettycashHeaderSearchResponse": {
+                "type": "object",
+                "properties": {
+                    "OUT_COUNT": {
+                        "type": "integer"
+                    },
+                    "OUT_DESCRIPTION": {
+                        "type": "string"
+                    },
+                    "OUT_HAS_NEXT": {
+                        "type": "string"
+                    },
+                    "OUT_STATUS": {
+                        "type": "string"
+                    },
+                    "OUT_TOTAL_COUNT": {
+                        "type": "integer"
+                    },
+                    "P_OUTPUT": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "claim_header_id": {
+                                    "type": "integer"
+                                },
+                                "object_version_num": {
+                                    "type": "integer"
+                                },
+                                "claim_number": {
+                                    "type": "string"
+                                },
+                                "request_date": {
+                                    "type": "string"
+                                },
+                                "petty_cash_type": {
+                                    "type": "string"
+                                },
+                                "petty_cash_name": {
+                                    "nullable": true
+                                },
+                                "governorate": {
+                                    "type": "string"
+                                },
+                                "supplier_id": {
+                                    "type": "integer"
+                                },
+                                "supplier_name": {
+                                    "type": "string"
+                                },
+                                "supplier_number": {
+                                    "type": "string"
+                                },
+                                "supplier_site_id": {
+                                    "type": "integer"
+                                },
+                                "supplier_site_code": {
+                                    "type": "string"
+                                },
+                                "status_id": {
+                                    "type": "integer"
+                                },
+                                "pending_with": {
+                                    "nullable": true
+                                },
+                                "status_code": {
+                                    "type": "string"
+                                },
+                                "status_name": {
+                                    "type": "string"
+                                },
+                                "open_balance_amt": {
+                                    "type": "integer"
+                                },
+                                "receipt_amt": {
+                                    "type": "integer"
+                                },
+                                "claim_amt": {
+                                    "type": "integer"
+                                },
+                                "staff_iou_amt": {
+                                    "type": "integer"
+                                },
+                                "close_balance_amt": {
+                                    "type": "integer"
+                                },
+                                "cash_in_hand": {
+                                    "type": "integer"
+                                },
+                                "comments": {
+                                    "nullable": true
+                                },
+                                "saas_transaction_id": {
+                                    "nullable": true
+                                },
+                                "saas_transaction_number": {
+                                    "nullable": true
+                                },
+                                "integration_status_id": {
+                                    "nullable": true
+                                },
+                                "integration_status_code": {
+                                    "nullable": true
+                                },
+                                "integration_status_name": {
+                                    "nullable": true
+                                },
+                                "integration_err_message": {
+                                    "nullable": true
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "created_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_updated_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_login": {
+                                    "type": "string"
+                                },
+                                "line_count": {
+                                    "type": "integer"
+                                },
+                                "receipt_count": {
+                                    "type": "integer"
+                                }
+
+                            }
+                        }
+                    }
+                }
+            },
+            "GetNws_custTankerLovGovernate": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "governate_name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetNws_custTankerLovWilayatName": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "wilayat_name": {
+                                    "type": "string"
+                                },
+                                "governate_name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetNws_custCommonLovGovernate": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "governate_name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetNws_custPettycashLovSupplier": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "supplier_site_id": {
+                                    "type": "integer"
+                                },
+                                "supplier_id": {
+                                    "type": "integer"
+                                },
+                                "supplier_name": {
+                                    "type": "string"
+                                },
+                                "supplier_number": {
+                                    "type": "string"
+                                },
+                                "supplier_site_code": {
+                                    "type": "string"
+                                },
+                                "address_line1": {
+                                    "type": "string"
+                                },
+                                "city": {
+                                    "type": "string"
+                                },
+                                "country": {
+                                    "type": "string"
+                                },
+                                "attribute2": {
+                                    "type": "string"
+                                },
+                                "governate_name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetNws_custPettycashLovGovernate": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "supplier_site_id": {
+                                    "type": "integer"
+                                },
+                                "supplier_id": {
+                                    "type": "integer"
+                                },
+                                "supplier_name": {
+                                    "type": "string"
+                                },
+                                "supplier_number": {
+                                    "type": "string"
+                                },
+                                "supplier_site_code": {
+                                    "type": "string"
+                                },
+                                "address_line1": {
+                                    "type": "string"
+                                },
+                                "city": {
+                                    "type": "string"
+                                },
+                                "country": {
+                                    "type": "string"
+                                },
+                                "attribute2": {
+                                    "type": "string"
+                                },
+                                "governate_name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostNws_custPettycashReceiptSearchResponse": {
+                "type": "object",
+                "properties": {
+                    "OUT_COUNT": {
+                        "type": "integer"
+                    },
+                    "OUT_DESCRIPTION": {
+                        "type": "string"
+                    },
+                    "OUT_HAS_NEXT": {
+                        "type": "string"
+                    },
+                    "OUT_STATUS": {
+                        "type": "string"
+                    },
+                    "OUT_TOTAL_COUNT": {
+                        "type": "integer"
+                    },
+                    "P_OUTPUT": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "claim_receipt_id": {
+                                    "type": "integer"
+                                },
+                                "claim_header_id": {
+                                    "type": "integer"
+                                },
+                                "object_version_num": {
+                                    "type": "integer"
+                                },
+                                "mode_of_payment": {
+                                    "type": "string"
+                                },
+                                "payment_received_date": {
+                                    "type": "string"
+                                },
+                                "reference_number": {
+                                    "type": "string"
+                                },
+                                "currency": {
+                                    "type": "string"
+                                },
+                                "amount": {
+                                    "type": "integer"
+                                },
+                                "exchange_rate_type": {
+                                    "type": "string"
+                                },
+                                "exchange_rate_date": {
+                                    "type": "string"
+                                },
+                                "exchange_rate": {
+                                    "type": "integer"
+                                },
+                                "receipt_line_amount": {
+                                    "type": "integer"
+                                },
+                                "brief_narration": {
+                                    "type": "string"
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "created_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_updated_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_login": {
+                                    "type": "string"
+                                },
+                                "claim_number": {
+                                    "type": "string"
+                                },
+                                "request_date": {
+                                    "type": "string"
+                                },
+                                "supplier_name": {
+                                    "type": "string"
+                                },
+                                "status_id": {
+                                    "type": "integer"
+                                },
+                                "header_status_name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetNws_custCommonLovLookup": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "lookup_value_id": {
+                                    "type": "integer"
+                                },
+                                "lookup_type_id": {
+                                    "type": "integer"
+                                },
+                                "lookup_type_code": {
+                                    "type": "string"
+                                },
+                                "lookup_type_name": {
+                                    "type": "string"
+                                },
+                                "lookup_value_code": {
+                                    "type": "string"
+                                },
+                                "lookup_value_name": {
+                                    "type": "string"
+                                },
+                                "display_order": {
+                                    "type": "integer"
+                                },
+                                "active_flag": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetNws_custPettycashLovDatarestriction": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "restriction_id": {
+                                    "type": "integer"
+                                },
+                                "restriction_code": {
+                                    "type": "string"
+                                },
+                                "restriction_name": {
+                                    "type": "string"
+                                },
+                                "person_id": {
+                                    "type": "integer"
+                                },
+                                "person_number": {
+                                    "type": "string"
+                                },
+                                "full_name": {
+                                    "type": "string"
+                                },
+                                "email_address": {
+                                    "type": "string"
+                                },
+                                "active_flag": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetNws_custCommonLovEmployeeDetail": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "person_id": {
+                                    "type": "integer"
+                                },
+                                "person_number": {
+                                    "type": "string"
+                                },
+                                "full_name": {
+                                    "type": "string"
+                                },
+                                "email_address": {
+                                    "type": "string"
+                                },
+                                "gender": {
+                                    "type": "string"
+                                },
+                                "work_phone_number": {
+                                    "type": "string"
+                                },
+                                "grade_id": {
+                                    "type": "integer"
+                                },
+                                "job_id": {
+                                    "type": "integer"
+                                },
+                                "location_id": {
+                                    "type": "integer"
+                                },
+                                "position_id": {
+                                    "type": "integer"
+                                },
+                                "supervisor_id": {
+                                    "type": "integer"
+                                },
+                                "supervisor_name": {
+                                    "type": "string"
+                                },
+                                "department_name": {
+                                    "type": "string"
+                                },
+                                "grade_name": {
+                                    "type": "string"
+                                },
+                                "job_name": {
+                                    "type": "string"
+                                },
+                                "position_name": {
+                                    "type": "string"
+                                },
+                                "location_name": {
+                                    "type": "string"
+                                },
+                                "department_id": {
+                                    "type": "integer"
+                                },
+                                "action": {
+                                    "type": "string"
+                                },
+                                "job_group": {
+                                    "type": "string"
+                                },
+                                "working_pattern": {
+                                    "type": "string"
+                                },
+                                "emp_region": {
+                                    "type": "string"
+                                },
+                                "user_id": {
+                                    "type": "integer"
+                                },
+                                "user_name": {
+                                    "type": "string"
+                                },
+                                "division": {
+                                    "type": "string"
+                                },
+                                "directorate": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "senior_directorate": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "work_phone_off_extension": {
+                                    "type": "integer",
+                                    "nullable": true
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetNws_custCommonLovCurrency": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "currency_code": {
+                                    "type": "string"
+                                },
+                                "currency_name": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "currency_precision": {
+                                    "type": "integer"
+                                },
+                                "enabled_flag": {
+                                    "type": "string"
+                                },
+                                "issuing_territory_code": {
+                                    "type": "string"
+                                },
+                                "currency_symbol": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetNws_custPettycashHeaderDtl": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "claim_header_id": {
+                                    "type": "integer"
+                                },
+                                "object_version_num": {
+                                    "type": "integer"
+                                },
+                                "claim_number": {
+                                    "type": "string"
+                                },
+                                "request_date": {
+                                    "type": "string"
+                                },
+                                "petty_cash_type": {
+                                    "type": "string"
+                                },
+                                "petty_cash_name": {
+                                    "nullable": true
+                                },
+                                "governorate": {
+                                    "type": "string"
+                                },
+                                "supplier_id": {
+                                    "type": "integer"
+                                },
+                                "supplier_name": {
+                                    "type": "string"
+                                },
+                                "supplier_number": {
+                                    "type": "string"
+                                },
+                                "supplier_site_id": {
+                                    "type": "integer"
+                                },
+                                "supplier_site_code": {
+                                    "type": "string"
+                                },
+                                "status_id": {
+                                    "type": "integer"
+                                },
+                                "status_code": {
+                                    "type": "string"
+                                },
+                                "status_name": {
+                                    "type": "string"
+                                },
+                                "open_balance_amt": {
+                                    "type": "integer"
+                                },
+                                "receipt_amt": {
+                                    "type": "integer"
+                                },
+                                "claim_amt": {
+                                    "type": "integer"
+                                },
+                                "staff_iou_amt": {
+                                    "type": "integer"
+                                },
+                                "close_balance_amt": {
+                                    "type": "integer"
+                                },
+                                "cash_in_hand": {
+                                    "type": "integer"
+                                },
+                                "comments": {
+                                    "nullable": true
+                                },
+                                "saas_transaction_id": {
+                                    "nullable": true
+                                },
+                                "saas_transaction_number": {
+                                    "nullable": true
+                                },
+                                "integration_status_id": {
+                                    "nullable": true
+                                },
+                                "integration_status_code": {
+                                    "nullable": true
+                                },
+                                "integration_status_name": {
+                                    "nullable": true
+                                },
+                                "integration_err_message": {
+                                    "nullable": true
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "created_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_updated_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_login": {
+                                    "type": "string"
+                                },
+                                "line_count": {
+                                    "type": "integer"
+                                },
+                                "receipt_count": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetNws_custPettycashLovUserRole": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "lookup_type_code": {
+                                    "type": "string"
+                                },
+                                "lookup_type_name": {
+                                    "type": "string"
+                                },
+                                "petty_cash_type": {
+                                    "type": "string"
+                                },
+                                "petty_cash_name": {
+                                    "type": "string"
+                                },
+                                "petty_cash_governate": {
+                                    "type": "string"
+                                },
+                                "extracted_name": {
+                                    "type": "string"
+                                },
+                                "clean_name": {
+                                    "type": "string"
+                                },
+                                "clean_name_no_space": {
+                                    "type": "string"
+                                },
+                                "person_id": {
+                                    "type": "integer"
+                                },
+                                "person_number": {
+                                    "type": "string"
+                                },
+                                "full_name": {
+                                    "type": "string"
+                                },
+                                "email_address": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetNws_custPettycashLovExpenseAccount": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "flex_value": {
+                                    "type": "string"
+                                },
+                                "flex_value_meaning": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetNws_custPettycashLovDepartment": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "flex_value": {
+                                    "type": "string"
+                                },
+                                "flex_value_meaning": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetNws_custPettycashLovGeography": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "flex_value": {
+                                    "type": "string"
+                                },
+                                "flex_value_meaning": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostNws_custAttachmentProcessResponse": {
+                "type": "object",
+                "properties": {
+                    "P_ERR_MSG": {
+                        "type": "string"
+                    },
+                    "P_PRIMARYKEY": {
+                        "type": "integer"
+                    },
+                    "P_STATUS": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostNws_custAttachmentSearchResponse": {
+                "type": "object",
+                "properties": {
+                    "P_OUTPUT": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "document_id": {
+                                    "type": "integer"
+                                },
+                                "document_name": {
+                                    "type": "string"
+                                },
+                                "document_category": {
+                                    "type": "string"
+                                },
+                                "document_type": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "appl_code": {
+                                    "type": "string"
+                                },
+                                "transaction_id": {
+                                    "type": "integer"
+                                },
+                                "reference_id": {
+                                    "type": "integer"
+                                },
+                                "title": {
+                                    "type": "string"
+                                },
+                                "url": {
+                                    "nullable": true
+                                },
+                                "type": {
+                                    "type": "string"
+                                },
+                                "additional_info": {
+                                    "nullable": true
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "created_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_updated_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_login": {
+                                    "type": "string"
+                                },
+                                "links": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "rel": {
+                                                "type": "string"
+                                            },
+                                            "href": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+            },
+            "PostNws_custAttachmentDownloadResponse": {
+                "type": "object",
+                "properties": {
+                    "P_ERR_MSG": {
+                        "type": "string"
+                    },
+                    "P_OUTPUT": {
+                        "type": "array",
+                        "items": {
+                        }
+                    },
+                    "P_PRIMARYKEY": {
+                        "type": "integer"
+                    },
+                    "P_STATUS": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostNws_custAttachmentDeleteResponse": {
+                "type": "object",
+                "properties": {
+                    "P_ERR_CODE": {
+                        "type": "string"
+                    },
+                    "P_ERR_MSG": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostNws_custPettycashLineSearchResponse": {
+                "type": "object",
+                "properties": {
+                    "OUT_COUNT": {
+                        "type": "integer"
+                    },
+                    "OUT_DESCRIPTION": {
+                        "type": "string"
+                    },
+                    "OUT_HAS_NEXT": {
+                        "type": "string"
+                    },
+                    "OUT_STATUS": {
+                        "type": "string"
+                    },
+                    "OUT_TOTAL_COUNT": {
+                        "type": "integer"
+                    },
+                    "P_OUTPUT": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "claim_line_id": {
+                                    "type": "integer"
+                                },
+                                "claim_header_id": {
+                                    "type": "integer"
+                                },
+                                "object_version_num": {
+                                    "type": "integer"
+                                },
+                                "line_number": {
+                                    "type": "integer"
+                                },
+                                "governorate_segment": {
+                                    "type": "string"
+                                },
+                                "governorate_segment_disp": {
+                                    "type": "string"
+                                },
+                                "geography_segment": {
+                                    "type": "string"
+                                },
+                                "geography_segment_disp": {
+                                    "type": "string"
+                                },
+                                "business_activities_segment": {
+                                    "type": "string"
+                                },
+                                "business_activities_segment_disp": {
+                                    "type": "string"
+                                },
+                                "cost_center_segment": {
+                                    "type": "string"
+                                },
+                                "cost_center_segment_disp": {
+                                    "type": "string"
+                                },
+                                "accounts_segment": {
+                                    "type": "string"
+                                },
+                                "accounts_segment_disp": {
+                                    "type": "string"
+                                },
+                                "assets_segment": {
+                                    "type": "string"
+                                },
+                                "assets_segment_disp": {
+                                    "type": "string"
+                                },
+                                "inter_company_segment": {
+                                    "type": "string"
+                                },
+                                "inter_company_segment_disp": {
+                                    "type": "string"
+                                },
+                                "future1_segment": {
+                                    "type": "string"
+                                },
+                                "future1_segment_disp": {
+                                    "type": "string"
+                                },
+                                "charge_account": {
+                                    "type": "string"
+                                },
+                                "currency": {
+                                    "type": "string"
+                                },
+                                "amount": {
+                                    "type": "integer"
+                                },
+                                "exchange_rate_type": {
+                                    "type": "string"
+                                },
+                                "exchange_rate_date": {
+                                    "type": "string"
+                                },
+                                "exchange_rate": {
+                                    "type": "integer"
+                                },
+                                "line_amount": {
+                                    "type": "integer"
+                                },
+                                "brief_narration": {
+                                    "type": "string"
+                                },
+                                "budget_status": {
+                                    "type": "string"
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "created_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_updated_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_login": {
+                                    "type": "string"
+                                },
+                                "claim_number": {
+                                    "type": "string"
+                                },
+                                "request_date": {
+                                    "type": "string"
+                                },
+                                "supplier_name": {
+                                    "type": "string"
+                                },
+                                "status_id": {
+                                    "type": "integer"
+                                },
+                                "header_status_name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetNws_custApprovalActionDetail": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "approval_instance_num": {
+                                    "type": "string"
+                                },
+                                "action_id": {
+                                    "type": "integer"
+                                },
+                                "appr_request_id": {
+                                    "type": "integer"
+                                },
+                                "transaction_id": {
+                                    "type": "integer"
+                                },
+                                "transaction_num": {
+                                    "type": "string"
+                                },
+                                "approval_category_code": {
+                                    "type": "string"
+                                },
+                                "requester_user_id": {
+                                    "type": "string"
+                                },
+                                "requester_email_id": {
+                                    "type": "string"
+                                },
+                                "approver_user_id": {
+                                    "type": "string"
+                                },
+                                "approver_email_id": {
+                                    "type": "string"
+                                },
+                                "approver_level": {
+                                    "type": "integer"
+                                },
+                                "status_code": {
+                                    "type": "string"
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "creation_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_update_date": {
+                                    "type": "string"
+                                },
+                                "last_update_login": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostNws_custApprovalActionSubmitRequest": {
+                "type": "object",
+                "properties": {
+                    "P_APPR_PROCESS": {
+                        "type": "string"
+                    },
+                    "P_TRX_ID": {
+                        "type": "string"
+                    },
+                    "P_TYPE": {
+                        "type": "string"
+                    },
+                    "P_USER_ID": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostNws_custApprovalActionSubmitResponse": {
+                "type": "object",
+                "properties": {
+                    "P_ACTION_ID": {
+                        "type": "string"
+                    },
+                    "P_ERROR_CODE": {
+                        "type": "string"
+                    },
+                    "P_ERROR_MSG": {
+                        "type": "string"
+                    }
+                }
+            },
+            "GetNws_custApprovalGetreassignLovIdcs": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "user_id": {
+                                    "type": "integer"
+                                },
+                                "idcs_user_id": {
+                                    "type": "string"
+                                },
+                                "user_name": {
+                                    "type": "string"
+                                },
+                                "person_name": {
+                                    "type": "string",
+                                    "nullable": true
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostNws_custApprovalActionHistoryRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostNws_custApprovalActionHistoryResponse": {
+                "type": "object",
+                "properties": {
+                    "OUT_COUNT": {
+                        "type": "integer"
+                    },
+                    "OUT_DESCRIPTION": {
+                        "type": "string"
+                    },
+                    "OUT_HAS_NEXT": {
+                        "type": "string"
+                    },
+                    "OUT_STATUS": {
+                        "type": "string"
+                    },
+                    "OUT_TOTAL_COUNT": {
+                        "type": "integer"
+                    },
+                    "P_OUTPUT": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "action_history_id": {
+                                    "type": "integer"
+                                },
+                                "action_id": {
+                                    "type": "integer"
+                                },
+                                "transaction_id": {
+                                    "type": "integer"
+                                },
+                                "transaction_num": {
+                                    "type": "string"
+                                },
+                                "status_code": {
+                                    "type": "string"
+                                },
+                                "appr_hierarchy_id": {
+                                    "type": "integer"
+                                },
+                                "appr_request_code": {
+                                    "type": "string"
+                                },
+                                "appr_request_name": {
+                                    "type": "string"
+                                },
+                                "appr_category_id": {
+                                    "type": "integer"
+                                },
+                                "appr_category_code": {
+                                    "type": "string"
+                                },
+                                "appr_category_name": {
+                                    "type": "string"
+                                },
+                                "appr_type_id": {
+                                    "type": "integer"
+                                },
+                                "appr_type_code": {
+                                    "type": "string"
+                                },
+                                "appr_type_name": {
+                                    "type": "string"
+                                },
+                                "appr_level": {
+                                    "type": "integer"
+                                },
+                                "action_sequence_num": {
+                                    "type": "integer"
+                                },
+                                "requester_user_id": {
+                                    "type": "integer"
+                                },
+                                "requester_user": {
+                                    "type": "string"
+                                },
+                                "requester_email_disp_name": {
+                                    "type": "string"
+                                },
+                                "requester_email_address": {
+                                    "type": "string"
+                                },
+                                "approver_user_name": {
+                                    "type": "string"
+                                },
+                                "response_user_id": {
+                                    "type": "integer"
+                                },
+                                "response_user": {
+                                    "type": "string"
+                                },
+                                "approver_email_id": {
+                                    "type": "string"
+                                },
+                                "action_type_id": {
+                                    "type": "integer"
+                                },
+                                "action_type_code": {
+                                    "type": "string"
+                                },
+                                "action_type": {
+                                    "type": "string"
+                                },
+                                "action_date": {
+                                    "type": "string"
+                                },
+                                "action_comments": {
+                                    "type": "string"
+                                },
+                                "approval_pcs_instance_num": {
+                                    "type": "string"
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "creation_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_update_date": {
+                                    "type": "string"
+                                },
+                                "last_update_login": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostNws_custApprovalActionUpdateRequest": {
+                "type": "object",
+                "properties": {
+                    "P_ACTION_ID": {
+                        "type": "string"
+                    },
+                    "P_TRX_ID": {
+                        "type": "string"
+                    },
+                    "P_ACTION_USER": {
+                        "type": "string"
+                    },
+                    "P_ACTION_USER_IDCS": {
+                        "type": "string"
+                    },
+                    "P_ACTION_CODE": {
+                        "type": "string"
+                    },
+                    "P_COMMENTS": {
+                        "type": "string"
+                    },
+                    "P_FROM_PERSON_ID": {
+                        "type": "string"
+                    },
+                    "P_TO_PERSON_ID": {
+                        "type": "string"
+                    },
+                    "P_APPR_LEVEL": {
+                        "type": "string"
+                    },
+                    "P_INSTANCE_NUMBER": {
+                        "type": "string"
+                    },
+                    "P_MORE_INFO_TYPE": {
+                        "type": "string"
+                    }
+                }
+            },
+            "GetPettycashLovUserRole": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "lookup_type_code": {
+                                    "type": "string"
+                                },
+                                "lookup_type_name": {
+                                    "type": "string"
+                                },
+                                "petty_cash_type": {
+                                    "type": "string"
+                                },
+                                "petty_cash_name": {
+                                    "type": "string"
+                                },
+                                "petty_cash_governate": {
+                                    "type": "string"
+                                },
+                                "extracted_name": {
+                                    "type": "string"
+                                },
+                                "clean_name": {
+                                    "type": "string"
+                                },
+                                "clean_name_no_space": {
+                                    "type": "string"
+                                },
+                                "person_id": {
+                                    "type": "integer"
+                                },
+                                "person_number": {
+                                    "type": "string"
+                                },
+                                "full_name": {
+                                    "type": "string"
+                                },
+                                "email_address": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetApprovalProcessEmployeeList": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "person_id": {
+                                    "type": "integer"
+                                },
+                                "person_number": {
+                                    "type": "string"
+                                },
+                                "full_name": {
+                                    "type": "string"
+                                },
+                                "email_address": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostApprovalProcessSecUpdateRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostApprovalProcessSecUpdateResponse": {
+                "type": "object",
+                "properties": {
+                    "P_ERROR_CODE": {
+                        "type": "string"
+                    },
+                    "P_ERROR_MSG": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostApprovalProcessSecSubmitRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostApprovalProcessSecSubmitResponse": {
+                "type": "object",
+                "properties": {
+                    "P_ERROR_CODE": {
+                        "type": "string"
+                    },
+                    "P_ERROR_MSG": {
+                        "type": "string"
+                    },
+                    "P_ACTION_ID": {
+                        "type": "string"
+                    }
+
+                }
+            },
+            "PostCommonValidationResponse": {
+                "type": "object",
+                "properties": {
+                    "P_ERR_CODE": {
+                        "type": "string"
+                    },
+                    "P_ERR_MSG": {
+                        "type": "string"
+                    },
+                    "P_PROCESS_CODE": {
+                        "type": "string"
+                    }
+                }
+            },
+            "GetCommonLovEmployee": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "person_id": {
+                                    "type": "integer"
+                                },
+                                "person_number": {
+                                    "type": "string"
+                                },
+                                "full_name": {
+                                    "type": "string"
+                                },
+                                "email_address": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostCommonValidationRequest": {
+                "type": "object",
+                "properties": {
+                    "a": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "PostAttachmentDeleteRequest": {
+                "type": "object",
+                "properties": {
+                    "a": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "PostAttachmentDownloadRequest": {
+                "type": "object",
+                "properties": {
+                    "a": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "PostAttachmentSearchRequest": {
+                "type": "object",
+                "properties": {
+                    "a": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "PostAttachmentProcessRequest": {
+                "type": "object",
+                "properties": {
+                    "a": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "GetCommonUserMenu": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "user_name": {
+                                    "type": "string"
+                                },
+                                "final_json": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetApprovalProcessUserDtl": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "person_id": {
+                                    "type": "integer"
+                                },
+                                "person_number": {
+                                    "type": "string"
+                                },
+                                "full_name": {
+                                    "type": "string"
+                                },
+                                "email_address": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetPettycashSiteLineDtl": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "reference_claim_line_id": {
+                                    "type": "integer"
+                                },
+                                "claim_header_id": {
+                                    "type": "integer"
+                                },
+                                "governorate_segment": {
+                                    "type": "string"
+                                },
+                                "governorate_segment_disp": {
+                                    "type": "string"
+                                },
+                                "geography_segment": {
+                                    "type": "string"
+                                },
+                                "geography_segment_disp": {
+                                    "type": "string"
+                                },
+                                "business_activities_segment": {
+                                    "type": "string"
+                                },
+                                "business_activities_segment_disp": {
+                                    "type": "string"
+                                },
+                                "cost_center_segment": {
+                                    "type": "string"
+                                },
+                                "cost_center_segment_disp": {
+                                    "type": "string"
+                                },
+                                "accounts_segment": {
+                                    "type": "string"
+                                },
+                                "accounts_segment_disp": {
+                                    "type": "string"
+                                },
+                                "assets_segment": {
+                                    "type": "string"
+                                },
+                                "assets_segment_disp": {
+                                    "type": "string"
+                                },
+                                "inter_company_segment": {
+                                    "type": "string"
+                                },
+                                "inter_company_segment_disp": {
+                                    "type": "string"
+                                },
+                                "future1_segment": {
+                                    "type": "string"
+                                },
+                                "future1_segment_disp": {
+                                    "type": "string"
+                                },
+                                "charge_account": {
+                                    "type": "string"
+                                },
+                                "currency": {
+                                    "type": "string"
+                                },
+                                "amount": {
+                                    "type": "integer"
+                                },
+                                "exchange_rate_type": {
+                                    "type": "string"
+                                },
+                                "exchange_rate_date": {
+                                    "type": "string"
+                                },
+                                "exchange_rate": {
+                                    "type": "integer"
+                                },
+                                "line_amount": {
+                                    "type": "integer"
+                                },
+                                "brief_narration": {
+                                    "type": "string"
+                                },
+                                "budget_status": {
+                                    "type": "string"
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "created_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_updated_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_login": {
+                                    "type": "string"
+                                },
+                                "claim_number": {
+                                    "type": "string"
+                                },
+                                "request_date": {
+                                    "type": "string"
+                                },
+                                "supplier_name": {
+                                    "type": "string"
+                                },
+                                "status_id": {
+                                    "type": "integer"
+                                },
+                                "petty_cash_type": {
+                                    "type": "string"
+                                },
+                                "header_status_name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetApprovalProcessSecActionList": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "action_id": {
+                                    "type": "integer"
+                                },
+                                "appr_request_id": {
+                                    "type": "integer"
+                                },
+                                "transaction_id": {
+                                    "type": "integer"
+                                },
+                                "version_number": {
+                                    "type": "integer"
+                                },
+                                "transaction_num": {
+                                    "type": "string"
+                                },
+                                "requester_user_id": {
+                                    "type": "string"
+                                },
+                                "requester_email_id": {
+                                    "type": "string"
+                                },
+                                "approver_user_id": {
+                                    "type": "string"
+                                },
+                                "approver_email_id": {
+                                    "type": "string"
+                                },
+                                "approver_level": {
+                                    "type": "integer"
+                                },
+                                "approval_category_code": {
+                                    "type": "string"
+                                },
+                                "approval_pcs_instance_num": {
+                                    "type": "string"
+                                },
+                                "status_code": {
+                                    "type": "string"
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "creation_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_update_date": {
+                                    "type": "string"
+                                },
+                                "last_update_login": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetCommonPreviousApprovalList": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "approver_level": {
+                                    "type": "integer"
+                                },
+                                "person_id": {
+                                    "type": "integer"
+                                },
+                                "person_number": {
+                                    "type": "string"
+                                },
+                                "person_name": {
+                                    "type": "string"
+                                },
+                                "person_emailid": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

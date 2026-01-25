@@ -1,0 +1,471 @@
+/**
+ * To theme your application, just override the variable values you want to change. To find which variables can be changed,
+ * see the JET documentation at https://www.oracle.com/webfolder/technetwork/jet/jsdocs/CssVariablesOverview.html
+ * In general, we recommend using the Stable theme, as it reduces the chances of being impacted by changes over time.
+ */
+ 
+ :root {
+    /* --oj-html-font-family:  -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif; */
+    /* --oj-html-font-size:   1em; */
+
+    --oj-form-layout-start-edge-label-to-value-padding: 0.4rem;
+    --oj-form-layout-top-edge-label-to-value-padding: 0rem;
+
+    --oj-text-field-height: 1.75rem;
+ }
+
+ .oj-button-toggle.oj-disabled, .oj-button.oj-disabled .oj-button-button {
+    cursor: not-allowed;
+}
+
+
+#tenderSM oj-sp-header-create-edit .oj-sp-header-create-edit-bg-light {
+    background-color: #01474d !important;
+}
+#tender_strategy_edit_page oj-sp-header-create-edit .oj-sp-header-create-edit-bg-light {
+    background-color: #01474d !important;
+}
+#oj_attachment oj-sp-header-create-edit .oj-sp-header-create-edit-bg-light {
+    background-color: #01474d !important;
+}
+
+oj-sp-header-create-edit .oj-sp-header-create-edit-title-sm-up {
+  color: white !important;
+}
+
+oj-sp-header-create-edit .oj-sp-header-create-edit-header-strip {
+    background-image: none;
+}
+
+@media (hover: hover) {
+    .BaseButtonStyles_styles_variants_outlined_pseudohover__jvi3dsv:hover:enabled:not(:active) {
+        border-color: rgb(255, 255, 255);
+        border-width: 2px;
+    }
+}
+
+.BaseButtonStyles_styles_sizes_sm__jvi3ds2d {
+    border-color: white;
+}
+
+
+
+.BaseButtonStyles_styles_sizes_sm__jvi3ds2d {
+  color: white !important
+}
+
+.oj-button.oj-hover.oj-button-half-chrome .oj-button-icon {
+    /* color: white !important; */
+    font-size: 2rem !important;
+}
+
+.oj-button.oj-default.oj-button-half-chrome .oj-button-icon, .oj-button.oj-focus-only.oj-button-half-chrome .oj-button-icon {
+    /* color: white !important; */
+    font-size: 1.5rem !important;
+}
+
+.oj-button-menu-icon-only-dropdown-icon:before, .oj-fwk-icon-dots-horizontal:before, .oj-navigationlist-overflow-item-icon:before, .oj-tabbar-overflow-item-icon:before {
+    content: "\f136";
+    border-color: white !important;
+    color: white;
+}
+
+.oj-dialog .oj-fwk-icon {
+    color: white;
+    margin-top: 1rem;
+}
+
+.oj-text-field.oj-disabled .oj-text-field-input {
+    /* color: var(--oj-text-field-text-color-disabled); */
+    /* color: red; */
+    color: black;
+    background-color: #dedcde;
+}
+
+.oj-text-field.oj-disabled .oj-text-field-container {
+    /* background-color: var(--oj-text-field-bg-color-disabled); */
+    border-color: var(--oj-text-field-border-color-disabled);
+    /* background-color: #e3e3e3; */
+    background-color: f6f6f6; 
+    border: solid 1px #171616;
+}
+
+ .oj-text-field .oj-text-field-container{
+    position: relative;
+    box-sizing: border-box;
+    border-style: solid;
+    transition: border-color .1s linear;
+    border-color: var(--oj-text-field-border-color);
+    border-width: var(--oj-text-field-border-width);
+    border-radius: var(--oj-text-field-border-radius);
+    background-color: var(--oj-text-field-bg-color);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow: hidden;
+    height: var(--oj-text-field-height);
+    border: solid 1px grey;
+    font-size: 12px; /* Adjust the font size as needed */
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Table */
+--oj-collection-grid-row-height: 1rem;
+--oj-collection-grid-header-height: 2rem;
+
+.oj-table-body-row {
+    height: auto !important;
+    min-height: 0rem !important;
+    font-size: 12px;
+    font-weight: medium;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+   /* color:#5D5D5D ;  */
+}
+
+ /* .oj-text-field .oj-text-field-container{
+    position: relative;
+    box-sizing: border-box;
+    border-style: solid;
+    transition: border-color .1s linear;
+    border-color: var(--oj-text-field-border-color);
+    border-width: var(--oj-text-field-border-width);
+    border-radius: var(--oj-text-field-border-radius);
+    background-color: var(--oj-text-field-bg-color);
+    display: flex;
+    flex-direction: row;
+    align-items: center !important;
+    overflow: hidden;
+    height: var(--oj-text-field-height);
+    border: solid 1px grey;
+    font-size: 1rem; /* Adjust the font size as needed */
+    /* font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+} */
+
+.oj-table-grid-display .oj-table-data-cell {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+/* --oj-form-layout-start-edge-label-to-value-padding: 0.3rem;
+--oj-form-layout-top-edge-label-to-value-padding: 0rem; */
+
+.oj-form-control-inherit:not(.oj-form-control-default) .oj-text-field:not(.oj-invalid):not(.oj-warning) .oj-text-field-container, .oj-form-control-inherit:not(.oj-form-control-default) .oj-text-field:not(.oj-invalid):not(.oj-warning) .oj-text-field-input, .oj-form-control-inherit:not(.oj-form-control-default) .oj-text-field:not(.oj-invalid):not(.oj-warning) .oj-text-field-readonly-div {
+    border-width: 0;
+}
+
+.oj-form-layout .oj-form.oj-enabled .oj-text-field.oj-read-only .oj-text-field-container {
+    border-width: var(--oj-text-field-border-width);
+    /* border-color: var(--oj-text-field-border-color-disabled); */
+    background-color: transparent;
+    height: var(--oj-text-field-height);
+    padding: 3px;
+    min-height: 1rem;
+}
+
+.oj-text-field-readonly {
+    min-height: 0;
+    font-size: 1rem !important;
+}
+
+.oj-table-grid-display .oj-table-column-header-cell, .oj-table-grid-display .oj-table-column-header-selector-cell, .oj-table-grid-display .oj-table-footer-cell, .oj-table-grid-display .oj-table-footer-row, .oj-table-grid-display .oj-table-footer-selector-cell, .oj-table-grid-display .oj-table-header-row{
+  text-align: center !important;
+}
+
+
+
+
+/* NEW CSS FOR ADD EDIT */
+
+/**
+ * Tender Strategy Management Theme with User Specified Color: #084C4C
+ */
+ 
+:root {
+    --user-primary-color: #084C4C;
+    --oj-button-height: 2rem;
+}
+
+/* Form height reduce */
+.oj-form-control:not(.oj-read-only):not(.oj-disabled) .oj-user-assistance-inline-container.oj-efficient, 
+.oj-form.oj-enabled .oj-user-assistance-inline-container.oj-efficient {
+    min-height: 0.1rem;
+}
+
+/* Fit to Page in redwood */
+.oj-sp-public-primary-content-container {
+    min-height: fit-content !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    box-sizing: border-box !important;
+}
+
+/* Advanced Create Edit - Primary Color */
+.oj-button-toggle.oj-default.oj-button-cta-chrome, 
+.oj-button-toggle.oj-focus-only.oj-button-cta-chrome, 
+.oj-button.oj-default.oj-button-cta-chrome .oj-button-button, 
+.oj-button.oj-focus-only.oj-button-cta-chrome .oj-button-button {
+    background-color: #084C4C !important;
+    border-color: var(--oj-button-call-to-action-chrome-border-color);
+    color: var(--oj-button-call-to-action-chrome-text-color);
+}
+
+oj-sp-header-create-edit .oj-sp-header-create-edit-spacing-container .oj-sp-header-create-edit-container .oj-sp-header-create-edit-avatar-container .oj-sp-header-create-edit-title .oj-sp-header-create-edit-title-badge-container .oj-sp-header-create-edit-page-title {
+    display: inline;
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: anywhere;
+    /* backgroung-color: #084C4C !important; */
+    color: white;
+}
+
+/* Button Styling */
+.oj-button-toggle.oj-default.oj-button-outlined-chrome, 
+.oj-button-toggle.oj-disabled.oj-button-outlined-chrome, 
+.oj-button-toggle.oj-focus-only.oj-button-outlined-chrome, 
+.oj-button.oj-default.oj-button-outlined-chrome .oj-button-button, 
+.oj-button.oj-disabled.oj-button-outlined-chrome .oj-button-button, 
+.oj-button.oj-focus-only.oj-button-outlined-chrome .oj-button-button {
+    border-color: var(--oj-button-outlined-chrome-border-color);
+    background-image: none;
+    background-color: #084C4C !important;
+}
+
+.oj-button-toggle.oj-default.oj-button-outlined-chrome, 
+.oj-button-toggle.oj-focus-only.oj-button-outlined-chrome, 
+.oj-button.oj-default.oj-button-outlined-chrome .oj-button-button, 
+.oj-button.oj-focus-only.oj-button-outlined-chrome .oj-button-button {
+    color: white !important;
+}
+
+/* Collapsible Section Headers */
+.oj-collapsible-header {
+    background-color: #084c4c;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Panel Styling */
+.oj-panel.oj-panel-shadow-md {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.oj-panel.oj-selected {
+    border-left: 4px solid #084C4C !important;
+}
+
+/* Tab Styling - Using Direct Color Values (Oracle JET Requirement) */
+.demo-tabbar-container .oj-navigationlist-horizontal .oj-navigationlist-item-element {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    margin-right: 0.25rem;
+}
+
+.demo-tabbar-container .oj-navigationlist-horizontal .oj-navigationlist-item-element.oj-selected {
+    background-color: #084C4C !important;
+    border-color: #084C4C !important;
+    color: white !important;
+}
+
+.demo-tabbar-container .oj-navigationlist-horizontal .oj-navigationlist-item-element.oj-selected:hover {
+    background-color: #063935 !important;
+    border-color: #063935 !important;
+}
+
+.demo-tabbar-container .oj-navigationlist-horizontal .oj-navigationlist-item-element.oj-selected:focus {
+    background-color: #084C4C !important;
+    border-color: #084C4C !important;
+}
+
+.demo-tabbar-container .oj-navigationlist-horizontal .oj-navigationlist-item-element.oj-selected a {
+    color: white !important;
+}
+
+/* Universal Tab Override */
+.oj-navigationlist-horizontal .oj-navigationlist-item-element.oj-selected {
+    background-color: #084C4C !important;
+    border-color: #084C4C !important;
+    color: white !important;
+}
+
+.oj-navigationlist-item-element.oj-selected {
+    background-color: #084C4C !important;
+    color: white !important;
+}
+
+oj-tab-bar .oj-navigationlist-horizontal .oj-navigationlist-item-element.oj-selected {
+    background-color: #084C4C !important;
+    border-color: #084C4C !important;
+}
+
+.oj-navigationlist .oj-navigationlist-item-element.oj-selected {
+    background-color: #084C4C !important;
+    border-color: #084C4C !important;
+}
+
+/* Form Layout Styling */
+.oj-form-layout .oj-formlayout-labels-inline .oj-label {
+    color: #495057;
+    font-weight: 500;
+}
+
+/* Input Field Styling */
+/* .oj-inputtext-input,
+.oj-inputnumber-input,
+.oj-inputdate-input,
+.oj-select-single .oj-select-choice,
+ {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 0.5rem 0.75rem;
+} */
+
+.oj-inputtext-input:focus,
+.oj-inputnumber-input:focus,
+.oj-inputdate-input:focus,
+.oj-select-single .oj-select-choice:focus,
+.oj-textarea-input:focus {
+    border-color: #084C4C !important;
+    box-shadow: 0 0 0 0.2rem rgba(8, 76, 76, 0.25);
+}
+
+/* Rich Text Editor Styling */
+#scope_editor { background-color: #ffffff; border-radius: 0.25rem; }
+
+#cost_editor,
+#technical_editor,
+#commercial_editor,
+#icv_editor,
+#division_editor {
+    background-color: #ffffff;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+/* Smart Search Filter */
+.oj-typography-body-xs, .oj-typography-caption-1 {
+    font-size: var(--oj-typography-body-xs-font-size) !important;
+    font-weight: 374 !important;
+    line-height: var(--oj-typography-body-xs-line-height) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .oj-form-layout[max-columns="3"] {
+        max-columns: 1;
+    }
+    
+    .demo-tabbar-container .oj-navigationlist-horizontal {
+        flex-direction: column;
+    }
+}
+
+/* Validation Error Styling */
+.oj-invalid .oj-inputtext-input,
+.oj-invalid .oj-inputnumber-input,
+.oj-invalid .oj-inputdate-input,
+.oj-invalid .oj-select-single .oj-select-choice,
+.oj-invalid .oj-textarea-input {
+    border-color: #dc3545;
+}
+
+.oj-message-error {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 0.25rem;
+    padding: 0.375rem 0.75rem;
+}
+
+/* Success State Styling */
+.oj-valid .oj-inputtext-input,
+.oj-valid .oj-inputnumber-input,
+.oj-valid .oj-inputdate-input,
+.oj-valid .oj-select-single .oj-select-choice,
+.oj-valid .oj-textarea-input {
+    border-color: #28a745;
+}
+
+
+
+
+.oj-radioset .oj-selected .oj-radiocheckbox-icon {
+    color: #4d9d30;
+}
+
+/* Tab-start */
+.oj-tabbar-horizontal.oj-tabbar-icon-only .oj-tabbar-item.oj-selected, .oj-tabbar-horizontal:not(.oj-tabbar-icon-only) .oj-tabbar-item.oj-selected {
+    /* color: var(--oj-tab-bar-item-border-color-selected); */
+    border-bottom: var(--oj-private-tab-bar-item-border-width-bottom) solid;
+    border-top: var(--oj-private-tab-bar-item-border-width-bottom) solid transparent;
+    border-left: var(--oj-private-tab-bar-item-border-width-end) solid transparent;
+    border-right: var(--oj-private-tab-bar-item-border-width-end) solid transparent;
+    background-color: #01474d !important;
+    color: white !important;
+}
+
+.oj-selected>a.oj-tabbar-item-content .oj-tabbar-item-label {
+    /* color: var(--oj-tab-bar-item-label-color-selected); */
+    font-weight: var(--oj-tab-bar-item-font-weight-selected);
+    color: white !important;
+}
+/* Tab- end */
+
+.oj-collapsible-header {
+  background-color: #115858 !important;
+  border-bottom: 1px solid #115858 !important;
+}
+
+.oj-collapsible-open-icon:before {
+  color: white !important;
+}
+
+a.oj-component-icon.oj-clickable-icon-nocontext.oj-collapsible-header-icon.oj-collapsible-close-icon {
+  color: white !important;
+}
+
+.oj-collapsible-header-wrapper {
+  background-color: #115858 !important;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+oj-sp-input-rich-text-2 .oj-sp-input-rich-text-2-toolbar-container {
+  padding-bottom: 0 !important;
+  zoom: 0.7;
+}
+
+oj-toolbar#_oj45_input_rich_text_2_standard_toolbar {
+  margin-left: auto;
+}
+
+oj-option#tender_strategy_edit_page_h_cancelAction {
+  display: none !important;
+}
+
+oj-option.oj-complete.oj-menu-divider {
+  display: none;
+}
+
+oj-sp-smart-search .oj-sp-smart-search-bar {
+    height: 2.1rem;
+    min-height: 2.1rem;
+    border-radius: 5px;
+}
+
+oj-sp-smart-search .oj-sp-filter-chip-suggested .oj-sp-filter-chip-chrome {
+    background-color: #ffffff !important;
+    color: black !important;
+    border-radius: 5px;
+}
+
+.oj-sp-filter-chip-suggested .oj-sp-smart-search-complex-chip-label {
+    /* max-width: 5rem; */
+    color: #000000 !important;
+}
+
+/* .oj-sp-smart-search-complex-chip-value {
+  color: black !important;
+} */
+
+oj-sp-smart-search .oj-sp-filter-chip-suggested .oj-sp-smart-search-complex-chip-value {
+    color: #000000 !important;
+}

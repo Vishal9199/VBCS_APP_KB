@@ -1,0 +1,39 @@
+{
+    "items": [
+        {
+            "section_id": 1201,
+            "template_id": 1044,
+            "section_code": "EMP_SEC_01",
+            "section_title": "Employee Basic Details",
+            "section_type": "HEADER",
+            "section_order": 3,
+            "view_name": "HR_EMP_DETAILS_V",
+            "join_type": "INNER",
+            "join_column": "EMP_ID",
+            "is_active": "Y",
+            "created_by": "SYSTEM",
+            "created_date": "2025-12-09T09:58:16.102434Z",
+            "last_updated_by": "ADMIN",
+            "last_updated_date": "2025-12-09T09:58:16.102434Z",
+            "last_updated_login": "10.10.10.5"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/email/section/dtl"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/metadata-catalog/email/section/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/email/section/dtl"
+        }
+    ]
+}

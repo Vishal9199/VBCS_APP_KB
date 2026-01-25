@@ -1,0 +1,42 @@
+{
+    "items": [
+        {
+            "flex_value": "1122016",
+            "flex_value_meaning": "Input VAT"
+        },
+        {
+            "flex_value": "2150004",
+            "flex_value_meaning": "Reverse Charge - Output VAT"
+        },
+        {
+            "flex_value": "5900003",
+            "flex_value_meaning": "VAT Tax Expense"
+        },
+        {
+            "flex_value": "1122017",
+            "flex_value_meaning": "Reverse Charge-Input VAT"
+        },
+        {
+            "flex_value": "2150003",
+            "flex_value_meaning": "Output VAT"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 5,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/pettycash/lov/expense/account?searchVal=vat"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/metadata-catalog/pettycash/lov/expense/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/pettycash/lov/expense/account?searchVal=vat"
+        }
+    ]
+}

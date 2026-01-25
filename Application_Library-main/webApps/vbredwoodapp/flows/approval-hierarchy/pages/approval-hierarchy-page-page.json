@@ -1,0 +1,912 @@
+{
+  "metadata": {},
+  "title": "Approval Hierarchy",
+  "description": "Comprehensive Approval Hierarchy Management Add/Edit page with Approval Hierarchy form and Approval Hierarchy List table management with popup editing functionality.",
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-label": {
+        "path": "ojs/ojlabel"
+      },
+      "oj-option": {
+        "path": "ojs/ojoption"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "oj-sp/simple-create-edit/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      },
+      "oj-switch": {
+        "path": "ojs/ojswitch"
+      }
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/addEditHeader.css"
+    ]
+  },
+  "types": {
+    "@decorators.ApprovalHierarchyList": {
+      "endpoint": "postApprovalHierarchyListSearch",
+      "service": "approvalHeirarchy",
+      "path": "response"
+    },
+    "@decorators.getAolUsrRoleLovBuNameResponse": {
+      "endpoint": "getAol_usrRoleLovBuName",
+      "service": "Role",
+      "path": "response"
+    },
+    "@decorators.getAolUsrRoleLovUserNameResponse": {
+      "endpoint": "getAol_usrRoleLovUserName",
+      "service": "User",
+      "path": "response"
+    },
+    "@decorators.getApprovalHierarchyLovApproverCategoryResponse": {
+      "endpoint": "getApprovalHierarchyLovApproverCategory",
+      "service": "approvalHeirarchy",
+      "path": "response"
+    },
+    "@decorators.getApprovalHierarchyLovApproverTypeResponse": {
+      "endpoint": "getApprovalHierarchyLovApproverType",
+      "service": "approvalHeirarchy",
+      "path": "response"
+    },
+    "@decorators.getApproverRoleLovRolecodeResponse": {
+      "endpoint": "getApproverRoleLovRolecode",
+      "service": "ApprovalUserRole",
+      "path": "response"
+    },
+    "@decorators.getFunctionLovFunctionNameResponse": {
+      "endpoint": "getFunctionLovFunctionName",
+      "service": "Function",
+      "path": "response"
+    },
+    "ApprovalHierarchyList": {
+      "active_flag": "string",
+      "approval_role_code": "string",
+      "attribute_json": "any",
+      "category_code": "string",
+      "category_id": "number",
+      "category_name": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "from_limit": "any",
+      "function_code": "string",
+      "function_id": "number",
+      "function_name": "string",
+      "hierarchy_code": "string",
+      "hierarchy_id": "number",
+      "hierarchy_list_id": "number",
+      "hierarchy_name": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "level_num": "number",
+      "object_version_num": "number",
+      "person_id": "number",
+      "person_name": "string",
+      "person_number": "string",
+      "remarks": "any",
+      "to_limit": "any",
+      "type_code": "string",
+      "type_id": "number",
+      "type_name": "string",
+      "user_id": "number",
+      "user_name": "string",
+      "user_role_id": "number",
+      "user_role_name": "string"
+    },
+    "getAolUsrRoleLovBuNameResponse": {
+      "items": [
+        {
+          "bu_id": "number",
+          "bu_name": "string"
+        }
+      ]
+    },
+    "getAolUsrRoleLovUserNameResponse": {
+      "items": [
+        {
+          "email_address": "string",
+          "person_full_name": "string",
+          "person_id": "number",
+          "person_name": "string",
+          "person_number": "string",
+          "user_id": "number",
+          "user_name": "string"
+        }
+      ]
+    },
+    "getApprovalHierarchyLovApproverCategoryResponse": {
+      "items": [
+        {
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getApprovalHierarchyLovApproverTypeResponse": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+
+        }
+      ]
+    },
+    "getApproverRoleLovRolecodeResponse": {
+      "items": [
+        {
+          "approval_role_code": "string",
+          "approval_role_id": "number",
+          "approval_role_name": "string"
+        }
+      ]
+    },
+    "getFunctionLovFunctionNameResponse": {
+      "items": [
+        {
+          "function_id": "number",
+          "function_name": "string"
+        }
+      ]
+    },
+    "ApprovalHierarchy": {
+      "hierarchy_id": "number",
+      "object_version_num": "number",
+      "hierarchy_code": "string",
+      "hierarchy_name": "string",
+      "remarks": "string",
+      "function_id": "number",
+      "business_unit_id": "number",
+      "active_flag": "string",
+      "attribute_json": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    }
+  },
+  "variables": {
+
+    "encryptedBody": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "getAolUsrRoleLovBuNameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "bu_id",
+        "itemsPath": "items",
+        "responseType": "getAolUsrRoleLovBuNameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "bu_name"
+          ]
+        },
+        "fetchChain": "getAol_usrRoleLovBuNameFetch"
+      }
+    },
+    "getAolUsrRoleLovUserNameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "user_id",
+        "itemsPath": "items",
+        "responseType": "getAolUsrRoleLovUserNameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "user_name"
+          ]
+        },
+        "fetchChain": "getAol_usrRoleLovUserNameFetch"
+      }
+    },
+    "getApprovalHierarchyLovApproverCategoryListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getApprovalHierarchyLovApproverCategoryResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        },
+        "fetchChain": "getApprovalHierarchyLovApproverCategoryFetch"
+      }
+    },
+    "getApprovalHierarchyLovApproverTypeListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "itemsPath": "items",
+        "responseType": "getApprovalHierarchyLovApproverTypeResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        },
+        "fetchChain": "getApprovalHierarchyLovApproverTypeFetch",
+        "keyAttributes": "lookup_value_code"
+      }
+    },
+    "getApproverRoleLovRolecodeListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "approval_role_id",
+        "itemsPath": "items",
+        "responseType": "getApproverRoleLovRolecodeResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "approval_role_name"
+          ]
+        },
+        "fetchChain": "getApproverRoleLovRolecodeFetch"
+      }
+    },
+    "getFunctionLovFunctionNameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "function_id",
+        "itemsPath": "items",
+        "responseType": "getFunctionLovFunctionNameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "function_name"
+          ]
+        },
+        "fetchChain": "getFunctionLovFunctionNameFetch"
+      }
+    },
+    "hierarchyCodeCustomMsg": {
+      "type": "object[]"
+    },
+    "searchObj": {
+      "type": {
+        "IN_LIMIT": "number",
+        "IN_OFFSET": "number",
+        "P_HIERARCHY_ID": "string",
+        "HIERARCHY_CODE": "string",
+        "HIERARCHY_NAME": "string",
+        "ACTIVE_FLAG": "string",
+        "FUNCTION_ID": "string",
+        "BUSINESS_UNIT_ID": "string"
+      },
+      "defaultValue": {
+        "IN_LIMIT": 8,
+        "IN_OFFSET": 0,
+        "P_HIERARCHY_ID": "",
+        "HIERARCHY_CODE": "",
+        "HIERARCHY_NAME": "",
+        "FUNCTION_ID": "",
+        "BUSINESS_UNIT_ID": ""
+      }
+    },
+    "searchHierarchyListObj": {
+      "type": {
+        "IN_LIMIT": "number",
+        "IN_OFFSET": "number",
+        "P_HIERARCHY_LIST_ID": "string",
+        "HIERARCHY_ID": "string",
+        "CATEGORY_ID": "string",
+        "TYPE_ID": "string",
+        "LEVEL_NUM": "string",
+        "USER_ID": "string",
+        "PERSON_ID": "string",
+        "USER_ROLE_ID": "string",
+        "ACTIVE_FLAG": "string"
+      },
+      "defaultValue": {
+        "IN_LIMIT": 5,
+        "IN_OFFSET": 0,
+        "P_HIERARCHY_LIST_ID": "",
+        "HIERARCHY_ID": "",
+        "CATEGORY_ID": "",
+        "TYPE_ID": "",
+        "LEVEL_NUM": "",
+        "USER_ID": "",
+        "PERSON_ID": "",
+        "USER_ROLE_ID": ""
+      }
+    },
+    "pagination": {
+      "type": {
+        "next": "boolean",
+        "prev": "boolean"
+      },
+      "defaultValue": {
+        "next": false,
+        "prev": false
+      }
+    },
+    "key": {
+      "type": "string",
+      "input": "fromUrl"
+    },
+    "approvalHierarchyVar": {
+      "type": "ApprovalHierarchy",
+      "defaultValue": {
+        "active_flag": "Y"
+      },
+      "input": "none",
+      "required": false,
+      "dirtyDataBehavior": "track"
+    },
+    "ADPapprovalHierarchyList": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "ApprovalHierarchyList",
+        "keyAttributes": "hierarchy_list_id"
+      }
+    },
+    "approvalHierarchyListVar": {
+      "type": "ApprovalHierarchyList",
+      "defaultValue": {
+        "active_flag": "Y",
+        "object_version_num": 0,
+        "hierarchy_list_id": 0,
+        "remarks": " ",
+        "attribute_json": "null"
+      }
+    },
+    "canEdit": {
+      "type": "boolean",
+      "defaultValue": "[[ $variables.method === \"POST\" ]]"
+    },
+    "method": {
+      "type": "string",
+      "defaultValue": "POST",
+      "input": "fromUrl"
+    },
+    "validationGroupVars": {
+      "type": {
+        "childTableFormId": "string",
+        "headerFormId": "string",
+        "isChildTableFormValid": "string",
+        "isHeaderFormValid": "string"
+      },
+      "defaultValue": {
+        "headerFormId": "approval-hierarchy-validation",
+        "childTableFormId": "approval-hierarchy-list-validation"
+      }
+    }
+  },
+  "constants": {
+    "hierarchyListColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Category Name",
+          "field": "category_name",
+          "resizable": "enabled",
+          "width": 167,
+          "template": "category_name_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Type Name",
+          "field": "type_name",
+          "resizable": "enabled",
+          "width": 103,
+          "template": "type_name_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "User Name",
+          "field": "user_name",
+          "resizable": "enabled",
+          "width": 180,
+          "template": "user_name_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Person Name",
+          "field": "person_name",
+          "resizable": "enabled",
+          "width": 180,
+          "template": "person_name_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "User Role Name",
+          "field": "user_role_name",
+          "resizable": "enabled",
+          "width": 170,
+          "template": "user_role_name_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Level",
+          "field": "level_num",
+          "resizable": "enabled",
+          "width": 60,
+          "template": "level_num_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "From Limit",
+          "field": "from_limit",
+          "resizable": "enabled",
+          "width": 100,
+          "template": "from_limit_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "To Limit",
+          "field": "to_limit",
+          "resizable": "enabled",
+          "width": 100,
+          "template": "to_limit_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "active_flag",
+          "resizable": "enabled",
+          "width": 70,
+          "template": "active_flag_template",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Remarks",
+          "field": "remarks",
+          "resizable": "enabled",
+          "width": 350,
+          "template": "remarks_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }
+      ]
+    },
+    "hierarchyListColumnsWithActions": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "width": 75,
+          "template": "hierarchy_list_actions_template",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Category Name",
+          "field": "category_name",
+          "resizable": "enabled",
+          "width": 167,
+          "template": "category_name_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Type Name",
+          "field": "type_name",
+          "resizable": "enabled",
+          "width": 103,
+          "template": "type_name_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "User Name",
+          "field": "user_name",
+          "resizable": "enabled",
+          "width": 180,
+          "template": "user_name_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Person Name",
+          "field": "person_name",
+          "resizable": "enabled",
+          "width": 180,
+          "template": "person_name_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "User Role Name",
+          "field": "user_role_name",
+          "resizable": "enabled",
+          "width": 170,
+          "template": "user_role_name_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Level",
+          "field": "level_num",
+          "resizable": "enabled",
+          "width": 60,
+          "template": "level_num_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "From Limit",
+          "field": "from_limit",
+          "resizable": "enabled",
+          "width": 100,
+          "template": "from_limit_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "To Limit",
+          "field": "to_limit",
+          "resizable": "enabled",
+          "width": 100,
+          "template": "to_limit_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "active_flag",
+          "resizable": "enabled",
+          "width": 70,
+          "template": "active_flag_template",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Remarks",
+          "field": "remarks",
+          "resizable": "enabled",
+          "width": 350,
+          "template": "remarks_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }
+      ]
+    }
+  },
+  "eventListeners": {
+    "activeFlagSwitchValue": {
+      "chains": [
+        {
+          "chain": "SwitchValueChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "addBtnAction": {
+      "chains": [
+        {
+          "chain": "addHierarchyListAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "approvalHierarchyListDialogClose": {
+      "chains": [
+        {
+          "chain": "ChildListDialogCloseAC",
+          "parameters": {
+            "event": "{{$event.detail.event}}"
+          }
+        }
+      ]
+    },
+    "approvalHierarchyPageSpCancel": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpCancelChain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "approvalHierarchyPageSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpPrimaryActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "feedbackEnabled": "{{$event.detail.feedbackEnabled}}"
+          }
+        }
+      ]
+    },
+    "approvalHierarchyPageSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpSecondaryActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "hj"
+          }
+        }
+      ]
+    },
+    "cancelAction": {
+      "chains": [
+        {
+          "chain": "cancel_ChildListAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "cancelExitBtnAction": {
+      "chains": [
+        {
+          "chain": "cancelLeavePageAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnNoAction": {
+      "chains": [
+        {
+          "chain": "cancelDeleteAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnYesAction": {
+      "chains": [
+        {
+          "chain": "okDeleteAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "dialogActiveFlagValue": {
+      "chains": [
+        {
+          "chain": "childStatusAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "dialogTypeIdValueItem": {
+      "chains": [
+        {
+          "chain": "typeAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "dialogUserIdValueItem": {
+      "chains": [
+        {
+          "chain": "userAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "hierarchyCodeValue": {
+      "chains": [
+        {
+          "chain": "headerCodeAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "iconClick": {
+      "chains": [
+        {
+          "chain": "editChildAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "iconClick2": {
+      "chains": [
+        {
+          "chain": "deleteChildListAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "iconOnlyBtnAction": {
+      "chains": [
+        {
+          "chain": "enableEditAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "nxtBtnAction": {
+      "chains": [
+        {
+          "chain": "nextBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "preBtnAction": {
+      "chains": [
+        {
+          "chain": "prevBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "proceedExitBtnAction": {
+      "chains": [
+        {
+          "chain": "leavePageAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "saveAddAnotherAction": {
+      "chains": [
+        {
+          "chain": "save_AddAnotherChildListAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "saveCloseAction": {
+      "chains": [
+        {
+          "chain": "save_CloseChildListAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbBeforeExit": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbBeforeExitListener"
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+  }
+}

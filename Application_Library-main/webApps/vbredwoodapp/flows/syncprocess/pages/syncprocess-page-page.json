@@ -1,0 +1,514 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "canEdit": {
+      "type": "boolean",
+      "defaultValue": "[[ $variables.method === \"POST\" ]]"
+    },
+    "encryptedBody": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "isFormValid": {
+      "type": "string"
+    },
+    "isValueFormValid": {
+      "type": "string"
+    },
+    "key": {
+      "type": "string",
+      "input": "fromUrl"
+    },
+    "lookupTypeCodeCustomMsg": {
+      "type": "object[]"
+    },
+    "method": {
+      "type": "string",
+      "defaultValue": "POST",
+      "input": "fromUrl"
+    },
+    "pagination": {
+      "type": {
+        "next": "boolean",
+        "prev": "boolean"
+      },
+      "defaultValue": {
+        "prev": false,
+        "next": false
+      }
+    },
+    "paramADP": {
+      "type": "vb/ArrayDataProvider",
+      "defaultValue": {
+        "itemType": "ScheduleSyncParamSearch",
+        "keyAttributes": "param_id"
+      }
+    },
+    "scheduled_id": {
+      "type": "number",
+      "defaultValue": 5460
+    },
+    "ScheduleSyncParamSearchVar": {
+      "type": "ScheduleSyncParamSearch"
+    },
+    "ScheduleSyncSearchVar": {
+      "type": "ScheduleSyncSearch",
+      "dirtyDataBehavior": "track"
+    },
+    "searchObj": {
+      "type": {
+
+        "LIMIT": "string",
+        "OFFSET": "string",
+        "SCHEDULE_ID": "any",
+        "SCHEDULE_NAME": "string",
+        "STATUS": "string"
+
+      },
+      "defaultValue": {
+        "OFFSET": "0",
+        "LIMIT": "8",
+        "SCHEDULE_NAME": "",
+        "STATUS": ""
+
+      }
+    },
+    "searchValueObj": {
+      "type": {
+
+        "LIMIT": "string",
+        "OFFSET": "string",
+        "PARAM_ID": "string",
+        "SCHEDULE_ID": "number",
+        "SEQUENCE_NO": "string"
+
+      },
+      "defaultValue": {
+        "OFFSET": "0",
+        "LIMIT": "5",
+        "PARAM_ID": "",
+        "SEQUENCE_NO": ""
+
+      }
+    },
+    "SelectADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "data": "{{ $variables.selectLOV }}",
+        "itemType": "selectLOV1",
+        "keyAttributes": "name"
+      }
+    },
+    "selectLOV": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "MERGE",
+          "name": "MERGE"
+        },
+        {
+          "label": "INSERT",
+          "name": "INSERT"
+        }
+      ]
+    },
+    "selectLovChild": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Fetch Time",
+          "name": "FETCH_TIME"
+        },
+        {
+          "label": "Param Value",
+          "name": "Param Value"
+        }
+      ]
+    },
+    "slectADPChild": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "data": "{{ $variables.selectLovChild }}",
+        "itemType": "selectLOV2",
+        "keyAttributes": "name"
+      }
+    },
+    "status": {
+      "type": "string"
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.ScheduleSyncParamSearch": {
+      "endpoint": "postStgScheduleSyncParamSearch",
+      "service": "ScheduleProcess",
+      "path": "response"
+    },
+    "@decorators.ScheduleSyncSearch": {
+      "endpoint": "postStgScheduleSyncSearch",
+      "service": "ScheduleProcess",
+      "path": "response"
+    },
+    "ScheduleSyncParamSearch": {
+      "created_by": "string",
+      "creation_date": "string",
+      "last_update_date": "string",
+      "last_updated_by": "string",
+      "next_schedule_time": "string",
+      "next_schedule_time_temp": "string",
+      "param_id": "number",
+      "param_name": "string",
+      "param_value": "string",
+      "schedule_id": "number",
+      "sequence_no": "number"
+    },
+    "ScheduleSyncSearch": {
+          "bi_report_name": "string",
+          "bi_report_path": "string",
+          "created_by": "string",
+          "creation_date": "string",
+          "db_column_names": "string",
+          "db_table_name": "string",
+          "frequency_min": "number",
+          "last_update_date": "string",
+          "last_update_login": "string",
+          "last_updated_by": "string",
+          "operation": "string",
+          "package_to_run_after_process": "any",
+          "reset_data": "string",
+          "run_package_at_last_seq": "string",
+          "schedule_id": "number",
+          "schedule_name": "string",
+          "status": "string"
+    },
+    "selectLOV1": {
+      "Insert": "string",
+      "Merge": "string"
+    },
+    "selectLOV2": {
+      "Fetch Time": "string",
+      "Param Value": "string"
+    }
+  },
+  "eventListeners": {
+    "addBtnAction": {
+      "chains": [
+        {
+          "chain": "addBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "saveandcloseDialogBtn",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "closeDialogBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction3": {
+      "chains": [
+        {
+          "chain": "saveandaddChildBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "cancelExitBtnAction": {
+      "chains": [
+        {
+          "chain": "cancelLeaveBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnNoAction": {
+      "chains": [
+        {
+          "chain": "deleteNoBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnYesAction": {
+      "chains": [
+        {
+          "chain": "deleteYesBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "iconClick": {
+      "chains": [
+        {
+          "chain": "deleteChildTableAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "iconClick2": {
+      "chains": [
+        {
+          "chain": "editChildTableAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "iconOnlyBtnAction": {
+      "chains": [
+        {
+          "chain": "enableEditAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "inputTextValue": {
+      "chains": [
+        {
+          "chain": "syncProcessCodeAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "nxtBtnAction": {
+      "chains": [
+        {
+          "chain": "nextBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "paramChildDialogClose": {
+      "chains": [
+        {
+          "chain": "DialogCloseChain",
+          "parameters": {
+            "event": "{{$event.detail.event}}"
+          }
+        }
+      ]
+    },
+    "preBtnAction": {
+      "chains": [
+        {
+          "chain": "prevBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "proceedExitBtnAction": {
+      "chains": [
+        {
+          "chain": "leaveStatusBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshBtnAC"
+        }
+      ]
+    },
+    "switchValue": {
+      "chains": [
+        {
+          "chain": "statusHeaderAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "syncProcessPageSpCancel": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpCancelChain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "syncProcessPageSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpPrimaryActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "feedbackEnabled": "{{$event.detail.feedbackEnabled}}"
+          }
+        }
+      ]
+    },
+    "syncProcessPageSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpSecondaryActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.value.id}}"
+          }
+        }
+      ]
+    },
+    "syncProcessPageSpSecondaryAction2": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpSecondaryActionChain1",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "vbBeforeEnter": {
+      "chains": [
+      ]
+    },
+    "vbBeforeExit": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbBeforeExitListener"
+        }
+    ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "PageVbEnterChain"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-dynamic-form": {
+        "path": "oj-dynamic/form/loader"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-date-time": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-message-unsaved-changes": {
+        "path": "oj-sp/message-unsaved-changes/loader"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "oj-sp/simple-create-edit/loader"
+      },
+      "oj-switch": {
+        "path": "ojs/ojswitch"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/addEditHeader.css"
+    ]
+  }
+}

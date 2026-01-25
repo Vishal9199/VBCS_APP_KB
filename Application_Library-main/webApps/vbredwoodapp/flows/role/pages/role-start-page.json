@@ -1,0 +1,489 @@
+{
+  "title": "Role Management",
+  "description": "Role Management Smart Search Page with Advanced Filtering and Action Capabilities",
+  "variables": {
+    "encryptPayload": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "getAolUsrRoleLovRolenameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "role_code",
+        "itemsPath": "items",
+        "responseType": "getAolUsrRoleLovRolenameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "role_name"
+          ]
+        },
+        "fetchChain": "getAol_usrRoleLovRolenameFetch"
+      }
+    },
+    "getApplicationLovAppCodeListSDP2": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "application_id",
+        "itemsPath": "items",
+        "responseType": "getApplicationLovAppCodeResponse2",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "application_name"
+          ]
+        },
+        "fetchChain": "getApplicationLovAppCodeFetch"
+      }
+    },
+    "getMenuLovMenuNameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "menu_id",
+        "itemsPath": "items",
+        "responseType": "getMenuLovMenuNameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "menu_name"
+          ]
+        },
+        "fetchChain": "getMenuLovMenuNameFetch"
+      }
+    },
+    "roleManagementADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "RoleManagementType",
+        "keyAttributes": "role_id"
+      }
+    },
+    "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+
+            "RoleNameFilter": {
+              "label": "Role Name",
+              "options": {
+                "optionsData": "[[ $page.variables.getAolUsrRoleLovRolenameListSDP ]]",
+                "optionsKeys": {
+                  "label": "role_name",
+                  "value": "role_code"
+                }
+              }
+            },
+            "MenuNameFilter": {
+              "label": "Menu Name",
+              "options": {
+                "optionsData": "[[ $page.variables.getMenuLovMenuNameListSDP ]]",
+                "optionsKeys": {
+                  "label": "menu_name",
+                  "value": "menu_id"
+                }
+              }
+            },
+            "ApplicationNameFilter": {
+              "label": "Application Name",
+              "options": {
+                "optionsData": "[[ $page.variables.getApplicationLovAppCodeListSDP2 ]]",
+                "optionsKeys": {
+                  "label": "application_name",
+                  "value": "application_id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/roleSearchConfig.json' ]]"
+      }
+    },
+    "searchObj": {
+      "type": "SearchParametersType",
+      "defaultValue": {
+        "IN_LIMIT": "8",
+        "IN_OFFSET": "0"
+      }
+    },
+    "pagingButton": {
+      "type": {
+          "next": "boolean",
+          "previous": "boolean"
+        },
+      "defaultValue": {
+        "previous": true,
+        "next": true
+      }
+    }
+
+  },
+  "types": {
+    "@decorators.getAolUsrRoleLovRolenameResponse": {
+      "endpoint": "getAol_usrRoleLovRolename",
+      "service": "Role",
+      "path": "response"
+    },
+    "@decorators.getApplicationLovAppCodeResponse2": {
+      "endpoint": "getApplicationLovAppCode",
+      "service": "Application",
+      "path": "response"
+    },
+    "@decorators.getMenuLovMenuNameResponse": {
+      "endpoint": "getMenuLovMenuName",
+      "service": "Menu",
+      "path": "response"
+    },
+    "getAolUsrRoleLovRolenameResponse": {
+      "items": [
+        {
+          "role_code": "string",
+          "role_name": "string"
+        }
+      ]
+    },
+    "getApplicationLovAppCodeResponse2": {
+      "items": [
+        {
+          "application_id": "number",
+          "application_name": "string"
+        }
+      ]
+    },
+    "getMenuLovMenuNameResponse": {
+      "items": [
+        {
+          "menu_id": "number",
+          "menu_name": "string"
+        }
+      ]
+    },
+    "RoleManagementType": {
+      "role_id": "number",
+      "object_version_num": "number",
+      "role_code": "string",
+      "role_name": "string",
+      "remarks": "string",
+      "menu_id": "number",
+      "menu_code": "string",
+      "menu_name": "string",
+      "request_group_id": "number",
+      "request_group_code": "string",
+      "request_group_name": "string",
+      "active_flag": "string",
+      "application_id": "number",
+      "application_code": "string",
+      "application_name": "string",
+      "business_unit_id": "number",
+      "business_unit_name": "string",
+      "attribute_json": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "SearchParametersType": {
+      "IN_LIMIT": "string",
+      "IN_OFFSET": "string",
+      "KEYWORD": "string",
+      "P_ROLE_ID": "string",
+      "ROLE_CODE": "string",
+      "ROLE_NAME": "string",
+      "MENU_ID": "string",
+      "APPLICATION_ID": "string"
+
+    }
+
+  },
+  "constants": {
+    "tableColumns": {
+      "type": "object[]",
+      "defaultValue": "[[ [\n     {\n        \"headerText\": \"Role Name\",\n        \"field\": \"role_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 136,\n        \"template\": \"role_name_template\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Menu Name\",\n        \"field\": \"menu_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 200,\n        \"template\": \"menu_name_template\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 150px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Request Group Name\",\n        \"field\": \"request_group_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 200,\n        \"template\": \"request_group_template\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Application Name\",\n        \"field\": \"application_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 285,\n        \"template\": \"application_name_template\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Business Unit\",\n        \"field\": \"business_unit_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 200,\n        \"template\": \"business_unit_template\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Status\",\n        \"field\": \"active_flag\",\n        \"resizable\": \"enabled\",\n        \"width\": 70,\n        \"sortable\": \"disabled\",\n        \"template\": \"active_flag_icon\",\n        \"headerStyle\": \"text-align: center; white-space: normal; min-width: 100px;\",\n        \"style\": \"text-align: center; vertical-align: middle;\"\n    },\n    {\n        \"headerText\": \"Remarks\",\n        \"field\": \"remarks\",\n        \"resizable\": \"enabled\",\n        \"width\": \"\",\n        \"template\": \"remarks_template\",\n        \"headerStyle\": \"white-space: nowrap;\",\n        \"style\": \"\"\n    }\n] ]]"    },
+    "tableColumnsWithActions": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "width": 100,
+          "template": "actions_template",
+          "sortable": "disabled",
+          "headerStyle": "text-align: center; white-space: normal;",
+          "style": "text-align: center; vertical-align: middle;"
+
+        },
+        {
+          "headerText": "Role Name",
+          "field": "role_name",
+          "resizable": "enabled",
+          "width": 136,
+          "template": "role_name_template",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": ""
+        },
+        {
+          "headerText": "Menu Name",
+          "field": "menu_name",
+          "resizable": "enabled",
+          "width": 200,
+          "template": "menu_name_template",
+          "headerStyle": "white-space: nowrap; min-width: 150px;",
+          "style": ""
+        },
+        {
+          "headerText": "Request Group Name",
+          "field": "request_group_name",
+          "resizable": "enabled",
+          "width": 200,
+          "template": "request_group_template",
+          "headerStyle": "white-space: nowrap; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Application Name",
+          "field": "application_name",
+          "resizable": "enabled",
+          "width": 285,
+          "template": "application_name_template",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": ""
+        },
+        {
+          "headerText": "Business Unit",
+          "field": "business_unit_name",
+          "resizable": "enabled",
+          "width": 200,
+          "template": "business_unit_template",
+          "headerStyle": "white-space: nowrap; min-width: 140px;",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "active_flag",
+          "resizable": "enabled",
+          "width": 70,
+          "sortable": "disabled",
+          "template": "active_flag_icon",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+
+        },
+        {
+          "headerText": "Remarks",
+          "field": "remarks",
+          "resizable": "enabled",
+          "width": "",
+          "template": "remarks_template",
+          "headerStyle": "white-space: nowrap;",
+          "style": ""
+
+        }
+      ]
+    }
+  },
+  "metadata": {},
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-flex": {
+        "path": "ojs/ojflex"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      }
+
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/smartSearch.css"
+    ]
+  },
+  "eventListeners": {
+    "addBtnAction": {
+      "chains": [
+        {
+          "chain": "addAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnNoAction": {
+      "chains": [
+        {
+          "chain": "deleteNoAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnYesAction": {
+      "chains": [
+        {
+          "chain": "deleteYesAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "hyperlinkClick": {
+      "chains": [
+        {
+          "chain": "HyperlinkClickChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "hyperlinkClick2": {
+      "chains": [
+        {
+          "chain": "HyperlinkClickChain1",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "iconClick": {
+      "chains": [
+        {
+          "chain": "deleteDialogOpenAc",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "iconClick2": {
+      "chains": [
+        {
+          "chain": "editAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "nxtBtnAction": {
+      "chains": [
+        {
+          "chain": "nextAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "preBtnAction": {
+      "chains": [
+        {
+          "chain": "previousAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "resetAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "onLoadAC"
+        }
+      ]
+    }
+
+  }
+}

@@ -1,0 +1,50 @@
+{
+    "items": [
+        {
+            "lookup_type_id": 1,
+            "lookup_type_code": "1",
+            "lookup_type_name": "1",
+            "application_code": null,
+            "application_name": null
+        },
+        {
+            "lookup_type_id": 78,
+            "lookup_type_code": "STATUS_TYPE",
+            "lookup_type_name": "Status Type",
+            "application_code": "RAI_JAS",
+            "application_name": "Ok App"
+        },
+        {
+            "lookup_type_id": 232,
+            "lookup_type_code": "TESTING_5",
+            "lookup_type_name": "Testing52",
+            "application_code": "RAI_JAS",
+            "application_name": "Ok App"
+        },
+        {
+            "lookup_type_id": 224,
+            "lookup_type_code": "TESTING_1",
+            "lookup_type_name": "Testing 1",
+            "application_code": "NBVN",
+            "application_name": "test"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 4,
+    "links": [
+        {
+            "rel": "self",
+            "href": "http://primaverademo.4iapps.com:8442/ords/aol/lookup/type/lov/type/name"
+        },
+        {
+            "rel": "describedby",
+            "href": "http://primaverademo.4iapps.com:8442/ords/aol/metadata-catalog/lookup/type/lov/type/item"
+        },
+        {
+            "rel": "first",
+            "href": "http://primaverademo.4iapps.com:8442/ords/aol/lookup/type/lov/type/name"
+        }
+    ]
+}

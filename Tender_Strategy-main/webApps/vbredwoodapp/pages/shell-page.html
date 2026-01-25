@@ -1,0 +1,22 @@
+<div id="pageContent" class="oj-web-applayout-page">
+    <div class="oj-web-applayout-content-nopad oj-web-applayout-max-width">
+
+      <div class="oj-flex">
+        <oj-messages messages="[[ $variables.messageADP ]]" 
+          position.at.horizontal="center" class="oj-flex-item oj-sm-12 oj-md-12"
+          position.at.vertical="top" position.collision="flipfit" position.my.horizontal="center" 
+          position.my.vertical="top" display-options.category="header">
+        </oj-messages>
+      </div>
+      
+      <oj-sp-messages-toast primary-text="[[ $variables.messageToast ]]" id="messageToast"></oj-sp-messages-toast>
+
+      <!-- <div class="oj-web-applayout-content-nopad oj-web-spacing oj-web-applayout-max-width">
+        <div class="oj-flex oj-web-applayout-content oj-flex-items-pad"> -->
+          <div class="oj-flex">
+            <oj-vb-content id="vbRouterContent" class="oj-flex-item" config="[[vbRouterFlow]]"></oj-vb-content>
+          </div>
+        <!-- </div>
+      </div> -->
+    </div>
+  </div>

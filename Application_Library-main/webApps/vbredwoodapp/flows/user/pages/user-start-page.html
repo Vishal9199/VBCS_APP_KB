@@ -1,0 +1,138 @@
+<style>
+.oj-sp-header-general-overview-header-strip {
+  display: none;}
+
+div#mainContent
+Specificity: (1,0,1)
+ {
+    background-color: white;
+}
+</style>
+
+<div id="sampleDemo1" class="demo-padding demo-container " style="background-color:white;">
+<div id="componentDemoContent1" style="width: 1px; min-width: 100%; background-color:white;">
+<div id="mainContent1" style="background-color:white;">
+<oj-sp-smart-search-page id="oj_exssp1" page-title="User Access Management" style="background-color:white;"
+  page-subtitle="  ">
+
+<!--Search Section -->
+<oj-flex slot="search" class="oj-sm-padding-2x" style="align-items: center;">
+  <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-space-between" style="width: 100%; align-items: flex-start; padding: 0 1rem;">
+    <div style="flex: 1; margin-right: 1rem;">
+      <oj-sp-smart-search 
+        id="freq_smartsearch"
+        filter-criterion="{{ $variables.filterCriterion }}"
+        search-config="[[ $variables.searchConfiguration.provider ]]" 
+        search-context="[[ $variables.searchContext ]]">
+      </oj-sp-smart-search>
+    </div>
+    <div style="display: flex; gap: 0.25rem; margin-left: 1rem; margin-top: 1px; flex-wrap: wrap;">
+      <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Reset" id="resetBtn"
+        on-oj-action="[[$listeners.resetBtnAction]]">
+     <img slot="startIcon" :src="[[ $application.path + 'resources/images/Reset.png' ]]">
+    </div>
+  </div>
+</oj-flex>
+
+<!--Table Section -->
+<div id="sampleDemo" class="demo-padding demo-container" style="background-color:white;">
+<div id="componentDemoContent" style="width: 1px; min-width: 100% ; background-color:white;">
+<div id="searchMainContent" style="background-color:white;">
+
+<div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-space-between"
+  style="width: 100%; align-items: flex-start; padding: 0 1rem ; background-color:white;">
+  <div style="flex: 1; margin-right: 1rem;">
+  </div>
+  <div style="display: flex; gap: 0.25rem; margin-left: 1rem; margin-top: 1px; flex-wrap: wrap;">
+    <oj-button style="margin:0.125rem;" label="Refresh" chroming="outlined" id="refreshBtn"
+      on-oj-action="[[$listeners.refreshBtnAction]]">
+      <img slot="startIcon" :src="[[ $application.path + 'resources/images/Refresh.png' ]]">
+    </oj-button>
+  </div>
+</div>
+
+<div class="oj-flex">
+<!-- oj-search-table -->
+<oj-table scroll-policy="loadMoreOnScroll" class="oj-sm-width-full oj-bg-body" display="grid"
+  horizontal-grid-visible="enabled" vertical-grid-visible="enabled" selection-mode.row="single"
+  selection-mode.column="single" id="searchUserAccessTbl"
+  data="[[ $variables.userAccessADP ]]"
+  columns="{{$flow.constants.accessObj.allowDelete || $flow.constants.accessObj.allowEdit ? $constants.tableColumnWithActions : $constants.tableColumns}}"
+   >
+
+<!-- Actions Template Slot with Oracle JET Icons -->
+
+
+<template slot="date_template">
+  <oj-input-date value="[[$current.data]]" readonly="true"
+    converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'>
+  </oj-input-date>
+</template>
+
+<template slot="active_flag_icon">
+ <oj-bind-if test='[[ $current.data === "Y"  || $current.data === "y" || $current.data === true ]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/activeBtn.png' ]]" >
+
+                    </oj-bind-if>
+                    <oj-bind-if test='[[ $current.data === "N"  || $current.data === false]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/inactive.png' ]]">
+                    </oj-bind-if>
+</template>
+<template slot="actions_template">
+  <div style="gap:15px" class="oj-flex oj-sm-align-items-center oj-sm-justify-content-center">
+    
+ 
+    
+
+    <!-- <oj-bind-if test="[[ $flow.constants.accessObj.allowDelete ]]">
+      <span class="oj-ux-ico-trash" style="cursor: pointer;" on-click="[[$listeners.iconClick]]"></span>
+    </oj-bind-if> -->
+
+  
+    <oj-bind-if test="[[ $flow.constants.accessObj.allowEdit ]]">
+      <span class="oj-ux-ico-edit" style="cursor: pointer;" on-click="[[$listeners.iconClick2]]"></span>
+    </oj-bind-if>
+  
+  </div>
+</template>
+
+</oj-table>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Pagination Section -->
+<div class="oj-flex" style="background-color:white">
+  <div class="oj-flex-item oj-sm-12 oj-md-1"></div>
+  <div class="oj-flex-item oj-sm-12 oj-flex oj-md-6">
+    <div class="oj-flex-item oj-sm-12 oj-md-8"></div>
+    <div class="oj-flex oj-sm-justify-content-center">
+      <oj-bind-if test="[[true]]">
+        <oj-toolbar chroming="solid" class="oj-flex-item oj-sm-flex-initial">
+          
+        <oj-button label="Prev" chroming="borderless" id="preBtn" disabled="[[ ! $variables.pagingButton.previous ]]"
+        on-oj-action="[[$listeners.preBtnAction]]">
+        <span slot="startIcon" class="oj-ux-ico-back"></span>
+      </oj-button>
+    
+   
+      <oj-button label="Next" chroming="borderless" id="nxtBtn" disabled="[[ !$variables.pagingButton.next ]]"
+        on-oj-action="[[$listeners.nxtBtnAction]]">
+        <span slot="endIcon" class="oj-ux-ico-forward-next"></span>
+      </oj-button>
+  
+           
+        </oj-toolbar>
+      </oj-bind-if>
+    </div>
+  </div>
+</div>
+
+<!-- Pagination Section -->
+
+</oj-sp-smart-search-page>
+</div>
+</div>
+</div>
+

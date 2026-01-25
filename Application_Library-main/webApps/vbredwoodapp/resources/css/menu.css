@@ -1,0 +1,193 @@
+/**
+ * Menu Management Smart Search Page Theme with User Specified Color: #2B1675
+ */
+ 
+:root {
+    --user-primary-color: #01474d;
+    --oj-button-height: 2rem;
+}
+oj-sp-header-general-overview .oj-sp-header-general-overview-bg-light {
+  background-color: white !important;
+}
+/* Fit to Page in redwood no scroll bar*/
+.oj-sp-public-primary-content-container {
+    min-height: fit-content !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    box-sizing: border-box !important;
+}.oj-sp-header-create-edit-spacing-container.oj-sm-only-padding-4x-horizontal.oj-xl-padding-12x-horizontal.oj-md-padding-6x-horizontal.oj-sp-template-wrapper.oj-sp-header-create-edit-container-outer-vertical-padding {
+    background-color: #ffffff !important;
+}
+
+/* Smart Search - Start */
+.oj-sp-header-general-overview-header-strip {
+  display: none;
+}
+
+#oj_exssp1_h_selectContext{
+   display: none;
+}
+
+#oj_exssp1_h_pageTitle{
+  color: #01474d;
+}
+
+/* All Button Css - Start */
+.oj-button.oj-default.oj-button-outlined-chrome .oj-button-button {
+    background-color: #01474d !important;
+    color: white !important;
+}
+
+.oj-button-toggle.oj-default.oj-button-outlined-chrome, 
+.oj-button-toggle.oj-disabled.oj-button-outlined-chrome, 
+.oj-button-toggle.oj-focus-only.oj-button-outlined-chrome, 
+.oj-button.oj-default.oj-button-outlined-chrome .oj-button-button, 
+.oj-button.oj-disabled.oj-button-outlined-chrome .oj-button-button, 
+.oj-button.oj-focus-only.oj-button-outlined-chrome .oj-button-button {
+    border-color: var(--oj-button-outlined-chrome-border-color);
+    background-image: none;
+    background-color: #01474d !important;
+}
+
+.oj-button-toggle.oj-default.oj-button-outlined-chrome, 
+.oj-button-toggle.oj-focus-only.oj-button-outlined-chrome, 
+.oj-button.oj-default.oj-button-outlined-chrome .oj-button-button, 
+.oj-button.oj-focus-only.oj-button-outlined-chrome .oj-button-button {
+    color: white !important;
+}
+
+/* Button Hover Effects */
+.oj-button.oj-default.oj-button-outlined-chrome .oj-button-button:hover {
+    background-color: #01474d !important;
+}
+
+/*All Page Table - Start */
+.oj-table-column-header-cell{
+    color: white;
+    background-color: #01474d;
+    font-weight: bold;
+    border-color: #ededed;
+}
+
+.oj-table {
+    position: relative;
+    line-height: normal;
+    min-width: 240px;
+    min-height: auto;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.oj-table-column-header {
+    font-size: initial;
+    position: relative;
+    float: none;
+    text-overflow: inherit;
+    overflow: inherit;
+    white-space: normal;
+    display: inline-flex;
+    align-items: center;
+    font-weight: bold;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Table Header Text Wrapping Prevention */
+.oj-table th, 
+.oj-table-column-header-cell, 
+.oj-table-column-header,
+.oj-table-column-header-cell *,
+oj-table .oj-table-column-header-cell {
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    flex-wrap: nowrap !important;
+}
+
+/* Table Row Hover Effect */
+.oj-table-data-row:hover {
+    background-color: rgba(43, 22, 117, 0.05);
+}
+
+/*Smart Search Filter - Start */
+.oj-typography-body-xs, .oj-typography-caption-1 {
+    font-size: var(--oj-typography-body-xs-font-size) !important;
+    font-weight: 374 !important;
+    line-height: var(--oj-typography-body-xs-line-height) !important;
+}
+
+oj-sp-smart-search-page .oj-sp-checkbox-template-wrapper, 
+oj-sp-smart-search-page .oj-sp-template-wrapper {
+    padding-left: var(--oj-sp-template-padding-horizontal) !important;
+    padding-right: var(--oj-sp-template-padding-horizontal) !important;
+    background-color: white !important;
+}
+
+/* Dialog Styling */
+.oj-dialog .oj-dialog-header {
+    background-color: #01474d;
+    color: white;
+    font-weight: bold;
+}
+
+.oj-dialog .oj-dialog-header .oj-dialog-title {
+    color: white;
+}
+
+/* Smart Search Page Title */
+.oj-sp-smart-search-page .oj-sp-page-title {
+    color: #01474d;
+    font-weight: bold;
+}
+
+/* Toolbar Styling */
+.oj-toolbar.oj-toolbar-chroming-solid {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+}
+
+/* Action Button Alignment */
+.oj-table-data-cell .oj-button-sm {
+    margin: 0.125rem;
+}
+
+/* Loading State */
+.oj-table-loading-icon {
+    color: #01474d;
+}
+
+/* Focus States */
+.oj-button:focus {
+    box-shadow: 0 0 0 0.2rem rgba(43, 22, 117, 0.25);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .oj-table {
+        font-size: 0.875rem;
+    }
+    
+    .demo-padding {
+        padding: 0.5rem;
+    }
+}
+.oj-ux-ico-oracle-o::before {
+    content: '\f345';
+    /* Unicode for search icon in ojuxIconFont */
+    color: black;
+  }
+ .oj-flex.oj-sm-flex-wrap-nowrap.oj-sm-justify-content-space-between {
+    background-color: white !important;
+}
+/* Print Styles */
+@media print {
+    .oj-button,
+    .oj-dialog {
+        display: none !important;
+    }
+    
+    .oj-table {
+        width: 100%;
+        font-size: 10pt;
+    }
+}

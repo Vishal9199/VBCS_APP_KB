@@ -1,0 +1,96 @@
+<style>
+/* Hide Redwood header strip */
+.oj-sp-header-general-overview-header-strip {
+  display: none;
+}
+
+/* Hide context selector */
+#approval_history_h_selectContext{
+   display: none;
+}
+
+/* Page title color */
+#approval_history_h_pageTitle{
+  /* color: #0572ce; */
+}
+/* Page Title Color - GREEN */
+#approval_history_h_pageTitle {
+    color: white !important;
+    font-weight: bold;
+}
+
+/* Smart Search Page Header Background and Title - GREEN THEME */
+oj-sp-smart-search-page .oj-sp-header-container {
+    background-color: #01474d !important;
+    color: white !important;
+}
+
+oj-sp-smart-search-page .oj-sp-header-title {
+    color: white !important;
+}
+
+/* Page title and subtitle in header */
+oj-sp-smart-search-page[id="approval_history"] .oj-sp-page-header-container {
+    background: linear-gradient(135deg, #28a745 0%, #218838 100%) !important;
+}
+
+oj-sp-smart-search-page[id="approval_history"] h1, oj-sp-smart-search-page[id="approval_history"] .oj-sp-page-title {
+    color: white !important;
+}
+
+#addBtn.oj-button.oj-button-outlined-chrome .oj-button-button, #resetBtn.oj-button.oj-button-outlined-chrome .oj-button-button {
+  border-color: white !important;
+}
+
+</style>
+
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width:1px;min-width: 100%;">
+    <div id="mainContent">
+      <oj-sp-smart-search-page page-title='[[ "Approval History " +$variables.lv_title ]]' primary-action.display="off"
+        badge.status="neutral" primary-action.label="Refresh"
+        secondary-actions='[{"label":"Cancel","id":"cancel","icon":" oj-ux-ico-cancel"},{"label":"Refresh","id":"Refresh","icon":"oj-ux-ico-refresh"}]'
+        id="approval_history" on-sp-primary-action="[[$listeners.approvalHistorySpPrimaryAction]]"
+        on-sp-secondary-action="[[$listeners.approvalHistorySpSecondaryAction]]" page-subtitle=" ">
+        <div id="sampleDemo1" class="demo-padding demo-container" style="margin-top:19px">
+          <div id="componentDemoContent2" style="min-width: 100%;">
+            <div class="oj-panel oj-panel-shadow-md"
+              style="overflow:hidden;margin-left:20px;margin-right:20px;margin-top:-10px;">
+              <div id="mainContent1">
+                <div class="oj-flex">
+                  <!-- Table -->
+                  <oj-table scroll-policy="loadMoreOnScroll" data="[[ $variables.adpSearch ]]"
+                    columns="{{ $constants.column }}" style="width: 99%; margin-left: 0.5%;  overflow-x: auto;"
+                    display="grid" id="historyTbl" selection-mode.row="single">
+                    <template slot="Date">
+                      <oj-input-date-time value='[[typeof $current.data === "string" ? $current.data : null]]'
+                        converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy hh:mm a"}}' readonly="true"
+                        id="start001" aria-label="start001">
+                      </oj-input-date-time>
+                    </template>
+                  </oj-table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="oj-flex oj-sm-justify-content-center" style="background-color:white;">
+          <oj-toolbar chroming="solid" class="oj-flex-item oj-sm-flex-initial">
+
+            <oj-button label="Prev" chroming="borderless"
+              disabled="[[ $variables.searchObj.IN_OFFSET === undefined || $variables.searchObj.IN_OFFSET === '0' ]]"
+              id="preBtn" on-oj-action="[[$listeners.preBtnAction]]">
+              <span slot="startIcon" class="oj-ux-ico-back"></span>
+            </oj-button>
+
+            <oj-button label="Next" chroming="borderless" disabled="[[ $variables.vHasMoreRecords === false ]]"
+              id="nxtBtn" on-oj-action="[[$listeners.nxtBtnAction]]">
+              <span slot="endIcon" class="oj-ux-ico-forward-next"></span>
+            </oj-button>
+
+          </oj-toolbar>
+        </div>
+      </oj-sp-smart-search-page>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+{
+	"params": {
+           "applicationName": "SelfService",
+           "processName": "Process",
+           "applicationVersion": "1.0"
+	},
+	"dataObject": {
+        "submitFormArgs": {
+            "callSubmitPackage": "NO",
+            "p_APPR_PROCESS": "DUTY_RESUMPTION",
+            "p_TRX_ID": "138307",
+            "p_TYPE": "",
+            "p_USER_ID": "300000004339990",
+            "p_ACTION_ID": "2175"
+        }
+	}
+}

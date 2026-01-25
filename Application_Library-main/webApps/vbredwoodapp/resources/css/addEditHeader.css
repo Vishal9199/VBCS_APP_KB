@@ -1,0 +1,102 @@
+:root {
+  --user-primary-color: #01474d;
+  /* default background */
+  --user-button-hover: #116971;
+  /* hover shade */
+  --user-button-active: #003337;
+  /* click/active shade */
+  --user-button-text: #ffffff;
+  /* text color */
+  --oj-button-height: 2rem;
+}
+
+/* Fit to Page in redwood */
+.oj-sp-public-primary-content-container {
+  min-height: fit-content !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  box-sizing: border-box !important;
+}
+
+.oj-sp-header-create-edit-header-strip {
+  display: none !important;
+}
+
+oj-sp-header-create-edit .oj-sp-header-create-edit-title-sm-up {
+  color: var(--user-primary-color);
+}
+
+oj-sp-header-create-edit .oj-sp-header-create-edit-bg-light {
+  background-color: white !important;
+}
+
+@media print,
+screen and (min-width: 600px) {
+  .oj-md-padding-12x-vertical {
+    padding-bottom: 0px !important;
+    padding-top: 0px !important;
+  }
+}
+
+/* Primary Action Button CSS */
+.oj-button.oj-button-cta-chrome .oj-button-button {
+  background-color: var(--user-primary-color) !important;
+  color: var(--user-button-text, #fff) !important;
+  border-color: var(--user-primary-color) !important;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+#refreshSectionBtn.oj-button.oj-button-outlined-chrome .oj-button-button,
+#addSectionBtn.oj-button.oj-button-outlined-chrome .oj-button-button,
+#addBtn.oj-button.oj-button-outlined-chrome .oj-button-button,
+#deleteBtnYes.oj-button.oj-button-outlined-chrome .oj-button-button,
+#deleteBtnNo.oj-button.oj-button-outlined-chrome .oj-button-button,
+#save-add-another.oj-button.oj-button-outlined-chrome .oj-button-button,
+#save-close.oj-button.oj-button-outlined-chrome .oj-button-button,
+#cancel.oj-button.oj-button-outlined-chrome .oj-button-button,
+#cancelExitBtn.oj-button.oj-button-outlined-chrome .oj-button-button,
+#proceedExitBtn.oj-button.oj-button-outlined-chrome .oj-button-button {
+  background-color: var(--user-primary-color) !important;
+  color: var(--user-button-text) !important;
+  border-color: var(--user-primary-color) !important;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+
+/* Dialog Styling */
+.oj-dialog .oj-dialog-header {
+  background-color: var(--user-primary-color);
+  color: white;
+  font-weight: bold;
+}
+
+.oj-dialog .oj-dialog-header .oj-dialog-title {
+  color: white;
+}
+
+.oj-dialog .oj-fwk-icon {
+  color: white;
+}
+
+span.oj-ux-ico-edit {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+span.oj-ux-ico-trash {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+
+/* Remove scrollbar from OJET validation popup */
+.oj-popup {
+  overflow: visible !important;
+  max-height: none !important;
+  white-space: nowrap !important;
+  /* prevents wrapping */
+}
+
+.oj-messaging-popup .oj-message-detail span {
+  white-space: nowrap;
+}

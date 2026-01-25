@@ -1,0 +1,28 @@
+{
+    "items": [
+        {
+            "person_id": 300000037189254,
+            "person_number": "7600",
+            "full_name": "Fahad Yahya Younis Al Naabi فهد الناعبي",
+            "email_address": "Fahad.Naabi@testowwsc.nama.om"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/approval/process/employee/list?searchVal=Fahad.Naabi%40testowwsc.nama.om"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/approval/process/employee/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/approval/process/employee/list?searchVal=Fahad.Naabi%40testowwsc.nama.om"
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "items": [
+        {
+            "parameter_id": 2324,
+            "param_code": "EMPLOYEE_NUMBER",
+            "param_name": "Employee Number",
+            "param_data_type": "VARCHAR2"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol/program/parent/lov?p_program_id=2322"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol/metadata-catalog/program/parent/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol/program/parent/lov?p_program_id=2322"
+        }
+    ]
+}

@@ -1,0 +1,357 @@
+{
+  "title": "Menu Management",
+  "description": "Smart Search page for Menu Management with search filters and table display",
+  "variables": {
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "encryptPayload": {
+  "type": {
+    "payload": "string"
+  },
+  "defaultValue": {
+    "payload": ""
+  }
+},
+    "getMenuLovMenuNameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "menu_id",
+        "itemsPath": "items",
+        "responseType": "getMenuLovMenuNameResponse4",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "menu_name"
+          ]
+        },
+        "fetchChain": "getMenuLovMenuNameFetch"
+      }
+    },
+    "getMenuLovMenuNameListSDP2": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "menu_id",
+        "itemsPath": "items",
+        "responseType": "getMenuLovMenuNameResponse5",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "menu_code"
+          ]
+        },
+        "fetchChain": "getMenuLovMenuNameFetch2"
+      }
+    },
+    "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "MenuNameFilter": {
+              "label": "Menu Name",
+              "options": {
+                "optionsData": "[[ $page.variables.getMenuLovMenuNameListSDP]]",
+                "optionsKeys": {
+                  "label": "menu_name",
+                  "value": "menu_id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/menuSearchConfig.json' ]]"
+      }
+    },
+    "menuManagementADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "MenuManagementType",
+        "data": [],
+        "keyAttributes": "menu_id"
+      }
+    },
+    "searchObj": {
+      "type": {
+        "IN_LIMIT": "string",
+        "IN_OFFSET": "string",
+        "KEYWORD": "string",
+        "MENU_CODE": "string",
+        "MENU_ID": "number",
+        "MENU_NAME": "string"
+
+      },
+      "defaultValue": {
+        "IN_LIMIT": "5",
+        "IN_OFFSET": "0",
+        "MENU_CODE": "",
+        "MENU_NAME": ""
+      }
+    },
+    "pagingButton": {
+      "type": {
+        "previous": "boolean",
+        "next": "boolean"
+      },
+      "defaultValue": {
+        "previous": false,
+        "next": false
+      }
+    }
+
+  },
+  "metadata": {},
+  "types": {
+
+    "@decorators.getMenuLovMenuNameResponse4": {
+      "endpoint": "getMenuLovMenuName",
+      "service": "Menu",
+      "path": "response"
+    },
+    "@decorators.getMenuLovMenuNameResponse5": {
+      "endpoint": "getMenuLovMenuName",
+      "service": "Menu",
+      "path": "response"
+    },
+    "getMenuLovMenuNameResponse4": {
+      "items": [
+        {
+          "menu_id": "number",
+          "menu_name": "string"
+        }
+      ]
+    },
+    "getMenuLovMenuNameResponse5": {
+      "items": [
+        {
+          "menu_code": "string",
+          "menu_id": "number"
+        }
+      ]
+    },
+    "MenuManagementType": {
+      "menu_id": "number",
+      "object_version_num": "number", 
+      "menu_code": "string",
+      "menu_name": "string",
+      "remarks": "string",
+      "attribute_json": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string", 
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {"path": "ojs/ojbutton"},
+      "oj-select-single": {"path": "ojs/ojselectsingle"},
+      "oj-table": {"path": "ojs/ojtable"},
+      "oj-sp-smart-search-page": {"path": "oj-sp/smart-search-page/loader"},
+      "oj-sp-smart-search": {"path": "oj-sp/smart-search/loader"},
+      "oj-bind-text": {"path": "ojs/ojbindtext"},
+      "oj-bind-if": {"path": "ojs/ojbindif"},
+      "oj-dialog": {"path": "ojs/ojdialog"},
+      "oj-toolbar": {"path": "ojs/ojtoolbar"}
+    },
+    "css": [
+      "/resources/css/smartSearch.css"
+    ]
+  },
+  "eventListeners": {
+    "addBtnAction": {
+      "chains": [
+        {
+          "chain": "addButtonAC"
+        }
+      ]
+    },
+    "deleteBtnNoAction": {
+      "chains": [
+        {
+          "chain": "deleteCloseAC"
+        }
+      ]
+    },
+    "deleteBtnYesAction": {
+      "chains": [
+        {
+          "chain": "deleteYesAC"
+        }
+      ]
+    },
+    "hyperlinkClick": {
+      "chains": [
+        {
+          "chain": "onClikEditAC",
+          "parameters": {
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "iconClick": {
+      "chains": [
+        {
+          "chain": "deleteAC",
+          "parameters": {
+            "key": "{{$current.key}}",
+            "current": "{{$current}}",
+            "index": "{{$current.index}}"
+          }
+        }
+      ]
+    },
+    "iconClick2": {
+      "chains": [
+        {
+          "chain": "onClikEditAC",
+          "parameters": {
+
+            "current": "{{$current}}",
+            "index": "{{$current.index}}",
+            "key": "{{$current.key}}"
+          }
+        }
+      ]
+    },
+    "nxtBtnAction": {
+      "chains": [
+        {
+          "chain": "nextButtonAC"
+        }
+      ]
+    },
+    "preBtnAction": {
+      "chains": [
+        {
+          "chain": "previousButtonAC"
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "onLoadAC"
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "resetAC"
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "onLoadAC"
+        }
+      ]
+    }
+
+  },
+  "constants": {
+    "tableColumns": {
+      "type": "object[]",
+      "defaultValue": [
+          {
+            "headerText": "Menu Code",
+            "field": "menu_code",
+          "resizable": "enabled",
+          "width": 250,
+          "sortable": "enabled",
+          "headerStyle": "white-space: nowrap; min-width: 150px; ",
+            "style": ""
+
+          },
+          {
+            "headerText": "Menu Name",
+            "field": "menu_name",
+            "resizable": "enabled",
+          "sortable": "enabled",
+          "width": 250,
+          "template": "menu_name_template",
+          "headerStyle": "white-space: nowrap; min-width: 200px;",
+            "style": ""
+
+          },
+          {
+            "headerText": "Remarks",
+            "field": "remarks",
+            "resizable": "enabled",
+          "sortable": "disabled",
+          "width": "",
+            "template": "remarks_template",
+            "headerStyle": "white-space: nowrap; ",
+            "style": ""
+
+          }
+        ]    },
+    "tableColumnsWithActions": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "width": 100,
+          "template": "actions_template",
+          "sortable": "disabled",
+          "headerStyle": "text-align: center; white-space: normal;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Menu Code",
+          "field": "menu_code",
+          "resizable": "enabled",
+          "width": 250,
+          "sortable": "enabled",
+          "headerStyle": "white-space: nowrap; min-width: 150px; ",
+          "style": ""
+        },
+        {
+          "headerText": "Menu Name",
+          "field": "menu_name",
+          "resizable": "enabled",
+          "sortable": "enabled",
+          "width": 250,
+          "template": "menu_name_template",
+          "headerStyle": "white-space: nowrap; min-width: 200px;",
+          "style": ""
+        },
+        {
+          "headerText": "Remarks",
+          "field": "remarks",
+          "resizable": "enabled",
+          "sortable": "disabled",
+          "width": "",
+          "template": "remarks_template",
+          "headerStyle": "white-space: nowrap; ",
+          "style": ""
+        }
+      ]
+    }
+  }
+}

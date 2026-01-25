@@ -1,0 +1,251 @@
+{
+    "items": [
+        {
+            "currency_code": "SGD",
+            "currency_name": "Singapore Dollar",
+            "description": "Singapore Dollar",
+            "currency_precision": 2,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "SG",
+            "currency_symbol": "$"
+        },
+        {
+            "currency_code": "SHP",
+            "currency_name": "Saint Helena Pound",
+            "description": "Saint Helena Pound",
+            "currency_precision": 2,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "SH",
+            "currency_symbol": "£"
+        },
+        {
+            "currency_code": "SIT",
+            "currency_name": "Tolar",
+            "description": "Tolar",
+            "currency_precision": 2,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "SI",
+            "currency_symbol": "SIT"
+        },
+        {
+            "currency_code": "SKK",
+            "currency_name": "Slovak Koruna",
+            "description": "Slovak Koruna",
+            "currency_precision": 2,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "SK",
+            "currency_symbol": "SIT"
+        },
+        {
+            "currency_code": "SLL",
+            "currency_name": "Leone",
+            "description": "Leone",
+            "currency_precision": 2,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "SL",
+            "currency_symbol": "Le"
+        },
+        {
+            "currency_code": "SOS",
+            "currency_name": "Somali Shilling",
+            "description": "Somali Shilling",
+            "currency_precision": 2,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "SO",
+            "currency_symbol": "S"
+        },
+        {
+            "currency_code": "SRD",
+            "currency_name": "Suriname Dollar",
+            "description": "Suriname Dollar",
+            "currency_precision": 2,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "SR",
+            "currency_symbol": "$"
+        },
+        {
+            "currency_code": "SRG",
+            "currency_name": "Suriname Guilder",
+            "description": "Suriname Guilder",
+            "currency_precision": 2,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "SR",
+            "currency_symbol": null
+        },
+        {
+            "currency_code": "SSP",
+            "currency_name": "South Sudanese Pound",
+            "description": "South Sudanese Pound",
+            "currency_precision": 2,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "SS",
+            "currency_symbol": null
+        },
+        {
+            "currency_code": "STAT",
+            "currency_name": "Statistical",
+            "description": "Statistical",
+            "currency_precision": 2,
+            "enabled_flag": "Y",
+            "issuing_territory_code": null,
+            "currency_symbol": null
+        },
+        {
+            "currency_code": "STD",
+            "currency_name": "Dobra (Obsolete)",
+            "description": "Dobra (Obsolete)",
+            "currency_precision": 2,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "ST",
+            "currency_symbol": "Db"
+        },
+        {
+            "currency_code": "STN",
+            "currency_name": "Dobra",
+            "description": "Dobra",
+            "currency_precision": 2,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "ST",
+            "currency_symbol": "Db"
+        },
+        {
+            "currency_code": "SUR",
+            "currency_name": "Rouble",
+            "description": "Rouble",
+            "currency_precision": 2,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "RU",
+            "currency_symbol": null
+        },
+        {
+            "currency_code": "SVC",
+            "currency_name": "El Salvador Colon",
+            "description": "El Salvador Colon",
+            "currency_precision": 2,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "SV",
+            "currency_symbol": "$"
+        },
+        {
+            "currency_code": "SYP",
+            "currency_name": "Syrian Pound",
+            "description": "Syrian Pound",
+            "currency_precision": 2,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "SY",
+            "currency_symbol": "£"
+        },
+        {
+            "currency_code": "SZL",
+            "currency_name": "Lilangeni",
+            "description": "Lilangeni",
+            "currency_precision": 2,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "SZ",
+            "currency_symbol": null
+        },
+        {
+            "currency_code": "THB",
+            "currency_name": "Baht",
+            "description": "Baht",
+            "currency_precision": 2,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "TH",
+            "currency_symbol": "฿"
+        },
+        {
+            "currency_code": "TJR",
+            "currency_name": "Tajik Ruble",
+            "description": "Tajik Ruble",
+            "currency_precision": 0,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "TJ",
+            "currency_symbol": null
+        },
+        {
+            "currency_code": "TJS",
+            "currency_name": "Somoni",
+            "description": "Somoni",
+            "currency_precision": 2,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "TJ",
+            "currency_symbol": null
+        },
+        {
+            "currency_code": "TMM",
+            "currency_name": "Manat (Obsolete)",
+            "description": "Manat (Obsolete)",
+            "currency_precision": 2,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "TM",
+            "currency_symbol": "m"
+        },
+        {
+            "currency_code": "TMT",
+            "currency_name": "Manat",
+            "description": "Manat",
+            "currency_precision": 2,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "TM",
+            "currency_symbol": "m"
+        },
+        {
+            "currency_code": "TND",
+            "currency_name": "Tunisian Dinar",
+            "description": "Tunisian Dinar",
+            "currency_precision": 3,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "TN",
+            "currency_symbol": "د.ت.‏"
+        },
+        {
+            "currency_code": "TOP",
+            "currency_name": "Pa'anga",
+            "description": "Pa'anga",
+            "currency_precision": 2,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "TO",
+            "currency_symbol": "T$"
+        },
+        {
+            "currency_code": "TPE",
+            "currency_name": "Timor Escudo",
+            "description": "Timor Escudo",
+            "currency_precision": 0,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "TP",
+            "currency_symbol": null
+        },
+        {
+            "currency_code": "TRL",
+            "currency_name": "Turkish Lira",
+            "description": "Turkish Lira",
+            "currency_precision": 0,
+            "enabled_flag": "Y",
+            "issuing_territory_code": "TR",
+            "currency_symbol": "₤"
+        }
+    ],
+    "hasMore": true,
+    "limit": 25,
+    "offset": 0,
+    "count": 25,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/common/lov/currency"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/metadata-catalog/common/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/common/lov/currency"
+        },
+        {
+            "rel": "next",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/common/lov/currency?offset=25"
+        }
+    ]
+}

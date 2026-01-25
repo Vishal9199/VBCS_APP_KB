@@ -1,0 +1,35 @@
+{
+    "description": "Smart Search Configuration for Approval Hierarchy Management Application",
+    "filters": {
+        "HierarchyNameFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Hierarchy Name",
+            "options": {
+                "field": "hierarchy_code",
+                "optionsData": "[[ $search.filters.HierarchyNameFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.HierarchyNameFilter.options.optionsKeys ]]"
+            },
+            "data": {}
+        },
+        "FunctionNameFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Function Name",
+            "options": {
+                "field": "function_id",
+                "optionsData": "[[ $search.filters.FunctionNameFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.FunctionNameFilter.options.optionsKeys ]]"
+            },
+            "data": {}
+        },
+        "BusinessUnitFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Business Unit",
+            "options": {
+                "field": "business_unit_id",
+                "optionsData": "[[ $search.filters.BusinessUnitFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.BusinessUnitFilter.options.optionsKeys ]]"
+            },
+            "data": {}
+        }
+    }
+}

@@ -1,0 +1,96 @@
+<div class="oj-panel oj-panel-shadow-md oj-selected"> 
+<oj-collapsible id="c4"expanded="true">
+  <h1 id="h4" slot="header" style="font-size: larger; font-weight: bold;color:#013766">Sync Process Logs</h1>
+  <div class="oj-flex-item oj-sm-12 oj-md-12">
+    <oj-form-layout label-edge="start" columns="2" style="margin-top:10px;">   
+	 <oj-select-single style=" margin-left:7%; width: 18rem;"
+    label-hint="[[$application.translations.appBundle.schedulename]]" item-text="schedule_name" label-edge="provided"
+    value="{{ $variables.searchObj.SCHEDULE_ID }}" data="[[$variables.getScheduleNameListSDP]]"
+    id="schid" on-value-item-changed="[[$listeners.schidValueItem]]">
+    </oj-select-single>
+  </oj-form-layout>
+  </div>
+    <div style="display:flex; justify-content:flex-end;">
+      <oj-button style="refreshBtn margin-left:0.5%;margin-right:0.5%;" 
+        chroming="solid" id="refreshBtn" on-oj-action="[[$listeners.refreshBtnAction]]" >
+        <oj-bind-text value="[[$application.translations.appBundle.refreshBtn]]" ></oj-bind-text>
+      </oj-button>
+      <oj-button style="resetBtn margin-left:0.5%;margin-right:0.5%;" 
+        chroming="solid" id="reset" on-oj-action="[[$listeners.resetAction]]" >
+        <oj-bind-text value="[[$application.translations.appBundle.Reset]]" ></oj-bind-text>
+      </oj-button>
+      <!--  -->
+      <!-- <oj-button style="resetBtn margin-left:0.5%;margin-right:0.5%;" 
+          label="[[$application.translations.appBundle.ErrorLog]]" chroming="solid">
+      </oj-button> -->
+      <!--  -->    
+      <oj-button style="resetBtn margin-left:0.5%;margin-right:0.5%;" 
+        label="[[$application.translations.appBundle.Stop]]"
+        chroming="solid" id="stopId" on-oj-action="[[$listeners.stopIdAction]]">
+      </oj-button>
+
+      <oj-button style="resetBtn margin-left:0.5%;margin-right:0.5%;" 
+        label="[[$application.translations.appBundle.Start]]"
+        chroming="solid" id="StartId" on-oj-action="[[$listeners.startIdAction]]">
+      </oj-button>
+
+    </div>
+    </div>
+<br>
+<!-- table start--->
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+<div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+<div id="mainContent">
+<oj-bind-if test="true">
+</oj-bind-if>
+  <oj-table scroll-policy="loadMoreOnScroll" class="oj-sm-width-full oj-bg-body tablerowdata scr"
+    columns='[[$variables.columns]]' horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+    selection-mode.column="single" selection-mode.row="single" display="grid" data="[[ $variables.adpTable ]]">
+     <template slot="Flag1"><oj-bind-if test='[[ $current.data==="N" ]]'><img :src="[[ $flow.path + 'resources/images/isActive_N.png' ]]">
+    </oj-bind-if><oj-bind-if test='[[ $current.data==="Y" ]]'> <img  :src="[[ $flow.path + 'resources/images/isActive_Y.png' ]]"></oj-bind-if>
+   </template>
+   <template slot="cfd date">
+		  
+            <oj-input-date value="[[$current.data]]" readonly="true"
+              converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'></oj-input-date>
+          </template>
+           <template slot="cfd date1">
+  <oj-bind-if test='[[ $current.data == "null" ]]'>
+    <h1 class="oj-header">NULL</h1>
+  </oj-bind-if>
+  <oj-bind-if test='[[ $current.data != "null" ]]'>
+    <oj-input-date value="[[$current.data]]" readonly="true"
+      converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy H:mm:ss"}}'>
+    </oj-input-date>
+  </oj-bind-if>
+</template>
+
+ <template slot="errormessage">
+   <oj-bind-if test="[[ $current.row.schedule_status=='ERROR' ]]">
+  <oj-button label="" chroming="borderless" on-oj-action="[[$listeners.buttonAction4]]">
+    <img :src="[[ $flow.path + 'resources/images/script_1.png' ]]" width="12" height="10">
+  </oj-button>
+            </oj-bind-if>
+          </template>
+
+    
+    <oj-paging-control slot="bottom" class="oj-sm-width-full" page-size="25" data="[[ $variables.onLoadTable ]]"  >
+    </oj-paging-control>
+  </oj-table>
+
+</div>
+</div>
+</div>
+<oj-dialog dialog-title="" id="error" style="width: 900px; height: 400px;"
+  cancel-behavior="icon">
+  <h1 id="h4" slot="header" style="font-size: larger; font-weight: bold;color:#013766">Error Message</h1>
+    <div class="oj-flex" >
+  <div class="oj-flex-item oj-sm-12 oj-md-12">
+    <oj-bind-text value="[[ $variables.error_message ]]"></oj-bind-text>
+  </div>
+</div>
+  
+  
+    
+  
+</oj-dialog>

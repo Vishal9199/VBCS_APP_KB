@@ -1,0 +1,48 @@
+{
+    "OUT_COUNT": 3,
+    "OUT_DESCRIPTION": "Successfully fetched 3 of 3 records.",
+    "OUT_HAS_NEXT": "N",
+    "OUT_STATUS": "SUCCESS",
+    "OUT_TOTAL_COUNT": 3,
+    "P_OUTPUT": [
+        {
+            "section_id": 1081,
+            "template_id": 1044,
+            "template_code": "DEP_ONBOARD_MAIL",
+            "section_code": "EMP_SEC_01",
+            "section_title": "Employee Basic Details",
+            "section_type": "HEADER",
+            "section_order": 1,
+            "view_name": "HR_EMP_DETAILS_V",
+            "join_type": "INNER",
+            "join_column": "EMP_ID",
+            "is_active": "Y"
+        },
+        {
+            "section_id": 1181,
+            "template_id": 1044,
+            "template_code": "DEP_ONBOARD_MAIL",
+            "section_code": "EMP_SEC_01",
+            "section_title": "Employee Basic Details",
+            "section_type": "HEADER",
+            "section_order": 2,
+            "view_name": "HR_EMP_DETAILS_V",
+            "join_type": "INNER",
+            "join_column": "EMP_ID",
+            "is_active": "Y"
+        },
+        {
+            "section_id": 1201,
+            "template_id": 1044,
+            "template_code": "DEP_ONBOARD_MAIL",
+            "section_code": "EMP_SEC_01",
+            "section_title": "Employee Basic Details",
+            "section_type": "HEADER",
+            "section_order": 3,
+            "view_name": "HR_EMP_DETAILS_V",
+            "join_type": "INNER",
+            "join_column": "EMP_ID",
+            "is_active": "Y"
+        }
+    ]
+}

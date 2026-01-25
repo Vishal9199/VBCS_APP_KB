@@ -1,0 +1,217 @@
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div>
+        <oj-sp-simple-create-edit id="approval_role_page" page-title="Approval Role"
+          display-options.responsive-padding="on" primary-action.label="Save and Close"
+          secondary-actions='[{"label":"Save","id":"save"}]' badge.status="info"
+          badge.text="[[ $variables.approvalRoleVar.approval_role_name ]]"
+          on-sp-secondary-action="[[$listeners.approvalRolePageSpSecondaryAction]]"
+          on-sp-primary-action="[[$listeners.approvalRolePageSpPrimaryAction]]"
+          on-sp-cancel="[[$listeners.approvalRolePageSpCancel]]">
+
+          <div slot="main" style="background-color:white;">
+            <div style="margin-top: 0;">
+
+              <!-- Main Form Section - Approval Role -->
+              <div class="oj-panel oj-panel-shadow-md oj-selected">
+                <oj-validation-group valid="{{ $variables.validationGroupVars.isHeaderFormValid }}"
+                  :id="[[ $variables.validationGroupVars.headerFormId ]]">
+                  <oj-form-layout max-columns="2" label-edge="start" label-width="45%"
+                    user-assistance-density="compact" direction="column">
+
+                    <!-- Approval Role Code - Auto Convert to Upper Case -->
+                    <oj-input-text id="approval-role-code" label-hint="Approval Role Code"
+                      placeholder="Approval Role Code" value="{{ $variables.approvalRoleVar.approval_role_code }}"
+                      required="true" messages-custom="{{ $variables.approvalRoleCodeCustomMsg }}"
+                      readonly="[[ !$variables.canEdit ]]" length.max="100"
+                      on-value-changed="[[$listeners.approvalRoleCodeValue]]">
+                      <div slot="end">
+                        <oj-bind-if test="[[ !$variables.canEdit ]]">
+                          <oj-button display="icons" chroming="borderless" label="Button"
+                            style="background-color:transparent;" id="editIconBtn"
+                            on-oj-action="[[$listeners.editIconBtnAction]]">
+                            <span class="oj-ux-ico-edit" slot="startIcon"></span>
+                          </oj-button>
+                        </oj-bind-if>
+                      </div>
+                    </oj-input-text>
+
+                    <oj-input-text id="approval-role-name" label-hint="Approval Role Name"
+                      placeholder="Approval Role Name" value="{{ $variables.approvalRoleVar.approval_role_name }}"
+                      required="true" length.max="100">
+                    </oj-input-text>
+
+                    <oj-switch id="active-flag-switch" value="{{ $variables.approvalRoleVar.active_flag === 'Y' }}"
+                      label-hint="Status" on-value-changed="[[$listeners.activeFlagSwitchValue]]">
+                    </oj-switch>
+
+                    <oj-text-area id="remarks" label-hint="Remarks" placeholder="Remarks"
+                      value="{{ $variables.approvalRoleVar.remarks }}" rows="4" length.counter="remaining"
+                      length.max="250">
+                    </oj-text-area>
+
+                  </oj-form-layout>
+                </oj-validation-group>
+              </div>
+
+              <!-- Approval Role User Table Section -->
+              <div>
+                <!-- Action Buttons for Approval Role User Table -->
+                <div
+                  style="color: #01474d; font-size: larger; font-weight: bold;margin-bottom:0rem; padding : 10px 15px;"
+                  class="oj-flex oj-sm-justify-content-space-between oj-sm-align-items-center">
+                  <oj-bind-text value="Approval Role User"></oj-bind-text>
+                  <div class="oj-flex oj-sm-justify-content-space-around oj-sm-align-items-center" style="gap:10px;">
+                    <oj-button style="margin:0.125rem;" label="Refresh" chroming="outlined" id="refreshBtn"
+                      on-oj-action="[[$listeners.refreshBtnAction]]">
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/Refresh.png' ]]">
+                    </oj-button>
+
+                    <oj-button label="Add" class="oj-flex-bar-end oj-helper-justify-content-flex-end"
+                      chroming="outlined" id="addBtn" on-oj-action="[[$listeners.addBtnAction]]">
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/Create (1).png' ]]">
+                    </oj-button>
+                  </div>
+                </div>
+                <!-- Approval Role User Table -->
+                <oj-table id="approval-role-user-table" data="{{ $variables.ADPapprovalRoleUser }}"
+                  columns="{{ ($flow.constants.accessObj.allowDelete || $flow.constants.accessObj.allowEdit) ? $constants.approvalRoleUserColumnsWithActions : $constants.approvalRoleUserColumns }}"
+                  columns-default.sortable="disabled" columns-default.resizable="enabled"
+                  class="oj-sm-width-full oj-bg-body" display="grid" selection-mode.row="none">
+
+                  <template slot="approval_role_user_actions_template">
+                    <div class="oj-flex oj-sm-align-items-center oj-sm-justify-content-center" style="gap:15px;">
+                      <span class="oj-ux-ico-trash" style="cursor:pointer; font-size:20px;"
+                        on-click="[[$listeners.iconClick2]]"></span>
+                      <span class="oj-ux-ico-edit" style="cursor:pointer; font-size:20px;"
+                        on-click="[[$listeners.iconClick]]"></span>
+                    </div>
+                  </template>
+
+                  <template slot="order_number_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="user_id_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="person_id_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="active_flag_template">
+                    <oj-bind-if test='[[ $current.data === "Y" ]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/activeBtn.png' ]]">
+                    </oj-bind-if>
+                    <oj-bind-if test='[[ $current.data === "N" ]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/inactive.png' ]]">
+                    </oj-bind-if>
+                  </template>
+
+                  <template slot="remarks_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                </oj-table>
+
+                <!-- Pagination Section -->
+                <div class="oj-flex oj-sm-justify-content-center">
+                  <oj-bind-if test="[[true]]">
+                    <oj-toolbar chroming="solid" class="oj-flex-item oj-sm-flex-initial">
+
+                      <oj-button label="Previous" chroming="borderless" disabled="[[ !$variables.pagination.prev ]]"
+                        id="preBtn" on-oj-action="[[$listeners.preBtnAction]]">
+                        <span slot="startIcon" class="oj-ux-ico-back"></span>
+                      </oj-button>
+
+                      <oj-button label="Next" chroming="borderless" disabled="[[ !$variables.pagination.next ]]"
+                        id="nxtBtn" on-oj-action="[[$listeners.nxtBtnAction]]">
+                        <span slot="endIcon" class="oj-ux-ico-forward-next"></span>
+                      </oj-button>
+
+                    </oj-toolbar>
+                  </oj-bind-if>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </oj-sp-simple-create-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Approval Role User Dialog -->
+<oj-dialog dialog-title="Approval Role User" id="approvalRoleUserDialog" cancel-behavior="icon"
+  resize-behavior="resizable" drag-affordance="title-bar" modality="modeless" style="width:1111px;"
+  on-oj-close="[[$listeners.approvalRoleUserDialogClose]]">
+  <div slot="body" style="padding-top:10px; background-color:white;">
+    <div class="oj-panel oj-panel-shadow-md oj-selected">
+      <oj-validation-group valid="{{ $variables.validationGroupVars.isChildTableFormValid }}"
+        :id="[[ $variables.validationGroupVars.childTableFormId ]]">
+        <oj-form-layout label-edge="start" direction="column" id="approvalRoleUserFormLayout" max-columns="2"
+          user-assistance-density="compact">
+
+          <oj-select-single label-hint="User Name" item-text="user_name"
+            on-value-item-changed="[[$listeners.selectValueItem]]" style="width: 16rem;"
+            value="{{ $variables.approvalRoleUserVar.user_id }}" required="true" id="dialog-user-name"
+            data="[[$variables.getApproverRoleLovUserNameListSDP]]"></oj-select-single>
+
+          <oj-input-text id="dialog-person-name" label-hint="Person Name" placeholder="Person Name"
+            value="{{ $variables.approvalRoleUserVar.person_name }}" style="width: 16rem;" readonly="true">
+          </oj-input-text>
+          
+          <oj-input-number id="dialog-order-number" label-hint="Order Number" placeholder="Order Number"
+            value="{{ $variables.approvalRoleUserVar.order_number }}" required="true" style="width: 16rem;" step="1"
+            min="1">
+          </oj-input-number>
+
+          <oj-switch id="dialog-active-flag" label-hint="Status"
+            value="{{ $variables.approvalRoleUserVar.active_flag === 'Y' }}">
+          </oj-switch>
+
+          <oj-text-area id="dialog-remarks" label-hint="Remarks" placeholder="Remarks"
+            value="{{ $variables.approvalRoleUserVar.remarks }}" style="width: 16rem;" length.counter="remaining"
+            length.max="250">
+          </oj-text-area>
+
+        </oj-form-layout>
+      </oj-validation-group>
+    </div>
+  </div>
+  <div slot="footer" style="background-color:white;">
+    <oj-button id="save-add-another" chroming="outlined" on-oj-action="[[$listeners.saveAddAnotherAction]]">Save & Add</oj-button>
+    <oj-button id="save-close" chroming="outlined" on-oj-action="[[$listeners.saveCloseAction]]">Save & Close</oj-button>
+    <oj-button id="cancel" chroming="outlined" on-oj-action="[[$listeners.cancelAction]]">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="Delete" id="deleteApprovalRoleUserDialog" cancel-behavior="icon">
+  <div slot="body">
+    <h6 id="deletehid" style="font-size:medium; font-weight: bold;">Are you sure you want to delete this approval role
+      user?
+    </h6>
+  </div>
+  <div slot="footer">
+    <oj-button id="deleteBtnYes" chroming="outlined" on-oj-action="[[$listeners.deleteBtnYesAction]]">Yes</oj-button>
+    <oj-button id="deleteBtnNo" chroming="outlined" on-oj-action="[[$listeners.deleteBtnNoAction]]">No</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Unsaved Changes Dialog -->
+<oj-dialog dialog-title="Unsaved Changes" id="unsavedChangesDialog" cancel-behavior="icon">
+  <div slot="body">
+    <h6 id="unsavedChangesText" style="font-size:medium; font-weight: bold;">Are you sure you want to leave this page?
+      Your changes will be lost.
+    </h6>
+  </div>
+  <div slot="footer">
+    <oj-button id="proceedExitBtn" chroming="outlined" on-oj-action="[[$listeners.proceedExitBtnAction]]">Leave</oj-button>
+    <oj-button id="cancelExitBtn" chroming="outlined" on-oj-action="[[$listeners.cancelExitBtnAction]]">Cancel</oj-button>
+  </div>
+</oj-dialog>

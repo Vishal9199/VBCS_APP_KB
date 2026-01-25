@@ -1,0 +1,501 @@
+<style>
+  /* Hide Redwood header strip */
+  .oj-sp-header-general-overview-header-strip {
+    display: none;
+  }
+
+  /* Hide context selector */
+  #oj_exssp1_h_selectContext {
+    display: none;
+  }
+
+  /* Page title color */
+  #oj_exssp1_h_pageTitle {
+    /* color: #0572ce; */
+  }
+
+  /* Page Title Color - GREEN */
+  #oj_exssp1_h_pageTitle {
+    color: white !important;
+    font-weight: bold;
+  }
+
+  /* Smart Search Page Header Background and Title - GREEN THEME */
+  oj-sp-smart-search-page .oj-sp-header-container {
+    background-color: #01474d !important;
+    color: white !important;
+  }
+
+  oj-sp-smart-search-page .oj-sp-header-title {
+    color: white !important;
+  }
+
+  /* Page title and subtitle in header */
+  oj-sp-smart-search-page[id="oj_exssp1"] .oj-sp-page-header-container {
+    background: linear-gradient(135deg, #28a745 0%, #218838 100%) !important;
+  }
+
+  oj-sp-smart-search-page[id="oj_exssp1"] h1,
+  oj-sp-smart-search-page[id="oj_exssp1"] .oj-sp-page-title {
+    color: white !important;
+  }
+
+  #addBtn.oj-button.oj-button-outlined-chrome .oj-button-button,
+  #refreshBtn.oj-button.oj-button-outlined-chrome .oj-button-button,
+  #resetBtn.oj-button.oj-button-outlined-chrome .oj-button-button,
+  #exportBtn.oj-button.oj-button-outlined-chrome .oj-button-button {
+    border-color: white !important;
+    border-width: 2px;
+    /* height: 2.5rem; */
+  }
+
+  .filter-order-1 {
+    order: 1 !important;
+  }
+
+  .filter-order-2 {
+    order: 2 !important;
+  }
+
+  .filter-order-3 {
+    order: 3 !important;
+  }
+
+  .filter-order-4 {
+    order: 4 !important;
+  }
+</style>
+
+<div id="sampleDemo1" class="demo-padding demo-container">
+  <div id="componentDemoContent1" style="width: 1px; min-width: 100%;">
+    <div id="mainContent1">
+
+      <oj-bind-if test="[[$page.variables.vShowFragment]]">
+        <oj-vb-fragment bridge="[[vbBridge]]" name="headermenu"></oj-vb-fragment>
+      </oj-bind-if>
+
+      <oj-sp-smart-search-page id="oj_exssp1" page-title="Petty Cash Claim Management" display-mode="light"
+        page-subtitle=" ">
+
+        <!--Search Section -->
+
+        <div class="oj-sm-padding-2x" style="align-items: center;" slot="search">
+          <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-space-between" id="smartSearchPettyCash"
+            style="width: 100%; align-items: flex-start; padding: 0 0rem 0rem 0rem; margin-left:0%;">
+          
+            <div style="flex: 1; margin-right: 1rem;">
+              <oj-sp-smart-search id="freq_smartsearch" filter-criterion="{{ $variables.filterCriterion }}"
+                search-config="[[ $variables.searchConfiguration.provider ]]" search-context="[[ $variables.searchContext ]]"
+                ask-hint="Search Reference No.">
+              </oj-sp-smart-search>
+            </div>
+          
+          
+            <div style="display: flex; margin-top: -3px; flex-wrap: wrap;">
+              <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Reset" id="resetBtn"
+                on-oj-action="[[$listeners.resetBtnAction]]">
+                <span slot="startIcon" class="oj-ux-ico-reset" style="color: white;"></span>
+              </oj-button>
+            </div>
+          
+            <div style="display: flex; margin-top: -3px; flex-wrap: wrap;">
+              <oj-button style="margin:0.125rem;" label="Refresh" chroming="outlined" id="addBtn"
+                on-oj-action="[[$listeners.refreshBtnAction]]" class="oj-button-md">
+                <span slot="startIcon" class="oj-ux-ico-refresh" style="color: white;"></span>
+              </oj-button>
+            </div>
+          
+            <div style="display: flex; margin-top: -3px; flex-wrap: wrap;">
+              <oj-button style="margin:0.125rem;" label="Export" chroming="outlined" id="addBtn"
+                on-oj-action="[[$listeners.exportBtnAction]]" class="oj-button-md">
+                <span slot="startIcon" class="oj-ux-ico-export-excel-data" style="color: white;"></span>
+              </oj-button>
+            </div>
+            <div style="display: flex; margin-top: -3px; flex-wrap: wrap;">
+              <oj-bind-if test="[[ $application.variables.allowCreate ]]">
+                <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Create" id="addBtn"
+                  on-oj-action="[[$listeners.addBtnAction]]">
+                  <span slot="startIcon" class="oj-ux-ico-plus" style="color: white;"></span>
+                </oj-button>
+              </oj-bind-if>
+            </div>
+          
+          </div>
+        </div>
+
+        <!--Table Section -->
+        <div id="sampleDemo1" class="demo-padding demo-container" style="margin-top:19px">
+          <div id="componentDemoContent2" style="min-width: 100%;">
+            <div class="oj-panel oj-panel-shadow-md"
+              style="overflow:hidden;margin-left:20px;margin-right:20px;margin-top:-10px;">
+              <div id="searchMainContent">
+
+                <!-- Table Action Buttons - Left Aligned -->
+                <!-- <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-flex-end"
+        style="width: 100%; align-items: flex-start; padding: 0 2rem; margin-bottom: 0.25rem; margin-top: 0.25rem;">
+        <div style="display: flex; gap: 0.25rem; margin-top: 1px; flex-wrap: wrap;">
+          <oj-button style="margin:0.125rem;" label="Refresh" chroming="outlined" id="refreshBtn"
+            on-oj-action="[[$listeners.refreshBtnAction]]">
+            <span slot="startIcon" class="oj-ux-ico-refresh" style="color: white;"></span>
+          </oj-button>
+          <oj-button style="margin:0.125rem; background-color: white;" label="Export" chroming="outlined" id="exportBtn"
+            on-oj-action="[[$listeners.exportBtnAction]]">
+            <span slot="startIcon" class="oj-ux-ico-export"></span>
+          </oj-button>
+        </div>
+      </div> -->
+
+                <div class="oj-flex">
+                  <!-- Petty Cash Claim Table -->
+                  <oj-table scroll-policy="loadMoreOnScroll" class="oj-sm-width-full oj-bg-body" display="grid"
+                    horizontal-grid-visible="enabled" vertical-grid-visible="enabled" selection-mode.row="single"
+                    selection-mode.column="single" id="searchPettyCashTbl" data="[[ $variables.tableHeaderADP ]]"
+                    columns="{{ $constants.headerColumns }}"
+                    style="width: 99%; margin-left: 0.5%;  overflow-x: auto;   font-size: 15px !important; ">
+
+                    <!-- Template Slots -->
+
+                    <!-- Actions Template with Edit/Delete buttons -->
+                    <template slot="actions">
+                      <div style="display: flex; gap: 4px;" class="oj-helper-justify-content-center">
+                        <oj-button display="icons" chroming="borderless" id="editBtn"
+                          on-oj-action="[[$listeners.editBtnAction]]" style="height:20px !important;">
+                          <span slot="startIcon" class="oj-ux-ico-edit" style="color: black;"></span>
+                        </oj-button>
+                        <oj-bind-if
+                          test="[[ ($current.row.status_code === 'DRA' || $current.row.status_code === 'WR') && $application.variables.allowDelete ]]">
+                          <oj-button display="icons" chroming="borderless" id="deleteBtn"
+                            on-oj-action="[[$listeners.deleteBtnAction]]"
+                            disabled="[[ $current.row.status_code !== &quot;DRA&quot; && $current.row.status_code !== 'WR' ]]"
+                            style="height:20px !important;">
+                            <span slot="startIcon" class="oj-ux-ico-trash" style="color: red;"></span>
+                          </oj-button>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[ ($current.row.status_code !== 'DRA' && $current.row.status_code !== 'WR') && $application.variables.allowDelete ]]">
+                          <oj-button display="icons" chroming="borderless" id="deleteBtn"
+                            disabled='[[ $current.row.status_code !== "DRA" ]]' style="height:20px !important;">
+                            <span slot="startIcon" class="oj-ux-ico-trash" style="color: grey;"></span>
+                          </oj-button>
+                        </oj-bind-if>
+                        <!-- <oj-bind-if test='[[ $current.row.status_name === "Pending" ]]'>
+            <oj-button display="icons" chroming="borderless" id="approveBtn">
+              <span slot="startIcon" class="oj-ux-ico-check-circle"></span>
+            </oj-button>
+          </oj-bind-if> -->
+                      </div>
+                    </template>
+
+                    <!-- <template slot="pending_with_template">
+                      <div style="text-align:center;">
+                        <oj-bind-if test='[[ $current.row.status_code!=="DRA"]]'>
+                          <oj-button chroming="borderless" class="oj-button-sm"
+                            on-oj-action="[[$listeners.buttonAction3]]" style="height:20px !important;">
+                            <span class="oj-ux-ico-progress-list-pending" slot="startIcon"
+                              style="height:-2px !important;"></span>
+                          </oj-button>
+                        </oj-bind-if>
+                      </div>
+                    </template>
+       -->
+
+                    <template slot="pending_with_template">
+                      <div style="text-align:center;">
+                        <oj-bind-if test='[[ $current.row.status_code ==="PEN" || $current.row.status_code === "RPA"]]'>
+                          <oj-button chroming="borderless" class="oj-button-sm"
+                            on-oj-action="[[$listeners.buttonAction3]]" style=" min-width:20px;height:20px; ">
+                            <span class="oj-ux-ico-progress-list-pending"  slot="startIcon"
+                style="font-size:18px; line-height:1; margin:0; padding:0;display:flex;align-items:center; justify-content:center;">
+              </span>
+                          </oj-button>
+                        </oj-bind-if>
+                      </div>
+                    </template>
+
+                    <!-- <template slot="about">
+                      <div style="display: flex; gap: 4px;" class="oj-helper-justify-content-center">
+                        <oj-button chroming="borderless" id="aboutBtn" class="oj-button-sm"
+                          on-oj-action="[[$listeners.aboutBtnAction]]" style="height:22px !important;">
+                          <span slot="startIcon" class="oj-ux-ico-information" style="height:23px !important;"></span>
+                        </oj-button>
+                      </div>
+                    </template> -->
+
+
+
+                    <template slot="about">
+                      <div style="display:flex; gap:4px; justify-content:center;">
+                        <oj-button chroming="borderless" id="aboutBtn" class="oj-button-sm"
+                          on-oj-action="[[$listeners.aboutBtnAction]]" style="min-width:20px;height:20px; ">
+                          <span slot="startIcon"   class="oj-ux-ico-information"
+              style="    font-size:18px;   line-height:1;    margin:0;    padding:0;    display:flex;  align-items:center;   justify-content:center;   ">
+            </span>
+                        </oj-button>
+                      </div>
+                    </template>
+
+                    <!-- Claim Number Template -->
+                    <template slot="claim_number">
+                      <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                    </template>
+
+                    <!-- Governorate Template -->
+                    <template slot="governorate">
+                      <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                    </template>
+
+                    <!-- Supplier Name Template -->
+                    <template slot="supplier_name">
+                      <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                    </template>
+
+                    <!-- Supplier Number Template -->
+                    <template slot="supplier_number">
+                      <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                    </template>
+
+                    <!-- Invoice Number Template -->
+                    <template slot="invoice_number">
+                      <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                    </template>
+
+                    <!-- Amount Template for Cash in Hand -->
+                    <template slot="amount">
+                      <oj-input-number readonly="true" value="[[ $current.data ]]"
+                        converter='{"style":"currency","currency":"OMR","currencyDisplay":"symbol","options":{"minimumFractionDigits":3},"type":"number"}'
+                        class=""></oj-input-number>
+                    </template>
+
+                    <!-- Status Badge Template -->
+                    <template slot="status_badge">
+                      <oj-bind-if test='[[ $current.row.status_name === "Draft" ]]'>
+                        <oj-bind-text style="font-size: 12px; color: black; font-weight: bold;">Draft</oj-bind-text>
+                      </oj-bind-if>
+                      <oj-bind-if test='[[ $current.row.status_name === "Pending" ]]'>
+                        <oj-bind-text style="font-size: 12px; color: orange; font-weight: bold;">Pending</oj-bind-text>
+                      </oj-bind-if>
+                      <oj-bind-if test='[[ $current.row.status_name === "Approved" ]]'>
+                        <oj-bind-text style="font-size: 12px; color: green; font-weight: bold;">Approved</oj-bind-text>
+                      </oj-bind-if>
+                      <oj-bind-if test='[[ $current.row.status_name === "Rejected" ]]'>
+                        <oj-bind-text style="font-size: 12px; color: red; font-weight: bold;">Rejected</oj-bind-text>
+                      </oj-bind-if>
+                      <oj-bind-if test='[[ $current.row.status_name === "Withdrawn" ]]'>
+                        <oj-bind-text style="font-size: 12px; color: crimson; font-weight: bold;">Withdrawn</oj-bind-text>
+                      </oj-bind-if>
+                      <oj-bind-if test='[[ $current.row.status_name === "Reassign" ]]'>
+                        <oj-bind-text style="font-size: 12px; color: darkred; font-weight: bold;">Reassign</oj-bind-text>
+                      </oj-bind-if>
+                      <oj-bind-if test='[[ $current.row.status_name === "Return for Information" ]]'>
+                        <oj-bind-text style="font-size: 12px; color: darkorange; font-weight: bold;">Employee More Info</oj-bind-text>
+                      </oj-bind-if>
+                      <oj-bind-if test='[[ $current.row.status_name === "Return to Previous Approver" ]]'>
+                        <oj-bind-text style="font-size: 12px; color: blue; font-weight: bold;">Approver More Info</oj-bind-text>
+                      </oj-bind-if>
+                    </template>
+
+                    <!-- Integration Status Template with Error/Success color coding -->
+                    <template slot="integration_status">
+                      <oj-bind-if test='[[ $current.row.integration_err_message ]]'>
+                        <a style="color: red; font-weight: bold; cursor: pointer;" id="errorLink">
+                          <oj-bind-text value="Error"></oj-bind-text>
+                        </a>
+                      </oj-bind-if>
+                      <oj-bind-if
+                        test='[[ !$current.row.integration_err_message && $current.row.integration_status_name === "Success" ]]'>
+                        <oj-bind-text style="color: green; font-weight: bold;">Success</oj-bind-text>
+                      </oj-bind-if>
+                      <oj-bind-if
+                        test='[[ !$current.row.integration_err_message && $current.row.integration_status_name !== "Success" ]]'>
+                        <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                      </oj-bind-if>
+                    </template>
+
+                    <!-- Created By Template -->
+                    <template slot="created_by">
+                      <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                    </template>
+
+                    <!-- Last Updated By Template -->
+                    <template slot="last_updated_by">
+                      <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                    </template>
+
+                    <!-- Date Template for all date fields -->
+                    <template slot="date">
+                      <oj-input-date value="[[$current.data]]" readonly="true"
+                        converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'>
+                      </oj-input-date>
+                    </template>
+
+                  </oj-table>
+                </div>
+
+                <!-- Pagination Section in Footer -->
+                <div>
+                  <!-- <div class="oj-flex-item oj-sm-12 oj-md-1"></div> -->
+                  <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+                    <!-- <div class="oj-flex-item oj-sm-12 oj-md-8"></div> -->
+                    <oj-button label="Prev" chroming="borderless" id="preBtn" on-oj-action="[[$listeners.preBtnAction]]"
+                      disabled="[[ $variables.pagination.is_prev ]]">
+                      <span slot="startIcon" class="oj-ux-ico-back"></span>
+                    </oj-button>
+
+                    <!-- Page Info -->
+                    <!-- <div
+                      style="display: flex; align-items: center; gap: 5px; color: #666; font-size: 12px; border: 2px;"
+                      class="oj-bg-body">
+                      <oj-bind-text value="[[ 'Page ' + $variables.currentPage ]]"></oj-bind-text>
+                      <span>•</span>
+                      <oj-bind-text
+                        value="[[ (Number($variables.SearchObj.in_offset)) + '-' + ((Number($variables.SearchObj.in_offset)) + (Number($variables.tableHeaderADP.data.length))) + ' of ' + $variables.totalRecords + ' records' ]]">
+                      </oj-bind-text>
+                    </div> -->
+
+                                <div style="display: flex; align-items: center; width: fit-content; min-width: 120px; max-width: 200px;">
+              <oj-input-text value="{{ $variables.paginationDisplay }}" readonly="true" class="pagination-text-area"
+                style="   width: 100%;   height: 32px;   text-align: center;   border: 1px solid #d4d4d4;   border-radius: 4px;   background-color: #f8f9fa;   font-size: 14px;   font-weight: 500;   color: #495057;   padding: 5px 12px;   outline: 1px light #999999;   box-sizing: border-box;   overflow: hidden;   white-space: nowrap;   flex: none; font-weight: bold;"
+                id="text001" aria-label="text001">
+              </oj-input-text>
+            </div>
+
+                    <oj-button label="Next" chroming="borderless" id="nextBtn"
+                      on-oj-action="[[$listeners.nextBtnAction]]" disabled="[[ $variables.pagination.is_next ]]">
+                      <span slot="endIcon" class="oj-ux-ico-forward-next"></span>
+                    </oj-button>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </oj-sp-smart-search-page>
+    </div>
+  </div>
+</div>
+
+<!-- Governorate Selection Dialog for Create -->
+<oj-dialog style="width: 35vw; overflow: hidden;" dialog-title="Select Governorate" id="governorateDialog"
+  cancel-behavior="icon" resize-behavior="none" drag-affordance="title-bar" position.my.vertical="top"
+  position.at.vertical="top">
+  <div slot="body">
+    <oj-validation-group id="headerFormValid" valid="{{ $variables.headerFormValid }}">
+      <oj-form-layout label-edge="start" max-columns="1" style="margin-top: 1rem;" user-assistance-density="compact"
+        class="oj-formlayout-full-width" label-width="44%">
+        <!-- <oj-select-single id="governorate-select" label-hint="Select Governorate" required="true"
+          data="[[$variables.getNwsCustPettycashLovUserRole2ListSDP]]" item-text="petty_cash_name"
+          value="{{ $variables.postPettycashHeaderVar.petty_cash_type }}"
+          on-value-item-changed="[[$listeners.governorateSelectValueItem]]"></oj-select-single> -->
+
+        <oj-select-single id="governorateSelect" label-hint="Select Governorate" required="true"
+          user-assistance-density="compact" data="[[$variables.getNwsCustPettycashLovUserRole2ListSDP]]"
+          item-text="petty_cash_name" on-value-item-changed="[[$listeners.governorateSelectValueItem2]]"
+          value="{{ $variables.postPettycashHeaderVar.petty_cash_type }}">
+          <template slot="collectionTemplate" data-oj-as="collection">
+            <!-- {"headerText":"Petty Cash Type","field":"petty_cash_type","sortable":"disabled"} -->
+            <oj-table id="table1" horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+              class="oj-select-results" selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}"
+              columns='[{"headerText":"Petty Cash Name","field":"petty_cash_name","sortable":"disabled"}]'
+              on-oj-row-action="[[collection.handleRowAction]]" data="[[ collection.data ]]" selection-mode.row="single"
+              display="grid" style="overflow: hidden;">
+              <template slot="cellTemplate" data-oj-as="cell">
+                <oj-bind-text value="[[String(cell.data)]]"></oj-bind-text>
+              </template>
+            </oj-table>
+          </template>
+        </oj-select-single>
+      </oj-form-layout>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-button id="govSaveBtn" chroming="solid" on-oj-action="[[$listeners.govSaveBtnAction]]">Save and Continue
+    </oj-button>
+    <oj-button id="govCancelBtn" on-oj-action="[[$listeners.govCancelBtnAction]]" chroming="solid">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Error Message Dialog -->
+<oj-dialog style="width: 500px; overflow: hidden;" dialog-title="Integration Error Details" id="errorDialog"
+  cancel-behavior="icon" resize-behavior="resizable" drag-affordance="title-bar" position.my.vertical="top"
+  position.at.vertical="top">
+  <div slot="body">
+    <div id="errorMessageContent" style="padding: 1rem;">
+      <!-- Error message will be populated dynamically -->
+    </div>
+  </div>
+  <div slot="footer">
+    <oj-button id="errorCloseBtn">Close</oj-button>
+  </div>
+</oj-dialog>
+
+
+<oj-dialog style="display:none; width: 500px; overflow: hidden;" dialog-title="Warning" id="delete_dialog"
+  cancel-behavior="icon" position.at.vertical="top" position.my.vertical="top">
+  <div slot="body" style="margin-top: 1.5rem;">
+    <div class="oj-flex">Are you sure you want to delete this record?</div>
+  </div>
+  <div slot="footer">
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction2]]">Yes</oj-button>
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction]]">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<oj-dialog id="loadingDialog" dialog-title="Loading..." cancel-behavior="none"
+  style="width: 250px; min-width: 250px; height: 150px; overflow: hidden;" position.at.vertical="top"
+  position.my.vertical="top">
+  <div style="text-align: center;" slot="body">
+    <oj-progress-bar value="-1" style="margin-top: 20px;"></oj-progress-bar>
+    <p style="margin-top: 10px;">Loading, please wait...</p>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="About" id="aboutDialog" cancel-behavior="icon" style="width: 400px; overflow: hidden;"
+  resize-behavior="resizable" position.my.vertical="top" position.at.vertical="top">
+  <div slot="body">
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-sm-12 oj-md-12">
+        <oj-form-layout label-edge='start' columns="1" style="margin-top:23px; margin-left:-20px"
+          user-assistance-density="compact" direction="column" class="oj-formlayout-full-width" label-width="45%">
+          <oj-input-text label-hint="Created By:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact" value="{{ $variables.about.created_by }}">
+          </oj-input-text>
+          <oj-input-text label-hint="Created Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.created_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated By:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact" value="{{ $variables.about.last_updated_by }}"></oj-input-text>
+          <oj-input-text label-hint="Created Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.last_updated_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated Login:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact" value="{{ $variables.about.last_updated_login }}">
+          </oj-input-text>
+        </oj-form-layout>
+      </div>
+    </div>
+  </div>
+  <div slot="footer" style="margin-top: -10px;">
+    <oj-button chroming="solid" id="aboutOkButton" on-oj-action="[[$listeners.aboutOkButtonAction]]"
+      style="margin-top:-20px !important;">
+      <span><oj-bind-text value="Ok"></oj-bind-text></span>
+    </oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Pending Dilaog -->
+<oj-dialog dialog-title="Pending With" style="height: 210px; width: 500px; overflow: hidden;" id="pendingDialog"
+  cancel-behavior="icon" resize-behavior="resizable" position.my.vertical="top" position.at.vertical="top">
+  <br>
+  <div>
+    <oj-bind-text value="[[ $variables.clobMessage ]]"></oj-bind-text>
+  </div>
+  <div slot="footer">
+    <oj-button chroming="solid" id="pendingCancelBtn" on-oj-action="[[$listeners.pendingCancelBtnAction]]">
+      <span><oj-bind-text value="Ok"></oj-bind-text></span>
+    </oj-button>
+  </div>
+</oj-dialog>

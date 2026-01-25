@@ -1,0 +1,141 @@
+
+
+<div id="sampleDemo1" class="demo-padding demo-container">
+<div id="componentDemoContent1" style="width: 1px; min-width: 100%;">
+<div id="mainContent1">
+
+  
+<oj-sp-smart-search-page id="oj_exssp1" page-title="Menu Management" page-subtitle="  ">
+
+<!--Search Section -->
+<oj-flex slot="search" class="oj-sm-padding-2x" style="align-items: center;">
+  <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-space-between" style="width: 100%; align-items: flex-start; padding: 0 1rem;">
+    <div style="flex: 1; margin-right: 1rem;">
+      <oj-sp-smart-search id="freq_smartsearch" filter-criterion="{{ $variables.filterCriterion }}"
+        search-config="[[ $variables.searchConfiguration.provider]]" search-context="[[ $variables.searchContext ]]">
+      </oj-sp-smart-search>
+    </div>
+    <div style="display: flex; gap: 0.25rem; margin-left: 1rem; margin-top: 1px; flex-wrap: wrap;">
+      <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Reset" id="resetBtn"
+        on-oj-action="[[$listeners.resetBtnAction]]">
+        <img slot="startIcon" :src="[[ $application.path + 'resources/images/Reset.png' ]]">
+      </oj-button>
+    </div>
+  </div>
+</oj-flex>
+
+<div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-flex-end"
+  style=" width: 100%; align-items: flex-start; padding: 0 1rem; background-color:white; ">
+  <div style="flex: 1; margin-right: 1rem ; background-color :white;">
+  </div>
+  <oj-button style="margin:0.125rem;" label="Refresh" chroming="outlined" id="refreshBtn"
+    on-oj-action="[[$listeners.refreshBtnAction]]">
+                    <img slot="startIcon" :src="[[ $application.path + 'resources/images/Refresh.png' ]]">
+                  </oj-button>
+  <div style="display: flex; gap: 0.25rem; margin-left: 1rem; margin-top: 1px; flex-wrap: wrap;">
+    <oj-button style="margin:0.125rem;" label="Add" chroming="outlined" id="addBtn"
+      on-oj-action="[[$listeners.addBtnAction]]">
+      <img slot="startIcon" :src="[[ $application.path + 'resources/images/Create (1).png' ]]">
+    </oj-button>
+  </div>
+
+</div>
+
+<div class="oj-flex">
+<oj-table scroll-policy="loadMoreOnScroll" class="oj-sm-width-full oj-bg-body" display="grid"
+  horizontal-grid-visible="enabled" vertical-grid-visible="enabled" selection-mode.row="single"
+  selection-mode.column="single" id="searchMenuTbl" columns="{{$flow.constants.accessObj.allowDelete || $flow.constants.accessObj.allowEdit ? $constants.tableColumnsWithActions : $constants.tableColumns}}"
+ data="[[ $variables.menuManagementADP ]]">
+
+<!-- Actions Template Slot with Oracle JET Icons -->
+<template slot="actions_template">
+ <div style="gap:15px" class="oj-flex oj-sm-align-items-center oj-sm-justify-content-center">
+  
+      
+  
+    <oj-bind-if test="[[ $flow.constants.accessObj.allowDelete ]]">
+      <span class="oj-ux-ico-trash" on-click="[[$listeners.iconClick]]"></span>
+    </oj-bind-if>
+  
+      
+
+    <oj-bind-if test="[[ $flow.constants.accessObj.allowEdit ]]">
+      <span class="oj-ux-ico-edit" on-click="[[$listeners.iconClick2]]" ></span>
+    </oj-bind-if>
+  
+  
+  </div>
+</template>
+
+<template slot="function_code_link">
+  <a style="font-weight: bold; color: #0572ce; text-decoration: underline; cursor: pointer;" target="_blank"
+    on-click="[[$listeners.hyperlinkClick]]">
+    <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+  </a>
+</template>
+
+
+
+<!-- Menu Name Template -->
+<template slot="menu_name_template">
+  <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+</template>
+
+<!-- Remarks Template -->
+<template slot="remarks_template">
+  <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+</template>
+
+</oj-table>
+</div>
+
+<!-- Pagination Section -->
+<div class="oj-flex" style="background-color:white">
+  <div class="oj-flex-item oj-sm-12 oj-md-1"></div>
+  <div class="oj-flex-item oj-sm-12 oj-flex oj-md-6">
+    <div class="oj-flex-item oj-sm-12 oj-md-8"></div>
+    <div class="oj-flex oj-sm-justify-content-center">
+      <oj-bind-if test="[[true]]">
+        <oj-toolbar chroming="solid" class="oj-flex-item oj-sm-flex-initial">
+          
+          <!-- Previous Button -->
+          <oj-button 
+            label="Prev" 
+            chroming="borderless"
+            id="preBtn" on-oj-action="[[$listeners.preBtnAction]]" disabled="[[ !$variables.pagingButton.previous ]]">
+            <span slot="startIcon" class="oj-ux-ico-back"></span>
+          </oj-button>
+          
+          <!-- Next Button -->
+          <oj-button 
+            label="Next" 
+            chroming="borderless" 
+            id="nxtBtn" on-oj-action="[[$listeners.nxtBtnAction]]" disabled="[[ !$variables.pagingButton.next ]]">
+            <span slot="endIcon" class="oj-ux-ico-forward-next"></span>
+          </oj-button>
+           
+        </oj-toolbar>
+      </oj-bind-if>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Dialog -->
+<oj-dialog dialog-title="Delete" id="deleteDialog" cancel-behavior="icon">
+  <div slot="body">
+    <h6 id="deletehid" style="font-size:medium; font-weight: bold;">Are you sure you want to delete?</h6>
+  </div>
+  <div slot="footer">
+    <oj-button id="deleteBtnYes" on-oj-action="[[$listeners.deleteBtnYesAction]]">Yes</oj-button>
+    <oj-button id="deleteBtnNo" on-oj-action="[[$listeners.deleteBtnNoAction]]">No</oj-button>
+  </div>
+</oj-dialog>
+
+</oj-sp-smart-search-page>
+</div>
+</div>
+</div>
+
+
+
+

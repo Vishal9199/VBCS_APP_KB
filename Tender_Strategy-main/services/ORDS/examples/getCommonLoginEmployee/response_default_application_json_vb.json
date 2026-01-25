@@ -1,0 +1,52 @@
+{
+    "items": [
+        {
+            "person_id": 100000005219102,
+            "person_number": "5536",
+            "full_name": "Muna Zahran Ali Al Maawali منى  المعولية",
+            "email_address": "muna.maawali@testowwsc.nama.om",
+            "gender": "F",
+            "work_phone_number": "96822639382",
+            "grade_id": 300000005199088,
+            "job_id": 300000005201268,
+            "location_id": 300000005330857,
+            "position_id": 300000078745096,
+            "supervisor_id": 100000005250135,
+            "supervisor_name": "Issa Saud Khalaf Al Shaibani عيسى  الشيباني",
+            "department_name": "Cloud Computing and Service Delivery_DT",
+            "grade_name": "M1",
+            "job_name": "Manager",
+            "position_name": "Cloud Computing and Service Delivery Manager",
+            "location_name": "Bowshar",
+            "department_id": 300000076945977,
+            "action": "Assignment Change",
+            "job_group": "M1",
+            "working_pattern": "Standard",
+            "emp_region": null,
+            "user_id": 300000005398800,
+            "user_name": "5536",
+            "division": null,
+            "directorate": "Information & Communication Technology_DI",
+            "senior_directorate": null,
+            "work_phone_off_extension": null
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/common/login/employee"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/common/login/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/common/login/employee"
+        }
+    ]
+}

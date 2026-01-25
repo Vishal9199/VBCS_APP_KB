@@ -1,0 +1,1277 @@
+<div id="sampleDemo1" class="demo-padding demo-container">
+  <div id="componentDemoContent1" style="width: 1px; min-width: 100%;">
+    <div id="mainContent1">
+
+      <oj-sp-advanced-create-edit id="oj_petty_cash" page-title="Petty Cash Claim" page-subtitle=" "
+        display-options.responsive-padding="on" display-mode="light" on-sp-cancel="[[$listeners.ojPettyCashSpCancel]]"
+        secondary-actions="[[ $variables.aToolGeneric ]]" badge.text="[[ $variables.payload.claim_number ]]"
+        badge.status='{{ ($variables.payload.status_code==="DRA")?"neutral":($variables.payload.status_code==="APR")?"success":($variables.payload.status_code==="REJ")?"danger":($variables.payload.status_code==="PEN")?"info":"warning"}}'
+        display-options.next="off" on-sp-secondary-action="[[$listeners.ojPettyCashSpSecondaryAction]]"
+        on-sp-primary-action="[[$listeners.ojPettyCashSpPrimaryAction]]" primary-action.label="Close">
+
+        <!-- <oj-validation-group id="claim_hdr_valid_grp" valid="{{ $variables.hdrValidationVar }}" slot="main"> -->
+        <div slot="main" style="margin: 10px;">
+          <oj-validation-group valid="{{ $variables.headerFormValid }}">
+            <oj-form-layout id="pettyCashClaimForm" label-edge='start' direction="column" max-columns="3"
+              class="oj-formlayout-full-width oj-panel oj-selected" style="margin-top: 0.25rem;"
+              user-assistance-density="compact" label-width="36%">
+
+              <!-- 📌 Claim Information -->
+              <oj-input-text label-hint="Claim Number" value="{{ $variables.payload.claim_number }}"
+                class="oj-form-control-max-width-sm" disabled="true"></oj-input-text>
+
+              <oj-input-date label-hint="Claim Date" value="{{ $variables.payload.request_date }}"
+                converter='[[ { "type": "datetime", "options": { "pattern": "dd-MMM-yyyy" }} ]]'
+                class="oj-form-control-max-width-sm" required="true" disabled="true"></oj-input-date>
+
+              <oj-input-text label-hint="Governate" value="{{ $variables.payload.governorate }}" disabled="true"
+                class="oj-form-control-max-width-sm" required="true">
+              </oj-input-text>
+
+
+              <!-- 📌 Supplier Details -->
+              <oj-input-text label-hint="Supplier Name" value="{{ $variables.payload.supplier_name }}" disabled="true"
+                class="oj-form-control-max-width-sm">
+              </oj-input-text>
+
+              <oj-input-text label-hint="Supplier Site Name" class="oj-form-control-max-width-sm" disabled="true"
+                value="{{ $variables.temp_Supplier_Site }}">
+              </oj-input-text>
+
+
+              <!-- 📌 Financial Values -->
+              <oj-input-number label-hint="Opening Balance" value="{{ $variables.payload.open_balance_amt }}"
+                converter='{"options":{"style":"decimal","minimumFractionDigits":3},"type":"number"}'
+                class="oj-form-control-max-width-sm oj-form-control-text-align-end" required="true" disabled="true">
+              </oj-input-number>
+              <oj-input-number label-hint="Claim Amount" value="{{ $variables.payload.claim_amt }}"
+                converter='{"options":{"style":"decimal","minimumFractionDigits":3},"type":"number"}'
+                class="oj-form-control-max-width-sm oj-form-control-text-align-end" required="true" disabled="true"></oj-input-number>
+
+              <oj-input-number label-hint="Receipt Amount" value="{{ $variables.payload.receipt_amt }}"
+                converter='{"options":{"style":"decimal","minimumFractionDigits":3},"type":"number"}'
+                class="oj-form-control-max-width-sm oj-form-control-text-align-end" required="true" disabled="true">
+              </oj-input-number>
+
+              <oj-input-number label-hint="Closing Balance" value="{{ $variables.payload.close_balance_amt }}"
+                converter='{"options":{"style":"decimal","minimumFractionDigits":3},"type":"number"}'
+                class="oj-form-control-max-width-sm oj-form-control-text-align-end" required="true" disabled="true">
+              </oj-input-number>
+
+              <!-- <oj-input-number label-hint="Staff IOU"
+                class="oj-form-control-max-width-sm oj-form-control-text-align-end"
+                converter='{"options":{"style":"decimal","minimumFractionDigits":3},"type":"number"}'
+                value="{{ $variables.payload.staff_iou_amt }}" disabled="true">
+              </oj-input-number> -->
+              <oj-input-text label-hint="Status" value="{{ $variables.payload.status_name }}" disabled="true"
+                class="oj-form-control-max-width-sm"></oj-input-text>
+
+              <oj-input-number label-hint="Cash in Hand" value="{{ $variables.payload.cash_in_hand }}"
+                converter='{"options":{"style":"currency","currency":"OMR","currencyDisplay":"name","minimumFractionDigits":3,"currencyFormat":"standard"},"type":"number"}'
+                class="oj-form-control-max-width-sm oj-form-control-text-align-end"
+                disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.payload.status_code) ]]" required="true"
+                max="[[ $variables.payload.close_balance_amt ]]">
+              </oj-input-number>
+
+
+              <!-- 📌 System / Status Info -->
+              <oj-input-text label-hint="Invoice Number" value="{{ $variables.payload.saas_transaction_number }}"
+                class="oj-form-control-max-width-sm" disabled="true">
+              </oj-input-text>
+
+              <!-- <oj-input-text label-hint="Integration Status" value="{{ $variables.payload.integration_status_name }}"
+                class="oj-form-control-max-width-sm" disabled="true">
+              </oj-input-text> -->
+              <oj-text-area value="{{ $variables.payload.comments }}" label-hint="Comments" rows="3"
+                label-edge="provided" max-rows="3" id="comments" resize-behavior="vertical"
+                class="oj-sm-align-self-center oj-form-control-width-sm" user-assistance-density="compact"
+                disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.payload.status_code) ]]">
+              </oj-text-area>
+
+
+              <!-- 📌 Comments (Editable) -->
+              <!-- <oj-input-text label-hint="Comments"
+                class="oj-form-control-max-width-sm"
+                value="{{ $variables.payload.comments }}">
+              </oj-input-text> -->
+
+            </oj-form-layout>
+            <!-- <div class="oj-flex"> -->
+            <!-- <oj-form-layout direction="column" label-edge="start" class="oj-sm-12" columns="1" label-width="16.5%">
+              <oj-text-area value="{{ $variables.payload.comments }}" label-hint="Comments" rows="3"
+                label-edge="provided" max-rows="3" id="comments" resize-behavior="vertical"
+                class="oj-sm-align-self-center oj-form-control-text-align-start oj-sm-10"
+                user-assistance-density="compact">
+              </oj-text-area>
+            </oj-form-layout> -->
+            <!-- </div> -->
+
+          </oj-validation-group>
+          <!-- </oj-validation-group> -->
+          <oj-bind-if
+            test="[[ $variables.pNavId != 0 && $variables.pNavId != null && $variables.pNavId != undefined ]]">
+            <div class="oj-panel oj-selected" style="margin-top: 5px;">
+              <oj-tab-bar edge="top" id="tabBarId" selection="{{ $variables.selectedTab }}" style="zoom: 0.75;">
+                <ul>
+                  <li id="claimLine">
+                    <a href="#" id="claimHrefId">Claim Details</a>
+                  </li>
+                  <li id="receiptLine">
+                    <a href="#" id="receiptHrefId">Receipt Details</a>
+                  </li>
+                </ul>
+              </oj-tab-bar>
+              <div style="display: flex; justify-content: flex-end; gap: 0.25rem;">
+                <oj-button label="Refresh" class="oj-button-sm" chroming="outlined"
+                  style="margin-top: 0.1rem; margin-bottom: 0.1rem; background-color:#01474d !important; color: white !important;"
+                  on-oj-action="[[$listeners.buttonAction18]]" id="refbtn">
+                  <span class="oj-ux-ico-refresh" slot="startIcon" style="color: white !important;"></span>
+                </oj-button>
+                <oj-button label="Export" class="oj-button-sm" chroming="outlined"
+                  style="margin-top: 0.1rem; margin-bottom: 0.1rem; background-color:#01474d !important; color:white !important;"
+                  on-oj-action="[[$listeners.buttonAction12]]"
+                  disabled="[[ ($variables.selectedTab === 'claimLine' && Number($variables.totalRecords_Claim) === 0) || ($variables.selectedTab === 'receiptLine' && Number($variables.totalRecords_Receipts) === 0) ]]"
+                  id="expbtn">
+                  <span class="oj-ux-ico-export-excel-data" slot="startIcon" style="color: white !important;"></span>
+                </oj-button>
+                <oj-bind-if
+                  test="[[ $variables.selectedTab === 'claimLine' && $variables.payload.petty_cash_type === 'WW_PC_OPERATION' ]]">
+                <!-- <oj-bind-if
+                  test="[[ $variables.selectedTab === 'claimLine' ]]"> -->
+                  <oj-button label="Add Site Line" class="oj-button-sm" chroming="outlined"
+                    style="margin-top: 0.1rem; margin-bottom: 0.1rem; background-color: #01474d !important; color: white !important;"
+                    id="addSiteLineBtn" on-oj-action="[[$listeners.addSiteLineBtnAction]]">
+                    <span class="oj-ux-ico-plus" slot="startIcon"></span>
+                  </oj-button>
+                </oj-bind-if>
+                <oj-bind-if test="[[ $application.variables.allowCreate ]]">
+                  <oj-button label="Add" on-oj-action="[[$listeners.buttonAction9]]" class="oj-button-sm"
+                    chroming="outlined"
+                    style="margin-top: 0.1rem; margin-bottom: 0.1rem; background-color: #01474d !important; color: white !important;"
+                    disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.payload.status_code) ]]" id="addbtn">
+                    <span class="oj-ux-ico-plus" slot="startIcon"></span>
+                  </oj-button>
+                </oj-bind-if>
+                <!-- <oj-bind-if test="[[ $variables.selectedTab !== 'claimLine' ]]"> -->
+              </div>
+              <!-- </oj-bind-if> -->
+              <oj-switcher value="[[ $variables.selectedTab ]]">
+                <div slot="claimLine" id="claimLine">
+                  <div class="oj-flex">
+                    <oj-table scroll-policy="loadMoreOnScroll" class="oj-flex-item oj-sm-12 oj-md-12"
+                      data="[[ $variables.claimLineADP ]]" columns="{{$constants.claimLineColumns}}" display="grid"
+                      style="border-radius: 5px;" selection-mode.row="single">
+                      <template slot="actions">
+                        <div style="display: flex; gap: 4px;" class="oj-helper-justify-content-center">
+                          <oj-button display="icons" chroming="borderless" id="editBtn1"
+                            on-oj-action="[[$listeners.editBtnAction]]" class="oj-button-sm" style="height:20px !important;">
+                            <span slot="startIcon" class="oj-ux-ico-edit"></span>
+                          </oj-button>
+                          <oj-bind-if test="[[ $application.variables.allowDelete ]]">
+                            <oj-button display="icons" chroming="borderless" id="deleteBtn1" class="oj-button-sm"
+                              disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.payload.status_code) ]]"
+                              on-oj-action="[[$listeners.deleteBtn1Action]]" style="height:20px !important;">
+                              <span slot="startIcon" class="oj-ux-ico-trash"></span>
+                            </oj-button>
+                          </oj-bind-if>
+
+                          <!-- 
+                          <oj-button display="icons" chroming="borderless" id="downloadBtn" class="oj-button-sm"
+                            on-oj-action="[[$listeners.downloadBtnAction]]" style="height:20px !important;">
+                            <span slot="startIcon" class="oj-ux-ico-download"></span>
+                          </oj-button> -->
+                          <oj-button display="icons" chroming="borderless" id="downloadBtn" class="oj-button-sm"
+                            on-oj-action="[[$listeners.downloadBtnAction]]" style="height: 20px !important;">
+                            <span slot="startIcon" class="oj-ux-ico-download"
+                              style="font-size: 18px;">
+                            </span>
+                          </oj-button>
+
+
+                          <!-- <oj-bind-if test='[[ $current.row.status_name === "Pending" ]]'>
+                          <oj-button display="icons" chroming="borderless" id="approveBtn">
+                            <span slot="startIcon" class="oj-ux-ico-check-circle"></span>
+                          </oj-button>
+                        </oj-bind-if> -->
+                        </div>
+                      </template>
+
+                      <!-- 
+                      <template slot="about">
+                        <div style="display: flex; gap: 4px;" class="oj-helper-justify-content-center">
+                          <oj-button display="icons" chroming="borderless" id="aboutBtn"
+                            on-oj-action="[[$listeners.aboutBtnAction]]" class="oj-button-sm"
+                            style="height:20px !important;">
+                            <span slot="startIcon" class="oj-ux-ico-information"></span>
+                          </oj-button>
+                        </div>
+                      </template> -->
+
+                      <template slot="about">
+                        <div style="display:flex; gap:4px; justify-content:center;">
+                          <oj-button display="icons" chroming="borderless" id="aboutBtn" class="oj-button-sm"
+                            on-oj-action="[[$listeners.aboutBtnAction]]" style="height:20px !important;">
+                            <span slot="startIcon" class="oj-ux-ico-information" style="font-size:18px;"></span>
+                          </oj-button>
+                        </div>
+                      </template>
+
+                      <template slot="amountOMR">
+                        <!-- <oj-input-number value=""></oj-input-number> -->
+                        <oj-bind-text
+                          value="[[ $application.functions.formatToOMR($current.row.amount * $current.row.exchange_rate) ]]">
+                        </oj-bind-text>
+                      </template>
+                      <template slot="date">
+                        <oj-input-date value="[[$current.data]]" readonly="true"
+                          converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'></oj-input-date>
+                      </template>
+                      <template slot="attachment">
+                        <div style="display: flex; gap: 4px;" class="oj-helper-justify-content-center">
+                          <oj-button display="icons" chroming="borderless" id="attachmentBtn"
+                            on-oj-action="[[$listeners.attachmentBtnAction]]" class="oj-button-sm">
+                            <span slot="startIcon" class="oj-ux-ico-document-attachment"></span>
+                          </oj-button>
+                        </div>
+                      </template>
+                      <!-- Status Badge Template -->
+                      <template slot="status_badge">
+                        <oj-bind-if test='[[ $current.row.budget_status === "Valid" ]]'>
+                          <oj-bind-text style="font-size: 12px; color: green; font-weight: bold;">Valid</oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test='[[ $current.row.budget_status === "Invalid" ]]'>
+                          <oj-bind-text style="font-size: 12px; color: red; font-weight: bold;">Invalid</oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test='[[ $current.row.budget_status === "Draft" ]]'>
+                          <oj-bind-text style="font-size: 12px;color: black;font-weight: bold;">Draft</oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test='[[ $current.row.budget_status === "Pending" ]]'>
+                          <oj-bind-text style="font-size: 12px;color: orange;font-weight: bold;">Pending</oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test='[[ $current.row.budget_status === "Approved" ]]'>
+                          <oj-bind-text style="font-size: 12px;color: green;font-weight: bold;">Approved</oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test='[[ $current.row.budget_status === "Rejected" ]]'>
+                          <oj-bind-text style="font-size: 12px;color: red;font-weight: bold;">Rejected</oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test='[[ $current.row.budget_status === "Paid" ]]'>
+                          <oj-bind-text style="font-size: 12px;color: blue;font-weight: bold;">Paid</oj-bind-text>
+                        </oj-bind-if>
+                      </template>
+                    </oj-table>
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-flex oj-sm-justify-content-flex-end">
+                      <oj-label for="totalLineAmount" class="oj-flex-item oj-sm-align-self-center oj-sm-2"
+                        style="margin-left: 2rem;">Total Line Amount</oj-label>
+                      <oj-input-number id="totalLineAmount"
+                        class="oj-flex-item oj-form-control-text-align-right oj-form-control-width-sm oj-sm-2"
+                        converter='[[ new $imports.ojConverterNumber.IntlNumberConverter({"minimumFractionDigits":3}) ]]'
+                        user-assistance-density="compact" value="{{ $variables.totalsVar.total_line_amount }}"
+                        disabled="true"></oj-input-number>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-flex oj-sm-justify-content-center">
+                      <oj-button label="Prev" chroming="borderless" id="preBtn"
+                        disabled="[[ $variables.pagination.claimLine_is_prev ]]"
+                        on-oj-action="[[$listeners.preBtnAction]]">
+                        <span slot="startIcon" class="oj-ux-ico-back"></span>
+                      </oj-button>
+
+                      <!-- Page Info -->
+                      <div
+                        style="display: flex; align-items: center; gap: 5px; color: #666; font-size: 12px; border: 2px;"
+                        class="oj-bg-body">
+                        <!-- <oj-bind-text value="[[ 'Page ' + $variables.currentPage ]]"></oj-bind-text>
+                        <span>•</span> -->
+                        <oj-bind-text
+                          value="[[ (Number($variables.SearchObj_ClaimLine.in_offset)) + '-' + ((Number($variables.SearchObj_ClaimLine.in_offset)) + (Number($variables.claimLineADP.data.length))) + ' of ' + $variables.totalRecords_Claim + ' items' ]]">
+                        </oj-bind-text>
+                      </div>
+
+                      <oj-button label="Next" chroming="borderless" id="nextBtn"
+                        disabled="[[ $variables.pagination.claimLine_is_next ]]"
+                        on-oj-action="[[$listeners.nextBtnAction]]">
+                        <span slot="endIcon" class="oj-ux-ico-forward-next"></span>
+                      </oj-button>
+                    </div>
+                  </div>
+                </div>
+                <div slot="receiptLine" id="receiptLine">
+                  <div class="oj-flex">
+                    <oj-table scroll-policy="loadMoreOnScroll" class="oj-flex-item oj-sm-12 oj-md-12"
+                      data="[[ $variables.receiptLineADP ]]" columns="{{$constants.receiptLineColumns}}"
+                      horizontal-grid-visible="enabled" vertical-grid-visible="enabled" display="grid"
+                      style="border-radius: 5px;" selection-mode.row="single">
+
+                      <template slot="receiptLineActions">
+                        <div style="display: flex; gap: 4px;" class="oj-helper-justify-content-center">
+                          <oj-button display="icons" chroming="borderless" id="editBtn2"
+                            on-oj-action="[[$listeners.editBtnAction2]]" class="oj-button-sm"
+                            style="height:20px !important;">
+                            <span slot="startIcon" class="oj-ux-ico-edit"></span>
+                          </oj-button>
+                          <oj-bind-if test="[[ $application.variables.allowDelete ]]">
+                            <oj-button display="icons" chroming="borderless" id="deleteBtn2" class="oj-button-sm"
+                              disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.payload.status_code) ]]"
+                              on-oj-action="[[$listeners.deleteBtn2Action]]" style="height:20px !important;">
+                              <span slot="startIcon" class="oj-ux-ico-trash"></span>
+                            </oj-button>
+                          </oj-bind-if>
+                          <!-- <oj-button display="icons" chroming="borderless" id="receiptDownloadBtn" class="oj-button-sm"
+                            on-oj-action="[[$listeners.receiptDownloadBtnAction]]" style="height:20px !important;">
+                            <span slot="startIcon" class="oj-ux-ico-download"></span>
+                          </oj-button> -->
+
+                          <oj-button display="icons" chroming="borderless" id="receiptDownloadBtn" class="oj-button-sm"
+                            on-oj-action="[[$listeners.receiptDownloadBtnAction]]" style="height:20px !important;">
+                            <span slot="startIcon" class="oj-ux-ico-download"
+                            style="font-size:18px;">
+                            </span>
+                          </oj-button>
+
+                        </div>
+                      </template>
+
+
+                      <!-- 
+                      <template slot="about">
+                        <div style="display: flex; gap: 4px;" class="oj-helper-justify-content-center">
+                          <oj-button display="icons" chroming="borderless" id="aboutBtn"
+                            on-oj-action="[[$listeners.aboutBtnAction]]" class="oj-button-sm"
+                            style="height:20px !important;">
+                            <span slot="startIcon" class="oj-ux-ico-information"></span>
+                          </oj-button>
+                        </div>
+                      </template> -->
+
+                      <template slot="about">
+                        <div style="display:flex; gap:4px; justify-content:center;">
+                          <oj-button display="icons" chroming="borderless" id="aboutBtn" class="oj-button-sm"
+                            on-oj-action="[[$listeners.aboutBtnAction]]" style="height:20px !important;">
+                            <span slot="startIcon" class="oj-ux-ico-information" style="font-size:18px;"></span>
+                          </oj-button>
+                        </div>
+                      </template>
+
+                      <template slot="amountOMR">
+                        <!-- <oj-input-number value=""></oj-input-number> -->
+                        <oj-bind-text
+                          value="[[ $application.functions.formatToOMR($current.row.amount * $current.row.exchange_rate) ]]">
+                        </oj-bind-text>
+                      </template>
+                      <template slot="date">
+                        <oj-input-date value="[[$current.data]]" readonly="true"
+                          converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'></oj-input-date>
+                      </template>
+                      <template slot="attachment">
+                        <div style="display: flex; gap: 4px;" class="oj-helper-justify-content-center">
+                          <oj-button display="icons" chroming="borderless" id="attachmentBtn"
+                            on-oj-action="[[$listeners.attachmentBtnAction]]" class="oj-button-sm">
+                            <span slot="startIcon" class="oj-ux-ico-upload"></span>
+                          </oj-button>
+                        </div>
+                      </template>
+                    </oj-table>
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-flex oj-sm-justify-content-flex-end">
+                      <oj-label for="totalReceiptAmount" class="oj-flex-item oj-sm-align-self-center oj-sm-2"
+                        style="margin-left: 2rem;">Total Receipt Amount</oj-label>
+                      <oj-input-number id="totalReceiptAmount"
+                        class="oj-flex-item oj-form-control-text-align-right oj-form-control-width-sm oj-sm-2"
+                        converter='[[ new $imports.ojConverterNumber.IntlNumberConverter({"minimumFractionDigits":3}) ]]'
+                        disabled="true" user-assistance-density="compact"
+                        value="{{ $variables.totalsVar.total_receipt_amount }}"></oj-input-number>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-flex oj-sm-justify-content-center">
+                      <oj-button label="Prev" chroming="borderless" id="preBtn"
+                        disabled="[[ $variables.pagination.receiptLine_is_prev ]]"
+                        on-oj-action="[[$listeners.preBtnAction2]]">
+                        <span slot="startIcon" class="oj-ux-ico-back"></span>
+                      </oj-button>
+
+                      <!-- Page Info -->
+                      <div
+                        style="display: flex; align-items: center; gap: 5px; color: #666; font-size: 12px; border: 2px;"
+                        class="oj-bg-body">
+                        <!-- <oj-bind-text value="[[ 'Page ' + $variables.currentPage ]]"></oj-bind-text>
+                        <span>•</span> -->
+                        <oj-bind-text
+                          value="[[ (Number($variables.SearchObj_ReceiptLine.in_offset)) + '-' + ((Number($variables.SearchObj_ReceiptLine.in_offset)) + (Number($variables.receiptLineADP.data.length))) + ' of ' + $variables.totalRecords_Receipts + ' items' ]]">
+                        </oj-bind-text>
+                      </div>
+
+                      <oj-button label="Next" chroming="borderless" id="nextBtn"
+                        disabled="[[ $variables.pagination.receiptLine_is_next ]]"
+                        on-oj-action="[[$listeners.nextBtnAction2]]">
+                        <span slot="endIcon" class="oj-ux-ico-forward-next"></span>
+                      </oj-button>
+                    </div>
+                  </div>
+                </div>
+              </oj-switcher>
+            </div>
+          </oj-bind-if>
+        </div>
+
+
+      </oj-sp-advanced-create-edit>
+
+    </div>
+  </div>
+</div>
+
+<oj-dialog dialog-title="Please wait..." id="progressMsg" class="wd200" style="overflow: hidden;"
+  position.my.vertical="top" position.at.vertical="top">
+  <div slot="body" style="margin-top: 2.1rem;">
+    <div class="oj-flex full_stretch lg_button_width">
+      <oj-progress-bar class="full_stretch oj-flex-item oj-sm-12 oj-md-12" value="-1" style="zoom: 2;">
+      </oj-progress-bar>
+    </div>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="Delete" id="deleteDialog" style="width: 400px; overflow: hidden;" position.at.vertical="top"
+  position.my.vertical="top">
+  <div slot="body">
+    <!-- <div class="oj-flex"> -->
+    <br>
+    Are you sure you want to delete this record?
+    <!-- </div> -->
+  </div>
+  <div slot="footer">
+    <oj-button on-oj-action="[[$listeners.buttonAction14]]" chroming="solid">Ok</oj-button>
+    <oj-button on-oj-action="[[$listeners.buttonAction15]]" chroming="solid">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="About" id="aboutDialog" cancel-behavior="icon" style="width: 400px; overflow: hidden;"
+  resize-behavior="resizable" position.my.vertical="top" position.at.vertical="top">
+  <div slot="body">
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-sm-12 oj-md-12">
+        <oj-form-layout label-edge='start' columns="1" style="margin-top:23px;margin-left:-20px"
+          user-assistance-density="compact" direction="column" class="oj-formlayout-full-width"
+          label-width="45%">
+          <oj-input-text label-hint="Created By:" style="margin-bottom: -6px;" value="{{ $variables.about.created_by }}"
+            readonly="true" user-assistance-density="compact">
+          </oj-input-text>
+          <oj-input-text label-hint="Created Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.created_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated By:" style="margin-bottom: -6px;"
+            value="{{ $variables.about.last_updated_by }}" readonly="true" user-assistance-density="compact"></oj-input-text>
+          <oj-input-text label-hint="Created Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.last_updated_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated Login:" value="{{ $variables.about.last_updated_login }}" style="margin-bottom: -6px;"
+            readonly="true" user-assistance-density="compact">
+          </oj-input-text>
+        </oj-form-layout>
+      </div>
+    </div>
+  </div>
+  <div slot="footer">
+    <oj-button id="aboutButtonCancel_AC" label="Ok" on-oj-action="[[$listeners.aboutButtonCancelACAction]]"
+      chroming="solid" style="margin-top:-20px !important;"></oj-button>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="Upload File" id="uploadPopUp" drag-affordance="none" cancel-behavior="icon"
+  style="overflow: hidden;" position.at.vertical="top" position.my.vertical="top">
+  <div>
+    <oj-validation-group id="uploadrecount" valid="{{ $variables.uploadFormValid }}">
+      <oj-form-layout label-edge="start" columns="1" direction="column" user-assistance-density="compact"
+        class="oj-formlayout-full-width" style="margin-top: 1rem;">
+        <!-- <oj-file-picker id="filepicker2" selection-mode="single" on-oj-select="[[$listeners.filepicker2Select]]"></oj-file-picker> -->
+
+
+        <oj-label for="oj-file-picker–0001" style="font-weight: bold;" show-required="true">Upload</oj-label>
+        <oj-file-picker id="oj-file-picker–0001" selection-mode="single" style="width: 20rem; height:6rem;"
+          on-oj-select="[[$listeners.filePickerSelect]]">
+        </oj-file-picker>
+
+        <br>
+
+        <oj-input-text style="width:20rem; margin-bottom:6px;" required="true" label-hint="File Name"
+          value="{{ $variables.attachmentObj.P_DOCUMENT_NAME }}"></oj-input-text>
+        <oj-input-text style="width:20rem;margin-bottom:6px;" label-hint="File Type"
+          value="{{ $variables.attachmentObj.P_DOCUMENT_TYPE }}" required="true"></oj-input-text>
+
+      </oj-form-layout>
+    </oj-validation-group>
+    <div style="display:flex; justify-content:flex-end;">
+      <oj-button style="searchBtn margin-left:0.5%;margin-right:0.5%;" label="Save"
+        on-oj-action="[[$listeners.buttonAction11]]" chroming="solid"></oj-button>
+      <oj-button style="searchBtn margin-left:0.5%;margin-right:0.5%;" label="Close"
+        on-oj-action="[[$listeners.buttonAction3]]" chroming="danger"></oj-button>
+    </div>
+
+  </div>
+
+
+</oj-dialog>
+
+<!-- ======================= CLAIM LINE DIALOG ======================= -->
+<oj-dialog id="claimCreateDialog" dialog-title="Create Claim Line" style="width: 70vw; overflow: hidden; height: 70vh;"
+  cancel-behavior="icon" drag-affordance="title-bar" resize-behavior="resizable"
+  on-oj-close="[[$listeners.claimCreateDialogClose]]" position.at.vertical="top" position.my.vertical="top">
+  <div slot="body">
+    <oj-validation-group valid="{{ $variables.isFormValid }}" id="claim_line_formValid">
+      <oj-form-layout label-edge="start" label-width="38%" direction="row" class="oj-formlayout-full-width"
+        style="margin-top: 0.5rem;" max-columns="2" user-assistance-density="compact">
+
+        <!-- Expense Account -->
+        <!-- <oj-select-single label-hint="Expense Account" class="oj-form-control-width-sm" required="true"
+          data="[[$variables.getNwsCustPettycashLovExpenseAccountListSDP]]" item-text="flex_value"
+          value="{{ $variables.claimLineForm.accounts_segment }}" style="margin-bottom: -6px;">
+        </oj-select-single> -->
+        <oj-select-single label-hint="Expense Account" class="oj-form-control-width-sm" required="true"
+          user-assistance-density="compact" data="[[$variables.getNwsCustPettycashLovExpenseAccountListSDP]]"
+          item-text="flex_value" value="{{ $variables.claimLineForm.accounts_segment }}" style="margin-bottom: -6px;"
+          on-value-item-changed="[[$listeners.selectValueItem3]]"
+          disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.payload.status_code) ]]">
+          <template slot="collectionTemplate" data-oj-as="collection">
+            <oj-table id="table1" horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+              class="oj-select-results" selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}"
+              columns='[{"headerText":"Value","field":"flex_value","sortable":"disabled"},{"headerText":"Description","field":"flex_value_meaning","sortable":"disabled"}]'
+              on-oj-row-action="[[collection.handleRowAction]]" data="[[ collection.data ]]" selection-mode.row="single"
+              display="grid" style="overflow: hidden;">
+              <template slot="cellTemplate" data-oj-as="cell">
+                <oj-bind-text value="[[String(cell.data)]]"></oj-bind-text>
+              </template>
+            </oj-table>
+          </template>
+        </oj-select-single>
+        <!-- <oj-input-text label-hint="Expense Account" class="oj-form-control-max-width-sm"
+           value="{{ $variables.claimLineForm.accounts_segment }}" style="margin-bottom: -6px;"></oj-input-text> -->
+
+        <!-- Expense Account Description -->
+        <oj-input-text label-hint="Expense Account Description" class="oj-form-control-max-width-sm"
+          style="margin-bottom: -6px;" disabled="true" value="{{ $variables.dependent_values.claimLine_ExpenseDesc }}">
+        </oj-input-text>
+
+        <!-- <oj-input-text label-hint="Cost Center" class="oj-form-control-max-width-sm"
+          style="margin-bottom: -6px;" value="{{ $variables.claimLineForm.cost_center_segment }}" required="true">
+        </oj-input-text> -->
+
+        <!-- Department Code -->
+        <!-- <oj-select-single label-hint="Cost Center/Dept." class="oj-form-control-width-sm"
+          value="{{ $variables.claimLineForm.cost_center_segment }}"
+          data="[[$variables.getNwsCustPettycashLovDepartmentListSDP]]" item-text="flex_value_meaning" required="true"
+          style="margin-bottom: -6px;" on-value-item-changed="[[$listeners.selectValueItem4]]">
+        </oj-select-single> -->
+        <oj-select-single label-hint="Cost Center/Dept." class="oj-form-control-width-sm"
+          value="{{ $variables.claimLineForm.cost_center_segment }}"
+          data="[[$variables.getNwsCustPettycashLovDepartmentListSDP]]" item-text="flex_value" required="true"
+          style="margin-bottom: -6px;" on-value-item-changed="[[$listeners.selectValueItem4]]"
+          disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.payload.status_code) ]]">
+          <template slot="collectionTemplate" data-oj-as="collection">
+            <oj-table id="table2" horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+              class="oj-select-results" selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}"
+              columns='[{"headerText":"Value","field":"flex_value","sortable":"disabled"},{"headerText":"Description","field":"flex_value_meaning","sortable":"disabled"}]'
+              on-oj-row-action="[[collection.handleRowAction]]" data="[[ collection.data ]]" selection-mode.row="single"
+              display="grid" style="overflow: hidden;">
+              <template slot="cellTemplate" data-oj-as="cell">
+                <oj-bind-text value="[[String(cell.data)]]"></oj-bind-text>
+              </template>
+            </oj-table>
+          </template>
+        </oj-select-single>
+
+        <!-- Department Description -->
+        <oj-input-text label-hint="Department Description" disabled="true" class="oj-form-control-width-sm"
+          style="margin-bottom: -6px;" value="{{ $variables.dependent_values.claimLine_CostDeptDesc }}">
+        </oj-input-text>
+
+        <!-- <oj-select-single label-hint="Department Code" required="" class="oj-form-control-width-sm"
+        data="[[ $variables.claimLineForm.cost_center_segment ]]">
+      </oj-select-single> -->
+        <!-- <oj-input-text label-hint="Department Code" class="oj-form-control-width-sm" style="margin-bottom: -6px;"></oj-input-text> -->
+
+
+        <!-- Geography Code (Visible only for Water BU) -->
+        <!-- <oj-bind-if test="[[ $variables.business_unit === 'WATER' ]]"> -->
+        <!-- <oj-select-single label-hint="Geography Code" required="" class="oj-form-control-width-sm"
+          value="{{ $variables.claimLineForm.geography_segment }}">
+        </oj-select-single> -->
+
+        <!-- <oj-bind-if test="[[ $application.variables.restricted_business_unit === 'Water Operating Unit' ]]">
+          <oj-input-text label-hint="Geography Code" class="oj-form-control-width-sm"
+            value="{{ $variables.claimLineForm.geography_segment }}" required="true" style="margin-bottom: -6px;"></oj-input-text> -->
+
+        <!-- Geography Description -->
+        <!-- <oj-input-text label-hint="Geography Description" disabled="true" class="oj-form-control-width-sm"
+            style="margin-bottom: -6px;"></oj-input-text>
+        </oj-bind-if> -->
+        <!-- </oj-bind-if> -->
+
+        <!-- <oj-select-single label-hint="Geography Code" class="oj-form-control-width-sm"
+        value="{{ $variables.claimLineForm.geography_segment }}" required="true" style="margin-bottom: -6px;"
+        data="[[$variables.getNwsCustPettycashLovGeographyListSDP]]" item-text="flex_value_meaning">
+      </oj-select-single> -->
+        <oj-select-single label-hint="Geography Code" class="oj-form-control-width-sm"
+          value="{{ $variables.claimLineForm.geography_segment }}" required="true" style="margin-bottom: -6px;"
+          data="[[$variables.getNwsCustPettycashLovGeographyListSDP]]" item-text="flex_value"
+          on-value-item-changed="[[$listeners.selectValueItem5]]"
+          disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.payload.status_code) ]]">
+          <template slot="collectionTemplate" data-oj-as="collection">
+            <oj-table id="table1" horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+              class="oj-select-results" selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}"
+              columns='[{"headerText":"Value","field":"flex_value","sortable":"disabled"},{"headerText":"Description","field":"flex_value_meaning","sortable":"disabled"}]'
+              on-oj-row-action="[[collection.handleRowAction]]" data="[[ collection.data ]]" selection-mode.row="single"
+              display="grid" style="overflow: hidden;">
+              <template slot="cellTemplate" data-oj-as="cell">
+                <oj-bind-text value="[[String(cell.data)]]"></oj-bind-text>
+              </template>
+            </oj-table>
+          </template>
+        </oj-select-single>
+
+        <oj-input-text label-hint="Geography Description" disabled="true" class="oj-form-control-width-sm"
+          style="margin-bottom: -6px;" value="{{ $variables.dependent_values.claimLine_GeographyDesc }}">
+        </oj-input-text>
+
+        <!-- Currency -->
+        <oj-select-single label-hint="Currency" class="oj-form-control-width-sm"
+          value="{{ $variables.claimLineForm.currency }}" required="true"
+          data="[[$variables.getNwsCustCommonLovCurrency2ListSDP]]" item-text="currency_code"
+          disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.payload.status_code) ]]"
+          on-value-item-changed="[[$listeners.selectValueItem6]]">
+        </oj-select-single>
+        <!-- <oj-input-text label-hint="Currency" class="oj-form-control-width-sm"
+          value="{{ $variables.claimLineForm.currency }}" required="true"
+          disabled="[[ $variables.enableDisableVar !== 'Y' ]]" style="margin-bottom: -6px;"
+          on-value-changed="[[$listeners.inputTextValue]]">
+          <oj-button slot="end" display="icons" chroming="solid" class="oj-button-full-width oj-button-lg"
+            on-oj-action="[[$listeners.buttonAction5]]">
+            <span class="oj-ux-ico-edit"></span>
+          </oj-button>
+        </oj-input-text> -->
+
+        <!-- Amount -->
+        <!-- help.instruction="Amount should not exceed 200 OMR per line" -->
+
+        <!-- Exchange Rate Type -->
+        <!-- <oj-select-single label-hint="Exchange Rate Type" class="oj-form-control-width-sm" required="true"
+        value="{{ $variables.claimLineForm.exchange_rate_type }}">
+      </oj-select-single> -->
+        <oj-input-date label-hint="Exchange Rate Date"
+          converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' class="oj-form-control-max-width-sm"
+          required="true" value="{{ $variables.claimLineForm.exchange_rate_date }}" user-assistance-density="compact"
+          style="margin-bottom: -6px;"
+          disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.payload.status_code) || $variables.claimLineForm.currency === 'OMR' ]]">
+        </oj-input-date>
+        <oj-input-text label-hint="Exchange Rate Type" class="oj-form-control-width-sm"
+          value="{{ $variables.claimLineForm.exchange_rate_type }}"
+          required="[[ $variables.claimLineForm.currency !== 'OMR' ]]" user-assistance-density="compact"
+          style="margin-bottom: -6px;"
+          disabled="[[   $variables.claimLineForm.currency === 'OMR' ||  (    $variables.payload.status_code !== 'DRA' &&    $variables.payload.status_code !== 'WR' &&    $variables.payload.status_code !== 'RIA' &&    $variables.payload.status_code !== 'RIM'  )]]">
+        </oj-input-text>
+
+        <!-- Exchange Rate Date -->
+        <!-- <oj-input-text label-hint="Exchange Rate Date" required class="oj-form-control-width-sm"
+          value="{{ $variables.claimLineForm.exchange_rate_date }}"></oj-input-text> -->
+
+        <!-- Exchange Rate -->
+        <oj-input-number label-hint="Exchange Rate"
+          class="oj-form-control-max-width-sm oj-form-control-text-align-right"
+          value="{{ $variables.claimLineForm.exchange_rate }}"
+          readonly="[[   $variables.claimLineForm.currency === 'OMR' ||  (    $variables.payload.status_code !== 'DRA' &&    $variables.payload.status_code !== 'WR' &&    $variables.payload.status_code !== 'RIA' &&  $variables.payload.status_code !== 'RIM'  )]]"
+          user-assistance-density="compact" style="margin-bottom: -6px;" min="0.001"
+          required="[[ $variables.claimLineForm.currency !== 'OMR' ]]"
+          converter='[[ new $imports.ojConverterNumber.IntlNumberConverter({"minimumFractionDigits":3}) ]]'
+          on-value-changed="[[$listeners.inputNumberValue3]]"></oj-input-number>
+
+        <!-- Amount in OMR -->
+        <oj-input-number label-hint="Amount" class="oj-form-control-max-width-sm oj-form-control-text-align-right"
+          value="{{ $variables.claimLineForm.amount }}" required="true"
+          on-value-changed="[[$listeners.inputNumberValue]]" user-assistance-density="compact"
+          style="margin-bottom: -6px;"
+          converter='[[ new $imports.ojConverterNumber.IntlNumberConverter({"minimumFractionDigits":3}) ]]' max="200"
+          disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.payload.status_code) ]]"></oj-input-number>
+        <oj-input-number label-hint="Amount in OMR"
+          class="oj-form-control-max-width-sm oj-form-control-text-align-right" readonly="true"
+          value="{{ $variables.claimLineForm.amount_in_omr }}" user-assistance-density="compact"
+          style="margin-bottom: -6px;"
+          converter='[[ new $imports.ojConverterNumber.IntlNumberConverter({"minimumFractionDigits":3}) ]]'>
+        </oj-input-number>
+
+        <!-- Brief Narration -->
+        <oj-input-text label-hint="Brief Narration" class="oj-form-control-max-width-sm"
+          value="{{ $variables.claimLineForm.brief_narration }}" required="true" user-assistance-density="compact"
+          style="margin-bottom: -6px;"
+          disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.payload.status_code) ]]">
+        </oj-input-text>
+
+        <oj-file-picker aria-label="Attachment" selection-mode="single" secondary-text=" "
+          on-oj-select="[[$listeners.filePickerSelect]]" primary-text="Drag & Drop(Single File)"
+          style="margin-left: 38%;">
+          <oj-button label="Attachment" slot="trigger" chroming="outlined" style="width: 14rem; height: 2.5rem;"
+            disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.payload.status_code) ]]">
+            <span class="oj-ux-ico-attach-file" slot="startIcon" style="color: #01474d;"></span>
+          </oj-button>
+        </oj-file-picker>
+
+        <oj-input-text label-hint="File Name" class="oj-form-control-max-width-sm"
+          value="{{ $variables.attachmentObj.P_DOCUMENT_NAME }}" required="true" user-assistance-density="compact"
+          style="margin-bottom: -6px;" readonly="true">
+          <oj-button label="Button" slot="end" display="icons" class="oj-button-full-width"
+            chroming="solid" on-oj-action="[[$listeners.buttonAction13]]"
+            disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.payload.status_code) ]]">
+            <span class="oj-ux-ico-trash" slot="endIcon"></span>
+          </oj-button>
+        </oj-input-text>
+
+        <!-- Attachments -->
+        <!-- <oj-file-picker aria-label="Attachment" selection-mode="single" secondary-text=" "
+          primary-text="Drag & Drop(Single File)" style="margin-bottom: -6px;"> -->
+        <!-- <oj-input-text label-hint="Attachment" slot="trigger" class="oj-form-control-width-sm"></oj-input-text> -->
+        <!-- <oj-button label="Button" slot="trigger" class="oj-button-lg" chroming="outlined">
+ <span class="oj-ux-ico-attach-file" slot="startIcon" style="color: #01474d;"></span>
+          </oj-button> -->
+        <!-- </oj-file-picker> -->
+      </oj-form-layout>
+    </oj-validation-group>
+
+  </div>
+
+  <!-- Footer Buttons -->
+  <!-- <div slot="footer" class="oj-helper-justify-content-center"> -->
+  <div slot="footer" style="display: flex; justify-content: flex-end; gap: 8px;">
+
+    <div>
+      <!-- <oj-file-picker aria-label="Attachment" selection-mode="single" secondary-text=" " on-oj-select="[[$listeners.filePickerSelect]]"
+          primary-text="Drag & Drop(Single File)">
+        <oj-button label="Attachment" slot="trigger" class="oj-button-sm" chroming="outlined">
+          <span class="oj-ux-ico-attach-file" slot="startIcon" style="color: #01474d;"></span>
+        </oj-button>
+      </oj-file-picker> -->
+      <oj-bind-if test="[[ $application.variables.allowCreate ]]">
+        <oj-button class="oj-button-primary oj-button-sm" on-oj-action="[[$listeners.saveAndAddAnotherClaimLine ]]"
+          disabled="[[     !$variables.attachmentObj.P_DOCUMENT_NAME ||    (      $variables.payload.status_code !== 'DRA' &&      $variables.payload.status_code !== 'WR' &&      $variables.payload.status_code !== 'RIA' &&      $variables.payload.status_code !== 'RIM'    )  ]]"
+          chroming="solid">
+        Save &amp; Add Another</oj-button>
+      </oj-bind-if>
+      <oj-bind-if test="[[ $application.variables.allowCreate ]]">
+        <oj-button class="oj-button-primary oj-button-sm" on-oj-action="[[$listeners.saveAndCloseClaimLine ]]"
+          disabled="[[     !$variables.attachmentObj.P_DOCUMENT_NAME ||    (      $variables.payload.status_code !== 'DRA' &&      $variables.payload.status_code !== 'WR' &&      $variables.payload.status_code !== 'RIA' &&      $variables.payload.status_code !== 'RIM'    )  ]]"
+          chroming="solid">
+        Save &amp; Close</oj-button>
+      </oj-bind-if>
+      <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction2]]" class="oj-button-sm">Cancel</oj-button>
+    </div>
+  </div>
+
+</oj-dialog>
+
+
+
+
+<!-- ======================= RECEIPT LINE DIALOG ======================= -->
+<oj-dialog id="receiptCreateDialog" dialog-title="Create Receipt Line" modality="modeless" resize-behavior="resizable"
+  style="width: 70vw; overflow: hidden;" cancel-behavior="icon" drag-affordance="title-bar"
+  on-oj-close="[[$listeners.receiptCreateDialogClose]]" position.at.vertical="top" position.my.vertical="top">
+  <div slot="body">
+    <oj-validation-group id="receipt-validation" valid="{{ $variables.receiptFormValid }}">
+      <oj-form-layout label-edge="start" max-columns="2" direction="column"
+        style="margin-top: 1rem; margin-bottom: -1rem;" user-assistance-density="compact"
+        class="oj-sm-12 oj-md-12 oj-formlayout-full-width" label-width="38%">
+
+        <!-- Mode of Payment (Cash, Check, Wire Transfer, Online Transfer) -->
+        <oj-select-single label-hint="Mode of Payment" required="true"
+          data="[[$variables.getNwsCustCommonLovLookupListSDP]]" item-text="lookup_value_name"
+          value="{{ $variables.receiptLineForm.mode_of_payment }}"
+          disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.payload.status_code) ]]">
+        </oj-select-single>
+        <!-- <oj-input-text label-hint="Payment Mode" class="" value="{{ $variables.receiptLineForm.mode_of_payment }}"
+          required="true"></oj-input-text> -->
+
+        <!-- Reference Number -->
+        <oj-input-text label-hint="Reference Number" value="{{ $variables.receiptLineForm.reference_number }}"
+          required="true" disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.payload.status_code) ]]">
+        </oj-input-text>
+
+        <!-- Currency LOV default OMR -->
+        <!-- <oj-select-single label-hint="Currency" value="{{ $variables.receiptLineForm.currency }}" required="true">
+      </oj-select-single> -->
+        <!-- <oj-input-text label-hint="Currency" value="{{ $variables.receiptLineForm.currency }}" required="true"
+          disabled="[[ $variables.isCurrencyEdit_AC != 'Y' ]]" on-value-changed="[[$listeners.inputTextValue2]]">
+          <oj-button label="EditCurrency" slot="end" class="oj-button-lg oj-button-full-width" display="icons"
+            chroming="solid" on-oj-action="[[$listeners.buttonAction8]]">
+            <span class="oj-ux-ico-edit" slot="startIcon"></span>
+          </oj-button>
+        </oj-input-text> -->
+        <oj-select-single label-hint="Currency" class="" value="{{ $variables.receiptLineForm.currency }}"
+          required="true" data="[[$variables.getNwsCustCommonLovCurrency2ListSDP]]" item-text="currency_code"
+          disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.payload.status_code) ]]">
+        </oj-select-single>
+
+        <!-- Amount -->
+        <oj-input-number label-hint="Amount" value="{{ $variables.receiptLineForm.amount }}" required="true"
+          on-value-changed="[[$listeners.inputNumberValue2]]"
+          converter='[[ new $imports.ojConverterNumber.IntlNumberConverter({"minimumFractionDigits":3,"style":"decimal"}) ]]'
+          class="oj-form-control-text-align-right"
+          disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.payload.status_code) ]]"></oj-input-number>
+
+        <!-- Payment Received Date -->
+        <oj-input-date label-hint="Payment Received Date" value="{{ $variables.receiptLineForm.payment_received_date }}"
+          converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' required="true"
+          max="[[ $application.functions.getSysdate() ]]"
+          disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.payload.status_code) ]]"></oj-input-date>
+
+        <!-- Brief Narration -->
+        <oj-input-text label-hint="Brief Narration" value="{{ $variables.receiptLineForm.brief_narration }}"
+          required="true" style="margin-bottom: -6px;"
+          disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.payload.status_code) ]]"></oj-input-text>
+
+        <!-- Attachments -->
+        <!-- <div class="oj-flex oj-helper-justify-content-flex-end">
+          <oj-file-picker selection-mode="single" aria-label="Attachment"></oj-file-picker>
+        </div> -->
+
+        <!-- Exchange Rate Type -->
+        <!-- <oj-select-single label-hint="Exchange Rate Type" value="{{ $variables.receiptLineForm.exchange_rate_type }}"
+        disabled="[[ $variables.receiptLineForm.currency === 'OMR' ]]">
+      </oj-select-single> -->
+        <oj-input-text label-hint="Exchange Rate Type" value="{{ $variables.receiptLineForm.exchange_rate_type }}"
+          disabled="[[ ($variables.receiptLineForm.currency === 'OMR') || ($variables.payload.status_code !== 'DRA' || $variables.payload.status_code !== 'WR' || $variables.payload.status_code !== 'RIA' || $variables.payload.status_code !== 'RIM') ]]"
+          required="[[ $variables.receiptLineForm.currency !== 'OMR' ]]"></oj-input-text>
+
+        <!-- Exchange Rate Date -->
+        <oj-input-date label-hint="Exchange Rate Date" value="{{ $variables.receiptLineForm.exchange_rate_date }}"
+          disabled="[[ $variables.receiptLineForm.currency === 'OMR' ||    (      $variables.payload.status_code !== 'DRA' &&      $variables.payload.status_code !== 'WR'  &&      $variables.payload.status_code !== 'RIA' &&      $variables.payload.status_code !== 'RIM'    ) ]]"
+          required="[[ $variables.receiptLineForm.currency !== 'OMR' ]]"></oj-input-date>
+
+        <!-- Exchange Rate -->
+        <oj-input-number label-hint="Exchange Rate" value="{{ $variables.receiptLineForm.exchange_rate }}"
+          disabled="[[ $variables.receiptLineForm.currency === 'OMR' ||    (      $variables.payload.status_code !== 'DRA' &&      $variables.payload.status_code !== 'WR'  &&      $variables.payload.status_code !== 'RIA' &&      $variables.payload.status_code !== 'RIM'    ) ]]"
+          required="[[ $variables.receiptLineForm.currency !== 'OMR' ]]" class="oj-form-control-text-align-right"
+          min="0.001" converter='[[ new $imports.ojConverterNumber.IntlNumberConverter({"minimumFractionDigits":3}) ]]'
+          on-value-changed="[[$listeners.inputNumberValue4]]"></oj-input-number>
+
+        <!-- Amount in OMR = Amount * Exchange Rate -->
+        <oj-input-number label-hint="Amount in OMR" disabled="true"
+          value="{{ $variables.receiptLineForm.amount_in_omr }}" class="oj-form-control-text-align-right"
+          converter='[[ new $imports.ojConverterNumber.IntlNumberConverter({"minimumFractionDigits":3}) ]]'>
+        </oj-input-number>
+
+        <oj-label for="receipt_attachment">Attachment</oj-label>
+        <oj-file-picker aria-label="Attachment" selection-mode="single" secondary-text=" "
+          on-oj-select="[[$listeners.filePickerSelect]]" primary-text="Drag & Drop(Single File)" id="receipt_attachment"
+          style="display: flex; width: 100%;">
+          <oj-button label="Attachment" slot="trigger" chroming="outlined" style="width: 100%; height: 2.5rem;"
+            id="receipt_attachment_Btn"
+            disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.payload.status_code) ]]">
+            <span class="oj-ux-ico-attach-file" slot="startIcon" style="color: #01474d;"></span>
+          </oj-button>
+        </oj-file-picker>
+
+        <oj-input-text label-hint="File Name" value="{{ $variables.attachmentObj.P_DOCUMENT_NAME }}" required="true"
+          user-assistance-density="compact" style="margin-bottom: -6px;" readonly="true">
+          <oj-button label="Delete Receipt File" slot="end" display="icons" class="oj-button-full-width"
+            chroming="solid" disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.payload.status_code) ]]"
+            on-oj-action="[[$listeners.buttonAction16]]">
+            <span class="oj-ux-ico-trash" slot="endIcon"></span>
+          </oj-button>
+        </oj-input-text>
+      </oj-form-layout>
+    </oj-validation-group>
+  </div>
+
+  <!-- Footer Buttons -->
+  <!-- <div slot="footer" style="display: flex; justify-content: space-between;"> -->
+  <div slot="footer" style="display: flex; justify-content: flex-end; gap: 8px;">
+
+    <div>
+    <!-- <oj-file-picker aria-label="Attachment" selection-mode="single" secondary-text=" "
+          primary-text="Drag & Drop(Single File)" on-oj-select="[[$listeners.filePickerSelect]]">
+        <oj-button label="Attachment" slot="trigger" class="oj-button-sm" chroming="outlined">
+          <span class="oj-ux-ico-attach-file" slot="startIcon" style="color: #01474d;"></span>
+        </oj-button>
+      </oj-file-picker> -->
+    <oj-bind-if test="[[ $application.variables.allowCreate ]]">
+        <oj-button class="oj-button-primary oj-button-sm"
+          disabled="[[     !$variables.attachmentObj.P_DOCUMENT_NAME ||    (      $variables.payload.status_code !== 'DRA' &&      $variables.payload.status_code !== 'WR' &&      $variables.payload.status_code !== 'RIA' &&      $variables.payload.status_code !== 'RIM'    )  ]]"
+          on-oj-action="[[$listeners.saveAndAddAnotherReceipt ]]" chroming="solid">
+      Save & Add Another</oj-button>
+    </oj-bind-if>
+    <oj-bind-if test="[[ $application.variables.allowCreate ]]">
+        <oj-button class="oj-button-primary oj-button-sm" on-oj-action="[[$listeners.saveAndCloseReceipt]]"
+          disabled="[[     !$variables.attachmentObj.P_DOCUMENT_NAME ||    (      $variables.payload.status_code !== 'DRA' &&      $variables.payload.status_code !== 'WR' &&      $variables.payload.status_code !== 'RIA' &&      $variables.payload.status_code !== 'RIM'    )  ]]"
+          chroming="solid">
+      Save & Close</oj-button>
+    </oj-bind-if>
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction4]]" class="oj-button-sm">Cancel</oj-button>
+    </div>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="Cancel" id="confirmCanceDialog" style="overflow: hidden;">
+  <div slot="body" style="padding-top: 25px;">
+    <div class="oj-flex">
+      <p>Do you want to save and close?</p>
+    </div>
+  </div>
+  <div slot="footer">
+    <oj-button>Yes</oj-button>
+    <oj-button on-oj-action="[[$listeners.buttonAction10]]">No</oj-button>
+  </div>
+</oj-dialog>
+
+
+
+
+
+<!-- APPROVAL DIALOGS STARTS HERE -->
+
+<!-- Submit Popup -->
+<!-- <oj-dialog dialog-title="Submit" id="submitDialog" drag-affordance="title-bar" cancel-behavior="icon"
+  resize-behavior="resizable" position.at.vertical="top" position.my.vertical="top" style="overflow: hidden;">
+  <div slot="body">
+    <h6>Are you sure you want to submit?</h6>
+  </div>
+  <div slot="footer">
+    <oj-button id="BtnOk" style="margin-left:0.5%;margin-right:1.5%;" label="Ok"
+      on-oj-action="[[$listeners.btnOkAction]]"></oj-button>
+    <oj-button id="BtnCancel" style="margin-left:0.5%;margin-right:1.5%;" label="Cancel"
+      on-oj-action="[[$listeners.btnCancelAction]]"></oj-button>
+  </div>
+</oj-dialog> -->
+
+<!-- Approval Popup -->
+<!-- <oj-dialog dialog-title="Approve" id="approveDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-input-text label-hint="Comments" user-assistance-density="compact" placeholder="Comments"
+      value="{{ $variables.responseComment }}" id="approveCmt" required="true"></oj-input-text>
+  </div>
+  <div slot="footer">
+    <oj-validation-group>
+      <oj-button id="appBtn" on-oj-action="[[$listeners.appBtnAction]]">Ok</oj-button>
+      <oj-button id="appCancel" on-oj-action="[[$listeners.appCancelAction]]">Cancel</oj-button>
+    </oj-validation-group>
+  </div>
+</oj-dialog> -->
+
+<!-- Reject Popup -->
+<!-- <oj-dialog dialog-title="Reject" id="rejectDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-validation-group valid="{{ $variables.formValid_Dialog_Obj.rejectValid }}">
+      <oj-input-text label-hint="Comments" placeholder="Please Enter the Reason For Rejection."
+        value="{{ $variables.responseComment }}" required="true" id="rejectCmt" user-assistance-density="compact">
+      </oj-input-text>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-validation-group>
+      <oj-button id="rejBtn" on-oj-action="[[$listeners.rejBtnAction]]">Ok</oj-button>
+      <oj-button id="rejCancel" on-oj-action="[[$listeners.rejCancelAction]]">Cancel</oj-button>
+    </oj-validation-group>
+  </div>
+</oj-dialog> -->
+
+<!-- Withdraw -->
+<!-- <oj-dialog dialog-title="Withdraw" id="withdrawDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-validation-group valid="{{ $variables.formValid_Dialog_Obj.withdrawValid }}">
+      <oj-input-text label-hint="Comments" placeholder="Please Enter the Reason For WithDraw"
+        user-assistance-density="compact" value="{{ $variables.responseComment }}" required="true"></oj-input-text>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-validation-group>
+      <oj-button id="withdrawOk" on-oj-action="[[$listeners.withdrawOkAction]]">Submit</oj-button>
+      <oj-button id="withdrawcancel" on-oj-action="[[$listeners.withdrawcancelAction]]">Cancel</oj-button>
+    </oj-validation-group>
+  </div>
+</oj-dialog> -->
+
+<!-- Reassign -->
+<!-- <oj-dialog dialog-title="Reassign" id="ReassignDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-validation-group valid="{{ $variables.formValid_Dialog_Obj.reassignValid }}">
+      <oj-input-text label-hint="* Current Approver" style="width: 21rem; margin-bottom: 10px;"
+        value="{{ $application.user.username }}" disabled="true" class="oj-form-control-full-width oj-sm-12"></oj-input-text>
+      <oj-input-text label-hint="Comments" placeholder="Please Enter Reassign Reason"
+        value="{{ $variables.responseComment }}" required="true" id="reassignCmt"></oj-input-text>
+      <oj-select-single label-hint="Reassign To" item-text="user_name"
+        value="{{ $flow.variables.updateAction.P_TO_PERSON_ID }}"
+        required="true" id="reassignto">
+        <template slot="collectionTemplate" data-oj-as="collection">
+          <oj-table scroll-policy="loadMoreOnScroll" horizontal-grid-visible="disabled" vertical-grid-visible="disabled"
+            selection-mode='{"row": "single"}' columns-default='{"resizable": "disabled","sortable": "disabled"}'
+            class="oj-select-results" columns='[
+						{"headerText":"Reassign Approver","field":"user_name"}              
+                        ]' on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]"
+            selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}">
+          </oj-table>
+        </template>
+      </oj-select-single>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-validation-group>
+      <oj-button id="reassignOk" on-oj-action="[[$listeners.reassignOkAction]]">Submit</oj-button>
+      <oj-button id="reassignCancel" on-oj-action="[[$listeners.reassignCancelAction]]">Cancel</oj-button>
+    </oj-validation-group>
+  </div>
+</oj-dialog> -->
+
+<!-- require more info -->
+<!-- <oj-dialog dialog-title="Require More Information" id="moreinfoDialog" style="overflow: hidden; width: 480px;"
+  cancel-behavior="icon" position.at.vertical="top" position.my.vertical="top">
+  <div style="margin-top: 1rem;">
+    <oj-validation-group valid="{{ $variables.formValid_Dialog_Obj.moreinfoValid }}">
+      <oj-text-area id="app-1" label-hint="Comments" placeholder="Please Enter More information Comments"
+        style="width: 21rem; margin-bottom:6px;" required="true" value="{{ $variables.responseComment }}"
+        class="oj-sm-12">
+      </oj-text-area>
+      <oj-radioset label-hint="Require More Information" value="{{ $flow.variables.updateAction.P_MORE_INFO_TYPE }}"
+        required="true" class="oj-sm-12">
+        <oj-option value="RIM">Request Info from Employee</oj-option>
+        <oj-option value="RIA">Send Back & Restart Process</oj-option>
+      </oj-radioset>
+    </oj-validation-group>
+    <br>
+    <oj-validation-group style="display:flex; justify-content:flex-end;">
+      <oj-button class="oj-button-sm" chroming="solid" id="moreinfoOk">Ok</oj-button>
+      <oj-button class="oj-button-sm" chroming="solid" id="moreinfoCancel"
+        on-oj-action="[[$listeners.moreinfoCancelAction]]">Cancel</oj-button>
+    </oj-validation-group>
+  </div>
+</oj-dialog> -->
+
+
+
+<!-- APPROVAL DIALOGS STARTS HERE -->
+
+<!-- Submit Popup -->
+<oj-dialog dialog-title="Submit" id="submitDialog" drag-affordance="title-bar" cancel-behavior="icon"
+  resize-behavior="resizable" position.at.vertical="top" position.my.vertical="top"
+  style="overflow: hidden; width: 414px;">
+
+  <div slot="footer" style="margin-top: -1rem;">
+    <oj-button id="BtnOk" style="margin-left:0.5%;margin-right:1.5%;" label="Ok"
+      on-oj-action="[[$listeners.btnOkAction2]]" class="oj-button-sm" chroming="solid"></oj-button>
+    <oj-button id="BtnCancel" style="margin-left:0.5%;margin-right:1.5%;" label="Cancel" class="oj-button-sm"
+      chroming="solid"></oj-button>
+  </div>
+  <p class="oj-p" slot="body" style="margin-top: 1rem; font-weight: bold;">Are you sure you want to submit the request?</p>
+</oj-dialog>
+
+<!-- Approval Popup -->
+<oj-dialog dialog-title="Approve" id="approveDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-input-text label-hint="Comments" user-assistance-density="compact" placeholder="Comments" id="approveCmt"
+      required="true" value="{{ $flow.variables.responseComments }}"></oj-input-text>
+  </div>
+  <div slot="footer">
+    <oj-button id="appBtn" on-oj-action="[[$listeners.appBtnAction]]"
+      disabled="[[ !$flow.variables.responseComments ]]">Ok</oj-button>
+    <oj-button id="appCancel" on-oj-action="[[$listeners.appCancelAction]]">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Reject Popup -->
+<oj-dialog dialog-title="Reject" id="rejectDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-validation-group valid="{{ $flow.variables.actionValidation.isRejectFormValid }}"
+      :id="[[ $flow.variables.actionValidation.rejectValidation ]]">
+      <oj-input-text label-hint="Comments" placeholder="Please Enter the Reason For Rejection." required="true"
+        id="rejectCmt" user-assistance-density="compact" value="{{ $flow.variables.responseComments }}">
+      </oj-input-text>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-validation-group>
+      <oj-button id="rejBtn" on-oj-action="[[$listeners.rejBtnAction]]"
+        disabled="[[ !$flow.variables.responseComments ]]">Ok</oj-button>
+      <oj-button id="rejCancel" on-oj-action="[[$listeners.rejCancelAction]]">Cancel</oj-button>
+    </oj-validation-group>
+  </div>
+</oj-dialog>
+
+<!-- Withdraw -->
+<oj-dialog dialog-title="Withdraw" id="withdrawDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-validation-group :id="[[ $flow.variables.actionValidation.withdrawValidation ]]"
+      valid="{{ $flow.variables.actionValidation.isWithdrawFormValid }}">
+      <oj-input-text label-hint="Comments" placeholder="Please Enter the Reason For Withdraw"
+        user-assistance-density="compact" required="true" value="{{ $flow.variables.responseComments }}">
+      </oj-input-text>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-validation-group>
+      <oj-button id="withdrawOk" on-oj-action="[[$listeners.withdrawOkAction]]"
+        disabled="[[ !$flow.variables.responseComments ]]">Ok</oj-button>
+      <oj-button id="withdrawcancel" on-oj-action="[[$listeners.withdrawcancelAction]]">Cancel</oj-button>
+    </oj-validation-group>
+  </div>
+</oj-dialog>
+
+<!-- Reassign -->
+<oj-dialog dialog-title="Reassign" id="ReassignDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-validation-group :id="[[ $flow.variables.actionValidation.reassignValidation ]]"
+      valid="{{ $flow.variables.actionValidation.isReassignFormValid }}">
+      <oj-input-text label-hint="* Current Approver" style="width: 21rem; margin-bottom: 10px;"
+        value="{{ $application.user.username }}" disabled="true" class="oj-form-control-full-width oj-sm-12">
+      </oj-input-text>
+      <oj-select-single label-hint="Reassign To" item-text="full_name" required="true" id="reassignto"
+        value="{{ $flow.variables.updateActionObj.p_to_person_id }}" style="margin-bottom: 10px;"
+        data="[[ $flow.variables.getApprovalProcessEmployeeListListSDP ]]">
+        <template slot="collectionTemplate" data-oj-as="collection">
+          <oj-table scroll-policy="loadMoreOnScroll" horizontal-grid-visible="disabled" vertical-grid-visible="disabled"
+            selection-mode='{"row": "single"}' columns-default='{"resizable": "disabled","sortable": "disabled"}'
+            class="oj-select-results" columns='[{"headerText":"Reassign Approver","field":"full_name"}]'
+            on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]"
+            selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}">
+          </oj-table>
+        </template>
+      </oj-select-single>
+      <oj-input-text label-hint="Comments" placeholder="Please Enter Reassign Reason" required="true" id="reassignCmt"
+        value="{{ $flow.variables.responseComments }}">
+      </oj-input-text>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-validation-group>
+      <oj-button id="reassignOk" on-oj-action="[[$listeners.reassignOkAction]]"
+        disabled="[[ !$flow.variables.updateActionObj.p_to_person_id || !$flow.variables.responseComments ]]">Ok</oj-button>
+      <oj-button id="reassignCancel" on-oj-action="[[$listeners.reassignCancelAction]]">Cancel</oj-button>
+    </oj-validation-group>
+  </div>
+</oj-dialog>
+
+<!-- require more info -->
+<oj-dialog dialog-title="Employee More Information" id="moreinfoDialog" style="overflow: hidden; width: 510px;"
+  cancel-behavior="icon" position.at.vertical="top" position.my.vertical="top">
+  <div style="margin-top: 1rem;">
+    <oj-validation-group>
+      <!-- <oj-radioset label-hint="Require More Information" required="true" class="oj-sm-12"
+        value="{{ $flow.variables.updateActionObj.P_MORE_INFO_TYPE }}">
+        <oj-option value="RIM">Request Info from Employee</oj-option>
+        <oj-option value="RIA">Send Back & Restart Process</oj-option>
+      </oj-radioset> -->
+      <oj-radioset label-hint="Require More Information" required="true" class="oj-sm-12"
+        value="{{ $flow.variables.updateActionObj.p_more_info_type }}">
+        <oj-option value="MAINTAIN">Return to employee for corrections and resubmission to me</oj-option>
+        <oj-option value="RETURN">Return to employee for re-initiation</oj-option>
+      </oj-radioset>
+      <oj-text-area id="app-1" label-hint="Comments" placeholder="Please Enter More Information Comments"
+        style="width: 21rem; margin-bottom:6px;" required="true" class="oj-sm-12"
+        value="{{ $flow.variables.responseComments }}" user-assistance-density="compact">
+      </oj-text-area>
+    </oj-validation-group>
+    <br>
+    <oj-validation-group style="display:flex; justify-content:flex-end;">
+      <oj-button class="oj-button-sm" chroming="solid" id="moreinfoOk" on-oj-action="[[$listeners.moreinfoOkAction]]"
+        disabled="[[ !$flow.variables.updateActionObj.p_more_info_type || !$flow.variables.responseComments ]]">Ok
+      </oj-button>
+      <oj-button class="oj-button-sm" chroming="solid" id="moreinfoCancel"
+        on-oj-action="[[$listeners.moreinfoCancelAction]]">Cancel</oj-button>
+    </oj-validation-group>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="Approver More Information" id="rpaDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;" drag-affordance="title-bar">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-validation-group :id="[[ $flow.variables.actionValidation.rpaValidation ]]" valid="{{ $flow.variables.actionValidation.isRpaFormValid }}">
+      <oj-select-single label-hint="More Info. Approver" item-text="person_name" required="true" id="apprMoreInfo"
+        value="{{ $flow.variables.updateActionObj.p_to_person_id }}" style="margin-bottom: 5px;"
+        user-assistance-density="compact" data="[[$variables.getCommonPreviousApprovalListListSDP]]">
+        <template slot="collectionTemplate" data-oj-as="collection">
+          <oj-table scroll-policy="loadMoreOnScroll" horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+            columns-default='{"sortable":"disabled"}' class="oj-select-results"
+            columns='[{"headerText":"Level","field":"approver_level","resizable":"enabled","sortable":"disabled"},{"headerText":"Employee Number","field":"person_number","sortable":"disabled","resizable":"enabled"},{"headerText":"More Info. Approver","field":"person_name","resizable":"enabled","sortable":"disabled"}]'
+            on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]"
+            selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}" display="grid"
+            selection-mode.row="single"></oj-table>
+        </template>
+      </oj-select-single>
+    </oj-validation-group>
+    <oj-input-text label-hint="Approver Comments" user-assistance-density="compact" placeholder="Approver Comments"
+      id="rpaApproverCmt" required="true" value="{{ $flow.variables.responseComments }}">
+    </oj-input-text>
+  </div>
+  <div slot="footer">
+    <oj-button id="rpaAppBtn" disabled="[[ !$flow.variables.responseComments ]]" on-oj-action="[[$listeners.rpaAppBtnAction]]">Ok</oj-button>
+    <oj-button id="rpaCancel" on-oj-action="[[$listeners.rpaCancelAction]]">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+
+<!-- Add Site Line Popup -->
+<oj-dialog dialog-title="Site Line" id="addSiteLine" 
+  cancel-behavior="icon" 
+  resize-behavior="resizable"
+  position.at.vertical="top"
+  position.my.vertical="top" 
+  style="width: 90vw; max-height: 85vh;">
+  
+  <div slot="body" style="display: flex; flex-direction: column; height: 70vh; padding: 0;">
+    
+    <!-- Action Buttons Section (Fixed at top) -->
+    <div style="padding: 1rem; border-bottom: 1px solid #e0e0e0; background-color: #f8f9fa;"
+      class="oj-flex oj-sm-justify-content-flex-end">
+      <div>
+        <oj-bind-if test="[[ $application.variables.allowCreate ]]">
+          <oj-button id="saveSiteLineBtn" chroming="solid" style="margin-right: 0.5rem;"
+            on-oj-action="[[$listeners.saveSiteLineBtnAction]]">
+        Save
+      </oj-button>
+        </oj-bind-if>
+      </div>
+      <oj-button id="siteLineCancel" chroming="solid" class="" on-oj-action="[[$listeners.siteLineCancelAction]]">
+        Cancel
+      </oj-button>
+    </div>
+    
+    <!-- Scrollable Table Container -->
+    <div style="flex: 1; overflow-y: auto; overflow-x: auto; padding: 1rem;">
+      <oj-table scroll-policy="loadMoreOnScroll" columns="{{ $constants.addSiteLineColumns }}"
+        selection-mode.row="multiple" selection-mode.column="single" display="grid" horizontal-grid-visible="enabled"
+        vertical-grid-visible="enabled" style="width: 100%; height: 100%;" data="[[ $variables.siteLineADP ]]">
+        
+        <template slot="amountOMR">
+          <oj-bind-text
+            value="[[ $application.functions.formatToOMR($current.row.amount * $current.row.exchange_rate) ]]">
+          </oj-bind-text>
+        </template>
+        
+        <template slot="date">
+          <oj-input-date value="[[$current.data]]" readonly="true"
+            converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'>
+          </oj-input-date>
+        </template>
+        
+      </oj-table>
+    </div>
+    
+  </div>
+</oj-dialog>
+
+<!-- Approver Response Popup (RPA) -->
+<oj-dialog dialog-title="Approver Response" id="apprResponseDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-validation-group :id="[[ $flow.variables.actionValidation.rpaResponseValidation ]]" valid="{{ $flow.variables.actionValidation.isRpaResponseFormValid }}">
+      <oj-input-text label-hint="Comments" user-assistance-density="compact" placeholder="Comments" id="apprResponseCmt"
+        required="true" value="{{ $flow.variables.responseComments }}">
+      </oj-input-text>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-button id="apprResponseBtn"
+      disabled="[[ !$flow.variables.responseComments ]]" on-oj-action="[[$listeners.apprResponseBtnAction]]">Ok</oj-button>
+    <oj-button id="appResponseCancel" on-oj-action="[[$listeners.appCancelAction]]">Cancel</oj-button>
+  </div>
+</oj-dialog>

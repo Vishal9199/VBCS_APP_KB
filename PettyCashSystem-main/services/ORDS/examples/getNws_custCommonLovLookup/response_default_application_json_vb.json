@@ -1,0 +1,62 @@
+{
+    "items": [
+        {
+            "lookup_value_id": 64,
+            "lookup_type_id": 61,
+            "lookup_type_code": "MODE_OF_PAYMENT",
+            "lookup_type_name": "Mode Of Payment",
+            "lookup_value_code": "WIRE_TRANSFER",
+            "lookup_value_name": "Wire Transfer",
+            "display_order": 3,
+            "active_flag": "Y"
+        },
+        {
+            "lookup_value_id": 62,
+            "lookup_type_id": 61,
+            "lookup_type_code": "MODE_OF_PAYMENT",
+            "lookup_type_name": "Mode Of Payment",
+            "lookup_value_code": "CASH",
+            "lookup_value_name": "Cash",
+            "display_order": 1,
+            "active_flag": "Y"
+        },
+        {
+            "lookup_value_id": 63,
+            "lookup_type_id": 61,
+            "lookup_type_code": "MODE_OF_PAYMENT",
+            "lookup_type_name": "Mode Of Payment",
+            "lookup_value_code": "CHEQUE",
+            "lookup_value_name": "Cheque",
+            "display_order": 2,
+            "active_flag": "Y"
+        },
+        {
+            "lookup_value_id": 65,
+            "lookup_type_id": 61,
+            "lookup_type_code": "MODE_OF_PAYMENT",
+            "lookup_type_name": "Mode Of Payment",
+            "lookup_value_code": "ONLINE_TRANSFER",
+            "lookup_value_name": "Online Transfer",
+            "display_order": 4,
+            "active_flag": "Y"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 4,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/common/lov/lookup"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/metadata-catalog/common/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/common/lov/lookup"
+        }
+    ]
+}

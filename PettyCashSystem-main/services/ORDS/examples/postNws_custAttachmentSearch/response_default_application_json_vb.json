@@ -1,0 +1,29 @@
+{
+    "P_OUTPUT": [
+        {
+            "document_id": 1929,
+            "document_name": "Claim_Lines_Export_20251204_224611.xlsx",
+            "document_category": "PC_CLAIM_LINE",
+            "document_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "description": "XLSX attachment for Claim_Lines_Export_20251204_224611.xlsx",
+            "appl_code": "PETTY_CASH",
+            "transaction_id": 221,
+            "reference_id": 241,
+            "title": "Claim_Lines_Export_20251204_224611.xlsx",
+            "url": null,
+            "type": "FILE",
+            "additional_info": null,
+            "created_by": "vishal.m@4iapps.com",
+            "created_date": "2025-12-05T14:23:37Z",
+            "last_updated_by": "vishal.m@4iapps.com",
+            "last_updated_date": "2025-12-05T14:23:37Z",
+            "last_updated_login": "vishal.m@4iapps.com",
+            "links": [
+                {
+                    "rel": "file",
+                    "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/attachment/1929/content"
+                }
+            ]
+        }
+    ]
+}

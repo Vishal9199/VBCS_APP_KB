@@ -1,0 +1,94 @@
+<div id="pageContent" class="oj-web-applayout-page">
+
+  <div class="oj-flex-bar oj-sm-align-items-center menuList">
+    <div class="oj-flex-bar-start">
+      <oj-bind-if test="[[ $application.variables.showNavigation ]]">
+        <oj-button on-oj-action="[[$listeners.buttonAction]]" chroming="borderless" display="icons"
+          style="background-color : #01474d;">
+          <span class="oj-ux-ico-menu icons" style="color : white ; " slot="startIcon"></span>
+        </oj-button>
+      </oj-bind-if>
+    </div>
+
+
+  </div>
+  <div class="oj-web-applayout-content-nopad oj-web-applayout-max-width">
+
+    <div class="oj-flex">
+      <oj-sp-messages-banner data="[[ $variables.messagesBannerADP ]]" class="oj-flex-item oj-sm-12 oj-md-12"
+        on-sp-close="[[$listeners.messagesBannerSpClose]]"></oj-sp-messages-banner>
+    </div>
+    <oj-messages messages="[[ $variables.messageADP ]]" position.at.horizontal="center" position.at.vertical="top"
+      position.collision="flip" position.my.vertical="top" display-options.category="header"
+      class="oj-messages-outlined"></oj-messages>
+
+    <oj-sp-messages-toast primary-text="[[ $variables.messageToast ]]" id="messageToast"></oj-sp-messages-toast>
+
+    <div class="oj-flex">
+      <!-- Renders flow content -->
+      <oj-vb-content id="vbRouterContent" class="oj-flex-item" config="[[vbRouterFlow]]">
+        <oj-drawer-popup opened="{{ $variables.popupOpen }}" close-gesture="none" style="width:80px">
+
+          <div class="popupheader oj-flex oj-sm-justify-content-space-between oj-sm-align-items-center"
+            style="background-color : #01474d ; padding: 0px 5 px;">
+            <h1 id="h4"
+              style="font-size: larger; font-weight: bold; margin-top: 0px; margin-bottom: 0px; color: white;">
+              Application Object Library</h1>
+            <oj-button chroming="borderless" on-oj-action="[[$listeners.buttonAction2]]">
+              <span class="oj-ux-ico-warehouse " slot="startIcon" style="color: white;"></span>
+            </oj-button>
+
+          </div>
+          <div class="oj-flex oj-sm-flex-direction-column oj-sm-align-items-flex-start">
+            <oj-collapsible class="oj-flex-item oj-sm-flex-initial" expanded="true">
+              <div class="oj-flex oj-sm-flex-direction-column oj-sm-align-items-flex-start">
+                <oj-bind-for-each data="[[ $application.constants.applicationLibraryPages ]]">
+                  <template>
+                    <oj-button chroming="borderless" class="" label="[[ $current.data.label ]]"
+                      on-oj-action="[[$listeners.buttonAction3]]">
+                      <span slot="startIcon" :class="[[$current.data.icon]]"></span>
+                    </oj-button>
+                  </template>
+                </oj-bind-for-each>
+              </div>
+              <h1 id="h4" slot="header" style="font-size: larger; font-weight: bold;color:#01474d">Application Library
+              </h1>
+            </oj-collapsible>
+            <oj-collapsible class="oj-flex-item oj-sm-flex-initial" expanded="true">
+              <div class="oj-flex oj-sm-flex-direction-column oj-sm-align-items-flex-start">
+                <oj-bind-for-each data="[[ $application.constants.ProgramLibraryPages ]]">
+                  <template>
+                    <oj-button chroming="borderless" class="" label="[[ $current.data.label ]]"
+                      on-oj-action="[[$listeners.buttonAction3]]">
+                      <span slot="startIcon" :class="[[$current.data.icon]]"></span>
+                    </oj-button>
+                  </template>
+                </oj-bind-for-each>
+              </div>
+              <h1 id="h4" slot="header" style="font-size: larger; font-weight: bold;color:#01474d">Program Library
+              </h1>
+            </oj-collapsible>
+            <oj-collapsible class="oj-flex-item oj-sm-flex-initial" expanded="true">
+              <div class="oj-flex oj-sm-flex-direction-column oj-sm-align-items-flex-start">
+                <oj-bind-for-each data="[[ $application.constants.syncApplicationPage ]]">
+                  <template>
+                    <oj-button chroming="borderless" class="" label="[[ $current.data.label ]]"
+                      on-oj-action="[[$listeners.buttonAction4]]">
+                      <span slot="startIcon" :class="[[$current.data.icon]]"></span>
+                    </oj-button>
+                  </template>
+                </oj-bind-for-each>
+              </div>
+              <h1 id="h4" slot="header" style="font-size: larger; font-weight: bold;color:#01474d">Sync Application
+              </h1>
+            </oj-collapsible>
+          </div>
+        </oj-drawer-popup>
+
+
+
+      </oj-vb-content>
+
+    </div>
+  </div>
+</div>

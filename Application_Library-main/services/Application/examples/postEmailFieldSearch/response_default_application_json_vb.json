@@ -1,0 +1,74 @@
+{
+    "OUT_COUNT": 5,
+    "OUT_DESCRIPTION": "Successfully fetched 5 of 5 records.",
+    "OUT_HAS_NEXT": "N",
+    "OUT_STATUS": "SUCCESS",
+    "OUT_TOTAL_COUNT": 5,
+    "P_OUTPUT": [
+        {
+            "field_id": 1104,
+            "section_id": 1081,
+            "section_code": "EMP_SEC_01",
+            "template_id": 1044,
+            "template_code": "DEP_ONBOARD_MAIL",
+            "field_code": "EMP_NAME",
+            "field_label": "Employee Name",
+            "field_order": 1,
+            "column_name": "EMP_NAME",
+            "display_format": "TEXT",
+            "is_active": "Y"
+        },
+        {
+            "field_id": 1121,
+            "section_id": 1081,
+            "section_code": "EMP_SEC_01",
+            "template_id": 1044,
+            "template_code": "DEP_ONBOARD_MAIL",
+            "field_code": "EMP_NAME",
+            "field_label": "Employee Name",
+            "field_order": 2,
+            "column_name": "EMP_NAME",
+            "display_format": "TEXT",
+            "is_active": "Y"
+        },
+        {
+            "field_id": 1122,
+            "section_id": 1081,
+            "section_code": "EMP_SEC_01",
+            "template_id": 1044,
+            "template_code": "DEP_ONBOARD_MAIL",
+            "field_code": "EMP_NAME",
+            "field_label": "Employee Name",
+            "field_order": 3,
+            "column_name": "EMP_NAME",
+            "display_format": "TEXT",
+            "is_active": "Y"
+        },
+        {
+            "field_id": 1141,
+            "section_id": 1081,
+            "section_code": "EMP_SEC_01",
+            "template_id": 1044,
+            "template_code": "DEP_ONBOARD_MAIL",
+            "field_code": "EMP_NAME",
+            "field_label": "Employee Name",
+            "field_order": 4,
+            "column_name": "EMP_NAME",
+            "display_format": "TEXT",
+            "is_active": "Y"
+        },
+        {
+            "field_id": 1221,
+            "section_id": 1081,
+            "section_code": "EMP_SEC_01",
+            "template_id": 1044,
+            "template_code": "DEP_ONBOARD_MAIL",
+            "field_code": "EMP_NAME",
+            "field_label": "Employee Name",
+            "field_order": 5,
+            "column_name": "EMP_NAME",
+            "display_format": "TEXT",
+            "is_active": "Y"
+        }
+    ]
+}

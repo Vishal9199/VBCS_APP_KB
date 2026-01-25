@@ -1,0 +1,371 @@
+/**
+ * To theme your application, just override the variable values you want to change. To find which variables can be changed,
+ * see the JET documentation at https://www.oracle.com/webfolder/technetwork/jet/jsdocs/CssVariablesOverview.html
+ * In general, we recommend using the Stable theme, as it reduces the chances of being impacted by changes over time.
+ */
+
+:root {
+  /* --oj-html-font-family:  -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif; */
+  /* --oj-html-font-size:   1em; */
+
+  --oj-form-layout-start-edge-label-to-value-padding: 0.4rem;
+  --oj-form-layout-top-edge-label-to-value-padding: 0rem;
+
+  --oj-text-field-height: 1.75rem;
+}
+
+
+#oj_petty_cash oj-sp-header-create-edit .oj-sp-header-create-edit-bg-light {
+  background-color: #01474d !important;
+}
+
+#oj_attachment oj-sp-header-create-edit .oj-sp-header-create-edit-bg-light {
+  background-color: #01474d !important;
+}
+
+oj-sp-header-create-edit .oj-sp-header-create-edit-title-sm-up {
+  color: white !important;
+}
+
+oj-sp-header-create-edit .oj-sp-header-create-edit-header-strip {
+  background-image: none;
+}
+
+/* @media (hover: hover) {
+    .BaseButtonStyles_styles_variants_outlined_pseudohover__jvi3dsv:hover:enabled:not(:active) {
+        border-color: rgb(255, 255, 255);
+        border-width: 2px;
+    }
+} */
+
+.BaseButtonStyles_styles_sizes_sm__jvi3ds2d {
+  border-color: white;
+}
+
+
+
+.BaseButtonStyles_styles_sizes_sm__jvi3ds2d {
+  color: white !important
+}
+
+/* .oj-button.oj-hover.oj-button-half-chrome .oj-button-icon { */
+/* color: white !important; */
+/* font-size: 2rem !important; */
+/* } */
+
+.oj-button.oj-default.oj-button-half-chrome .oj-button-icon,
+.oj-button.oj-focus-only.oj-button-half-chrome .oj-button-icon {
+  /* color: white !important; */
+  font-size: 1.5rem !important;
+}
+
+.oj-button-menu-icon-only-dropdown-icon:before,
+.oj-fwk-icon-dots-horizontal:before,
+.oj-navigationlist-overflow-item-icon:before,
+.oj-tabbar-overflow-item-icon:before {
+  content: "\f136";
+  border-color: white !important;
+  color: white;
+}
+
+.oj-dialog .oj-fwk-icon {
+  color: white;
+  margin-top: 1rem;
+}
+
+.oj-text-field.oj-disabled .oj-text-field-input {
+  /* color: var(--oj-text-field-text-color-disabled); */
+  /* color: red; */
+  color: black;
+  background-color: #dedcde;
+}
+
+.oj-text-field.oj-disabled .oj-text-field-container {
+  /* background-color: var(--oj-text-field-bg-color-disabled); */
+  border-color: var(--oj-text-field-border-color-disabled);
+  /* background-color: #e3e3e3; */
+  background-color: f6f6f6;
+  border: solid 1px #171616;
+}
+
+.oj-text-field .oj-text-field-container {
+  position: relative;
+  box-sizing: border-box;
+  border-style: solid;
+  transition: border-color .1s linear;
+  border-color: var(--oj-text-field-border-color);
+  border-width: var(--oj-text-field-border-width);
+  border-radius: var(--oj-text-field-border-radius);
+  background-color: var(--oj-text-field-bg-color);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  height: var(--oj-text-field-height);
+  border: solid 1px grey;
+  font-size: 12px;
+  /* Adjust the font size as needed */
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Table */
+--oj-collection-grid-row-height: 1rem;
+--oj-collection-grid-header-height: 2rem;
+
+.oj-table-body-row {
+  height: auto !important;
+  min-height: 0rem !important;
+  font-size: 12px;
+  font-weight: medium;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* color:#5D5D5D ;  */
+}
+
+.oj-text-field .oj-text-field-container {
+  position: relative;
+  box-sizing: border-box;
+  border-style: solid;
+  transition: border-color .1s linear;
+  border-color: var(--oj-text-field-border-color);
+  border-width: var(--oj-text-field-border-width);
+  border-radius: var(--oj-text-field-border-radius);
+  background-color: var(--oj-text-field-bg-color);
+  display: flex;
+  flex-direction: row;
+  align-items: center !important;
+  overflow: hidden;
+  height: var(--oj-text-field-height);
+  border: solid 1px grey;
+  font-size: 12px;
+  /* Adjust the font size as needed */
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* .oj-table-grid-display .oj-table-data-cell {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+} */
+
+/* --oj-form-layout-start-edge-label-to-value-padding: 0.3rem;
+--oj-form-layout-top-edge-label-to-value-padding: 0rem; */
+
+.oj-form-control-inherit:not(.oj-form-control-default) .oj-text-field:not(.oj-invalid):not(.oj-warning) .oj-text-field-container,
+.oj-form-control-inherit:not(.oj-form-control-default) .oj-text-field:not(.oj-invalid):not(.oj-warning) .oj-text-field-input,
+.oj-form-control-inherit:not(.oj-form-control-default) .oj-text-field:not(.oj-invalid):not(.oj-warning) .oj-text-field-readonly-div {
+  border-width: 0;
+}
+
+.oj-form-layout .oj-form.oj-enabled .oj-text-field.oj-read-only .oj-text-field-container {
+  border-width: var(--oj-text-field-border-width);
+  /* border-color: var(--oj-text-field-border-color-disabled); */
+  background-color: transparent;
+  height: var(--oj-text-field-height);
+  padding: 3px;
+  min-height: 1rem;
+}
+
+/* .oj-table-grid-display .oj-table-column-header-cell, .oj-table-grid-display .oj-table-column-header-selector-cell, .oj-table-grid-display .oj-table-footer-cell, .oj-table-grid-display .oj-table-footer-row, .oj-table-grid-display .oj-table-footer-selector-cell, .oj-table-grid-display .oj-table-header-row{
+  text-align: center !important;
+} */
+
+oj-option.oj-complete.oj-menu-divider {
+  display: none !important;
+}
+
+oj-option#oj_petty_cash_h_cancelAction {
+  display: none !important;
+}
+
+button.oj-sp-filter-chip-chrome.oj-sp-filter-chip-complex.oj-sp-filter-chip-container.oj-sp-helper-white-space-nowrap.oj-sp-filter-chip-clickable.oj-sm-padding-0 {
+  background-color: #ffffff !important;
+}
+
+.oj-sp-filter-chip-suggested .oj-sp-smart-search-complex-chip-label {
+  color: black Important;
+}
+
+oj-sp-smart-search .oj-sp-filter-chip-suggested .oj-sp-smart-search-complex-chip-value {
+  color: #000000 !important;
+}
+
+.oj-tabbar-horizontal:not(.oj-tabbar-icon-only) .oj-tabbar-item.oj-selected {
+  background-color: #01474d !important;
+}
+
+.oj-selected>a.oj-tabbar-item-content .oj-tabbar-item-label {
+  color: white;
+}
+
+.oj-button.oj-default.oj-button-cta-chrome .oj-button-button {
+  background-color: white !important;
+  color: black;
+}
+
+
+.oj-table .oj-table-data-cell {
+  height: 20px !important;
+  min-height: 20px !important;
+  padding: 2px 6px !important;
+  line-height: 16px !important;
+  font-size: 12px !important;
+}
+
+.oj-table-grid-display .oj-table-header .oj-table-column-header-cell {
+  padding: 0 8px !important;
+  height: 10px !important;
+  line-height: 1 !important;
+  font-size: 12px !important;
+}
+
+
+.oj-table .oj-table-body-row {
+  height: 20px !important;
+  min-height: 20px !important;
+}
+
+.oj-table .oj-table-data-cell {
+  height: 20px !important;
+  min-height: 20px !important;
+  padding: 2px 6px !important;
+  line-height: 16px !important;
+  font-size: 12px !important;
+}
+
+.oj-text-field-readonly {
+  min-height: 0;
+  font-size: 12px !important;
+}
+
+
+.oj-button .oj-button-icon {
+  pointer-events: none !important;
+}
+
+/* When button is hovered, keep icon unchanged */
+.oj-button:hover .oj-button-icon,
+.oj-button:hover .oj-ux-ico,
+.oj-button:hover oj-icon {
+  color: inherit !important;
+  background: none !important;
+}
+
+
+oj-table .oj-table-header-row {
+  height: 22px !important;
+  min-height: 22px !important;
+}
+
+.oj-table-grid-display .oj-table-header .oj-table-column-header-cell {
+  padding: 0 8px !important;
+  height: 10px !important;
+  line-height: 1 !important;
+  font-size: 13px !important;
+}
+
+oj-table-column-header-text {
+  display: -webkit-box;
+  min-width: 1rem;
+  height: inherit;
+  overflow: inherit;
+  text-overflow: inherit;
+  vertical-align: middle;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-size: 13px !important;
+}
+
+
+oj-table-column-header-cell * {
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+  font-size: 13px !important;
+}
+
+
+#expbtn .oj-button-label,
+#expbtn .oj-button-label oj-option,
+#refbtn .oj-button-label,
+#refbtn .oj-button-label oj-option,
+#addbtn .oj-button-label,
+#addbtn .oj-button-label oj-option,
+#addSiteLineBtn .oj-button-label,
+#addSiteLineBtn .oj-button-label oj-option
+#addRefFileBtn .oj-button-label,
+#addRefFileBtn .oj-button-label oj-option {
+  cursor: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: white !important;
+}
+
+
+.oj-table-column-header-cell * {
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+  font-size: 13px !important;
+}
+
+
+.oj-ux-ico-export:before {
+  content: '\f24d';
+  color: white !important;
+}
+
+.oj-ux-ico-plus:before {
+  content: '\f320';
+  color: white !important;
+}
+
+.oj-ux-ico-refresh:before {
+  content: '\f32f';
+  color: white !important;
+}
+
+oj-dialog-header {
+  background-color: #01474d;
+  padding: 21px 35px 0px 40px !important;
+}
+
+
+.oj-dialog-title {
+  color: white;
+  font-family: "Oracle Sans", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: -21px;
+  margin-top: -18px;
+}
+
+.oj-dialog .oj-fwk-icon:before {
+  color: white;
+}
+
+/* Hover styles for all CTA chrome buttons */
+.oj-button-cta-chrome:hover button {
+  background-color: #fff !important;
+}
+
+.oj-button-cta-chrome:hover .oj-button-text {
+  color: #000 !important;
+}
+
+/* Hover styles for Close button */
+#oj_petty_cash_h_primaryActionFromHeader_primaryActionCta:hover button {
+  background-color: #fff !important;
+}
+
+#oj_petty_cash_h_primaryActionFromHeader_primaryActionCta:hover .oj-button-text {
+  color: #000 !important;
+}
+
+/* Cursor Not Allowed */
+.oj-button-toggle.oj-disabled, .oj-button.oj-disabled .oj-button-button {
+    cursor: not-allowed;
+}

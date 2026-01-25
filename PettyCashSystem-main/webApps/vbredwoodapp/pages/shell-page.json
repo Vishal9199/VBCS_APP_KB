@@ -1,0 +1,101 @@
+{
+    "description": "",
+    "routerFlow": "pettycashmaster",
+    "variables": {
+      "messageToast": {
+        "type": "string"
+      },
+      "messagesBannerADP": {
+        "type": "vb/ArrayDataProvider2",
+        "defaultValue": {
+          "itemType": "MessagesBannerType",
+          "keyAttributes": "id"
+        }
+      },
+      "messageId": {
+        "type": "string"
+      },
+      "messageADP": {
+        "type": "vb/ArrayDataProvider2",
+        "defaultValue": {
+          "itemType": "messageObj",
+          "keyAttributes": "id"
+        }
+      }
+    },
+    "metadata": {},
+    "types": {
+      "MessagesBannerType": {
+        "id": "string",
+        "messageType": "string",
+        "primaryText": "string",
+        "primaryActionLabel": "string",
+        "secondaryText": "any",
+        "secondaryActionLabel": "string"
+      },
+      "messageObj": {
+      "autoTimeout": "number",
+      "category": "string",
+      "detail": "string",
+      "DisplayOptions": "string",
+      "id": "string",
+      "severity": "string",
+      "summary": "string",
+      "timestamp": "string"
+    }
+    },
+    "eventListeners": {
+    "application:spShowToast": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "showMessageToast"
+        }
+      ]
+    },
+    "messagesBannerSpClose": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "closeMessageBanner"
+        }
+      ]
+    },
+    "vbNotification": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}",
+            "fireNotifiObj": {
+              "autoTimeout": "{{ $event.displayMode==='transient'? 0 : -1 }}",
+              "detail": "{{ $event.message }}",
+              "id": "{{ $event.key }}",
+              "severity": "{{ $event.type }}",
+              "summary": "{{ $event.summary }}"
+            }
+          },
+          "chain": "showNotificationMessage"
+        }
+      ]
+    }
+    },
+    "imports": {
+    "components": {
+      "oj-messages": {
+        "path": "ojs/ojmessages"
+      },
+      "oj-sp-messages-banner": {
+        "path": "oj-sp/messages-banner/loader"
+      },
+      "oj-sp-messages-toast": {
+        "path": "oj-sp/messages-toast/loader"
+      }
+
+    }
+    },
+    "translations": {}
+  }

@@ -1,0 +1,152 @@
+{
+  "description": "",
+  "routerFlow": "application",
+  "variables": {
+    "messageToast": {
+      "type": "string"
+    },
+    "messagesBannerADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "MessagesBannerType",
+        "keyAttributes": "id"
+      }
+    },
+    "messageADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "messageADP",
+        "keyAttributes": "id"
+      }
+    },
+    "messageId": {
+      "type": "number",
+      "defaultValue": 1
+    },
+    "popupOpen": {
+      "type": "boolean"
+    }
+  },
+  "metadata": {},
+  "types": {
+    "MessagesBannerType": {
+      "id": "number",
+      "messageType": "string",
+      "primaryText": "string",
+      "primaryActionLabel": "string",
+      "secondaryText": "any",
+      "secondaryActionLabel": "string"
+    },
+    "messageADP": {
+      "autoTimeout": "number",
+      "category": "string",
+      "detail": "string",
+      "id": "string",
+      "severity": "string",
+      "summary": "string",
+      "timestamp": "string"
+    }
+  },
+  "eventListeners": {
+    "application:spShowToast": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "showMessageToast"
+        }
+      ]
+    },
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "openPopupAC"
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "closePopUpAC"
+        }
+      ]
+    },
+    "buttonAction3": {
+      "chains": [
+        {
+          "chain": "navToFlowAC",
+          "parameters": {
+            "current": "[[ $current.data ]]"
+          }
+        }
+      ]
+    },
+    "buttonAction4": {
+      "chains": [
+        {
+          "chain": "navToFlowAC",
+          "parameters": {
+            "current": "[[ $current.data ]]"
+          }
+        }
+      ]
+    },
+    "messagesBannerSpClose": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "closeMessageBanner"
+        }
+      ]
+    },
+    "vbNotification": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}",
+            "currentVar": {
+              "autoTimeout": "{{ $event.displayMode === 'transient' ? 0 : -1 }}",
+              "detail": "{{ $event.message }}",
+              "id": "{{ $event.key }}",
+              "severity": "{{ $event.type }}",
+              "summary": "{{ $event.summary }}"
+            }
+          },
+          "chain": "showNotificationMessage"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-drawer-layout": {
+        "path": "ojs/ojdrawerlayout"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-drawer-popup": {
+        "path": "ojs/ojdrawerpopup"
+      },
+      "oj-messages": {
+        "path": "ojs/ojmessages"
+      },
+      "oj-sp-messages-banner": {
+        "path": "oj-sp/messages-banner/loader"
+      },
+      "oj-sp-messages-toast": {
+        "path": "oj-sp/messages-toast/loader"
+      }
+
+    }
+  },
+  "translations": {},
+  "constants": {}
+}

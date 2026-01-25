@@ -1,0 +1,42 @@
+{
+    "items": [
+        {
+            "role_id": 14,
+            "role_code": "ROLE_1",
+            "role_name": "Role 1",
+            "application_id": 4,
+            "application_code": "TEST1234",
+            "application_name": "Test123",
+            "business_unit_id": null,
+            "business_unit_name": null
+        },
+        {
+            "role_id": 23,
+            "role_code": "ABC_2",
+            "role_name": "abc_2",
+            "application_id": 1,
+            "application_code": null,
+            "application_name": null,
+            "business_unit_id": 1,
+            "business_unit_name": null
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 2,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/role/lov/rolename"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/metadata-catalog/role/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/role/lov/rolename"
+        }
+    ]
+}

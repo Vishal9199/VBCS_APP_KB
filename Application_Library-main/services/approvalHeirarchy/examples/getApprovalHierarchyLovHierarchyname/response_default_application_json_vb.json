@@ -1,0 +1,27 @@
+{
+    "items": [
+        {
+            "hierarchy_id": 16,
+            "hierarchy_code": "HIERARCHY_01",
+            "hierarchy_name": "Hierarchy 01"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/approval/hierarchy/lov/hierarchyname"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/metadata-catalog/approval/hierarchy/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/approval/hierarchy/lov/hierarchyname"
+        }
+    ]
+}

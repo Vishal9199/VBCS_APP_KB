@@ -1,0 +1,64 @@
+{
+    "items": [
+        {
+            "lookup_type_code": "PETTY_CASH",
+            "lookup_type_name": "Petty Cash",
+            "petty_cash_type": "WW_PC_LOGISTICS",
+            "petty_cash_name": "Waste Water Petty Cash Logistics",
+            "petty_cash_governate": "Waste Water Business Unit",
+            "extracted_name": "Logistics",
+            "clean_name": "Logistics",
+            "clean_name_no_space": "Logistics",
+            "person_id": 100000001703242,
+            "person_number": "3068",
+            "full_name": "Nasr Hamed Saif Al Amri نصر  العامري",
+            "email_address": "nasr.amri@testowwsc.nama.om"
+        },
+        {
+            "lookup_type_code": "PETTY_CASH",
+            "lookup_type_name": "Petty Cash",
+            "petty_cash_type": "W_PC_LOGISTICS",
+            "petty_cash_name": "Water Petty Cash Logistics",
+            "petty_cash_governate": "Water Operating Unit",
+            "extracted_name": "Logistics",
+            "clean_name": "Logistics",
+            "clean_name_no_space": "Logistics",
+            "person_id": 100000001703242,
+            "person_number": "3068",
+            "full_name": "Nasr Hamed Saif Al Amri نصر  العامري",
+            "email_address": "nasr.amri@testowwsc.nama.om"
+        },
+        {
+            "lookup_type_code": "PETTY_CASH",
+            "lookup_type_name": "Petty Cash",
+            "petty_cash_type": "W_PC_AL_DAKHLIYA_REGION",
+            "petty_cash_name": "Water Petty Cash Al Dakhliya Region",
+            "petty_cash_governate": "Water Operating Unit",
+            "extracted_name": "Al Dakhliya Region",
+            "clean_name": "Al Dakhliya Region",
+            "clean_name_no_space": "AlDakhliyaRegion",
+            "person_id": 100000001703242,
+            "person_number": "3068",
+            "full_name": "Nasr Hamed Saif Al Amri نصر  العامري",
+            "email_address": "nasr.amri@testowwsc.nama.om"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 3,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/pettycash/lov/user/role?p_email_address=lBrdaCHmshz1jRf-6Ia1o8A4g2CS1tcVwGKkwJbfLR09T0UeYPU8ju7rT713qEMMmOgz3E0KEBnv97xl38ohPA.."
+        },
+        {
+            "rel": "describedby",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/metadata-catalog/pettycash/lov/user/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/pettycash/lov/user/role?p_email_address=lBrdaCHmshz1jRf-6Ia1o8A4g2CS1tcVwGKkwJbfLR09T0UeYPU8ju7rT713qEMMmOgz3E0KEBnv97xl38ohPA.."
+        }
+    ]
+}

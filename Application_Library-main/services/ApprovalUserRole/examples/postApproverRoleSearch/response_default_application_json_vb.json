@@ -1,0 +1,37 @@
+{
+    "OUT_COUNT": 2,
+    "OUT_DESCRIPTION": "Successfully fetched approval role records",
+    "OUT_HAS_NEXT": "N",
+    "OUT_STATUS": "SUCCESS",
+    "OUT_TOTAL_COUNT": 2,
+    "P_OUTPUT": [
+        {
+            "approval_role_id": 567,
+            "object_version_num": 2,
+            "approval_role_code": "FINANCE_ADMIN_TEST",
+            "approval_role_name": "Finance Administrator",
+            "remarks": "Some remarks",
+            "active_flag": "Y",
+            "attribute_json": "{\"extra_field\":\"value\"}",
+            "created_by": "USER123",
+            "created_date": "2025-09-22T06:55:17Z",
+            "last_updated_by": "USER123",
+            "last_updated_date": "2025-09-22T06:56:14Z",
+            "last_updated_login": "APP123"
+        },
+        {
+            "approval_role_id": 1,
+            "object_version_num": 0,
+            "approval_role_code": "abc",
+            "approval_role_name": "abc",
+            "remarks": "abc",
+            "active_flag": "Y",
+            "attribute_json": "{\n\"abc\":\"avc\"\n}",
+            "created_by": "api",
+            "created_date": "2025-09-05T22:40:09.220759Z",
+            "last_updated_by": "api",
+            "last_updated_date": "2025-09-05T22:40:16.118526Z",
+            "last_updated_login": "api"
+        }
+    ]
+}

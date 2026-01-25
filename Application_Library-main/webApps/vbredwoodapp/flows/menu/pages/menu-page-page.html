@@ -1,0 +1,409 @@
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div>
+
+        <oj-sp-simple-create-edit id="oj_ssce1" page-title="Menu Management" display-options.responsive-padding="on"
+          primary-action.label="Save and Close" secondary-actions='[{"label":"Save","id":"save"}]'
+          on-sp-primary-action="[[$listeners.ojSsce1SpPrimaryAction2]]" on-sp-cancel="[[$listeners.ojSsce1SpCancel2]]"
+          on-sp-secondary-action="[[$listeners.ojSsce1SpSecondaryAction2]]" badge.status="info"
+          badge.text="[[ $variables.menuVar.menu_name ]]" page-subtitle="  ">
+
+          <div slot="main" style="padding-top: 0; margin-top: 0; background-color:white;">
+            <div style="margin-top: 0;">
+
+              <!-- Main Form Section - Lookup Type -->
+              <div class="oj-panel oj-panel-shadow-md oj-selected">
+                <oj-validation-group id="fid_menu_form_group" valid="{{ $variables.validform.isHeaderFormValid }}">
+                  <oj-form-layout max-columns="2" label-edge="start" label-width="45%" colspan-wrap="wrap"
+                    user-assistance-density="compact">
+
+
+                    <!-- Basic Menu Details -->
+                    <oj-input-text id="menu-code" label-hint="Menu Code" placeholder="Menu Code"
+                      value="{{ $variables.menuVar.menu_code }}" required="true"
+                      on-value-changed="[[$listeners.menuCodeValue2]]" readonly="[[ $variables.isMenuCodeReadOnly ]]"
+                      length.max="30">
+                      <span slot="end">
+        <oj-bind-if test="{{ $variables.isMenuCodeReadOnly }}">
+  <span class="oj-ux-ico-edit" on-click="[[$listeners.iconClick]]"></span>
+
+
+
+
+
+
+                      </oj-bind-if>
+                      </span>
+                    </oj-input-text>
+
+                    <oj-input-text id="menu-name" label-hint="Menu Name" placeholder="Menu Name"
+                      value="{{ $variables.menuVar.menu_name }}" required="true" length.max="200">
+                    </oj-input-text>
+
+
+
+
+                    <oj-text-area id="fid_remarks" value="{{ $variables.menuVar.remarks }}" length.counter="remaining"
+                      length.max="250" rows="3" label-hint="Remarks" class="">
+                    </oj-text-area>
+
+
+                  </oj-form-layout>
+                </oj-validation-group>
+              </div>
+
+              <!-- Submenu Value Table Section -->
+
+
+              <div style="margin-top: 1.5rem;">
+
+
+
+
+                <!-- Action Buttons for Lookup Value Table -->
+                <div class="oj-flex oj-sm-justify-content-space-between" data-vb-layout-type="flex">
+
+
+                  <h6 style="color:#01474d;margin-left:20px;margin-top:5px;">Sub Menu Value </h6>
+                  <div>
+                    <oj-button style="margin:0.125rem;" label="Refresh" chroming="outlined" id="refreshBtn"
+                      on-oj-action="[[$listeners.refreshBtnAction]]">
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/Refresh.png' ]]">
+                    </oj-button>
+                    <oj-button label="Add" class="oj-flex-bar-end oj-helper-justify-content-flex-end"
+                      chroming="outlined" id="addBtn" on-oj-action="[[$listeners.addBtnAction2]]"
+                      style="margin-right:20px;">
+
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/Create (1).png' ]]">
+
+
+                    </oj-button>
+                  </div>
+                </div>
+
+
+
+
+                <oj-table id="submenu-table" data="{{ $variables.ADPsubmenuValue }}"
+                  columns="{{$flow.constants.accessObj.allowDelete || $flow.constants.accessObj.allowEdit ? $constants.tableColumnWithActions : $constants.tableColumns}}" columns-default.sortable="disabled"
+                  columns-default.resizable="enabled" class="oj-sm-width-full oj-bg-body" display="grid"
+                  selection-mode.row="single">
+
+                  <!-- Template Slots -->
+                  <template slot="actions_template">
+                    <div style="gap:15px" class="oj-flex oj-sm-align-items-center oj-sm-justify-content-center">
+
+    <oj-bind-if test="[[ $flow.constants.accessObj.allowDelete ]]">
+      <span class="oj-ux-ico-trash" id="trah" on-click="[[$listeners.trahClick]]"></span>
+    </oj-bind-if>
+
+                      
+
+    <oj-bind-if test="[[ $flow.constants.accessObj.allowEdit ]]">
+      <span class="oj-ux-ico-edit" id="edit" on-click="[[$listeners.editClick]]"></span>
+    </oj-bind-if>
+
+
+
+                    </div>
+                  </template>
+                  <template slot="function_code_link">
+                    <a style="font-weight: bold; color: #0572ce; text-decoration: underline; cursor: pointer;"
+                      target="_blank" on-click="[[$listeners.hyperlinkClick]]">
+                      <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    </a>
+                  </template>
+                  </template>
+                  <template slot="navigate_to_function">
+                    <a style="font-weight: bold; color: #0572ce; text-decoration: underline; cursor: pointer;"
+                      target="_blank" on-click="[[$listeners.hyperlinkClick]]">
+                      <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    </a>
+                  </template>
+
+
+
+                  <template slot="active_flag_icon">
+                    <oj-bind-if test='[[ $current.data === "Y"  || $current.data === "y" || $current.data === true ]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/activeBtn.png' ]]"
+                        style="margin-left:35px">
+
+                    </oj-bind-if>
+                    <oj-bind-if test='[[ $current.data === "N"  || $current.data === false]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/inactive.png' ]]"
+                        style="margin-left:35px">
+                    </oj-bind-if>
+                  </template>
+                  <template slot="menu_entry_id_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="entry_sequence_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+
+
+
+                  <template slot="sub_menu_id_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+
+
+                  <template slot="submenu_remarks_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+
+
+                </oj-table>
+                <div class="oj-flex oj-sm-justify-content-center">
+
+                  <oj-toolbar chroming="solid" class="oj-flex-item oj-sm-flex-initial">
+
+                    <oj-button label="Previous" chroming="borderless" disabled="[[ !$variables.pagination.prev ]]"
+                      id="preBtn" on-oj-action="[[$listeners.preBtnAction]]">
+                      <span slot="startIcon" class="oj-ux-ico-back"></span>
+                    </oj-button>
+
+                    <oj-button label="Next" chroming="borderless" disabled="[[ !$variables.pagination.next ]]"
+                      id="nxtBtn" on-oj-action="[[$listeners.nxtBtnAction]]">
+                      <span slot="endIcon" class="oj-ux-ico-forward-next"></span>
+                    </oj-button>
+
+                  </oj-toolbar>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+      </div>
+
+    </div>
+
+
+
+    </oj-sp-simple-create-edit>
+
+  </div>
+</div>
+</div>
+</div>
+
+
+<oj-dialog id="fid_menuEntriesDialog" dialog-title="Sub Menu Entries" cancel-behavior="icon" modality="modal"
+  style="width:850px;" on-oj-close="[[$listeners.fidMenuEntriesDialogClose]]">
+  <!-- Dialog Body -->
+  <div slot="body" class="dialog-body">
+    <div class="oj-panel oj-selected">
+      <oj-validation-group id="fid_sub_menu_entries_form" valid="{{ $variables.validform.isChildFormValid }}">
+
+        <div class="form-container">
+          <!-- Left Column -->
+          <div class="left-column">
+<oj-form-layout style="margin-right:10px" 
+    label-edge="start" 
+    columns="1" 
+    direction="column" 
+    max-columns="1"
+    label-width="35%" 
+    id="submenuFormLayout" 
+    user-assistance-density="compact">
+
+    <!-- Prompt -->
+    <oj-input-text 
+        id="prompt-input"
+        label-hint="Prompt" 
+        required="true" 
+        value="{{ $variables.subMenuVar.prompt }}">
+    </oj-input-text>
+
+    <!-- Function Name (Create) -->
+    <oj-bind-if test="[[ $variables.function_field_hide=='create' ]]">
+        <oj-select-single 
+            id="function-name-select"
+            label-hint="Function Name" 
+            class="oj-form-control-width-md" 
+            required="true"
+            on-value-item-changed="[[$listeners.selectValueItem]]" 
+            item-text="function_name"
+            value="{{ $variables.subMenuVar.function_id }}" 
+            data="[[$variables.getMenuLovFunctionName2ListSDP4]]">
+        </oj-select-single>
+    </oj-bind-if>
+
+    <!-- Function Name (Edit - disabled input) -->
+    <oj-bind-if test="[[ $variables.function_field_hide  == 'edit']]">
+        <oj-input-text 
+            id="function-name-input"
+            label-hint="Function Name" 
+            disabled="true" 
+            required="true"
+            value="{{ $variables.subMenuVar.function_name }}">
+        </oj-input-text>
+    </oj-bind-if>
+
+    <!-- Sub Menu Name -->
+    <oj-select-single 
+        id="submenu-name-select"
+        label-hint="Sub Menu Name"
+        class="oj-form-control-width-md"
+        item-text="menu_name" 
+        value="{{ $variables.subMenuVar.sub_menu_id }}"
+        data="[[$variables.getMenuLovChildMenuNameListSDP2]]">
+    </oj-select-single>
+
+    <!-- Order No -->
+    <oj-input-number 
+        id="order-no-input"
+        label-hint="Order No" 
+        required="true" 
+        min="1" 
+        value="{{ $variables.subMenuVar.entry_sequence }}" 
+        readonly="true">
+    </oj-input-number>
+
+    <!-- Remarks -->
+    <oj-text-area 
+        id="remarks-textarea"
+        label-hint="Remarks"
+        class="oj-form-control-width-md"
+        value="{{ $variables.subMenuVar.remarks }}" 
+        length.counter="remaining" 
+        length.max="250">
+    </oj-text-area>
+</oj-form-layout>
+
+
+          </div>
+
+          <!-- Right Column -->
+          <div class="right-column">
+            <oj-form-layout columns="1" label-edge="start" label-width="45%" direction="column" id="switch-form">
+
+              <!-- Status -->
+
+              <oj-switch value="{{ $variables.subMenuVar.active_flag == 'Y'?true:false}}"
+                on-value-changed="[[$listeners.switchValue]]" label-hint="Status">
+              </oj-switch>
+
+
+              <!-- Full Access -->
+
+              <oj-switch value="{{ $variables.subMenuVar.full_access == 'Y'?true:false}}"
+                disabled="[[ $variables.subMenuVar.read_only =='Y' ]]" on-value-changed="[[$listeners.switchValue2]]"
+                label-hint="Full Acess">
+              </oj-switch>
+
+              <oj-switch value="{{ $variables.subMenuVar.allow_create == 'Y'?true:false }}"
+                disabled="[[ $variables.subMenuVar.read_only =='Y'|| $variables.subMenuVar.full_access =='Y']]"
+                on-value-changed="[[$listeners.switchValue3]]" label-hint="Allow Create">
+              </oj-switch>
+
+
+              <!-- Allow Edit -->
+
+              <oj-switch value="{{ $variables.subMenuVar.allow_edit == 'Y'?true:false }}"
+                disabled="[[ $variables.subMenuVar.read_only =='Y'|| $variables.subMenuVar.full_access=='Y' ]]"
+                on-value-changed="[[$listeners.switchValue4]]" label-hint="Allow Edit">
+              </oj-switch>
+
+
+              <oj-switch value="{{ $variables.subMenuVar.allow_delete == 'Y'?true:false }}"
+                disabled="[[ $variables.subMenuVar.read_only =='Y'|| $variables.subMenuVar.full_access=='Y' ]]"
+                on-value-changed="[[$listeners.switchValue5]]" label-hint="Allow Edit">
+              </oj-switch>
+
+              <!-- Read Only -->
+
+              <oj-switch value="{{ $variables.subMenuVar.read_only == 'Y'?true:false}}"
+                disabled="[[ $variables.subMenuVar.full_access== 'Y']]" on-value-changed="[[$listeners.switchValue6]]"
+                label-hint="Read Only">
+              </oj-switch>
+            </oj-form-layout>
+          </div>
+        </div>
+    </div>
+    </oj-validation-group>
+  </div>
+  </div>
+
+  <!-- Dialog Footer -->
+  <div slot="footer" class="dialog-footer" style="background-color:white;">
+    <oj-button chroming="outlined" on-oj-action="[[$listeners.test2Action]]" id="save-add-another">
+      Save & Add 
+    </oj-button>
+
+    <oj-button chroming="outlined" on-oj-action="[[$listeners.buttonAction3]]" id="save-close">
+      Save & Close
+    </oj-button>
+
+    <oj-button chroming="outlined" on-oj-action="[[$listeners.buttonAction4]]" id="cancel">
+      Cancel
+    </oj-button>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="Delete" id="deleteDialog" cancel-behavior="icon">
+  <div slot="body">
+    <h6 id="deletehid" style="font-size:medium; font-weight: bold;">Are you sure you want to delete?</h6>
+  </div>
+  <div slot="footer">
+    <oj-button id="deleteBtnYes" on-oj-action="[[$listeners.deleteBtnYesAction]]">Yes</oj-button>
+    <oj-button id="deleteBtnNo" on-oj-action="[[$listeners.deleteBtnNoAction]]">No</oj-button>
+  </div>
+</oj-dialog>
+<oj-dialog dialog-title="Unsaved Changes" id="unsavedChangesDialog" cancel-behavior="icon">
+  <div slot="body">
+    <h6 id="unsavedChangesText" style="font-size:medium; font-weight: bold;">Are you sure you want to leave this page?
+      Your changes will be lost.
+    </h6>
+  </div>
+  <div slot="footer">
+    <oj-button id="proceedExitBtn" chroming="outlined" on-oj-action="[[$listeners.proceedExitBtnAction]]">Leave</oj-button>
+    <oj-button id="cancelExitBtn" chroming="outlined" on-oj-action="[[$listeners.cancelExitBtnAction]]">Cancel
+    </oj-button>
+  </div>
+</oj-dialog>
+
+
+<style>
+  .dialog-body {
+    background-color: white;
+    padding: 15px;
+  }
+
+  .form-container {
+    display: flex;
+    flex-direction: row;
+
+  }
+
+  .left-column {
+    flex: 2;
+    padding-right: 20px;
+  }
+
+  .right-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+
+  }
+
+
+  /* Hide the inline user-assistance only for the form with id="switch-form" */
+  #switch-form .oj-user-assistance-inline-container.oj-efficient {
+    display: none !important;
+  }
+
+  #switch-form .oj-formlayout-inline-value>.oj-user-assistance-inline-container.oj-efficient {
+    display: none !important;
+  }
+</style>

@@ -1,0 +1,4 @@
+{
+    "P_ERR_CODE": "E",
+    "P_ERR_MSG": "The User ID and Role ID combination already exists. A user can only have one instance of each role."
+}

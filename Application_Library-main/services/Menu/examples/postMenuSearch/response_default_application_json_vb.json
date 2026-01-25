@@ -1,0 +1,22 @@
+{
+    "OUT_COUNT": 1,
+    "OUT_DESCRIPTION": "Successfully fetched menu records",
+    "OUT_HAS_NEXT": "N",
+    "OUT_STATUS": "SUCCESS",
+    "OUT_TOTAL_COUNT": 1,
+    "P_OUTPUT": [
+        {
+            "menu_id": 84,
+            "object_version_num": 1,
+            "menu_code": "ADMIN_MENU",
+            "menu_name": "Administration Menu",
+            "remarks": "Main administration menu for system management",
+            "attribute_json": "[{\"name\":\"icon\",\"value\":\"settings\"},{\"name\":\"order\",\"value\":\"1\"}]",
+            "created_by": "System.Admin",
+            "created_date": "2025-09-03T18:42:06Z",
+            "last_updated_by": "System.Admin",
+            "last_updated_date": "2025-09-03T18:42:06Z",
+            "last_updated_login": "System.Admin"
+        }
+    ]
+}

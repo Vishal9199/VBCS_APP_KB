@@ -1,0 +1,30 @@
+{
+    "items": [
+        {
+            "flex_value": "3001",
+            "flex_value_meaning": "Common COO Water"
+        },
+        {
+            "flex_value": "3501",
+            "flex_value_meaning": "Common COO WasteWater"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 2,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/pettycash/lov/department?searchVal=coo"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/metadata-catalog/pettycash/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_cust/pettycash/lov/department?searchVal=coo"
+        }
+    ]
+}

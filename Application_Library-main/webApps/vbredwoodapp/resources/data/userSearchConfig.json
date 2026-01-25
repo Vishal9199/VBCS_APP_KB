@@ -1,0 +1,31 @@
+{
+  "description": "Smart Search Configuration for User Access Management Application",
+  "filters": {
+    "UserNameFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "User Name",
+      "options": {
+        "field": "user_id",
+        "optionsData": "[[ $search.filters.UserNameFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.UserNameFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+    "EndDateRangeFilter": {
+      "type": "oj-sp/smart-search/default-filters/DateRangeFilter",
+      "label": "Date Range",
+      "options": {
+        "field": "EFFECTIVE_END_DATE",
+        "startDate": "[[ $page.variables.p_start_date ]]",
+        "endDate": "[[ $page.variables.p_end_date ]]",
+        "value": "",
+        "converter": {
+          "type": "datetime",
+          "options": {
+            "pattern": "dd-MMM-yyyy"
+          }
+        }
+      }
+    }
+  }
+}

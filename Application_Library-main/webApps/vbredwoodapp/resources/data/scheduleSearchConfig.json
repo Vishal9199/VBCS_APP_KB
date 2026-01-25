@@ -1,0 +1,15 @@
+{
+    "description": "Smart Search Configuration for Schedule Management Application",
+    "filters": {
+        "ScheduleNameFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Schedule Name",
+            "options": {
+                "field": "schedule_id",
+                "optionsData": "[[ $search.filters.ScheduleNameFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.ScheduleNameFilter.options.optionsKeys ]]"
+            },
+            "data": {}
+        }
+    }
+}

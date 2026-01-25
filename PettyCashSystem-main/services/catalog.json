@@ -1,0 +1,24 @@
+{
+    "backends": {
+
+        "ProcessApi": {
+            "servers": [
+                {
+                    "url": "https://opa-oic-owwscoict-1686739096988-frg175ushz37-fra.process.oci.oraclecloud.com/process",
+                    "description": "Opa Oic Owwscoict 1686739096988 Frg175ushz37 Fra Process Oci Oraclecloud Com",
+                    "x-vb": {
+                        "authentication": {
+                            "authenticated": {
+                                "type": "oauth2_resource_owner",
+                                "clientIdCredentials": "vb_c9cb5a78-cbd3-47d6-8f98-4516eb46f90d",
+                                "scope": "https://opa-oic-owwscoict-1686739096988-frg175ushz37-fra.process.oci.oraclecloud.com/process%20offline_access",
+                                "authUrl": "https://idcs-ef7bb8520dfd4455ac2d995966d45063.identity.oraclecloud.com/oauth2/v1/token",
+                                "credentials": "vb_2ef6bd0d-143d-4209-8111-d8d28f83c5f0"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+      }
+}

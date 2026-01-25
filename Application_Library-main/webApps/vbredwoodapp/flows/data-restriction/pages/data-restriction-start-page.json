@@ -1,0 +1,646 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "deletePayload": {
+      "defaultValue": {
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "created_by": "[[ $application.user.email ]]",
+        "object_version_num": 0,
+        "last_updated_by": "[[ $application.user.email ]]",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]"
+      },
+      "type": "postNws_aolRestrictionSearch"
+    },
+    "encPayload": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "encSearchObj": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "getNwsAolRestrictionLovDataRestrictListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "lookup_value_code",
+        "itemsPath": "items",
+        "responseType": "getNwsAolRestrictionLovDataRestrictResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        },
+        "fetchChain": "getNws_aolRestrictionLovDataRestrictFetch"
+      }
+    },
+    "getNwsAolRestrictionLovEmployeeListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "itemsPath": "items",
+        "responseType": "getNwsAolRestrictionLovEmployeeResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "full_name"
+          ]
+        },
+        "fetchChain": "getNws_aolRestrictionLovEmployeeFetch",
+        "keyAttributes": "person_id"
+      }
+    },
+    "payload": {
+      "type": "postNws_aolRestrictionSearch",
+      "defaultValue": {
+          "created_date": "[[ $application.functions.getSysdate() ]]",
+          "created_by": "[[ $application.user.email ]]",
+          "object_version_num": 0,
+          "last_updated_by": "[[ $application.user.email ]]",
+          "last_updated_login": "[[ $application.user.email ]]",
+          "last_updated_date": "[[ $application.functions.getSysdate() ]]"
+        }
+    },
+    "request_add": {
+      "type": "string"
+    },
+    "searchObjTemp": {
+      "type": {
+        "IN_LIMIT": "string",
+        "IN_OFFSET": "string",
+        "P_RESTRICTION_ID": "string",
+        "P_RESTRICTION_CODE": "string",
+        "P_PERSON_ID": "string",
+        "P_ACTIVE_FLAG": "string",
+        "P_KEYWORD": "string"
+      },
+      "defaultValue": {
+        "IN_LIMIT": "30",
+        "IN_OFFSET": "0",
+        "P_RESTRICTION_ID": "",
+        "P_RESTRICTION_CODE": "",
+        "P_PERSON_ID": "",
+        "P_ACTIVE_FLAG": "",
+        "P_KEYWORD": ""
+      }
+    },
+    "tableADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "postNws_aolRestrictionSearch",
+        "keyAttributes": "restriction_id"
+      }
+    },
+    "tableVar": {
+      "type": "any"
+    },
+    "user_add": {
+      "type": "string"
+    },
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/datarestrictionsearchconfig.json' ]]"
+      }
+    },
+     "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "RestrictionFilter": {
+              "label": "Restriction Name",
+              "options": {
+                "optionsData": "[[ $page.variables.getNwsAolRestrictionLovDataRestrictListSDP]]",
+                "optionsKeys": {
+                  "label": "lookup_value_name",
+                  "value": "lookup_value_code"
+                }
+              }
+            },
+            "PersonFilter": {
+              "label": "Person Name",
+              "options": {
+                "optionsData": "[[ $page.variables.getNwsAolRestrictionLovEmployeeListSDP ]]",
+                "optionsKeys": {
+                  "label": "full_name",
+                  "value": "person_id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "SearchObj": {
+      "type": {
+        "IN_LIMIT": "string",
+        "IN_OFFSET": "string",
+        "P_RESTRICTION_CODE": "string",
+        "P_KEYWORD": "string",
+        "P_PERSON_ID": "string"
+      },
+      "defaultValue": {
+        "IN_OFFSET": "0",
+        "IN_LIMIT": "10"
+      }
+    },
+    "pagination": {
+      "type": {
+        "is_next": "boolean",
+        "is_prev": "boolean"
+      }
+    }
+
+  },
+  "metadata": {},
+  "types": {
+
+    "@decorators.getDataRestLookupResponse2": {
+      "endpoint": "getDataRestLookup",
+      "service": "LovModule",
+      "path": "response"
+    },
+    "@decorators.getDataRestLookupResponse3": {
+      "endpoint": "getDataRestLookup",
+      "service": "LovModule",
+      "path": "response"
+    },
+    "@decorators.getDataRestUserResponse": {
+      "endpoint": "getDataRestUser",
+      "service": "LovModule",
+      "path": "response"
+    },
+    "@decorators.getDataRestUserResponse2": {
+      "endpoint": "getDataRestUser",
+      "service": "LovModule",
+      "path": "response"
+    },
+    "@decorators.getDataRestUserResponse3": {
+      "endpoint": "getDataRestUser",
+      "service": "LovModule",
+      "path": "response"
+    },
+    "@decorators.getDataRestUserResponse4": {
+      "endpoint": "getDataRestUser",
+      "service": "LovModule",
+      "path": "response"
+    },
+    "@decorators.getDataRestUserResponse5": {
+      "endpoint": "getDataRestUser",
+      "service": "LovModule",
+      "path": "response"
+    },
+    "@decorators.getDataRestUserResponse6": {
+      "endpoint": "getDataRestUser",
+      "service": "LovModule",
+      "path": "response"
+    },
+    "@decorators.getDataRestUserResponse7": {
+      "endpoint": "getDataRestUser",
+      "service": "LovModule",
+      "path": "response"
+    },
+    "@decorators.getNwsAolRestrictionLovDataRestrictResponse": {
+      "endpoint": "getNws_aolRestrictionLovDataRestrict",
+      "service": "User",
+      "path": "response"
+    },
+    "@decorators.getNwsAolRestrictionLovEmployeeResponse": {
+      "endpoint": "getNws_aolRestrictionLovEmployee",
+      "service": "User",
+      "path": "response"
+    },
+    "@decorators.postNws_aolRestrictionSearch": {
+      "endpoint": "postNws_aolRestrictionSearch",
+      "service": "User",
+      "path": "response"
+    },
+    "@decorators.postPkgUserDataSearchResponse": {
+      "endpoint": "postPkgUserDataSearch",
+      "service": "LookupModule",
+      "path": "response"
+    },
+    "getDataRestLookupResponse2": {
+      "items": [
+        {
+          "lookup_type_code": "string",
+          "lookup_type_name": "string"
+        }
+      ]
+    },
+    "getDataRestLookupResponse3": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getDataRestUserResponse": {
+      "items": [
+        {
+          "user_id": "number",
+          "user_name": "string"
+        }
+      ]
+    },
+    "getDataRestUserResponse2": {
+      "items": [
+        {
+          "email_address": "string",
+          "user_name": "string"
+        }
+      ]
+    },
+    "getDataRestUserResponse3": {
+      "items": [
+        {
+          "email_address": "string",
+          "user_name": "string"
+        }
+      ]
+    },
+    "getDataRestUserResponse4": {
+      "items": [
+        {
+          "email_address": "string",
+          "user_name": "string"
+        }
+      ]
+    },
+    "getDataRestUserResponse5": {
+      "items": [
+        {
+          "user_name": "string"
+        }
+      ]
+    },
+    "getDataRestUserResponse6": {
+      "items": [
+        {
+          "email_address": "string",
+          "user_name": "string"
+        }
+      ]
+    },
+    "getDataRestUserResponse7": {
+      "items": [
+        {
+          "email_address": "string",
+          "user_name": "string"
+        }
+      ]
+    },
+    "getNwsAolRestrictionLovDataRestrictResponse": {
+      "items": [
+        {
+          "lookup_type_code": "string",
+          "lookup_type_id": "number",
+          "lookup_type_name": "string",
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string",
+          "remarks": "any"
+        }
+      ]
+    },
+    "getNwsAolRestrictionLovEmployeeResponse": {
+      "items": [
+        {
+          "email_address": "string",
+          "full_name": "string",
+          "person_id": "number",
+          "person_number": "string"
+        }
+      ]
+    },
+    "postNws_aolRestrictionSearch": {
+          "active_flag": "string",
+          "attribute_json": "any",
+          "created_by": "string",
+          "created_date": "string",
+          "email_address": "string",
+          "full_name": "string",
+          "last_updated_by": "string",
+          "last_updated_date": "string",
+          "last_updated_login": "string",
+          "object_version_num": "number",
+          "person_id": "number",
+          "person_number": "string",
+          "remarks": "any",
+          "restriction_code": "string",
+          "restriction_id": "number",
+          "restriction_name": "string"
+    },
+    "postPkgUserDataSearchResponse": {
+      "P_OUTPUT": [
+        {
+          "active_flag": "string",
+          "created_by": "string",
+          "created_date": "string",
+          "email_address": "string",
+          "last_updated_by": "string",
+          "last_updated_date": "string",
+          "last_updated_login": "string",
+          "object_version_num": "number",
+          "person_full_name": "string",
+          "person_id": "number",
+          "person_number": "string",
+          "request_type": "string",
+          "request_type_disp": "string",
+          "restriction_id": "number",
+          "user_email_id": "string",
+          "user_id": "number",
+          "user_name": "string"
+        }
+      ]
+    },
+    "filterChip": {
+      "count": "number",
+      "dependencies": "string[]",
+      "filter": "string",
+      "filterLabel": "string",
+      "label": "string",
+      "value": "any"
+    }
+
+  },
+  "eventListeners": {
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "deleteYesAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "AddAC"
+        }
+      ]
+    },
+    "buttonAction3": {
+      "chains": [
+        {
+          "chain": "save_close_ac",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction4": {
+      "chains": [
+        {
+          "chain": "save_add_anotherAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction5": {
+      "chains": [
+        {
+          "chain": "cancel_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction6": {
+      "chains": [
+        {
+          "chain": "deleteNoButtonAC"
+        }
+      ]
+    },
+    "buttonAction7": {
+      "chains": [
+        {
+          "chain": "prevBtnAc",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction8": {
+      "chains": [
+        {
+          "chain": "nextBtnAc",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "iconClick": {
+      "chains": [
+        {
+          "chain": "IconClickChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "resetButtonAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "selectValueItem": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain2",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "selectValueItem2": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain3",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "smartSearchPageTemplateSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "SmartSearchPageTemplateSpPrimaryActionChain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "switchValue": {
+      "chains": [
+        {
+          "chain": "switchActiveAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-drawer-popup": {
+        "path": "ojs/ojdrawerpopup"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-search": {
+        "path": "ojs/ojinputsearch"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-paging-control": {
+        "path": "ojs/ojpagingcontrol"
+      },
+      "oj-progress-bar": {
+        "path": "ojs/ojprogress-bar"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-switch": {
+        "path": "ojs/ojswitch"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      }
+
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/smartSearch.css"
+   ]
+  },
+  "constants": {
+    "tableColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "template": "actions_template",
+          "width": "100px"
+        },
+        {
+          "headerText": "Restriction Name",
+          "field": "restriction_name"
+        },
+        {
+          "headerText": "Person Name",
+          "field": "full_name",
+          "width": "400px",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Email Address",
+          "field": "email_address",
+          "width": "250px"
+        },
+        {
+          "headerText": "Status",
+          "field": "active_flag",
+          "template": "active_flag_icon",
+          "width": "100px"
+
+        }
+      ]
+    }
+  }
+}

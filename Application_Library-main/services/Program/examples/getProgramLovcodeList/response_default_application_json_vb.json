@@ -1,0 +1,27 @@
+{
+    "items": [
+        {
+            "lov_config_id": 2325,
+            "lov_code": "DEPARTMENTS_LOV",
+            "lov_name": "Departments List"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/program/lovcode/list"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/metadata-catalog/program/lovcode/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/program/lovcode/list"
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "schedulesync",
+  "description": "Flow main",
+  "defaultPage": "schedule_sync-start",
+  "services": {},
+  "types": {},
+  "variables": {}
+}

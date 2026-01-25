@@ -1,0 +1,126 @@
+{
+    "items": [
+        {
+            "schedule_id": 5461,
+            "schedule_name": "Absence"
+        },
+        {
+            "schedule_id": 5464,
+            "schedule_name": "Bank"
+        },
+        {
+            "schedule_id": 5465,
+            "schedule_name": "Business Unit"
+        },
+        {
+            "schedule_id": 5467,
+            "schedule_name": "COA Segments"
+        },
+        {
+            "schedule_id": 5468,
+            "schedule_name": "Category"
+        },
+        {
+            "schedule_id": 5480,
+            "schedule_name": "Currency"
+        },
+        {
+            "schedule_id": 5481,
+            "schedule_name": "Customer Accounts"
+        },
+        {
+            "schedule_id": 5482,
+            "schedule_name": "Cycle Count"
+        },
+        {
+            "schedule_id": 5483,
+            "schedule_name": "Departments"
+        },
+        {
+            "schedule_id": 5484,
+            "schedule_name": "Employee Information"
+        },
+        {
+            "schedule_id": 5460,
+            "schedule_name": "Exchange Rate"
+        },
+        {
+            "schedule_id": 5462,
+            "schedule_name": "FND Lookup Values"
+        },
+        {
+            "schedule_id": 5463,
+            "schedule_name": "Flex Value Set Values"
+        },
+        {
+            "schedule_id": 5466,
+            "schedule_name": "GL Code Combination"
+        },
+        {
+            "schedule_id": 5469,
+            "schedule_name": "Inv Organization"
+        },
+        {
+            "schedule_id": 5485,
+            "schedule_name": "Inv Transaction Types"
+        },
+        {
+            "schedule_id": 5487,
+            "schedule_name": "Inv Unit Transactions"
+        },
+        {
+            "schedule_id": 5489,
+            "schedule_name": "Inventory Locators"
+        },
+        {
+            "schedule_id": 5494,
+            "schedule_name": "Item Cost"
+        },
+        {
+            "schedule_id": 5486,
+            "schedule_name": "Item Cross Reference"
+        },
+        {
+            "schedule_id": 5488,
+            "schedule_name": "Item Onhand"
+        },
+        {
+            "schedule_id": 5490,
+            "schedule_name": "Item Serial Number"
+        },
+        {
+            "schedule_id": 5491,
+            "schedule_name": "Item with Category"
+        },
+        {
+            "schedule_id": 5493,
+            "schedule_name": "Legal Entity"
+        },
+        {
+            "schedule_id": 5495,
+            "schedule_name": "Locations"
+        }
+    ],
+    "hasMore": true,
+    "limit": 25,
+    "offset": 0,
+    "count": 25,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_stage/schedule/lov/schedule/name"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_stage/metadata-catalog/schedule/lov/schedule/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_stage/schedule/lov/schedule/name"
+        },
+        {
+            "rel": "next",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_stage/schedule/lov/schedule/name?offset=25"
+        }
+    ]
+}

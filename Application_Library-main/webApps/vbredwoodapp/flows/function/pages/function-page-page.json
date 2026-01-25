@@ -1,0 +1,325 @@
+{
+  "metadata": {},
+  "title": "Function Management Add/Edit",
+  "description": "Function Management Add/Edit page for managing system functions with application details, configuration settings, and status management.",
+  "imports": {
+    "components": {
+      "oj-button": {"path": "ojs/ojbutton"},
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-form-layout": {"path": "ojs/ojformlayout"},
+      "oj-input-text": {"path": "ojs/ojinputtext"},
+      "oj-input-number": {"path": "ojs/ojinputnumber"},
+      "oj-label": {
+        "path": "ojs/ojlabel"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-input-url": {
+        "path": "oj-sp/input-url/loader"
+      },
+      "oj-text-area": {"path": "ojs/ojinputtext"},
+      "oj-switch": {"path": "ojs/ojswitch"},
+      "oj-sp-simple-create-edit": {"path": "oj-sp/simple-create-edit/loader"},
+      "oj-collapsible": {"path": "ojs/ojcollapsible"},
+      "oj-bind-text": {"path": "ojs/ojbindtext"},
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+
+    },
+    "modules": {
+      "ojValidationBase": {
+        "path": "ojs/ojvalidation-base"
+      }
+   },
+    "css": [
+      "/resources/css/addEditHeader.css"
+    ]
+  },
+  "types": {
+    "@decorators.getApplicationLovActiveApplicationResponse": {
+      "endpoint": "getApplicationLovActiveApplication",
+      "service": "Application",
+      "path": "response"
+    },
+
+    "@decorators.getApplicationLovAppCodeResponse3": {
+      "endpoint": "getApplicationLovAppCode",
+      "service": "Application",
+      "path": "response"
+    },
+    "FunctionType": {
+      "application_code": "string",
+      "application_name": "string",
+      "created_date": "string",
+      "function_id": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "object_version_num": "number",
+      "function_code": "string",
+      "function_name": "string",
+      "remarks": "string",
+      "page_url": "string",
+      "parameter_json": "string",
+      "application_id": "number",
+      "active_flag": "string",
+      "attribute_json": "string",
+      "created_by": "string",
+      "last_updated_by": "string"
+
+    },
+    "getApplicationLovActiveApplicationResponse": {
+      "items": [
+        {
+          "application_id": "number",
+          "application_name": "string"
+        }
+      ]
+    },
+    "SearchParametersType": {
+      "IN_LIMIT": "number",
+      "IN_OFFSET": "number",
+      "P_FUNCTION_ID": "string",
+      "FUNCTION_CODE": "string",
+      "FUNCTION_NAME": "string",
+      "ACTIVE_FLAG": "string",
+      "APPLICATION_ID": "string",
+      "APPLICATION_CODE": "string",
+      "PAGE_URL": "string"
+
+    },
+    "getApplicationLovAppCodeResponse3": {
+      "items": [
+        {
+          "application_id": "number",
+          "application_name": "string"
+        }
+      ]
+    }
+
+  },
+  "variables": {
+    "encryptedPayload": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "functionDetailsVar": {
+      "type": "FunctionType",
+      "defaultValue": {
+        "created_by": "[[ $application.user.email ]]",
+        "created_date": "2025-09-01",
+        "last_updated_by": "[[ $application.user.email ]]",
+        "last_updated_date": "2025-09-10",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "object_version_num": 0
+      },
+      "input": "none",
+      "dirtyDataBehavior": "track"
+    },
+    "functionMessageCustom": {
+      "type": "object[]"
+    },
+    "getApplicationLovActiveApplicationListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "application_id",
+        "itemsPath": "items",
+        "responseType": "getApplicationLovActiveApplicationResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "application_name"
+          ]
+        },
+        "fetchChain": "getApplicationLovActiveApplicationFetch"
+      }
+    },
+    "isFunctionCodeReadOnly": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": true,
+      "input": "fromUrl"
+    },
+    "method": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "primaryKey": {
+      "type": "number",
+      "required": true,
+      "input": "fromUrl"
+    },
+     "searchObj": {
+      "type": "SearchParametersType",
+      "defaultValue": {
+        "IN_LIMIT": 8,
+        "IN_OFFSET": 0,
+        "P_FUNCTION_ID": "",
+        "FUNCTION_CODE": "",
+        "FUNCTION_NAME": "",
+        "ACTIVE_FLAG": "",
+        "APPLICATION_ID": "",
+        "APPLICATION_CODE": "",
+        "PAGE_URL": ""
+      }
+    }
+
+  },
+  "eventListeners": {
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "editIconAC"
+        }
+      ]
+    },
+    "cancelExitBtnAction": {
+      "chains": [
+        {
+          "chain": "leaveCancelAC"
+        }
+      ]
+    },
+    "fidFunctionCodeValue2": {
+      "chains": [
+        {
+          "chain": "formatterAC",
+          "parameters": {
+            "value": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "functionPageSpCancel": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpCancelChain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "functionPageSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpPrimaryActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "feedbackEnabled": "{{$event.detail.feedbackEnabled}}"
+          }
+        }
+      ]
+    },
+    "functionPageSpSave": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpSaveChain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "inputTextValue": {
+      "chains": [
+        {
+          "chain": "InputTextValueChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "inputTextValue2": {
+      "chains": [
+        {
+          "chain": "InputTextValueChangeChain1",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "ojSsce1SpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "saveAndCloseAC"
+        }
+      ]
+    },
+    "proceedExitBtnAction": {
+      "chains": [
+        {
+          "chain": "leaveWithoutSavingAC"
+        }
+      ]
+    },
+    "selectValueItem2": {
+      "chains": [
+        {
+          "chain": "selectSingleApplicationNameAC",
+          "parameters": {
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}"
+          }
+        }
+      ]
+    },
+    "simpleCreateAndEditPageTemplateSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "savePrimaryAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.value.id}}"
+          }
+        }
+      ]
+    },
+    "switchValue": {
+      "chains": [
+        {
+          "chain": "SwitchValueChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "vbBeforeExit": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbBeforeExitListener"
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+
+  }
+}

@@ -1,0 +1,15 @@
+{
+    "description": "Smart Search Configuration for Menu Management Application with LOV Filters",
+    "filters": {
+        "MenuNameFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Menu Name", 
+            "options": {
+                "field": "menu_name",
+                "optionsData": "[[ $search.filters.MenuNameFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.MenuNameFilter.options.optionsKeys ]]"
+            },
+            "data": {}
+        }
+    }
+}

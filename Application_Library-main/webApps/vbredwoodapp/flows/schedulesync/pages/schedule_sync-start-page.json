@@ -1,0 +1,257 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "adpTable": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "postStgScheduleSyncList",
+        "keyAttributes": "schedule_list_id"
+      }
+    },
+    "columns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Schedule List ID",
+          "field": "schedule_list_id",
+          "width": 204,
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Schedule Name",
+          "field": "schedule_name",
+          "width": 204,
+          "resizable": "enabled",
+          "frozenEdge": "start"
+        },
+        {
+          "headerText": "BI Report Path",
+          "field": "bi_report_path",
+          "width": 298,
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "BI Report Name",
+          "field": "bi_report_name",
+          "width": 204,
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Last Refresh Time",
+          "field": "last_refresh_time",
+          "width": 204,
+          "template": "cfd date1",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Schedule Status",
+          "field": "schedule_status",
+          "width": 250,
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Error Message",
+          "template": "errormessage",
+          "field": "error_message",
+          "width": 204,
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Param SequenceNo",
+          "field": "param_sequence_no",
+          "width": 204,
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Report Record Count",
+          "field": "report_record_count",
+          "width": 210,
+          "resizable": "enabled",
+          "frozenEdge": "start"
+        },
+        {
+          "headerText": "Creation Date",
+          "field": "creation_date",
+          "width": 204,
+          "template": "cfd date1",
+          "resizable": "enabled"
+        }
+      ]
+    },
+    "encryptObj": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "error_message": {
+      "type": "any"
+    },
+    "getScheduleNameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "schedule_id",
+        "itemsPath": "items",
+        "responseType": "getStgScheduleLovScheduleNameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "schedule_name"
+          ]
+        },
+        "fetchChain": "getStgScheduleLovScheduleNameFetch"
+      }
+    },
+    "searchObj": {
+      "type": {
+        "LIMIT": "string",
+        "OFFSET": "string",
+        "SCHEDULE_ID": "string"
+      },
+      "defaultValue": {
+        "LIMIT": "50",
+        "OFFSET": "0"
+      }
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getStgScheduleLovScheduleNameResponse": {
+      "endpoint": "getStgScheduleLovScheduleName",
+      "service": "SynProcessLog",
+      "path": "response"
+    },
+    "@decorators.postStgScheduleSyncList": {
+      "endpoint": "postStgScheduleSyncList",
+      "service": "SynProcessLog",
+      "path": "response"
+    },
+    "getStgScheduleLovScheduleNameResponse": {
+      "items": [
+        {
+          "schedule_id": "number",
+          "schedule_name": "string"
+        }
+      ]
+    },
+    "postStgScheduleSyncList": {
+          "bi_report_name": "string",
+          "bi_report_path": "string",
+          "created_by": "string",
+          "creation_date": "string",
+          "db_column_names": "string",
+          "db_table_name": "string",
+          "error_message": "any",
+          "frequency_min": "number",
+          "last_refresh_time": "string",
+          "last_update_date": "string",
+          "last_update_login": "string",
+          "last_updated_by": "string",
+          "operation": "string",
+          "param_sequence_no": "number",
+          "report_record_count": "number",
+          "reset_data": "string",
+          "schedule_hdr_status": "string",
+          "schedule_id": "number",
+          "schedule_list_id": "number",
+          "schedule_name": "string",
+          "schedule_status": "string"
+    }
+  },
+  "eventListeners": {
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "onClickRefresh",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "resetAction": {
+      "chains": [
+        {
+          "chain": "onReset",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "schidValueItem": {
+      "chains": [
+        {
+          "chain": "onChange",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "startIdAction": {
+      "chains": [
+        {
+          "chain": "onClickStart",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "stopIdAction": {
+      "chains": [
+        {
+          "chain": "onClickStop",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    }
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-paging-control": {
+        "path": "ojs/ojpagingcontrol"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      }
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    }
+  }
+}

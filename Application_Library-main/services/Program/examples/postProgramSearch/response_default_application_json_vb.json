@@ -1,0 +1,36 @@
+{
+    "OUT_COUNT": 1,
+    "OUT_DESCRIPTION": "Successfully fetched records",
+    "OUT_HAS_NEXT": "N",
+    "OUT_STATUS": "SUCCESS",
+    "OUT_TOTAL_COUNT": 1,
+    "P_OUTPUT": [
+        {
+            "program_id": 2322,
+            "object_version_num": 0,
+            "program_code": "EMP_REPORT_001",
+            "program_name": "Employee Attendance Report",
+            "remarks": "Monthly ",
+            "application_id": 24,
+            "program_type": "Report",
+            "rtf_path": "/reports/templates/",
+            "rtf_name": "employee_attendance_template.rtf",
+            "db_function_name": "get_employee_attendance_data",
+            "output_type": "PDF",
+            "column_per_row": 5,
+            "active_flag": "Y",
+            "active_status": "Active",
+            "attribute_json": "",
+            "created_by": "ADMIN",
+            "created_date": "2025-12-24T09:59:45Z",
+            "last_updated_by": "ADMIN",
+            "last_updated_date": "2025-12-24T09:59:45Z",
+            "last_updated_login": "ADMIN",
+            "created_date_display": "24-DEC-2025 09:59:45",
+            "last_updated_date_display": "24-DEC-2025 09:59:45",
+            "search_text": "EMP_REPORT_001 EMPLOYEE ATTENDANCE REPORT REPORT",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        }
+    ]
+}

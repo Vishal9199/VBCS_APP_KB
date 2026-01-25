@@ -1,0 +1,283 @@
+{
+  "title": "Sync Process Log",
+  "description": "",
+  "variables": {
+    "getStgScheduleLovScheduleNameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "schedule_id",
+        "itemsPath": "items",
+        "responseType": "getStgScheduleLovScheduleNameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "schedule_name"
+          ]
+        },
+        "fetchChain": "getStgScheduleLovScheduleNameFetch"
+      }
+    },
+    "pagingButton": {
+      "type": {
+        "previous": "boolean",
+        "next": "boolean"
+      },
+      "defaultValue": {
+        "previous": false,
+        "next": false
+      }
+    },
+    "scheduleLogADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "data": [],
+        "itemType": "scheduleType",
+        "keyAttributes": "schedule_list_id"
+      }
+    },
+  "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "ScheduleNameFilter": {
+              "label": "Schedule Name",
+              "options": {
+                "optionsData": "[[ $page.variables.getStgScheduleLovScheduleNameListSDP]]",
+                "optionsKeys": {
+                  "label": "schedule_name",
+                  "value": "schedule_id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "searchObj": {
+      "type": {
+        "LIMIT": "string",
+        "OFFSET": "string",
+        "SCHEDULE_ID": "string"
+
+      },
+      "defaultValue": {
+        "LIMIT": "5",
+        "OFFSET": "0",
+        "SCHEDULE_ID": ""
+
+      }
+    },
+    "encryptPayload": {
+      "type": {
+        "payload": "string"
+      },
+      "defaultValue": {
+        "payload": ""
+      }
+    },
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+     "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/syncprocesslog.json' ]]"
+      }
+    } 
+
+
+ 
+},
+  "types": {
+    "@decorators.getStgScheduleLovScheduleNameResponse": {
+      "endpoint": "getStgScheduleLovScheduleName",
+      "service": "SynProcessLog",
+      "path": "response"
+    },
+    "getStgScheduleLovScheduleNameResponse": {
+      "items": [
+        {
+          "schedule_id": "number",
+          "schedule_name": "string"
+        }
+      ]
+    },
+    "scheduleType": {
+  "schedule_list_id": "number",
+  "schedule_id": "number",
+  "param_sequence_no": "number",
+  "schedule_name": "string",
+  "bi_report_path": "string",
+  "bi_report_name": "string",
+  "last_refresh_time": "string",
+  "schedule_status": "string",
+  "error_message": "string",
+  "report_record_count": "number",
+  "frequency_min": "number",
+  "schedule_hdr_status": "string",
+  "reset_data": "string",
+  "db_table_name": "string",
+  "db_column_names": "string",
+  "operation": "string",
+  "created_by": "string",
+  "creation_date": "string",
+  "last_updated_by": "string",
+  "last_update_date": "string",
+  "last_update_login": "string"
+}
+,
+    "errorLogArrayType": {
+      "items": [
+        {
+          "err_id": "number",
+          "table_name": "string",
+          "merge_query": "string",
+          "schedule_id": "number",
+          "schedule_list_id": "number",
+          "err_code": "string",
+          "err_msg": "string",
+          "creation_date": "string",
+          "err_status": "string"
+        }
+      ]
+    }
+
+  },
+  "constants": {
+    "tableColumns": {
+      "type": "object[]",
+      "defaultValue": "[[ [\n    {\n        \"headerText\": \"Schedule ID\",\n        \"field\": \"schedule_id\",\n        \"template\": \"schedule_id\",\n        \"width\": 150,\n        \"sortable\": \"enabled\",\n        \"resizable\": \"enabled\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\"\n    },\n    {\n        \"headerText\": \"Param Sequence No\",\n        \"field\": \"param_sequence_no\",\n        \"template\": \"param_sequence_no\",\n        \"width\": 200,\n        \"sortable\": \"enabled\",\n        \"resizable\": \"enabled\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\"\n    },\n    {\n        \"headerText\": \"Schedule Name\",\n        \"field\": \"schedule_name\",\n        \"template\": \"schedule_name\",\n        \"width\": 200,\n        \"sortable\": \"enabled\",\n        \"resizable\": \"enabled\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\"\n    },\n    {\n        \"headerText\": \"BI Report Path\",\n        \"field\": \"bi_report_path\",\n        \"template\": \"bi_report_path\",\n        \"width\": 250,\n        \"sortable\": \"disabled\",\n        \"resizable\": \"enabled\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 250px;\"\n    },\n    {\n        \"headerText\": \"BI Report Name\",\n        \"field\": \"bi_report_name\",\n        \"template\": \"bi_report_name\",\n        \"width\": 245,\n        \"sortable\": \"enabled\",\n        \"resizable\": \"enabled\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\"\n    },\n    {\n        \"headerText\": \"Last Refresh Time\",\n        \"field\": \"last_refresh_time\",\n        \"template\": \"creation_date\",\n        \"width\": 180,\n        \"sortable\": \"disabled\",\n        \"resizable\": \"enabled\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\"\n    },\n    {\n        \"headerText\": \"Schedule Status\",\n        \"field\": \"schedule_status\",\n        \"template\": \"schedule_status\",\n        \"width\": 160,\n        \"sortable\": \"disabled\",\n        \"resizable\": \"enabled\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\"\n    },\n    {\n        \"headerText\": \"Error Message\",\n        \"field\": \"error_message\",\n        \"template\": \"error_message\",\n        \"width\": 250,\n        \"sortable\": \"disabled\",\n        \"resizable\": \"enabled\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 250px;\"\n    },\n    {\n        \"headerText\": \"Report Record Count\",\n        \"field\": \"report_record_count\",\n        \"template\": \"report_record_count\",\n        \"width\": 180,\n        \"sortable\": \"disabled\",\n        \"resizable\": \"enabled\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\"\n    },\n    {\n        \"headerText\": \"Frequency Min\",\n        \"field\": \"frequency_min\",\n        \"template\": \"frequency_min\",\n        \"width\": 140,\n        \"sortable\": \"disabled\",\n        \"resizable\": \"enabled\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\"\n    },\n    {\n        \"headerText\": \"Schedule Hdr Status\",\n        \"field\": \"schedule_hdr_status\",\n        \"template\": \"status\",\n        \"width\": 180,\n        \"sortable\": \"disabled\",\n        \"resizable\": \"enabled\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\"\n    },\n    {\n        \"headerText\": \"Reset Data\",\n        \"field\": \"reset_data\",\n        \"template\": \"status\",\n        \"width\": 120,\n        \"sortable\": \"disabled\",\n        \"resizable\": \"enabled\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 120px;\"\n    },\n    {\n        \"headerText\": \"DB Table Name\",\n        \"field\": \"db_table_name\",\n        \"template\": \"db_table_name\",\n        \"width\": 200,\n        \"sortable\": \"enabled\",\n        \"resizable\": \"enabled\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 200px;\"\n    },\n    {\n        \"headerText\": \"DB Column Names\",\n        \"field\": \"db_column_names\",\n        \"template\": \"db_column_names\",\n        \"width\": 200,\n        \"sortable\": \"enabled\",\n        \"resizable\": \"enabled\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 200px;\"\n    },\n    {\n        \"headerText\": \"Operation\",\n        \"field\": \"operation\",\n        \"template\": \"operation\",\n        \"width\": 120,\n        \"sortable\": \"enabled\",\n        \"resizable\": \"enabled\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 120px;\"\n    },\n    {\n        \"headerText\": \"Created By\",\n        \"field\": \"created_by\",\n        \"template\": \"created_by\",\n        \"width\": 140,\n        \"sortable\": \"disabled\",\n        \"resizable\": \"enabled\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\"\n    },\n    {\n        \"headerText\": \"Creation Date\",\n        \"field\": \"creation_date\",\n        \"template\": \"creation_date\",\n        \"width\": 160,\n        \"sortable\": \"disabled\",\n        \"resizable\": \"enabled\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\"\n    },\n    {\n        \"headerText\": \"Last Updated By\",\n        \"field\": \"last_updated_by\",\n        \"template\": \"last_updated_by\",\n        \"width\": 160,\n        \"sortable\": \"disabled\",\n        \"resizable\": \"enabled\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\"\n    },\n    {\n        \"headerText\": \"Last Update Date\",\n        \"field\": \"last_update_date\",\n        \"template\": \"creation_date\",\n        \"width\": 160,\n        \"sortable\": \"disabled\",\n        \"resizable\": \"enabled\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\"\n    },\n    {\n        \"headerText\": \"Last Update Login\",\n        \"field\": \"last_update_login\",\n        \"template\": \"last_update_login\",\n        \"width\": 180,\n        \"sortable\": \"disabled\",\n        \"resizable\": \"enabled\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\"\n    }\n] ]]"}
+  },
+  "eventListeners": {
+    "nxtBtnAction": {
+      "chains": [
+        {
+          "chain": "nextAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "preBtnAction": {
+      "chains": [
+        {
+          "chain": "previousAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction2": {
+      "chains": [
+        {
+          "chain": "errorDetaillogAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "resetAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+  
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "onloadAC"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-avatar": {
+        "path": "ojs/ojavatar"
+      },
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-popup": {
+        "path": "ojs/ojpopup"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      }
+
+    },
+    "css": [
+      "/resources/css/smartSearch.css"
+    ],
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    }
+  }
+}

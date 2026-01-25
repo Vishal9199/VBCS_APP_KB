@@ -1,0 +1,25 @@
+{
+    "description": "Smart Search Configuration for Lookup Management Application",
+    "filters": {
+        "ApplicationNameFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Application Name",
+            "options": {
+                "field": "application_code",
+                "optionsData": "[[ $search.filters.ApplicationNameFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.ApplicationNameFilter.options.optionsKeys ]]"
+            },
+            "data": {}
+        },
+        "LookupTypeFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Lookup Type",
+            "options": {
+                "field": "lookup_type_code",
+                "optionsData": "[[ $search.filters.LookupTypeFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.LookupTypeFilter.options.optionsKeys ]]"
+            },
+            "data": {}
+        }
+    }
+}

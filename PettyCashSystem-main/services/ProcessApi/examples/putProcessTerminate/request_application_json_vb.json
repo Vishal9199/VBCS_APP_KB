@@ -1,0 +1,6 @@
+{
+    "action": "TERMINATE",
+    "instanceActionProps": {
+        "reason": "i want to withdraw"
+    }
+}

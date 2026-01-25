@@ -1,0 +1,34 @@
+{
+    "items": [
+        {
+            "function_code": "CREATE_USER",
+            "function_name": "Create User Function",
+            "application_code": null,
+            "application_name": null
+        },
+        {
+            "function_code": "page1",
+            "function_name": "page2",
+            "application_code": null,
+            "application_name": null
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 2,
+    "links": [
+        {
+            "rel": "self",
+            "href": "http://primaverademo.4iapps.com:8442/ords/aol/function/lov/function/name"
+        },
+        {
+            "rel": "describedby",
+            "href": "http://primaverademo.4iapps.com:8442/ords/aol/metadata-catalog/function/lov/function/item"
+        },
+        {
+            "rel": "first",
+            "href": "http://primaverademo.4iapps.com:8442/ords/aol/function/lov/function/name"
+        }
+    ]
+}

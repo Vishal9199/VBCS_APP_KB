@@ -1,0 +1,14 @@
+{
+  "filters": {
+    "TableNameFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Table Name",
+      "options": {
+        "field": "table_name",
+        "optionsData": "[[ $search.filters.TableNameFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.TableNameFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    }
+  }
+}

@@ -1,0 +1,155 @@
+{
+    "items": [
+        {
+            "user_name": "apptestdev1@darwishholding.com",
+            "final_json": [
+                {
+                    "application_id": 1,
+                    "application_name": "Darwish Custom Application",
+                    "application_code": "DH_CUST_APP",
+                    "role": [
+                        {
+                            "role_id": "102",
+                            "role_code": "EXCEL_UPLOAD_ROLE",
+                            "role_name": "Excel Upload Role",
+                            "menu": [
+                                {
+                                    "menu_code": "EXCEL_UPLOAD_MENU",
+                                    "menu_name": "Excel Upload Menu",
+                                    "menu_id": 100,
+                                    "function": [
+                                        {
+                                            "menu_active_flag": "Y",
+                                            "full_access": "Y",
+                                            "fun_remarks": "Excel Upload",
+                                            "function_code": "EXCEL_UPLOAD",
+                                            "allow_delete": "Y",
+                                            "function_name": "Excel Upload",
+                                            "page_url": "https://oic-vbcs-dhfsoictest-vb-axbrdbhb3wme.builder.eu-amsterdam-1.ocp.oraclecloud.com/ic/builder/rt/ExcelUpload/live/webApps/vbredwoodapp/",
+                                            "allow_edit": "Y",
+                                            "menu_entry_id": 101,
+                                            "read_only": "N",
+                                            "allow_create": "Y"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "role_id": "123",
+                            "role_code": "SEC_MATRIX_ROLE",
+                            "role_name": "Security Matrix Role",
+                            "menu": [
+                                {
+                                    "menu_code": "STORE_MATRIX",
+                                    "menu_name": "Store Matrix",
+                                    "menu_id": 116,
+                                    "function": [
+                                        {
+                                            "menu_active_flag": "Y",
+                                            "full_access": "Y",
+                                            "fun_remarks": "Store Matrix",
+                                            "function_code": "STORE_MATRIX",
+                                            "allow_delete": "Y",
+                                            "function_name": "Store Matrix",
+                                            "page_url": "https://oic-vbcs-dhfsoictest-vb-axbrdbhb3wme.builder.eu-amsterdam-1.ocp.oraclecloud.com/ic/builder/rt/ManageStoreTransfer/live/webApps/vbredwoodapp/vp/shell/storematrix",
+                                            "allow_edit": "Y",
+                                            "menu_entry_id": 117,
+                                            "read_only": "N",
+                                            "allow_create": "Y"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "role_id": "126",
+                            "role_code": "STORE_ADMIN_ROLE",
+                            "role_name": "Store Admin Role",
+                            "menu": [
+                                {
+                                    "menu_code": "STORE_ADMIN",
+                                    "menu_name": "Store Admin",
+                                    "menu_id": 120,
+                                    "function": [
+                                        {
+                                            "menu_active_flag": "Y",
+                                            "full_access": "Y",
+                                            "fun_remarks": "Store Matrix",
+                                            "function_code": "STORE_MATRIX",
+                                            "allow_delete": "Y",
+                                            "function_name": "Store Matrix",
+                                            "page_url": "https://oic-vbcs-dhfsoictest-vb-axbrdbhb3wme.builder.eu-amsterdam-1.ocp.oraclecloud.com/ic/builder/rt/ManageStoreTransfer/live/webApps/vbredwoodapp/vp/shell/storematrix",
+                                            "allow_edit": "Y",
+                                            "menu_entry_id": 121,
+                                            "read_only": "N",
+                                            "allow_create": "Y"
+                                        },
+                                        {
+                                            "menu_active_flag": "Y",
+                                            "full_access": "Y",
+                                            "fun_remarks": "Store Transfer",
+                                            "function_code": "STORE_TRANSFER",
+                                            "allow_delete": "Y",
+                                            "function_name": "Store Transfer",
+                                            "page_url": "https://oic-vbcs-dhfsoictest-vb-axbrdbhb3wme.builder.eu-amsterdam-1.ocp.oraclecloud.com/ic/builder/rt/ManageStoreTransfer/live/webApps/vbredwoodapp/vp/shell/store-transfer-request",
+                                            "allow_edit": "Y",
+                                            "menu_entry_id": 122,
+                                            "read_only": "N",
+                                            "allow_create": "Y"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "role_id": "128",
+                            "role_code": "STORE_TRANSFER_ROLE",
+                            "role_name": "Store Transfer Role",
+                            "menu": [
+                                {
+                                    "menu_code": "STORE_TRANSFER",
+                                    "menu_name": "Store Transfer",
+                                    "menu_id": 118,
+                                    "function": [
+                                        {
+                                            "menu_active_flag": "Y",
+                                            "full_access": "Y",
+                                            "fun_remarks": "Store Transfer",
+                                            "function_code": "STORE_TRANSFER",
+                                            "allow_delete": "Y",
+                                            "function_name": "Store Transfer",
+                                            "page_url": "https://oic-vbcs-dhfsoictest-vb-axbrdbhb3wme.builder.eu-amsterdam-1.ocp.oraclecloud.com/ic/builder/rt/ManageStoreTransfer/live/webApps/vbredwoodapp/vp/shell/store-transfer-request",
+                                            "allow_edit": "Y",
+                                            "menu_entry_id": 119,
+                                            "read_only": "N",
+                                            "allow_create": "Y"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://dhapextest.darwishholding.com/ords/dh_cust/generic/user/menu"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://dhapextest.darwishholding.com/ords/dh_cust/metadata-catalog/generic/user/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://dhapextest.darwishholding.com/ords/dh_cust/generic/user/menu"
+        }
+    ]
+}

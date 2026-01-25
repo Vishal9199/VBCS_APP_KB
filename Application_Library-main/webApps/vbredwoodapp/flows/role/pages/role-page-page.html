@@ -1,0 +1,302 @@
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div>
+
+        <oj-sp-simple-create-edit id="oj_ssce1" page-title="Role Management" display-options.responsive-padding="on"
+          primary-action.label="Save and Close" secondary-actions='[{"label":"Save","id":"save"}]' badge.status="info"
+          badge.text="[[ $variables.roleManagementVar.role_name ]]" on-sp-cancel="[[$listeners.ojSsce1SpCancel]]"
+          on-sp-secondary-action="[[$listeners.ojSsce1SpSecondaryAction]]"
+          on-sp-primary-action="[[$listeners.ojSsce1SpPrimaryAction]]">
+
+          <div slot="main" style="padding-top: 0; margin-top: 0; background-color:white;">
+            <div style="margin-top: 0;">
+
+              <!-- Main Form Section - Role Management Header -->
+              <div class="oj-panel oj-panel-shadow-md oj-selected">
+                <oj-validation-group id="fid_role_form_group" valid="{{ $variables.validform.isHeaderFormValid }}">
+                  <oj-form-layout max-columns="2" label-edge="start" label-width="45%" colspan-wrap="wrap"
+                    user-assistance-density="compact" direction="column">
+
+                    <!-- Role Code -->
+                    <oj-input-text id="role-code" label-hint="Role Code" placeholder="Role Code"
+                      value="{{ $variables.roleManagementVar.role_code }}" required="true"
+                      readonly="[[ $variables.isRoleCodeReadOnly ]]" length.max="30"
+                      on-value-changed="[[$listeners.roleCodeValue]]">
+                      <span slot="end">
+                        <oj-bind-if test="{{ $variables.isRoleCodeReadOnly }}">
+                          <span class="oj-ux-ico-edit" style="cursor: pointer;" on-click="[[$listeners.iconClick]]"></span>
+                      </oj-bind-if>
+                      </span>
+                    </oj-input-text>
+
+                    <!-- Role Name -->
+                    <oj-input-text id="role-name" label-hint="Role Name" placeholder="Role Name"
+                      value="{{ $variables.roleManagementVar.role_name }}" required="true" length.max="200">
+                    </oj-input-text>
+
+                    <!-- Menu Name -->
+                    <oj-select-single id="menu-name" label-hint="Menu Name"
+                      value="{{ $variables.roleManagementVar.menu_id }}" item-text="menu_name"
+                      data="[[$variables.getMenuLovMenuNameListSDP]]">
+                    </oj-select-single>
+
+                    <!-- Request Group Name -->
+                    <!-- <oj-select-single 
+                      id="request-group-name" 
+                      label-hint="Request Group Name"
+                      value="{{ $variables.roleManagementVar.request_group_id }}"
+                      data="[[ $variables.getRequestGroupLovListSDP ]]" 
+                      item-text="request_group_name"
+                      >
+                    </oj-select-single> -->
+                    <oj-input-text id="role-name" label-hint="Request Group Name" placeholder="Request Group "
+                      value="{{ $variables.roleManagementVar.request_group_name }}" length.max="200">
+                    </oj-input-text>
+
+                    <oj-select-single label-hint="Application Name"
+                      data="[[$variables.getApplicationLovAppCodeListSDP2]]" item-text="application_name"
+                      value="{{ $variables.roleManagementVar.application_id }}"></oj-select-single>
+
+
+                    <oj-select-single id="business-unit-name" label-hint="Business Unit Name"
+                      value="{{ $variables.roleManagementVar.business_unit_id }}" item-text="bu_name"
+                      data="[[$variables.getAolUsrRoleLovBuNameListSDP]]">
+                    </oj-select-single>
+
+                    <!-- Remarks -->
+                    <oj-text-area id="fid_remarks" label-hint="Remarks" placeholder="Remarks"
+                      value="{{ $variables.roleManagementVar.remarks }}" length.counter="remaining" length.max="250"
+                      rows="3" colspan="2">
+                    </oj-text-area>
+                    <oj-switch label-hint="Status"
+                      value='{{ $variables.roleManagementVar.active_flag == "Y"?true:false }}'
+                      on-value-changed="[[$listeners.switchValue]]"></oj-switch>
+
+
+
+                  </oj-form-layout>
+                </oj-validation-group>
+              </div>
+
+
+
+            </div>
+
+
+            <div style="margin-top: 1.5rem;">
+
+
+
+
+              <!-- Action Buttons for Lookup Value Table -->
+              <div class="oj-flex oj-sm-justify-content-space-between" data-vb-layout-type="flex">
+
+
+                <h6 style="color:#01474d;margin-left:20px;margin-top:5px;">User Role </h6>
+                <div>
+                  <oj-button style="margin:0.125rem;" label="Refresh" chroming="outlined" id="refreshBtn"
+                    on-oj-action="[[$listeners.refreshBtnAction]]">
+                    <img slot="startIcon" :src="[[ $application.path + 'resources/images/Refresh.png' ]]">
+                  </oj-button>
+                  <oj-button label="Add" class="oj-flex-bar-end oj-helper-justify-content-flex-end" chroming="outlined"
+                    id="addBtn" on-oj-action="[[$listeners.addBtnAction2]]" style="margin-right:20px;">
+
+                    <img slot="startIcon" :src="[[ $application.path + 'resources/images/Create (1).png' ]]">
+
+
+                  </oj-button>
+                </div>
+              </div>
+
+
+
+
+              <oj-table
+                columns="{{$flow.constants.accessObj.allowDelete || $flow.constants.accessObj.allowEdit ? $constants.tableColumnWithActions : $constants.tableColumns}}"
+                columns-default.sortable="disabled" columns-default.resizable="enabled"
+                class="oj-sm-width-full oj-bg-body" display="grid" selection-mode.row="single"
+                data="[[ $variables.userADP ]]">
+
+                <!-- Template Slots -->
+                <template slot="actions_template">
+                  <div style="gap:15px" class="oj-flex oj-sm-align-items-center oj-sm-justify-content-center">
+
+
+                   
+                      <oj-bind-if test="[[ $flow.constants.accessObj.allowDelete ]]">
+                        <span class="oj-ux-ico-trash" id="trah" on-click="[[$listeners.trahClick]]" ></span>
+                      </oj-bind-if>
+                  
+
+                    
+                      <oj-bind-if test="[[ $flow.constants.accessObj.allowEdit ]]">
+                        <span class="oj-ux-ico-edit" id="edit" on-click="[[$listeners.editClick]]"></span>
+                      </oj-bind-if>
+                    
+
+
+                  </div>
+                </template>
+
+
+
+
+                <template slot="active_flag_icon">
+                  <oj-bind-if test='[[ $current.data === "Y"  || $current.data === "y" || $current.data === true ]]'>
+                    <img slot="startIcon" :src="[[ $application.path + 'resources/images/activeBtn.png' ]]"
+                       >
+
+                  </oj-bind-if>
+                  <oj-bind-if test='[[ $current.data === "N"  || $current.data === false]]'>
+                    <img slot="startIcon" :src="[[ $application.path + 'resources/images/inactive.png' ]]"
+                        >
+                  </oj-bind-if>
+                </template>
+                <template slot="effective_start_date_template">
+                  <oj-input-date value="[[$current.data]]" readonly="true"
+                    converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'>
+                  </oj-input-date>
+                </template>
+
+                <!-- Effective End Date Template -->
+                <template slot="effective_end_date_template">
+                  <oj-input-date value="[[$current.data]]" readonly="true"
+                    converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'>
+                  </oj-input-date>
+                </template>
+
+
+              </oj-table>
+              <div class="oj-flex oj-sm-justify-content-center">
+
+                <oj-toolbar chroming="solid" class="oj-flex-item oj-sm-flex-initial">
+
+                  <oj-button label="Previous" chroming="borderless" disabled="[[ !$variables.pagination.prev ]]"
+                    id="preBtn" on-oj-action="[[$listeners.preBtnAction]]">
+                    <span slot="startIcon" class="oj-ux-ico-back"></span>
+                  </oj-button>
+
+                  <oj-button label="Next" chroming="borderless" disabled="[[ !$variables.pagination.next ]]" id="nxtBtn"
+                    on-oj-action="[[$listeners.nxtBtnAction]]">
+                    <span slot="endIcon" class="oj-ux-ico-forward-next" on-click="[[$listeners.iconClick2]]"></span>
+                  </oj-button>
+
+                </oj-toolbar>
+
+              </div>
+            </div>
+          </div>
+
+        </oj-sp-simple-create-edit>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<oj-dialog dialog-title="Role User Management" id="userDialog" cancel-behavior="icon" style="width: 600px;"
+  on-oj-close="[[$listeners.userDialogClose]]">
+
+  <div slot="body">
+    <div class="oj-panel oj-selected" style="margin-top:10px">
+      <oj-validation-group id="userForm" valid="{{ $variables.validform.isChildFormValid }}">
+        <oj-form-layout id="roleuserFormLayout" label-edge="top" direction="column" columns="1" label-width="45%"
+          user-assistance-density="compact">
+
+          <!-- Role Name -->
+          <oj-input-text id="role_name_input" label-hint="Role Name" placeholder="Enter Role Name"
+            value="{{ $variables.childUser.role_name }}" required="true" disabled="[[ $variables.isUserRoleReadOnly ]]">
+          </oj-input-text>
+
+          <!-- User Name (Create Mode - Dropdown) -->
+          <oj-bind-if test="[[ $variables.user_field_hide == 'create' ]]">
+            <oj-select-single id="user_name_select" label-hint="User Name" item-text="user_name"
+              value="{{ $variables.childUser.user_id }}" on-value-item-changed="[[$listeners.selectValueItem2]]"
+              on-click="[[$listeners.selectClick]]" required="true"
+              data="[[$variables.getAolUsrRoleLovUserNameListSDP3]]">
+            </oj-select-single>
+          </oj-bind-if>
+
+          <!-- User Name (Edit Mode - Textbox) -->
+          <oj-bind-if test="[[ $variables.user_field_hide === 'edit' ]]">
+            <oj-input-text id="user_name_input" label-hint="User Name" value="{{ $variables.childUser.user_name }}"
+              disabled="true" required="true">
+            </oj-input-text>
+          </oj-bind-if>
+
+          <!-- Effective Start Date -->
+          <oj-input-date id="effective_start_date_input" label-hint="Start Date"
+            value="{{ $variables.childUser.effective_start_date }}"
+            converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}' required="true"
+            on-value-changed="[[$listeners.effectiveStartDateValue]]"
+            disabled="[[ $variables.user_field_hide ==='edit']]">
+          </oj-input-date>
+
+          <!-- Effective End Date -->
+          <oj-input-date id="effective_end_date_input" label-hint="End Date"
+            value="{{ $variables.childUser.effective_end_date }}"
+            converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}' required="true"
+            min="[[ $variables.childUser.effective_start_date ]]">
+          </oj-input-date>
+
+          <!-- Status Switch -->
+          <oj-switch id="status_switch" label-hint="Status"
+            value="{{ $variables.childUser.active_flag=='Y' ? true : false }}"
+            on-value-changed="[[$listeners.switchValue2]]">
+          </oj-switch>
+
+        </oj-form-layout>
+
+      </oj-validation-group>
+    </div>
+
+    <!-- Dialog Footer -->
+
+
+    <div slot="footer" class="dialog-footer" style="background-color:white; margin-top: 27px;margin-left: 69px">
+      <oj-button class="oj-button-primary" on-oj-action="[[$listeners.roleuserSaveCloseAction]]" id="save-add-another"
+        chroming="outlined">Save & Add </oj-button>
+      <oj-button class="oj-button-primary" on-oj-action="[[$listeners.roleuserSaveAction]]" id="save-close"
+        chroming="outlined">Save & Close </oj-button>
+      <oj-button on-oj-action="[[$listeners.roleuserCancelAction]]" id="cancel" chroming="outlined">Cancel</oj-button>
+    </div>
+  </div>
+
+</oj-dialog>
+
+
+
+<oj-dialog dialog-title="Delete" id="deleteDialog" cancel-behavior="icon">
+  <div slot="body">
+    <h6 id="deletehid" style="font-size:medium; font-weight: bold;">Are you sure you want to delete the user role?</h6>
+  </div>
+  <div slot="footer">
+    <oj-button id="deleteBtnYes" on-oj-action="[[$listeners.deleteBtnYesAction]]">Yes</oj-button>
+    <oj-button id="deleteBtnNo" on-oj-action="[[$listeners.deleteBtnNoAction]]">No</oj-button>
+  </div>
+</oj-dialog>
+<oj-dialog dialog-title="Unsaved Changes" id="unsavedChangesDialog" cancel-behavior="icon">
+  <div slot="body">
+    <h6 id="unsavedChangesText" style="font-size:medium; font-weight: bold;">Are you sure you want to leave this page?
+      Your changes will be lost.
+    </h6>
+  </div>
+  <div slot="footer" style="background-color:white;">
+    <oj-button id="proceedExitBtn" chroming="outlined" on-oj-action="[[$listeners.proceedExitBtnAction]]">Leave
+    </oj-button>
+    <oj-button id="cancelExitBtn" chroming="outlined" on-oj-action="[[$listeners.cancelExitBtnAction]]">Cancel
+    </oj-button>
+  </div>
+</oj-dialog>
+<style>
+  .oj-dialog-body {
+    background-color: white;
+
+
+  }
+
+  .oj-dialog-footer {
+    background-color: white !important;
+}
+</style>

@@ -1,0 +1,645 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "OPA CUSTOM",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "vb-catalog://backends/OPA_NEW_CUST"
+        }
+    ],
+    "paths": {
+        "/process/api/v1/instances": {
+            "post": {
+                "operationId": "submitForApproval",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostApiV1InstancesRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "summary": "Example stored by VB User",
+                                    "externalValue": "./examples/postApiV1Instances/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostApiV1InstancesResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/postApiV1Instances/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                },
+                "summary": "postApiV1Instances"
+            }
+        },
+        "/process/api/v1/tasks/{taskId}/complete": {
+            "parameters": [
+                {
+                    "name": "taskId",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "post": {
+                "operationId": "Approve_Reject",
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostApiV1TasksTaskIdCompleteResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/postApiV1TasksTaskIdComplete/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostApiV1TasksTaskIdCompleteRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postApiV1TasksTaskIdComplete/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "postApiV1TasksTaskIdComplete"
+            }
+        },
+        "/process/api/v1/instances/{p_instance_id}": {
+            "parameters": [
+                {
+                    "name": "p_instance_id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "put": {
+                "operationId": "postProcessApiV1InstancesP_instance_id",
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PutApiV1InstancesP_instance_idResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/putApiV1InstancesP_instance_id/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PutApiV1InstancesP_instance_idRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/putProcessTerminate/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "putProcessTerminate"
+            }
+        },
+        "/process/api/v1/instances/{instance_number}": {
+            "parameters": [
+                {
+                    "name": "instance_number",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "put": {
+                "operationId": "putProcessSuspend",
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PutApiV1InstancesInstance_numberResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/putApiV1InstancesInstance_number/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PutApiV1InstancesInstance_numberRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/putApiV1InstancesInstance_number2/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "putApiV1InstancesInstance_number2"
+            }
+        },
+        "/process/api/v1/instances/{p_instance_number}/activities": {
+            "parameters": [
+                {
+                    "name": "p_instance_number",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "get": {
+                "operationId": "getCurrentActivity",
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetApiV1InstancesP_instance_numberActivities"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/getApiV1InstancesP_instance_numberActivities/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                },
+                "summary": "getApiV1InstancesP_instance_numberActivities"
+            }
+        },
+        "/process/api/v1/instances/{p_instance_number}": {
+            "parameters": [
+                {
+                    "name": "p_instance_number",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "put": {
+                "operationId": "postProcessApiV1InstancesP_instance_number",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PutApiV1InstancesP_instance_numberRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/putApiV1InstancesP_instance_number2/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {},
+                "x-vb": {
+                    "actionHint": "getMany"
+                },
+                "summary": "putApiV1InstancesP_instance_number2\n\npostProcessApiV1InstancesP_instance_number\n\nputProcessApiV1InstancesP_instance_number"
+            }
+        },
+        "/process/api/v1/instances/{p_instance_number}/target-activities": {
+            "parameters": [
+                {
+                    "name": "p_instance_number",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "get": {
+                "operationId": "getTargetActivities",
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetApiV1InstancesP_instance_numberTarget-activities"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/getApiV1InstancesP_instance_numberTargetActivities/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany",
+                    "queryParameters": {
+                        "fetchCompleted": "true"
+                    }
+                },
+                "summary": "getApiV1InstancesP_instance_numberTargetActivities"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PostApiViInstancesRequest": {
+                "type": "object",
+                "properties": {
+                    "params": {
+                        "type": "object",
+                        "properties": {
+                            "applicationName": {
+                                "type": "string"
+                            },
+                            "processName": {
+                                "type": "string"
+                            },
+                            "applicationVersion": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "dataObject": {
+                        "type": "object",
+                        "properties": {
+                            "startWebFormArgs": {
+                                "type": "object",
+                                "properties": {
+                                    "callSubmitPackage": {
+                                        "type": "string"
+                                    },
+                                    "p_APPR_PROCESS": {
+                                        "type": "string"
+                                    },
+                                    "p_TRX_ID": {
+                                        "type": "string"
+                                    },
+                                    "p_ACTION_ID": {
+                                        "type": "string"
+                                    },
+                                    "p_USER_ID": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostApiV1InstancesRequest": {
+                "type": "object",
+                "properties": {
+                    "params": {
+                        "type": "object",
+                        "properties": {
+                            "applicationName": {
+                                "type": "string"
+                            },
+                            "processName": {
+                                "type": "string"
+                            },
+                            "applicationVersion": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "dataObject": {
+                        "type": "object",
+                        "properties": {
+                            "submitFormArgs": {
+                                "type": "object",
+                                "properties": {
+                                    "callSubmitPackage": {
+                                        "type": "string"
+                                    },
+                                    "p_APPR_PROCESS": {
+                                        "type": "string"
+                                    },
+                                    "p_TRX_ID": {
+                                        "type": "string"
+                                    },
+                                    "p_TYPE": {
+                                        "type": "string"
+                                    },
+                                    "p_USER_ID": {
+                                        "type": "string"
+                                    },
+                                    "p_ACTION_ID": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostApiV1InstancesResponse": {
+                "type": "object",
+                "properties": {
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "href": {
+                                    "type": "string"
+                                },
+                                "rel": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "processDefinitionId": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "state": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "createdBy": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "applicationName": {
+                        "type": "string"
+                    },
+                    "applicationVersion": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostApiV1TasksTaskIdCompleteResponse": {
+                "type": "object",
+                "properties": {
+                    "errorCode": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "integer"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "details": {
+                        "type": "string"
+                    },
+                    "cause": {
+                        "nullable": true
+                    },
+                    "opcRequestId": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PutApiV1InstancesP_instance_idResponse": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PutApiV1InstancesInstance_numberResponse": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                }
+            },
+            "GetApiV1InstancesP_instance_numberActivities": {
+                "type": "object",
+                "properties": {
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "href": {
+                                    "type": "string"
+                                },
+                                "rel": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "activities": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "activityId": {
+                                    "type": "string"
+                                },
+                                "activityName": {
+                                    "type": "string"
+                                },
+                                "activityType": {
+                                    "type": "string"
+                                },
+                                "activityInstanceId": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetApiV1InstancesP_instance_numberTarget-activities": {
+                "type": "object",
+                "properties": {
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "href": {
+                                    "type": "string"
+                                },
+                                "rel": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "activities": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "activityId": {
+                                    "type": "string"
+                                },
+                                "activityName": {
+                                    "type": "string"
+                                },
+                                "activityType": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PutApiV1InstancesP_instance_idRequest": {
+                "type": "object",
+                "properties": {
+                    "action": {
+                        "type": "string"
+                    },
+                    "instanceActionProps": {
+                        "type": "object",
+                        "properties": {
+                            "reason": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "PostApiV1TasksTaskIdCompleteRequest": {
+                "type": "object",
+                "properties": {
+                    "outcome": {
+                        "type": "string"
+                    },
+                    "comment": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PutApiV1InstancesInstance_numberRequest": {
+                "type": "object",
+                "properties": {
+                    "action": {
+                        "type": "string"
+                    },
+                    "instanceActionProps": {
+                        "type": "object",
+                        "properties": {
+                            "reason": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "PutApiV1InstancesP_instance_numberRequest": {
+                "type": "object",
+                "properties": {
+                    "action": {
+                        "type": "string"
+                    },
+                    "instanceActionProps": {
+                        "type": "object",
+                        "properties": {
+                            "sourceActivityId": {
+                                "type": "string"
+                            },
+                            "destinationActivityId": {
+                                "type": "string"
+                            },
+                            "reason": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

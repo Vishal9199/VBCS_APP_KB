@@ -1,0 +1,53 @@
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div class="oj-flex-bar oj-sm-align-items-center menuList" style="background-color: #01474d;">
+        <oj-button class="oj-flex-bar-start oj-button-sm oj-sm-align-self-center"
+          style="background-color: #01474d; height: 20px; width:25px; margin-top: 2px;" chroming="borderless"
+          id="menuBtn" on-oj-action="[[$listeners.menuBtnAction]]" display="icons">
+          <!-- <h6 id="h4" slot="endIcon" class="icons h1">Custom Application</h6> -->
+          
+  <span class="oj-ux-ico-menu" style="font-weight: bolder; font-size: 21px; color: white;"></span>
+        </oj-button>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  <oj-bind-text value="[[$application.translations.appBundle.style__text_2243]]"></oj-bind-text>
+</style>
+
+<oj-drawer-popup style="width:80px" opened="{{ $variables.openPopup }}">
+  <div style="flex: 1;">
+    <!-- <h6 class="drawer-header" style="color:#01474d;"><oj-bind-text value="[[ $constants.MenuTitle ]]"></oj-bind-text></h6> -->
+    <oj-navigation-list drill-mode="collapsible" id="tree-navigation" data="[[ $variables.navigationContent ]]"
+      selection="{{ $variables.currentPage }}" expanded="{{ $variables.expandedNodes }}">
+      
+      <div style="padding-right: 10px; text-align: right;">
+        <a id="expandCollapseLink" style="color:#084c4c; text-decoration: underline; cursor: pointer; font-size: 12px;"
+          on-click="[[$listeners.expandCollapseLinkClick]]">
+          <oj-bind-text value='[[ ($variables.isShowMore)?"Show more":"Show less" ]]'></oj-bind-text>
+        </a>
+      </div>
+      
+      <h6 class="drawer-header" style="color:#084c4c;">
+        <oj-bind-text value="[[ $constants.MenuTitle ]]"></oj-bind-text>
+      </h6>
+      <template slot="itemTemplate" data-oj-as="item">
+        <li on-click="[[$listeners.hyperlinkClick]]">
+          <a style="cursor:pointer">
+            <oj-bind-if test="[[item.data.attr.node]]">
+              <oj-bind-text value="[[item.data.attr.name]]">
+              </oj-bind-text>
+            </oj-bind-if>
+            <oj-bind-if test="[[!item.data.attr.node]]">
+              <span class="oj-typography-body-md">
+               <oj-bind-text value="[[item.data.attr.name]]"></oj-bind-text>
+                </span>
+            </oj-bind-if>
+          </a>
+        </li>
+      </template>
+    </oj-navigation-list>
+  </div>
+</oj-drawer-popup>

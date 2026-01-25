@@ -1,0 +1,27 @@
+{
+    "OUT_COUNT": 1,
+    "OUT_DESCRIPTION": "Successfully fetched data restriction records",
+    "OUT_HAS_NEXT": "N",
+    "OUT_STATUS": "SUCCESS",
+    "OUT_TOTAL_COUNT": 1,
+    "P_OUTPUT": [
+        {
+            "restriction_id": 1,
+            "object_version_num": 0,
+            "restriction_code": "WW_PC_AL_ANSAB",
+            "restriction_name": "Waste Water Petty Cash Al Ansab",
+            "person_id": 100000005219102,
+            "person_number": "5536",
+            "full_name": "Muna Zahran Ali Al Maawali منى  المعولية",
+            "email_address": "muna.maawali@testowwsc.nama.om",
+            "active_flag": "Y",
+            "remarks": null,
+            "attribute_json": null,
+            "created_by": "api",
+            "created_date": "2025-11-18T11:22:50.197629Z",
+            "last_updated_by": "api",
+            "last_updated_date": "2025-11-18T11:22:53.791496Z",
+            "last_updated_login": "api"
+        }
+    ]
+}

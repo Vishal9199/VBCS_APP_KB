@@ -1,0 +1,619 @@
+{
+  "title": "User Access Management",
+  "description": "User Access Management Add/Edit page with header form and User Access Details table with popup dialog editing",
+  "variables": {
+    "getAolUsrRoleLovRolenameListSDP2": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "role_id",
+        "itemsPath": "items",
+        "responseType": "getAolUsrRoleLovRolenameResponse2",
+        "headers": {
+          "p_user_id": "{{ $variables.userAccessDetailHeaderVar.user_id }}"
+        },
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "role_name"
+          ]
+        },
+        "fetchChain": "getAol_usrRoleLovRolenameFetch3"
+      }
+    },
+    "P_KEY": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "user_hide": {
+      "type": "string"
+    },
+    "userAccessChildVar": {
+      "type": "UserAccessType",
+      "defaultValue": {
+        "effective_end_date": "4712-12-31",
+        "effective_start_date": "[[ $application.functions.removeTimeZone($application.functions.getSysdate()) ]]"
+      }
+    },
+    "userAccessDetailHeaderVar": {
+      "type": "UserAccessDetailType"
+    },
+    "ADPuserAccessDetails": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "UserAccessType",
+        "keyAttributes": "user_access_id"
+      }
+    },
+    "searchObj": {
+      "type": {
+        "IN_LIMIT": "number",
+        "IN_OFFSET": "number",
+        "P_USER_ACCESS_ID": "number",
+        "P_USER_NAME": "string",
+        "P_ACTIVE_FLAG": "string",
+        "P_EFFECTIVE_START_DATE": "string",
+        "P_EFFECTIVE_END_DATE": "string",
+        "USER_ID": "number"
+      },
+      "defaultValue": {
+        "IN_OFFSET": 0,
+        "IN_LIMIT": 6
+      }
+ 
+    },
+    "encryptPayload": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "pagination": {
+      "type": {
+        "prev": "boolean",
+        "next": "boolean"
+      },
+      "defaultValue": {
+        "prev": false,
+        "next": false
+      }
+    },
+    "validform": {
+      "type": {
+        "isHeaderFormValid": "string",
+        "isDialogFormValid": "string"
+      },
+      "defaultValue": {
+        "isHeaderFormValid": "valid",
+        "isDialogFormValid": "valid"
+      }
+    }
+
+  },
+  "types": {
+    "@decorators.getAolUsrRoleLovRolenameResponse": {
+      "endpoint": "getAol_usrRoleLovRolename",
+      "service": "Role",
+      "path": "response"
+    },
+    "@decorators.getAolUsrRoleLovRolenameResponse2": {
+      "endpoint": "getAol_usrRoleLovRolename",
+      "service": "Role",
+      "path": "response"
+    },
+    "@decorators.getAolUsrRoleLovRolenameResponse4": {
+      "endpoint": "getAol_usrRoleLovRolename",
+      "service": "Role",
+      "path": "response"
+    },
+    "getAolUsrRoleLovRolenameResponse": {
+      "items": [
+        {
+          "application_name": "string",
+          "role_code": "string",
+          "role_id": "number",
+          "role_name": "string"
+
+        }
+      ]
+    },
+    "getAolUsrRoleLovRolenameResponse2": {
+      "items": [
+        {
+          "application_name": "string",
+          "role_code": "string",
+          "role_id": "number",
+          "role_name": "string"
+        }
+      ]
+    },
+    "getAolUsrRoleLovRolenameResponse4": {
+      "items": [
+        {
+          "application_name": "string",
+          "role_code": "string",
+          "role_id": "number",
+          "role_name": "string"
+        }
+      ]
+    },
+    "UserAccessType": {
+      "user_access_id": "number",
+      "object_version_num": "number",
+      "user_id": "number",
+      "user_name": "string",
+      "role_id": "number",
+      "role_code": "string",
+      "role_name": "string",
+      "application_id": "number",
+      "application_name": "string",
+      "remarks": "string",
+      "effective_start_date": "string",
+      "effective_end_date": "string",
+      "active_flag": "string",
+      "attribute_json": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "UserAccessDetailType": {
+    "user_id": "number",
+    "user_name": "string",
+    "user_guid": "string",
+    "business_group_id": "number",
+    "active_flag": "string",
+    "start_date": "string",
+    "end_date": "string",
+    "person_id": "number",
+    "email_address": "string",
+    "trx_source": "string",
+    "source_rowid": "string",
+    "created_by": "string",
+    "created_date": "string",
+    "last_updated_by": "string",
+    "last_updated_date": "string",
+    "last_updated_login": "string"
+  }
+
+  },
+  "metadata": {},
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "oj-sp/simple-create-edit/loader"
+      },
+      "oj-switch": {
+        "path": "ojs/ojswitch"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      }
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/addEditHeader.css"
+    ]
+  },
+  "constants": {
+    "tableColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Role Name",
+          "field": "role_name",
+          "resizable": "enabled",
+          "width": 180,
+          "template": "role_name_template",
+          "headerStyle": "white-space: normal;",
+          "style": "",
+          "sortable": "enabled"
+        },
+        {
+          "headerText": "Application Name",
+          "field": "application_name",
+          "resizable": "enabled",
+          "width": 200,
+          "template": "application_name_template",
+          "headerStyle": "white-space: normal;",
+          "style": "",
+          "sortable": "enabled"
+        },
+        {
+          "headerText": "Effective Start Date",
+          "field": "effective_start_date",
+          "width": 200,
+          "template": "effective_start_date_template",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": "",
+          "sortable": "enabled"
+        },
+        {
+          "headerText": "Effective End Date",
+          "field": "effective_end_date",
+          "width": 200,
+          "template": "effective_end_date_template",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": "",
+          "sortable": "enabled"
+        },
+        {
+          "headerText": "Status",
+          "field": "active_flag",
+          "resizable": "enabled",
+          "width": 70,
+          "sortable": "disabled",
+          "template": "active_flag_icon",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Remarks",
+          "field": "remarks",
+          "resizable": "enabled",
+          "width": "",
+          "template": "remarks_template",
+          "headerStyle": "white-space: normal;",
+          "style": "",
+          "sortable": "enabled"
+
+        }
+      ]
+    },
+    "tableColumnsWithActions": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "width": 100,
+          "template": "actions_template",
+          "sortable": "disabled",
+          "headerStyle": "text-align: center; white-space: normal;",
+          "style": "text-align: center; vertical-align: middle;"
+
+        },
+        {
+          "headerText": "Role Name",
+          "field": "role_name",
+          "resizable": "enabled",
+          "width": 180,
+          "template": "role_name_template",
+          "headerStyle": "white-space: normal;",
+          "style": "",
+          "sortable": "enabled"
+        },
+        {
+          "headerText": "Application Name",
+          "field": "application_name",
+          "resizable": "enabled",
+          "width": 200,
+          "template": "application_name",
+          "headerStyle": "white-space: normal;",
+          "style": "",
+          "sortable": "enabled"
+        },
+        {
+          "headerText": "Effective Start Date",
+          "field": "effective_start_date",
+          "width": 200,
+          "template": "effective_start_date_template",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": "",
+          "sortable": "enabled"
+        },
+        {
+          "headerText": "Effective End Date",
+          "field": "effective_end_date",
+          "width": 200,
+          "template": "effective_end_date_template",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": "",
+          "sortable": "enabled"
+        },
+        {
+          "headerText": "Status",
+          "field": "active_flag",
+          "resizable": "enabled",
+          "width": 70,
+          "sortable": "disabled",
+          "template": "active_flag_icon",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Remarks",
+          "field": "remarks",
+          "resizable": "enabled",
+          "width": "",
+          "template": "remarks_template",
+          "headerStyle": "white-space: normal;",
+          "style": "",
+          "sortable": "enabled"
+
+        }
+      ]
+    }
+  },
+  "eventListeners": {
+    "activeFlagValue": {
+      "chains": [
+        {
+          "chain": "SwitchValueChangeChain1",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "addBtnAction": {
+      "chains": [
+        {
+          "chain": "childAddAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    
+    "cancelAction": {
+      "chains": [
+        {
+          "chain": "cancelAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnNoAction": {
+      "chains": [
+        {
+          "chain": "deleteNoAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnYesAction": {
+      "chains": [
+        {
+          "chain": "deleteYesAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "editClick": {
+      "chains": [
+        {
+          "chain": "editAC",
+          "parameters": {
+            "current": "{{ $current }}",
+            "event": "{{$event}}",
+            "index": "{{ $current.index }}",
+            "key": "{{ $current.key }}"
+          }
+        }
+      ]
+    },
+    "hyperlinkClick": {
+      "chains": [
+        {
+          "chain": "application_name_fetch_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "hyperlinkClick2": {
+      "chains": [
+        {
+          "chain": "application_name",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "hyperlinkClick3": {
+      "chains": [
+        {
+          "chain": "HyperlinkClickChain1",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "hyperlinkClick4": {
+      "chains": [
+        {
+          "chain": "application_name",
+          "parameters": {
+            "current": "{{ $current }}",
+            "event": "{{$event}}",
+            "index": "{{ $current.index }}",
+            "key": "{{ $current.key }}"
+          }
+        }
+      ]
+    },
+    "nextBtnAction": {
+      "chains": [
+        {
+          "chain": "nextAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "ojSsce1SpCancel": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpCancelChain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "prevBtnAction": {
+      "chains": [
+        {
+          "chain": "previousAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "saveAddAnotherAction": {
+      "chains": [
+        {
+          "chain": "saveAndAddAnotherAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "saveCloseAction": {
+      "chains": [
+        {
+          "chain": "save_closeAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "selectValueItem": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "switchValue": {
+      "chains": [
+        {
+          "chain": "SwitchValueChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "trahClick": {
+      "chains": [
+        {
+          "chain": "deleteAC",
+          "parameters": {
+            "current": "{{ $current }}",
+            "event": "{{$event}}",
+            "index": "{{ $current.index }}",
+            "key": "{{ $current.key }}"
+          }
+        }
+      ]
+    },
+    "userAccessDetailsDialogClose": {
+      "chains": [
+        {
+          "chain": "DialogCloseChain",
+          "parameters": {
+            "event": "{{$event.detail.event}}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+
+  }
+}

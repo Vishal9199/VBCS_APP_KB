@@ -1,0 +1,666 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Role",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "vb-catalog://backends/ORDS_AOL",
+            "description": "Role"
+        }
+    ],
+    "paths": {
+
+        "/role/process": {
+            "post": {
+                "operationId": "postAol_usrRoleProcess",
+                "parameters": [
+                    {
+                        "name": "X-cache-code",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "x-vb": {
+                            "defaultValue": "XQ5aYWpnv3UA3EyvV5ZMYnwitX/j3YSyHgpSNPmWteA="
+                        }
+                    },
+                    {
+                        "name": "X-cache-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "x-vb": {
+                            "defaultValue": "n/myHvDZA03+sotLLQ2NNH4yFVKWvnfj22tTOr/XRis="
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostAol_usrRoleProcessRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postAol_usrRoleProcess/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostAol_usrRoleProcessResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postAol_usrRoleProcess/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/role/search": {
+            "post": {
+                "operationId": "postAol_usrRoleSearch",
+                "requestBody": {
+                    "description": "Request for application/json",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostAol_usrRoleSearchRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "summary": "Example stored by VB User",
+                                    "externalValue": "./examples/postAol_usrRoleSearch/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostRoleSearchResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postAol_usrRoleSearch/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/role/lov/bu/name": {
+            "get": {
+                "operationId": "getAol_usrRoleLovBuName",
+                "parameters": [
+                    {
+                        "name": "search_var",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetAol_usrRoleLovBuName"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getAol_usrRoleLovBuName/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/role/lov/rolename": {
+            "get": {
+                "operationId": "getAol_usrRoleLovRolename",
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetNws_aolRoleLovRolename"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getAol_usrRoleLovRolename/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                },
+                "parameters": [
+                    {
+                        "name": "search_var",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "p_user_id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "GetAol_usrRoleLovRolename": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "role_id": {
+                                    "type": "integer"
+                                },
+                                "role_code": {
+                                    "type": "string"
+                                },
+                                "role_name": {
+                                    "type": "string"
+                                },
+                                "application_id": {
+                                    "type": "integer"
+                                },
+                                "application_code": {
+                                    "type": "string"
+                                },
+                                "application_name": {
+                                    "type": "string"
+                                },
+                                "business_unit_id": {
+                                    "type": "integer",
+                                    "nullable": true
+                                },
+                                "business_unit_name": {
+                                    "type": "string",
+                                    "nullable": true
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostAol_usrRoleProcessRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostAol_usrRoleProcessResponse": {
+                "type": "object",
+                "properties": {
+                    "P_ERR_CODE": {
+                        "type": "string"
+                    },
+                    "P_ERR_MSG": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostAol_usrRoleSearchResponse": {
+                "type": "object",
+                "properties": {
+                    "OUT_COUNT": {
+                        "type": "integer"
+                    },
+                    "OUT_DESCRIPTION": {
+                        "type": "string"
+                    },
+                    "OUT_HAS_NEXT": {
+                        "type": "string"
+                    },
+                    "OUT_STATUS": {
+                        "type": "string"
+                    },
+                    "OUT_TOTAL_COUNT": {
+                        "type": "integer"
+                    },
+                    "P_OUTPUT": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "role_id": {
+                                    "type": "integer"
+                                },
+                                "object_version_num": {
+                                    "type": "integer"
+                                },
+                                "role_code": {
+                                    "type": "string"
+                                },
+                                "role_name": {
+                                    "type": "string"
+                                },
+                                "remarks": {
+                                    "nullable": true
+                                },
+                                "menu_id": {
+                                    "type": "integer"
+                                },
+                                "menu_code": {
+                                    "type": "string"
+
+                                },
+                                "menu_name": {
+                                    "type": "string"
+
+                                },
+                                "request_group_id": {
+                                    "nullable": true
+                                },
+                                "request_group_code": {
+                                    "type": "string"
+                                },
+                                "request_group_name": {
+                                    "type": "string"
+                                },
+                                "active_flag": {
+                                    "type": "string"
+                                },
+                                "application_id": {
+                                    "type": "integer"
+                                },
+                                "application_code": {
+                                    "type": "string"
+
+                                },
+                                "application_name": {
+                                    "type": "string"
+
+                                },
+                                "business_unit_id": {
+                                    "type": "integer"
+                                },
+                                "business_unit_name": {
+                                    "type": "string"
+                                },
+                                "attribute_json": {
+                                    "nullable": true
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "created_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_updated_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_login": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostAol_usrRoleSearchRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "GetAol_usrRoleLovBuName": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "bu_id": {
+                                    "type": "integer"
+                                },
+                                "bu_name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetRoleLovRolename": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "role_id": {
+                                    "type": "integer"
+                                },
+                                "role_code": {
+                                    "type": "string"
+                                },
+                                "role_name": {
+                                    "type": "string"
+                                },
+                                "application_id": {
+                                    "type": "integer"
+                                },
+                                "application_code": {
+                                    "type": "string"
+                                },
+                                "application_name": {
+                                    "type": "string"
+                                },
+                                "business_unit_id": {
+                                    "nullable": true
+                                },
+                                "business_unit_name": {
+                                    "nullable": true
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostRoleSearchResponse": {
+                "type": "object",
+                "properties": {
+                    "OUT_COUNT": {
+                        "type": "integer"
+                    },
+                    "OUT_DESCRIPTION": {
+                        "type": "string"
+                    },
+                    "OUT_HAS_NEXT": {
+                        "type": "string"
+                    },
+                    "OUT_STATUS": {
+                        "type": "string"
+                    },
+                    "OUT_TOTAL_COUNT": {
+                        "type": "integer"
+                    },
+                    "P_OUTPUT": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "role_id": {
+                                    "type": "integer"
+                                },
+                                "object_version_num": {
+                                    "type": "integer"
+                                },
+                                "role_code": {
+                                    "type": "string"
+                                },
+                                "role_name": {
+                                    "type": "string"
+                                },
+                                "remarks": {
+                                    "type": "string"
+                                },
+                                "menu_id": {
+                                    "type": "integer"
+                                },
+                                "menu_code": {
+                                    "type": "string"
+                                },
+                                "menu_name": {
+                                    "type": "string"
+                                },
+                                "request_group_id": {
+                                    "type": "integer",
+                                    "nullable": true
+                                },
+                                "request_group_code": {
+                                    "nullable": true
+                                },
+                                "request_group_name": {
+                                    "nullable": true
+                                },
+                                "active_flag": {
+                                    "type": "string"
+                                },
+                                "application_id": {
+                                    "type": "integer"
+                                },
+                                "application_code": {
+                                    "type": "string"
+                                },
+                                "application_name": {
+                                    "type": "string"
+                                },
+                                "business_unit_id": {
+                                    "type": "integer",
+                                    "nullable": true
+                                },
+                                "business_unit_name": {
+                                    "nullable": true
+                                },
+                                "attribute_json": {
+                                    "nullable": true
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "created_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_updated_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_login": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetNws_aolRoleLovRolename": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "role_id": {
+                                    "type": "integer"
+                                },
+                                "role_code": {
+                                    "type": "string"
+                                },
+                                "role_name": {
+                                    "type": "string"
+                                },
+                                "application_id": {
+                                    "type": "integer"
+                                },
+                                "application_code": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "application_name": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "business_unit_id": {
+                                    "type": "integer"
+                                },
+                                "business_unit_name": {
+                                    "nullable": true
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

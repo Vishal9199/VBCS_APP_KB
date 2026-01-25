@@ -1,0 +1,37 @@
+{
+    "OUT_COUNT": 1,
+    "OUT_DESCRIPTION": "Successfully fetched 1 of 1 records.",
+    "OUT_HAS_NEXT": "N",
+    "OUT_STATUS": "SUCCESS",
+    "OUT_TOTAL_COUNT": 1,
+    "P_OUTPUT": [
+        {
+            "menu_entry_id": 13,
+            "object_version_num": 0,
+            "entry_sequence": 1,
+            "prompt": "OK",
+            "remarks": null,
+            "menu_id": 11,
+            "menu_code": "TEST",
+            "menu_name": "Test",
+            "function_id": 12,
+            "function_code": "FUNCTION",
+            "function_name": "Function",
+            "sub_menu_id": 9,
+            "sub_menu_code": "QQQ",
+            "sub_menu_name": "Qqq",
+            "full_access": "Y",
+            "allow_edit": "N",
+            "allow_create": "N",
+            "allow_delete": "N",
+            "read_only": "N",
+            "active_flag": "Y",
+            "attribute_json": null,
+            "created_by": "vishal.m@4iapps.com",
+            "created_date": "2025-11-10T15:34:32Z",
+            "last_updated_by": "vishal.m@4iapps.com",
+            "last_updated_date": "2025-11-10T15:34:32Z",
+            "last_updated_login": "vishal.m@4iapps.com"
+        }
+    ]
+}

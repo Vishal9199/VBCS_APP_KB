@@ -1,0 +1,27 @@
+{
+    "description": "Smart Search Configuration for Function Management Application",
+    "filters": {
+        "ApplicationNameFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Application Name",
+            "options": {
+                "field": "application_name",
+                "optionsData": "[[ $search.filters.ApplicationNameFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.ApplicationNameFilter.options.optionsKeys ]]"
+            },
+            "data": {
+            }
+        },
+        "FunctionNameFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Function Name",
+            "options": {
+                "field": "function_name",
+                "optionsData": "[[ $search.filters.FunctionNameFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.FunctionNameFilter.options.optionsKeys ]]"
+            },
+            "data": {
+            }
+        }
+    }
+}

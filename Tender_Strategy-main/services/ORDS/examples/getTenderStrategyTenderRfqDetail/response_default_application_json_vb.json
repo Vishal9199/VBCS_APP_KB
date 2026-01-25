@@ -1,0 +1,48 @@
+{
+    "items": [
+        {
+            "pr_header_id": 300000094734503,
+            "auction_header_id": 2001,
+            "tender_rfq_number": "NW-RFQ-10008-2026",
+            "request_date": null,
+            "tender_rfq_creation_date": "2025-12-30T00:00:00Z",
+            "technical_opening_date": "2025-12-30T00:00:00Z",
+            "commercial_closing_date": "2025-12-30T00:00:00Z",
+            "contract_start_date": "2025-12-30T00:00:00Z",
+            "tender_rfq_status": "NO",
+            "technically_qualified": "ABC",
+            "tender_description": "RFQ2",
+            "auction_title": "RFQ2",
+            "floated_date": "2025-12-31T00:00:00Z",
+            "technical_closing_date": "2025-12-31T00:00:00Z",
+            "loa_issued_date": "2025-12-31T00:00:00Z",
+            "contract_end_date": "2025-12-30T00:00:00Z",
+            "no_of_bidders_purchase": 2,
+            "count_of_floated_to_award_days": 2,
+            "bid_submission_closing_date": null,
+            "commercial_opening_date": null,
+            "number_of_bidders_submitted": 2,
+            "award_value": 2,
+            "auction_display_number": "NW-RFQ-10008-2026",
+            "req_bu_id": 300000094681119
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/tender/strategy/tender/rfq/detail"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/tender/strategy/tender/rfq/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/tender/strategy/tender/rfq/detail"
+        }
+    ]
+}

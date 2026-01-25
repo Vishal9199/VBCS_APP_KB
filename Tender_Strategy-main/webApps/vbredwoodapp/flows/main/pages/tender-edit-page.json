@@ -1,0 +1,1871 @@
+{
+  "title": "Tender Strategy Management",
+  "description": "Advanced Add/Edit page for Tender Strategy Request management with MOM details, PR/PO information, and evaluation criteria",
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-file-picker": {
+        "path": "ojs/ojfilepicker"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-date-time": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-label": {
+        "path": "ojs/ojlabel"
+      },
+      "oj-list-item-layout": {
+        "path": "ojs/ojlistitemlayout"
+      },
+      "oj-list-view": {
+        "path": "ojs/ojlistview"
+      },
+      "oj-option": {
+        "path": "ojs/ojoption"
+      },
+      "oj-popup": {
+        "path": "ojs/ojpopup"
+      },
+      "oj-progress-bar": {
+        "path": "ojs/ojprogress-bar"
+      },
+      "oj-radioset": {
+        "path": "ojs/ojradioset"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-sp-input-rich-text-2": {
+        "path": "oj-sp/input-rich-text-2/loader"
+      },
+      "oj-switcher": {
+        "path": "ojs/ojswitcher"
+      },
+      "oj-tab-bar": {
+        "path": "ojs/ojnavigationlist"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-switch": {
+        "path": "ojs/ojswitch"
+      }
+    },
+    "modules": {
+      "ojConverterNumber": {
+        "path": "ojs/ojconverter-number"
+      },
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      },
+      "ojValidationNumber": {
+        "path": "ojs/ojvalidation-number"
+      }
+    },
+    "css": [
+      "/resources/css/redwood-overrides.css"
+    ]
+  },
+  "variables": {
+    "allFormsValidObj": {
+      "type": {
+        "m_info": "string",
+        "pr_po_details": "string"
+      }
+    },
+    "matrixData": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "row": 1,
+          "col": 1,
+          "selected": false
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "selected": false
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "selected": false
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "selected": false
+        },
+        {
+          "row": 1,
+          "col": 5,
+          "selected": false
+        },
+        {
+          "row": 1,
+          "col": 6,
+          "selected": false
+        },
+        {
+          "row": 1,
+          "col": 7,
+          "selected": false
+        },
+        {
+          "row": 1,
+          "col": 8,
+          "selected": false
+        },
+        {
+          "row": 1,
+          "col": 9,
+          "selected": false
+        },
+        {
+          "row": 1,
+          "col": 10,
+          "selected": false
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "selected": false
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "selected": false
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "selected": false
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "selected": false
+        },
+        {
+          "row": 2,
+          "col": 5,
+          "selected": false
+        },
+        {
+          "row": 2,
+          "col": 6,
+          "selected": false
+        },
+        {
+          "row": 2,
+          "col": 7,
+          "selected": false
+        },
+        {
+          "row": 2,
+          "col": 8,
+          "selected": false
+        },
+        {
+          "row": 2,
+          "col": 9,
+          "selected": false
+        },
+        {
+          "row": 2,
+          "col": 10,
+          "selected": false
+        },
+        {
+          "row": 3,
+          "col": 1,
+          "selected": false
+        },
+        {
+          "row": 3,
+          "col": 2,
+          "selected": false
+        },
+        {
+          "row": 3,
+          "col": 3,
+          "selected": false
+        },
+        {
+          "row": 3,
+          "col": 4,
+          "selected": false
+        },
+        {
+          "row": 3,
+          "col": 5,
+          "selected": false
+        },
+        {
+          "row": 3,
+          "col": 6,
+          "selected": false
+        },
+        {
+          "row": 3,
+          "col": 7,
+          "selected": false
+        },
+        {
+          "row": 3,
+          "col": 8,
+          "selected": false
+        },
+        {
+          "row": 3,
+          "col": 9,
+          "selected": false
+        },
+        {
+          "row": 3,
+          "col": 10,
+          "selected": false
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "selected": false
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "selected": false
+        },
+        {
+          "row": 4,
+          "col": 3,
+          "selected": false
+        },
+        {
+          "row": 4,
+          "col": 4,
+          "selected": false
+        },
+        {
+          "row": 4,
+          "col": 5,
+          "selected": false
+        },
+        {
+          "row": 4,
+          "col": 6,
+          "selected": false
+        },
+        {
+          "row": 4,
+          "col": 7,
+          "selected": false
+        },
+        {
+          "row": 4,
+          "col": 8,
+          "selected": false
+        },
+        {
+          "row": 4,
+          "col": 9,
+          "selected": false
+        },
+        {
+          "row": 4,
+          "col": 10,
+          "selected": false
+        },
+        {
+          "row": 5,
+          "col": 1,
+          "selected": false
+        },
+        {
+          "row": 5,
+          "col": 2,
+          "selected": false
+        },
+        {
+          "row": 5,
+          "col": 3,
+          "selected": false
+        },
+        {
+          "row": 5,
+          "col": 4,
+          "selected": false
+        },
+        {
+          "row": 5,
+          "col": 5,
+          "selected": false
+        },
+        {
+          "row": 5,
+          "col": 6,
+          "selected": false
+        },
+        {
+          "row": 5,
+          "col": 7,
+          "selected": false
+        },
+        {
+          "row": 5,
+          "col": 8,
+          "selected": false
+        },
+        {
+          "row": 5,
+          "col": 9,
+          "selected": false
+        },
+        {
+          "row": 5,
+          "col": 10,
+          "selected": false
+        },
+        {
+          "row": 6,
+          "col": 1,
+          "selected": false
+        },
+        {
+          "row": 6,
+          "col": 2,
+          "selected": false
+        },
+        {
+          "row": 6,
+          "col": 3,
+          "selected": false
+        },
+        {
+          "row": 6,
+          "col": 4,
+          "selected": false
+        },
+        {
+          "row": 6,
+          "col": 5,
+          "selected": false
+        },
+        {
+          "row": 6,
+          "col": 6,
+          "selected": false
+        },
+        {
+          "row": 6,
+          "col": 7,
+          "selected": false
+        },
+        {
+          "row": 6,
+          "col": 8,
+          "selected": false
+        },
+        {
+          "row": 6,
+          "col": 9,
+          "selected": false
+        },
+        {
+          "row": 6,
+          "col": 10,
+          "selected": false
+        },
+        {
+          "row": 7,
+          "col": 1,
+          "selected": false
+        },
+        {
+          "row": 7,
+          "col": 2,
+          "selected": false
+        },
+        {
+          "row": 7,
+          "col": 3,
+          "selected": false
+        },
+        {
+          "row": 7,
+          "col": 4,
+          "selected": false
+        },
+        {
+          "row": 7,
+          "col": 5,
+          "selected": false
+        },
+        {
+          "row": 7,
+          "col": 6,
+          "selected": false
+        },
+        {
+          "row": 7,
+          "col": 7,
+          "selected": false
+        },
+        {
+          "row": 7,
+          "col": 8,
+          "selected": false
+        },
+        {
+          "row": 7,
+          "col": 9,
+          "selected": false
+        },
+        {
+          "row": 7,
+          "col": 10,
+          "selected": false
+        },
+        {
+          "row": 8,
+          "col": 1,
+          "selected": false
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "selected": false
+        },
+        {
+          "row": 8,
+          "col": 3,
+          "selected": false
+        },
+        {
+          "row": 8,
+          "col": 4,
+          "selected": false
+        },
+        {
+          "row": 8,
+          "col": 5,
+          "selected": false
+        },
+        {
+          "row": 8,
+          "col": 6,
+          "selected": false
+        },
+        {
+          "row": 8,
+          "col": 7,
+          "selected": false
+        },
+        {
+          "row": 8,
+          "col": 8,
+          "selected": false
+        },
+        {
+          "row": 8,
+          "col": 9,
+          "selected": false
+        },
+        {
+          "row": 8,
+          "col": 10,
+          "selected": false
+        },
+        {
+          "row": 9,
+          "col": 1,
+          "selected": false
+        },
+        {
+          "row": 9,
+          "col": 2,
+          "selected": false
+        },
+        {
+          "row": 9,
+          "col": 3,
+          "selected": false
+        },
+        {
+          "row": 9,
+          "col": 4,
+          "selected": false
+        },
+        {
+          "row": 9,
+          "col": 5,
+          "selected": false
+        },
+        {
+          "row": 9,
+          "col": 6,
+          "selected": false
+        },
+        {
+          "row": 9,
+          "col": 7,
+          "selected": false
+        },
+        {
+          "row": 9,
+          "col": 8,
+          "selected": false
+        },
+        {
+          "row": 9,
+          "col": 9,
+          "selected": false
+        },
+        {
+          "row": 9,
+          "col": 10,
+          "selected": false
+        },
+        {
+          "row": 10,
+          "col": 1,
+          "selected": false
+        },
+        {
+          "row": 10,
+          "col": 2,
+          "selected": false
+        },
+        {
+          "row": 10,
+          "col": 3,
+          "selected": false
+        },
+        {
+          "row": 10,
+          "col": 4,
+          "selected": false
+        },
+        {
+          "row": 10,
+          "col": 5,
+          "selected": false
+        },
+        {
+          "row": 10,
+          "col": 6,
+          "selected": false
+        },
+        {
+          "row": 10,
+          "col": 7,
+          "selected": false
+        },
+        {
+          "row": 10,
+          "col": 8,
+          "selected": false
+        },
+        {
+          "row": 10,
+          "col": 9,
+          "selected": false
+        },
+        {
+          "row": 10,
+          "col": 10,
+          "selected": false
+        }
+      ]
+    },
+    "contractHolder_SDP": {
+      "defaultValue": {
+        "responseType": "getTenderStrategyLovContractHolder",
+        "itemsPath": "items",
+        "fetchChain": "getTenderStrategyLovContractHolderFetch",
+        "keyAttributes": "person_id",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "full_name"
+          ]
+        }
+      },
+      "type": "vb/ServiceDataProvider"
+    },
+    "contractOwner_SDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "responseType": "getTenderStrategyLovContractOwner",
+        "itemsPath": "items",
+        "keyAttributes": "person_id",
+        "fetchChain": "getTenderStrategyLovContractOwnerFetch",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "full_name"
+          ]
+        }
+      }
+    },
+    "dummyStatus": {
+      "type": "string"
+    },
+    "dummyStatusCode": {
+      "type": "string"
+    },
+    "encPayload": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "filesADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "data": "{{ $variables.filesArray }}"
+      }
+    },
+    "filesArray": {
+      "type": "object[]"
+    },
+    "getCommonLovCurrencyListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "currency_code",
+        "itemsPath": "items",
+        "responseType": "getCommonLovCurrencyResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "currency_code"
+          ]
+        },
+        "fetchChain": "getCommonLovCurrencyFetch"
+      }
+    },
+    "getCommonLovCurrencyListSDP2": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "currency_code",
+        "itemsPath": "items",
+        "responseType": "getCommonLovCurrencyResponse2",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "currency_code"
+          ]
+        },
+        "fetchChain": "getCommonLovCurrencyFetch2"
+      }
+    },
+    "getCommonPreviousApprovalListListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "ORDS/getCommonPreviousApprovalList",
+        "keyAttributes": "person_id",
+        "itemsPath": "items",
+        "responseType": "getCommonPreviousApprovalListResponse",
+        "headers": {
+          "x-session-id": "{{ $variables.pNavId }}"
+        },
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "person_name"
+          ]
+        }
+      }
+    },
+    "getTenderStrategyClob_DtlVar": {
+      "type": "getTenderStrategyClob_Dtl"
+    },
+    "getTenderStrategyLovPrDtlListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "pr_number",
+        "itemsPath": "items",
+        "responseType": "getTenderStrategyLovPrDtlResponse",
+        "fetchChain": "getTenderStrategyLovPrDtlFetch",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "amount",
+            "pr_number",
+            "title"
+          ]
+        }
+      }
+    },
+    "getTenderStrategyReviewerReassignListListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "ORDS/getTenderStrategyReviewerReassignList",
+        "keyAttributes": "person_id",
+        "itemsPath": "items",
+        "responseType": "getTenderStrategyReviewerReassignListResponse",
+        "headers": {
+          "p_type": "{{ $variables.postPayloadTypeVar.tender_category }}"
+        },
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "person_name"
+          ]
+        }
+      }
+    },
+    "inputTable": {
+      "type": {
+        "columns": "number",
+        "rows": "number"
+      }
+    },
+    "originalClobValues": {
+      "type": "object"
+    },
+    "pNavId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "postPayloadTypeVar": {
+      "type": "postPayloadType",
+      "description": "test new method/way"
+    },
+    "tenderRfqDetailVar": {
+      "type": "getTenderStrategyTenderRfqDetail"
+    },
+    "tenderStrategyVar": {
+      "type": "getTenderStrategyDtl2"
+    },
+    "selectedMOMTab": {
+      "type": "string",
+      "defaultValue": "scope-tab"
+    },
+    "SearchObj": {
+      "type": {
+        "in_limit": "string",
+        "in_offset": "string",
+        "p_created_by": "string",
+        "p_keyword": "string",
+        "p_strategy_hdr_id": "string",
+        "p_pr_number": "string",
+        "p_tender_type": "string",
+        "p_tender_category": "string",
+        "p_status_id": "string",
+        "p_contract_owner_id": "string"
+      },
+      "defaultValue": {
+        "in_limit": "10",
+        "in_offset": "0",
+        "p_created_by": "",
+        "p_keyword": "",
+        "p_strategy_hdr_id": "",
+        "p_pr_number": "",
+        "p_tender_type": "",
+        "p_tender_category": "",
+        "p_status_id": "",
+        "p_contract_owner_id": ""
+      }
+    },
+    "tenderStrategyVar_OLD": {
+      "type": "object"
+    },
+    "aToolGeneric": {
+      "type": "object[]"
+    },
+    "toEmployeeObject": {
+      "type": {
+        "department_id": "string",
+        "department_name": "string",
+        "email_address": "string",
+        "full_name": "string",
+        "grade": "string",
+        "grade_id": "string",
+        "job": "string",
+        "job_id": "string",
+        "location_id": "string",
+        "location_name": "string",
+        "person_id": "number",
+        "person_number": "string"
+      }
+    },
+    "pageTitle": {
+      "type": "string",
+      "defaultValue": "Tender Strategy"
+    },
+    "pageTitleCode": {
+      "type": "string"
+    },
+    "requestData": {
+      "type": "object",
+      "defaultValue": {}
+    },
+    "currentActivity": {
+      "type": "string"
+    },
+    "nextActivity": {
+      "type": "string"
+    },
+    "attachmentObj": {
+      "type": {
+        "P_DOCUMENT_NAME": "string",
+        "P_DOCUMENT_CATEGORY": "string",
+        "P_DOCUMENT_TYPE": "string",
+        "P_DOCUMENT_FILE": "any",
+        "P_DESCRIPTION": "string",
+        "P_APPL_CODE": "string",
+        "P_TRANSACTION_ID": "string",
+        "P_TYPE": "string",
+        "P_TITLE": "string",
+        "P_URL": "string",
+        "P_REFERENCE_TYPE": "string",
+        "P_REFERENCE_ID": "string",
+        "P_CREATED_BY": "string"
+      },
+      "defaultValue": {
+        "P_TYPE": "FILE",
+        "P_APPL_CODE": "TENDER_STRATEGY",
+        "P_CREATED_BY": "[[ $application.user.email ]]",
+        "P_DESCRIPTION": "Tender Strategy Attachment",
+        "P_TITLE": "Tender Strategy",
+        "P_DOCUMENT_CATEGORY": "MOM_SIGN_DOCUMENT",
+        "P_TRANSACTION_ID": "[[ $variables.postPayloadTypeVar.strategy_hdr_id ]]"
+      }
+    },
+    "taskId": {
+      "type": "string",
+      "input": "fromUrl",
+      "required": true
+    },
+    "requestDetailVar": {
+      "type": "requestDetailType",
+      "defaultValue": {
+        "created_by": "[[ $application.user.email ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_by": "[[ $application.user.email ]]",
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "object_version_num": "0",
+        "request_date": "[[ $application.functions.getSysdate() ]]",
+        "status_code": "DRA",
+        "status_name": "Draft",
+        "request_id": "[[ $application.user.email ]]"
+      }
+    },
+    "formValid_Dialog_Obj": {
+      "type": {
+        "moreinfoValid": "string",
+        "reassignValid": "string",
+        "rejectValid": "string",
+        "withdrawValid": "string"
+      }
+    },
+    "responseComment": {
+      "type": "string"
+    },
+    "about": {
+      "type": "about"
+    },
+    "uploadFormValid": {
+      "type": "string"
+    },
+    "docTypeVar": {
+      "type": "string"
+    },
+    "encryptionRequestVar": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "postTenderVar_Normal": {
+      "type": {
+        "strategy_hdr_id": "number",
+        "object_version_num": "number",
+        "request_number": "string",
+        "request_date": "string",
+        "status_id": "number",
+        "person_id": "number",
+        "comments": "string",
+        "status_code": "string",
+        "status_name": "string",
+        "scm_team": "string",
+        "tender_type": "string",
+        "tender_category": "string",
+        "tender_category_des": "string",
+        "tender_committe": "string",
+        "pr_number": "string",
+        "pr_title": "string",
+        "pr_estimated_value": "string",
+        "currency": "string",
+        "contract_holder_id": "number",
+        "contract_owner_id": "number",
+        "procurement_plan": "string",
+        "created_by": "string",
+        "created_date": "string",
+        "last_updated_by": "string",
+        "last_updated_date": "string",
+        "last_updated_login": "string",
+        "variation_type": "string",
+        "mom_number": "string",
+        "mom_schedule_date": "string",
+        "mom_start_time": "string",
+        "mom_end_time": "string",
+        "mom_notify": "string"
+      },
+      "defaultValue": {
+        "created_by": "[[ $application.variables.userLogin ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_by": "[[ $application.user.fullName ]]",
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "object_version_num": 0
+      }
+    },
+    "selectedPrItem": {
+      "type": {
+        "requisition_header_id": "number",
+        "pr_number": "string",
+        "title": "string",
+        "amount": "number",
+        "currency_code": "string"
+      }
+    }
+  },
+  "metadata": {},
+  "eventListeners": {
+    "apprResponseBtnAction": {
+      "chains": [
+        {
+          "chain": "onClick_ApproverMoreInfo_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "attachmentFilePickerSelect": {
+      "chains": [
+        {
+          "chain": "FilePickerSelectChain1",
+          "parameters": {
+            "event": "{{$event}}",
+            "files": "[[ Array.prototype.slice.call($event.detail.files) ]]",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "confirmCancel_Dialog_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction4": {
+      "chains": [
+        {
+          "chain": "okAboutDialog_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "commercialEvaluationBtnAction": {
+      "chains": [
+        {
+          "chain": "onClickCommEvaluationAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "currencyValueItem": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "customReassignOkAction": {
+      "chains": [
+        {
+          "chain": "onClickApproveMOMOkAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnAction": {
+      "chains": [
+        {
+          "chain": "deleteFileAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "divClick": {
+      "chains": [
+        {
+          "chain": "divClickChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "data": "[[ $current.data ]]"
+          }
+        }
+      ]
+    },
+    "divMouseover": {
+      "chains": [
+        {
+          "chain": "divMouseoverChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "data": "[[ $current.data ]]"
+          }
+        }
+      ]
+    },
+    "intputTableBtnAction": {
+      "chains": [
+        {
+          "chain": "onInputTableBtnClick",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "moreinfoOkAction": {
+      "chains": [
+        {
+          "chain": "onClickMoreInfoOk",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "notifyBtnValue": {
+      "chains": [
+        {
+          "chain": "notifyChangeChainAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "prNumberValueItem": {
+      "chains": [
+        {
+          "chain": "onPrNumberSelection_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "rpaAppBtnAction": {
+      "chains": [
+        {
+          "chain": "onClickRpaOkBtn_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "rpaCancelAction": {
+      "chains": [
+        {
+          "chain": "cancel_Common_Dialog_AC",
+          "parameters": {
+            "dialogId": "rpaDialog"
+          }
+        }
+      ]
+    },
+    "technicalEvaluationBtnAction": {
+      "chains": [
+        {
+          "chain": "onClickTechEvaluationAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "tenderStrategyEditPageSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "cancelAC",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "tenderStrategyEditPageSpSecondaryAction": {
+      "chains": [
+        {
+          "parameters": {
+            "actionId": "{{$event.detail.secondaryItem}}",
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}"
+          },
+          "chain": "secondary_AC"
+        }
+      ]
+    },
+    "transactionLogAction": {
+      "chains": [
+        {
+          "chain": "onClickTransactionLog",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    },
+    "btnOkAction": {
+      "chains": [
+        {
+          "chain": "onClickSubmitOk",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "aboutBtnAction": {
+      "chains": [
+        {
+          "chain": "aboutBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "appBtnAction": {
+      "chains": [
+        {
+          "chain": "onClickApproveOk",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "appCancelAction": {
+      "chains": [
+        {
+          "chain": "cancel_Common_Dialog_AC",
+          "parameters": {
+            "dialogId": "apprResponseDialog"
+          }
+        }
+      ]
+    },
+    "btnCancelAction": {
+      "chains": [
+        {
+          "chain": "cancel_Common_Dialog_AC",
+          "parameters": {
+            "dialogId": "submitDialog"
+          }
+        }
+      ]
+    },
+    "moreinfoCancelAction": {
+      "chains": [
+        {
+          "chain": "cancel_Common_Dialog_AC",
+          "parameters": {
+            "dialogId": "moreinfoDialog"
+          }
+        }
+      ]
+    },
+    "reassignCancelAction": {
+      "chains": [
+        {
+          "chain": "cancel_Common_Dialog_AC",
+          "parameters": {
+            "dialogId": "ReassignDialog"
+          }
+        }
+      ]
+    },
+    "reassignOkAction": {
+      "chains": [
+        {
+          "chain": "onClickReassignOk",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "rejBtnAction": {
+      "chains": [
+        {
+          "chain": "onClickRejectOk",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "rejCancelAction": {
+      "chains": [
+        {
+          "chain": "cancel_Common_Dialog_AC",
+          "parameters": {
+            "dialogId": "rejectDialog"
+          }
+        }
+      ]
+    },
+    "withdrawcancelAction": {
+      "chains": [
+        {
+          "chain": "cancel_Common_Dialog_AC",
+          "parameters": {
+            "dialogId": "withdrawDialog"
+          }
+        }
+      ]
+    },
+    "customDialogClose": {
+      "chains": [
+        {
+          "chain": "DialogCloseChain",
+          "parameters": {
+            "event": "{{$event.detail.event}}"
+          }
+        }
+      ]
+    },
+    "withdrawOkAction": {
+      "chains": [
+        {
+          "chain": "onClickWithrawOk",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    }
+
+  },
+  "types": {
+    "@decorators.get_Nws_Dtl2": {
+      "endpoint": "post_Nws_Search",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.getCommonLovCurrencyResponse": {
+      "endpoint": "getCommonLovCurrency",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.getCommonLovCurrencyResponse2": {
+      "endpoint": "getCommonLovCurrency",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.getCommonPreviousApprovalListResponse": {
+      "endpoint": "getCommonPreviousApprovalList",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.getTenderStrategyClob_Dtl": {
+      "endpoint": "getTenderStrategyChildDtl",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.getTenderStrategyDtl2": {
+      "endpoint": "getTenderStrategyDtl2",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.getTenderStrategyLovContractHolder": {
+      "endpoint": "getTenderStrategyLovContractHolder",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.getTenderStrategyLovContractOwner": {
+      "endpoint": "getTenderStrategyLovContractOwner",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.getTenderStrategyLovPrDtlResponse": {
+      "endpoint": "getTenderStrategyLovPrDtl",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.getTenderStrategyReviewerReassignListResponse": {
+      "endpoint": "getTenderStrategyReviewerReassignList",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.getTenderStrategyTenderRfqDetail": {
+      "endpoint": "getTenderStrategyTenderRfqDetail",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "get_Nws_Dtl2": {
+      "comments": "string",
+      "contract_holder_id": "number",
+      "contract_owner_id": "number",
+      "created_by": "string",
+      "created_date": "string",
+      "currency": "string",
+      "department_name": "string",
+      "directorate": "string",
+      "full_name": "string",
+      "gender": "string",
+      "grade_name": "string",
+      "holder_full_name": "string",
+      "job_name": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "location_name": "string",
+      "object_version_num": "number",
+      "owner_full_name": "string",
+      "person_id": "number",
+      "person_number": "string",
+      "position_name": "string",
+      "pr_estimated_value": "number",
+      "pr_number": "string",
+      "pr_title": "string",
+      "procurement_plan": "string",
+      "request_date": "string",
+      "request_number": "string",
+      "scm_team": "string",
+      "senior_directorate": "string",
+      "status_code": "string",
+      "status_id": "number",
+      "status_name": "string",
+      "strategy_hdr_id": "number",
+      "tender_category": "string",
+      "tender_category_des": "string",
+      "tender_committe": "string",
+      "tender_type": "string"
+    },
+    "getCommonLovCurrencyResponse": {
+      "items": [
+        {
+          "currency_code": "string",
+          "currency_name": "string",
+          "currency_precision": "number",
+          "currency_symbol": "string",
+          "description": "string",
+          "enabled_flag": "string",
+          "issuing_territory_code": "string"
+        }
+      ]
+    },
+    "getCommonLovCurrencyResponse2": {
+      "items": [
+        {
+          "currency_code": "string",
+          "currency_name": "string",
+          "currency_precision": "number",
+          "currency_symbol": "string",
+          "description": "string",
+          "enabled_flag": "string",
+          "issuing_territory_code": "string"
+        }
+      ]
+    },
+    "getCommonPreviousApprovalListResponse": {
+      "items": [
+        {
+          "approver_level": "number",
+          "person_emailid": "string",
+          "person_id": "number",
+          "person_name": "string",
+          "person_number": "string"
+        }
+      ]
+    },
+    "getTenderStrategyClob_Dtl": {
+      "strategy_hdr_id": "number",
+      "tender_background": "string",
+      "tender_commercial_criteria": "string",
+      "tender_cost_estimate": "string",
+      "tender_division_info": "any",
+      "tender_icv_minimum_info": "string",
+      "tender_objective": "string",
+      "tender_scope_work": "string",
+      "tender_technical_criteria": "string"
+    },
+    "getTenderStrategyDtl2": {
+      "comments": "string",
+      "contract_holder_id": "any",
+      "contract_owner_id": "any",
+      "created_by": "string",
+      "created_date": "string",
+      "currency": "string",
+      "department_name": "string",
+      "directorate": "string",
+      "full_name": "string",
+      "gender": "string",
+      "grade_name": "string",
+      "holder_full_name": "string",
+      "job_name": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "location_name": "string",
+      "object_version_num": "number",
+      "owner_full_name": "string",
+      "person_id": "number",
+      "person_number": "string",
+      "position_name": "string",
+      "pr_estimated_value": "number",
+      "pr_number": "string",
+      "pr_title": "string",
+      "procurement_plan": "string",
+      "request_date": "string",
+      "request_number": "string",
+      "scm_team": "string",
+      "senior_directorate": "string",
+      "status_code": "string",
+      "status_id": "number",
+      "status_name": "string",
+      "strategy_hdr_id": "number",
+      "tender_category": "string",
+      "tender_category_des": "string",
+      "tender_committe": "string",
+      "tender_type": "string"
+    },
+    "getTenderStrategyLovContractHolder": {
+      "items": [
+        {
+          "display_name": "string",
+          "email_address": "string",
+          "full_name": "string",
+          "person_id": "number",
+          "person_number": "string",
+          "contract_holder_id": "number"
+        }
+      ]
+    },
+    "getTenderStrategyLovContractOwner": {
+      "items": [
+        {
+          "display_name": "string",
+          "email_address": "string",
+          "full_name": "string",
+          "person_id": "number",
+          "person_number": "string"
+        }
+      ]
+    },
+    "getTenderStrategyLovPrDtlResponse": {
+      "items": [
+        {
+          "amount": "number",
+          "currency_code": "string",
+          "pr_number": "string",
+          "requisition_header_id": "number",
+          "title": "string"
+        }
+      ]
+    },
+    "getTenderStrategyReviewerReassignListResponse": {
+      "items": [
+        {
+          "email_id": "string",
+          "person_id": "number",
+          "person_name": "string",
+          "person_number": "string"
+        }
+      ]
+    },
+    "getTenderStrategyTenderRfqDetail": {
+      "auction_display_number": "string",
+      "auction_header_id": "number",
+      "auction_title": "string",
+      "award_value": "number",
+      "bid_submission_closing_date": "any",
+      "commercial_closing_date": "string",
+      "commercial_opening_date": "any",
+      "contract_end_date": "string",
+      "contract_start_date": "string",
+      "count_of_floated_to_award_days": "number",
+      "floated_date": "string",
+      "loa_issued_date": "string",
+      "no_of_bidders_purchase": "number",
+      "number_of_bidders_submitted": "number",
+      "pr_header_id": "number",
+      "req_bu_id": "number",
+      "request_date": "any",
+      "technical_closing_date": "string",
+      "technical_opening_date": "string",
+      "technically_qualified": "string",
+      "tender_description": "string",
+      "tender_rfq_creation_date": "string",
+      "tender_rfq_number": "string",
+      "tender_rfq_status": "string"
+    },
+    "postPayloadType": {
+      "strategy_hdr_id": "number",
+      "object_version_num": "number",
+      "request_number": "string",
+      "request_date": "string",
+      "status_id": "number",
+      "status_code": "string",
+      "status_name": "string",
+      "person_id": "number",
+      "person_number": "string",
+      "full_name": "string",
+      "gender": "string",
+      "department_name": "string",
+      "grade_name": "string",
+      "job_name": "string",
+      "position_name": "string",
+      "location_name": "string",
+      "directorate": "string",
+      "division": "any",
+      "senior_directorate": "any",
+      "comments": "string",
+      "scm_team": "string",
+      "tender_type": "string",
+      "tender_category": "string",
+      "tender_category_des": "string",
+      "tender_committe": "string",
+      "pr_number": "string",
+      "pr_title": "string",
+      "pr_estimated_value": "number",
+      "currency": "string",
+      "contract_holder_id": "number",
+      "holder_full_name": "string",
+      "contract_owner_id": "number",
+      "owner_full_name": "string",
+      "procurement_plan": "string",
+      "variation_type": "any",
+      "tender_rfq_number": "any",
+      "mom_number": "any",
+      "mom_schedule_date": "any",
+      "mom_start_time": "any",
+      "mom_end_time": "any",
+      "mom_notify": "any",
+      "po_number": "any",
+      "tender_objective": "string",
+      "tender_background": "string",
+      "tender_scope_work": "string",
+      "tender_cost_estimate": "string",
+      "tender_technical_criteria": "string",
+      "tender_commercial_criteria": "string",
+      "tender_icv_minimum_info": "string",
+      "tender_division_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "requestDetailType": {
+      "created_by": "string",
+      "created_date": "string",
+      "description": "string",
+      "duty_resumption_info": "object",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "object_version_num": "string",
+      "person_id": "number",
+      "request_date": "string",
+      "request_id": "string",
+      "request_number": "string",
+      "request_type": "string",
+      "request_type_id": "number",
+      "requester_email_id": "string",
+      "requester_id": "number",
+      "status_code": "string",
+      "status_id": "number",
+      "status_name": "string"
+    },
+    "about": {
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    }
+  },
+  "constants": {
+    "apprProcess": {
+      "type": "string",
+      "defaultValue": "TENDER_STRATEGY"
+    },
+    "toolRPA": {
+      "defaultValue": [
+        {
+          "label": "Approver Response",
+          "id": "apprResponseMoreInfo",
+          "icon": "oj-ux-ico-app-info"
+        },
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+        {
+          "label": "Attachment",
+          "id": "attachment",
+          "icon": "oj-ux-ico-attachment"
+        },
+        {
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ],
+      "type": "object[]",
+      "uniqueItems": true
+    },
+    "stored_Appl_Code": {
+      "type": "string",
+      "defaultValue": "uzsWHqGp7LQh4C7_br-eLaJkpeB7V2XGI0vrPMAPTYs."
+    },
+    "toolPending": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Approve",
+          "id": "approve",
+          "icon": "oj-ux-ico-check-circle"
+        },
+        {
+          "label": "Reject",
+          "id": "reject",
+          "icon": "oj-ux-ico-close-circle"
+        },
+        {
+          "label": "Approver More Info",
+          "id": "apprMoreInfo",
+          "icon": "oj-ux-ico-app-info"
+        },
+        {
+          "id": "reassign",
+          "label": "Reassign",
+          "icon": "oj-ux-ico-assign-to-me"
+        },
+        {
+          "id": "requireMoreInfo",
+          "label": "Require More Information",
+          "icon": "oj-ux-ico-request-information"
+        },
+        {
+          "label": "Attachment",
+          "id": "attachment",
+          "icon": "oj-ux-ico-attachment"
+        },
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+        {
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ]
+    },
+    "toolDraft": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Save",
+          "id": "save",
+          "icon": "oj-ux-ico-save"
+        },
+        {
+          "label": "Submit",
+          "id": "submit",
+          "icon": "oj-ux-ico-success"
+        },
+        {
+          "label": "Save & Close",
+          "id": "saveClose",
+          "icon": "oj-ux-ico-save-and-close"
+        },
+        {
+          "label": "Attachment",
+          "id": "attachment",
+          "icon": "oj-ux-ico-attachment"
+        },
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+        {
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ],
+      "uniqueItems": true
+    },
+    "toolError": {
+      "defaultValue": [
+        {
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        },
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        }
+      ],
+      "uniqueItems": true,
+      "type": "object[]"
+    },
+    "toolFinal": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+        {
+          "label": "Attachment",
+          "id": "attachment",
+          "icon": "oj-ux-ico-attachment"
+        },
+        {
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ],
+      "uniqueItems": true,
+      "description": "{\n        \"label\": \"Export\",\n        \"id\": \"export\",\n        \"icon\": \"oj-ux-ico-acl-export\"\n    },"
+    },
+    "toolWithDraw": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "id": "withdraw",
+          "label": "Withdraw",
+          "icon": "oj-ux-ico-withdraw-request"
+        },
+        {
+          "label": "Attachment",
+          "id": "attachment",
+          "icon": "oj-ux-ico-attachment"
+        },
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+        {
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ],
+      "uniqueItems": true,
+      "description": "{\n        \"label\": \"Export\",\n        \"id\": \"export\",\n        \"icon\": \"oj-ux-ico-acl-export\"\n    },"
+    }
+  }
+}

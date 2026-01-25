@@ -1,0 +1,20 @@
+{
+  "id": "lookup",
+  "description": "Flow main",
+  "defaultPage": "lookup-start",
+  "services": {},
+  "types": {},
+  "variables": {},
+  "constants": {
+    "accessObj": {
+      "type": {
+        "allowDelete": "boolean",
+        "allowEdit": "boolean"
+      },
+      "defaultValue": {
+        "allowEdit": true,
+        "allowDelete": true
+      }
+    }
+  }
+}

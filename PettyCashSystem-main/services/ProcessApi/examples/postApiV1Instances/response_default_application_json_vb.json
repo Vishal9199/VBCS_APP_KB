@@ -1,0 +1,51 @@
+{
+    "links": [
+        {
+            "href": "https://opa-oic-owwscoicuat-1695548400376-frg175ushz37-fra.process.oci.oraclecloud.com/instances",
+            "rel": "self"
+        },
+        {
+            "href": "https://opa-oic-owwscoicuat-1695548400376-frg175ushz37-fra.process.oci.oraclecloud.com",
+            "rel": "parent"
+        },
+        {
+            "href": "https://opa-oic-owwscoicuat-1695548400376-frg175ushz37-fra.process.oci.oraclecloud.com/instances/variables",
+            "rel": "variables"
+        },
+        {
+            "href": "https://opa-oic-owwscoicuat-1695548400376-frg175ushz37-fra.process.oci.oraclecloud.com/instances/folders",
+            "rel": "folders"
+        },
+        {
+            "href": "https://opa-oic-owwscoicuat-1695548400376-frg175ushz37-fra.process.oci.oraclecloud.com/instances/history",
+            "rel": "history"
+        },
+        {
+            "href": "https://opa-oic-owwscoicuat-1695548400376-frg175ushz37-fra.process.oci.oraclecloud.com/instances/comments",
+            "rel": "comments"
+        },
+        {
+            "href": "https://opa-oic-owwscoicuat-1695548400376-frg175ushz37-fra.process.oci.oraclecloud.com/instances/documents",
+            "rel": "documents"
+        },
+        {
+            "href": "https://opa-oic-owwscoicuat-1695548400376-frg175ushz37-fra.process.oci.oraclecloud.com/instances/jobs",
+            "rel": "jobs"
+        },
+        {
+            "href": "https://opa-oic-owwscoicuat-1695548400376-frg175ushz37-fra.process.oci.oraclecloud.com/instances/incidents",
+            "rel": "incidents"
+        }
+    ],
+    "id": "a2c51897-5f8c-11ee-9420-d2e3e7b590c1",
+    "processDefinitionId": "d25aedef-5f79-11ee-9420-d2e3e7b590c1",
+    "title": "SelfServiceProcess",
+    "state": "ACTIVE",
+    "description": "SelfServiceProcess",
+    "createdBy": {
+        "id": "e59bc93f338f4d589da8eb113e299c98",
+        "name": "fusiondev"
+    },
+    "applicationName": "SelfService",
+    "applicationVersion": "1.1"
+}

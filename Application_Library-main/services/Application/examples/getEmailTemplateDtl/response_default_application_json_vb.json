@@ -1,0 +1,38 @@
+{
+    "items": [
+        {
+            "template_id": 1044,
+            "template_code": "DEP_ONBOARD_MAIL",
+            "template_name": "Employee Onboarding Notification",
+            "header_view_name": "HR_EMP_ONBOARD_V",
+            "header_primary_key": "EMP_ID",
+            "approve_url_template": "https://myapp.com/approve?emp_id={EMP_ID}",
+            "reject_url_template": "https://myapp.com/reject?emp_id={EMP_ID}",
+            "report_url_template": "https://myapp.com/report?emp_id={EMP_ID}",
+            "is_active": "Y",
+            "created_by": "SYSTEM",
+            "created_date": "2025-12-09T08:14:46.673077Z",
+            "last_updated_by": "ADMIN",
+            "last_updated_date": "2025-12-09T08:14:46.673077Z",
+            "last_updated_login": "192.168.1.10"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/email/template/dtl"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/metadata-catalog/email/template/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/email/template/dtl"
+        }
+    ]
+}

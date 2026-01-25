@@ -1,0 +1,925 @@
+{
+  "metadata": {},
+  "title": "Program Management",
+  "description": "Comprehensive Program Management Add/Edit page with Program form and Parameter Configuration table management with popup editing functionality.",
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-label": {
+        "path": "ojs/ojlabel"
+      },
+      "oj-option": {
+        "path": "ojs/ojoption"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "oj-sp/simple-create-edit/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      },
+      "oj-switch": {
+        "path": "ojs/ojswitch"
+      },
+      "oj-file-picker": {
+        "path": "ojs/ojfilepicker"
+      },
+      "oj-paging-control": {
+        "path": "ojs/ojpagingcontrol"
+      }
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/addEditHeader.css"
+    ]
+  },
+  "types": {
+    "@decorators.getApplicationLovActiveApplicationResponse": {
+      "endpoint": "getApplicationLovActiveApplication",
+      "service": "Application",
+      "path": "response"
+    },
+    "@decorators.getApplicationLovResponse": {
+      "endpoint": "getApplicationLov",
+      "service": "Application",
+      "path": "response"
+    },
+    "@decorators.getProgramLovcodeListResponse": {
+      "endpoint": "getProgramLovcodeList",
+      "service": "Program",
+      "path": "response"
+    },
+    "@decorators.getProgramParentLovResponse2": {
+      "endpoint": "getProgramParentLov",
+      "service": "Program",
+      "path": "response"
+    },
+    "@decorators.getReportLovResponse": {
+      "endpoint": "getReportLov",
+      "service": "Report",
+      "path": "response"
+    },
+    "@decorators.getProgramParentLovResponse": {
+      "endpoint": "getProgramParentLov",
+      "service": "Program",
+      "path": "response"
+    },
+    "getApplicationLovActiveApplicationResponse": {
+      "items": [
+        {
+          "application_code": "string",
+          "application_id": "number",
+          "application_name": "string"
+        }
+      ]
+    },
+    "getProgramLovcodeListResponse": {
+      "items": [
+        {
+          "lov_code": "string",
+          "lov_config_id": "number",
+          "lov_name": "string"
+        }
+      ]
+    },
+    "getProgramParentLovResponse2": {
+      "items": [
+        {
+          "param_code": "string",
+          "param_data_type": "string",
+          "param_name": "string",
+          "parameter_id": "number"
+        }
+      ]
+    },
+    "Program": {
+      "program_id": "number",
+      "object_version_num": "number",
+      "program_code": "string",
+      "program_name": "string",
+      "remarks": "string",
+      "application_id": "number",
+      "program_type": "string",
+      "rtf_path": "string",
+      "rtf_name": "string",
+      "db_function_name": "string",
+      "output_type": "string",
+      "column_per_row": "number",
+      "active_flag": "string",
+      "active_status": "string",
+      "attribute_json": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "created_date_display": "string",
+      "last_updated_date_display": "string",
+      "search_text": "string",
+      "application_code": "string",
+      "application_name": "string"
+    },
+    "Parameter": {
+      "parameter_id": "number",
+      "object_version_num": "number",
+      "program_id": "number",
+      "program_code": "string",
+      "program_name": "string",
+      "program_type": "string",
+      "param_seq_num": "number",
+      "param_code": "string",
+      "param_name": "string",
+      "param_label": "string",
+      "param_data_type": "string",
+      "field_type": "string",
+      "lov_code": "string",
+      "default_value": "string",
+      "placeholder_text": "string",
+      "min_length": "number",
+      "max_length": "number",
+      "min_value": "number",
+      "max_value": "number",
+      "validation_rule": "string",
+      "validation_message": "string",
+      "parent_parameter_code": "string",
+      "dependent_field_code": "string",
+      "required_flag": "string",
+      "required_status": "string",
+      "read_only_flag": "string",
+      "read_only_status": "string",
+      "disable_flag": "string",
+      "disable_status": "string",
+      "visible_flag": "string",
+      "visible_status": "string",
+      "active_flag": "string",
+      "active_status": "string",
+      "help_text": "string",
+      "remarks": "string",
+      "attribute_json": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "created_date_display": "string",
+      "last_updated_date_display": "string",
+      "search_text": "string"
+    },
+    "getApplicationLovResponse": {
+      "items": [
+        {
+          "application_id": "number",
+          "application_code": "string",
+          "application_name": "string"
+        }
+      ]
+    },
+    "getReportLovResponse": {
+      "items": [
+        {
+          "lov_code": "string",
+          "lov_name": "string"
+        }
+      ]
+    },
+    "getProgramParentLovResponse": {
+      "items": [
+        {
+          "param_code": "string",
+          "param_name": "string"
+        }
+      ]
+    }
+
+  },
+  "variables": {
+    "encryptedBody": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "fieldTypeArray": {
+      "type": "object[]"
+    },
+    "getApplicationLovActiveApplicationListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "application_id",
+        "itemsPath": "items",
+        "responseType": "getApplicationLovActiveApplicationResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "application_name"
+          ]
+        },
+        "fetchChain": "getApplicationLovActiveApplicationFetch"
+      }
+    },
+    "getProgramLovcodeListListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "lov_code",
+        "itemsPath": "items",
+        "responseType": "getProgramLovcodeListResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lov_name"
+          ]
+        },
+        "fetchChain": "getProgramLovcodeListFetch"
+      }
+    },
+    "getProgramParentLovListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "Program/getProgramParentLov",
+        "keyAttributes": "param_code",
+        "itemsPath": "items",
+        "responseType": "getProgramParentLovResponse2",
+        "uriParameters": {
+          "p_program_id": "{{ $variables.programVar.program_id }}"
+        },
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "param_name"
+          ]
+        }
+      }
+    },
+    "programCodeCustomMsg": {
+      "type": "object[]"
+    },
+    "paramCodeCustomMsg": {
+      "type": "object[]"
+    },
+    "searchObj": {
+      "type": {
+        "in_limit": "number",
+        "in_offset": "number",
+        "p_keyword": "string",
+        "p_program_id": "string",
+        "p_program_type": "string",
+        "p_active_flag": "string"
+      },
+      "defaultValue": {
+        "in_limit": 10,
+        "in_offset": 0,
+        "p_keyword": "",
+        "p_program_id": "",
+        "p_program_type": "",
+        "p_active_flag": "Y"
+      }
+    },
+    "searchParameterObj": {
+      "type": {
+        "in_limit": "number",
+        "in_offset": "number",
+        "p_keyword": "string",
+        "p_program_id": "string",
+        "p_parameter_id": "string",
+        "p_active_flag": "string"
+      },
+      "defaultValue": {
+        "in_limit": 4,
+        "in_offset": 0,
+        "p_keyword": "",
+        "p_program_id": "",
+        "p_parameter_id": "",
+        "p_active_flag": ""
+      }
+    },
+    "pagination": {
+      "type": {
+        "next": "boolean",
+        "prev": "boolean"
+      },
+      "defaultValue": {
+        "next": false,
+        "prev": false
+      }
+    },
+    "key": {
+      "type": "string",
+      "input": "fromUrl"
+    },
+    "programVar": {
+      "type": "Program",
+      "defaultValue": {
+        "active_flag": "Y",
+        "object_version_num": 0
+      },
+      "input": "none",
+      "required": false,
+      "dirtyDataBehavior": "track"
+    },
+    "ADPprogramParameters": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "Parameter",
+        "keyAttributes": "parameter_id"
+      }
+    },
+    "parameterVar": {
+      "type": "Parameter",
+      "defaultValue": {
+        "active_flag": "Y",
+        "required_flag": "N",
+        "read_only_flag": "N",
+        "disable_flag": "N",
+        "visible_flag": "Y",
+        "object_version_num": 0,
+        "parameter_id": 0,
+        "param_seq_num": 1,
+        "remarks": " ",
+        "attribute_json": "{\"key\": \"value\"}"
+      }
+    },
+    "canEdit": {
+      "type": "boolean",
+      "defaultValue": "[[ $variables.method === \"POST\" ]]"
+    },
+    "method": {
+      "type": "string",
+      "defaultValue": "POST",
+      "input": "fromUrl"
+    },
+    "linecount": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "navi": {
+      "type": "string",
+      "defaultValue": "No"
+    },
+    "validationGroupVars": {
+      "type": {
+        "childTableFormId": "string",
+        "headerFormId": "string",
+        "isChildTableFormValid": "string",
+        "isHeaderFormValid": "string"
+      },
+      "defaultValue": {
+        "headerFormId": "program-validation",
+        "childTableFormId": "parameter-validation"
+      }
+    },
+    "programTypeLOV": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "data": [
+          {
+            "program_type": "Report"
+          },
+          {
+            "program_type": "Integration"
+          },
+          {
+            "program_type": "Page"
+          }
+        ],
+        "keyAttributes": "program_type"
+      }
+    },
+    "outputTypeLOV": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "data": [
+          {
+            "output_type": "PDF"
+          },
+          {
+            "output_type": "EXCEL"
+          },
+          {
+            "output_type": "CSV"
+          },
+          {
+            "output_type": "XML"
+          },
+          {
+            "output_type": "JSON"
+          }
+        ],
+        "keyAttributes": "output_type"
+      }
+    },
+    "paramDataTypeADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "data": [
+          {
+            "label": "VARCHAR2",
+            "value": "VARCHAR2"
+          },
+          {
+            "label": "DATE",
+            "value": "DATE"
+          },
+          {
+            "label": "NUMBER",
+            "value": "NUMBER"
+          }
+        ],
+        "keyAttributes": "value"
+      }
+    },
+    "fieldTypeADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "data": "{{ $variables.fieldTypeArray }}",
+        "keyAttributes": "value",
+        "textFilterAttributes": [
+          "label"
+        ]
+      }
+    },
+    "isParameterFormValid": {
+      "type": "string"
+    }
+
+  },
+  "constants": {
+    "parameterColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "width": 75,
+          "template": "parameter_actions_template",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Param Code",
+          "field": "param_code",
+          "resizable": "enabled",
+          "width": 131,
+          "template": "param_code_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Param Name",
+          "field": "param_name",
+          "resizable": "enabled",
+          "width": 143,
+          "template": "param_name_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Param Label",
+          "field": "param_label",
+          "resizable": "enabled",
+          "width": 143,
+          "template": "param_label_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Order No",
+          "field": "param_seq_num",
+          "resizable": "enabled",
+          "width": 131,
+          "template": "param_seq_num_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Data Type",
+          "field": "param_data_type",
+          "resizable": "enabled",
+          "width": 131,
+          "template": "param_data_type_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Field Type",
+          "field": "field_type",
+          "resizable": "enabled",
+          "width": 143,
+          "template": "field_type_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Default Value",
+          "field": "default_value",
+          "resizable": "enabled",
+          "width": 143,
+          "template": "default_value_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Placeholder Text",
+          "field": "placeholder_text",
+          "resizable": "enabled",
+          "width": 163,
+          "template": "placeholder_text_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Active",
+          "field": "active_flag",
+          "resizable": "enabled",
+          "width": 90,
+          "template": "active_flag_template",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Required",
+          "field": "required_flag",
+          "resizable": "enabled",
+          "width": 90,
+          "template": "required_flag_template",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Read Only",
+          "field": "read_only_flag",
+          "resizable": "enabled",
+          "width": 95,
+          "template": "read_only_flag_template",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Disabled",
+          "field": "disable_flag",
+          "resizable": "enabled",
+          "width": 90,
+          "template": "disable_flag_template",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Visible",
+          "field": "visible_flag",
+          "resizable": "enabled",
+          "width": 90,
+          "template": "visible_flag_template",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Description",
+          "field": "remarks",
+          "resizable": "enabled",
+          "width": 150,
+          "template": "remarks_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }
+      ]
+    }
+  },
+  "eventListeners": {
+    "activeFlagSwitchValue": {
+      "chains": [
+        {
+          "chain": "programStatusAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "addBtnAction": {
+      "chains": [
+        {
+          "chain": "addChildAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteParameterNoAction": {
+      "chains": [
+        {
+          "chain": "cancelDeleteAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteParameterYesAction": {
+      "chains": [
+        {
+          "chain": "okDeleteAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "dialogActiveFlagValue": {
+      "chains": [
+        {
+          "chain": "activeFlagAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "dialogDisableFlagValue": {
+      "chains": [
+        {
+          "chain": "disableFlagAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "dialogParamDataTypeValueItem": {
+      "chains": [
+        {
+          "chain": "dateTypeAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "dialogParamLabelValue": {
+      "chains": [
+        {
+          "chain": "paramLabelAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "dialogReadOnlyFlagValue": {
+      "chains": [
+        {
+          "chain": "readOnlyFlagAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "dialogRequiredFlagValue": {
+      "chains": [
+        {
+          "chain": "requiredFlagAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "dialogVisibleFlagValue": {
+      "chains": [
+        {
+          "chain": "visibleFlagAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "iconClick": {
+      "chains": [
+        {
+          "chain": "deleteChildAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "iconClick2": {
+      "chains": [
+        {
+          "chain": "editChildAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "nextParameterBtnAction": {
+      "chains": [
+        {
+          "chain": "nextBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "parameterCancelAction": {
+      "chains": [
+        {
+          "chain": "cancel_ChildListAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "parameterConfigDialogClose": {
+      "chains": [
+        {
+          "chain": "cancel_ChildListAC",
+          "parameters": {
+            "event": "{{$event.detail.event}}"
+          }
+        }
+      ]
+    },
+    "parameterSaveAddAnotherAction": {
+      "chains": [
+        {
+          "chain": "save_AddAnotherChildListAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "parameterSaveCloseAction": {
+      "chains": [
+        {
+          "chain": "save_CloseChildListAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "prevParameterBtnAction": {
+      "chains": [
+        {
+          "chain": "prevBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "programCodeValue": {
+      "chains": [
+        {
+          "chain": "headerCodeAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "programManagementPageSpCancel": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpCancelChain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "programManagementPageSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpPrimaryActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "feedbackEnabled": "{{$event.detail.feedbackEnabled}}"
+          }
+        }
+      ]
+    },
+    "programManagementPageSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpSecondaryActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "gg"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "chain": "vbEnterListener",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    }
+
+  }
+}

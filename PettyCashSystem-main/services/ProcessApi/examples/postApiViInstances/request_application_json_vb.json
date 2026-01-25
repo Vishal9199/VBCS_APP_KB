@@ -1,0 +1,16 @@
+{
+	"params": {
+           "applicationName": "PettyCash",
+           "processName": "PettyCashProcess",
+           "applicationVersion": "1.0"
+	},
+	"dataObject": {
+		"startWebFormArgs": {
+			"callSubmitPackage": "YES",
+			"p_APPR_PROCESS": "PETTY_CASH_REQUEST",
+			"p_TRX_ID": "437",
+			"p_ACTION_ID": "",
+			"p_USER_ID": "300000006028057"
+		}
+	}
+}

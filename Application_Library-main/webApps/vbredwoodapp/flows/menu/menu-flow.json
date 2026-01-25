@@ -1,0 +1,22 @@
+{
+  "id": "menu",
+  "description": "Flow main",
+  "defaultPage": "menu-start",
+  "services": {},
+  "types": {},
+  "variables": {
+     
+  },
+  "constants": {
+     "accessObj": {
+      "type": {
+        "allowDelete": "boolean",
+        "allowEdit": "boolean"
+      },
+      "defaultValue": {
+        "allowEdit": true,
+        "allowDelete": true
+      }
+    }
+  }
+}

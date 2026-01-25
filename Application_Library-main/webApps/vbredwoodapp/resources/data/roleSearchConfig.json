@@ -1,0 +1,37 @@
+{
+  "description": "Smart Search Configuration for Role Management Application",
+  "filters": {
+   
+    "RoleNameFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter", 
+      "label": "Role Name",
+      "options": {
+        "field": "role_code",
+        "optionsData": "[[ $search.filters.RoleNameFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.RoleNameFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+    "MenuNameFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Menu Name", 
+      "options": {
+        "field": "menu_id",
+        "optionsData": "[[ $search.filters.MenuNameFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.MenuNameFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+    "ApplicationNameFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Application Name",
+      "options": {
+        "field": "application_id", 
+        "optionsData": "[[ $search.filters.ApplicationNameFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.ApplicationNameFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    }
+    
+  }
+}

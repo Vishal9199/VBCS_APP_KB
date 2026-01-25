@@ -1,0 +1,31 @@
+{
+    "items": [
+        {
+            "lookup_value_id": 151,
+            "lookup_type_id": 104,
+            "lookup_type_code": "DATA_RESTRICTION",
+            "lookup_type_name": "Data Restriction",
+            "lookup_value_code": "WW_PC_AL_ANSAB",
+            "lookup_value_name": "Waste Water Petty Cash Al Ansab",
+            "remarks": null
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/restriction/lov/data/restrict?searchVal=ansab"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/metadata-catalog/restriction/lov/data/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/restriction/lov/data/restrict?searchVal=ansab"
+        }
+    ]
+}

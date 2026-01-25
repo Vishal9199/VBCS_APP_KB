@@ -1,0 +1,563 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "OPA CUSTOM",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "vb-catalog://backends/OPA_CUSTOM",
+            "description": "OPA CUSTOM"
+        }
+    ],
+    "paths": {
+        "/process/api/v1/instances/{p_instance_id}": {
+            "parameters": [
+                {
+                    "name": "p_instance_id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "put": {
+                "operationId": "postProcessApiV1InstancesP_instance_id",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PutProcessApiV1InstancesP_instance_idRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/putProcessApiV1InstancesP_instance_id/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PutProcessApiV1InstancesP_instance_idResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/putProcessApiV1InstancesP_instance_id/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                },
+                "summary": "putProcessApiV1InstancesP_instance_id"
+            }
+        },
+        "/process/api/v1/instances/{instance_number}": {
+            "parameters": [
+                {
+                    "name": "instance_number",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "put": {
+                "operationId": "putProcessSuspend",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PutProcessApiV1InstancesInstance_numberRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/putProcessApiV1InstancesInstance_number2/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PutProcessApiV1InstancesInstance_numberResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/putProcessApiV1InstancesInstance_number2/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/process/api/v1/instances/{p_instance_number}/activities": {
+            "parameters": [
+                {
+                    "name": "p_instance_number",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "get": {
+                "operationId": "getCurrentActivity",
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetProcessApiV1InstancesP_instance_numberActivities"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/getProcessApiV1InstancesP_instance_numberActivities/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/process/api/v1/instances/{p_instance_number}": {
+            "parameters": [
+                {
+                    "name": "p_instance_number",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "put": {
+                "operationId": "postProcessApiV1InstancesP_instance_number",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PutProcessApiV1InstancesP_instance_numberRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/putProcessApiV1InstancesP_instance_number/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {},
+                "x-vb": {
+                    "actionHint": "getMany"
+                },
+                "summary": "putProcessApiV1InstancesP_instance_number"
+            }
+        },
+        "/process/api/v1/tasks/{taskId}/complete": {
+            "parameters": [
+                {
+                    "name": "taskId",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "post": {
+                "operationId": "Approve_Reject",
+                "responses": {},
+                "x-vb": {
+                    "actionHint": "getMany"
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostProcessApiV1TasksTaskIdCompleteRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postProcessApiV1TasksTaskIdComplete/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/process/api/v1/instances": {
+            "post": {
+                "operationId": "submitForApproval",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostProcessApiV1InstancesRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postProcessApiV1Instances/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostProcessApiV1InstancesResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/postProcessApiV1Instances/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/process/api/v1/instances/{p_instance_number}/target-activities": {
+            "parameters": [
+                {
+                    "name": "p_instance_number",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "get": {
+                "operationId": "getTargetActivities",
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetProcessApiV1InstancesP_instance_numberTarget-activities"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/getProcessApiV1InstancesP_instance_numberTargetActivities/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany",
+                    "queryParameters": {
+                        "fetchCompleted": "true"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PutProcessApiV1InstancesP_instance_idRequest": {
+                "type": "object",
+                "properties": {
+                    "action": {
+                        "type": "string"
+                    },
+                    "instanceActionProps": {
+                        "type": "object",
+                        "properties": {
+                            "reason": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "PutProcessApiV1InstancesP_instance_idResponse": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PutProcessApiV1InstancesInstance_numberRequest": {
+                "type": "object",
+                "properties": {
+                    "action": {
+                        "type": "string"
+                    },
+                    "instanceActionProps": {
+                        "type": "object",
+                        "properties": {
+                            "reason": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "PutProcessApiV1InstancesInstance_numberResponse": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                }
+            },
+            "GetProcessApiV1InstancesP_instance_numberActivities": {
+                "type": "object",
+                "properties": {
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "href": {
+                                    "type": "string"
+                                },
+                                "rel": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "activities": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "activityId": {
+                                    "type": "string"
+                                },
+                                "activityName": {
+                                    "type": "string"
+                                },
+                                "activityType": {
+                                    "type": "string"
+                                },
+                                "activityInstanceId": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetProcessApiV1InstancesP_instance_numberTarget-activities": {
+                "type": "object",
+                "properties": {
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "href": {
+                                    "type": "string"
+                                },
+                                "rel": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "activities": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "activityId": {
+                                    "type": "string"
+                                },
+                                "activityName": {
+                                    "type": "string"
+                                },
+                                "activityType": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PutProcessApiV1InstancesP_instance_numberRequest": {
+                "type": "object",
+                "properties": {
+                    "action": {
+                        "type": "string"
+                    },
+                    "instanceActionProps": {
+                        "type": "object",
+                        "properties": {
+                            "sourceActivityId": {
+                                "type": "string"
+                            },
+                            "destinationActivityId": {
+                                "type": "string"
+                            },
+                            "reason": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "PostProcessApiV1InstancesRequest": {
+                "type": "object",
+                "properties": {
+                    "params": {
+                        "type": "object",
+                        "properties": {
+                            "applicationName": {
+                                "type": "string"
+                            },
+                            "processName": {
+                                "type": "string"
+                            },
+                            "applicationVersion": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "dataObject": {
+                        "type": "object",
+                        "properties": {
+                            "startFormArgs": {
+                                "type": "object",
+                                "properties": {
+                                    "p_PACKAGE_CALL": {
+                                        "type": "string"
+                                    },
+                                    "p_appr_process": {
+                                        "type": "string"
+                                    },
+                                    "p_TRX_ID": {
+                                        "type": "string"
+                                    },
+                                    "p_PERSON_ID": {
+                                        "type": "string"
+                                    },
+                                    "p_ACTION_ID": {
+                                        "type": "string"
+                                    },
+                                    "p_TYPE": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostProcessApiV1InstancesResponse": {
+                "type": "object",
+                "properties": {
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "href": {
+                                    "type": "string"
+                                },
+                                "rel": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "processDefinitionId": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "state": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "createdBy": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "type": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "applicationName": {
+                        "type": "string"
+                    },
+                    "applicationVersion": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostProcessApiV1TasksTaskIdCompleteRequest": {
+                "type": "object",
+                "properties": {
+                    "outcome": {
+                        "type": "string"
+                    },
+                    "comment": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

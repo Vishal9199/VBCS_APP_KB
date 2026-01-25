@@ -1,0 +1,30 @@
+<oj-sp-simple-create-edit id="app_page" page-title="Sync Setup" display-options.responsive-padding="on"
+  primary-action.label="Save" badge.status="info" on-sp-secondary-action="[[$listeners.appPageSpSecondaryAction]]"
+  secondary-actions='[{"label":"Edit","id":"edit"}]' primary-action.disabled="[[ $variables.saveFlag ]]"
+  on-sp-primary-action="[[$listeners.appPageSpPrimaryAction]]">
+  <div class="oj-panel oj-panel-shadow-md oj-selected" slot="main">
+    <oj-validation-group valid="{{ $variables.isFormValid }}" id="application-validation">
+
+
+      <oj-form-layout max-columns="2" label-edge="start" user-assistance-density="compact" direction="column"
+        columns="2">
+        <oj-input-text label-hint="Setup ID" value="{{ $variables.postStgScheduleSetupSearchVar.setup_id }}"
+          readonly="true"></oj-input-text>
+        <oj-input-text label-hint="Fusion Domain" value="{{ $variables.postStgScheduleSetupSearchVar.fusion_domain }}"
+          readonly="[[ $variables.dataExist ]]"></oj-input-text>
+        <oj-input-text label-hint="Fusion Username"
+          value="{{ $variables.postStgScheduleSetupSearchVar.fusion_username }}" readonly="[[ $variables.dataExist ]]"></oj-input-text>
+        <oj-input-password label-hint="Fusion Password"
+          value="{{ $variables.postStgScheduleSetupSearchVar.fusion_password }}" readonly="[[ $variables.dataExist ]]"></oj-input-password>
+
+
+
+      </oj-form-layout>
+      <oj-form-layout label-edge="start" class="">
+        <oj-switch label-hint="Mail Notification" value="{{ $variables.mailSwitchVar }}"
+          disabled="[[ $variables.dataExist ]]"></oj-switch>
+
+      </oj-form-layout>
+    </oj-validation-group>
+  </div>
+</oj-sp-simple-create-edit>

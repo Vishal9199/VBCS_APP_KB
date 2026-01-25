@@ -1,0 +1,134 @@
+{
+    "items": [
+        {
+            "requisition_header_id": 300000095610884,
+            "pr_number": "NW-PR-10019-2026",
+            "title": "RR",
+            "amount": 2344,
+            "currency_code": "OMR"
+        },
+        {
+            "requisition_header_id": 300000094978094,
+            "pr_number": "NWW-PR-10014-2026",
+            "title": "Sales Item",
+            "amount": 0,
+            "currency_code": "OMR"
+        },
+        {
+            "requisition_header_id": 300000095621758,
+            "pr_number": "NW-PR-10020-2026",
+            "title": "PR",
+            "amount": 0,
+            "currency_code": "OMR"
+        },
+        {
+            "requisition_header_id": 300000095610666,
+            "pr_number": "NW-PR-10016-2026",
+            "title": "TEST EXPENSE PR",
+            "amount": 50,
+            "currency_code": "OMR"
+        },
+        {
+            "requisition_header_id": 300000094722932,
+            "pr_number": "NWW-PR-10003-2026",
+            "title": "Tender Sample PR",
+            "amount": 60000,
+            "currency_code": "OMR"
+        },
+        {
+            "requisition_header_id": 300000094734503,
+            "pr_number": "NW-PR-10010-2026",
+            "title": "requirement",
+            "amount": 50,
+            "currency_code": "OMR"
+        },
+        {
+            "requisition_header_id": 300000094734479,
+            "pr_number": "NW-PR-10003-2026",
+            "title": "PR",
+            "amount": 0,
+            "currency_code": "OMR"
+        },
+        {
+            "requisition_header_id": 300000094732996,
+            "pr_number": "NW-PR-10011-2026",
+            "title": "TEST EXPENSE PR",
+            "amount": 0,
+            "currency_code": "OMR"
+        },
+        {
+            "requisition_header_id": 300000094734494,
+            "pr_number": "NW-PR-10009-2026",
+            "title": "requirement",
+            "amount": 50,
+            "currency_code": "OMR"
+        },
+        {
+            "requisition_header_id": 300000094732906,
+            "pr_number": "NW-PR-10008-2026",
+            "title": "TEST EXPENSE PR",
+            "amount": 0,
+            "currency_code": "OMR"
+        },
+        {
+            "requisition_header_id": 300000094722947,
+            "pr_number": "NW-PR-10001-2026",
+            "title": "Tender Sample PR",
+            "amount": 70000,
+            "currency_code": "OMR"
+        },
+        {
+            "requisition_header_id": 300000094734487,
+            "pr_number": "NW-PR-10006-2026",
+            "title": "PR",
+            "amount": 0,
+            "currency_code": "OMR"
+        },
+        {
+            "requisition_header_id": 300000094745026,
+            "pr_number": "NW-PR-10012-2026",
+            "title": "TEST EXPENSE PR",
+            "amount": 0,
+            "currency_code": "OMR"
+        },
+        {
+            "requisition_header_id": 300000094745971,
+            "pr_number": "NWW-PR-10013-2026",
+            "title": "Sales Item",
+            "amount": 0,
+            "currency_code": "OMR"
+        },
+        {
+            "requisition_header_id": 300000095610829,
+            "pr_number": "NW-PR-10018-2026",
+            "title": "yes",
+            "amount": 0,
+            "currency_code": "OMR"
+        },
+        {
+            "requisition_header_id": 300000095610679,
+            "pr_number": "NW-PR-10017-2026",
+            "title": "TEST EXPENSE PR",
+            "amount": 0,
+            "currency_code": "OMR"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 16,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/tender/strategy/lov/pr/dtl"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/tender/strategy/lov/pr/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/tender/strategy/lov/pr/dtl"
+        }
+    ]
+}

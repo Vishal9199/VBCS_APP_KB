@@ -1,0 +1,16 @@
+{
+  "description": "Smart Search Configuration for Program Application",
+  "filters": {
+    "ProgramTypeFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Program Type",
+      "options": {
+        "field": "program_type",
+        "optionsData": "[[ $search.filters.ProgramTypeFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.ProgramTypeFilter.options.optionsKeys ]]"
+      },
+      "data": {
+      }
+    }
+  }
+}

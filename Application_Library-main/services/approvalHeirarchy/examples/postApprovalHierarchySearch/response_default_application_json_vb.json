@@ -1,0 +1,47 @@
+{
+    "OUT_DESCRIPTION": "Successfully fetched approval hierarchy records",
+    "OUT_HAS_NEXT": "N",
+    "OUT_STATUS": "SUCCESS",
+    "OUT_TOTAL_COUNT": 2,
+    "P_OUTPUT": [
+        {
+            "hierarchy_id": 574,
+            "object_version_num": 1,
+            "hierarchy_code": "FIN_HIER_NEW02",
+            "hierarchy_name": "Finance Hierarchy New",
+            "function_id": 564,
+            "function_code": "TEST_2",
+            "function_name": "Test 2",
+            "business_unit_id": 100,
+            "business_unit_name": null,
+            "remarks": "Created for Finance workflow",
+            "active_flag": "N",
+            "attribute_json": null,
+            "created_by": "yohasree.s@4iapps.com",
+            "created_date": "2025-09-22T10:00:37Z",
+            "last_updated_by": "yohasree.s@4iapps.com",
+            "last_updated_date": "2025-09-22T13:02:30Z",
+            "last_updated_login": "yohasree.s@4iapps.com"
+        },
+        {
+            "hierarchy_id": 1,
+            "object_version_num": 0,
+            "hierarchy_code": "ab",
+            "hierarchy_name": "a",
+            "function_id": 1,
+            "function_code": "CREATE_USER",
+            "function_name": "Create",
+            "business_unit_id": 1,
+            "business_unit_name": null,
+            "remarks": "a",
+            "active_flag": "y",
+            "attribute_json": "{\n\"abc\":\"abc\"\n}",
+            "created_by": "api",
+            "created_date": "2025-09-05T23:54:52.075237Z",
+            "last_updated_by": "api",
+            "last_updated_date": "2025-09-05T23:54:57.587788Z",
+            "last_updated_login": "api"
+        }
+    ],
+    "OUT_COUNT": 2
+}

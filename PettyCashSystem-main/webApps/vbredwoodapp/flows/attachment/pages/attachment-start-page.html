@@ -1,0 +1,531 @@
+<style>
+
+/* Optional: On hover – only when button is NOT disabled */
+#oj_ssce1_h_primaryActionFromHeader:not(.oj-disabled) .oj-button-button:hover {
+  background-color: #f2f2f2 !important;
+}
+
+@media (hover: hover) {
+  .BaseButtonStyles_styles_variants_outlined_pseudohover__jvi3dsv:hover:enabled:not(:active) {
+      border-color: rgb(255, 255, 255);
+      border-width: 2px;
+  }
+}
+
+.BaseButtonStyles_styles_variants_outlined_base__jvi3dso {
+    border-color: rgb(255 255 255);
+    color: rgb(255 255 255);
+}
+
+/* Tab-start */
+.oj-tabbar-horizontal.oj-tabbar-icon-only .oj-tabbar-item.oj-selected, .oj-tabbar-horizontal:not(.oj-tabbar-icon-only) .oj-tabbar-item.oj-selected {
+    /* color: var(--oj-tab-bar-item-border-color-selected); */
+    border-bottom: var(--oj-private-tab-bar-item-border-width-bottom) solid;
+    border-top: var(--oj-private-tab-bar-item-border-width-bottom) solid transparent;
+    border-left: var(--oj-private-tab-bar-item-border-width-end) solid transparent;
+    border-right: var(--oj-private-tab-bar-item-border-width-end) solid transparent;
+    background-color: #01474d !important;
+    color: white !important;
+}
+
+.oj-selected>a.oj-tabbar-item-content .oj-tabbar-item-label {
+    /* color: var(--oj-tab-bar-item-label-color-selected); */
+    font-weight: var(--oj-tab-bar-item-font-weight-selected);
+    color: white !important;
+}
+/* Tab- end */
+
+.oj-table-grid-display .oj-table-header {
+    background-color: #01474d !important;
+    color: white !important;
+}
+
+#addBtn.oj-button.oj-button-outlined-chrome .oj-button-button,
+#resetBtn.oj-button.oj-button-outlined-chrome .oj-button-button,
+#addRefFileBtn.oj-button.oj-button-outlined-chrome .oj-button-button,
+#addFileBtn.oj-button.oj-button-outlined-chrome .oj-button-button {
+  border-color: white !important;
+  color: white !important;
+}
+
+.oj-ux-ico-refresh:before {
+    content: '\f32f';
+    color: white;
+}
+
+oj-c-button#oj_attachment_h_cancelAction {
+    display: none !important;
+}
+
+</style>
+
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+  <oj-sp-advanced-create-edit id="oj_attachment" page-title='[[ "Attachment - "+$variables.P_SCREEN_NAME ]]'
+    page-subtitle=" " primary-action.label="Close" on-sp-cancel="[[$listeners.ojAttachmentSpCancel]]"
+    on-sp-secondary-action="[[$listeners.ojAttachmentSpSecondaryAction]]"
+    secondary-actions='[{"label":"Refresh","id":"refresh"}]'
+    on-sp-primary-action="[[$listeners.ojAttachmentSpPrimaryAction]]">
+
+    <!-- <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-flex-end oj-sm-align-items-center"
+      style="width: 100%; padding: 0 0.1rem;" slot="search">
+      <div style="display: flex; gap: 0.25rem; margin-left: 1rem; margin-top: 1px; flex-wrap: wrap;">
+    
+        <oj-button label="Refresh" chroming="outlined" id="addRefFileBtn" on-oj-action="[[$listeners.addRefFileBtnAction]]"
+          class="oj-button-sm" style="margin-bottom: 0.1rem;">
+          <span slot="startIcon" class="oj-ux-ico-refresh"></span>
+        </oj-button>
+        <oj-bind-if
+          test='[[ ($variables.P_STATUS==="DRA" || $variables.P_STATUS==="RIM" || $variables.P_STATUS==="RIA") ]]'>
+          <oj-button style="margin-bottom: 0.1rem;" label="Add" chroming="outlined" id="addFileBtn"
+            on-oj-action="[[$listeners.addFileBtnAction]]" class="oj-button-sm">
+            <span slot="startIcon" class="oj-ux-ico-plus"></span>
+          </oj-button>
+        </oj-bind-if>
+      </div>
+    </div> -->
+
+    <div slot="main" style="margin-top: -2.5rem;" class="oj-panel">
+    <!-- Tab Bar Container -->
+          <!-- <div class="demo-tabbar-container oj-panel">
+            <oj-tab-bar id="tabbar" edge="top" selection="{{ $variables.selectedTab }}">
+              <ul>
+                <li id="file-tab">
+                  <a href="#" style="font-size: larger; font-weight: bold;" aria-controls="file-content" id="file-link">File</a>
+                </li>
+                <li id="text-tab">
+                  <a href="#" style="font-size: larger; font-weight: bold;" aria-controls="text-content" id="text-link">Text</a>
+                </li>
+                <li id="url-tab">
+                  <a href="#" style="font-size: larger; font-weight: bold;" aria-controls="url-content" id="url-link">URL</a>
+                </li>
+              </ul>
+            </oj-tab-bar>
+          </div> -->
+
+          <!-- Switcher Container -->
+          <!-- <div class="demo-switcher-container oj-panel">
+            <oj-switcher value="{{ $variables.selectedTab }}"> -->
+              
+              <!-- File Tab Content -->
+              <!-- <div slot="file-tab" id="file-content" role="tabpanel" aria-labelledby="file-tab" style="height: 30rem;"> -->
+                <div class="demo-content">
+                  <div id="sampleDemoFile" class="demo-padding demo-container">
+                    <div id="componentDemoContentFile" style="width: 1px; min-width: 100%;">
+                      <div id="searchMainContentFile">
+                        
+                        <div class="oj-flex">
+                          <oj-table scroll-policy="loadMoreOnScroll" class="oj-sm-width-full oj-bg-body" display="grid"
+                            horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+                            selection-mode.row="single" selection-mode.column="none"
+                            data="[[ $variables.adpAttachmentFile ]]" columns="{{ $constants.columnsFile }}"
+                            id="fileDocumentsTbl">
+
+                            <!-- <template slot="action">
+                            <oj-bind-if
+                            test='[[ ($variables.P_STATUS==="DRA" || $variables.P_STATUS==="RIM" || $variables.P_STATUS==="RIA") ]]'>
+                              <oj-button display="icons" chroming="danger" class="oj-button-sm" id="deleteBtn"
+                                style="margin-left: 30%;" on-oj-action="[[$listeners.deleteBtnAction]]">
+                                <span class="oj-ux-ico-delete-all" slot="startIcon"></span>
+                              </oj-button>
+                            </oj-bind-if>  
+                            </template> -->
+
+                            <template slot="download_template">
+                              <div class="oj-helper-justify-content-center oj-flex">
+                                <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                                  id="deleteBtn" on-oj-action="[[$listeners.deleteBtnAction2]]">
+                                  <span class="oj-ux-ico-download" slot="startIcon"></span>
+                                </oj-button>
+                              </div>
+                            </template>
+
+                            <template slot="document_type_template">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </template>
+
+                            <template slot="document_category_template">
+                              <oj-bind-text value="[[ $current.data === 'PC_CLAIM_LINE' ? 'Claim Line' : $current.data === 'PC_RECEIPT_LINE' ? 'Receipt Line' : $current.data ]]">
+                              </oj-bind-text>
+                            </template>
+
+
+                            <template slot="title_template">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </template>
+
+                            <template slot="description_template">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </template>
+
+                            <template slot="type_template">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </template>
+
+                            <template slot="url_template">
+                              <oj-bind-if test="[[ $current.data ]]">
+                                <a href="[[ $current.data ]]" target="_blank" style="color: #0572ce; text-decoration: none;">
+                                  <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                                </a>
+                              </oj-bind-if>
+                            </template>
+
+                            <template slot="additional_info_template">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </template>
+
+                            <template slot="download_template">
+                              <oj-bind-if test="[[ $current.row.links && $current.row.links.length > 0 ]]">
+                                <a href="[[ $current.row.links[0].href ]]" target="_blank" style="color: #0572ce;">
+                                  <span class="oj-ux-ico-download"></span> Download
+                                </a>
+                              </oj-bind-if>
+                            </template>
+                          </oj-table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <!-- </div> -->
+
+              <!-- Text Tab Content -->
+              <!-- <div slot="text-tab" id="text-content" role="tabpanel" aria-labelledby="text-tab" style="height: 30rem;">
+                <div class="demo-content">
+                  <div id="sampleDemoText" class="demo-padding demo-container">
+                    <div id="componentDemoContentText" style="width: 1px; min-width: 100%;">
+                      <div id="searchMainContentText">
+                        <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-flex-end"
+                          style="width: 100%; background-color: white;">
+                          <div style="display: flex; gap: 0.25rem; margin-left: 1rem; margin-top: 1px; flex-wrap: wrap;">
+                            
+                            <oj-button label="Refresh" chroming="outlined" id="addRefTextBtn"
+                              on-oj-action="[[$listeners.addRefTextBtnAction]]" class="oj-button-sm oj-bg-success-30"
+                              style="margin-bottom: 0.1rem;">
+                              <span slot="startIcon" class="oj-ux-ico-refresh"></span>
+                            </oj-button>
+                          <oj-bind-if
+                            test='[[ ($variables.P_STATUS==="DRA" || $variables.P_STATUS==="RIM" || $variables.P_STATUS==="RIA") ]]'>
+                            <oj-button style="margin:0.125rem;" label="Add" chroming="callToAction" id="addTextBtn"
+                              on-oj-action="[[$listeners.addTextBtnAction]]">
+                              <span slot="startIcon" class="oj-ux-ico-plus"></span>
+                            </oj-button>
+                          </oj-bind-if>  
+                          </div>
+                        </div>
+                        <div class="oj-flex">
+                          <oj-table scroll-policy="loadMoreOnScroll" class="oj-sm-width-full oj-bg-body" display="grid"
+                            horizontal-grid-visible="enabled" vertical-grid-visible="enabled" selection-mode.row="none"
+                            selection-mode.column="none" id="textDocumentsTbl" data="[[ $variables.adpAttachmentText ]]"
+                            columns="{{ $constants.columnsText }}">
+
+                            <template slot="appl_code_template">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </template>
+
+                            <template slot="action_template">
+                                                       <oj-bind-if
+                            test='[[ ($variables.P_STATUS==="DRA" || $variables.P_STATUS==="RIM" || $variables.P_STATUS==="RIA") ]]'> 
+                              <oj-button display="icons" chroming="callToAction" class="oj-button-sm" id="deleteBtn"
+                                on-oj-action="[[$listeners.deleteBtnAction4]]">
+                                <span class="oj-ux-ico-delete-all" slot="startIcon"></span>
+                              </oj-button>
+                                                       </oj-bind-if>
+                            </template>
+
+                            <template slot="document_name_template">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </template>
+
+                            <template slot="document_type_template">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </template>
+
+                            <template slot="document_category_template">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </template>
+
+                            <template slot="title_template">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </template>
+
+                            <template slot="description_template">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </template>
+
+                            <template slot="type_template">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </template>
+
+                            <template slot="url_template">
+                              <oj-bind-if test="[[ $current.data ]]">
+                                <a href="[[ $current.data ]]" target="_blank" style="color: #0572ce; text-decoration: none;">
+                                  <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                                </a>
+                              </oj-bind-if>
+                            </template>
+
+                            <template slot="additional_info_template">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </template>
+                          </oj-table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+
+              <!-- URL Tab Content -->
+              <!--Tab 3  -->
+              <!-- <div slot="url-tab" id="url-content" role="tabpanel" aria-labelledby="url-tab" style="height: 30rem;">
+                <div class="demo-content">
+                  <div id="sampleDemoUrl" class="demo-padding demo-container">
+                    <div id="componentDemoContentUrl" style="width: 1px; min-width: 100%;">
+                      <div id="searchMainContentUrl">
+                        <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-flex-end"
+                          style="width: 100%; background-color: white;">
+                          <div style="display: flex; gap: 0.25rem; margin-left: 1rem; margin-top: 1px; flex-wrap: wrap;">
+                            
+                            <oj-button label="Refresh" chroming="outlined" id="addRefurlBtn"
+                              on-oj-action="[[$listeners.addRefurlBtnAction]]" class="oj-button-sm oj-bg-success-30"
+                              style="margin-bottom: 0.1rem;">
+                              <span slot="startIcon" class="oj-ux-ico-refresh"></span>
+                            </oj-button>
+                        <oj-bind-if
+                            test='[[ ($variables.P_STATUS==="DRA" || $variables.P_STATUS==="RIM" || $variables.P_STATUS==="RIA") ]]'>
+                            <oj-button style="margin:0.125rem;" label="Add" chroming="callToAction" id="addUrlBtn"
+                              on-oj-action="[[$listeners.addUrlBtnAction]]">
+                              <span slot="startIcon" class="oj-ux-ico-plus"></span>
+                            </oj-button>
+                        </oj-bind-if>                          
+                          </div>
+                        </div>
+                        <div class="oj-flex">
+                          <oj-table scroll-policy="loadMoreOnScroll" class="oj-sm-width-full oj-bg-body" display="grid"
+                            horizontal-grid-visible="enabled" vertical-grid-visible="enabled" selection-mode.row="none"
+                            selection-mode.column="none" id="urlDocumentsTbl" data="[[ $variables.adpAttachmentUrl ]]"
+                            columns="{{ $constants.columnsUrl }}">
+                            <template slot="appl_code_template">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </template>
+                            <template slot="action_template3">
+                            <oj-bind-if
+                            test='[[ ($variables.P_STATUS==="DRA" || $variables.P_STATUS==="RIM" || $variables.P_STATUS==="RIA") ]]'>
+                              <oj-button display="icons" chroming="callToAction" class="oj-button-sm" id="deleteBtn"
+                                on-oj-action="[[$listeners.deleteBtnAction3]]">
+                                <span class="oj-ux-ico-delete-all" slot="startIcon"></span>
+                              </oj-button>
+                            </oj-bind-if>
+                            </template>
+
+                            <template slot="document_name_template">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </template>
+
+                            <template slot="document_type_template">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </template>
+
+                            <template slot="document_category_template">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </template>
+
+                            <template slot="title_template">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </template>
+
+                            <template slot="description_template">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </template>
+
+                            <template slot="type_template">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </template>
+
+                            <template slot="url_template">
+                              <oj-bind-if test="[[ $current.data ]]">
+                                <a href="[[ $current.data ]]" target="_blank" style="color: #0572ce; text-decoration: none;">
+                                  <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                                </a>
+                              </oj-bind-if>
+                            </template>
+
+                            <template slot="additional_info_template">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </template>
+                          </oj-table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+
+            <!-- </oj-switcher> -->
+          </div>
+    </div>
+  </oj-sp-advanced-create-edit>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Dialog with FIXED oj-bind-if structure -->
+<oj-dialog dialog-title="Attachment" id="attachmentDialog" cancel-behavior="icon" style="width: 450px;"
+  position.at.vertical="top" position.my.vertical="top">
+  
+  <div slot="body">
+    <oj-validation-group valid="{{ $variables.formObj.addDialogValidate }}" id="attachment-validation">
+      <oj-form-layout id="attachmentFormLayout" label-edge="start" direction="row" max-columns="2"
+        user-assistance-density="compact" class="oj-formlayout-full-width">
+      
+        <oj-radioset label-hint="Type" required="true" class="oj-choice-direction-row" id="radio"
+          value="{{ $variables.attachmentObj.P_TYPE }}">
+          <oj-option value="FILE">File</oj-option>
+          <oj-option value="TEXT">Text</oj-option>
+          <oj-option value="URL">URL</oj-option>
+        </oj-radioset>
+        
+        <!-- FILE Type Fields -->
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'FILE' ]]">
+          <div style="text-align:center; grid-column: 1 / -1;">
+            <oj-file-picker id="attachment-file-picker" selection-mode="single"
+              on-oj-select="[[$listeners.attachmentFilePickerSelect]]">
+              <oj-button slot="trigger" label="Upload" chroming="outlined" class="oj-button-sm oj-bg-success-30">
+                <span slot="startIcon" class="oj-ux-ico-upload"></span>
+              </oj-button>
+            </oj-file-picker>
+          </div>
+        </oj-bind-if>
+        
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'FILE' ]]">
+          <oj-input-text id="attachment-file-name" label-hint="File Name" style="width:16rem;" disabled="true"
+            value="{{ $variables.attachmentObj.P_DOCUMENT_NAME }}" class="">
+          </oj-input-text>
+        </oj-bind-if>
+        
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'FILE' ]]">
+          <oj-input-text id="attachment-file-type" 
+            value="{{ $variables.attachmentObj.P_DOCUMENT_TYPE }}"
+            label-hint="File Type" style="width:16rem;" disabled="true">
+          </oj-input-text>
+        </oj-bind-if>
+        
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'FILE' ]]">
+          <oj-input-text id="attachment-file-desc" 
+            value="{{ $variables.attachmentObj.P_DESCRIPTION }}"
+            label-hint="Description" style="width:16rem;">
+          </oj-input-text>
+        </oj-bind-if>
+        
+        <!-- URL Type Fields -->
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'URL' ]]">
+          <oj-input-text id="attachment-url" label-hint="URL" 
+            value="{{ $variables.attachmentObj.P_URL }}"
+            required="true" style="width:16rem;">
+          </oj-input-text>
+        </oj-bind-if>
+        
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'URL' ]]">
+          <oj-input-text id="attachment-url-desc" 
+            value="{{ $variables.attachmentObj.P_DESCRIPTION }}"
+            label-hint="Description" style="width:16rem;">
+          </oj-input-text>
+        </oj-bind-if>
+        
+        <!-- TEXT Type Fields -->
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'TEXT' ]]">
+          <oj-input-text id="attachment-text-title" 
+            value="{{ $variables.attachmentObj.P_TITLE }}"
+            label-hint="Title" style="width:16rem;" required="true">
+          </oj-input-text>
+        </oj-bind-if>
+        
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'TEXT' ]]">
+          <oj-input-text id="attachment-text-desc" 
+            value="{{ $variables.attachmentObj.P_DESCRIPTION }}"
+            label-hint="Description" style="width:16rem;">
+          </oj-input-text>
+        </oj-bind-if>
+        
+      </oj-form-layout>
+    </oj-validation-group>
+  </div>
+
+  <div slot="footer" style="display:flex; justify-content:flex-end;">
+    
+    <!-- <oj-button id="attachment-save-add" chroming="outlined" label="Save & Add"
+      style="margin-left:0.5%;margin-right:0.5%;" on-oj-action="[[$listeners.attachmentSaveAddAction]]">
+      <span class="oj-ux-ico-save" slot="startIcon"></span>
+    </oj-button> -->
+    
+    <oj-button id="attachment-save-close" chroming="outlined" label="Save & Close"
+      style="margin-left:0.5%;margin-right:0.5%;" on-oj-action="[[$listeners.attachmentSaveCloseAction2]]"
+      class="oj-button-sm">
+      <span class="oj-ux-ico-save" slot="startIcon"></span>
+    </oj-button>
+    
+    <oj-button id="attachment-cancel" chroming="outlined" label="Cancel" style="margin-left:0.5%;margin-right:0.5%;"
+      on-oj-action="[[$listeners.attachmentSaveCloseAction]]" class="oj-button-sm">
+      <span class="oj-ux-ico-cancel-s" slot="startIcon"></span>
+    </oj-button>
+  </div>  
+</oj-dialog>
+<!--Delete Dialog  -->
+<!-- Delete Confirmation Dialog -->
+<oj-dialog dialog-title="Delete" id="deleteDialog" cancel-behavior="icon" modality="modal" resize-behavior="none"
+  style="width: 400px;" position.at.vertical="top" position.my.vertical="top">
+  <div slot="body">
+    <div style="padding: 1rem; text-align: center;">
+      <!-- Warning Icon -->
+      <div style="margin-bottom: 1rem;">
+        <span class="oj-ux-ico-warning" style="font-size: 3rem; color: #ff6b35;"></span>
+      </div>
+      <!-- Confirmation Message -->
+      <div style="margin-bottom: 1rem;">
+        <h4 style="color: #333; margin: 0 0 0.5rem 0;">Are you sure?</h4>
+        <p style="color: #666; margin: 0; line-height: 1.4;">
+          Do you want to delete this attachment? This action cannot be undone.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div slot="footer" style="display: flex; justify-content: end; gap: 0.5rem; padding: 1rem;">
+    <!-- Delete Button (Danger Style) -->
+    <oj-button id="confirmDeleteBtn" chroming="danger" label="Yes, Delete"
+      style="min-width: 120px;" on-oj-action="[[$listeners.confirmDeleteBtnAction]]">
+      <span class="oj-ux-ico-delete" slot="startIcon"></span>
+    </oj-button>
+    <!-- Cancel Button -->
+    <oj-button id="cancelDeleteBtn" chroming="outlined" label="Cancel" style="min-width: 120px;"
+      on-oj-action="[[$listeners.cancelDeleteBtnAction]]">
+      <span class="oj-ux-ico-cancel" slot="startIcon"></span>
+    </oj-button>
+  </div>
+</oj-dialog>
+
+
+
+
+<oj-dialog dialog-title="" id="loadingDialog" cancel-behavior="none" modality="modal" resize-behavior="none"
+  style="width: 350px; text-align: center;" drag-affordance="none" position.my.vertical="top"
+  position.at.vertical="top">
+  <div slot="body">
+    <div style="padding: 2rem 1rem; text-align: center;">
+      <!-- Loading Animation -->
+      <div style="margin-bottom: 1.5rem;">
+        <oj-progress-circle size="lg" value="-1"></oj-progress-circle>
+      </div>
+      <!-- Loading Message -->
+      <div style="margin-bottom: 1rem;">
+        <h4 style="color: #333; margin: 0 0 0.5rem 0; font-weight: 500;">
+          <oj-bind-text value="[[ 'Please Wait' ]]"></oj-bind-text>
+        </h4>
+      </div>
+    </div>
+  </div>
+</oj-dialog>

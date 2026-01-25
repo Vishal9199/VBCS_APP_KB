@@ -1,0 +1,852 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "askHint": {
+      "type": "string",
+      "defaultValue": "Search"
+    },
+    "clobMessage": {
+      "type": "string"
+    },
+    "currentPage": {
+      "type": "number",
+      "defaultValue": 1
+    },
+    "displayMode": {
+      "type": "string"
+    },
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "functionalPrimaryActions": {
+      "type": "action[]"
+    },
+    "functionalSecondaryActions": {
+      "type": "action[]"
+    },
+    "getGovernateByUserSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "responseType": "getNws_custPettyCashLovGovernate",
+        "itemsPath": "items",
+        "fetchChain": "getNws_custPettyCashLovGovernateFetch",
+        "keyAttributes": "governate_name"
+      }
+    },
+    "getNwsCustPettycashLovUserRole2ListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "itemsPath": "items",
+        "responseType": "getNwsCustPettycashLovUserRole2Response",
+        "keyAttributes": "petty_cash_type",
+        "fetchChain": "getNws_custPettycashLovUserRole2Fetch"
+      }
+    },
+    "getSupplierByGovernateSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "responseType": "GetNws_custPettycashLovSupplier",
+        "itemsPath": "items",
+        "keyAttributes": "supplier_name",
+        "fetchChain": "getNws_custPettyCashLovSupplierFetch"
+      }
+    },
+    "goToParentOption": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "governateUserLOV_SDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "ORDS/getNws_custPettycashLovUserRole2",
+        "responseType": "getNws_custPettycashLovUserRole2",
+        "itemsPath": "items",
+        "keyAttributes": "petty_cash_governate",
+        "uriParameters": {
+          "p_email_address": "{{ $application.variables.enc_UserLogin }}"
+        }
+      }
+    },
+    "headerFormValid": {
+      "type": "string"
+    },
+    "p_nav_id": {
+      "type": "string"
+    },
+    "paginationDisplay": {
+      "type": "string"
+    },
+    "passDeleteKey": {
+      "type": "string"
+    },
+    "postPettycashHeaderVar": {
+      "type": "postPettycashHeaderSearch",
+      "defaultValue": {
+        "cash_in_hand": 0,
+        "claim_amt": 0,
+        "claim_header_id": 0,
+        "created_by": "[[ $application.user.username ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_by": "[[ $application.user.username ]]",
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "object_version_num": 0,
+        "open_balance_amt": 0,
+        "receipt_amt": 0,
+        "receipt_count": 0,
+        "request_date": "[[ $application.functions.getSysdate() ]]",
+        "staff_iou_amt": 0
+      }
+    },
+    "progressValue": {
+      "type": "string",
+      "defaultValue": "0"
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/mysearchconfiguration.json' ]]"
+      }
+    },
+    "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "GovernateFilter": {
+              "label": "Governate",
+              "options": {
+                "optionsData": "[[ $page.variables.governateUserLOV_SDP]]",
+                "optionsKeys": {
+                  "label": "petty_cash_governate",
+                  "value": "petty_cash_governate"
+                }
+              }
+            },
+            "DateFilter": {
+              "label": "request_date",
+              "options": {
+                "field": "request_date",
+                "startDate": "[[ $variables.trx_start_date ]]",
+                "endDate": "[[ $variables.trx_end_date ]]",
+                "minDate": "2019-11-14",
+                "maxDate": "2025-12-31"
+              }
+            },
+            "SupplierNameFilter": {
+              "label": "Supplier Name",
+              "options": {
+                "optionsData": "[[ $page.variables.getSupplierByGovernateSDP ]]",
+                "optionsKeys": {
+                  "label": "supplier_name",
+                  "value": "supplier_name"
+                }
+              }
+            },
+            "StatusFilter": {
+              "label": "Status",
+              "options": {
+                "optionsData": "[[ $page.variables.statusLov_SDP]]",
+                "optionsKeys": {
+                  "label": "lookup_value_name",
+                  "value": "lookup_value_id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "selectContextData": {
+      "type": "vb/ArrayDataProvider"
+    },
+    "selectContextItemText": {
+      "type": "string",
+      "defaultValue": "label"
+    },
+    "selectContextLabelHint": {
+      "type": "string"
+    },
+    "selectContextValue": {
+      "type": "string",
+      "defaultValue": null,
+      "input": "fromUrl"
+    },
+    "selectContextValueItem": {
+      "type": "any"
+    },
+    "statusLov_SDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "ORDS/getNws_custCommonLovLookup",
+        "responseType": "getNws_custCommonLovLookup",
+        "itemsPath": "items",
+        "headers": {
+          "p_lookup_type_code": "STATUS"
+        },
+        "keyAttributes": "lookup_value_id"
+      }
+    },
+    "tableHeaderADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "postPettycashHeaderSearch",
+        "keyAttributes": "claim_header_id"
+      }
+    },
+    "encPayload": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "encSearchObj": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "pagination": {
+      "type": {
+        "is_next": "boolean",
+        "is_prev": "boolean"
+      }
+    },
+    "SearchObj": {
+      "type": {
+        "in_limit": "string",
+        "in_offset": "string",
+        "p_app_type": "string",
+        "p_created_by": "string",
+        "p_keyword": "string",
+        "p_status_id": "string",
+        "p_claim_header_id": "string",
+        "p_claim_number": "string",
+        "p_governorate": "string",
+        "p_petty_cash_type": "string",
+        "p_supplier_id": "string",
+        "p_supplier_name": "string",
+        "p_from_date": "string",
+        "p_to_date": "string"
+      },
+      "defaultValue": {
+        "in_limit": "10",
+        "in_offset": "0"
+      }
+    },
+    "totalRecords": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "trx_end_date": {
+      "type": "string",
+      "defaultValue": "2075-07-21"
+    },
+    "trx_start_date": {
+      "type": "string",
+      "defaultValue": "2020-07-21"
+    },
+    "about": {
+      "type": {
+        "created_by": "string",
+        "created_date": "string",
+        "last_updated_by": "string",
+        "last_updated_date": "string",
+        "last_updated_login": "string"
+      }
+    },
+    "vShowFragment": {
+      "type": "boolean",
+      "defaultValue": false
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getNws_custCommonLovLookup": {
+      "endpoint": "getNws_custCommonLovLookup",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.getNws_custPettyCashLovGovernate": {
+      "endpoint": "getNws_custPettyCashLovGovernate",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.GetNws_custPettycashLovSupplier": {
+      "endpoint": "getNws_custTankerLovWilayatName",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.getNws_custPettycashLovUserRole2": {
+      "endpoint": "getNws_custPettycashLovUserRole2",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.getNwsCustPettycashLovUserRole2Response": {
+      "endpoint": "getNws_custPettycashLovUserRole2",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.postPettycashHeaderSearch": {
+      "endpoint": "postPettycashHeaderSearch",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "action": {
+      "id": "string",
+      "label": "string",
+      "display": "string",
+      "icon": "string"
+    },
+    "getNws_custCommonLovLookup": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getNws_custPettyCashLovGovernate": {
+      "items": [
+        {
+          "address_line1": "string",
+          "attribute2": "string",
+          "city": "string",
+          "country": "string",
+          "governate_name": "string",
+          "supplier_id": "number",
+          "supplier_name": "string",
+          "supplier_number": "string",
+          "supplier_site_code": "string",
+          "supplier_site_id": "number"
+        }
+      ]
+    },
+    "GetNws_custPettycashLovSupplier": {
+      "items": [
+        {
+          "address_line1": "string",
+          "attribute2": "string",
+          "city": "string",
+          "country": "string",
+          "governate_name": "string",
+          "supplier_id": "number",
+          "supplier_name": "string",
+          "supplier_number": "string",
+          "supplier_site_code": "string",
+          "supplier_site_id": "number"
+        }
+      ]
+    },
+    "getNws_custPettycashLovUserRole2": {
+      "items": [
+        {
+          "clean_name": "string",
+          "clean_name_no_space": "string",
+          "email_address": "string",
+          "extracted_name": "string",
+          "full_name": "string",
+          "lookup_type_code": "string",
+          "lookup_type_name": "string",
+          "person_id": "number",
+          "person_number": "string",
+          "petty_cash_governate": "string",
+          "petty_cash_name": "string",
+          "petty_cash_type": "string"
+        }
+      ]
+    },
+    "getNwsCustPettycashLovUserRole2Response": {
+      "items": [
+        {
+          "clean_name": "string",
+          "clean_name_no_space": "string",
+          "email_address": "string",
+          "extracted_name": "string",
+          "full_name": "string",
+          "lookup_type_code": "string",
+          "lookup_type_name": "string",
+          "person_id": "number",
+          "person_number": "string",
+          "petty_cash_governate": "string",
+          "petty_cash_name": "string",
+          "petty_cash_type": "string"
+        }
+      ]
+    },
+    "postPettycashHeaderSearch": {
+      "cash_in_hand": "number",
+      "claim_amt": "number",
+      "claim_header_id": "number",
+      "claim_number": "string",
+      "close_balance_amt": "number",
+      "comments": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "governorate": "string",
+      "integration_err_message": "any",
+      "integration_status_code": "string",
+      "integration_status_id": "number",
+      "integration_status_name": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "line_count": "number",
+      "object_version_num": "number",
+      "open_balance_amt": "number",
+      "petty_cash_type": "string",
+      "receipt_amt": "number",
+      "receipt_count": "number",
+      "request_date": "string",
+      "saas_transaction_id": "number",
+      "saas_transaction_number": "string",
+      "staff_iou_amt": "number",
+      "status_code": "string",
+      "status_id": "number",
+      "status_name": "string",
+      "supplier_id": "number",
+      "supplier_name": "string",
+      "supplier_number": "string"
+    }
+  },
+  "eventListeners": {
+    "aboutBtnAction": {
+      "chains": [
+        {
+          "chain": "aboutBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "aboutOkButtonAction": {
+      "chains": [
+        {
+          "chain": "aboutCancelButton_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "addBtnAction": {
+      "chains": [
+        {
+          "chain": "createClaimAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "cancelDeleteAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "deleteOkAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "deleteKey": "$event.detail.key"
+          }
+        }
+      ]
+    },
+    "buttonAction3": {
+      "chains": [
+        {
+          "chain": "pendingWith_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "deleteBtnAction": {
+      "chains": [
+        {
+          "chain": "deleteAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "editBtnAction": {
+      "chains": [
+        {
+          "chain": "editAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "exportBtnAction": {
+      "chains": [
+        {
+          "chain": "exportHeader_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "govCancelBtnAction": {
+      "chains": [
+        {
+          "chain": "cancel_Gov_Dialog_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "governorateSelectValueItem": {
+      "chains": [
+        {
+          "chain": "onSelectGovernate_LOV",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "governorateSelectValueItem2": {
+      "chains": [
+        {
+          "chain": "on_Gov_ValueChange_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "govSaveBtnAction": {
+      "chains": [
+        {
+          "chain": "createClaimDialog_OK_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "nextBtnAction": {
+      "chains": [
+        {
+          "chain": "nextBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "pendingCancelBtnAction": {
+      "chains": [
+        {
+          "chain": "cancelPending_Dialog_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "preBtnAction": {
+      "chains": [
+        {
+          "chain": "prevBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "resetBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    }
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-list-view": {
+        "path": "ojs/ojlistview"
+      },
+      "oj-progress-bar": {
+        "path": "ojs/ojprogress-bar"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-collection-container": {
+        "path": "oj-sp/collection-container/loader"
+      },
+      "oj-sp-empty-state": {
+        "path": "oj-sp/empty-state/loader"
+      },
+      "oj-sp-list-item-template": {
+        "path": "oj-sp/list-item-template/loader"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+    },
+    "modules": {
+      "xlsx": {
+        "path": "https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"
+      },
+      "exceljs": {
+        "path": "https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"
+      },
+      "ojConverterNumber": {
+        "path": "ojs/ojconverter-number"
+      },
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      },
+      "ojValidationNumber": {
+        "path": "ojs/ojvalidation-number"
+      }
+    },
+    "css": [
+      "/resources/css/redwood-overrides.css",
+      "/resources/css/smartSearch.css"
+    ]
+  },
+  "constants": {
+    "headerColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "sortable": "disabled",
+          "resizable": "enabled",
+          "width": 80,
+          "template": "actions",
+          "frozenEdge": "start",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Reference Number",
+          "field": "claim_number",
+          "resizable": "enabled",
+          "width": 156,
+          "sortable": "enabled",
+           "frozenEdge": "start",
+          "template": "claim_number",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Governorate",
+          "field": "governorate",
+          "resizable": "enabled",
+          "width": 168,
+          "template": "governorate",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Supplier Name",
+          "field": "supplier_name",
+          "resizable": "enabled",
+          "width": 208,
+          "template": "supplier_name",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Supplier Number",
+          "field": "supplier_number",
+          "resizable": "enabled",
+          "width": 145,
+          "template": "supplier_number",
+          "headerStyle": "white-space: normal;",
+          "className": "oj-helper-text-align-center"
+        },
+        {
+          "headerText": "Request Date",
+          "field": "request_date",
+          "resizable": "enabled",
+          "width": 123,
+          "template": "date",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Cash in Hand",
+          "field": "cash_in_hand",
+          "resizable": "enabled",
+          "width": 120,
+          "template": "amount",
+          "headerStyle": "white-space: normal;",
+          "className": "oj-helper-text-align-end"
+        },
+        {
+          "headerText": "Status",
+          "field": "status_name",
+          "resizable": "enabled",
+          "width": 150,
+          "template": "status_badge",
+          "headerStyle": "white-space: normal;",
+          "className": "oj-helper-text-align-center"
+        },
+        {
+          "headerText": "Pending With",
+          "field": "",
+          "width": 120,
+          "sortable": "disabled",
+          "resizable": "enabled",
+          "template": "pending_with_template",
+          "headerStyle": "white-space: normal;",
+          "className": "oj-helper-text-align-center"
+        },
+        {
+          "headerText": "Invoice Number",
+          "field": "saas_transaction_number",
+          "resizable": "enabled",
+          "width": 140,
+          "template": "invoice_number",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Integration Status",
+          "field": "integration_status_name",
+          "resizable": "enabled",
+          "width": 149,
+          "template": "integration_status",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "About",
+          "field": "about",
+          "sortable": "disabled",
+          "resizable": "enabled",
+          "template": "about",
+          "width": 61,
+          "className": "oj-helper-text-align-center"
+        }
+      ],
+      "description": "{\n        \"headerText\": \"Created By\",\n        \"field\": \"created_by\",\n        \"resizable\": \"enabled\",\n        \"width\": 120,\n        \"template\": \"created_by\",\n        \"headerStyle\": \"white-space: normal;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Created Date\",\n        \"field\": \"created_date\",\n        \"resizable\": \"enabled\",\n        \"width\": 130,\n        \"template\": \"date\",\n        \"headerStyle\": \"white-space: normal;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Last Updated By\",\n        \"field\": \"last_updated_by\",\n        \"resizable\": \"enabled\",\n        \"width\": 140,\n        \"template\": \"last_updated_by\",\n        \"headerStyle\": \"white-space: normal;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Last Update Date\",\n        \"field\": \"last_updated_date\",\n        \"resizable\": \"enabled\",\n        \"width\": 130,\n        \"template\": \"date\",\n        \"headerStyle\": \"white-space: normal;\",\n        \"style\": \"\"\n    }"
+    }
+  }
+}

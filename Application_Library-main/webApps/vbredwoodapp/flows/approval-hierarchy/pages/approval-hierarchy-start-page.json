@@ -1,0 +1,528 @@
+{
+  "title": "Approval Hierarchy",
+  "description": "Smart Search page for Approval Hierarchy management with filters for Hierarchy Name, Function Name, and Business Unit",
+  "variables": {
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "encryptedBody": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "getAolUsrRoleLovBuNameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "bu_id",
+        "itemsPath": "items",
+        "responseType": "getAolUsrRoleLovBuNameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "bu_name"
+          ]
+        },
+        "fetchChain": "getAol_usrRoleLovBuNameFetch"
+      }
+    },
+    "getApprovalHierarchyLovHierarchynameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "hierarchy_code",
+        "itemsPath": "items",
+        "responseType": "getApprovalHierarchyLovHierarchynameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "hierarchy_name"
+          ]
+        },
+        "fetchChain": "getApprovalHierarchyLovHierarchynameFetch"
+      }
+    },
+    "getFunctionLovFunctionNameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "function_id",
+        "itemsPath": "items",
+        "responseType": "getFunctionLovFunctionNameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "function_name"
+          ]
+        },
+        "fetchChain": "getFunctionLovFunctionNameFetch"
+      }
+    },
+    "pagination": {
+      "type": {
+        "next": "boolean",
+        "prev": "boolean"
+      },
+      "defaultValue": {
+        "next": false,
+        "prev": false
+      }
+    },
+    "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "HierarchyNameFilter": {
+              "label": "Hierarchy Name",
+              "options": {
+                "optionsData": "[[ $page.variables.getApprovalHierarchyLovHierarchynameListSDP ]]",
+                "optionsKeys": {
+                  "label": "hierarchy_name",
+                  "value": "hierarchy_code"
+                }
+              }
+            },
+            "FunctionNameFilter": {
+              "label": "Function Name",
+              "options": {
+                "optionsData": "[[ $page.variables.getFunctionLovFunctionNameListSDP ]]",
+                "optionsKeys": {
+                  "label": "function_name",
+                  "value": "function_id"
+                }
+              }
+            },
+            "BusinessUnitFilter": {
+              "label": "Business Unit",
+              "options": {
+                "optionsData": "[[ $page.variables.getAolUsrRoleLovBuNameListSDP ]]",
+                "optionsKeys": {
+                  "label": "bu_name",
+                  "value": "bu_id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/approvalHierarcySeachConfig.json' ]]"
+      }
+    },
+    "searchObj": {
+      "type": {
+        "IN_LIMIT": "number",
+        "IN_OFFSET": "number",
+        "KEYWORD": "string",
+        "P_HIERARCHY_ID": "string",
+        "HIERARCHY_CODE": "string",
+        "HIERARCHY_NAME": "string",
+        "FUNCTION_ID": "string",
+        "BUSINESS_UNIT_ID": "string",
+        "ACTIVE_FLAG": "string"
+      },
+      "defaultValue": {
+        "IN_LIMIT": 8,
+        "IN_OFFSET": 0,
+        "P_HIERARCHY_ID": "",
+        "HIERARCHY_CODE": "",
+        "HIERARCHY_NAME": "",
+        "FUNCTION_ID": "",
+        "BUSINESS_UNIT_ID": "",
+        "ACTIVE_FLAG": ""
+      }
+    },
+    "approvalHierarchyADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "ApprovalHierarchyType",
+        "keyAttributes": "hierarchy_id"
+      }
+    }
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getAolUsrRoleLovBuNameResponse": {
+      "endpoint": "getAol_usrRoleLovBuName",
+      "service": "Role",
+      "path": "response"
+    },
+    "@decorators.getApprovalHierarchyLovHierarchynameResponse": {
+      "endpoint": "getApprovalHierarchyLovHierarchyname",
+      "service": "approvalHeirarchy",
+      "path": "response"
+    },
+    "@decorators.getFunctionLovFunctionNameResponse": {
+      "endpoint": "getFunctionLovFunctionName",
+      "service": "Function",
+      "path": "response"
+    },
+    "getAolUsrRoleLovBuNameResponse": {
+      "items": [
+        {
+          "bu_id": "number",
+          "bu_name": "string"
+        }
+      ]
+    },
+    "getApprovalHierarchyLovHierarchynameResponse": {
+      "items": [
+        {
+          "hierarchy_code": "string",
+          "hierarchy_name": "string"
+        }
+      ]
+    },
+    "getFunctionLovFunctionNameResponse": {
+      "items": [
+        {
+          "function_id": "number",
+          "function_name": "string"
+        }
+      ]
+    },
+    "ApprovalHierarchyType": {
+      "hierarchy_id": "number",
+      "object_version_num": "number",
+      "hierarchy_code": "string",
+      "hierarchy_name": "string",
+      "remarks": "string",
+      "function_id": "number",
+      "function_code": "string",
+      "function_name": "string",
+      "business_unit_id": "number",
+      "business_unit_name": "string",
+      "active_flag": "string",
+      "attribute_json": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    }
+  },
+  "chains": {},
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-date-time": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      }
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/smartSearch.css"
+    ]
+  },
+  "constants": {
+    "tableColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Hierarchy Code",
+          "field": "hierarchy_code",
+          "resizable": "enabled",
+          "width": "",
+          "sortable": "enabled",
+          "template": "hierarchy_code",
+          "headerStyle": "white-space: normal; min-width: 160px;",
+          "style": ""
+        },
+        {
+          "headerText": "Hierarchy Name",
+          "field": "hierarchy_name",
+          "resizable": "enabled",
+          "width": "",
+          "sortable": "enabled",
+          "template": "hierarchy_name",
+          "headerStyle": "white-space: normal; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Function Name",
+          "field": "function_name",
+          "resizable": "enabled",
+          "width": "",
+          "template": "function_name",
+          "headerStyle": "white-space: normal; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Business Unit Name",
+          "field": "business_unit_name",
+          "resizable": "enabled",
+          "width": "",
+          "template": "business_unit_name",
+          "headerStyle": "white-space: normal; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "active_flag",
+          "resizable": "enabled",
+          "width": 70,
+          "sortable": "disabled",
+          "template": "active_flag",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Remarks",
+          "field": "remarks",
+          "resizable": "enabled",
+          "width": "",
+          "sortable": "disabled",
+          "template": "remarks",
+          "headerStyle": "white-space: normal; min-width: 200px;",
+          "style": ""
+        }
+      ]
+    },
+    "tableColumnsWithActions": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "width": 75,
+          "sortable": "disabled",
+          "template": "actions",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Hierarchy Code",
+          "field": "hierarchy_code",
+          "resizable": "enabled",
+          "width": "",
+          "sortable": "enabled",
+          "template": "hierarchy_code",
+          "headerStyle": "white-space: normal; min-width: 160px;",
+          "style": ""
+        },
+        {
+          "headerText": "Hierarchy Name",
+          "field": "hierarchy_name",
+          "resizable": "enabled",
+          "width": "",
+          "sortable": "enabled",
+          "template": "hierarchy_name",
+          "headerStyle": "white-space: normal; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Function Name",
+          "field": "function_name",
+          "resizable": "enabled",
+          "width": "",
+          "template": "function_name",
+          "headerStyle": "white-space: normal; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Business Unit Name",
+          "field": "business_unit_name",
+          "resizable": "enabled",
+          "width": "",
+          "template": "business_unit_name",
+          "headerStyle": "white-space: normal; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "active_flag",
+          "resizable": "enabled",
+          "width": 70,
+          "sortable": "disabled",
+          "template": "active_flag",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Remarks",
+          "field": "remarks",
+          "resizable": "enabled",
+          "width": "",
+          "sortable": "disabled",
+          "template": "remarks",
+          "headerStyle": "white-space: normal; min-width: 200px;",
+          "style": ""
+        }
+      ]
+    }
+  },
+  "eventListeners": {
+    "addBtnAction": {
+      "chains": [
+        {
+          "chain": "addAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnNoAction": {
+      "chains": [
+        {
+          "chain": "cancelDeleteAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnYesAction": {
+      "chains": [
+        {
+          "chain": "okDeleteAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "hyperlinkClick": {
+      "chains": [
+        {
+          "chain": "functionAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "iconClick": {
+      "chains": [
+        {
+          "chain": "editAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "iconClick2": {
+      "chains": [
+        {
+          "chain": "deleteActionAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "nxtBtnAction": {
+      "chains": [
+        {
+          "chain": "nextBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "preBtnAction": {
+      "chains": [
+        {
+          "chain": "prevBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "resetBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+  }
+}

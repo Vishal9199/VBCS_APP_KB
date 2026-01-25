@@ -1,0 +1,128 @@
+{
+
+  "id": "pettycashmaster",
+  "description": "Flow main",
+  "defaultPage": "main-start",
+  "chains": {},
+  "services": {},
+  "types": {
+    "@decorators.getApprovalProcessEmployeeListResponse": {
+      "endpoint": "getApprovalProcessEmployeeList",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.postInstances": {
+      "endpoint": "postApiV1Instances",
+      "service": "ProcessApi",
+      "path": "request"
+    },
+    "@decorators.putProcessTerminate": {
+      "endpoint": "putProcessTerminate",
+      "service": "ProcessApi",
+      "path": "request"
+    },
+    "getApprovalProcessEmployeeListResponse": {
+      "items": [
+        {
+          "email_address": "string",
+          "full_name": "string",
+          "person_id": "number",
+          "person_number": "string"
+        }
+      ]
+    },
+    "postInstances": {
+      "dataObject": {
+        "submitFormArgs": {
+          "callSubmitPackage": "string",
+          "p_ACTION_ID": "string",
+          "p_APPR_PROCESS": "string",
+          "p_TRX_ID": "string",
+          "p_TYPE": "string",
+          "p_USER_ID": "string"
+        }
+      },
+      "params": {
+        "applicationName": "string",
+        "applicationVersion": "string",
+        "processName": "string"
+      }
+    },
+    "putProcessTerminate": {
+      "action": "string",
+      "instanceActionProps": {
+        "reason": "string"
+      }
+    }
+
+  },
+  "variables": {
+     "actionValidation": {
+      "type": {
+        "isRpaFormValid": "boolean",
+        "isRpaResponseFormValid": "boolean",
+        "rejectValidation": "string",
+        "isRejectFormValid": "boolean",
+        "rpaFormValid": "string",
+        "rpaResponseValidation": "string",
+        "rpaValidation": "string",
+        "withdrawValidation": "string",
+        "isWithdrawFormValid": "boolean",
+        "reassignValidation": "string",
+        "isReassignFormValid": "boolean",
+        "moreInfoValidation": "string",
+        "isMoreInfoFormValid": "boolean"
+
+      },
+      "defaultValue": {
+        "rejectValidation": "reject-validation",
+        "isRejectFormValid": false,
+        "withdrawValidation": "withdraw-validation",
+        "isWithdrawFormValid": false,
+        "reassignValidation": "reassign-validation",
+        "isReassignFormValid": false,
+        "moreInfoValidation": "moreInfo-validation",
+        "isMoreInfoFormValid": false,
+        "isRpaFormValid": false,
+        "rpaFormValid": "rpa-validation",
+        "isRpaResponseFormValid": false,
+        "rpaResponseValidation": "rparesponse-validation",
+        "rpaValidation": "rpa-validation"
+      }
+    },
+    "updateActionObj": {
+      "type": {
+        "p_action_id": "string",
+        "p_action_user_email": "string",
+        "p_action_code": "string",
+        "p_comments": "string",
+        "p_approver_idcs_id": "string",
+        "p_from_person_email": "string",
+        "p_to_person_id": "string",
+        "p_appr_level": "string",
+        "p_instance_number": "string",
+        "p_more_info_type": "string",
+        "p_trx_id": "string"
+      }
+    },
+    "responseComments": {
+      "type": "string"
+    },
+    "getApprovalProcessEmployeeListListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "person_id",
+        "itemsPath": "items",
+        "responseType": "getApprovalProcessEmployeeListResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "full_name"
+          ]
+        },
+        "fetchChain": "getApprovalProcessEmployeeListFetch"
+      }
+    }
+
+  }
+}

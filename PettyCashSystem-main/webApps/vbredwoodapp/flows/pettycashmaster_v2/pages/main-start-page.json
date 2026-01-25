@@ -1,0 +1,453 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "askHint": {
+      "type": "string",
+      "defaultValue": "Search"
+    },
+    "displayMode": {
+      "type": "string"
+    },
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "functionalPrimaryActions": {
+      "type": "action[]"
+    },
+    "functionalSecondaryActions": {
+      "type": "action[]"
+    },
+    "getGovernateByUserSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "responseType": "getNws_custPettyCashLovGovernate",
+        "itemsPath": "items",
+        "fetchChain": "getNws_custPettyCashLovGovernateFetch",
+        "keyAttributes": "governate_name"
+      }
+    },
+    "getSupplierByGovernateSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "responseType": "GetNws_custPettycashLovSupplier",
+        "itemsPath": "items",
+        "keyAttributes": "supplier_name",
+        "fetchChain": "getNws_custPettyCashLovSupplierFetch"
+      }
+    },
+    "goToParentOption": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "passDeleteKey": {
+      "type": "string"
+    },
+    "postPettycashHeaderVar": {
+      "type": "postPettycashHeaderSearch"
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/mysearchconfiguration.json' ]]"
+      }
+    },
+    "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+
+            "GovernateFilter": {
+              "label": "Governate",
+              "options": {
+                "optionsData": "[[ $page.variables.getGovernateByUserSDP ]]",
+                "optionsKeys": {
+                  "label": "governate_name",
+                  "value": "governate_name"
+                }
+              }
+            },
+            "DateFilter": {
+              "label": "Trx Date",
+              "options": {
+                "field": "trx_date",
+                "startDate": "[[ $variables.trx_start_date ]]",
+                "endDate": "[[ $variables.trx_end_date ]]",
+                "minDate": "2020-01-01",
+                "maxDate": "2025-12-31"
+              }
+            },
+            "SupplierNameFilter": {
+              "label": "Supplier Name",
+              "options": {
+                "optionsData": "[[ $page.variables.getSupplierByGovernateSDP ]]",
+                "optionsKeys": {
+                  "label": "supplier_name",
+                  "value": "supplier_name"
+                }
+              }
+            }
+
+          }
+        }
+      }
+    },
+    "selectContextData": {
+      "type": "vb/ArrayDataProvider"
+    },
+    "selectContextItemText": {
+      "type": "string",
+      "defaultValue": "label"
+    },
+    "selectContextLabelHint": {
+      "type": "string"
+    },
+    "selectContextValue": {
+      "type": "string",
+      "defaultValue": null,
+      "input": "fromUrl"
+    },
+    "selectContextValueItem": {
+      "type": "any"
+    },
+    "tableHeaderADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "postPettycashHeaderSearch",
+        "keyAttributes": "claim_header_id"
+      }
+    },
+    "encPayload": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "encSearchObj": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "pagination": {
+      "type": {
+        "is_next": "boolean",
+        "is_prev": "boolean"
+      }
+    },
+    "SearchObj": {
+      "type": {
+        "in_limit": "string",
+        "in_offset": "string",
+        "p_app_type": "string",
+        "p_created_by": "string",
+        "p_keyword": "string",
+        "p_status_id": "string",
+        "p_claim_header_id": "string",
+        "p_claim_number": "string",
+        "p_governorate": "string",
+        "p_petty_cash_type": "string",
+        "p_supplier_id": "string",
+        "p_supplier_name": "string",
+        "p_from_date": "string",
+        "p_to_date": "string"
+      },
+      "defaultValue": {
+        "in_limit": "10",
+        "in_offset": "0"
+      }
+    },
+    "trx_end_date": {
+      "type": "string",
+      "defaultValue": "2075-0721"
+    },
+    "trx_start_date": {
+      "type": "string",
+      "defaultValue": "2020-07-21"
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getNws_custPettyCashLovGovernate": {
+      "endpoint": "getNws_custPettyCashLovGovernate",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.GetNws_custPettycashLovSupplier": {
+      "endpoint": "getNws_custTankerLovWilayatName",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.postPettycashHeaderSearch": {
+      "endpoint": "postPettycashHeaderSearch",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "action": {
+      "id": "string",
+      "label": "string",
+      "display": "string",
+      "icon": "string"
+    },
+    "getNws_custPettyCashLovGovernate": {
+      "items": [
+        {
+          "address_line1": "string",
+          "attribute2": "string",
+          "city": "string",
+          "country": "string",
+          "governate_name": "string",
+          "supplier_id": "number",
+          "supplier_name": "string",
+          "supplier_number": "string",
+          "supplier_site_code": "string",
+          "supplier_site_id": "number"
+        }
+      ]
+    },
+    "GetNws_custPettycashLovSupplier": {
+      "items": [
+        {
+          "address_line1": "string",
+          "attribute2": "string",
+          "city": "string",
+          "country": "string",
+          "governate_name": "string",
+          "supplier_id": "number",
+          "supplier_name": "string",
+          "supplier_number": "string",
+          "supplier_site_code": "string",
+          "supplier_site_id": "number"
+        }
+      ]
+    },
+    "postPettycashHeaderSearch": {
+          "cash_in_hand": "number",
+          "claim_amt": "number",
+          "claim_header_id": "number",
+          "claim_number": "string",
+          "close_balance_amt": "number",
+          "comments": "string",
+          "created_by": "string",
+          "created_date": "string",
+          "governorate": "string",
+          "integration_err_message": "any",
+          "integration_status_code": "string",
+          "integration_status_id": "number",
+          "integration_status_name": "string",
+          "last_updated_by": "string",
+          "last_updated_date": "string",
+          "last_updated_login": "string",
+          "line_count": "number",
+          "object_version_num": "number",
+          "open_balance_amt": "number",
+          "petty_cash_type": "string",
+          "receipt_amt": "number",
+          "receipt_count": "number",
+          "request_date": "string",
+          "saas_transaction_id": "number",
+          "saas_transaction_number": "string",
+          "staff_iou_amt": "number",
+          "status_code": "string",
+          "status_id": "number",
+          "status_name": "string",
+          "supplier_id": "number",
+          "supplier_name": "string",
+          "supplier_number": "string"
+    }
+
+  },
+  "eventListeners": {
+    "addBtnAction": {
+      "chains": [
+        {
+          "chain": "createClaimAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "cancelDeleteAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "deleteOkAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "deleteKey": "$event.detail.key"
+          }
+        }
+      ]
+    },
+    "deleteBtnAction": {
+      "chains": [
+        {
+          "chain": "deleteAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "editBtnAction": {
+      "chains": [
+        {
+          "chain": "editAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "nextBtnAction": {
+      "chains": [
+        {
+          "chain": "nextBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "preBtnAction": {
+      "chains": [
+        {
+          "chain": "prevBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "resetBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-list-view": {
+        "path": "ojs/ojlistview"
+      },
+      "oj-progress-bar": {
+        "path": "ojs/ojprogress-bar"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-collection-container": {
+        "path": "oj-sp/collection-container/loader"
+      },
+      "oj-sp-empty-state": {
+        "path": "oj-sp/empty-state/loader"
+      },
+      "oj-sp-list-item-template": {
+        "path": "oj-sp/list-item-template/loader"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      }
+
+    },
+    "modules": {
+      "ojConverterNumber": {
+        "path": "ojs/ojconverter-number"
+      },
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      },
+      "ojValidationNumber": {
+        "path": "ojs/ojvalidation-number"
+      }
+    },
+    "css": [
+      "/resources/css/smartSearch.css"
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+    "description": "Smart Search Configuration for Email Template Management Application",
+    "filters": {
+        "HeaderTemplateNameFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Template Name",
+            "options": {
+                "field": "template_code",
+                "optionsData": "[[ $search.filters.HeaderTemplateNameFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.HeaderTemplateNameFilter.options.optionsKeys ]]"
+            },
+            "data": {}
+        }
+    }
+}

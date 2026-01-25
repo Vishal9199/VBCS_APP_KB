@@ -1,0 +1,16 @@
+{
+    "backends": {
+        "ORDS_CUST": {
+            "servers": [
+                {
+                    "url": "vb-catalog://backends.tenant/ORDS_CUST",
+                    "description": "Overridden Default Server",
+                    "x-vb": {
+                        "authentication": {},
+                        "forceProxy": "cors"
+                    }
+                }
+            ]
+        }
+      }
+}

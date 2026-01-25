@@ -1,0 +1,34 @@
+{
+    "items": [
+        {
+            "template_code": "DEP_ONBOARD_MAIL",
+            "template_name": "Employee Onboarding Notification"
+        },
+        {
+            "template_code": "TEST_ONBOARD_MAIL",
+            "template_name": "Employee Onboarding Notification"
+        },
+        {
+            "template_code": "NWS_TANKER_MASTER",
+            "template_name": "Tanker Master Registration Notification"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 3,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/email/lov/template?search_var"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/metadata-catalog/email/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/email/lov/template?search_var"
+        }
+    ]
+}

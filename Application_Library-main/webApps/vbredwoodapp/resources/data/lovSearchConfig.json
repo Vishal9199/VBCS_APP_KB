@@ -1,0 +1,27 @@
+{
+    "description": "Smart Search Configuration for LOV Configuration Management",
+    "filters": {
+        "LovFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "LOV Name",
+            "options": {
+                "field": "lov_config_id",
+                "optionsData": "[[ $search.filters.LovFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.LovFilter.options.optionsKeys ]]"
+            },
+            "data": {
+            }
+        },
+        "LovTypeFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "LOV Type",
+            "options": {
+                "field": "lov_type",
+                "optionsData": "[[ $search.filters.LovTypeFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.LovTypeFilter.options.optionsKeys ]]"
+            },
+            "data": {
+            }
+        }
+    }
+}

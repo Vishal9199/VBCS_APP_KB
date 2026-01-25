@@ -1,0 +1,8 @@
+{
+  "id": "data-restriction",
+  "description": "Flow main",
+  "defaultPage": "data-restriction-start",
+  "services": {},
+  "types": {},
+  "variables": {}
+}

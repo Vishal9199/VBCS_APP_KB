@@ -1,0 +1,27 @@
+{
+    "items": [
+        {
+            "application_id": 4,
+            "application_code": "TEST1234",
+            "application_name": "Test123"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/application/lov/active/application"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/metadata-catalog/application/lov/active/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://owwscoratpuat.nws.nama.om/ords/nws_aol/application/lov/active/application"
+        }
+    ]
+}

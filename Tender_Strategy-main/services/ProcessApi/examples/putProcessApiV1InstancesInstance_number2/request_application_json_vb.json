@@ -1,0 +1,6 @@
+{
+    "action": "SUSPEND",
+    "instanceActionProps": {
+        "reason": "Suspending for performing the alter flow by the system."
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "items": [
+        {
+            "approver_level": 1,
+            "person_id": 100000005247752,
+            "person_number": "3064",
+            "person_name": "Fahad Issa Mohammed Al Harrasi فهد  الحراصي",
+            "person_emailid": "fahad.harasi@testowwsc.nama.om"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/common/previous/approval/list"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/common/previous/approval/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/common/previous/approval/list"
+        }
+    ]
+}

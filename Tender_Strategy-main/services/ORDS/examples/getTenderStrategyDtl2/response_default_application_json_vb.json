@@ -1,0 +1,71 @@
+{
+    "items": [
+        {
+            "strategy_hdr_id": 361,
+            "object_version_num": 0,
+            "request_number": "TR-361-14012026",
+            "request_date": "2026-01-14T11:23:33Z",
+            "status_id": 26,
+            "status_code": "DRA",
+            "status_name": "Draft",
+            "person_id": 100000005247814,
+            "person_number": "4097",
+            "full_name": "Salim Hamed Saud AL Suleimani سالم  السليماني",
+            "gender": "M",
+            "department_name": "IT Service Delivery_SN",
+            "grade_name": "10",
+            "job_name": "Section Head",
+            "position_name": "Head of IT Service Delivery",
+            "location_name": "Nizwa",
+            "directorate": "Information & Communication Technology_DI",
+            "division": null,
+            "senior_directorate": null,
+            "comments": "2026-01-14_Comment",
+            "scm_team": "Procurement",
+            "tender_type": "OPEN",
+            "tender_category": "OPEX",
+            "tender_category_des": "Operations & Expenses",
+            "tender_committe": "Major",
+            "pr_number": "NW-PR-10016-2026",
+            "pr_title": "TEST EXPENSE PR",
+            "pr_estimated_value": 50,
+            "currency": "OMR",
+            "contract_holder_id": 100000005247814,
+            "holder_full_name": "Salim Hamed Saud AL Suleimani سالم  السليماني-4097",
+            "contract_owner_id": 100000005247814,
+            "owner_full_name": "Salim Hamed Saud AL Suleimani سالم  السليماني-4097",
+            "procurement_plan": "Y",
+            "variation_type": null,
+            "tender_rfq_number": null,
+            "mom_number": null,
+            "mom_schedule_date": null,
+            "mom_start_time": null,
+            "mom_end_time": null,
+            "mom_notify": null,
+            "po_number": null,
+            "created_by": "yuvashankar.t@4iapps.com",
+            "created_date": "2026-01-14T11:23:33Z",
+            "last_updated_by": "yuvashankar.t@4iapps.com",
+            "last_updated_date": "2026-01-14T11:23:33Z",
+            "last_updated_login": "yuvashankar.t@4iapps.com"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/tender/strategy/dtl"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/tender/strategy/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/tender/strategy/dtl"
+        }
+    ]
+}

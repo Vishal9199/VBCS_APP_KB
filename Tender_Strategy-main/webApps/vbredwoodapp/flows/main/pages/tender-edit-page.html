@@ -1,0 +1,1136 @@
+<style>
+  #background .oj-text-field-container {
+    min-height: 10rem !important;
+  }
+
+  #objective .oj-text-field-container {
+    min-height: 10rem !important;
+  }
+
+  #summaryOfScope .oj-text-field-container {
+    min-height: 20rem !important;
+  }
+
+  #techEvaluation .oj-text-field-container {
+    min-height: 25rem !important;
+  }
+
+  #comEvaluation .oj-text-field-container {
+    min-height: 25rem !important;
+  }
+
+  #costEstimate .oj-text-field-container {
+    min-height: 15rem !important;
+  }
+
+  #icvMinReq .oj-text-field-container {
+    min-height: 25rem !important;
+  }
+
+  #divisionRequirement .oj-text-field-container {
+    min-height: 15rem !important;
+  }
+
+  .BaseButtonStyles_styles_variants_borderless_base__jvi3ds1b {
+    background-color: #868686;
+    border-color: var(--oj-c-EXPERIMENTAL-DO-NOT-USE-base-button-variants-borderless-base-border-color);
+    color: var(--oj-c-EXPERIMENTAL-DO-NOT-USE-base-button-variants-borderless-base-color);
+  }
+
+  .oj-button-toggle.oj-default.oj-button-cta-chrome,
+  .oj-button-toggle.oj-focus-only.oj-button-cta-chrome,
+  .oj-button.oj-default.oj-button-cta-chrome .oj-button-button,
+  .oj-button.oj-focus-only.oj-button-cta-chrome .oj-button-button {
+    background-color: #ffffff !important;
+    border-color: var(--oj-button-call-to-action-chrome-border-color);
+    color: rgb(0 0 0);
+  }
+
+  .oj-collapsible-header {
+    background-color: #115858 !important;
+    border-bottom: 1px solid #115858 !important;
+  }
+
+  .oj-collapsible-open-icon:before {
+    color: white !important;
+  }
+
+  a.oj-component-icon.oj-clickable-icon-nocontext.oj-collapsible-header-icon.oj-collapsible-close-icon {
+    color: white !important;
+  }
+
+  .oj-collapsible-header-wrapper {
+    background-color: #115858 !important;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+</style>
+
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div>
+        <oj-sp-advanced-create-edit id="tender_strategy_edit_page" page-title="Tender Strategy Management"
+          page-subtitle=" " display-options.responsive-padding="on" display-options.next="off"
+          display-options.bottom-actions="on" primary-action.label="Close"
+          secondary-actions="[[ $variables.aToolGeneric ]]"
+          badge.status='{{ ($variables.dummyStatusCode==="DRA")?"neutral":($variables.dummyStatusCode==="APR")?"success":($variables.dummyStatusCode==="REJ")?"danger":($variables.dummyStatusCode==="PEN")?"info":"warning"}}'
+          badge.text="[[ $variables.postPayloadTypeVar.request_number ]]"
+          on-sp-primary-action="[[$listeners.tenderStrategyEditPageSpPrimaryAction]]"
+          on-sp-secondary-action="[[$listeners.tenderStrategyEditPageSpSecondaryAction]]">
+
+          <div slot="main" style="padding-top: 0; margin-top: 0;">
+            <div style="margin-top: 0;">
+
+              <!-- MOM Information Section -->
+              <!-- <div class="oj-helper-justify-content-flex-end oj-flex-bar-end"
+                style="margin-top: 3px; margin-bottom: 3px; margin-right: 9px;">
+                <oj-button label="Attach" on-oj-action="[[$listeners.buttonAction2]]" class="oj-button-sm"
+                  chroming="outlined" id="attachBtn">Attachment
+                  <span class="oj-ux-ico-attach-add" slot="startIcon" style="color: white;"></span>
+                </oj-button>
+              </div> -->
+              <oj-collapsible id="mom-info-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+                style="margin-top: 0;" disabled="true">
+                <span slot="header" style="font-weight: bold; color: #ffffff;">MOM Information</span>
+                <div style="padding: 1rem;">
+                  <oj-validation-group id="mom_info_validation" valid="{{ $variables.allFormsValidObj.m_info }}">
+                    <oj-form-layout max-columns="3" label-edge="start" colspan-wrap="wrap"
+                      user-assistance-density="compact" direction="column">
+
+                      <!-- Row 1 -->
+                      <oj-input-text id="requester" label-hint="Requester" placeholder="Requester"
+                        value="{{ $application.variables.getEmployeeDetailTypeVar.full_name }}"
+                        style="width: 16rem; margin-bottom: -6px;" user-assistance-density="compact" disabled="true">
+                      </oj-input-text>
+                      <!-- <oj-select-single id="requester" label-hint="Requester" value="{{ $variables.postPayloadTypeVar.person_id }}"
+                        style="width: 16rem;"> -->
+
+                      <oj-input-text id="request_number" label-hint="Request Number"
+                        value="{{ $variables.postPayloadTypeVar.request_number }}"
+                        style="width: 16rem; margin-bottom: -6px;" user-assistance-density="compact" disabled="true"
+                        placeholder="Request Number">
+                      </oj-input-text>
+
+                      <!-- <oj-input-text id="bulk_approval" label-hint="Bulk Approval"
+                            placeholder="No" value="No" readonly="true" style="width: 16rem;">
+                           </oj-input-text> -->
+
+                      <!-- Row 2 -->
+                      <oj-input-text id="division" label-hint="Division" style="width: 16rem; margin-bottom: -6px;"
+                        value="{{ $application.variables.getEmployeeDetailTypeVar.division }}"
+                        user-assistance-density="compact" disabled="true" placeholder="Division">
+                      </oj-input-text>
+
+                      <oj-input-text id="department" label-hint="Department" style="width: 16rem; margin-bottom: -6px;"
+                        value="{{ $application.variables.getEmployeeDetailTypeVar.department_name }}"
+                        user-assistance-density="compact" disabled="true">
+                      </oj-input-text>
+
+                      <!-- Row 3 -->
+                      <!-- <oj-select-single 
+                        id="scm_team" 
+                        label-hint="SCM Team"
+                        value="{{ $variables.postPayloadTypeVar.scm_team }}"
+                        style="width: 16rem;">
+                      </oj-select-single> -->
+                      <oj-input-text id="location" label-hint="Location" placeholder="Online/Offline"
+                        value="{{ $application.variables.getEmployeeDetailTypeVar.location_name }}"
+                        style="width: 16rem; margin-bottom: -6px;" user-assistance-density="compact" disabled="true">
+                      </oj-input-text>
+                      <oj-radioset label-hint="SCM Team" class="oj-choice-direction-row"
+                        value="{{ $variables.postPayloadTypeVar.scm_team }}" style="width: 15rem; margin-bottom: -6px;"
+                        user-assistance-density="compact" required="true" disabled="true">
+                        <oj-option value="Contract">Contract</oj-option>
+                        <oj-option value="Procurement">Procurement</oj-option>
+                      </oj-radioset>
+
+                      <!-- <oj-select-single 
+                        id="tender_type" 
+                        label-hint="Tender Type"
+                        value="{{ $variables.postPayloadTypeVar.tender_type }}"
+                        style="width: 16rem;">
+                      </oj-select-single> -->
+                      <oj-radioset label-hint="Tender Type" class="oj-choice-direction-row"
+                        value="{{ $variables.postPayloadTypeVar.tender_type }}"
+                        style="width: 12rem; margin-bottom: -6px;" user-assistance-density="compact" required="true">
+                        <oj-option value="SINGLE">Single</oj-option>
+                        <oj-option value="OPEN">Open</oj-option>
+                      </oj-radioset>
+
+                      <oj-select-single id="variation_type" label-hint="Variation Type"
+                        value="{{ $variables.postPayloadTypeVar.variation_type }}" style="width: 16rem;"
+                        data="[[ $flow.variables.variationTypeADP ]]">
+                      </oj-select-single>
+
+                      <oj-radioset label-hint="Tender Category" class="oj-choice-direction-row"
+                        value="{{ $variables.postPayloadTypeVar.tender_category }}"
+                        style="width: 12rem; margin-bottom: -6px;" user-assistance-density="compact" required="true">
+                        <oj-option value="CAPEX">CAPEX</oj-option>
+                        <oj-option value="OPEX">OPEX</oj-option>
+                      </oj-radioset>
+
+                      <!-- Row 4 -->
+                      <!-- <oj-select-single 
+                        id="tender_category" 
+                        label-hint="Tender Category"
+                        value="{{ $variables.postPayloadTypeVar.tender_category }}"
+                        style="width: 16rem;">
+                      </oj-select-single> -->
+
+                      <oj-input-text id="category_description" label-hint="Category Desc."
+                        value="{{ $variables.postPayloadTypeVar.tender_category_des }}"
+                        style="width: 16rem; margin-bottom: -6px;" disabled="true">
+                      </oj-input-text>
+
+                      <oj-input-text id="strategy_status" label-hint="Status" style="width: 16rem; margin-bottom: -6px;"
+                        disabled="true" value="{{ $variables.postPayloadTypeVar.status_name }}">
+                      </oj-input-text>
+
+                      <!-- <oj-select-single 
+                        id="tender_committe" 
+                        label-hint="Tender Committe"
+                        value="{{ $variables.postPayloadTypeVar.tender_committe }}"
+                        style="width: 16rem;">
+                      </oj-select-single> -->
+                      <oj-radioset label-hint="Tender Committe" class="oj-choice-direction-row"
+                        value="{{ $variables.postPayloadTypeVar.tender_committe }}" style="margin-bottom: -6px;"
+                        required="true">
+                        <oj-option value="Minor">Minor</oj-option>
+                        <oj-option value="Major">Major</oj-option>
+                      </oj-radioset>
+
+                      <!-- Row 5 -->
+                      <!-- <oj-input-text id="mom_number" label-hint="MOM Number" placeholder="Auto Generated" value="65543"
+                        readonly="true" style="width: 16rem; margin-bottom: -6px;">
+                      </oj-input-text> -->
+                      <oj-input-date id="request_date" label-hint="Request Date"
+                        value="{{ $variables.postPayloadTypeVar.request_date }}"
+                        converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'
+                        style="width: 16rem; margin-bottom: -6px;" user-assistance-density="compact" disabled="true">
+                      </oj-input-date>
+
+                      <oj-input-date id="schedule_date" label-hint="Schedule Date"
+                        value="{{ $variables.postPayloadTypeVar.request_date }}"
+                        converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'
+                        style="width: 16rem; margin-bottom: -6px;" required="true">
+                      </oj-input-date>
+
+                      <!-- <div style="display: flex; gap: 1.5rem; align-items: center; margin-bottom: -6px;"
+                        class="oj-helper-justify-content-flex-end">
+                        <oj-input-text id="schedule_from_time" label-hint="Schedule From Time" placeholder="00:00" value="00:00"
+                          style="width: 7rem;">
+                        </oj-input-text>
+                      
+                        <oj-input-text id="schedule_to_time" label-hint="Schedule To Time" placeholder="01:15" value="01:15"
+                          style="width: 7rem;">
+                        </oj-input-text>
+                      </div> -->
+
+                    </oj-form-layout>
+                  </oj-validation-group>
+                </div>
+              </oj-collapsible>
+
+              <!-- PR and PO Details Section -->
+              <oj-collapsible id="pr-po-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+                style="margin-top: 1rem;" disabled="true">
+                <span slot="header" style="font-weight: bold; color: #ffffff;">PR and PO details</span>
+                <div style="padding: 1rem;">
+                  <oj-validation-group id="pr_po_validation" valid="{{ $variables.allFormsValidObj.pr_po_details }}">
+                    <oj-form-layout max-columns="3" label-edge="start" label-width="45%" colspan-wrap="wrap"
+                      user-assistance-density="compact">
+
+                      <!-- Row 1 -->
+                      <!-- <oj-select-single id="pr_number" label-hint="PR Number"
+                        value="{{ $variables.postPayloadTypeVar.pr_number }}" style="width: 16rem;"
+                        data="[[$variables.getTenderStrategyLovPrDtlListSDP]]" item-text="pr_number">
+                      </oj-select-single> -->
+                      <oj-select-single id="pr_number" label-hint="PR Number"
+                        value="{{ $variables.postPayloadTypeVar.pr_number }}" style="width: 16rem;"
+                        data="[[$variables.getTenderStrategyLovPrDtlListSDP]]" item-text="pr_number"
+                        placeholder="PR Number/Title/Amount" required="true"
+                        on-value-item-changed="[[$listeners.prNumberValueItem]]">
+
+                        <!-- Collection Template: Table View in Dropdown -->
+                        <template slot="collectionTemplate" data-oj-as="collection">
+                          <oj-table id="prLovTable" data="[[collection.data]]" selection-mode.row="single"
+                            on-oj-row-action="[[collection.handleRowAction]]" class="oj-select-results"
+                            selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}" columns='[
+                              {
+                                "headerText": "PR Number", "field": "pr_number", "width": 180, "template": "prNumberTemplate", "sortable": "disabled", "resizable": "enabled"
+                              },
+                              {
+                                "headerText": "Title", "field": "title", "width": 200, "template": "titleTemplate", "sortable": "disabled", "resizable": "enabled"
+                              },
+                              {
+                                "headerText": "Amount", "field": "amount", "width": 120, "template": "amountTemplate", "sortable": "disabled", "resizable": "enabled", "style": "text-align: right;"
+                              },
+                              {
+                                "headerText": "Currency", "field": "currency_code", "width": 100, "template": "currencyTemplate", "sortable": "disabled", "resizable": "enabled"
+                              }
+                            ]' scroll-policy="loadMoreOnScroll" class="oj-sm-width-full" display="grid"
+                            style="height: 300px; width: 100%;">
+
+                            <!-- PR Number Template -->
+                            <template slot="prNumberTemplate">
+                              <span style="font-weight: bold;">
+                                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                              </span>
+                            </template>
+
+                            <!-- Title Template -->
+                            <template slot="titleTemplate">
+                              <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                            </template>
+
+                            <!-- Amount Template -->
+                            <template slot="amountTemplate">
+                              <oj-bind-text value="[[$application.functions.formatToOMR($current.data)]]">
+                              </oj-bind-text>
+                            </template>
+
+                            <!-- Currency Template -->
+                            <template slot="currencyTemplate">
+                              <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                            </template>
+
+                          </oj-table>
+                        </template>
+
+                        <!-- Item Template: Display selected value -->
+                        <template slot="itemTemplate" data-oj-as="item">
+                          <div class="oj-flex">
+                            <div class="oj-flex-item" style="flex: 1;">
+                              <span style="font-weight: bold;">
+                                <oj-bind-text value="[[item.data.pr_number]]"></oj-bind-text>
+                              </span>
+                              <span style="margin-left: 10px; color: #666;">
+                                <oj-bind-text value="[[item.data.title]]"></oj-bind-text>
+                              </span>
+                            </div>
+                            <div class="oj-flex-item" style="text-align: right;">
+                              <span style="font-weight: bold;">
+                                <oj-bind-text value="[[item.data.amount]]"></oj-bind-text>
+                              </span>
+                              <span style="margin-left: 5px;">
+                                <oj-bind-text value="[[item.data.currency_code]]"></oj-bind-text>
+                              </span>
+                            </div>
+                          </div>
+                        </template>
+
+                      </oj-select-single>
+                      <!-- <oj-input-text id="pr_number" label-hint="PR Number" placeholder="PR Number"
+                        style="width: 16rem; margin-bottom: -6px;" value="{{ $variables.postPayloadTypeVar.pr_number }}"
+                        required="true">
+                      </oj-input-text> -->
+
+                      <!-- Row 2 -->
+                      <oj-text-area id="pr_title" label-hint="Project/Tender Title" placeholder="Project/Tender Title"
+                        value="{{ $variables.postPayloadTypeVar.pr_title }}" style="width: 16rem; margin-bottom: -6px;"
+                        resize-behavior="vertical" required="true" rows="1" disabled="true"></oj-text-area>
+                      <oj-input-number id="estimated_value" label-hint="Estimated Value" placeholder="Estimated Value"
+                        value="{{ $variables.postPayloadTypeVar.pr_estimated_value }}"
+                        style="width: 16rem;margin-bottom: -6px;" required="true"
+                        class="oj-form-control-text-align-right" disabled="true"
+                        converter='[[ new $imports.ojConverterNumber.IntlNumberConverter({"minimumFractionDigits":3}) ]]'>
+                      </oj-input-number>
+
+                      <oj-select-single id="currency" label-hint="Currency"
+                        value="{{ $variables.postPayloadTypeVar.currency }}" style="width: 16rem; margin-bottom: -6px;"
+                        on-value-item-changed="[[$listeners.currencyValueItem]]"
+                        data="[[$variables.getCommonLovCurrencyListSDP2]]" item-text="currency_code"
+                        placeholder="Currency" required="true">
+                      </oj-select-single>
+
+                      <!-- Row 3 -->
+                      <oj-select-single id="contract_holder" label-hint="Contract Holder"
+                        value="{{ $variables.postPayloadTypeVar.contract_holder_id }}"
+                        style="width: 16rem; margin-bottom: -6px;" data="[[ $variables.contractHolder_SDP ]]"
+                        item-text="display_name" placeholder="Contract Holder" required="true">
+                      </oj-select-single>
+
+                      <oj-select-single id="contract_owner" label-hint="Contract Owner Name"
+                        value="{{ $variables.postPayloadTypeVar.contract_owner_id }}"
+                        style="width: 16rem; margin-bottom: -6px;" data="[[ $variables.contractOwner_SDP ]]"
+                        item-text="display_name" placeholder="Contract Owner" required="true">
+                      </oj-select-single>
+
+                      <!-- <oj-input-text id="scm_focal_point" label-hint="SCM Focal Point" placeholder="SCM Focal Point"
+                        style="width: 16rem; margin-bottom: -6px;">
+                      </oj-input-text> -->
+
+                      <!-- Row 4 -->
+                      <!-- <div style="display: flex; align-items: end; gap: 0.5rem;">
+                        <span style="min-width: 45%;">Procurement Plan</span> -->
+                      <oj-switch id="procurement_plan"
+                        value="{{ $variables.postPayloadTypeVar.procurement_plan === 'Y' ? true : false }}"
+                        label-hint="Procurement Plan" style="margin-bottom: -6px;"></oj-switch>
+                      <!-- </div> -->
+
+                    </oj-form-layout>
+                  </oj-validation-group>
+                </div>
+              </oj-collapsible>
+
+              <!-- Tender/RFQ Details Section -->
+              <oj-collapsible id="tender-rfq-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+                style="margin-top: 1rem;" disabled="true">
+                <span slot="header" style="font-weight: bold; color: #ffffff;">Tender/RFQ Details</span>
+                <div style="padding: 1rem;">
+                  <oj-validation-group id="tender_rfq_validation">
+                    <oj-form-layout max-columns="3" label-edge="start" label-width="45%" colspan-wrap="wrap"
+                      user-assistance-density="compact">
+
+                      <!-- Row 1 -->
+                      <oj-input-text id="tender_rfq_number" label-hint="Tender/RFQ Number"
+                        placeholder="Tender/RFQ Number" style="width: 16rem; margin-bottom: -6px;"
+                        value="{{ $variables.tenderRfqDetailVar.tender_rfq_number }}" disabled="true">
+                      </oj-input-text>
+
+                      <oj-input-date id="tender_rfq_creation_date" label-hint="Tender/RFQ Creation Date"
+                        value="{{ $variables.tenderRfqDetailVar.tender_rfq_creation_date }}"
+                        style="width: 16rem; margin-bottom: -6px;" disabled="true">
+                      </oj-input-date>
+
+                      <oj-input-date id="technical_opening_date" label-hint="Technical Opening Date"
+                        value="{{ $variables.tenderRfqDetailVar.technical_opening_date }}"
+                        style="width: 16rem; margin-bottom: -6px;" disabled="true">
+                      </oj-input-date>
+
+                      <!-- Row 2 -->
+                      <oj-input-date id="commercial_closing_date" label-hint="Commercial Closing Date"
+                        value="{{ $variables.tenderRfqDetailVar.commercial_closing_date }}"
+                        style="width: 16rem; margin-bottom: -6px;" disabled="true">
+                      </oj-input-date>
+
+                      <oj-input-date id="contract_start_date" label-hint="Contract Start Date"
+                        value="{{ $variables.tenderRfqDetailVar.contract_start_date }}"
+                        style="width: 16rem; margin-bottom: -6px;" disabled="true">
+                      </oj-input-date>
+
+                      <oj-input-text id="tender_rfq_status" label-hint="Tender/RFQ Status" placeholder="Status"
+                        style="width: 16rem; margin-bottom: -6px;"
+                        value="{{ $variables.tenderRfqDetailVar.tender_rfq_status }}" disabled="true">
+                      </oj-input-text>
+
+                      <!-- Row 3 -->
+                      <oj-input-text id="technically_qualified" label-hint="Technically Qualified"
+                        placeholder="Technically Qualified" style="width: 16rem; margin-bottom: -6px;"
+                        value="{{ $variables.tenderRfqDetailVar.technically_qualified }}" disabled="true">
+                      </oj-input-text>
+
+                      <oj-input-date id="floated_date" label-hint="Floated Date"
+                        value="{{ $variables.tenderRfqDetailVar.floated_date }}"
+                        style="width: 16rem; margin-bottom: -6px;" disabled="true">
+                      </oj-input-date>
+
+                      <oj-input-date id="technical_closing_date" label-hint="Technical Closing Date"
+                        value="{{ $variables.tenderRfqDetailVar.technical_closing_date }}"
+                        style="width: 16rem; margin-bottom: -6px;" disabled="true">
+                      </oj-input-date>
+
+                      <!-- Row 4 -->
+                      <oj-input-date id="loa_issued_date" label-hint="LOA Issued Date"
+                        value="{{ $variables.tenderRfqDetailVar.loa_issued_date }}"
+                        style="width: 16rem; margin-bottom: -6px;" disabled="true">
+                      </oj-input-date>
+
+                      <oj-input-date id="contract_end_date" label-hint="Contract End Date"
+                        value="{{ $variables.tenderRfqDetailVar.contract_end_date }}"
+                        style="width: 16rem; margin-bottom: -6px;" disabled="true">
+                      </oj-input-date>
+
+                      <oj-input-number id="no_of_bidders_purchase" label-hint="Number of Bidders Purchase"
+                        value="{{ $variables.tenderRfqDetailVar.no_of_bidders_purchase }}"
+                        style="width: 16rem; margin-bottom: -6px;" disabled="true"
+                        class="oj-form-control-text-align-right">
+                      </oj-input-number>
+
+                      <!-- Row 5 -->
+                      <oj-input-number id="count_of_floated_to_award_days" label-hint="Count of Floated to Award Days"
+                        value="{{ $variables.tenderRfqDetailVar.count_of_floated_to_award_days }}"
+                        style="width: 16rem; margin-bottom: -6px;" disabled="true"
+                        class="oj-form-control-text-align-right">
+                      </oj-input-number>
+
+                      <oj-input-date id="bid_submission_closing_date" label-hint="Bid Submission Closing Date"
+                        value="{{ $variables.tenderRfqDetailVar.bid_submission_closing_date }}"
+                        style="width: 16rem; margin-bottom: -6px;" disabled="true">
+                      </oj-input-date>
+
+                      <oj-input-date id="commercial_opening_date" label-hint="Commercial Opening Date"
+                        value="{{ $variables.tenderRfqDetailVar.commercial_opening_date }}"
+                        style="width: 16rem; margin-bottom: -6px;" disabled="true">
+                      </oj-input-date>
+
+                      <!-- Row 6 -->
+                      <oj-input-number id="number_of_bidders_submitted" label-hint="Number of Bidders Submitted"
+                        value="{{ $variables.tenderRfqDetailVar.number_of_bidders_submitted }}"
+                        style="width: 16rem; margin-bottom: -6px;" disabled="true"
+                        class="oj-form-control-text-align-right">
+                      </oj-input-number>
+
+                      <oj-input-number id="award_value" label-hint="Award Value"
+                        value="{{ $variables.tenderRfqDetailVar.award_value }}"
+                        style="width: 16rem; margin-bottom: -6px;" disabled="true"
+                        class="oj-form-control-text-align-right"
+                        converter='[[ new $imports.ojConverterNumber.IntlNumberConverter({"minimumFractionDigits":3}) ]]'>
+                      </oj-input-number>
+                      <oj-text-area id="tender_description" label-hint="Tender Description"
+                        placeholder="Tender Description" value="{{ $variables.tenderRfqDetailVar.tender_description }}"
+                        style="width: 100%; margin-bottom: -6px;" resize-behavior="vertical" disabled="true" rows="2">
+                      </oj-text-area>
+
+                    </oj-form-layout>
+                  </oj-validation-group>
+                </div>
+              </oj-collapsible>
+
+              <div class="oj-flex oj-sm-justify-content-flex-end" style="gap:15px; padding-right : 15px;">
+                <oj-button label="Technical Evaluation" id="technical-evaluation-btn"
+                  disabled="[[ !$variables.tenderRfqDetailVar.tender_rfq_number ]]"
+                  on-oj-action="[[$listeners.technicalEvaluationBtnAction]]"></oj-button>
+
+                <oj-button label="Commercial Evaluation" id="commercial-evaluation-btn"
+                  disabled="[[ !$variables.tenderRfqDetailVar.tender_rfq_number ]]"
+                  on-oj-action="[[$listeners.commercialEvaluationBtnAction]]"></oj-button>
+
+              </div>
+
+              <!-- MOM Details Tabbed Section -->
+              <div class="demo-tabbar-container oj-panel oj-selected" style="margin-top: 1rem;">
+                <oj-tab-bar id="mom-tab-bar" edge="top" selection="{{ $variables.selectedMOMTab }}" class="">
+                  <ul>
+                    <li id="scope-tab">
+                      <a href="#" style="font-size: larger; font-weight: bold;" aria-controls="scope-content"
+                        id="scope-link">Summary of Scope for Work</a>
+                    </li>
+                    <li id="cost-tab">
+                      <a href="#" style="font-size: larger; font-weight: bold;" aria-controls="cost-content"
+                        id="cost-link">Cost Estimate</a>
+                    </li>
+                    <li id="technical-tab">
+                      <a href="#" style="font-size: larger; font-weight: bold;" aria-controls="technical-content"
+                        id="technical-link">Technical Evaluation Criteria</a>
+                    </li>
+                    <li id="commercial-tab">
+                      <a href="#" style="font-size: larger; font-weight: bold;" aria-controls="commercial-content"
+                        id="commercial-link">Commercial Evaluation Criteria</a>
+                    </li>
+                    <li id="icv-tab">
+                      <a href="#" style="font-size: larger; font-weight: bold;" aria-controls="icv-content"
+                        id="icv-link">ICV Minimum Requirement</a>
+                    </li>
+                    <li id="division-tab">
+                      <a href="#" style="font-size: larger; font-weight: bold;" aria-controls="division-content"
+                        id="division-link">Division's Recommendation</a>
+                    </li>
+                  </ul>
+                </oj-tab-bar>
+              </div>
+
+              <!-- MOM Content Switcher -->
+              <div class="oj-panel oj-selected demo-tabbar-container">
+                <oj-switcher value="{{ $variables.selectedMOMTab }}">
+
+                  <!-- Objective and Background Section -->
+                  <div slot="scope-tab" id="scope-content" role="tabpanel" aria-labelledby="scope-tab">
+                    <div class="demo-content">
+                      <oj-form-layout max-columns="2" label-edge="top" label-width="15%" colspan-wrap="wrap"
+                        class="oj-sm-12 oj-formlayout-full-width">
+
+                        <oj-text-area id="objective" label-hint="Objective"
+                          placeholder="(Example for reference: The objective of this presentation is to get MITC approval for issue of an Public Tender / Limited Tender for procurement of the above mentioned item)."
+                          value="{{ $variables.postPayloadTypeVar.tender_objective }}" style="width: 100%;" rows="4">
+                        </oj-text-area>
+
+                        <oj-text-area id="background" label-hint="Background"
+                          placeholder="(Example for reference: Operations department has a requirement for the supply of additional 16 nos. of membrane double deck units EK400 (SUS304 un-pickled). This will increase the output of the MBR system by 3,500 M3/Day at New Ansab STP which will safeguard the plant operation and allow us to stop using Old Ansab STP. Spare location is available to add two additional units in every MBR tank (8 tanks).)"
+                          value="{{ $variables.postPayloadTypeVar.tender_background }}" rows="4" style="width: 100%;">
+                        </oj-text-area>
+
+                      </oj-form-layout>
+
+                      <div id="scope_editor">
+                        <oj-sp-input-rich-text-2 label-hint="Summary of Scope for Work"
+                          value="{{ $variables.postPayloadTypeVar.tender_scope_work }}"
+                          placeholder="Add your description here..." primary-action.display="off"
+                          length.measure="formattedText" secondary-action.display="off"
+                          secondary-action.label="Secondary" tertiary-action.display="off" primary-action.label="Save"
+                          display-options.toolbar-items='["fontColor","heading","fontFamily","fontSize","bold","italic","underline","strikethrough","superscript",
+                                                        "subscript","fontBackgroundColor","alignment","bulletedList","numberedList","outdent","indent","link","horizontalLine","generateHtmlSupport",
+                                                        "removeFormat","undo","redo","uploadImage"]'>
+                        </oj-sp-input-rich-text-2>
+
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <!-- Cost Estimate Tab -->
+                  <div slot="cost-tab" id="cost-content" role="tabpanel" aria-labelledby="cost-tab">
+                    <div class="demo-content">
+                      <div style="margin-top: 1rem;">
+                        <!-- <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Cost Estimate</label> -->
+                        <!-- <div id="cost_editor" style="border: 1px solid #ccc; min-height: 250px;"> -->
+                        <!-- <p style="font-style: italic;">(Give detailed breakup of cost and basis of calculation)</p> -->
+                        <!-- <div innerHTML="[[ $variables.postPayloadTypeVar.tender_cost_estimate ]]"></div> -->
+                        <!-- <oj-text-area value="{{ $variables.postPayloadTypeVar.tender_cost_estimate }}" rows="5"
+                                              id="costEstimate"></oj-text-area> -->
+                        <oj-sp-input-rich-text-2 label-hint="Cost Estimate"
+                          value="{{ $variables.postPayloadTypeVar.tender_cost_estimate }}"
+                          placeholder="(Give detailed breakup of cost and basis of calculation)"
+                          primary-action.display="off" length.measure="formattedText" secondary-action.display="off"
+                          secondary-action.label="Secondary" tertiary-action.display="off" primary-action.label="Save"
+                          display-options.toolbar-items='["fontColor","heading","fontFamily","fontSize","bold","italic","underline","strikethrough","superscript",
+                                                  "subscript","fontBackgroundColor","alignment","bulletedList","numberedList","outdent","indent","link","horizontalLine","generateHtmlSupport",
+                                                  "removeFormat","undo","redo","uploadImage"]'>
+                        </oj-sp-input-rich-text-2>
+                        <!-- </div> -->
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Technical Evaluation Criteria Tab -->
+                  <div slot="technical-tab" id="technical-content" role="tabpanel" aria-labelledby="technical-tab">
+                    <div class="demo-content">
+                      <div style="margin-top: 1rem;">
+                        <!-- <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Technical Evaluation Criteria</label> -->
+                        <!-- <div id="technical_editor" style="border: 1px solid #ccc; min-height: 300px; padding: 1rem;">
+                                            <div innerHTML="[[ $variables.postPayloadTypeVar.tender_technical_criteria ]]"></div>
+                                          </div> -->
+                        <!-- <oj-text-area value="{{ $variables.postPayloadTypeVar.tender_technical_criteria }}" rows="5"
+                                            id="techEvaluation"></oj-text-area> -->
+                        <oj-sp-input-rich-text-2 label-hint="Technical Evaluation Criteria"
+                          value="{{ $variables.postPayloadTypeVar.tender_technical_criteria }}"
+                          placeholder="Add your description here..." primary-action.display="off"
+                          length.measure="formattedText" secondary-action.display="off"
+                          secondary-action.label="Secondary" tertiary-action.display="off" primary-action.label="Save"
+                          display-options.toolbar-items='["fontColor","heading","fontFamily","fontSize","bold","italic","underline","strikethrough","superscript",
+                                                  "subscript","fontBackgroundColor","alignment","bulletedList","numberedList","outdent","indent","link","horizontalLine","generateHtmlSupport",
+                                                  "removeFormat","undo","redo","uploadImage"]'>
+                        </oj-sp-input-rich-text-2>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Commercial Evaluation Criteria Tab -->
+                  <div slot="commercial-tab" id="commercial-content" role="tabpanel" aria-labelledby="commercial-tab">
+                    <div class="demo-content">
+                      <div>
+                        <!-- <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Commercial Evaluation Criteria</label> -->
+                        <!-- <div id="commercial_editor" style="border: 1px solid #ccc; min-height: 250px;"> -->
+                        <!-- <div innerHTML="[[ $variables.postPayloadTypeVar.tender_commercial_criteria ]]"></div> -->
+                        <!-- <oj-text-area value="{{ $variables.postPayloadTypeVar.tender_commercial_criteria }}" rows="8"
+                                              id="comEvaluation"></oj-text-area> -->
+                        <oj-sp-input-rich-text-2 label-hint="Commercial Evaluation Criteria"
+                          value="{{ $variables.postPayloadTypeVar.tender_commercial_criteria }}"
+                          placeholder="Add your description here..." primary-action.display="off"
+                          length.measure="formattedText" secondary-action.display="off"
+                          secondary-action.label="Secondary" tertiary-action.display="off" primary-action.label="Save"
+                          display-options.toolbar-items='["fontColor","heading","fontFamily","fontSize","bold","italic","underline","strikethrough","superscript",
+                                                  "subscript","fontBackgroundColor","alignment","bulletedList","numberedList","outdent","indent","link","horizontalLine","generateHtmlSupport",
+                                                  "removeFormat","undo","redo","uploadImage"]'>
+                        </oj-sp-input-rich-text-2>
+                        <!-- </div> -->
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- ICV Minimum Requirement Tab -->
+                  <div slot="icv-tab" id="icv-content" role="tabpanel" aria-labelledby="icv-tab">
+                    <div class="demo-content">
+                      <!-- <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">ICV Minimum Requirement</label> -->
+                      <!-- <div id="icv_editor" style="border: 1px solid #ccc; min-height: 250px;"> -->
+                      <!-- <div innerHTML="[[ $variables.postPayloadTypeVar.tender_icv_minimum_info ]]"></div> -->
+                      <!-- <oj-text-area value="{{ $variables.postPayloadTypeVar.tender_icv_minimum_info }}" rows="5"
+                                              id="icvMinReq"></oj-text-area> -->
+                      <oj-sp-input-rich-text-2 label-hint="ICV Minimum Requirement"
+                        value="{{ $variables.postPayloadTypeVar.tender_icv_minimum_info }}"
+                        placeholder="Add your description here..." primary-action.display="off"
+                        length.measure="formattedText" secondary-action.display="off" secondary-action.label="Secondary"
+                        tertiary-action.display="off" primary-action.label="Save" display-options.toolbar-items='["fontColor","heading","fontFamily","fontSize","bold","italic","underline","strikethrough","superscript",
+                                                  "subscript","fontBackgroundColor","alignment","bulletedList","numberedList","outdent","indent","link","horizontalLine","generateHtmlSupport",
+                                                  "removeFormat","undo","redo","uploadImage"]'>
+                      </oj-sp-input-rich-text-2>
+                      <!-- </div> -->
+                    </div>
+                  </div>
+
+                  <!-- Division's Recommendation Tab -->
+                  <div slot="division-tab" id="division-content" role="tabpanel" aria-labelledby="division-tab">
+                    <div class="demo-content">
+                      <!-- <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Division's Recommendation</label> -->
+                      <!-- <div id="division_editor" style="border: 1px solid #ccc; min-height: 250px;"> -->
+                      <!-- <div innerHTML="[[ $variables.postPayloadTypeVar.tender_division_info ]]"></div> -->
+                      <!-- <oj-text-area value="{{ $variables.postPayloadTypeVar.tender_division_info }}" rows="8"
+                                              id="divisionRequirement"></oj-text-area> -->
+                      <oj-sp-input-rich-text-2 label-hint="Division's Recommendation"
+                        value="{{ $variables.postPayloadTypeVar.tender_division_info }}"
+                        placeholder="Add your description here..." primary-action.display="off"
+                        length.measure="formattedText" secondary-action.display="off" secondary-action.label="Secondary"
+                        tertiary-action.display="off" primary-action.label="Save" display-options.toolbar-items='["fontColor","heading","fontFamily","fontSize","bold","italic","underline","strikethrough","superscript",
+                                                  "subscript","fontBackgroundColor","alignment","bulletedList","numberedList","outdent","indent","link","horizontalLine","generateHtmlSupport",
+                                                  "removeFormat","undo","redo","uploadImage"]'>
+                      </oj-sp-input-rich-text-2>
+                      <!-- </div> -->
+                    </div>
+                  </div>
+
+                </oj-switcher>
+                <div class="oj-flex-item oj-sm-12 oj-md-2">
+                  <oj-button id="intputTableBtn" label="Table" on-oj-action="[[$listeners.intputTableBtnAction]]">
+                    <span class="oj-ux-ico-tables" slot="startIcon" style="color : white;"></span>
+                  </oj-button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </oj-sp-advanced-create-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Popup -->
+<oj-popup id="tablePopup" modality="modeless" auto-dismiss="focusLoss" position.my.horizontal="start"
+  position.my.vertical="top" position.at.horizontal="start" position.at.vertical="bottom" position.of="#intputTableBtn">
+
+  <div class="matrix-container">
+    <div class="matrix-grid">
+      <oj-bind-for-each data="[[ $variables.matrixData ]]">
+
+        <template>
+          <div class="matrix-cell" :class="[[ $current.data.selected ? 'selected' : '' ]]"
+            on-mouseover="[[$listeners.divMouseover]]" on-click="[[$listeners.divClick]]">
+          </div>
+        </template>
+      </oj-bind-for-each>
+    </div>
+
+    <div class="matrix-info">
+      <oj-bind-text value='[[ $variables.inputTable.rows+" X "+$variables.inputTable.columns ]]'></oj-bind-text>
+    </div>
+  </div>
+</oj-popup>
+
+<style>
+  .matrix-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 15px);
+    /* 6 columns per row */
+    gap: 4px;
+  }
+
+  .matrix-cell {
+    width: 15px;
+    height: 15px;
+    border: 1px solid #999;
+    cursor: pointer;
+  }
+
+  .matrix-cell.selected {
+    background-color: #007cc3;
+  }
+</style>
+
+
+<oj-dialog dialog-title="Cancel" id="confirmCanceDialog" style="overflow: hidden;" position.at.vertical="top"
+  position.my.vertical="top">
+  <div slot="body" style="padding-top: 25px;">
+    <div class="oj-flex">
+      <p>Do you want to save and close?</p>
+    </div>
+  </div>
+  <div slot="footer">
+    <oj-button>Yes</oj-button>
+    <oj-button on-oj-action="[[$listeners.buttonAction]]">No</oj-button>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="Please wait..." id="progressMsg" class="wd200" style="overflow: hidden;"
+  position.at.vertical="top" position.my.vertical="top">
+  <div slot="body" style="margin-top: 2.1rem;">
+    <div class="oj-flex full_stretch lg_button_width">
+      <oj-progress-bar class="full_stretch oj-flex-item oj-sm-12 oj-md-12" value="-1" style="zoom: 2;">
+      </oj-progress-bar>
+    </div>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="Delete" id="deleteDialog" style="width: 400px; overflow: hidden;" position.at.vertical="top"
+  position.my.vertical="top">
+  <div slot="body">
+    <!-- <div class="oj-flex"> -->
+    <br>
+Are you sure you want to delete the record?
+    <!-- </div> -->
+  </div>
+  <div slot="footer">
+    <oj-button>Ok</oj-button>
+    <oj-button on-oj-action="[[$listeners.buttonAction]]">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="About" id="aboutDialog" cancel-behavior="icon" style="width: 420px; overflow: hidden;"
+  position.at.vertical="top" position.my.vertical="top" drag-affordance="title-bar">
+  <div slot="body">
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-sm-12 oj-md-12">
+        <oj-form-layout label-edge='start' columns="1" style="margin-top:23px; margin-left:-20px"
+          user-assistance-density="compact" direction="column" class="oj-formlayout-full-width" label-width="45%">
+          <oj-input-text label-hint="Created By:" style="margin-bottom: -6px;" value="{{ $variables.about.created_by }}"
+            readonly="true">
+          </oj-input-text>
+          <oj-input-text label-hint="Created Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.created_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated By:" style="margin-bottom: -6px;"
+            value="{{ $variables.about.last_updated_by }}" readonly="true"></oj-input-text>
+          <oj-input-text label-hint="Created Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.last_updated_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated Login:" value="{{ $variables.about.last_updated_login }}"
+            style="margin-bottom: -6px;" readonly="true">
+          </oj-input-text>
+        </oj-form-layout>
+      </div>
+    </div>
+  </div>
+  <div class="oj-flex-bar-end" slot="footer" style="margin-top: -2rem;">
+    <oj-button label="Transaction Log" chroming="outlined" class="oj-flex-bar-end" id="transaction-log"
+      on-oj-action="[[$listeners.transactionLogAction]]">
+    </oj-button>
+    <oj-button label="Ok" chroming="outlined" on-oj-action="[[$listeners.buttonAction4]]" class="oj-flex-bar-end">
+    </oj-button>
+  </div>
+</oj-dialog>
+
+
+
+
+
+<!-- APPROVAL DIALOGS STARTS HERE -->
+
+<!-- Submit Popup -->
+<oj-dialog dialog-title="Submit" id="submitDialog" drag-affordance="title-bar" cancel-behavior="icon"
+  resize-behavior="resizable" position.at.vertical="top" position.my.vertical="top" style="overflow: hidden;">
+  <!-- <div slot="body">
+    <h6>Are you sure you want to submit?</h6>
+  </div> -->
+  <div slot="footer">
+    <oj-button id="BtnOk" style="margin-left:0.5%;margin-right:1.5%;" label="Ok"
+      on-oj-action="[[$listeners.btnOkAction]]"></oj-button>
+    <oj-button id="BtnCancel" style="margin-left:0.5%;margin-right:1.5%;" label="Cancel"
+      on-oj-action="[[$listeners.btnCancelAction]]"></oj-button>
+  </div>
+  <p class="oj-p" slot="body" style="margin-top: 1rem; font-weight: bold;">Are you sure you want to submit the request?
+  </p>
+</oj-dialog>
+
+<!-- Approval Popup -->
+<oj-dialog dialog-title="Approve" id="approveDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;" on-oj-close="[[$listeners.customDialogClose]]"
+  drag-affordance="title-bar">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-validation-group>
+      <!-- <oj-form-layout label-edge="top"> -->
+      <oj-input-text label-hint="Comments" user-assistance-density="compact" placeholder="Comments"
+        value="{{ $flow.variables.responseComments }}" id="approveCmt" required="true"></oj-input-text>
+      <!-- </oj-form-layout> -->
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-validation-group>
+      <oj-button id="appBtn" on-oj-action="[[$listeners.appBtnAction]]"
+        disabled="[[ !$flow.variables.responseComments ]]">Ok</oj-button>
+      <oj-button id="appCancel" on-oj-action="[[$listeners.appCancelAction]]">Cancel</oj-button>
+    </oj-validation-group>
+  </div>
+</oj-dialog>
+
+<!-- Reject Popup -->
+<oj-dialog dialog-title="Reject" id="rejectDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;" on-oj-close="[[$listeners.customDialogClose]]"
+  drag-affordance="title-bar">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-validation-group valid="{{ $flow.variables.actionValidation.rejectValidation }}"
+      :id="[[ $flow.variables.actionValidation.rejectValidation ]]">
+      <oj-input-text label-hint="Comments" placeholder="Please Enter the Reason For Rejection."
+        value="{{ $flow.variables.responseComments }}" required="true" id="rejectCmt" user-assistance-density="compact">
+      </oj-input-text>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-validation-group>
+      <oj-button id="rejBtn" on-oj-action="[[$listeners.rejBtnAction]]">Ok</oj-button>
+      <oj-button id="rejCancel" on-oj-action="[[$listeners.rejCancelAction]]">Cancel</oj-button>
+    </oj-validation-group>
+  </div>
+</oj-dialog>
+
+<!-- Withdraw -->
+<oj-dialog dialog-title="Withdraw" id="withdrawDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;" on-oj-close="[[$listeners.customDialogClose]]"
+  drag-affordance="title-bar">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-validation-group valid="{{ $flow.variables.actionValidation.isWithdrawFormValid }}"
+      :id="[[ $flow.variables.actionValidation.withdrawValidation ]]">
+      <oj-input-text label-hint="Comments" placeholder="Please Enter the Reason For Withdraw"
+        user-assistance-density="compact" value="{{ $flow.variables.responseComments }}" required="true">
+      </oj-input-text>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-validation-group>
+      <oj-button id="withdrawOk" on-oj-action="[[$listeners.withdrawOkAction]]">Ok</oj-button>
+      <oj-button id="withdrawcancel" on-oj-action="[[$listeners.withdrawcancelAction]]">Cancel</oj-button>
+    </oj-validation-group>
+  </div>
+</oj-dialog>
+
+<!-- Reassign -->
+<oj-dialog dialog-title="Reassign" id="ReassignDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;" on-oj-close="[[$listeners.customDialogClose]]"
+  drag-affordance="title-bar">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-validation-group valid="{{ $flow.variables.actionValidation.isReassignFormValid }}"
+      :id="[[ $flow.variables.actionValidation.reassignValidation ]]">
+      <oj-input-text label-hint="* Current Approver" style="width: 21rem; margin-bottom: 5px;"
+        :id="[[ $flow.variables.actionValidation.reassignValidation ]]" value="{{ $application.user.username }}"
+        disabled="true" class="oj-form-control-full-width oj-sm-12" user-assistance-density="compact"></oj-input-text>
+      <oj-select-single label-hint="Reassign To" item-text="full_name" required="true" id="reassignto"
+        value="{{ $flow.variables.updateActionObj.p_to_person_id }}" style="margin-bottom: 6px;"
+        data="[[ $flow.variables.getApprovalProcessEmployeeListListSDP ]]" user-assistance-density="compact">
+        <template slot="collectionTemplate" data-oj-as="collection">
+          <oj-table scroll-policy="loadMoreOnScroll" horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+            selection-mode='{"row": "single"}' columns-default='{"resizable": "disabled","sortable": "disabled"}'
+            class="oj-select-results"
+            columns='[{"headerText":"Reassign Approver","field":"full_name","template":"approverNameTemplate","sortable":"disabled"},{"headerText":"Employee Number","field":"person_number"}]'
+            on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]"
+            selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}" display="grid">
+            <template slot="approverNameTemplate">
+              <span style="font-weight: bold;">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </span>
+            </template>
+          </oj-table>
+        </template>
+      </oj-select-single>
+      <oj-input-text label-hint="Comments" placeholder="Please Enter Reassign Reason"
+        value="{{ $flow.variables.responseComments }}" required="true" id="reassignCmt2"
+        user-assistance-density="compact"></oj-input-text>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-validation-group>
+      <oj-button id="reassignOk"
+        disabled="[[ !$flow.variables.updateActionObj.p_to_person_id || !$flow.variables.responseComments ]]"
+        on-oj-action="[[$listeners.reassignOkAction]]">Ok</oj-button>
+      <oj-button id="reassignCancel" on-oj-action="[[$listeners.reassignCancelAction]]">Cancel</oj-button>
+    </oj-validation-group>
+  </div>
+</oj-dialog>
+
+<!-- require more info -->
+<oj-dialog dialog-title="Employee More Information" id="moreinfoDialog" style="overflow: hidden; width: 510px;"
+  cancel-behavior="icon" position.at.vertical="top" position.my.vertical="top"
+  on-oj-close="[[$listeners.customDialogClose]]" drag-affordance="title-bar">
+  <div style="margin-top: 1rem;">
+    <oj-validation-group valid="{{ $flow.variables.actionValidation.isMoreInfoFormValid }}"
+      :id="[[ $flow.variables.actionValidation.moreInfoValidation ]]">
+      <oj-radioset label-hint="Require More Information" value="{{ $flow.variables.updateActionObj.p_more_info_type }}"
+        required="true" class="oj-sm-12">
+        <oj-option value="MAINTAIN">Return to employee for corrections and resubmission to me</oj-option>
+        <oj-option value="RETURN">Return to employee for re-initiation</oj-option>
+      </oj-radioset>
+      <oj-text-area id="app-1" label-hint="Comments" placeholder="Please Enter More information Comments"
+        style="width: 21rem; margin-bottom: 6px;" required="true" value="{{ $flow.variables.responseComments }}"
+        class="oj-sm-12" user-assistance-density="compact">
+      </oj-text-area>
+    </oj-validation-group>
+    <br>
+    <oj-validation-group style="display:flex; justify-content:flex-end;">
+      <oj-button class="oj-button-sm" chroming="solid" id="moreinfoOk" on-oj-action="[[$listeners.moreinfoOkAction]]"
+        disabled="[[ !$flow.variables.updateActionObj.p_more_info_type || !$flow.variables.responseComments ]]">Ok
+      </oj-button>
+      <oj-button class="oj-button-sm" chroming="solid" id="moreinfoCancel"
+        on-oj-action="[[$listeners.moreinfoCancelAction]]">Cancel</oj-button>
+    </oj-validation-group>
+  </div>
+</oj-dialog>
+
+<!-- Special Reassign Case (4th Level) -->
+<oj-dialog dialog-title="Approve" id="approveReassignDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;" on-oj-close="[[$listeners.customDialogClose]]"
+  drag-affordance="title-bar">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-validation-group valid="{{ $flow.variables.actionValidation.isReassignFormValid }}"
+      :id="[[ $flow.variables.actionValidation.reassignValidation ]]">
+      <!-- <oj-input-text label-hint="* Current Approver" style="width: 21rem; margin-bottom: 5px;" :id="[[ $flow.variables.actionValidation.reassignValidation ]]"
+        value="{{ $application.user.username }}" disabled="true" class="oj-form-control-full-width oj-sm-12"></oj-input-text> -->
+      <oj-select-single label-hint="Reassign To" item-text="person_name" required="true" id="reassignto2"
+        value="{{ $flow.variables.updateActionObj.p_to_person_id }}" style="margin-bottom: 5px;"
+        user-assistance-density="compact" data="[[$variables.getTenderStrategyReviewerReassignListListSDP]]">
+        <template slot="collectionTemplate" data-oj-as="collection">
+          <oj-table scroll-policy="loadMoreOnScroll" horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+            class="oj-select-results"
+            columns='[{"headerText":"Reassign Approver","field":"person_name"}, {"headerText":"Employee Number","field":"person_number"}, {"headerText":"Employee Email","field":"email_id"}]'
+            on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]"
+            selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}" display="grid"
+            selection-mode.row="single" columns-default.sortable="disabled">
+          </oj-table>
+        </template>
+      </oj-select-single>
+      <oj-input-text label-hint="Comments" placeholder="Please Enter Reassign Reason"
+        value="{{ $flow.variables.responseComments }}" required="true" id="reassignCmt"
+        user-assistance-density="compact"></oj-input-text>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-validation-group>
+      <oj-button id="customReassignOk" on-oj-action="[[$listeners.reassignOkAction]]" chroming="outlined">Ok</oj-button>
+      <oj-button id="customReassignCancel" on-oj-action="[[$listeners.reassignCancelAction]]" chroming="outlined">Cancel
+      </oj-button>
+    </oj-validation-group>
+  </div>
+</oj-dialog>
+
+<!-- Special Approve Case to Fill MOM Form -->
+<style>
+  .oj-listitemlayout-grid {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    padding-inline-start: 0px !important;
+    padding-inline-end: 0px !important;
+  }
+
+  .oj-listview-item-layout {
+    padding: 0px 0px !important;
+  }
+</style>
+<oj-dialog dialog-title="Approve" id="ApproveMOMFormDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;" on-oj-close="[[$listeners.customDialogClose]]"
+  drag-affordance="title-bar">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-validation-group valid="{{ $flow.variables.actionValidation.isApproveMOMFormValid }}"
+      :id="[[ $flow.variables.actionValidation.approveMOMFormValidation ]]">
+      <!-- <oj-input-text label-hint="* Current Approver" style="width: 21rem; margin-bottom: 5px;" :id="[[ $flow.variables.actionValidation.reassignValidation ]]"
+        value="{{ $application.user.username }}" disabled="true" class="oj-form-control-full-width oj-sm-12"></oj-input-text> -->
+      <oj-form-layout id="attachmentFormLayout" label-edge="start" direction="row" max-columns="1"
+        user-assistance-density="compact">
+        <oj-input-date-time id="schedule-date" label-hint="Schedule Date" required="true"
+          min="[[ $application.functions.getSysdate() ]]" value="{{ $variables.postPayloadTypeVar.mom_schedule_date }}"
+          converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'></oj-input-date-time>
+        <oj-input-date-time id="start-time" label-hint="Start Time" required="true"
+          min="[[ $application.functions.getSysdate() ]]"
+          converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy hh:mm a"}}'
+          value="{{ $variables.postPayloadTypeVar.mom_start_time }}"></oj-input-date-time>
+        <oj-input-date-time id="end-time" label-hint="End Time" required="true"
+          min="[[ $application.functions.getSysdate() ]]"
+          converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy hh:mm a"}}'
+          value="{{ $variables.postPayloadTypeVar.mom_end_time }}"></oj-input-date-time>
+        <oj-input-text id="mom-number" label-hint="MOM Number" required="true"
+          value="{{ $variables.postPayloadTypeVar.mom_number }}"></oj-input-text>
+        <oj-switch label-hint="Notify" id="notify-btn" class="oj-switch"
+          value="{{ $variables.postPayloadTypeVar.mom_notify === 'Y' }}"
+          on-value-changed="[[$listeners.notifyBtnValue]]"></oj-switch>
+        <oj-input-text label-hint="Comments" placeholder="Please Enter Reassign Reason"
+          value="{{ $flow.variables.responseComments }}" required="true" id="reassignCmt"
+          user-assistance-density="compact"></oj-input-text>
+        <!-- FILE Type Fields -->
+        <div style="text-align:center; grid-column: 1 / -1;">
+          <oj-file-picker id="attachment-file-picker" selection-mode="single"
+            on-oj-select="[[$listeners.attachmentFilePickerSelect]]">
+            <oj-button slot="trigger" label="Upload" chroming="callToAction">
+              <span slot="startIcon" class="oj-ux-ico-upload"></span>
+            </oj-button>
+          </oj-file-picker>
+        </div>
+        <oj-bind-if test="[[ $variables.filesArray.length > 0 ]]">
+          <div class="oj-panel oj-panel-shadow-md oj-selected" style="max-height:140px; overflow-y: auto;">
+            <oj-list-view data="[[ $variables.filesADP ]]" class="" gridlines.item="visibleExceptLast">
+              <template slot="itemTemplate">
+                <oj-list-item-layout>
+                  <!-- Remove span with class for icon and replace with img to directly use an image -->
+                  <!--img src="[[ $current.data.image ]]" slot="leading" width="32" height="32"/-->
+                  <div slot="leading">
+                    <oj-button display="icons" chroming="borderless" class="oj-button-sm" id="deleteBtn"
+                      on-oj-action="[[$listeners.deleteBtnAction]]">
+                      <span class="oj-ux-ico-trash" slot="startIcon" style="font-size:20px; color:red;"></span>
+                    </oj-button>
+                  </div>
+                  <div>
+                    <oj-bind-text value="[[ $current.data.document_name ]]"></oj-bind-text>
+                  </div>
+                </oj-list-item-layout>
+              </template>
+            </oj-list-view>
+
+
+          </div>
+        </oj-bind-if>
+
+
+      </oj-form-layout>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-validation-group>
+      <oj-button id="customReassignOk" on-oj-action="[[$listeners.customReassignOkAction]]">Ok</oj-button>
+      <oj-button id="customReassignCancel" on-oj-action="[[$listeners.reassignCancelAction]]">Cancel</oj-button>
+    </oj-validation-group>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="Approver More Information" id="rpaDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;" drag-affordance="title-bar">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-validation-group :id="[[ $flow.variables.actionValidation.rpaValidation ]]"
+      valid="{{ $flow.variables.actionValidation.isRpaFormValid }}">
+      <oj-select-single label-hint="More Info. Approver" item-text="person_name" required="true" id="apprMoreInfo"
+        value="{{ $flow.variables.updateActionObj.p_to_person_id }}" style="margin-bottom: 5px;"
+        user-assistance-density="compact" data="[[$variables.getCommonPreviousApprovalListListSDP]]">
+        <template slot="collectionTemplate" data-oj-as="collection">
+          <oj-table scroll-policy="loadMoreOnScroll" horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+            selection-mode='{"row": "single"}' columns-default='{"sortable":"disabled"}' class="oj-select-results"
+            columns='[
+						{"headerText":"Previous Approver","field":"person_name"},            
+						{"headerText":"Number","field":"person_number"}              
+                        ]' on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]"
+            selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}" display="grid"></oj-table>
+        </template>
+      </oj-select-single>
+      <oj-input-text label-hint="Approver Comments" user-assistance-density="compact" placeholder="Approver Comments"
+        id="rpaApproverCmt" required="true" value="{{ $flow.variables.responseComments }}">
+      </oj-input-text>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-button id="rpaAppBtn" on-oj-action="[[$listeners.rpaAppBtnAction]]">Ok</oj-button>
+    <oj-button id="rpaCancel" on-oj-action="[[$listeners.rpaCancelAction]]">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Approver Response Popup (RPA) -->
+<oj-dialog dialog-title="Approver Response" id="apprResponseDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-validation-group :id="[[ $flow.variables.actionValidation.rpaResponseValidation ]]"
+      valid="{{ $flow.variables.actionValidation.isRpaResponseFormValid }}">
+      <oj-input-text label-hint="Comments" user-assistance-density="compact" placeholder="Comments" id="apprResponseCmt"
+        required="true" value="{{ $flow.variables.responseComments }}">
+      </oj-input-text>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-button id="apprResponseBtn" on-oj-action="[[$listeners.apprResponseBtnAction]]">Ok</oj-button>
+    <oj-button id="appResponseCancel" on-oj-action="[[$listeners.appCancelAction]]">Cancel</oj-button>
+  </div>
+</oj-dialog>

@@ -1,0 +1,1251 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "about": {
+      "type": "about"
+    },
+    "aToolGeneric": {
+      "type": "object[]"
+    },
+    "claimLineADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "postPettycashLineSearch",
+        "keyAttributes": "claim_line_id"
+      }
+    },
+    "claimLineForm": {
+      "type": "postPettycashLineSearch",
+      "defaultValue": {
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "created_by": "[[ $application.user.username ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_by": "[[ $application.user.username ]]",
+        "object_version_num": 0,
+        "business_activities_segment": "0000",
+        "future1_segment": "0000",
+        "assets_segment": "000000",
+        "governorate_segment": "[[ $application.functions.getWaterCategory($application.variables.restricted_business_unit) === 'Water Operating Unit' ? 31 : 11 ]]",
+        "inter_company_segment": "[[ $application.functions.getWaterCategory($application.variables.restricted_business_unit) === 'Water Operating Unit' ? 31 : 11 ]]",
+        "budget_status": "[[ $variables.payload.status_name || 'Draft' ]]"
+      }
+    },
+    "enableDisableVar": {
+      "type": "string"
+    },
+    "getNwsCustCommonLovLookupListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "ORDS/getNws_custCommonLovLookup",
+        "itemsPath": "items",
+        "responseType": "getNwsCustCommonLovLookupResponse",
+        "headers": {
+          "p_lookup_type_code": "MODE_OF_PAYMENT"
+        },
+        "keyAttributes": "lookup_value_name"
+      }
+    },
+    "getNwsCustPettyCashLovGovernateListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "governate_name",
+        "itemsPath": "items",
+        "responseType": "getNwsCustPettyCashLovGovernateResponse",
+        "fetchChain": "getNws_custPettyCashLovGovernateFetch"
+      }
+    },
+    "getNwsCustPettyCashLovSupplierListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "supplier_id",
+        "itemsPath": "items",
+        "responseType": "getNwsCustPettyCashLovSupplierResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "supplier_name"
+          ]
+        },
+        "fetchChain": "getNws_custPettyCashLovSupplierFetch"
+      }
+    },
+    "hdrValidationVar": {
+      "type": "string"
+    },
+    "headerFormValid": {
+      "type": "string"
+    },
+    "isCurrencyEdit_AC": {
+      "type": "string"
+    },
+    "isFormValid": {
+      "type": "string"
+    },
+    "p_nav_id": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl",
+      "description": "p_claim_header_id"
+    },
+    "passClaimLineKey": {
+      "type": "string"
+    },
+    "payload": {
+      "type": "postPettycashHeaderSearch",
+      "defaultValue": {
+        "created_by": "[[ $application.user.username ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]"
+      }
+    },
+    "payload_view": {
+      "defaultValue": {
+        "created_by": "[[ $application.user.username ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]"
+      },
+      "type": "postPettycashHeaderSearch"
+    },
+    "receiptFormValid": {
+      "type": "string"
+    },
+    "receiptLineADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "postPettycashReceiptSearch",
+        "keyAttributes": "claim_receipt_id"
+      }
+    },
+    "receiptLineForm": {
+      "type": "postPettycashReceiptSearch",
+      "defaultValue": {
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "created_by": "[[ $application.user.username ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_by": "[[ $application.user.username ]]",
+        "object_version_num": 0
+      }
+    },
+    "SearchObj_ClaimLine": {
+      "defaultValue": {
+        "in_limit": "10",
+        "in_offset": "0"
+      },
+      "type": {
+        "in_limit": "string",
+        "in_offset": "string",
+        "p_created_by": "string",
+        "p_keyword": "string",
+        "p_claim_line_id": "string",
+        "p_claim_header_id": "string",
+        "p_cost_center_segment": "string",
+        "p_accounts_segment": "string",
+        "p_budget_status": "string",
+        "p_currency": "string"
+      }
+    },
+    "SearchObj_ReceiptLine": {
+      "defaultValue": {
+        "in_limit": "10",
+        "in_offset": "0"
+      },
+      "type": {
+        "in_limit": "string",
+        "in_offset": "string",
+        "p_created_by": "string",
+        "p_keyword": "string",
+        "p_claim_receipt_id": "string",
+        "p_claim_header_id": "string",
+        "p_mode_of_payment": "string",
+        "p_reference_number": "string",
+        "p_currency": "string"
+      }
+    },
+    "selectedTab": {
+      "type": "string",
+      "description": "1. claimLines\n2. receiptLines",
+      "defaultValue": "claimLines"
+    },
+    "pagination": {
+      "type": {
+        "claimLine_is_next": "boolean",
+        "claimLine_is_prev": "boolean",
+        "receiptLine_is_next": "boolean",
+        "receiptLine_is_prev": "boolean"
+      }
+    },
+    "SearchObj": {
+      "type": {
+        "in_limit": "string",
+        "in_offset": "string",
+        "p_app_type": "string",
+        "p_created_by": "string",
+        "p_keyword": "string",
+        "p_status_id": "string",
+        "p_claim_header_id": "string",
+        "p_claim_number": "string",
+        "p_governorate": "string",
+        "p_petty_cash_type": "string",
+        "p_supplier_id": "string",
+        "p_supplier_name": "string",
+        "p_from_date": "string",
+        "p_to_date": "string"
+      },
+      "defaultValue": {
+        "in_limit": "10",
+        "in_offset": "0"
+      }
+    },
+    "encPayload": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "encSearchObj": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "attachmentVar": {
+      "type": {
+        "file_attachment": "any",
+        "file_name": "string",
+        "file_type": "string"
+      }
+    },
+    "taskId": {
+      "type": "string",
+      "input": "fromUrl"
+    },
+    "temp_Supplier_Site": {
+      "type": "string"
+    },
+    "totalsVar": {
+      "type":
+        {
+          "total_line_amount": "number",
+        "total_lines": "number",
+        "total_receipt_amount": "number",
+        "total_receipt_lines": "number"
+        }
+    }
+
+  },
+  "metadata": {
+    "dynamicContainerMetadata": {
+      "type": "vb/ContainerMetadataProviderDescriptor"
+    }
+  },
+  "types": {
+    "@decorators.getNwsCustCommonLovLookupResponse": {
+      "endpoint": "getNws_custCommonLovLookup",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.getNwsCustPettyCashLovGovernateResponse": {
+      "endpoint": "getNws_custPettyCashLovGovernate",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.getNwsCustPettyCashLovSupplierResponse": {
+      "endpoint": "getNws_custPettyCashLovSupplier",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.postPettycashHeaderSearch": {
+      "endpoint": "postPettycashHeaderSearch",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.postPettycashLineSearch": {
+      "endpoint": "postPettycashLineSearch",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.postPettycashReceiptSearch": {
+      "endpoint": "postPettycashReceiptSearch",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "about": {
+          "created_by": "string",
+          "created_date": "string",
+          "last_updated_by": "string",
+          "last_updated_date": "string",
+          "last_updated_login": "string"
+    },
+    "getNwsCustCommonLovLookupResponse": {
+      "items": [
+        {
+          "lookup_type_code": "string",
+          "lookup_type_id": "number",
+          "lookup_type_name": "string",
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getNwsCustPettyCashLovGovernateResponse": {
+      "items": [
+        {
+          "address_line1": "string",
+          "attribute2": "string",
+          "city": "string",
+          "country": "string",
+          "governate_name": "string",
+          "supplier_id": "number",
+          "supplier_name": "string",
+          "supplier_number": "string",
+          "supplier_site_code": "string",
+          "supplier_site_id": "number"
+        }
+      ]
+    },
+    "getNwsCustPettyCashLovSupplierResponse": {
+      "items": [
+        {
+          "supplier_id": "number",
+          "supplier_name": "string",
+          "supplier_number": "string",
+          "supplier_site_code": "string",
+          "supplier_site_id": "number"
+        }
+      ]
+    },
+    "postPettycashHeaderSearch": {
+          "cash_in_hand": "number",
+          "claim_amt": "number",
+          "claim_header_id": "number",
+          "claim_number": "string",
+          "close_balance_amt": "number",
+          "comments": "string",
+          "created_by": "string",
+          "created_date": "string",
+          "governorate": "string",
+          "integration_err_message": "any",
+          "integration_status_code": "string",
+          "integration_status_id": "number",
+          "integration_status_name": "string",
+          "last_updated_by": "string",
+          "last_updated_date": "string",
+          "last_updated_login": "string",
+          "line_count": "number",
+          "object_version_num": "number",
+          "open_balance_amt": "number",
+          "petty_cash_type": "string",
+          "receipt_amt": "number",
+          "receipt_count": "number",
+          "request_date": "string",
+          "saas_transaction_id": "number",
+          "saas_transaction_number": "string",
+          "staff_iou_amt": "number",
+          "status_code": "string",
+          "status_id": "number",
+          "status_name": "string",
+          "supplier_id": "number",
+          "supplier_name": "string",
+          "supplier_number": "string"
+    },
+    "postPettycashLineSearch": {
+          "accounts_segment": "string",
+          "amount": "number",
+      "amount_in_omr": "number",
+      "assets_segment": "string",
+          "brief_narration": "string",
+          "budget_status": "string",
+          "business_activities_segment": "string",
+          "charge_account": "string",
+          "claim_header_id": "number",
+          "claim_line_id": "number",
+          "claim_number": "string",
+          "cost_center_segment": "string",
+          "created_by": "string",
+          "created_date": "string",
+          "currency": "string",
+          "exchange_rate": "number",
+          "exchange_rate_date": "string",
+          "exchange_rate_type": "string",
+          "future1_segment": "string",
+          "geography_segment": "string",
+          "governorate_segment": "string",
+          "header_status_name": "string",
+          "inter_company_segment": "string",
+          "last_updated_by": "string",
+          "last_updated_date": "string",
+          "last_updated_login": "string",
+          "line_amount": "number",
+          "line_number": "number",
+          "object_version_num": "number",
+          "request_date": "string",
+          "status_id": "number",
+          "supplier_name": "string"
+
+    },
+    "postPettycashReceiptSearch": {
+          "amount": "number",
+      "amount_in_omr": "number",
+      "brief_narration": "string",
+          "claim_header_id": "number",
+          "claim_number": "string",
+          "claim_receipt_id": "number",
+          "created_by": "string",
+          "created_date": "string",
+          "currency": "string",
+          "exchange_rate": "number",
+          "exchange_rate_date": "string",
+          "exchange_rate_type": "string",
+      "field1": "string",
+      "header_status_name": "string",
+          "last_updated_by": "string",
+          "last_updated_date": "string",
+          "last_updated_login": "string",
+          "mode_of_payment": "string",
+          "object_version_num": "number",
+          "payment_received_date": "string",
+          "receipt_line_amount": "number",
+          "reference_number": "string",
+          "request_date": "string",
+          "status_id": "number",
+          "supplier_name": "string"
+
+    }
+
+  },
+  "eventListeners": {
+    "aboutBtnAction": {
+      "chains": [
+        {
+          "chain": "aboutBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "attachmentBtnAction": {
+      "chains": [
+        {
+          "chain": "attachmentBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "cancelDeleteAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction10": {
+      "chains": [
+        {
+          "chain": "confirmCancel_Dialog_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "cancelClaimLineDialog",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction3": {
+      "chains": [
+        {
+          "chain": "closeAttachmentDialog",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction4": {
+      "chains": [
+        {
+          "chain": "cancelReceiptLineDialog",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction5": {
+      "chains": [
+        {
+          "chain": "enableDisableCurrency",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction6": {
+      "chains": [
+        {
+          "chain": "save_ClaimLine_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction7": {
+      "chains": [
+        {
+          "chain": "save_ReceiptLine_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction8": {
+      "chains": [
+        {
+          "chain": "currencyEdit_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction9": {
+      "chains": [
+        {
+          "chain": "addLinesBtn_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "editBtnAction": {
+      "chains": [
+        {
+          "chain": "editClaimLineBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "editBtnAction2": {
+      "chains": [
+        {
+          "chain": "editReceiptAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "inputNumberValue": {
+      "chains": [
+        {
+          "chain": "claimLineAmountChange_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "inputNumberValue2": {
+      "chains": [
+        {
+          "chain": "receiptAmountChange_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "inputNumberValue3": {
+      "chains": [
+        {
+          "chain": "claimLineRateChange_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "inputTextValue": {
+      "chains": [
+        {
+          "chain": "on_Currency_Change_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "inputTextValue2": {
+      "chains": [
+        {
+          "chain": "on_Receipt_Currency_Change_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "nextBtnAction": {
+      "chains": [
+        {
+          "chain": "next_ClaimLineAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "ojPettyCashSpCancel": {
+      "chains": [
+        {
+          "chain": "cancelAC",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "ojPettyCashSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "cancel_SpPrimary_AC",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "ojPettyCashSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "secondary_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "preBtnAction": {
+      "chains": [
+        {
+          "chain": "prev_ClaimLineAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "selectValueItem": {
+      "chains": [
+        {
+          "chain": "governate_Value_Change_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "selectValueItem2": {
+      "chains": [
+        {
+          "chain": "supplier_Value_Change_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-buttonset-one": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-file-picker": {
+        "path": "ojs/ojfilepicker"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-label": {
+        "path": "ojs/ojlabel"
+      },
+      "oj-option": {
+        "path": "ojs/ojoption"
+      },
+      "oj-progress-bar": {
+        "path": "ojs/ojprogress-bar"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-sp-message-unsaved-changes": {
+        "path": "oj-sp/message-unsaved-changes/loader"
+      },
+      "oj-sp-vertical-anchor-navigator": {
+        "path": "oj-sp/vertical-anchor-navigator/loader"
+      },
+      "oj-switcher": {
+        "path": "ojs/ojswitcher"
+      },
+      "oj-tab-bar": {
+        "path": "ojs/ojnavigationlist"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+
+    },
+    "modules": {
+      "ojConverterNumber": {
+        "path": "ojs/ojconverter-number"
+      },
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      },
+      "ojValidationNumber": {
+        "path": "ojs/ojvalidation-number"
+      }
+    },
+    "css": [
+      "/resources/css/redwood-overrides.css"
+    ]
+  },
+  "@dt": {
+    "iconClass": "vbdt-dynamic-icon-77-icoAdvancedCreateAndEdit48Svg"
+  },
+  "layouts": {
+    "containerLayout1": {
+      "label": "Container Rule Set 1",
+      "layoutType": "container",
+      "layouts": {
+        "case1": {
+          "label": "Case 1",
+          "layoutType": "container",
+          "layout": {
+            "sectionTemplateMap": {
+              "template1": "template1",
+              "template2": "template2"
+            },
+            "displayProperties": [
+              "template1",
+              "template2"
+            ]
+          }
+        }
+      },
+      "rules": [
+        "containerLayout1-rule1"
+      ]
+    },
+    "containerLayout1-rule1": {
+      "expression": "case1"
+    }
+  },
+  "templates": {
+    "template1": {
+      "title": "Section 1",
+      "description": "Sample Section 1",
+      "extensible": "byReference",
+      "@dt": {
+        "type": "section",
+        "layout": "containerLayout1"
+      },
+      "dependencies": [
+        "oj-dynamic/form/loader",
+        "oj-sp/section/loader"
+      ],
+      "labelHint": "Sample Section 1"
+    },
+    "template2": {
+      "title": "Section 2",
+      "description": "Sample Section 2",
+      "extensible": "byReference",
+      "@dt": {
+        "layout": "containerLayout1",
+        "type": "section"
+      },
+      "dependencies": [
+        "oj-dynamic/form/loader",
+        "oj-sp/section/loader"
+      ],
+      "labelHint": "Sample Section 2"
+    }
+  },
+  "constants": {
+    "claimLineColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Action",
+          "field": "action",
+          "sortable": "disabled",
+          "template": "actions",
+          "frozenEdge": "start",
+          "style": "width:120px",
+          "className": "oj-helper-text-align-center"
+
+        },
+        {
+          "headerText": "Line No",
+          "field": "line_number",
+          "sortable": "enabled",
+          "style": "width:80px",
+          "className": "oj-helper-text-align-end"
+        },
+        {
+          "headerText": "Expense Type",
+          "field": "accounts_segment",
+          "sortable": "enabled",
+          "style": "width:130px"
+        },
+        {
+          "headerText": "Expense Account Description",
+          "field": "expense_account_desc",
+          "sortable": "enabled",
+          "style": "width:200px"
+        },
+        {
+          "headerText": "Department",
+          "field": "cost_center_segment",
+          "sortable": "enabled",
+          "style": "width:120px"
+        },
+        {
+          "headerText": "Department Description",
+          "field": "department_desc",
+          "sortable": "enabled",
+          "style": "width:180px"
+        },
+        {
+          "headerText": "Geography Code",
+          "field": "geography_segment",
+          "sortable": "enabled",
+          "style": "width:120px"
+        },
+        {
+          "headerText": "Geography Description",
+          "field": "geography_desc",
+          "sortable": "enabled",
+          "style": "width:180px"
+        },
+        {
+          "headerText": "Code Combination",
+          "field": "charge_account",
+          "sortable": "enabled",
+          "style": "width: 400px"
+        },
+        {
+          "headerText": "Currency",
+          "field": "currency",
+          "sortable": "enabled",
+          "style": "width:80px",
+          "className": "oj-helper-text-align-center"
+        },
+        {
+          "headerText": "Amount",
+          "field": "amount",
+          "sortable": "enabled",
+          "style": "width:100px",
+          "className": "oj-helper-text-align-end"
+        },
+        {
+          "headerText": "Exchange Type",
+          "field": "exchange_rate_type",
+          "sortable": "enabled",
+          "style": "width:120px"
+        },
+        {
+          "headerText": "Exchange Date",
+          "field": "exchange_rate_date",
+          "template": "date",
+          "sortable": "enabled",
+          "style": "width:120px"
+
+        },
+        {
+          "headerText": "Exchange Rate",
+          "field": "exchange_rate",
+          "sortable": "enabled",
+          "style": "width:100px",
+          "className": "oj-helper-text-align-end"
+        },
+        {
+          "headerText": "Amount in OMR",
+          "field": "",
+          "sortable": "enabled",
+          "template": "amountOMR",
+          "style": "width:120px",
+          "className": "oj-helper-text-align-end"
+
+        },
+        {
+          "headerText": "Brief Narration",
+          "field": "brief_narration",
+          "sortable": "enabled",
+          "style": "width:250px"
+        },
+        {
+          "headerText": "Budget Status",
+          "field": "budget_status",
+          "sortable": "enabled",
+          "template": "status_badge",
+          "style": "width:120px",
+          "className": "oj-helper-text-align-center"
+
+        },
+        {
+          "headerText": "Attachments",
+          "field": "attachment_count",
+          "sortable": "enabled",
+          "template": "attachment",
+          "style": "width:100px",
+          "className": "oj-helper-text-align-center"
+
+        },
+        {
+          "headerText": "About",
+          "field": "about",
+          "sortable": "disabled",
+          "template": "about",
+          "style": "width:80px",
+          "className": "oj-helper-text-align-center"
+
+        }
+      ]
+    },
+    "receiptLineColumns": {
+      "defaultValue": [
+        {
+          "headerText": "Action",
+          "field": "",
+          "frozenEdge": "start",
+          "template": "receiptLineActions",
+          "sortable": "disabled",
+          "style": "width:120px",
+          "className": "oj-helper-text-align-center"
+
+        },
+        {
+          "headerText": "Mode of Payment",
+          "field": "mode_of_payment",
+          "sortable": "enabled",
+          "style": "width:150px"
+        },
+        {
+          "headerText": "Reference Number",
+          "field": "reference_number",
+          "sortable": "enabled",
+          "style": "width:150px"
+        },
+        {
+          "headerText": "Payment Receipt Date",
+          "field": "payment_received_date",
+          "template": "date",
+          "sortable": "enabled",
+          "style": "width:150px"
+
+        },
+        {
+          "headerText": "Currency",
+          "field": "currency",
+          "sortable": "enabled",
+          "style": "width:80px",
+          "className": "oj-helper-text-align-center"
+        },
+        {
+          "headerText": "Amount",
+          "field": "amount",
+          "sortable": "enabled",
+          "style": "width:100px",
+          "className": "oj-helper-text-align-end"
+        },
+        {
+          "headerText": "Exchange Type",
+          "field": "exchange_rate_type",
+          "sortable": "enabled",
+          "style": "width:120px"
+        },
+        {
+          "headerText": "Exchange Date",
+          "field": "exchange_rate_date",
+          "template": "date",
+          "sortable": "enabled",
+          "style": "width:120px"
+
+        },
+        {
+          "headerText": "Exchange Rate",
+          "field": "exchange_rate",
+          "sortable": "enabled",
+          "style": "width:100px",
+          "className": "oj-helper-text-align-end"
+        },
+        {
+          "headerText": "Amount in OMR",
+          "field": "",
+          "template": "amountOMR",
+          "sortable": "enabled",
+          "style": "width:120px",
+          "className": "oj-helper-text-align-end"
+
+        },
+        {
+          "headerText": "Brief Narration",
+          "field": "brief_narration",
+          "sortable": "enabled",
+          "style": "width:250px"
+        },
+        {
+          "headerText": "Attachments",
+          "field": "attachment_count",
+          "template": "attachment",
+          "sortable": "enabled",
+          "style": "width:100px",
+          "className": "oj-helper-text-align-center"
+        },
+        {
+          "headerText": "About",
+          "field": "",
+          "template": "about",
+          "sortable": "disabled",
+          "style": "width:80px",
+          "className": "oj-helper-text-align-center"
+
+        }
+      ],
+      "type": "object[]",
+      "description": "{\n        \"headerText\": \"Line No\",\n        \"field\": \"line_number\",\n        \"sortable\": \"enabled\",\n        \"style\": \"width:80px\",\n        \"className\": \"oj-helper-text-align-end\"\n}"
+    },
+    "toolPending": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Approve",
+          "id": "approve",
+          "icon": "oj-ux-ico-check-circle"
+        },
+        {
+          "label": "Reject",
+          "id": "reject",
+          "icon": "oj-ux-ico-close-circle"
+        },
+        {
+          "id": "reassign",
+          "label": "Reassign",
+          "icon": "oj-ux-ico-assign-to-me"
+        },
+        {
+          "id": "requireMoreInfo",
+          "label": "Require More Information",
+          "icon": "oj-ux-ico-request-information"
+        },
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+        {
+          "label": "Attachment",
+          "id": "attachment",
+          "icon": "oj-ux-ico-attachment"
+        }
+      ]
+    },
+    "toolDraft": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Save",
+          "id": "save",
+          "icon": "oj-ux-ico-save"
+        },
+        {
+          "label": "Submit",
+          "id": "submit",
+          "icon": "oj-ux-ico-success"
+        },
+        {
+          "label": "Save & Close",
+          "id": "saveClose",
+          "icon": "oj-ux-ico-save-and-close"
+        },
+{
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+        {
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ],
+      "uniqueItems": true
+    },
+    "toolError": {
+      "defaultValue": [
+        {
+          "label": "Export",
+          "id": "export",
+          "icon": "oj-ux-ico-acl-export"
+        },
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        }
+      ],
+      "uniqueItems": true,
+      "type": "object[]"
+    },
+    "toolFinal": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+        {
+          "label": "Export",
+          "id": "export",
+          "icon": "oj-ux-ico-acl-export"
+        }
+      ],
+      "uniqueItems": true
+    },
+    "toolWithDraw": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "id": "withdraw",
+          "label": "Withdraw",
+          "icon": "oj-ux-ico-withdraw-request"
+        },
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+        {
+          "label": "Export",
+          "id": "export",
+          "icon": "oj-ux-ico-acl-export"
+        }
+      ],
+      "uniqueItems": true
+    }
+
+  }
+}

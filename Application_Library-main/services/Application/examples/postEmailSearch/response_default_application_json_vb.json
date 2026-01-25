@@ -1,0 +1,20 @@
+{
+    "OUT_COUNT": 1,
+    "OUT_DESCRIPTION": "Successfully fetched 1 of 1 records.",
+    "OUT_HAS_NEXT": "N",
+    "OUT_STATUS": "SUCCESS",
+    "OUT_TOTAL_COUNT": 1,
+    "P_OUTPUT": [
+        {
+            "template_id": 1162,
+            "template_code": "TEST_ONBOARD_MAIL",
+            "template_name": "Employee Onboarding Notification",
+            "header_view_name": "HR_EMP_ONBOARD_V",
+            "header_primary_key": "EMP_ID",
+            "approve_url_template": "https://myapp.com/approve?emp_id={EMP_ID}",
+            "reject_url_template": "https://myapp.com/reject?emp_id={EMP_ID}",
+            "report_url_template": "https://myapp.com/report?emp_id={EMP_ID}",
+            "is_active": "Y"
+        }
+    ]
+}

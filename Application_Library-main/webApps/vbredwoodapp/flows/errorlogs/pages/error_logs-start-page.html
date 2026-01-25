@@ -1,0 +1,202 @@
+<div id="sampleDemo1" class="demo-padding demo-container">
+  <div id="componentDemoContent1" style="width: 1px; min-width: 100%;">
+    <div id="mainContent1">
+
+      <oj-sp-smart-search-page page-title="Error Logs " id="oj_exssp1">
+
+        <!--Search Section -->
+        <oj-flex slot="search" class="oj-sm-padding-2x" style="align-items: center;">
+          <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-space-between"
+            style="width: 100%; align-items: flex-start; padding: 0 1rem;">
+            <div style="flex: 1; margin-right: 1rem;">
+             <oj-sp-smart-search id="freq_smartsearch" filter-criterion="{{ $variables.filterCriterion }}"
+        search-config="[[ $variables.searchConfiguration.provider]]" search-context="[[ $variables.searchContext ]]">
+      </oj-sp-smart-search>
+            </div>
+            <div style="display: flex; gap: 0.25rem; margin-left: 1rem; margin-top: 1px; flex-wrap: wrap;">
+              <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Reset" id="resetBtn"
+                on-oj-action="[[$listeners.resetBtnAction]]">
+                <img slot="startIcon" :src="[[ $application.path + 'resources/images/Reset.png' ]]">
+              </oj-button>
+            </div>
+          </div>
+        </oj-flex>
+
+        <!--Table Section -->
+        <div id="sampleDemo" class="demo-padding demo-container">
+          <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+            <div id="searchMainContent">
+
+              <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-flex-end"
+                style="width: 100%; padding: 0 1rem; background-color: white;">
+                <div style="display: flex; gap: 0.25rem; margin-left: 1rem; margin-top: 1px; flex-wrap: wrap;">
+                  <oj-button style="margin:0.125rem;" label="Export" chroming="outlined" id="refreshBtn">
+  <span slot="startIcon" class="oj-ux-ico-export-excel-data" style="color: #ffffff;"></span>
+                    
+                    <!-- <img slot="startIcon" :src="[[ $application.path + 'resources/images/Refresh.png' ]]"> -->
+                  </oj-button>
+                  <oj-button style="margin:0.125rem;" label="Refresh" chroming="outlined" id="refreshBtn"
+                    on-oj-action="[[$listeners.refreshBtnAction]]">
+                    <img slot="startIcon" :src="[[ $application.path + 'resources/images/Refresh.png' ]]">
+                  </oj-button>
+               
+                </div>
+              </div>
+
+              <div class="oj-flex">
+                <!-- oj-search-table -->
+                <oj-table scroll-policy="loadMoreOnScroll" class="oj-sm-width-full oj-bg-body" display="grid"
+                  horizontal-grid-visible="enabled" vertical-grid-visible="enabled" selection-mode.row="none"
+                  selection-mode.column="none" id="searchErrorLogTbl"
+                 columns="{{ $constants.tableColumns}}" data="[[ $variables.errorLogADP ]]">
+
+                  <!-- Template Slots -->
+                  <template slot="actions">
+                    <div class="oj-flex oj-sm-align-items-center oj-sm-justify-content-center" style="gap:15px;">
+                      <span class="oj-ux-ico-trash" style="cursor:pointer; font-size:20px;"
+                        id="deleteIcon"></span>
+                      <span class="oj-ux-ico-edit" style="cursor:pointer; font-size:20px;"
+                        id="editIcon"></span>
+                    </div>
+                  </template>
+
+                  <template slot="err_id">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="table_name">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="merge_query">
+ 
+  <span class="oj-ux-ico-merge" style="cursor:pointer; font-size:20px; margin-left:35px"
+                        id="deleteIcon" slot="startIcon" on-click="[[$listeners.deleteIconClick]]">
+                  
+                  </template>
+
+                  <template slot="schedule_list_id">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="err_code">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+               <template slot="err_msg">
+  <oj-bind-if test="[[ $current.data ]]">
+    <div class="error-message-container">
+      <!-- Trigger Element with Hover Card Reference -->
+      <oj-button 
+        id="errorBtn-[[$current.index]]"
+        class="error-message-trigger"
+        chroming="borderless"
+        display="icons">
+        <span slot="startIcon" class="oj-ux-ico-error" on-mouseover="[[$listeners.iconMouseover]]"
+          style="margin-left:35px"></span>
+        
+      </oj-button>
+      
+
+  
+    </div>
+  </oj-bind-if>
+</template>
+
+                  <template slot="creation_date">
+      <oj-input-date value='[[typeof $current.data === "string" ? $current.data : null]]' readonly="true"
+        converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yy"}}'></oj-input-date>
+   </template>
+
+                  <template slot="err_status">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                </oj-table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagination Section -->
+        <div class="oj-flex oj-sm-justify-content-center" style="background-color:white;">
+          <oj-toolbar chroming="solid" class="oj-flex-item oj-sm-flex-initial">
+
+            <oj-button label="Prev" chroming="borderless" disabled="[[ !$variables.pagingButton.previous ]]" id="preBtn"
+              on-oj-action="[[$listeners.preBtnAction]]">
+              <span slot="startIcon" class="oj-ux-ico-back"></span>
+            </oj-button>
+
+            <oj-button label="Next" chroming="borderless" id="nxtBtn" on-oj-action="[[$listeners.nxtBtnAction]]"
+              disabled="[[ !$variables.pagingButton.next ]]">
+              <span slot="endIcon" class="oj-ux-ico-forward-next"></span>
+            </oj-button>
+
+          </oj-toolbar>
+        </div>
+
+      </oj-sp-smart-search-page>
+    </div>
+  </div>
+</div>
+<oj-dialog dialog-title="Merge Query" id="merge_query" cancel-behavior="icon">
+  <div slot="body">
+   
+      
+      <!-- Text Area Section -->
+      <oj-text-area 
+        class="oj-flex-item oj-form-control-full-width" 
+        readonly="true" 
+        value="{{ $variables.merge_query }}"
+        rows="15" 
+        style="padding-top:10px">
+      </oj-text-area>
+    </div>
+  </div>
+  
+    <div slot="footer">
+      <div class="oj-flex oj-sm-justify-content-flex-end oj-sm-padding-2x-bottom">
+        <oj-button id="copyButton" label="Copy Text" on-oj-action="[[$listeners.copyButtonAction]]"
+          >
+          <span slot="startIcon" class="oj-ux-ico-copy" ></span>
+        </oj-button>
+      </div>
+    <oj-button label="Close" chroming="callToAction" on-oj-action="[[$listeners.buttonAction2]]"></oj-button>
+  </div>
+
+</oj-dialog>
+
+
+<oj-dialog dialog-title="Error Code" id="error" cancel-behavior="icon" style="height:300px;">
+  <div slot="body">
+    <div class="oj-flex oj-sm-flex-direction-column">
+      <!-- Copy Button Section -->
+    
+      
+      <!-- Text Area Section -->
+      <oj-text-area 
+        class="oj-flex-item oj-form-control-full-width" 
+        readonly="true" 
+        value="{{ $variables.errorcode }}"
+        rows="4" 
+        style="padding-top:10px">
+      </oj-text-area>
+    </div>
+  </div>
+  
+  <div slot="footer">
+      <div class="oj-flex oj-sm-justify-content-flex-end oj-sm-padding-2x-bottom">
+        <oj-button id="copyButton" label="Copy Text" on-oj-action="[[$listeners.copyButtonMouseover]]"
+          >
+          <span slot="startIcon" class="oj-ux-ico-copy"></span>
+        </oj-button>
+      </div>
+  <oj-button label="Close" chroming="callToAction" on-oj-action="[[$listeners.buttonAction3]]"></oj-button>
+   
+  </div>
+</oj-dialog>
+
+
+<div class="oj-flex" data-vb-layout-type="grid">
+  
+</div>

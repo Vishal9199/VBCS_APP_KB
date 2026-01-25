@@ -1,0 +1,508 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "adpAttachmentFile": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "postNws_custAttachmentSearch",
+        "keyAttributes": "document_id"
+      }
+    },
+    "adpAttachmentText": {
+      "defaultValue": {
+        "itemType": "postAttachmentSearch",
+        "keyAttributes": "document_id"
+      },
+      "type": "vb/ArrayDataProvider2"
+    },
+    "adpAttachmentUrl": {
+      "defaultValue": {
+        "itemType": "postAttachmentSearch",
+        "keyAttributes": "document_id"
+      },
+      "type": "vb/ArrayDataProvider2"
+    },
+    "attachmentObj": {
+      "type": {
+        "P_DOCUMENT_NAME": "string",
+        "P_DOCUMENT_CATEGORY": "string",
+        "P_DOCUMENT_TYPE": "string",
+        "P_DOCUMENT_FILE": "any",
+        "P_DESCRIPTION": "string",
+        "P_APPL_CODE": "string",
+        "P_TRANSACTION_ID": "string",
+        "P_TYPE": "string",
+        "P_TITLE": "string",
+        "P_URL": "string",
+        "P_CREATED_BY": "string"
+      },
+      "defaultValue": {
+        "P_APPL_CODE": "[[ $variables.P_APPLICATION_CODE ]]",
+        "P_CREATED_BY": "[[ $application.user.email ]]",
+        "P_TRANSACTION_ID": "[[ $variables.P_TRANSACTION_ID ]]",
+        "P_TYPE": "URL"
+      }
+    },
+    "formObj": {
+      "type": {
+        "addDialogValidate": "string"
+      }
+    },
+    "P_APPLICATION_CODE": {
+      "type": "string",
+      "input": "fromCaller"
+    },
+    "P_SCREEN_NAME": {
+      "type": "string",
+      "input": "fromCaller"
+    },
+    "P_STATUS": {
+      "type": "string",
+      "input": "fromCaller"
+    },
+    "P_TRANSACTION_ID": {
+      "type": "string",
+      "@dt": {
+        "label": "P_TRANSACTION_ID"
+      },
+      "input": "fromCaller"
+    },
+    "P_TRANSACTION_NUMBER": {
+      "type": "string",
+      "description": "REQ-1002",
+      "input": "fromCaller"
+    },
+    "rowId": {
+      "type": "string"
+    },
+    "rowTransId": {
+      "type": "string"
+    },
+    "selectedTab": {
+      "type": "string",
+      "defaultValue": "file-tab"
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.postAttachmentSearch": {
+      "endpoint": "postAttachmentSearch",
+      "service": "Attachment",
+      "path": "response"
+    },
+    "@decorators.postNws_custAttachmentSearch": {
+      "endpoint": "postNws_custAttachmentSearch",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "postAttachmentSearch": {
+          "additional_info": "any",
+          "appl_code": "string",
+          "created_by": "string",
+          "created_date": "string",
+          "description": "any",
+          "document_category": "string",
+          "document_id": "number",
+          "document_name": "string",
+          "document_type": "string",
+          "last_updated_by": "string",
+          "last_updated_date": "string",
+          "last_updated_login": "string",
+          "title": "any",
+          "transaction_id": "number",
+          "type": "string",
+          "url": "any"
+    },
+    "postNws_custAttachmentSearch": {
+      "additional_info": "any",
+      "appl_code": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "description": "string",
+      "document_category": "string",
+      "document_id": "number",
+      "document_name": "string",
+      "document_type": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "reference_id": "number",
+      "title": "string",
+      "transaction_id": "number",
+      "type": "string",
+      "url": "any"
+    }
+  },
+  "eventListeners": {
+    "addBtnAction": {
+      "chains": [
+        {
+
+          "parameters": {
+          },
+          "chain": "onAddAttachment"
+        }
+      ]
+    },
+    "addFileBtnAction": {
+      "chains": [
+        {
+          "chain": "onAddAttachment",
+          "parameters": {
+            "btnType": "FILE"
+          }
+        }
+      ]
+    },
+    "addRefFileBtnAction": {
+      "chains": [
+        {
+          "chain": "onRefresh"
+        }
+      ]
+    },
+    "addRefTextBtnAction": {
+      "chains": [
+        {
+          "chain": "onRefresh"
+        }
+      ]
+    },
+    "addRefurlBtnAction": {
+      "chains": [
+        {
+          "chain": "onRefresh",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "addTextBtnAction": {
+      "chains": [
+        {
+          "chain": "onAddAttachment",
+          "parameters": {
+            "btnType": "TEXT"
+          }
+        }
+      ]
+    },
+    "addUrlBtnAction": {
+      "chains": [
+        {
+          "chain": "onAddAttachment",
+          "parameters": {
+            "btnType": "URL"
+          }
+        }
+      ]
+    },
+    "attachmentFilePickerSelect": {
+      "chains": [
+        {
+          "chain": "FilePickerSelectChain",
+          "parameters": {
+
+            "files": "[[ Array.prototype.slice.call($event.detail.files) ]]"
+          }
+        }
+      ]
+    },
+    "attachmentSaveCloseAction": {
+      "chains": [
+        {
+          "chain": "onClickCancel",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "attachmentSaveCloseAction2": {
+      "chains": [
+        {
+          "chain": "onClickSave",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "cancelDeleteBtnAction": {
+      "chains": [
+        {
+          "chain": "onDilaogCancel"
+        }
+      ]
+    },
+    "confirmDeleteBtnAction": {
+      "chains": [
+{
+          "chain": "onDeleteOk",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnAction": {
+      "chains": [
+        {
+          "chain": "onClickDeleteBtn",
+          "parameters": {
+
+            "current": "{{ $current }}",
+            "event": "{{ $event }}",
+            "index": "{{ $current.index }}",
+            "key": "{{ $current.key }}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnAction2": {
+      "chains": [
+{
+          "chain": "onClickDownload",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "ojAttachmentSpCancel": {
+      "chains": [
+        {
+          "chain": "AdvancedCreateAndEditPageTemplateSpCancelChain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "ojAttachmentSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "AdvancedCreateAndEditPageTemplateSpPrimaryActionChain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "ojAttachmentSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "secondary_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-file-picker": {
+        "path": "ojs/ojfilepicker"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-option": {
+        "path": "ojs/ojoption"
+      },
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-radioset": {
+        "path": "ojs/ojradioset"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "oj-sp/simple-create-edit/loader"
+      },
+      "oj-sp-vertical-anchor-navigator": {
+        "path": "oj-sp/vertical-anchor-navigator/loader"
+      },
+      "oj-switcher": {
+        "path": "ojs/ojswitcher"
+      },
+      "oj-tab-bar": {
+        "path": "ojs/ojnavigationlist"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+
+    },
+    "css": [
+      "/resources/css/redwood-overrides.css"
+    ]
+  },
+  "constants": {
+    "columnsFile": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Download",
+          "field": "",
+          "resizable": "enabled",
+          "width": "",
+          "template": "download_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Document Name",
+          "field": "document_name",
+          "resizable": "enabled",
+          "width": "",
+          "sortable": "enabled",
+          "template": "document_name_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Document Category",
+          "field": "document_category",
+          "resizable": "enabled",
+          "width": "",
+          "sortable": "enabled",
+          "template": "document_category_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+
+        },
+        {
+          "headerText": "Document Type",
+          "field": "document_type",
+          "resizable": "enabled",
+          "width": "",
+          "template": "document_type_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Description",
+          "field": "description",
+          "resizable": "enabled",
+          "width": "",
+          "template": "description_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }
+      ],
+      "description": "{\n        \"headerText\": \"Action\",\n        \"field\": \"\",\n        \"resizable\": \"enabled\",\n        \"width\": 100,\n        \"sortable\": \"enabled\",\n        \"template\": \"action\",\n        \"headerStyle\": \"white-space: normal;\",\n        \"style\": \"\"\n    },"
+    },
+    "columnsText": {
+      "defaultValue": [
+        {
+          "headerText": "Action",
+          "field": "",
+          "resizable": "enabled",
+          "width": 150,
+          "sortable": "enabled",
+          "template": "action_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Title",
+          "field": "title",
+          "resizable": "enabled",
+          "width": 430,
+          "template": "title_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Description",
+          "field": "description",
+          "resizable": "enabled",
+          "width": 835,
+          "template": "description_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }
+      ],
+      "type": "object[]",
+      "uniqueItems": true
+    },
+    "columnsUrl": {
+      "defaultValue": [
+        {
+          "headerText": "Action",
+          "field": "",
+          "resizable": "enabled",
+          "width": 150,
+          "sortable": "enabled",
+          "template": "action_template3",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "URL",
+          "field": "url",
+          "resizable": "enabled",
+          "width": 450,
+          "template": "url_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Description",
+          "field": "description",
+          "resizable": "enabled",
+          "width": 850,
+          "template": "description_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }
+      ],
+      "type": "object[]",
+      "uniqueItems": true
+    },
+    "SIZE_LIMIT": {
+      "type": "string",
+      "defaultValue": "2MB"
+    }
+
+  }
+}

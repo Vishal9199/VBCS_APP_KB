@@ -1,0 +1,28 @@
+{
+    "items": [
+        {
+            "person_id": 100000005219102,
+            "person_number": "5536",
+            "full_name": "Muna Zahran Ali Al Maawali منى  المعولية",
+            "email_address": "muna.maawali@testowwsc.nama.om"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/approval/process/user/dtl"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/approval/process/user/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/approval/process/user/dtl"
+        }
+    ]
+}

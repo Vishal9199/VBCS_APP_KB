@@ -1,0 +1,31 @@
+   <oj-button class="oj-flex-bar-start" on-oj-action="[[$listeners.buttonAction]]" chroming="borderless"
+      display="icons" style="background-color : #2B1675;">
+      <span class="oj-ux-ico-menu icons" style="color : white ; " slot="startIcon"></span>
+    </oj-button>
+    <oj-drawer-popup opened="{{ $variables.popupOpen }}" close-gesture="none" style="width:80px">
+
+  <div class="popupheader oj-flex oj-sm-justify-content-space-between oj-sm-align-items-center"
+    style="background-color : #2B1675 ; padding: 0px 5 px;">
+    <h1 id="h4" style="font-size: larger; font-weight: bold; margin-top: 0px; margin-bottom: 0px; color: white;">
+      Application Object Library</h1>
+    <oj-button chroming="borderless" on-oj-action="[[$listeners.buttonAction2]]">
+      <span class="oj-ux-ico-warehouse " slot="startIcon" style="color: white;"></span>
+    </oj-button>
+
+  </div>
+  <div class="oj-flex oj-sm-flex-direction-column oj-sm-align-items-flex-start">
+    <oj-collapsible class="oj-flex-item oj-sm-flex-initial">
+      <div class="oj-flex oj-sm-flex-direction-column oj-sm-align-items-flex-start">
+        <oj-bind-for-each data="[[ $application.constants.applicationLibraryPages ]]">
+          <template>
+            <oj-button chroming="borderless" class="" label="[[ $current.data.label ]]"
+              on-oj-action="[[$listeners.buttonAction3]]">
+              <span slot="startIcon" :class="[[$current.data.icon]]"></span>
+            </oj-button>
+          </template>
+        </oj-bind-for-each>
+      </div>
+      <h1 id="h4" slot="header" style="font-size: larger; font-weight: bold;color:#2B1675">Application Library</h1>
+    </oj-collapsible>
+  </div>
+</oj-drawer-popup>

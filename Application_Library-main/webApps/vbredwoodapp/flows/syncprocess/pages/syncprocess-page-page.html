@@ -1,0 +1,238 @@
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+
+<div>
+  <oj-sp-simple-create-edit id="SyncProcess_page" page-title="Sync Process" display-options.responsive-padding="on"
+    primary-action.label="Save and Close" secondary-actions='[{"label":"Save","id":"save"}]'
+    on-sp-primary-action="[[$listeners.syncProcessPageSpPrimaryAction]]"
+    on-sp-cancel="[[$listeners.syncProcessPageSpCancel]]" badge.status="info"
+    badge.text="[[ $variables.ScheduleSyncSearchVar.schedule_name ]]"
+    on-sp-secondary-action="[[$listeners.syncProcessPageSpSecondaryAction2]]">
+
+    <div slot="main" style="background-color:white;">
+      <div style="margin-top: 0;">
+    
+        <!-- Add/Edit Form -->
+    
+        <div class="oj-panel oj-panel-shadow-md oj-selected">
+          <oj-validation-group valid="{{ $variables.isFormValid }}" id="lookup-type-validation">
+            <oj-form-layout max-columns="3" label-edge="start" label-width="45%" user-assistance-density="compact"
+              direction="column">
+    
+              <!-- Schedule Name -->
+              <oj-input-text label-hint="Schedule Name" value="{{ $variables.ScheduleSyncSearchVar.schedule_name }}"
+                readonly="[[ !$variables.canEdit ]]" messages-custom="{{ $variables.lookupTypeCodeCustomMsg }}"
+                on-value-changed="[[$listeners.inputTextValue]]">
+    
+                <oj-bind-if test="[[ !$variables.canEdit ]]">
+                  <div slot="end">
+                    <oj-button display="icons" chroming="borderless" label="Button" style="background-color:transparent;"
+                      id="iconOnlyBtn" on-oj-action="[[$listeners.iconOnlyBtnAction]]">
+                      <span class="oj-ux-ico-edit" id="span--655749004-1" slot="startIcon"></span>
+                    </oj-button>
+                  </div>
+                </oj-bind-if>
+              </oj-input-text>
+              
+              <!-- BI Report Name -->
+    
+              <oj-input-text label-hint="BI Report Name" value="{{ $variables.ScheduleSyncSearchVar.bi_report_name }}"
+                required="true">
+    
+              </oj-input-text>
+    
+              <!-- Frequency Min -->
+    
+              <oj-input-text value="{{ $variables.ScheduleSyncSearchVar.frequency_min }}" label-hint="Frequency Min"
+                required="true">
+    
+              </oj-input-text>
+    
+              <!-- Table Name -->
+              <oj-input-text label-hint="Table Name" value="{{ $variables.ScheduleSyncSearchVar.db_table_name }}"
+                required="true">
+              </oj-input-text>
+    
+              <!-- BI Report Path -->
+              <oj-input-text label-hint="BI Report Path" value="{{ $variables.ScheduleSyncSearchVar.bi_report_path }}"
+                required="true">
+              </oj-input-text>
+              <!-- Status -->
+              <oj-switch label-hint="Active" value="{{ $variables.ScheduleSyncSearchVar.status === 'Y'}}"
+                on-value-changed="[[$listeners.switchValue]]">
+    
+    
+              </oj-switch>
+    
+              <!-- Unique Column -->
+              <oj-input-text label-hint="Unique Column" value="{{ $variables.ScheduleSyncSearchVar.db_column_names }}"
+                required="true">
+              </oj-input-text>
+    
+              <!--Operation  -->
+              <oj-select-single label-hint="Operation" value="{{ $variables.ScheduleSyncSearchVar.operation }}"
+                data="[[ $variables.SelectADP ]]">
+              </oj-select-single>
+    
+            </oj-form-layout>
+          </oj-validation-group>
+        </div>
+        
+        <!-- Schedule Parameters Heading -->
+
+        <div style="color: #01474d; font-size: larger; font-weight: bold;margin-bottom:0rem; padding : 10px 15px;"
+          class="oj-flex oj-sm-justify-content-space-between oj-sm-align-items-center">
+          <oj-bind-text value="Schedule Parameters"></oj-bind-text>
+          <div class="oj-flex oj-sm-justify-content-space-around oj-sm-align-items-center" style="gap:10px;">
+            <oj-button style="margin:0.125rem; background-color:#2B167;" label="Refresh" chroming="outlined"
+              id="refreshBtn" on-oj-action="[[$listeners.refreshBtnAction]]">
+              <img slot="startIcon" :src="[[ $application.path + 'resources/images/Refresh.png' ]]">
+            </oj-button>
+
+            <oj-button label="Add" class="oj-flex-bar-end oj-helper-justify-content-flex-end" chroming="outlined"
+              id="addBtn" on-oj-action="[[$listeners.addBtnAction]]">
+              <img slot="startIcon" :src="[[ $application.path + 'resources/images/Create (1).png' ]]">
+            </oj-button>
+          </div>
+        </div>
+
+        <!-- Schedule Parameters Table -->
+
+        <oj-table scroll-policy="loadMoreOnScroll" display="grid" data="[[ $variables.paramADP ]]"
+          columns='[{"headerText":"Actions","field":"","template":"Action","resizable":"enabled","width":104,"sortable":"disabled"},{"headerText":"Param Name","field":"param_name","resizable":"enabled"},{"headerText":"Param Value","field":"param_value","resizable":"enabled"},{"headerText":"Sequence No","field":"sequence_no","resizable":"enabled"},{"headerText":"Next Schedule Time","field":"next_schedule_time","template":"start_date","resizable":"enabled"}]'
+          style="width:100%;">
+
+                  <template slot="Action">
+                    <div class="oj-flex oj-sm-align-items-center oj-sm-justify-content-center" style="gap:15px;">
+                      <span class="oj-ux-ico-trash"
+                      style="cursor:pointer; font-size:20px;" on-click="[[$listeners.iconClick]]"></span>
+                      <span class="oj-ux-ico-edit"
+                      style="cursor:pointer; font-size:20px;" on-click="[[$listeners.iconClick2]]" ></span>
+                    </div>
+                  </template>
+
+
+  <template slot="Start Date">
+    <oj-input-date-time value='[[typeof $current.data === "string" ? $current.data : null]]'
+      converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy hh:mm a"}}' readonly="true" id="start001"
+      aria-label="start001">
+    </oj-input-date-time>
+  </template>
+
+    <template slot="start_date" data-oj-as="cell">
+    <oj-input-date-time
+      value="[[cell.data]]"
+      readonly="true"
+      converter='{"type": "datetime", "options": { "pattern": "dd-MMM-yyyy hh:mm a" }}'>
+    </oj-input-date-time>
+  </template>
+
+
+
+        </oj-table>
+        <!-- Pagination -->
+        <div class="oj-flex oj-sm-justify-content-center">
+          <oj-bind-if test="[[true]]">
+            <oj-toolbar chroming="solid" class="oj-flex-item oj-sm-flex-initial">
+
+              <oj-button label="Previous" chroming="borderless" id="preBtn" disabled="[[ !$variables.pagination.prev ]]"
+                on-oj-action="[[$listeners.preBtnAction]]">
+                <span slot="startIcon" class="oj-ux-ico-back"></span>
+              </oj-button>
+
+              <oj-button label="Next" chroming="borderless" id="nxtBtn" disabled="[[ !$variables.pagination.next ]]"
+                on-oj-action="[[$listeners.nxtBtnAction]]">
+                <span slot="endIcon" class="oj-ux-ico-forward-next"></span>
+              </oj-button>
+
+            </oj-toolbar>
+          </oj-bind-if>
+        </div>
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+
+
+
+
+
+
+  </oj-sp-simple-create-edit>
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Dialog for Add -->
+
+<oj-dialog dialog-title="Schedule Parameters" id="ParamChildDialog" cancel-behavior="icon" resize-behavior="resizable"
+  drag-affordance="title-bar" style="width:900px;" on-oj-close="[[$listeners.paramChildDialogClose]]">
+  <div slot="body" style="padding-top:10px; background-color:white;">
+    <div class="oj-flex oj-panel oj-panel-shadow-md oj-selected">
+      <oj-validation-group id="syncParamForm" valid="{{ $variables.isValueFormValid }}">
+      <oj-form-layout label-edge="start" direction="column" id="scheduleParameter" max-columns="2"
+        user-assistance-density="compact">
+        <oj-input-text label-hint="Schedule ID" value="{{ $variables.scheduled_id }}"
+          id="dialog-Schedule-ID" readonly="true"></oj-input-text>
+        <oj-input-text label-hint="Sequence No" value="{{ $variables.ScheduleSyncParamSearchVar.sequence_no }}"
+          id="dialog-sequence-no"></oj-input-text>
+        <oj-input-text label-hint="Param Name" value="{{ $variables.ScheduleSyncParamSearchVar.param_name }}"
+          id="dialog-Param-Name" required="true"></oj-input-text>
+        <oj-input-date-time label-hint="Next Schedule Time" id="dialog-date-time"
+          value="{{ $variables.ScheduleSyncParamSearchVar.next_schedule_time_temp }}" converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy hh:mm a"}}'></oj-input-date-time>
+        <!-- <oj-input-date label-hint="Next Schedule Time"
+          value="{{ $variables.ScheduleSyncParamSearchVar.next_schedule_time_temp }}"></oj-input-date> -->
+        <oj-select-single label-hint="Param Value" id="dialog-Param-Value"
+          value="{{ $variables.ScheduleSyncParamSearchVar.param_value }}" data="[[ $variables.slectADPChild ]]"></oj-select-single>
+      </oj-validation-group>
+      </oj-form-layout>
+
+    </div>
+  </div>
+  <div slot="footer">
+    <oj-button on-oj-action="[[$listeners.buttonAction]]">Save &amp; close</oj-button>
+    <oj-button on-oj-action="[[$listeners.buttonAction3]]">Save &amp; Add</oj-button>
+    <oj-button on-oj-action="[[$listeners.buttonAction2]]">Close</oj-button>
+  </div>
+</oj-dialog>
+
+
+<!-- Delete Dialog -->
+
+<oj-dialog dialog-title="Delete" id="deleteSyncParamChildDialog" cancel-behavior="icon">
+  <div slot="body">
+    <h6 id="deletehid" style="font-size:medium; font-weight: bold;">Are you sure you want to delete this Sync Parameter?
+    </h6>
+  </div>
+  <div slot="footer">
+    <oj-button id="deleteBtnYes" chroming="outlined" on-oj-action="[[$listeners.deleteBtnYesAction]]">Yes</oj-button>
+    <oj-button id="deleteBtnNo" chroming="outlined" on-oj-action="[[$listeners.deleteBtnNoAction]]">No</oj-button>
+  </div>
+</oj-dialog>
+
+
+
+<!-- Unsaved Changes Dialog -->
+<oj-dialog dialog-title="Unsaved Changes" id="unsavedChangesDialog" cancel-behavior="icon">
+  <div slot="body">
+    <h6 id="unsavedChangesText" style="font-size:medium; font-weight: bold;">Are you sure you want to leave this page?
+      Your changes will be lost.
+    </h6>
+  </div>
+  <div slot="footer">
+    <oj-button id="proceedExitBtn" chroming="outlined" on-oj-action="[[$listeners.proceedExitBtnAction]]">Leave
+    </oj-button>
+    <oj-button id="cancelExitBtn" chroming="outlined" on-oj-action="[[$listeners.cancelExitBtnAction]]">Cancel
+    </oj-button>
+  </div>
+</oj-dialog>

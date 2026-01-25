@@ -1,0 +1,15 @@
+{
+    "description": "Smart Search Configuration for Approval Role Management Application",
+    "filters": {
+        "ApprovalRoleNameFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Approval Role Name",
+            "options": {
+                "field": "approval_role_code",
+                "optionsData": "[[ $search.filters.ApprovalRoleNameFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.ApprovalRoleNameFilter.options.optionsKeys ]]"
+            },
+            "data": {}
+        }
+    }
+}

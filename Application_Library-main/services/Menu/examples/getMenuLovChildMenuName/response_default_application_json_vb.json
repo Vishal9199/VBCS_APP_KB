@@ -1,0 +1,107 @@
+{
+    "items": [
+        {
+            "menu_id": 84,
+            "menu_code": "ADMIN_MENU",
+            "menu_name": "Administration Menu"
+        },
+        {
+            "menu_id": 228,
+            "menu_code": "TEST_2",
+            "menu_name": "TEST_2"
+        },
+        {
+            "menu_id": 243,
+            "menu_code": "KDGN",
+            "menu_name": "cbkwrg"
+        },
+        {
+            "menu_id": 250,
+            "menu_code": "CJKSAHD",
+            "menu_name": "ccbad"
+        },
+        {
+            "menu_id": 223,
+            "menu_code": "ADMIN_MENU_2",
+            "menu_name": "test"
+        },
+        {
+            "menu_id": 229,
+            "menu_code": "TEST3",
+            "menu_name": "test"
+        },
+        {
+            "menu_id": 231,
+            "menu_code": "TEST6",
+            "menu_name": "test"
+        },
+        {
+            "menu_id": 230,
+            "menu_code": "TEST4",
+            "menu_name": "test"
+        },
+        {
+            "menu_id": 240,
+            "menu_code": "TESTTTT",
+            "menu_name": "test2"
+        },
+        {
+            "menu_id": 236,
+            "menu_code": "TEST20",
+            "menu_name": "test20"
+        },
+        {
+            "menu_id": 237,
+            "menu_code": "TEST21",
+            "menu_name": "test21"
+        },
+        {
+            "menu_id": 239,
+            "menu_code": "TEST45",
+            "menu_name": "test45"
+        },
+        {
+            "menu_id": 233,
+            "menu_code": "TEST8",
+            "menu_name": "test8"
+        },
+        {
+            "menu_id": 234,
+            "menu_code": "TESTT9",
+            "menu_name": "test999"
+        },
+        {
+            "menu_id": 227,
+            "menu_code": "TEST",
+            "menu_name": "test_1"
+        },
+        {
+            "menu_id": 254,
+            "menu_code": "TEST_NEWW",
+            "menu_name": "test_new"
+        },
+        {
+            "menu_id": 1,
+            "menu_code": "welcome",
+            "menu_name": "welcome"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 17,
+    "links": [
+        {
+            "rel": "self",
+            "href": "http://primaverademo.4iapps.com:8442/ords/aol/menu/lov/child/menu/name?p_menu_code=VEW"
+        },
+        {
+            "rel": "describedby",
+            "href": "http://primaverademo.4iapps.com:8442/ords/aol/metadata-catalog/menu/lov/child/menu/item"
+        },
+        {
+            "rel": "first",
+            "href": "http://primaverademo.4iapps.com:8442/ords/aol/menu/lov/child/menu/name?p_menu_code=VEW"
+        }
+    ]
+}

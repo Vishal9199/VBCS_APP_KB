@@ -1,0 +1,618 @@
+<div id="sampleDemo1" class="demo-padding demo-container">
+  <div id="componentDemoContent1" style="width: 1px; min-width: 100%;">
+    <div id="mainContent1">
+
+      <oj-sp-advanced-create-edit id="oj_petty_cash" page-title="Petty Cash Claim" page-subtitle=" "
+        display-options.responsive-padding="on" display-mode="light" on-sp-cancel="[[$listeners.ojPettyCashSpCancel]]"
+        secondary-actions="[[ $variables.aToolGeneric ]]" badge.text="[[ $variables.payload.claim_number ]]"
+        badge.status="info" display-options.next="off"
+        on-sp-secondary-action="[[$listeners.ojPettyCashSpSecondaryAction]]"
+        on-sp-primary-action="[[$listeners.ojPettyCashSpPrimaryAction]]" primary-action.label=" "
+        primary-action.disabled="true">
+
+        <!-- <oj-validation-group id="claim_hdr_valid_grp" valid="{{ $variables.hdrValidationVar }}" slot="main"> -->
+        <div class="oj-panel" slot="main" style="margin: 10px;">
+          <oj-validation-group valid="{{ $variables.headerFormValid }}">
+            <oj-form-layout id="pettyCashClaimForm" label-edge='start' direction="column" max-columns="3"
+              class="oj-formlayout-full-width oj-panel" style="margin-top: 0.25rem;" user-assistance-density="compact">
+
+            <!-- Claim Number - Auto-generated, Non-editable -->
+              <oj-input-text label-hint="Claim Number" value="{{ $variables.payload.claim_number }}"
+                class="oj-form-control-max-width-sm" disabled="true"></oj-input-text>
+
+            <!-- Claim Submission Date - System date, Non-editable -->
+              <oj-input-date label-hint="Claim Submission Date" value="{{ $variables.payload.request_date }}"
+                converter='[[ { "type": "datetime", "options": { "pattern": "dd-MMM-yyyy" }} ]]'
+                disabled="[[ $variables.p_nav_id != 0 && $variables.p_nav_id != null && $variables.p_nav_id != undefined ]]"
+                class="oj-form-control-max-width-sm" required="true"></oj-input-date>
+
+            <!-- Governate - Auto-populated based on role (Water/Waste Water), Non-editable -->
+            <!-- <oj-input-text label-hint="Governate" value="{{ $variables.payload.governorate }}"
+              disabled="[[ $variables.p_nav_id != 0 && $variables.p_nav_id != null && $variables.p_nav_id != undefined ]]"
+              class="oj-form-control-max-width-sm" required="true"></oj-input-text> -->
+              <oj-select-single label-hint="Governate" value="{{ $variables.payload.governorate }}"
+                data="[[$variables.getNwsCustPettyCashLovGovernateListSDP]]" item-text="governate_name" required="true"
+                class="oj-form-control-max-width-sm"
+                disabled="[[ $variables.p_nav_id != 0 && $variables.p_nav_id != null && $variables.p_nav_id != undefined ]]"
+                on-value-item-changed="[[$listeners.selectValueItem]]"></oj-select-single>
+              
+
+            <!-- Supplier Name - Auto-populated from SaaS, Non-editable -->
+            <!-- <oj-input-text label-hint="Supplier Name" value="{{ $variables.payload.supplier_name }}"
+              disabled="[[ $variables.p_nav_id != 0 && $variables.p_nav_id != null && $variables.p_nav_id != undefined ]]"
+              class="oj-form-control-max-width-sm"></oj-input-text> -->
+              <oj-select-single label-hint="Supplier Name" value="{{ $variables.payload.supplier_id }}" required="true"
+                class="oj-form-control-max-width-sm"
+                disabled="[[ ($variables.p_nav_id != 0 && $variables.p_nav_id != null && $variables.p_nav_id != undefined) || !$variables.payload.governorate ]]"
+                data="[[$variables.getNwsCustPettyCashLovSupplierListSDP]]" item-text="supplier_name"
+                on-value-item-changed="[[$listeners.selectValueItem2]]"></oj-select-single>
+
+            <!-- Supplier Site Name - Auto-populated from SaaS, Non-editable -->
+              <oj-input-text label-hint="Supplier Site Name" class="oj-form-control-max-width-sm" disabled="true"
+                value="{{ $variables.temp_Supplier_Site }}"></oj-input-text>
+              <oj-input-text label-hint="Comments"
+                disabled="[[ $variables.p_nav_id != 0 && $variables.p_nav_id != null && $variables.p_nav_id != undefined ]]"
+                class="oj-form-control-max-width-sm" value="{{ $variables.payload.comments }}"></oj-input-text>
+
+            <!-- Opening Balance - Closing balance from last claim, Non-editable -->
+              <oj-input-number label-hint="Opening Balance" value="{{ $variables.payload.open_balance_amt }}"
+                converter='{"options":{"style":"decimal","minimumFractionDigits":3},"type":"number"}'
+                class="oj-form-control-max-width-sm oj-form-control-text-align-end" required="true"></oj-input-number>
+
+            <!-- Receipts Amount - Total sum of receipt lines, Non-editable -->
+              <oj-input-number label-hint="Receipt Amount" value="{{ $variables.payload.receipt_amt }}"
+                converter='{"options":{"style":"decimal","minimumFractionDigits":3},"type":"number"}'
+                class="oj-form-control-max-width-sm oj-form-control-text-align-end" required="true" readonly="true"></oj-input-number>
+              <oj-input-number label-hint="Claim Amount" value="{{ $variables.payload.claim_amt }}"
+                converter='{"options":{"style":"decimal","minimumFractionDigits":3},"type":"number"}'
+                class="oj-form-control-max-width-sm oj-form-control-text-align-end" required="true" readonly="true"></oj-input-number>
+
+            <!-- Number of Receipt Lines - Total count, Non-editable -->
+
+            <!-- Claim Amount - Total sum of claim lines, Non-editable -->
+
+            <!-- Number of Claim Lines - Total count, Non-editable -->
+
+            <!-- Closing Balance/Cash in Hand - Calculated: Opening + Receipts - Claims, Non-editable -->
+              <oj-input-number label-hint="Closing Balance" value="{{ $variables.payload.close_balance_amt }}"
+                converter='{"options":{"style":"decimal","minimumFractionDigits":3},"type":"number"}'
+                class="oj-form-control-max-width-sm oj-form-control-text-align-end" required="true" readonly="true"></oj-input-number>
+              <oj-input-number label-hint="Staff IOU"
+                disabled="[[ $variables.p_nav_id != 0 && $variables.p_nav_id != null && $variables.p_nav_id != undefined ]]"
+                class="oj-form-control-max-width-sm oj-form-control-text-align-end"
+                converter='{"options":{"style":"decimal","minimumFractionDigits":3},"type":"number"}'
+                value="{{ $variables.payload.staff_iou_amt }}"></oj-input-number>
+              <oj-input-number label-hint="Cash in Hand" value="{{ $variables.payload.cash_in_hand }}"
+                converter='{"options":{"style":"currency","currency":"OMR","currencyDisplay":"name","minimumFractionDigits":3,"currencyFormat":"standard"},"type":"number"}'
+                class="oj-form-control-max-width-sm oj-form-control-text-align-end"
+                disabled="[[ $variables.p_nav_id != 0 && $variables.p_nav_id != null && $variables.p_nav_id != undefined ]]"></oj-input-number>
+
+              <oj-input-text label-hint="Invoice Number" value="{{ $variables.payload.saas_transaction_number }}"
+                disabled="[[ $variables.p_nav_id != 0 && $variables.p_nav_id != null && $variables.p_nav_id != undefined ]]"
+                class="oj-form-control-max-width-sm"></oj-input-text>
+                
+              <oj-input-text label-hint="Integration Status" value="{{ $variables.payload.integration_status_name }}"
+                class="oj-form-control-max-width-sm" disabled="true"></oj-input-text>
+              <oj-input-text label-hint="Status" value="{{ $variables.payload.status_name }}" disabled="true"
+                class="oj-form-control-max-width-sm"></oj-input-text>
+            </oj-form-layout>
+          </oj-validation-group>
+          <!-- </oj-validation-group> -->
+          <oj-bind-if
+            test="[[ $variables.p_nav_id != 0 && $variables.p_nav_id != null && $variables.p_nav_id != undefined ]]">
+            <div>
+              <oj-tab-bar edge="top" id="tabBarId" selection="{{ $variables.selectedTab }}">
+                <ul>
+                  <li id="claimLine">
+                    <a href="#" id="claimHrefId">Claim Details</a>
+                  </li>
+                  <li id="receiptLine">
+                    <a href="#" id="receiptHrefId">Receipt Details</a>
+                  </li>
+                </ul>
+              </oj-tab-bar>
+              <oj-button label="Add" on-oj-action="[[$listeners.buttonAction9]]" class="oj-button-sm"
+                chroming="outlined" style="margin-top: 0.1rem; margin-bottom: 0.1rem;">
+                <span class="oj-ux-ico-plus" slot="startIcon"></span>
+              </oj-button>
+              <oj-bind-if test="[[ $variables.selectedTab !== 'claimLine' ]]">
+                <oj-button label="Export" class="oj-button-sm" chroming="outlined"
+                  style="margin-top: 0.1rem; margin-bottom: 0.1rem;">
+                  <span class="oj-ux-ico-export-excel-data" slot="startIcon"></span>
+                </oj-button>
+              </oj-bind-if>
+              <oj-switcher value="[[ $variables.selectedTab ]]">
+                <div slot="claimLine" id="claimLine">
+                  <div class="oj-flex">
+                    <oj-table scroll-policy="loadMoreOnScroll" class="oj-flex-item oj-sm-12 oj-md-12"
+                      data="[[ $variables.claimLineADP ]]" columns="{{$constants.claimLineColumns}}" display="grid"
+                      style="border-radius: 5px;">
+                      <template slot="actions">
+                        <div style="display: flex; gap: 4px;" class="oj-helper-justify-content-center">
+                          <oj-button display="icons" chroming="borderless" id="editBtn"
+                            on-oj-action="[[$listeners.editBtnAction]]" class="oj-button-sm">
+                            <span slot="startIcon" class="oj-ux-ico-edit"></span>
+                          </oj-button>
+                          <oj-button display="icons" chroming="borderless" id="deleteBtn" class="oj-button-sm">
+                            <span slot="startIcon" class="oj-ux-ico-trash"></span>
+                          </oj-button>
+                        <!-- <oj-bind-if test='[[ $current.row.status_name === "Pending" ]]'>
+                          <oj-button display="icons" chroming="borderless" id="approveBtn">
+                            <span slot="startIcon" class="oj-ux-ico-check-circle"></span>
+                          </oj-button>
+                        </oj-bind-if> -->
+                        </div>
+                      </template>
+                      <template slot="about">
+                        <div style="display: flex; gap: 4px;" class="oj-helper-justify-content-center">
+                          <oj-button display="icons" chroming="borderless" id="aboutBtn"
+                            on-oj-action="[[$listeners.aboutBtnAction]]" class="oj-button-sm">
+                            <span slot="startIcon" class="oj-ux-ico-information"></span>
+                          </oj-button>
+                        </div>
+                      </template>
+                      <template slot="amountOMR">
+                      <!-- <oj-input-number value=""></oj-input-number> -->
+                        <oj-bind-text
+                          value="[[ $application.functions.formatToOMR($current.row.amount * $current.row.exchange_rate) ]]"></oj-bind-text>
+                      </template>
+                      <template slot="date">
+                        <oj-input-date value="[[$current.data]]" readonly="true"
+                          converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'></oj-input-date>
+                      </template>
+                      <template slot="attachment">
+                        <div style="display: flex; gap: 4px;" class="oj-helper-justify-content-center">
+                          <oj-button display="icons" chroming="borderless" id="attachmentBtn"
+                            on-oj-action="[[$listeners.attachmentBtnAction]]" class="oj-button-sm">
+                            <span slot="startIcon" class="oj-ux-ico-document-attachment"></span>
+                          </oj-button>
+                        </div>
+                      </template>
+                    <!-- Status Badge Template -->
+                      <template slot="status_badge">
+                        <oj-bind-if test='[[ $current.row.budget_status === "DRAFT" ]]'>
+                          <oj-bind-text style="font-size: 14px;color: gray;font-weight: bold;">Draft</oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test='[[ $current.row.budget_status === "PENDING" ]]'>
+                          <oj-bind-text style="font-size: 14px;color: orange;font-weight: bold;">Pending</oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test='[[ $current.row.budget_status === "APPROVED" ]]'>
+                          <oj-bind-text style="font-size: 14px;color: green;font-weight: bold;">Approved</oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test='[[ $current.row.budget_status === "REJECTED" ]]'>
+                          <oj-bind-text style="font-size: 14px;color: red;font-weight: bold;">Rejected</oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test='[[ $current.row.budget_status === "PAID" ]]'>
+                          <oj-bind-text style="font-size: 14px;color: blue;font-weight: bold;">Paid</oj-bind-text>
+                        </oj-bind-if>
+                      </template>
+                    </oj-table>
+                      <div class="oj-flex-item oj-sm-12 oj-md-12 oj-flex oj-sm-justify-content-flex-end">
+                      <oj-label for="totalLineAmount" class="oj-flex-item oj-sm-align-self-center oj-sm-2"
+                        style="margin-left: 2rem;">Total Line Amount</oj-label>
+                      <oj-input-number id="totalLineAmount"
+                        class="oj-flex-item oj-form-control-text-align-right oj-form-control-width-sm oj-sm-2"
+                        converter='[[ new $imports.ojConverterNumber.IntlNumberConverter({"minimumFractionDigits":3}) ]]'
+                        disabled="true" user-assistance-density="compact"
+                        value="{{ $variables.totalsVar.total_line_amount }}"></oj-input-number>
+                      </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-flex oj-sm-justify-content-center">
+                      <div class="oj-flex-item oj-sm-flex-initial">
+                        <oj-button label="Prev" chroming="borderless" id="preBtn"
+                          disabled="[[ $variables.pagination.claimLine_is_prev ]]"
+                          on-oj-action="[[$listeners.preBtnAction]]">
+                          <span slot="startIcon" class="oj-ux-ico-back"></span>
+                        </oj-button>
+                      </div>
+                      <div class="oj-flex-item oj-sm-flex-initial">
+                        <oj-button label="Next" chroming="borderless" id="nextBtn"
+                          disabled="[[ $variables.pagination.claimLine_is_next ]]"
+                          on-oj-action="[[$listeners.nextBtnAction]]">
+                          <span slot="endIcon" class="oj-ux-ico-forward-next"></span>
+                        </oj-button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div slot="receiptLine" id="receiptLine">
+                  <div class="oj-flex">
+                    <oj-table scroll-policy="loadMoreOnScroll" class="oj-flex-item oj-sm-12 oj-md-12"
+                      data="[[ $variables.receiptLineADP ]]" columns="{{$constants.receiptLineColumns}}"
+                      horizontal-grid-visible="enabled" vertical-grid-visible="enabled" display="grid"
+                      style="border-radius: 5px;">
+                      <template slot="receiptLineActions">
+                        <div style="display: flex; gap: 4px;" class="oj-helper-justify-content-center">
+                          <oj-button display="icons" chroming="borderless" id="editBtn"
+                            on-oj-action="[[$listeners.editBtnAction2]]" class="oj-button-sm">
+                            <span slot="startIcon" class="oj-ux-ico-edit"></span>
+                          </oj-button>
+                          <oj-button display="icons" chroming="borderless" id="deleteBtn" class="oj-button-sm">
+                            <span slot="startIcon" class="oj-ux-ico-trash"></span>
+                          </oj-button>
+                        </div>
+                      </template>
+                      <template slot="about">
+                        <div style="display: flex; gap: 4px;" class="oj-helper-justify-content-center">
+                          <oj-button display="icons" chroming="borderless" id="aboutBtn"
+                            on-oj-action="[[$listeners.aboutBtnAction]]" class="oj-button-sm">
+                            <span slot="startIcon" class="oj-ux-ico-information"></span>
+                          </oj-button>
+                        </div>
+                      </template>
+                      <template slot="amountOMR">
+                      <!-- <oj-input-number value=""></oj-input-number> -->
+                        <oj-bind-text
+                          value="[[ $application.functions.formatToOMR($current.row.amount * $current.row.exchange_rate) ]]"></oj-bind-text>
+                      </template>
+                      <template slot="date">
+                        <oj-input-date value="[[$current.data]]" readonly="true"
+                          converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'></oj-input-date>
+                      </template>
+                      <template slot="attachment">
+                        <div style="display: flex; gap: 4px;" class="oj-helper-justify-content-center">
+                          <oj-button display="icons" chroming="borderless" id="attachmentBtn"
+                            on-oj-action="[[$listeners.attachmentBtnAction]]" class="oj-button-sm">
+                            <span slot="startIcon" class="oj-ux-ico-document-attachment"></span>
+                          </oj-button>
+                        </div>
+                      </template>
+                    </oj-table>
+                   <div class="oj-flex-item oj-sm-12 oj-md-12 oj-flex oj-sm-justify-content-flex-end">
+                      <oj-label for="totalReceiptAmount" class="oj-flex-item oj-sm-align-self-center oj-sm-2"
+                        style="margin-left: 2rem;">Total Receipt Amount</oj-label>
+                      <oj-input-number id="totalReceiptAmount"
+                        class="oj-flex-item oj-form-control-text-align-right oj-form-control-width-sm oj-sm-2"
+                        converter='[[ new $imports.ojConverterNumber.IntlNumberConverter({"minimumFractionDigits":3}) ]]'
+                        disabled="true" user-assistance-density="compact"
+                        value="{{ $variables.totalsVar.total_receipt_amount }}"></oj-input-number>
+                      </div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-12 oj-flex oj-sm-justify-content-center">
+                      <div class="oj-flex-item oj-sm-flex-initial">
+                        <oj-button label="Prev" chroming="borderless" id="preBtn"
+                          disabled="[[ $variables.pagination.receiptLine_is_prev ]]">
+                          <span slot="startIcon" class="oj-ux-ico-back"></span>
+                        </oj-button>
+                      </div>
+                      <div class="oj-flex-item oj-sm-flex-initial">
+                        <oj-button label="Next" chroming="borderless" id="nextBtn"
+                          disabled="[[ $variables.pagination.receiptLine_is_next ]]">
+                          <span slot="endIcon" class="oj-ux-ico-forward-next"></span>
+                        </oj-button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </oj-switcher>
+            </div>
+          </oj-bind-if>
+        </div>
+
+
+      </oj-sp-advanced-create-edit>
+
+    </div>
+  </div>
+</div>
+
+<oj-dialog dialog-title="Please wait..." id="progressMsg" class="wd200" style="overflow: hidden;">
+  <div slot="body">
+    <div class="oj-flex full_stretch lg_button_width">
+      <oj-progress-bar class="full_stretch oj-flex-item oj-sm-12 oj-md-12" value="-1"></oj-progress-bar>
+    </div>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="Delete" id="deleteDialog" style="width: 400px; overflow: hidden;">
+  <div slot="body">
+    <!-- <div class="oj-flex"> -->
+    <br>
+Do you want to delete the Record
+    <!-- </div> -->
+  </div>
+  <div slot="footer">
+    <oj-button>Ok</oj-button>
+    <oj-button on-oj-action="[[$listeners.buttonAction]]">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="About" id="aboutDialog" cancel-behavior="icon" style="width: 500px; overflow: hidden;">
+  <div slot="body">
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-sm-12 oj-md-12">
+        <oj-form-layout label-edge='start' columns="1" style="margin-top:23px;margin-left:-20px"
+          user-assistance-density="compact" direction="column" class="oj-formlayout-full-width" readonly="true">
+          <oj-input-text label-hint="Created By:" style="margin-bottom:10px;" value="{{ $variables.about.created_by }}">
+          </oj-input-text>
+          <oj-input-text label-hint="Created Date:" readonly="true" style="margin-bottom:10px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.created_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated By:" style="margin-bottom:10px;"
+            value="{{ $variables.about.last_updated_by }}"></oj-input-text>
+          <oj-input-text label-hint="Created Date:" readonly="true" style="margin-bottom:10px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.last_updated_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated Login:" value="{{ $variables.about.last_updated_login }}">
+          </oj-input-text>
+        </oj-form-layout>
+      </div>
+    </div>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="Upload File" id="uploadPopUp" drag-affordance="none" cancel-behavior="icon"
+  style="overflow: hidden;">
+  <div>
+    <oj-validation-group id="uploadrecount">
+      <oj-form-layout label-edge="start" columns="1" direction="column" user-assistance-density="compact"
+        class="oj-formlayout-full-width" style="margin-top: 1rem;">
+        <!-- <oj-file-picker id="filepicker2" selection-mode="single" on-oj-select="[[$listeners.filepicker2Select]]"></oj-file-picker> -->
+
+
+        <oj-label for="oj-file-picker–0001" style="font-weight: bold;" show-required="true">Upload</oj-label>
+        <oj-file-picker id="oj-file-picker–0001" selection-mode="single" style="width: 20rem; height:6rem;">
+        </oj-file-picker>
+
+        <br>
+
+        <oj-input-text style="width:20rem; margin-bottom:6px;" required="true" label-hint="File Name"
+          value="{{ $variables.attachmentVar.file_name }}"></oj-input-text>
+        <oj-input-text style="width:20rem;margin-bottom:6px;" label-hint="File Type"
+          value="{{ $variables.attachmentVar.file_type }}" required="true"></oj-input-text>
+
+      </oj-form-layout>
+    </oj-validation-group>
+    <div style="display:flex; justify-content:flex-end;">
+      <oj-button style="searchBtn margin-left:0.5%;margin-right:0.5%;" label="Save"></oj-button>
+      <oj-button style="searchBtn margin-left:0.5%;margin-right:0.5%;" label="Close"
+        on-oj-action="[[$listeners.buttonAction3]]"></oj-button>
+    </div>
+
+  </div>
+
+
+</oj-dialog>
+
+<!-- ======================= CLAIM LINE DIALOG ======================= -->
+<oj-dialog id="claimCreateDialog" dialog-title="Create Claim Line" style="width: 85vw; overflow: hidden; height: 90vh;"
+  cancel-behavior="none">
+  <div slot="body">
+    <oj-validation-group valid="{{ $variables.isFormValid }}" id="claim_line_formValid">
+      <oj-form-layout label-edge="start" label-width="38%" direction="column" class="oj-formlayout-full-width"
+        style="margin-top: 1rem;" max-columns="2" user-assistance-density="compact">
+
+      <!-- Expense Account -->
+        <!-- <oj-select-single label-hint="Expense Account" class="oj-form-control-width-sm" required="true"></oj-select-single> -->
+         <oj-input-text label-hint="Expense Account" class="oj-form-control-max-width-sm"
+           value="{{ $variables.claimLineForm.accounts_segment }}" style="margin-bottom: -6px;"></oj-input-text>
+
+      <!-- Expense Account Description -->
+        <oj-input-text label-hint="Expense Account Description" disabled="true" class="oj-form-control-max-width-sm"
+          style="margin-bottom: -6px;"></oj-input-text>
+
+        <oj-input-text label-hint="Cost Center" class="oj-form-control-max-width-sm"
+          style="margin-bottom: -6px;" value="{{ $variables.claimLineForm.cost_center_segment }}" required="true">
+        </oj-input-text>
+      <!-- Department Code -->
+      <!-- <oj-select-single label-hint="Department Code" required="" class="oj-form-control-width-sm"
+        data="[[ $variables.claimLineForm.cost_center_segment ]]">
+      </oj-select-single> -->
+        <oj-input-text label-hint="Department Code" class="oj-form-control-width-sm" style="margin-bottom: -6px;"></oj-input-text>
+
+      <!-- Department Description -->
+        <oj-input-text label-hint="Department Description" disabled="true" class="oj-form-control-width-sm"
+          style="margin-bottom: -6px;"></oj-input-text>
+
+      <!-- Geography Code (Visible only for Water BU) -->
+      <!-- <oj-bind-if test="[[ $variables.business_unit === 'WATER' ]]"> -->
+      <!-- <oj-select-single label-hint="Geography Code" required="" class="oj-form-control-width-sm"
+          value="{{ $variables.claimLineForm.geography_segment }}">
+        </oj-select-single> -->
+        
+        <oj-bind-if test="[[ $application.variables.restricted_business_unit === 'Water Operating Unit' ]]">
+          <oj-input-text label-hint="Geography Code" class="oj-form-control-width-sm"
+            value="{{ $variables.claimLineForm.geography_segment }}" required="true" style="margin-bottom: -6px;"></oj-input-text>
+
+          <!-- Geography Description -->
+          <oj-input-text label-hint="Geography Description" disabled="true" class="oj-form-control-width-sm"
+            style="margin-bottom: -6px;"></oj-input-text>
+        </oj-bind-if>
+      <!-- </oj-bind-if> -->
+
+      <!-- Currency -->
+      <!-- <oj-select-single label-hint="Currency" required="" class="oj-form-control-width-sm"
+        value="{{ $variables.claimLineForm.currency }}">
+      </oj-select-single> -->
+        <oj-input-text label-hint="Currency" class="oj-form-control-width-sm"
+          value="{{ $variables.claimLineForm.currency }}" required="true"
+          disabled="[[ $variables.enableDisableVar !== 'Y' ]]" style="margin-bottom: -6px;"
+          on-value-changed="[[$listeners.inputTextValue]]">
+          <oj-button slot="end" display="icons" chroming="solid" class="oj-button-full-width oj-button-lg"
+            on-oj-action="[[$listeners.buttonAction5]]">
+            <span class="oj-ux-ico-edit"></span>
+          </oj-button>
+        </oj-input-text>
+
+      <!-- Amount -->
+      <!-- help.instruction="Amount should not exceed 200 OMR per line" -->
+        <oj-input-number label-hint="Amount" class="oj-form-control-max-width-sm oj-form-control-text-align-right"
+          value="{{ $variables.claimLineForm.amount }}" required="true"
+          on-value-changed="[[$listeners.inputNumberValue]]" user-assistance-density="compact"
+          style="margin-bottom: -6px;"></oj-input-number>
+
+      <!-- Exchange Rate Type -->
+      <!-- <oj-select-single label-hint="Exchange Rate Type" class="oj-form-control-width-sm" required="true"
+        value="{{ $variables.claimLineForm.exchange_rate_type }}">
+      </oj-select-single> -->
+        <oj-input-text label-hint="Exchange Rate Type" class="oj-form-control-width-sm"
+          value="{{ $variables.claimLineForm.exchange_rate_type }}"
+          required="[[ $variables.claimLineForm.currency !== 'OMR' ]]" user-assistance-density="compact"
+          style="margin-bottom: -6px;" disabled="[[ $variables.claimLineForm.currency === 'OMR' ]]"></oj-input-text>
+
+      <!-- Exchange Rate Date -->
+        <oj-input-date label-hint="Exchange Rate Date"
+          converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' class="oj-form-control-max-width-sm"
+          required="true" value="{{ $variables.claimLineForm.exchange_rate_date }}" user-assistance-density="compact"
+          style="margin-bottom: -6px;"></oj-input-date>
+      <!-- <oj-input-text label-hint="Exchange Rate Date" required class="oj-form-control-width-sm"
+          value="{{ $variables.claimLineForm.exchange_rate_date }}"></oj-input-text> -->
+
+      <!-- Exchange Rate -->
+        <oj-input-number label-hint="Exchange Rate"
+          class="oj-form-control-max-width-sm oj-form-control-text-align-right"
+          value="{{ $variables.claimLineForm.exchange_rate }}"
+          readonly="[[ $variables.claimLineForm.currency === 'OMR' ]]" user-assistance-density="compact"
+          style="margin-bottom: -6px;" min="0.001" required="[[ $variables.claimLineForm.currency !== 'OMR' ]]"
+          converter='[[ new $imports.ojConverterNumber.IntlNumberConverter({"minimumFractionDigits":3}) ]]'
+          on-value-changed="[[$listeners.inputNumberValue3]]"></oj-input-number>
+
+      <!-- Amount in OMR -->
+        <oj-input-number label-hint="Amount in OMR"
+          class="oj-form-control-max-width-sm oj-form-control-text-align-right" readonly="true"
+          value="{{ $variables.claimLineForm.amount_in_omr }}" user-assistance-density="compact"
+          style="margin-bottom: -6px;"></oj-input-number>
+
+      <!-- Brief Narration -->
+        <oj-input-text label-hint="Brief Narration" class="oj-form-control-max-width-sm"
+          value="{{ $variables.claimLineForm.brief_narration }}" required="true" user-assistance-density="compact"
+          style="margin-bottom: -6px;"></oj-input-text>
+
+      <!-- Attachments -->
+        <!-- <oj-file-picker aria-label="Attachment" selection-mode="single" secondary-text=" "
+          primary-text="Drag & Drop(Single File)" style="margin-bottom: -6px;"> -->
+          <!-- <oj-input-text label-hint="Attachment" slot="trigger" class="oj-form-control-width-sm"></oj-input-text> -->
+        <!-- <oj-button label="Button" slot="trigger" class="oj-button-lg" chroming="outlined">
+ <span class="oj-ux-ico-attach-file" slot="startIcon" style="color: #01474d;"></span>
+          </oj-button> -->
+        <!-- </oj-file-picker> -->
+      </oj-form-layout>
+    </oj-validation-group>
+
+  </div>
+
+  <!-- Footer Buttons -->
+  <div slot="footer" class="oj-helper-justify-content-center">
+
+    <div>
+      <oj-file-picker aria-label="Attachment" selection-mode="single" secondary-text=" "
+          primary-text="Drag & Drop(Single File)">
+        <oj-button label="Attachment" slot="trigger" class="oj-button-sm" chroming="outlined">
+          <span class="oj-ux-ico-attach-file" slot="startIcon" style="color: #01474d;"></span>
+        </oj-button>
+        </oj-file-picker>
+      <oj-button class="oj-button-primary oj-button-sm" on-oj-action="[[$listeners.buttonAction6]]">Save</oj-button>
+      <oj-button chroming="outlined" on-oj-action="[[$listeners.buttonAction2]]" class="oj-button-sm">Cancel</oj-button>
+    </div>
+  </div>
+
+</oj-dialog>
+
+
+
+
+<!-- ======================= RECEIPT LINE DIALOG ======================= -->
+<oj-dialog id="receiptCreateDialog" dialog-title="Create Receipt Line" modality="modeless" resize-behavior="none"
+  style="width: 80vw; overflow: hidden;" cancel-behavior="none">
+  <div slot="body">
+      <oj-validation-group id="receipt-validation" valid="{{ $variables.receiptFormValid }}">
+      <oj-form-layout label-edge="start" max-columns="2" direction="column"
+        style="margin-top: 1rem; margin-bottom: -1rem;" user-assistance-density="compact"
+        class="oj-sm-12 oj-md-12 oj-formlayout-full-width">
+
+      <!-- Mode of Payment (Cash, Check, Wire Transfer, Online Transfer) -->
+      <oj-select-single label-hint="Mode of Payment" required="true"
+        data="[[$variables.getNwsCustCommonLovLookupListSDP]]" item-text="lookup_value_name"
+        value="{{ $variables.receiptLineForm.mode_of_payment }}">
+      </oj-select-single>
+        <!-- <oj-input-text label-hint="Payment Mode" class="" value="{{ $variables.receiptLineForm.mode_of_payment }}"
+          required="true"></oj-input-text> -->
+
+      <!-- Reference Number -->
+        <oj-input-text label-hint="Reference Number" value="{{ $variables.receiptLineForm.reference_number }}"
+          required="true"></oj-input-text>
+
+      <!-- Currency LOV default OMR -->
+      <!-- <oj-select-single label-hint="Currency" value="{{ $variables.receiptLineForm.currency }}" required="true">
+      </oj-select-single> -->
+        <oj-input-text label-hint="Currency" value="{{ $variables.receiptLineForm.currency }}" required="true"
+          disabled="[[ $variables.isCurrencyEdit_AC != 'Y' ]]" on-value-changed="[[$listeners.inputTextValue2]]">
+          <oj-button label="EditCurrency" slot="end" class="oj-button-lg oj-button-full-width" display="icons"
+            chroming="solid" on-oj-action="[[$listeners.buttonAction8]]">
+            <span class="oj-ux-ico-edit" slot="startIcon"></span>
+          </oj-button>
+        </oj-input-text>
+
+      <!-- Amount -->
+        <oj-input-number label-hint="Amount" value="{{ $variables.receiptLineForm.amount }}" required="true"
+          on-value-changed="[[$listeners.inputNumberValue2]]"
+          converter='[[ new $imports.ojConverterNumber.IntlNumberConverter({"minimumFractionDigits":3,"style":"decimal"}) ]]'
+          class="oj-form-control-text-align-right"></oj-input-number>
+
+      <!-- Payment Received Date -->
+        <oj-input-date label-hint="Payment Received Date" value="{{ $variables.receiptLineForm.payment_received_date }}"
+          converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' required="true"></oj-input-date>
+
+      <!-- Brief Narration -->
+        <oj-input-text label-hint="Brief Narration" value="{{ $variables.receiptLineForm.brief_narration }}"
+          required="true"></oj-input-text>
+
+      <!-- Attachments -->
+        <!-- <div class="oj-flex oj-helper-justify-content-flex-end">
+          <oj-file-picker selection-mode="single" aria-label="Attachment"></oj-file-picker>
+        </div> -->
+
+      <!-- Exchange Rate Type -->
+      <!-- <oj-select-single label-hint="Exchange Rate Type" value="{{ $variables.receiptLineForm.exchange_rate_type }}"
+        disabled="[[ $variables.receiptLineForm.currency === 'OMR' ]]">
+      </oj-select-single> -->
+        <oj-input-text label-hint="Exchange Rate Type" value="{{ $variables.receiptLineForm.exchange_rate_type }}"
+          disabled="[[ $variables.receiptLineForm.currency === 'OMR' ]]"
+          required="[[ $variables.receiptLineForm.currency !== 'OMR' ]]"></oj-input-text>
+
+      <!-- Exchange Rate Date -->
+        <oj-input-date label-hint="Exchange Rate Date" value="{{ $variables.receiptLineForm.exchange_rate_date }}"
+          disabled="[[ $variables.receiptLineForm.currency === 'OMR' ]]"
+          required="[[ $variables.receiptLineForm.currency !== 'OMR' ]]"></oj-input-date>
+
+      <!-- Exchange Rate -->
+        <oj-input-number label-hint="Exchange Rate" value="{{ $variables.receiptLineForm.exchange_rate }}"
+          disabled="[[ $variables.receiptLineForm.currency === 'OMR' || !$variables.receiptLineForm.exchange_rate_type ]]"
+          required="[[ $variables.receiptLineForm.currency !== 'OMR' ]]" class="oj-form-control-text-align-right"
+          min="0.001" converter='[[ new $imports.ojConverterNumber.IntlNumberConverter({"minimumFractionDigits":3}) ]]'></oj-input-number>
+
+      <!-- Amount in OMR = Amount * Exchange Rate -->
+        <oj-input-number label-hint="Amount in OMR" disabled="true"
+          value="{{ $variables.receiptLineForm.amount_in_omr }}" class="oj-form-control-text-align-right"
+          converter='[[ new $imports.ojConverterNumber.IntlNumberConverter({"minimumFractionDigits":3}) ]]'></oj-input-number>
+      </oj-form-layout>
+      </oj-validation-group>
+  </div>
+
+  <!-- Footer Buttons -->
+  <div slot="footer" style="display: flex; justify-content: space-between;" class="oj-helper-justify-content-center">
+
+    <!-- <div> -->
+      <oj-file-picker aria-label="Attachment" selection-mode="single" secondary-text=" "
+          primary-text="Drag & Drop(Single File)">
+        <oj-button label="Attachment" slot="trigger" class="oj-button-sm" chroming="outlined">
+          <span class="oj-ux-ico-attach-file" slot="startIcon" style="color: #01474d;"></span>
+        </oj-button>
+        </oj-file-picker>
+      <oj-button class="oj-button-primary oj-button-sm" on-oj-action="[[$listeners.buttonAction7]]">Save</oj-button>
+      <oj-button chroming="outlined" on-oj-action="[[$listeners.buttonAction4]]" class="oj-button-sm">Cancel</oj-button>
+    <!-- </div> -->
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="Cancel" id="confirmCanceDialog">
+  <div slot="body" style="padding-top: 25px;">
+    <div class="oj-flex">
+      <p>Do you want to save and close?</p>
+    </div>
+  </div>
+  <div slot="footer">
+    <oj-button>Yes</oj-button>
+    <oj-button on-oj-action="[[$listeners.buttonAction10]]">No</oj-button>
+  </div>
+</oj-dialog>

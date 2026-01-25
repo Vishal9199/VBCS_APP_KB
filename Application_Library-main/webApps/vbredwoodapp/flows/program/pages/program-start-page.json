@@ -1,0 +1,430 @@
+{
+  "title": "Program Configuration",
+  "description": "Smart Search page for Program management with filter for Program Type",
+  "variables": {
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "encryptedBody": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "programTypeADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+
+        "itemsPath": "items",
+        "responseType": "getProgramTypeResponse",
+        "fetchChain": "getProgramTypeFetch",
+        "data": "{{ $constants.programTypeArray }}",
+        "keyAttributes": "value",
+        "textFilterAttributes": [
+          "label"
+        ]
+      }
+    },
+    "pagination": {
+      "type": {
+        "next": "boolean",
+        "prev": "boolean"
+      },
+      "defaultValue": {
+        "next": false,
+        "prev": false
+      }
+    },
+    "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "ProgramTypeFilter": {
+              "label": "Program Type",
+              "options": {
+                "optionsData": "[[ $page.variables.programTypeADP ]]",
+                "optionsKeys": {
+                  "label": "label",
+                  "value": "value"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/Programsearchconfig.json' ]]"
+      }
+    },
+    "searchObj": {
+      "type": {
+        "in_limit": "number",
+        "in_offset": "number",
+        "p_keyword": "string",
+        "p_program_id": "string",
+        "p_program_type": "string",
+        "p_active_flag": "string"
+      },
+      "defaultValue": {
+        "in_limit": 10,
+        "in_offset": 0,
+        "p_keyword": "",
+        "p_program_id": "",
+        "p_program_type": "",
+        "p_active_flag": "Y"
+      }
+    },
+    "programADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "ProgramType",
+        "keyAttributes": "program_id"
+      }
+    }
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getProgramTypeResponse": {
+      "endpoint": "getProgramType",
+      "service": "Program",
+      "path": "response"
+    },
+    "getProgramTypeResponse": {
+      "items": [
+        {
+          "program_type": "string"
+        }
+      ]
+    },
+    "ProgramType": {
+      "program_id": "number",
+      "object_version_num": "number",
+      "program_code": "string",
+      "program_name": "string",
+      "remarks": "string",
+      "application_id": "number",
+      "program_type": "string",
+      "rtf_path": "string",
+      "rtf_name": "string",
+      "db_function_name": "string",
+      "output_type": "string",
+      "column_per_row": "number",
+      "active_flag": "string",
+      "active_status": "string",
+      "attribute_json": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "created_date_display": "string",
+      "last_updated_date_display": "string",
+      "search_text": "string",
+      "application_code": "string",
+      "application_name": "string"
+    }
+  },
+  "chains": {},
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-date-time": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      }
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/smartSearch.css"
+    ]
+  },
+  "constants": {
+    "programTypeArray": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Integration",
+          "value": "Integration"
+        },
+        {
+          "label": "Report",
+          "value": "Report"
+        },
+        {
+          "label": "Page",
+          "value": "Page"
+        }
+      ]
+    },
+    "tableColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Code",
+          "field": "program_code",
+          "resizable": "enabled",
+          "sortable": "enabled",
+          "template": "program_code",
+          "headerStyle": "white-space: normal; min-width: 200px;",
+          "style": ""
+        },
+        {
+          "headerText": "Name",
+          "field": "program_name",
+          "resizable": "enabled",
+          "template": "program_name",
+          "headerStyle": "white-space: normal; min-width: 250px;",
+          "style": ""
+        },
+        {
+          "headerText": "Application Name",
+          "field": "application_name",
+          "resizable": "enabled",
+          "template": "application_name",
+          "headerStyle": "white-space: normal; min-width: 200px;",
+          "style": ""
+        },
+        {
+          "headerText": "Type",
+          "field": "program_type",
+          "resizable": "enabled",
+          "width": 130,
+          "template": "program_type",
+          "headerStyle": "white-space: normal; min-width: 130px;",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "active_flag",
+          "resizable": "enabled",
+          "width": 100,
+          "sortable": "disabled",
+          "template": "active_flag",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        }
+      ]
+    },
+    "tableColumnsWithActions": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "width": 75,
+          "sortable": "disabled",
+          "template": "actions",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Code",
+          "field": "program_code",
+          "resizable": "enabled",
+          "sortable": "enabled",
+          "template": "program_code",
+          "headerStyle": "white-space: normal; min-width: 200px;",
+          "style": ""
+        },
+        {
+          "headerText": "Name",
+          "field": "program_name",
+          "resizable": "enabled",
+          "template": "program_name",
+          "headerStyle": "white-space: normal; min-width: 250px;",
+          "style": ""
+        },
+        {
+          "headerText": "Application Name",
+          "field": "application_name",
+          "resizable": "enabled",
+          "template": "application_name",
+          "headerStyle": "white-space: normal; min-width: 200px;",
+          "style": ""
+        },
+        {
+          "headerText": "Type",
+          "field": "program_type",
+          "resizable": "enabled",
+          "width": 130,
+          "template": "program_type",
+          "headerStyle": "white-space: normal; min-width: 130px;",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "active_flag",
+          "resizable": "enabled",
+          "width": 100,
+          "sortable": "disabled",
+          "template": "active_flag",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        }
+      ]
+    }
+
+  },
+  "eventListeners": {
+    "addBtnAction": {
+      "chains": [
+        {
+          "chain": "addAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnNoAction": {
+      "chains": [
+        {
+          "chain": "cancelDeleteAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnYesAction": {
+      "chains": [
+        {
+          "chain": "okDeleteAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "iconClick": {
+      "chains": [
+        {
+          "chain": "editAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "iconClick2": {
+      "chains": [
+        {
+          "chain": "deleteActionAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "nxtBtnAction": {
+      "chains": [
+        {
+          "chain": "nextBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "preBtnAction": {
+      "chains": [
+        {
+          "chain": "prevBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "resetBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+  }
+}

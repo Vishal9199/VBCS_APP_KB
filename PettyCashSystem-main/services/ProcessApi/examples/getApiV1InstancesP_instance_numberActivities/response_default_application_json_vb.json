@@ -1,0 +1,20 @@
+{
+    "links": [
+        {
+            "href": "https://opa-oic-dhfsoictest-1745125970397-axbrdbhb3wme-ams.process.oci.oraclecloud.com/process/api/v1/instances/4b70b71f-9940-11f0-a6ed-42174908528a/activities",
+            "rel": "self"
+        },
+        {
+            "href": "https://opa-oic-dhfsoictest-1745125970397-axbrdbhb3wme-ams.process.oci.oraclecloud.com/process/api/v1/instances/4b70b71f-9940-11f0-a6ed-42174908528a",
+            "rel": "parent"
+        }
+    ],
+    "activities": [
+        {
+            "activityId": "flow_a5e1282d-d62a-fff8-2eb8-0078f283082d",
+            "activityName": "User task",
+            "activityType": "userTask",
+            "activityInstanceId": "4f8a0f62-9940-11f0-a6ed-42174908528a"
+        }
+    ]
+}

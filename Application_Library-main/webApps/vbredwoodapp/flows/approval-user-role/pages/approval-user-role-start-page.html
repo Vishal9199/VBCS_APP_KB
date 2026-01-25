@@ -1,0 +1,128 @@
+<div id="sampleDemo1" class="demo-padding demo-container">
+  <div id="componentDemoContent1" style="width: 1px; min-width: 100%;">
+    <div id="mainContent1">
+      <oj-sp-smart-search-page id="approval_role_sm" page-title="Approval Role">
+
+        <!--Search Section -->
+        <oj-flex slot="search" class="oj-sm-padding-2x" style="align-items: center;">
+          <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-space-between"
+            style="width: 100%; align-items: flex-start; padding: 0 1rem;">
+            <div style="flex: 1; margin-right: 1rem;">
+              <oj-sp-smart-search filter-criterion="{{ $variables.filterCriterion }}"
+                search-config="[[ $variables.searchConfiguration.provider ]]"
+                search-context="[[ $variables.searchContext ]]" id="freq_smartsearch">
+              </oj-sp-smart-search>
+            </div>
+            <div style="display: flex; gap: 0.25rem; margin-left: 1rem; margin-top: 1px; flex-wrap: wrap;">
+              <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Reset" id="resetBtn"
+                on-oj-action="[[$listeners.resetBtnAction]]">
+                <img slot="startIcon" :src="[[ $application.path + 'resources/images/Reset.png' ]]">
+              </oj-button>
+            </div>
+          </div>
+        </oj-flex>
+
+        <!--Table Section -->
+        <div id="sampleDemo" class="demo-padding demo-container">
+          <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+            <div id="searchMainContent">
+
+              <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-flex-end"
+                style="width: 100%; padding: 0 1rem; background-color: white;">
+                <div style="display: flex; gap: 0.25rem; margin-left: 1rem; margin-top: 1px; flex-wrap: wrap;">
+                  <oj-button style="margin:0.125rem;" label="Refresh" chroming="outlined" id="refreshBtn"
+                    on-oj-action="[[$listeners.refreshBtnAction]]">
+                    <img slot="startIcon" :src="[[ $application.path + 'resources/images/Refresh.png' ]]">
+                  </oj-button>
+                  <oj-button style="margin:0.125rem;" label="Add" chroming="outlined" id="addBtn"
+                    on-oj-action="[[$listeners.addBtnAction]]">
+                    <img slot="startIcon" :src="[[ $application.path + 'resources/images/Create (1).png' ]]">
+                  </oj-button>
+                </div>
+              </div>
+
+              <div class="oj-flex">
+                <!-- oj-search-table -->
+                <oj-table scroll-policy="loadMoreOnScroll" class="oj-sm-width-full oj-bg-body" display="grid"
+                  horizontal-grid-visible="enabled" vertical-grid-visible="enabled" selection-mode.row="none"
+                  selection-mode.column="none" id="searchApprovalRoleTbl" data="{{ $variables.approvalRoleRequestADP }}"
+                  columns="{{ ($flow.constants.accessObj.allowDelete || $flow.constants.accessObj.allowEdit) ? $constants.tableColumnsWithActions : $constants.tableColumns }}">
+
+                  <!-- Template Slots -->
+                  <template slot="actions">
+                    <div class="oj-flex oj-sm-align-items-center oj-sm-justify-content-center" style="gap:15px;">
+
+                      <oj-bind-if test="[[ $flow.constants.accessObj.allowDelete ]]">
+                        <span class="oj-ux-ico-trash" style="cursor:pointer; font-size:20px;"
+                            on-click="[[$listeners.iconClick]]"></span>
+                      </oj-bind-if>
+
+                      <oj-bind-if test="[[ $flow.constants.accessObj.allowEdit ]]">
+                        <span class="oj-ux-ico-edit" style="cursor:pointer; font-size:20px;"
+                            on-click="[[$listeners.iconClick2]]"
+                        ></span>
+                      </oj-bind-if>
+                    </div>
+                  </template>
+
+                  <template slot="approval_role_code">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="approval_role_name">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="remarks">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="active_flag">
+                    <oj-bind-if test='[[ $current.data === "Y" ]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/activeBtn.png' ]]">
+                    </oj-bind-if>
+                    <oj-bind-if test='[[ $current.data === "N" ]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/inactive.png' ]]">
+                    </oj-bind-if>
+                  </template>
+
+                </oj-table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagination Section -->
+        <div class="oj-flex oj-sm-justify-content-center" style="background-color:white;">
+          <oj-bind-if test="[[true]]">
+            <oj-toolbar chroming="solid" class="oj-flex-item oj-sm-flex-initial">
+
+              <oj-button label="Previous" chroming="borderless" disabled="[[ !$variables.pagination.prev ]]" id="preBtn"
+                on-oj-action="[[$listeners.preBtnAction]]">
+                <span slot="startIcon" class="oj-ux-ico-back"></span>
+              </oj-button>
+
+              <oj-button label="Next" chroming="borderless" disabled="[[ !$variables.pagination.next ]]" id="nxtBtn"
+                on-oj-action="[[$listeners.nxtBtnAction]]">
+                <span slot="endIcon" class="oj-ux-ico-forward-next"></span>
+              </oj-button>
+
+            </oj-toolbar>
+          </oj-bind-if>
+        </div>
+
+      </oj-sp-smart-search-page>
+    </div>
+  </div>
+</div>
+
+<oj-dialog dialog-title="Delete" id="deleteDialog" cancel-behavior="icon">
+  <div slot="body">
+    <h6 id="deletehid" style="font-size:medium; font-weight: bold;">Are you sure you want to delete this approval role?
+    </h6>
+  </div>
+  <div slot="footer">
+    <oj-button id="deleteBtnYes" on-oj-action="[[$listeners.deleteBtnYesAction]]">Yes</oj-button>
+    <oj-button id="deleteBtnNo" on-oj-action="[[$listeners.deleteBtnNoAction]]">No</oj-button>
+  </div>
+</oj-dialog>
