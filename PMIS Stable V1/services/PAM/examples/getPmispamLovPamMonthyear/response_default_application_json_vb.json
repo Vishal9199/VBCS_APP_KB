@@ -1,0 +1,54 @@
+{
+    "items": [
+        {
+            "month_year": "Jan-2024"
+        },
+        {
+            "month_year": "Feb-2024"
+        },
+        {
+            "month_year": "Mar-2024"
+        },
+        {
+            "month_year": "Apr-2024"
+        },
+        {
+            "month_year": "May-2024"
+        },
+        {
+            "month_year": "Jun-2024"
+        },
+        {
+            "month_year": "Jul-2024"
+        },
+        {
+            "month_year": "Aug-2024"
+        },
+        {
+            "month_year": "Sep-2024"
+        },
+        {
+            "month_year": "Oct-2024"
+        },
+        {
+            "month_year": "Nov-2024"
+        },
+        {
+            "month_year": "Dec-2024"
+        }
+    ],
+    "hasMore": false,
+    "limit": 0,
+    "offset": 0,
+    "count": 12,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/lov/pam/monthyear?searchVal=2024"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/lov/pam/item"
+        }
+    ]
+}

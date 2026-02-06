@@ -1,0 +1,25 @@
+{
+  "description": "Smart Search Configuration for Region Setup Screen",
+  "filters": {
+    "RegionNameFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Region Name",
+      "options": {
+        "field": "lookup_value_id",
+        "optionsData": "[[ $search.filters.RegionNameFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.RegionNameFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+    "ResponsiblePersonNameFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Responsible Person",
+      "options": {
+        "field": "user_id",
+        "optionsData": "[[ $search.filters.ResponsiblePersonNameFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.ResponsiblePersonNameFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    }
+  }
+}

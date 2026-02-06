@@ -1,0 +1,42 @@
+{
+    "items": [
+        {
+            "cal_line_id": 759,
+            "object_version_num": 0,
+            "cal_hdr_id": 758,
+            "calendar_name": "2025 Project Calendar",
+            "calendar_type_code": null,
+            "calendar_type": null,
+            "line_num": 1,
+            "from_year": 2025,
+            "to_year": 2030,
+            "prompt": "2025-2030",
+            "description": "Budget planning schedule for fiscal years 2025-2030",
+            "enabled_flag": "Y",
+            "additional_info": "{\"budget_category\":\"CAPEX\",\"department\":\"Finance\"}",
+            "created_by": "JOHN.DOE",
+            "created_date": "2026-01-26T15:27:06Z",
+            "last_updated_by": "JOHN.DOE",
+            "last_updated_date": "2026-01-26T15:27:06Z",
+            "last_updated_login": "JOHN.DOE"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmis/calendar/line/getbyid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmis/calendar/line/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmis/calendar/line/getbyid"
+        }
+    ]
+}

@@ -1,0 +1,297 @@
+<style>
+  oj-option#calendar_admin_page_h_cancelAction
+  {
+    display: none !important;
+  }
+</style>
+
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <!-- <div> -->
+        <oj-sp-advanced-create-edit id="calendar_admin_page" page-title="Calendar Admin" page-subtitle=" "
+          display-options.responsive-padding="on" display-mode="light" primary-action.label="Close"
+          display-options.next="off"
+          badge.status='{{ ($variables.calendarHeaderVar.enabled_flag==="Y")?"success":"neutral" }}'
+          badge.text="[[ $variables.calendarHeaderVar.calendar_name || 'New Calendar' ]]"
+          secondary-actions="[[ $variables.toolActions ]]"
+          on-sp-secondary-action="[[$listeners.calendarAdminPageSpSecondaryAction]]"
+          on-sp-primary-action="[[$listeners.calendarAdminPageSpPrimaryAction]]"
+          >
+
+          <div slot="main" style="padding-top: 0; margin-top: 0.1rem; min-width: 100%;">
+            <div style="margin-top: 0;">
+
+              <!-- Calendar Information Section -->
+              <oj-collapsible id="calendar-info-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+                style="margin-top: 0;" disabled="true">
+                <span slot="header" style="font-weight: bold; color: #ffffff;">Calendar</span>
+                <div style="padding: 1rem;">
+                  <oj-validation-group id="calendar_info_validation" valid="{{ $variables.calendarInfoValid }}">
+                    <oj-form-layout max-columns="2" label-edge="start" colspan-wrap="wrap"
+                      user-assistance-density="compact" direction="column">
+
+                      <!-- Row 1 -->
+                      <!-- <oj-input-text id="calendar-type" label-hint="Calendar Type" placeholder="Calendar Type"
+                        style="width: 16rem; margin-bottom: -6px;" user-assistance-density="compact" required="true">
+                      </oj-input-text> -->
+
+                      <oj-select-single id="calendar-type" label-hint="Calendar Type" style="width: 16rem;"
+                        data="[[$variables.getPmisLovCalendarTypeListSDP]]" item-text="lookup_value_name"
+                        required="true" value="{{ $variables.calendarHeaderVar.calendar_type_id }}"
+                        placeholder="Calendar Type" on-value-item-changed="[[$listeners.calendarTypeValueItem]]">
+                      </oj-select-single>
+
+                      <oj-input-text id="calendar-name" label-hint="Calendar Name" placeholder="Calendar Name"
+                        value="{{ $variables.calendarHeaderVar.calendar_name }}"
+                        style="width: 16rem; margin-bottom: -6px;" user-assistance-density="compact" required="true">
+                      </oj-input-text>
+
+                      <!-- Row 2 -->
+                      <oj-text-area id="description" label-hint="Description" placeholder="Calendar Description"
+                        value="{{ $variables.calendarHeaderVar.description }}"
+                        style="width: 16rem; margin-bottom: -6px;" user-assistance-density="compact"
+                        resize-behavior="vertical" rows="2">
+                      </oj-text-area>
+
+                      <oj-switch id="enabled-flag" label-hint="Enabled Flag"
+                        value="{{ $variables.calendarHeaderVar.enabled_flag === 'Y' ? true : false }}"
+                        style="margin-bottom: -6px;" on-value-changed="[[$listeners.enabledFlagValue]]">
+                      </oj-switch>
+
+                    </oj-form-layout>
+                  </oj-validation-group>
+                </div>
+              </oj-collapsible>
+
+              <!-- Details Section -->
+              <oj-collapsible id="details-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+                style="margin-top: 1rem;" disabled="true">
+                <span slot="header" style="font-weight: bold; color: #ffffff;">Details</span>
+                <div style="padding-top: 0.1rem;">
+
+                  <!-- Action Buttons -->
+                  <div style="display:flex; justify-content:flex-end; margin-bottom: 0rem;" class="oj-flex">
+                    <oj-button style="margin-left:0.5%; margin-right:0.5%;" chroming="outlined" id="createLineBtn"
+                      on-oj-action="[[$listeners.createLineBtnAction]]" class=""
+                      disabled="[[ $variables.pNavCode === 'CREATE' ]]">
+                      <span slot="startIcon" class="oj-ux-ico-plus" style="color: white;"></span>
+                      <span>Create</span>
+                    </oj-button>
+                    <oj-button style="margin-left:0.5%;" chroming="outlined" id="refreshLineBtn" class=""
+                      on-oj-action="[[$listeners.refreshLineBtnAction]]">
+                      <span slot="startIcon" class="oj-ux-ico-refresh" style="color: white;"></span>
+                      <span>Refresh</span>
+                    </oj-button>
+                  </div>
+
+                  <!-- Details Table -->
+                  <oj-table id="detailsTable" data="{{ $variables.ADPcalendarLines }}"
+                    columns-default.sortable="disabled" columns-default.resizable="enabled"
+                    class="oj-sm-width-full oj-bg-body" display="grid" selection-mode.row="single"
+                    selection-mode.column="single" horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+                    columns="{{ $constants.lineTableColumns }}">
+
+                    <template slot="actions_template">
+                      <div class="custom-button-align">
+                        <oj-button display="icons" chroming="borderless" class="oj-button-sm" id="editLineBtn"
+                          on-oj-action="[[$listeners.editLineBtnAction]]">
+                          <span class="oj-ux-ico-edit" slot="startIcon" style="font-size: 15px;"></span>
+                        </oj-button>
+                        <oj-button display="icons" chroming="borderless" class="oj-button-sm" id="deleteLineBtn"
+                          on-oj-action="[[$listeners.deleteLineBtnAction]]">
+                          <span class="oj-ux-ico-trash" slot="startIcon" style="font-size: 15px;"></span>
+                        </oj-button>
+                      </div>
+                    </template>
+
+                    <template slot="about">
+                      <div style="display:flex; gap:4px; justify-content:center;">
+                        <oj-button chroming="borderless" id="aboutBtn" class="oj-button-sm"
+                          style="min-width:20px;height:20px; " on-oj-action="[[$listeners.aboutBtnAction]]">
+                          <span slot="startIcon"   class="oj-ux-ico-information"
+                                  style="    font-size:18px;   line-height:1;    margin:0;    padding:0;    display:flex;  align-items:center;   justify-content:center;   ">
+                                </span>
+                        </oj-button>
+                      </div>
+                    </template>
+
+                    <template slot="line_num_template">
+                      <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                    </template>
+
+                    <template slot="from_year_template">
+                      <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                    </template>
+
+                    <template slot="prompt_template">
+                      <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                    </template>
+
+                    <template slot="description_template">
+                      <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                    </template>
+
+                    <template slot="enabled_flag_template">
+                      <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                    </template>
+
+                  </oj-table>
+
+                </div>
+
+                <!-- Pagination Section -->
+                <div class="oj-flex oj-sm-justify-content-center oj-sm-align-items-center" style="margin-top: 0.25rem; gap: 1rem;">
+                  <div class="oj-flex-item oj-sm-flex-initial">
+                    <oj-button label="Prev" chroming="outlined" id="prevBtn"
+                      disabled="[[ $variables.pagination.is_prev ]]" on-oj-action="[[$listeners.prevBtnAction]]">
+                      <span slot="startIcon" class="oj-ux-ico-back"></span>
+                    </oj-button>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 5px; color: #666; font-size: 12px; border: 2px;"
+                    class="oj-bg-body">
+                    <oj-bind-text
+                      value="[[ (Number($variables.searchObj.in_offset)) + '-' + ((Number($variables.searchObj.in_offset)) + (Number($variables.ADPcalendarLines.data.length))) + ' of ' + $variables.totalRecords + ' items' ]]">
+                    </oj-bind-text>
+                  </div>
+                  <!-- <oj-text-area readonly="true" rows="1" class="pagination-text-area"
+                    style="text-align: center; font-weight: 500; border-radius: 4px; width: 120px;"
+                    value="{{ 'Page' + $variables.currentPage + ' | Total: ' + [[ $variables.totalRecords ]] }}"
+                    tabindex="-1" autocomplete="off">
+                  </oj-text-area> -->
+                  <div class="oj-flex-item oj-sm-flex-initial">
+                    <oj-button label="Next" chroming="outlined" id="nextBtn"
+                      disabled="[[ $variables.pagination.is_next ]]" on-oj-action="[[$listeners.nextBtnAction]]">
+                      <span slot="endIcon" class="oj-ux-ico-forward-next"></span>
+                    </oj-button>
+                  </div>
+                </div>
+              </oj-collapsible>
+
+            </div>
+          </div>
+
+        </oj-sp-advanced-create-edit>
+      <!-- </div> -->
+    </div>
+  </div>
+</div>
+
+<!-- Calendar Line Add/Edit Dialog -->
+<oj-dialog dialog-title="Calendar Line Details" id="lineDialog" cancel-behavior="icon" resize-behavior="resizable"
+  drag-affordance="title-bar" position.at.vertical="top" position.my.vertical="top"
+  style="width: auto; max-height: 90vh; overflow: hidden;" on-oj-close="[[$listeners.lineDialogClose]]"
+  header-decoration="off">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-validation-group id="lineForm" valid="{{ $variables.lineFormValid }}">
+      <oj-form-layout label-edge="top" direction="row" id="lineFormLayout" max-columns="2"
+        user-assistance-density="compact">
+
+        <!-- <oj-input-number id="from-year" label-hint="From Year" placeholder="From Year"
+          value="{{ $variables.calendarLineVar.from_year }}" style="width: 16rem; margin-bottom: -6px;"
+          user-assistance-density="compact" required="true">
+        </oj-input-number> -->
+        <oj-select-single id="from-year" label-hint="From Year" data="[[$variables.getPmisLovYearListSDP]]"
+          item-text="display_year" value="{{ $variables.calendarLineVar.from_year }}" required="true"
+          on-value-item-changed="[[$listeners.fromYearValueItem]]" class="oj-form-control-max-width-md"></oj-select-single>
+
+        <!-- <oj-input-number id="to-year" label-hint="To Year" placeholder="To Year"
+          value="{{ $variables.calendarLineVar.to_year }}" style="width: 16rem; margin-bottom: -6px;"
+          user-assistance-density="compact" required="true">
+        </oj-input-number> -->
+        <oj-bind-if test="[[ $variables.isMasterPlan === 'Y' ]]">
+          <oj-select-single id="to-year" label-hint="To Year" data="[[$variables.getPmisLovYearListSDP]]"
+            item-text="display_year" value="{{ $variables.calendarLineVar.to_year }}" required="true"
+            on-value-item-changed="[[$listeners.toYearValueItem]]"></oj-select-single>
+        </oj-bind-if>
+
+        <oj-input-text id="prompt" label-hint="Prompt" placeholder="Prompt"
+          value="{{ $variables.calendarLineVar.prompt }}" style="width: 16rem; margin-bottom: -6px;"
+          user-assistance-density="compact" required="true" class="oj-form-control-width-md">
+        </oj-input-text>
+
+        <oj-text-area id="line-description" label-hint="Description" placeholder="Description"
+          value="{{ $variables.calendarLineVar.description }}" style="width: 16rem; margin-bottom: -6px;"
+          user-assistance-density="compact" rows="3" class="oj-form-control-width-md">
+        </oj-text-area>
+
+        <oj-switch id="line-enabled-flag" label-hint="Enabled Flag"
+          value="{{ $variables.calendarLineVar.enabled_flag === 'Y' ? true : false }}" style="margin-bottom: -6px;"
+          on-value-changed="[[$listeners.lineEnabledFlagValue]]" class="">
+        </oj-switch>
+
+      </oj-form-layout>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-validation-group>
+      <oj-button id="line-save-another"
+       disabled="[[ $variables.isMasterPlan === 'Y' ? (!$variables.calendarLineVar.from_year || !$variables.calendarLineVar.to_year || !$variables.calendarLineVar.prompt) : (!$variables.calendarLineVar.from_year || !$variables.calendarLineVar.prompt) ]]"
+        on-oj-action="[[$listeners.lineSaveAnotherAction]]">Save & Add Another</oj-button>
+      <oj-button id="line-save"
+        disabled="[[ $variables.isMasterPlan === 'Y' ? (!$variables.calendarLineVar.from_year || !$variables.calendarLineVar.to_year || !$variables.calendarLineVar.prompt) : (!$variables.calendarLineVar.from_year || !$variables.calendarLineVar.prompt) ]]"
+        on-oj-action="[[$listeners.lineSaveAction]]">Save & Close
+      </oj-button>
+      <oj-button id="line-cancel" on-oj-action="[[$listeners.lineCancelAction]]">Cancel</oj-button>
+    </oj-validation-group>
+  </div>
+</oj-dialog>
+
+<!-- Delete Confirmation Dialog -->
+<oj-dialog dialog-title="Delete" id="deleteDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="width: 400px; overflow: hidden;">
+  <div slot="body">
+    <br>
+    Are you sure you want to delete this record?
+  </div>
+  <div slot="footer">
+    <oj-button id="deleteOk" on-oj-action="[[$listeners.deleteOkAction]]">Ok</oj-button>
+    <oj-button id="deleteCancel" on-oj-action="[[$listeners.deleteCancelAction]]">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Progress Dialog -->
+<oj-dialog dialog-title="Please wait..." id="progressDialog" style="overflow: hidden;" position.at.vertical="top"
+  position.my.vertical="top">
+  <div slot="body" style="margin-top: 2.1rem;">
+    <div class="oj-flex full_stretch">
+      <oj-progress-bar class="full_stretch oj-flex-item oj-sm-12 oj-md-12" value="-1" style="zoom: 2;">
+      </oj-progress-bar>
+    </div>
+  </div>
+</oj-dialog>
+
+<!-- About Dialog -->
+<oj-dialog dialog-title="About" id="aboutDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" drag-affordance="title-bar" style="width: 420px; overflow: hidden;"
+  header-decoration="off">
+  <div slot="body">
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-sm-12 oj-md-12">
+        <oj-form-layout label-edge='start' columns="1" style="margin-top: 15px; margin-left:-20px"
+          user-assistance-density="compact" direction="column" class="oj-formlayout-full-width" label-width="45%">
+          <oj-input-text label-hint="Created By:" style="margin-bottom: -6px;" value="{{ $variables.about.created_by }}"
+            readonly="true" tabindex="-1">
+          </oj-input-text>
+          <oj-input-text label-hint="Created Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.created_date }}" tabindex="-1"></oj-input-text>
+          <oj-input-text label-hint="Last Updated By:" style="margin-bottom: -6px;"
+            value="{{ $variables.about.last_updated_by }}" readonly="true" tabindex="-1"></oj-input-text>
+          <oj-input-date-time label-hint="Last Update Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.last_updated_date }}" tabindex="-1"></oj-input-date-time>
+          <oj-input-text label-hint="Last Updated Login:" value="{{ $variables.about.last_updated_login }}"
+            style="margin-bottom: -6px;" readonly="true" tabindex="-1">
+          </oj-input-text>
+        </oj-form-layout>
+      </div>
+    </div>
+  </div>
+  <div class="oj-flex-bar-end" slot="footer" style="margin-top: -1.5rem;">
+    <oj-button label="Ok" chroming="outlined" on-oj-action="[[$listeners.aboutOkAction]]" class="oj-flex-bar-end">
+    </oj-button>
+  </div>
+</oj-dialog>

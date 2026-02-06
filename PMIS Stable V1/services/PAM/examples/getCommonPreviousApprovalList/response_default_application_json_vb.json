@@ -1,0 +1,29 @@
+{
+    "items": [
+        {
+            "approver_level": 1,
+            "person_id": 100000005329349,
+            "person_number": "7024",
+            "person_name": "Abdullah Mohamed Salmeen Al Naimi عبدالله   سالمين النعيمي",
+            "person_emailid": "abdullah.alnaimi@testowwsc.nama.om"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/common/previous/approval/list"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/common/previous/approval/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/common/previous/approval/list"
+        }
+    ]
+}

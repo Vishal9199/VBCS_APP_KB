@@ -1,0 +1,683 @@
+{
+  "title": "Search Project Details",
+  "description": "Smart Search page for NWS PMIS Master Plan Project Details with comprehensive filtering and search capabilities",
+  "variables": {
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "lovProjectNameSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getPmispamLovMasterplanProjectname",
+        "itemsPath": "items",
+        "keyAttributes": "project_id",
+        "fetchChain": "getPmispamLovMasterplanProjectnameFetch"
+      }
+    },
+    "lovRefNumSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getPmispamLovMasterplanReferenceno",
+        "itemsPath": "items",
+        "keyAttributes": "mp_ref_num",
+        "fetchChain": "getPmispamLovMasterplanReferencenoFetch"
+      }
+    },
+    "lovRegionSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getPmisLovRegionName",
+        "itemsPath": "items",
+        "keyAttributes": "lookup_value_id",
+        "fetchChain": "getPmisLovRegionNameFetch"
+      }
+    },
+    "pagination": {
+      "type": "object",
+      "defaultValue": {
+        "is_next": false,
+        "is_prev": true
+      }
+    },
+    "paginationDisplay": {
+      "type": "string",
+      "defaultValue": "0 - 0 of 0 items"
+    },
+    "passProjectDtlsVar": {
+      "type": {
+        "mpName": "string",
+        "mpRefId": "string",
+        "refNum": "string"
+
+      },
+      "defaultValue": {
+        "refNum": "0",
+        "mpName": "0",
+        "mpRefId": "0"
+      }
+    },
+    "totalRecords": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "currentPage": {
+      "type": "number",
+      "defaultValue": 1
+    },
+    "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "ProjectNameFilter": {
+              "label": "Project Name",
+              "options": {
+                "optionsData": "[[ $variables.lovProjectNameSDP ]]",
+                "optionsKeys": {
+                  "label": "project_name",
+                  "value": "project_id"
+                }
+              }
+            },
+            "ReferenceNumberFilter": {
+              "label": "Reference Number",
+              "options": {
+                "optionsData": "[[ $variables.lovRefNumSDP ]]",
+                "optionsKeys": {
+                  "label": "mp_ref_num",
+                  "value": "mp_ref_num"
+                }
+              }
+            },
+            "RegionFilter": {
+              "label": "Region",
+              "options": {
+                "optionsData": "[[ $variables.lovRegionSDP ]]",
+                "optionsKeys": {
+                  "label": "lookup_value_name",
+                  "value": "lookup_value_id"
+                }
+              }
+            },
+            "StatusFilter": {
+              "label": "Status",
+              "options": {
+                "optionsData": "[[ $variables.lovStatusADP ]]",
+                "optionsKeys": {
+                  "label": "status_label",
+                  "value": "active_flag"
+                }
+              }
+            },
+            "DateRangeFilter": {
+              "label": "Date Range"
+            }
+          }
+        }
+      }
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/projectsearchconfig.json' ]]"
+      }
+    },
+    "searchObj": {
+      "type": {
+        "in_limit": "string",
+        "in_offset": "string",
+        "p_keyword": "string",
+        "p_project_id": "string",
+        "p_mp_ref_num": "string",
+        "p_project_name": "string",
+        "p_project_type": "string",
+        "p_region_id": "string",
+        "p_status": "string",
+        "p_from_date": "string",
+        "p_to_date": "string",
+        "p_created_by_user": "string"
+
+      },
+      "defaultValue": {
+        "in_limit": "10",
+        "in_offset": "0",
+        "p_keyword": "",
+        "p_project_id": "",
+        "p_mp_ref_num": "",
+        "p_project_name": "",
+        "p_project_type": "",
+        "p_status": "",
+        "p_region_id": "",
+        "p_from_date": "",
+        "p_to_date": "",
+        "p_created_by_user": ""
+
+      }
+    },
+    "projectDetailsADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "ProjectDetailsType",
+        "keyAttributes": "project_id"
+      }
+    },
+    "currentOffset": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "hasNext": {
+      "type": "string",
+      "defaultValue": "N"
+    },
+    "totalCount": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "currentCount": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "p_start_date": {
+      "type": "string"
+    },
+    "p_end_date": {
+      "type": "string"
+    },
+    "lovStatusADP": {
+  "type": "vb/ArrayDataProvider2",
+  "defaultValue": {
+    "data": [
+      { "active_flag": "Y", "status_label": "Active" },
+      { "active_flag": "N", "status_label": "Inactive" }
+    ],
+    "keyAttributes": "active_flag"
+  }
+}
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getPmisLovRegionName": {
+      "endpoint": "getPmisLovRegionName",
+      "service": "PmisSetup",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovMasterplanProjectname": {
+      "endpoint": "getPmispamLovMasterplanProjectname",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovMasterplanReferenceno": {
+      "endpoint": "getPmispamLovMasterplanReferenceno",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.ProjectDetailsType": {
+      "endpoint": "getProjectDetails",
+      "service": "ProjectDetailsService",
+      "path": "response"
+    },
+    "@decorators.ProjectDetailsTypeOLD": {
+      "endpoint": "getProjectDetails",
+      "service": "ProjectDetailsService",
+      "path": "response"
+    },
+    "getPmisLovRegionName": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispamLovMasterplanProjectname": {
+      "items": [
+        {
+          "project_id": "number",
+          "project_long_name": "string",
+          "project_name": "string"
+        }
+      ]
+    },
+    "getPmispamLovMasterplanReferenceno": {
+      "items": [
+        {
+          "mp_ref_id": "number",
+          "mp_ref_num": "string",
+          "mp_ref_plan_name": "string"
+        }
+      ]
+    },
+    "ProjectDetailsType": {
+      "project_id": "number",
+      "object_version_num": "number",
+      "mp_ref_id": "number",
+      "mp_ref_num": "string",
+      "mp_ref_plan_name": "string",
+      "project_type_id": "number",
+      "project_type": "string",
+      "project_category_id": "number",
+      "project_category": "string",
+      "project_name": "string",
+      "project_long_name": "string",
+      "region_id": "number",
+      "region_name": "string",
+      "project_location_id": "number",
+      "project_location": "string",
+      "category_id": "number",
+      "category": "string",
+      "description": "string",
+      "five_year_prj_flag": "string",
+      "latest_est_budget_val": "number",
+      "scp_approved_budget_val": "number",
+      "active_flag": "string",
+      "inactive_date": "string",
+      "budget_year_id": "number",
+      "calendar_name": "string",
+      "comments": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "ProjectDetailsTypeOLD": {
+      "project_id": "number",
+      "object_version_num": "number",
+      "mp_ref_id": "number",
+      "mp_ref_num": "string",
+      "mp_ref_plan_name": "string",
+      "project_type_id": "number",
+      "project_category_id": "number",
+      "project_name": "string",
+      "project_long_name": "string",
+      "region_id": "number",
+      "project_location_id": "number",
+      "category_id": "number",
+      "description": "string",
+      "five_year_prj_flag": "string",
+      "latest_est_budget_val": "number",
+      "scp_approved_budget_val": "number",
+      "active_flag": "string",
+      "inactive_date": "string",
+      "budget_year_id": "number",
+      "comments": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    }
+
+  },
+  "eventListeners": {
+    "addProjectBtnAction": {
+      "chains": [
+        {
+          "chain": "onAddProjectBtnAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "onEditAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "onDeleteAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "closeLovDialog": {
+      "chains": [
+        {
+          "chain": "closeLovDialog",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "confirmLovSelection": {
+      "chains": [
+        {
+          "chain": "confirmLovSelection",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+    "chains": [
+      {
+        "chain": "resetSearchAction"
+      }
+    ]
+  },
+  "refreshBtnAction": {
+    "chains": [
+      {
+        "chain": "refreshSearchAction"
+      }
+    ]
+  },
+  "exportBtnAction": {
+    "chains": [
+      {
+        "chain": "exportToExcelAction"
+      }
+    ]
+  },
+  "createBtnAction": {
+    "chains": [
+      {
+        "chain": "createProjectAction"
+      }
+    ]
+  },
+  "preBtnAction": {
+    "chains": [
+      {
+        "chain": "previousPageAction"
+      }
+    ]
+  },
+  "nxtBtnAction": {
+    "chains": [
+      {
+        "chain": "nextPageAction"
+      }
+    ]
+  },
+    "selectValueItem": {
+      "chains": [
+        {
+          "chain": "onLovDialogRefNumValue",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+    "chains": [
+      {
+        "chain": "vbEnterListener"
+      }
+    ]
+  }
+
+},
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      }
+
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-search.css"
+    ]
+  },
+  "constants": {
+    "columnsVar": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "frozenEdge": "start",
+          "resizable": "disabled",
+          "sortable": "disabled",
+          "width": 100,
+          "template": "actions",
+          "headerStyle": "white-space: nowrap; min-width: 100px;",
+          "style": ""
+
+        },
+        {
+          "headerText": "Reference Number",
+          "field": "mp_ref_num",
+          "frozenEdge": "start",
+          "resizable": "enabled",
+          "width": 160,
+          "template": "edit_link",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": ""
+
+        },
+        {
+          "headerText": "Reference Plan Name",
+          "field": "mp_ref_plan_name",
+          "resizable": "enabled",
+          "width": 200,
+          "template": "mp_ref_plan_name",
+          "headerStyle": "white-space: nowrap; min-width: 200px;",
+          "style": ""
+        },
+        {
+          "headerText": "Project Name",
+          "field": "project_name",
+          "resizable": "enabled",
+          "width": 180,
+          "template": "project_name",
+          "headerStyle": "white-space: nowrap; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Project Long Name",
+          "field": "project_long_name",
+          "resizable": "enabled",
+          "width": 250,
+          "template": "project_long_name",
+          "headerStyle": "white-space: nowrap; min-width: 250px;",
+          "style": ""
+        },
+        {
+          "headerText": "Project Type",
+          "field": "project_type",
+          "resizable": "enabled",
+          "width": 140,
+          "template": "project_type",
+          "headerStyle": "white-space: nowrap; min-width: 140px;",
+          "style": ""
+        },
+        {
+          "headerText": "Project Category",
+          "field": "project_category",
+          "resizable": "enabled",
+          "width": 160,
+          "template": "project_category",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": ""
+        },
+        {
+          "headerText": "Region",
+          "field": "region_name",
+          "resizable": "enabled",
+          "width": 150,
+          "template": "region_name",
+          "headerStyle": "white-space: nowrap; min-width: 150px;",
+          "style": ""
+        },
+        {
+          "headerText": "Location",
+          "field": "project_location",
+          "resizable": "enabled",
+          "width": 160,
+          "template": "project_location",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": ""
+        },
+        {
+          "headerText": "Category",
+          "field": "category",
+          "resizable": "enabled",
+          "width": 180,
+          "template": "category",
+          "headerStyle": "white-space: nowrap; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Description",
+          "field": "description",
+          "resizable": "enabled",
+          "width": 250,
+          "template": "description",
+          "headerStyle": "white-space: nowrap; min-width: 250px;",
+          "style": ""
+        },
+        {
+          "headerText": "Five Year Plan Flag",
+          "field": "five_year_prj_flag",
+          "resizable": "enabled",
+          "width": 180,
+          "template": "five_year_prj_flag",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": ""
+        },
+        {
+          "headerText": "Latest Est Budget",
+          "field": "latest_est_budget_val",
+          "resizable": "enabled",
+          "width": 180,
+          "template": "latest_est_budget_val",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": ""
+        },
+        {
+          "headerText": "SCP Approved Budget",
+          "field": "scp_approved_budget_val",
+          "resizable": "enabled",
+          "width": 180,
+          "template": "scp_approved_budget_val",
+          "headerStyle": "white-space: nowrap; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "active_flag",
+          "resizable": "enabled",
+          "width": 100,
+          "template": "status_badge",
+          "headerStyle": "white-space: nowrap; min-width: 100px;",
+          "style": ""
+        },
+        {
+          "headerText": "Inactive Date",
+          "field": "inactive_date",
+          "resizable": "enabled",
+          "width": 130,
+          "template": "date",
+          "headerStyle": "white-space: nowrap; min-width: 130px;",
+          "style": ""
+        },
+        {
+          "headerText": "Calendar Name",
+          "field": "calendar_name",
+          "resizable": "enabled",
+          "width": 200,
+          "template": "calendar_name",
+          "headerStyle": "white-space: nowrap; min-width: 200px;",
+          "style": ""
+        },
+        {
+          "headerText": "Comments",
+          "field": "comments",
+          "resizable": "enabled",
+          "width": 200,
+          "template": "comments",
+          "headerStyle": "white-space: nowrap; min-width: 200px;",
+          "style": ""
+        }        
+      ],
+      "description": "[\n    {\n        \"headerText\": \"Actions\",\n        \"field\": \"\",\n        \"resizable\": \"enabled\",\n        \"fozenEdge\": \"start\",\n        \"sortable\": \"disabled\",\n        \"width\": 100,\n        \"template\": \"actions\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 100px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Project ID\",\n        \"field\": \"project_id\",\n        \"resizable\": \"enabled\",\n        \"width\": 120,\n        \"sortable\": \"enabled\",\n        \"template\": \"project_id\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 120px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Reference Number\",\n        \"field\": \"mp_ref_num\",\n        \"resizable\": \"enabled\",\n        \"width\": 160,\n        \"template\": \"edit_link\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Reference Plan Name\",\n        \"field\": \"mp_ref_plan_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 200,\n        \"template\": \"mp_ref_plan_name\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 200px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Project Name\",\n        \"field\": \"project_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 180,\n        \"template\": \"project_name\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Project Long Name\",\n        \"field\": \"project_long_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 250,\n        \"template\": \"project_long_name\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 250px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Project Type ID\",\n        \"field\": \"project_type_id\",\n        \"resizable\": \"enabled\",\n        \"width\": 140,\n        \"template\": \"project_type_id\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Project Category ID\",\n        \"field\": \"project_category_id\",\n        \"resizable\": \"enabled\",\n        \"width\": 170,\n        \"template\": \"project_category_id\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 170px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Region ID\",\n        \"field\": \"region_id\",\n        \"resizable\": \"enabled\",\n        \"width\": 110,\n        \"template\": \"region_id\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 110px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Project Location ID\",\n        \"field\": \"project_location_id\",\n        \"resizable\": \"enabled\",\n        \"width\": 170,\n        \"template\": \"project_location_id\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 170px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Category ID\",\n        \"field\": \"category_id\",\n        \"resizable\": \"enabled\",\n        \"width\": 120,\n        \"template\": \"category_id\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 120px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Description\",\n        \"field\": \"description\",\n        \"resizable\": \"enabled\",\n        \"width\": 250,\n        \"template\": \"description\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 250px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Five Year Plan Flag\",\n        \"field\": \"five_year_prj_flag\",\n        \"resizable\": \"enabled\",\n        \"width\": 160,\n        \"template\": \"five_year_prj_flag\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Latest Est Budget\",\n        \"field\": \"latest_est_budget_val\",\n        \"resizable\": \"enabled\",\n        \"width\": 160,\n        \"template\": \"latest_est_budget_val\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"SCP Approved Budget\",\n        \"field\": \"scp_approved_budget_val\",\n        \"resizable\": \"enabled\",\n        \"width\": 180,\n        \"template\": \"scp_approved_budget_val\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Status\",\n        \"field\": \"active_flag\",\n        \"resizable\": \"enabled\",\n        \"width\": 100,\n        \"template\": \"status_badge\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 100px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Inactive Date\",\n        \"field\": \"inactive_date\",\n        \"resizable\": \"enabled\",\n        \"width\": 130,\n        \"template\": \"date\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 130px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Budget Year ID\",\n        \"field\": \"budget_year_id\",\n        \"resizable\": \"enabled\",\n        \"width\": 140,\n        \"template\": \"budget_year_id\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Comments\",\n        \"field\": \"comments\",\n        \"resizable\": \"enabled\",\n        \"width\": 200,\n        \"template\": \"comments\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 200px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Object Version\",\n        \"field\": \"object_version_num\",\n        \"resizable\": \"enabled\",\n        \"width\": 140,\n        \"template\": \"object_version_num\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"MP Reference ID\",\n        \"field\": \"mp_ref_id\",\n        \"resizable\": \"enabled\",\n        \"width\": 140,\n        \"template\": \"mp_ref_id\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Created By\",\n        \"field\": \"created_by\",\n        \"resizable\": \"enabled\",\n        \"width\": 140,\n        \"template\": \"created_by\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Creation Date\",\n        \"field\": \"created_date\",\n        \"resizable\": \"enabled\",\n        \"width\": 130,\n        \"template\": \"date\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 130px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Last Updated By\",\n        \"field\": \"last_updated_by\",\n        \"resizable\": \"enabled\",\n        \"width\": 150,\n        \"template\": \"last_updated_by\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 150px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Last Update Date\",\n        \"field\": \"last_updated_date\",\n        \"resizable\": \"enabled\",\n        \"width\": 150,\n        \"template\": \"date\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 150px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Last Update Login\",\n        \"field\": \"last_updated_login\",\n        \"resizable\": \"enabled\",\n        \"width\": 150,\n        \"template\": \"last_updated_login\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 150px;\",\n        \"style\": \"\"\n    }\n]"
+    }
+  }
+}

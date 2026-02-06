@@ -1,0 +1,87 @@
+{
+  "description": "Smart Search Configuration for NWS PMIS Details",
+  "filters": {
+
+    "BudgetFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Budget",
+      "options": {
+        "field": "budget_number",
+        "optionsData": "[[ $search.filters.BudgetFilter.options.optionsData ]]",
+        "optionsKeys": {
+          "value": "value",
+          "label": "label"
+        }
+      },
+      "data": {
+        "lovFor": "BUDGET"
+      }
+    },
+
+    "ServiceSpecFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Service Specification",
+      "options": {
+        "field": "service_spec_num",
+        "optionsData": "[[ $search.filters.ServiceSpecFilter.options.optionsData ]]",
+        "optionsKeys": {
+          "value": "value",
+          "label": "label"
+        }
+      },
+      "data": {
+        "lovFor": "SERVICE_SPEC"
+      }
+    },
+
+    "TenderFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Tender",
+      "options": {
+        "field": "tender_number",
+        "optionsData": "[[ $search.filters.TenderFilter.options.optionsData ]]",
+        "optionsKeys": {
+          "value": "value",
+          "label": "label"
+        }
+      },
+      "data": {
+        "lovFor": "TENDER"
+      }
+    },
+
+    "StatusFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Status",
+      "options": {
+        "field": "status_id",
+        "optionsData": "[[ $search.filters.StatusFilter.options.optionsData ]]",
+        "optionsKeys": {
+          "value": "lookup_value_id",
+          "label": "lookup_value_name"
+        }
+      },
+      "data": {}
+    },
+
+    "DateRangeFilter": {
+      "type": "oj-sp/smart-search/default-filters/DateRangeFilter",
+      "label": "Created Date",
+      "options": {
+        "field": "created_date",
+        "startDate": "[[ $page.variables.p_start_date ]]",
+        "endDate": "[[ $page.variables.p_end_date ]]",
+        "converter": {
+          "type": "datetime",
+          "options": {
+            "pattern": "dd-MMM-yyyy"
+          }
+        }
+      },
+      "data": {
+        "start": "[[ $functions.pastDate() ]]",
+        "end": "[[ $functions.todayDate() ]]"
+      }
+    }
+  }
+}

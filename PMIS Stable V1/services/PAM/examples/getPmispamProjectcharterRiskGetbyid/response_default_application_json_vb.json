@@ -1,0 +1,39 @@
+{
+    "items": [
+        {
+            "major_risk_id": 1385,
+            "object_version_num": 1,
+            "project_charter_id": 1293,
+            "project_charter_name": "PROJ_TEST 001",
+            "ref_num": "PC-1",
+            "major_risk_title": "Delay in Vendor Delivery",
+            "description": "Risk of project delay due to late delivery from external vendors",
+            "impact": "High impact on project timeline and budget",
+            "mitigation": "Maintain buffer stock and enforce SLA penalties",
+            "additional_info": "Vendor X has history of delays",
+            "created_by": "VISHAL",
+            "created_date": "2026-02-04T05:07:30Z",
+            "last_updated_by": "VISHAL",
+            "last_updated_date": "2026-02-04T05:07:30Z",
+            "last_updated_login": "WEB_PORTAL"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/projectcharter/risk/getbyid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/projectcharter/risk/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/projectcharter/risk/getbyid"
+        }
+    ]
+}

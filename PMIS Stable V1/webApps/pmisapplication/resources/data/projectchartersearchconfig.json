@@ -1,0 +1,35 @@
+{
+  "description": "Smart Search Configuration for Project Charter Application",
+  "filters": {
+    "ReferenceNumberFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Reference Number",
+      "options": {
+        "field": "lov_label",
+        "optionsData": "[[ $search.filters.ReferenceNumberFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.ReferenceNumberFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+    "RegionFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Region",
+      "options": {
+        "field": "lookup_value_id",
+        "optionsData": "[[ $search.filters.RegionFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.RegionFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+    "ProjectNameFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Project Name",
+      "options": {
+        "field": "project_charter_name",
+        "optionsData": "[[ $search.filters.ProjectNameFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.ProjectNameFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+    "items": [
+        {
+            "mp_ref_id": 1003,
+            "mp_ref_num": "M)-2026-1003",
+            "mp_ref_plan_name": "Master Plan – Phase 3"
+        },
+        {
+            "mp_ref_id": 1000,
+            "mp_ref_num": "MP-2026-2001",
+            "mp_ref_plan_name": "Master Plan - 2001"
+        },
+        {
+            "mp_ref_id": 1002,
+            "mp_ref_num": "MP-2026-1002",
+            "mp_ref_plan_name": "Master Plan – Phase 2"
+        },
+        {
+            "mp_ref_id": 1001,
+            "mp_ref_num": "MP-2026-1001",
+            "mp_ref_plan_name": "Master Plan – Phase 1"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 4,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/lov/masterplan/referenceno"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/lov/masterplan/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/lov/masterplan/referenceno"
+        }
+    ]
+}

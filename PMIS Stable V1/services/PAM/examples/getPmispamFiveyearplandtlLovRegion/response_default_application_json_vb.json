@@ -1,0 +1,23 @@
+{
+    "items": [
+        {
+            "lookup_value_id": 6174,
+            "lookup_value_code": "MUS",
+            "lookup_value_name": "Musandam"
+        }
+    ],
+    "hasMore": false,
+    "limit": 0,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/fiveyearplandtl/lov/region?searchVal=Musandam"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/fiveyearplandtl/lov/item"
+        }
+    ]
+}

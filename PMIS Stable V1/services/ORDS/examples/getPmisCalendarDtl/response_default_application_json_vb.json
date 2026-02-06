@@ -1,0 +1,49 @@
+{
+    "items": [
+        {
+            "xxpmis_cal_hdr_id": 1001,
+            "calendar_type": "AA",
+            "calendar_name": "CAL Name 1",
+            "description": "Description",
+            "enabled_flag": "Y",
+            "last_update_date": "2026-01-16T15:41:15Z",
+            "last_updated_by": 1,
+            "creation_date": "2026-01-16T15:41:33Z",
+            "created_by": 1,
+            "last_update_login": 1,
+            "attribute1": "attr1",
+            "attribute2": "attr2",
+            "attribute3": "attr3",
+            "attribute4": "attr4",
+            "attribute5": "attr5",
+            "attribute6": "attr6",
+            "attribute7": "attr7",
+            "attribute8": "attr8",
+            "attribute9": "attr9",
+            "attribute10": "attr10",
+            "attribute11": "attr11",
+            "attribute12": "attr12",
+            "attribute13": "attr13",
+            "attribute14": "attr14",
+            "attribute15": "attr15"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmis/calendar/dtl"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmis/calendar/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmis/calendar/dtl"
+        }
+    ]
+}

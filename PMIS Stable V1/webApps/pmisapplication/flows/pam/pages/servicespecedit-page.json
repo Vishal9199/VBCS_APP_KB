@@ -1,0 +1,584 @@
+{
+  "metadata": {},
+  "title": "Service Specification Add/Edit",
+  "description": "Service Specification management form with specification details, tender information, and project details",
+  "imports": {
+    "components": {
+      "oj-button": {"path": "ojs/ojbutton"},
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-form-layout": {"path": "ojs/ojformlayout"},
+      "oj-input-text": {"path": "ojs/ojinputtext"},
+      "oj-option": {
+        "path": "ojs/ojoption"
+      },
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-radioset": {
+        "path": "ojs/ojradioset"
+      },
+      "oj-select-single": {"path": "ojs/ojselectsingle"},
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-sp-simple-create-edit": {"path": "oj-sp/simple-create-edit/loader"},
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {"path": "ojs/ojinputtext"},
+      "oj-collapsible": {"path": "ojs/ojcollapsible"},
+      "oj-bind-text": {"path": "ojs/ojbindtext"},
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  },
+  "types": {
+    "@decorators.getCommonPreviousApprovalList": {
+      "endpoint": "getCommonPreviousApprovalList",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.ServiceSpecification": {
+      "endpoint": "getPmispamServicespecGetbyid",
+      "service": "PAM",
+      "path": "response"
+    },
+    "getCommonPreviousApprovalList": {
+      "items": [
+        {
+          "approver_level": "number",
+          "person_emailid": "string",
+          "person_id": "number",
+          "person_name": "string",
+          "person_number": "string"
+        }
+      ]
+    },
+    "ServiceSpecification": {
+      "additional_info": "string",
+      "budget_number": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "excepted_deliverables": "string",
+      "expected_schedule": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "object_version_num": "any",
+      "project_introduction": "string",
+      "score_of_service": "string",
+      "service_spec_id": "number",
+      "service_spec_name": "string",
+      "service_spec_num": "string",
+      "status_code": "string",
+      "status_id": "number",
+      "status_name": "string",
+      "tender_name": "string",
+      "tender_number": "string"
+
+    },
+    "AboutType": {
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "ServiceSpecification2": {
+      "service_spec_id": "number",
+      "service_spec_num": "string",
+      "service_spec_name": "string",
+      "tender_number": "string",
+      "tender_name": "string",
+      "budget_number": "string",
+      "score_of_service": "string",
+      "project_introduction": "string",
+      "expected_schedule": "string",
+      "excepted_deliverables": "string",
+      "status_id": "string",
+      "flow_status": "string",
+      "created_by": "string",
+      "creation_date": "string",
+      "last_updated_by": "string",
+      "last_update_date": "string",
+      "last_update_login": "string"
+    }
+
+  },
+  "variables": {
+    "formValidation": {
+      "type": "string"
+    },
+    "getCommonPreviousApprovalListListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PAM/getCommonPreviousApprovalList",
+        "responseType": "getCommonPreviousApprovalList",
+        "itemsPath": "items",
+        "keyAttributes": "person_id",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "person_name"
+          ]
+        },
+        "headers": {
+          "x-session-id": "{{ $variables.pNavId }}"
+        }
+      }
+    },
+    "responseComment": {
+      "type": "string"
+    },
+    "serviceSpecVar": {
+      "type": "ServiceSpecification",
+      "defaultValue": {
+        "last_updated_by": "[[ $application.user.email ]]",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "object_version_num": "0",
+        "created_by": "[[ $application.user.email ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]"
+      }
+    },
+     "pNavCode": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl",
+      "defaultValue": "CREATE"
+    },
+    "pNavId": {
+      "type": "string",
+      "defaultValue": "0",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "about": {
+      "type": "AboutType"
+    },
+    "aToolGeneric": {
+      "type": "object[]"
+    },
+    "taskId": {
+      "type": "string",
+      "input": "fromUrl"
+    },
+    "attachmentObj": {
+      "type": {
+        "P_DOCUMENT_NAME": "string",
+        "P_DOCUMENT_CATEGORY": "string",
+        "P_DOCUMENT_TYPE": "string",
+        "P_DOCUMENT_FILE": "any",
+        "P_DESCRIPTION": "string",
+        "P_APPL_CODE": "string",
+        "P_TRANSACTION_ID": "string",
+        "P_TYPE": "string",
+        "P_TITLE": "string",
+        "P_URL": "string",
+        "P_REFERENCE_TYPE": "string",
+        "P_REFERENCE_ID": "string",
+        "P_CREATED_BY": "string"
+      },
+      "defaultValue": {
+        "P_TYPE": "FILE",
+        "P_APPL_CODE": "[[ $constants.stored_Appl_Code ]]",
+        "P_CREATED_BY": "[[ $application.user.email ]]",
+        "P_DESCRIPTION": "Service Specification Attachment",
+        "P_TITLE": "Service Specification Attachment"
+      }
+    }
+
+  },
+  "eventListeners": {
+    "aboutButtonCancelACAction": {
+      "chains": [
+        {
+          "chain": "onAboutCancelAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "btnCancelAction": {
+      "chains": [
+        {
+          "chain": "cancel_Common_Dialog_AC",
+          "parameters": {
+            "dialogId": "submitDialog"
+          }
+        }
+      ]
+    },
+    "serviceSpecPageSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "onCloseAction",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "serviceSpecPageSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "onSecondaryAction",
+          "parameters": {
+
+            "actionId": "{{$event.detail.secondaryItem}}",
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    },
+    "withdrawOkAction": {
+      "chains": [
+        {
+          "chain": "onClickWithrawOk",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "rejBtnAction": {
+      "chains": [
+        {
+          "chain": "onClickRejectOk",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "reassignOkAction": {
+      "chains": [
+        {
+          "chain": "onClickReassignOk",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "moreinfoOkAction": {
+      "chains": [
+        {
+          "chain": "onClickMoreInfoOk",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "appBtnAction": {
+      "chains": [
+        {
+          "chain": "onClickApproveOk",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "rpaAppBtnAction": {
+      "chains": [
+        {
+          "chain": "onClickRpaOkBtn_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "btnOkAction2": {
+      "chains": [
+        {
+          "chain": "onClickSubmitOk",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "apprResponseBtnAction": {
+      "chains": [
+        {
+          "chain": "onClick_ApproverMoreInfo_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "moreinfoCancelAction": {
+      "chains": [
+        {
+          "chain": "cancel_Common_Dialog_AC",
+          "parameters": {
+            "dialogId": "moreinfoDialog"
+          }
+        }
+      ]
+    },
+    "reassignCancelAction": {
+      "chains": [
+        {
+          "chain": "cancel_Common_Dialog_AC",
+          "parameters": {
+            "dialogId": "ReassignDialog"
+          }
+        }
+      ]
+    },
+    "rejCancelAction": {
+      "chains": [
+        {
+          "chain": "cancel_Common_Dialog_AC",
+          "parameters": {
+            "dialogId": "rejectDialog"
+          }
+        }
+      ]
+    },
+    "withdrawcancelAction": {
+      "chains": [
+        {
+          "chain": "cancel_Common_Dialog_AC",
+          "parameters": {
+            "dialogId": "withdrawDialog"
+          }
+        }
+      ]
+    },
+    "rpaCancelAction": {
+      "chains": [
+        {
+          "chain": "cancel_Common_Dialog_AC",
+          "parameters": {
+            "dialogId": "rpaDialog"
+          }
+        }
+      ]
+    },
+    "appCancelAction": {
+      "chains": [
+        {
+          "chain": "cancel_Common_Dialog_AC",
+          "parameters": {
+            "dialogId": "approveDialog"
+          }
+        }
+      ]
+    }
+
+  },
+  "constants": {
+    "apprProcess": {
+      "type": "string",
+      "defaultValue": "SERVICE_SPECIFICATION"
+    },
+    "stored_Appl_Code": {
+      "type": "string",
+      "defaultValue": "SERVICE_SPECIFICATION"
+    },
+    "toolPending": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Approve",
+          "id": "approve",
+          "icon": "oj-ux-ico-check-circle"
+        },
+        {
+          "label": "Reject",
+          "id": "reject",
+          "icon": "oj-ux-ico-close-circle"
+        },
+        {
+          "id": "reassign",
+          "label": "Reassign",
+          "icon": "oj-ux-ico-assign-to-me"
+        },
+        {
+
+          "label": "Approver More Info",
+          "id": "apprMoreInfo",
+          "icon": "oj-ux-ico-app-info"
+        },
+        {
+
+          "id": "requireMoreInfo",
+          "label": "Employee More Information",
+          "icon": "oj-ux-ico-request-information"
+        },
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+        {
+          "label": "Attachment",
+          "id": "attachment",
+          "icon": "oj-ux-ico-attachment"
+        },
+{
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ],
+        "uniqueItems": true
+    },
+    "toolDraft": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Save",
+          "id": "save",
+          "icon": "oj-ux-ico-save"
+        },
+        {
+          "label": "Submit",
+          "id": "submit",
+          "icon": "oj-ux-ico-success"
+        },
+        {
+          "label": "Save & Close",
+          "id": "saveClose",
+          "icon": "oj-ux-ico-save-and-close"
+        },
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+{
+          "label": "Attachment",
+          "id": "attachment",
+          "icon": "oj-ux-ico-attachment"
+        },
+        {
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ],
+      "uniqueItems": true
+    },
+    "toolError": {
+      "defaultValue": [
+        {
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        },
+{
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        }
+      ],
+      "uniqueItems": true,
+      "type": "object[]"
+    },
+    "toolFinal": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+        {
+          "label": "Attachment",
+          "id": "attachment",
+          "icon": "oj-ux-ico-attachment"
+        },
+{
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ],
+      "uniqueItems": true,
+      "description": "{\n        \"label\": \"Export\",\n        \"id\": \"export\",\n        \"icon\": \"oj-ux-ico-acl-export\"\n    },"
+    },
+    "toolRPA": {
+      "defaultValue": [
+        {
+          "label": "Approver Response",
+          "id": "apprResponseMoreInfo",
+          "icon": "oj-ux-ico-app-info"
+        },
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+        {
+          "label": "Attachment",
+          "id": "attachment",
+          "icon": "oj-ux-ico-attachment"
+        },
+{
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ],
+      "type": "object[]",
+      "uniqueItems": true
+    },
+    "toolWithDraw": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "id": "withdraw",
+          "label": "Withdraw",
+          "icon": "oj-ux-ico-withdraw-request"
+        },
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+{
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ],
+      "uniqueItems": true,
+      "description": "{\n        \"label\": \"Export\",\n        \"id\": \"export\",\n        \"icon\": \"oj-ux-ico-acl-export\"\n    },"
+    }
+
+  }
+}

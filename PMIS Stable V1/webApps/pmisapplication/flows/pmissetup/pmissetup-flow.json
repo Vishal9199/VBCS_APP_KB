@@ -1,0 +1,22 @@
+{
+
+  "id": "pmissetup",
+  "description": "Flow main",
+  "defaultPage": "lookupsearch",
+  "chains": {},
+  "services": {},
+  "types": {},
+  "variables": {},
+  "constants": {
+    "accessObj": {
+      "type": {
+        "allowDelete": "boolean",
+        "allowEdit": "boolean"
+      },
+      "defaultValue": {
+        "allowEdit": true,
+        "allowDelete": true
+      }
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+    "items": [
+        {
+            "lookup_value_id": 6160,
+            "lookup_value_code": "IMPROVEMENT",
+            "lookup_value_name": "Improvement"
+        },
+        {
+            "lookup_value_id": 6162,
+            "lookup_value_code": "TRANSMISSION_SYSTEM",
+            "lookup_value_name": "Transmission System"
+        },
+        {
+            "lookup_value_id": 6164,
+            "lookup_value_code": "GENERAL",
+            "lookup_value_name": "General"
+        },
+        {
+            "lookup_value_id": 6166,
+            "lookup_value_code": "PUMP_STATUS",
+            "lookup_value_name": "Pump Status"
+        },
+        {
+            "lookup_value_id": 6170,
+            "lookup_value_code": "RESERVOIR",
+            "lookup_value_name": "Reservoir"
+        },
+        {
+            "lookup_value_id": 6163,
+            "lookup_value_code": "WATER_SOURCE",
+            "lookup_value_name": "Water Source"
+        },
+        {
+            "lookup_value_id": 6165,
+            "lookup_value_code": "SCADA",
+            "lookup_value_name": "Scada"
+        },
+        {
+            "lookup_value_id": 6158,
+            "lookup_value_code": "BUILDING",
+            "lookup_value_name": "Building"
+        },
+        {
+            "lookup_value_id": 6159,
+            "lookup_value_code": "DISTRIBUTION_SYSTEM",
+            "lookup_value_name": "Distribution System"
+        },
+        {
+            "lookup_value_id": 6161,
+            "lookup_value_code": "TANKER_FILLING_ST.",
+            "lookup_value_name": "Tanker Filling St."
+        },
+        {
+            "lookup_value_id": 6167,
+            "lookup_value_code": "CONSULTANCY_SERVICES",
+            "lookup_value_name": "Consultancy Services"
+        },
+        {
+            "lookup_value_id": 6168,
+            "lookup_value_code": "WATER_QUALITY",
+            "lookup_value_name": "Water Quality"
+        },
+        {
+            "lookup_value_id": 6169,
+            "lookup_value_code": "OTHERS",
+            "lookup_value_name": "Others"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 13,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/lov/project/category"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/lov/project/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/lov/project/category"
+        }
+    ]
+}

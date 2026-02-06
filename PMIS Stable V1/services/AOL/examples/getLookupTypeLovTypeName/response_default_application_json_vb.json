@@ -1,0 +1,456 @@
+{
+    "items": [
+        {
+            "lookup_type_id": 6125,
+            "lookup_type_code": "ABCD",
+            "lookup_type_name": "ABCD",
+            "application_code": null,
+            "application_name": null
+        },
+        {
+            "lookup_type_id": 44,
+            "lookup_type_code": "APPROVER_CATEGORY",
+            "lookup_type_name": "Approver Category",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 41,
+            "lookup_type_code": "APPROVER_TYPE",
+            "lookup_type_name": "Approver Type",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 5907,
+            "lookup_type_code": "CIC_ATTACHMENT",
+            "lookup_type_name": "CIC Attachment",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 5895,
+            "lookup_type_code": "CIC_REGION",
+            "lookup_type_name": "CIC Region",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 5910,
+            "lookup_type_code": "CIC_SUPPLIER_ATTACHMENT",
+            "lookup_type_name": "CIC Supplier Attachment",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 5891,
+            "lookup_type_code": "CIC_INVOICE_STATUS",
+            "lookup_type_name": "Cic Invoice Status",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 104,
+            "lookup_type_code": "DATA_RESTRICTION",
+            "lookup_type_name": "Data Restriction",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 21,
+            "lookup_type_code": "EXCHANGE_RATE_TYPE",
+            "lookup_type_name": "Exchange Rate Type",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 928,
+            "lookup_type_code": "HOUSE_CONNECTION_AD_DHARHIRAH",
+            "lookup_type_name": "House Connection Ad Dahira",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 321,
+            "lookup_type_code": "HOUSE_CONNECTION_AL_BATINAH_NORTH",
+            "lookup_type_name": "House Connection Al Batinah North",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 341,
+            "lookup_type_code": "HOUSE_CONNECTION_AL_BATINAH_SOUTH",
+            "lookup_type_name": "House Connection Al Batinah South",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 919,
+            "lookup_type_code": "HOUSE_CONNECTION_AL_BURAIMI",
+            "lookup_type_name": "House Connection Al Buraimi",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 961,
+            "lookup_type_code": "HOUSE_CONNECTION_ASH_SHARQIYAH_SOUTH",
+            "lookup_type_name": "House Connection Ash Sharqiya South ",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 968,
+            "lookup_type_code": "HOUSE_CONNECTION_ASH_SHARQIYAH_NORTH",
+            "lookup_type_name": "House Connection Ash Sharqiyah North ",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 922,
+            "lookup_type_code": "HOUSE_CONNECTION_AD_DAKHLIYAH",
+            "lookup_type_name": "House Connection Dakhaliya",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 954,
+            "lookup_type_code": "HOUSE_CONNECTION_HEAD_OFFICE",
+            "lookup_type_name": "House Connection Head Office",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 933,
+            "lookup_type_code": "HOUSE_CONNECTION_MUSANDAM",
+            "lookup_type_name": "House Connection Musandam",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 935,
+            "lookup_type_code": "HOUSE_CONNECTION_MUSCAT",
+            "lookup_type_name": "House Connection Muscat",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 4420,
+            "lookup_type_code": "HOUSE_CONNECTION_MUSCAT_AL_AMERAT",
+            "lookup_type_name": "House Connection Muscat Al Amerat",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 4400,
+            "lookup_type_code": "HOUSE_CONNECTION_MUSCAT_BOUSHER",
+            "lookup_type_name": "House Connection Muscat Bousher",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 4380,
+            "lookup_type_code": "HOUSE_CONNECTION_MUSCAT_SEEB",
+            "lookup_type_name": "House Connection Muscat Seeb",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 910,
+            "lookup_type_code": "HOUSE_CONNECTION_NORTH_BATINA",
+            "lookup_type_name": "House Connection North Batina",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 940,
+            "lookup_type_code": "HOUSE_CONNECTION_WUSTA",
+            "lookup_type_name": "House Connection Wusta",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 48,
+            "lookup_type_code": "INTEGRATION_STATUS",
+            "lookup_type_name": "Integration Status",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 61,
+            "lookup_type_code": "MODE_OF_PAYMENT",
+            "lookup_type_name": "Mode Of Payment",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 5915,
+            "lookup_type_code": "PAYMENT_STATUS",
+            "lookup_type_name": "Payment Status",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 441,
+            "lookup_type_code": "PETTY_CASH",
+            "lookup_type_name": "Petty Cash",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 25,
+            "lookup_type_code": "STATUS",
+            "lookup_type_name": "Status",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 4661,
+            "lookup_type_code": "SUP_RENEW_ATT_AGENT",
+            "lookup_type_name": "Sup Renew Att Agent",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 4720,
+            "lookup_type_code": "SUP_RENEW_ATT_FREELANCER",
+            "lookup_type_name": "Sup Renew Att Freelancer",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 4700,
+            "lookup_type_code": "SUP_RENEW_ATT_GOVERNMENT",
+            "lookup_type_name": "Sup Renew Att Government",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 4660,
+            "lookup_type_code": "SUP_RENEW_ATT_HOTELS",
+            "lookup_type_name": "Sup Renew Att Hotels",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 4681,
+            "lookup_type_code": "SUP_RENEW_ATT_OIA_ENTITIES",
+            "lookup_type_name": "Sup Renew Att OIA Entities",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 4662,
+            "lookup_type_code": "SUP_RENEW_ATT_OVERSEAS",
+            "lookup_type_name": "Sup Renew Att Overseas",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 4680,
+            "lookup_type_code": "SUP_RENEW_ATT_SME_MEDIUM",
+            "lookup_type_name": "Sup Renew Att Sme Medium",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 4760,
+            "lookup_type_code": "SUP_RENEW_ATT_OTHERS",
+            "lookup_type_name": "Sup Renewal Att Others",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 4740,
+            "lookup_type_code": "SUP_RENEW_ATT_SME_HOLDING",
+            "lookup_type_name": "Sup Renewal Att SME Holding",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 5923,
+            "lookup_type_code": "SUPP_RENEWAL_SUPPLIER_TYPES",
+            "lookup_type_name": "Supp Renewal Supplier Types",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 681,
+            "lookup_type_code": "TANKER_AL_BURAIMI",
+            "lookup_type_name": "Tanker Al Buraimi",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 741,
+            "lookup_type_code": "TANKER_DAKHALIYA",
+            "lookup_type_name": "Tanker Dakhaliya",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 781,
+            "lookup_type_code": "TANKER_DHAHIRAH",
+            "lookup_type_name": "Tanker Dhahirah",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 908,
+            "lookup_type_code": "TANKER_HEAD_OFFICE",
+            "lookup_type_name": "Tanker Head Office",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 821,
+            "lookup_type_code": "TANKER_MUSANDAM",
+            "lookup_type_name": "Tanker Musandam",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 701,
+            "lookup_type_code": "TANKER_MUSCAT",
+            "lookup_type_name": "Tanker Muscat",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 241,
+            "lookup_type_code": "TANKER_NORTH_BATINAH",
+            "lookup_type_name": "Tanker North Batinah",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 746,
+            "lookup_type_code": "TANKER_NORTH_SHARQIYA",
+            "lookup_type_name": "Tanker North Sharqiya",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 261,
+            "lookup_type_code": "TANKER_SOUTH_BATINAH",
+            "lookup_type_name": "Tanker South Batinah",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 841,
+            "lookup_type_code": "TANKER_SOUTH_SHARQIYA",
+            "lookup_type_name": "Tanker South Sharqiya",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 845,
+            "lookup_type_code": "TANKER_WUSTA",
+            "lookup_type_name": "Tanker Wusta",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 64,
+            "lookup_type_code": "VAT_PERCENTAGE",
+            "lookup_type_name": "VAT Percentage",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 541,
+            "lookup_type_code": "VEHICLE_CODE",
+            "lookup_type_name": "Vehicle Code",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 2820,
+            "lookup_type_code": "WS_TANKER_DAKHALIYA",
+            "lookup_type_name": "WS Tanker Dakhaliya",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 2840,
+            "lookup_type_code": "WS_TANKER_DHAHIRAH",
+            "lookup_type_name": "WS Tanker Dhahirah",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 2860,
+            "lookup_type_code": "WS_TANKER_MUSANDAM",
+            "lookup_type_name": "WS Tanker Musandam",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 2900,
+            "lookup_type_code": "WS_TANKER_NORTH_BATINAH",
+            "lookup_type_name": "WS Tanker North Batinah",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 2920,
+            "lookup_type_code": "WS_TANKER_NORTH_SHARQIYA",
+            "lookup_type_name": "WS Tanker North Sharqiya",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 2960,
+            "lookup_type_code": "WS_TANKER_SOUTH_SHARQIYA",
+            "lookup_type_name": "WS Tanker South Sharqiya",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 2980,
+            "lookup_type_code": "WS_TANKER_WUSTA",
+            "lookup_type_name": "WS Tanker Wusta",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 2880,
+            "lookup_type_code": "WS_TANKER_MUSCAT",
+            "lookup_type_name": "Ws Tanker Muscat",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 2946,
+            "lookup_type_code": "WS_TANKER_SOUTH_BATINAH",
+            "lookup_type_name": "Ws Tanker South Batinah",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        },
+        {
+            "lookup_type_id": 2301,
+            "lookup_type_code": "XXPMIS_CALENDAR_TYPE",
+            "lookup_type_name": "Xxpmis Calendar Type",
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        }
+    ],
+    "hasMore": false,
+    "limit": 250,
+    "offset": 0,
+    "count": 62,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol/lookup/type/lov/type/name"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol/metadata-catalog/lookup/type/lov/type/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol/lookup/type/lov/type/name"
+        }
+    ]
+}

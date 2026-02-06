@@ -1,0 +1,49 @@
+{
+    "items": [
+        {
+            "budget_cost_id": 1,
+            "project_id": 818,
+            "budget_year_id": 2025,
+            "calendar_name": null,
+            "project_name": "Urban Infrastructure Upgrade",
+            "year_prompt1": "2010-2015",
+            "year_value1": 100,
+            "year_prompt2": "2015-2020",
+            "year_value2": 0,
+            "year_prompt3": "2020-2025",
+            "year_value3": 0,
+            "year_prompt4": "2025-2030",
+            "year_value4": 0,
+            "year_prompt5": "2030-2035",
+            "year_value5": 0,
+            "year_prompt6": null,
+            "year_value6": null,
+            "year_prompt7": null,
+            "year_value7": null,
+            "additional_info": null,
+            "created_by": "VBCS USER",
+            "created_date": "2026-01-28T14:46:23.972Z",
+            "last_updated_by": "VBCS USER",
+            "last_updated_date": "2026-01-28T14:46:19.508Z",
+            "last_updated_login": "VBCS USER"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/masterplan/linebudgetcost/getbyid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/masterplan/linebudgetcost/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/masterplan/linebudgetcost/getbyid"
+        }
+    ]
+}

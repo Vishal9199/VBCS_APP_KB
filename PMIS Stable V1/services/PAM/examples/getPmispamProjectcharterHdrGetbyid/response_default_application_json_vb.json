@@ -1,0 +1,69 @@
+{
+    "items": [
+        {
+            "project_charter_id": 1293,
+            "object_version_num": 1,
+            "project_id": 1200,
+            "project_charter_name": "PROJ_TEST 001",
+            "project_category": "Opex PDD",
+            "ref_num": "PC-1",
+            "region_id": "6174",
+            "region_code": "MUS",
+            "region_name": "Musandam",
+            "related_sons": "Related SONS details",
+            "budget_number": "BUD-2025-001",
+            "principle_purpose": "Primary purpose of the project",
+            "other_purpose": "Secondary objectives if any",
+            "justification": "Business justification for the project",
+            "main_feature": "Key features of the project",
+            "oper_philosophy": "Operational philosophy description",
+            "capex_requirement": "CAPEX requirement details",
+            "location_pl": "Project location plan",
+            "service_req_obj": "Service requirement objectives",
+            "overview_project": "Overall project overview",
+            "project_owner": "Project Owner Name",
+            "execution_director": "Execution Director Name",
+            "design": "Design scope details",
+            "construction": "Construction scope details",
+            "testing_commissioning": "Testing & commissioning plan",
+            "design_date": "2026-02-01T00:00:00Z",
+            "construction_date": "2026-03-15T00:00:00Z",
+            "testing_commissioning_date": "2026-06-30T00:00:00Z",
+            "tender_award": "2026-01-20T00:00:00Z",
+            "estimated_capex_cost": 25000000,
+            "estimated_opex_cost": 5000000,
+            "procurement_assumption": "Procurement assumptions details",
+            "operating_principle": "Operating principle description",
+            "manager_status": "DRAFT",
+            "wf_item_type": "PROJECT_CHARTER",
+            "wf_item_key": "PC_TEMP_KEY",
+            "status_id": 26,
+            "status_code": "DRA",
+            "status_name": "Draft",
+            "additional_info": "Any additional information",
+            "created_by": "VISHAL",
+            "created_date": "2026-02-03T07:27:21Z",
+            "last_updated_by": "VISHAL",
+            "last_updated_date": "2026-02-03T07:27:21Z",
+            "last_updated_login": "WEB_PORTAL"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/projectcharter/hdr/getbyid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/projectcharter/hdr/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/projectcharter/hdr/getbyid"
+        }
+    ]
+}

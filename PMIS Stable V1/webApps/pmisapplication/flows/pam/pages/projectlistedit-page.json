@@ -1,0 +1,768 @@
+{
+  "title": "Project Details - Add/Edit",
+  "description": "Advanced Add/Edit page for NWS PMIS Master Plan with Budget Cost Details",
+  "imports": {
+    "components": {
+      "oj-button": {"path": "ojs/ojbutton"},
+      "oj-collapsible": {"path": "ojs/ojcollapsible"},
+      "oj-dialog": {"path": "ojs/ojdialog"},
+      "oj-form-layout": {"path": "ojs/ojformlayout"},
+      "oj-input-date": {"path": "ojs/ojdatetimepicker"},
+      "oj-input-number": {"path": "ojs/ojinputnumber"},
+      "oj-input-text": {"path": "ojs/ojinputtext"},
+      "oj-progress-bar": {
+        "path": "ojs/ojprogress-bar"
+      },
+      "oj-select-single": {"path": "ojs/ojselectsingle"},
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-sp-simple-create-edit": {"path": "oj-sp/simple-create-edit/loader"},
+      "oj-switch": {"path": "ojs/ojswitch"},
+      "oj-table": {"path": "ojs/ojtable"},
+      "oj-text-area": {"path": "ojs/ojinputtext"},
+      "oj-validation-group": {"path": "ojs/ojvalidationgroup"},
+      "oj-bind-text": {"path": "ojs/ojbindtext"},
+      "oj-bind-if": {"path": "ojs/ojbindif"},
+      "oj-bind-slot": {"path": "ojs/ojbinddom"}
+
+    },
+    "modules": {
+      "ojConverterNumber": {
+        "path": "ojs/ojconverter-number"
+      },
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      },
+      "ojValidationNumber": {
+        "path": "ojs/ojvalidation-number"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  },
+  "types": {
+    "@decorators.getPmisLovRegionNameResponse": {
+      "endpoint": "getPmisLovRegionName",
+      "service": "PmisSetup",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovMasterplanDepCalendarnameResponse": {
+      "endpoint": "getPmispamLovMasterplanDepCalendarname",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovMasterplanLocationResponse": {
+      "endpoint": "getPmispamLovMasterplanLocation",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovMasterplanProjectnameResponse": {
+      "endpoint": "getPmispamLovMasterplanProjectname",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovPmisprojectCategoryResponse": {
+      "endpoint": "getPmispamLovPmisprojectCategory",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovProjectCategoryResponse": {
+      "endpoint": "getPmispamLovProjectCategory",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovProjectTypeResponse": {
+      "endpoint": "getPmispamLovProjectType",
+      "service": "PAM",
+      "path": "response"
+    },
+    "getPmisLovRegionNameResponse": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispamLovMasterplanDepCalendarnameResponse": {
+      "items": [
+        {
+          "cal_hdr_id": "number",
+          "calendar_name": "string",
+          "calendar_type": "string",
+          "calendar_type_code": "string"
+        }
+      ]
+    },
+    "getPmispamLovMasterplanLocationResponse": {
+      "items": [
+        {
+          "dependent_lookup_value_code": "string",
+          "dependent_lookup_value_id": "number",
+          "dependent_lookup_value_name": "string",
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispamLovMasterplanProjectnameResponse": {
+      "items": [
+        {
+          "project_id": "number",
+          "project_long_name": "string",
+          "project_name": "string"
+        }
+      ]
+    },
+    "getPmispamLovPmisprojectCategoryResponse": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispamLovProjectCategoryResponse": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispamLovProjectTypeResponse": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "MasterPlanHeader": {
+      "project_id": "number",
+      "object_version_num": "number",
+      "mp_ref_id": "number",
+      "mp_ref_num": "string",
+      "mp_ref_plan_name": "string",
+      "project_type_id": "number",
+      "project_category_id": "number",
+      "project_name": "string",
+      "project_long_name": "string",
+      "region_id": "number",
+      "project_location_id": "number",
+      "category_id": "number",
+      "description": "string",
+      "five_year_prj_flag": "string",
+      "latest_est_budget_val": "number",
+      "scp_approved_budget_val": "number",
+      "active_flag": "string",
+      "inactive_date": "string",
+      "budget_year_id": "number",
+      "comments": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "BudgetCostLine": {
+      "budget_cost_id": "number",
+      "object_version_num": "number",
+      "project_id": "number",
+      "budget_year_id": "number",
+      "calendar_name": "string",
+      "year_prompt1": "string",
+      "year_value1": "number",
+      "year_prompt2": "string",
+      "year_value2": "number",
+      "year_prompt3": "string",
+      "year_value3": "number",
+      "year_prompt4": "string",
+      "year_value4": "number",
+      "year_prompt5": "string",
+      "year_value5": "number",
+      "year_prompt6": "string",
+      "year_value6": "number",
+      "year_prompt7": "string",
+      "year_value7": "number",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "CalendarYearRange": {
+      "year_id": "number",
+      "cal_hdr_id": "number",
+      "year_prompt": "string",
+      "year_start": "number",
+      "year_end": "number",
+      "display_sequence": "number",
+      "active_flag": "string"
+    },
+    "about": {
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    }
+  },
+  "variables": {
+    "aToolBar": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Save",
+          "id": "save",
+          "icon": "oj-ux-ico-save"
+        },
+        {
+          "label": "Save & Close",
+          "id": "saveClose",
+          "icon": "oj-ux-ico-save-and-close"
+        },
+        {
+          "label": "Attachment",
+          "id": "attachment",
+          "icon": "oj-ux-ico-attachment"
+        },
+        {
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ]
+    },
+    "enterType": {
+      "type": "string",
+      "defaultValue": "0",
+      "input": "fromCaller"
+    },
+    "formValidation": {
+      "type": "string"
+    },
+    "formValidation2": {
+      "type": "string"
+    },
+    "getPmisLovRegionNameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getPmisLovRegionNameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        },
+        "fetchChain": "getPmisLovRegionNameFetch"
+      }
+    },
+    "getPmispamLovMasterplanDepCalendarnameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "cal_hdr_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamLovMasterplanDepCalendarnameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "calendar_name"
+          ]
+        },
+        "fetchChain": "getPmispamLovMasterplanDepCalendarnameFetch"
+      }
+    },
+    "getPmispamLovMasterplanLocationListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamLovMasterplanLocationResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        },
+        "fetchChain": "getPmispamLovMasterplanLocationFetch"
+      }
+    },
+    "getPmispamLovMasterplanProjectnameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PAM/getPmispamLovMasterplanProjectname",
+        "keyAttributes": "project_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamLovMasterplanProjectnameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "project_name"
+          ]
+        }
+      }
+    },
+    "getPmispamLovPmisprojectCategoryListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamLovPmisprojectCategoryResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        },
+        "fetchChain": "getPmispamLovPmisprojectCategoryFetch"
+      }
+    },
+    "getPmispamLovProjectCategoryListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamLovProjectCategoryResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        },
+        "fetchChain": "getPmispamLovProjectCategoryFetch"
+      }
+    },
+    "getPmispamLovProjectTypeListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamLovProjectTypeResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        },
+        "fetchChain": "getPmispamLovProjectTypeFetch"
+      }
+    },
+    "inputProjectDtls": {
+      "type": {
+        "mpName": "string",
+        "mpRefId": "string",
+        "refNum": "string"
+
+      },
+      "required": false,
+      "input": "fromCaller"
+    },
+    "masterPlanHeaderVar": {
+      "type": "MasterPlanHeader",
+      "defaultValue": {
+        "object_version_num": 0,
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "created_by": "[[ $application.user.email ]]",
+        "active_flag": "N"
+      }
+    },
+    "budgetCostLineVar": {
+      "type": "BudgetCostLine",
+      "defaultValue": {
+        "year_value1": 0,
+        "year_value2": 0,
+        "year_value3": 0,
+        "year_value4": 0,
+        "year_value5": 0,
+        "year_value6": 0,
+        "year_value7": 0,
+        "created_by": "[[ $application.user.email ]]",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "last_updated_by": "[[ $application.user.email ]]",
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "object_version_num": 0
+      }
+    },
+    "ADPbudgetCostLines": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "BudgetCostLine",
+        "keyAttributes": "budget_cost_id"
+      }
+    },
+    "calendarYearRangesADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "CalendarYearRange",
+        "keyAttributes": "year_id",
+        "data": []
+      }
+    },
+    "activeYearFieldIndex": {
+      "type": "number",
+      "defaultValue": null
+    },
+    "budgetValidationMessage": {
+      "type": "string",
+      "defaultValue": ""
+    },
+    "editMode": {
+      "type": "string",
+      "defaultValue": "add"
+    },
+    "pNavCode": {
+      "type": "string",
+      "defaultValue": "CREATE",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "pNavId": {
+      "type": "string",
+      "defaultValue": "0",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "selectedBudgetLineIndex": {
+      "type": "number",
+      "defaultValue": -1
+    },
+    "showBudgetForm": {
+      "type": "string",
+      "defaultValue": "N"
+    },
+    "valueFromLov": {
+      "type": {
+        "regionCode": "string"
+      }
+    },
+    "searchObj": {
+    "type": {
+      "in_limit": "string",
+      "in_offset": "string",
+      "p_keyword": "string",
+      "p_budget_cost_id": "string",
+      "p_project_id": "string",
+      "p_budget_year": "string",
+      "p_budget_year_id": "string",
+      "p_created_by_user": "string"
+    },
+    "defaultValue": {
+      "in_limit": "10",
+      "in_offset": "0",
+      "p_keyword": "",
+      "p_budget_cost_id": "",
+      "p_project_id": "",
+      "p_budget_year": "",
+      "p_budget_year_id": "",
+      "p_created_by_user": ""
+    }
+  },
+  "about": {
+    "type": "about"
+  },
+    "budgetEntryTableADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "data": [
+          {
+            "row_id": "budget_row_1"
+          }
+        ],
+        "keyAttributes": "row_id"
+      },
+      "description": "Single row data provider for budget entry table"
+    },
+    "budgetEntryColumnsVar": {
+      "type": "object[]",
+      "description": "Dynamic column configuration - populated by buildBudgetColumnsAC action chain"
+    }
+  },
+  "metadata": {},
+  "eventListeners": {
+    "activeFlagValue": {
+      "chains": [
+        {
+          "chain": "SwitchValueChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "budgetCalendarValueItem": {
+      "chains": [
+        {
+          "chain": "budgetCalendarChangeAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "projectListEditPageSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "onCloseAction",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "projectListEditPageSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "secondary_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "regionNameValueItem": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "budgetCalendarChangeAction": {
+      "chains": [
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    },
+    "yearValue1ChangeAction": {
+      "chains": [
+        {
+          "chain": "yearValue1ChangeAction",
+          "parameters": {
+            "value": "{{ $event.detail.value }}",
+            "previousValue": "{{ $event.detail.previousValue }}"
+          }
+        }
+      ]
+    },
+    "yearValue2ChangeAction": {
+      "chains": [
+        {
+          "chain": "yearValue2ChangeAction",
+          "parameters": {
+            "value": "{{ $event.detail.value }}",
+            "previousValue": "{{ $event.detail.previousValue }}"
+          }
+        }
+      ]
+    },
+    "yearValue3ChangeAction": {
+      "chains": [
+        {
+          "chain": "yearValue3ChangeAction",
+          "parameters": {
+            "value": "{{ $event.detail.value }}",
+            "previousValue": "{{ $event.detail.previousValue }}"
+          }
+        }
+      ]
+    },
+    "yearValue4ChangeAction": {
+      "chains": [
+        {
+          "chain": "yearValue4ChangeAction",
+          "parameters": {
+            "value": "{{ $event.detail.value }}",
+            "previousValue": "{{ $event.detail.previousValue }}"
+          }
+        }
+      ]
+    },
+    "yearValue5ChangeAction": {
+      "chains": [
+        {
+          "chain": "yearValue5ChangeAction",
+          "parameters": {
+            "value": "{{ $event.detail.value }}",
+            "previousValue": "{{ $event.detail.previousValue }}"
+          }
+        }
+      ]
+    },
+    "yearValue6ChangeAction": {
+      "chains": [
+        {
+          "chain": "yearValue6ChangeAction",
+          "parameters": {
+            "value": "{{ $event.detail.value }}",
+            "previousValue": "{{ $event.detail.previousValue }}"
+          }
+        }
+      ]
+    },
+    "yearValue7ChangeAction": {
+      "chains": [
+        {
+          "chain": "yearValue7ChangeAction",
+          "parameters": {
+            "value": "{{ $event.detail.value }}",
+            "previousValue": "{{ $event.detail.previousValue }}"
+          }
+        }
+      ]
+    },
+    "budgetSaveAction": {
+      "chains": [
+        {
+          "chain": "budgetSaveAction",
+          "parameters": {}
+        }
+      ]
+    },
+    "budgetClearAction": {
+      "chains": [
+        {
+          "chain": "budgetClearAction",
+          "parameters": {}
+        }
+      ]
+    },
+    "budgetRefreshAction": {
+      "chains": [
+        {
+          "chain": "budgetRefreshAction",
+          "parameters": {}
+        }
+      ]
+    },
+    "budgetEditAction": {
+      "chains": [
+        {
+          "chain": "budgetEditAction",
+          "parameters": {
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "budgetDeleteAction": {
+      "chains": [
+        {
+          "chain": "budgetDeleteAction",
+          "parameters": {
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    }
+
+  },
+  "constants": {
+    "budgetTableColumnsVar": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "width": 100,
+          "template": "budget_actions_template",
+          "headerStyle": "white-space: nowrap; min-width: 100px;"
+        },
+        {
+          "headerText": "Calendar Name",
+          "field": "calendar_name",
+          "resizable": "enabled",
+          "width": 180,
+          "template": "calendar_name_template",
+          "headerStyle": "white-space: nowrap; min-width: 180px;"
+        },
+        {
+          "headerText": "Year Range",
+          "field": "",
+          "resizable": "enabled",
+          "width": 150,
+          "template": "active_year_range_template",
+          "headerStyle": "white-space: nowrap; min-width: 150px;"
+        },
+        {
+          "headerText": "Budget Amount",
+          "field": "",
+          "resizable": "enabled",
+          "width": 150,
+          "template": "active_year_value_template",
+          "headerStyle": "white-space: nowrap; min-width: 150px;"
+        },
+        {
+          "headerText": "Additional Info",
+          "field": "additional_info",
+          "resizable": "enabled",
+          "width": "",
+          "template": "additional_info_template",
+          "headerStyle": "white-space: nowrap; min-width: 200px;"
+        },
+        {
+          "headerText": "Created By",
+          "field": "created_by",
+          "resizable": "enabled",
+          "width": 140,
+          "template": "created_by_template",
+          "headerStyle": "white-space: nowrap; min-width: 140px;"
+        },
+        {
+          "headerText": "Creation Date",
+          "field": "created_date",
+          "resizable": "enabled",
+          "width": 150,
+          "template": "date_template",
+          "headerStyle": "white-space: nowrap; min-width: 150px;"
+        }
+      ],
+      "description": "[\n    {\n        \"headerText\": \"Actions\",\n        \"field\": \"\",\n        \"resizable\": \"enabled\",\n        \"width\": 100,\n        \"template\": \"budget_actions_template\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 100px;\"\n    },\n    {\n        \"headerText\": \"Calendar Name\",\n        \"field\": \"calendar_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 180,\n        \"template\": \"calendar_name_template\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\"\n    },\n    {\n        \"headerText\": \"Year Range\",\n        \"field\": \"\",\n        \"resizable\": \"enabled\",\n        \"width\": 150,\n        \"template\": \"active_year_range_template\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 150px;\"\n    },\n    {\n        \"headerText\": \"Budget Amount\",\n        \"field\": \"\",\n        \"resizable\": \"enabled\",\n        \"width\": 150,\n        \"template\": \"active_year_value_template\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 150px;\"\n    },\n    {\n        \"headerText\": \"Additional Info\",\n        \"field\": \"additional_info\",\n        \"resizable\": \"enabled\",\n        \"width\": \"\",\n        \"template\": \"additional_info_template\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 200px;\"\n    },\n    {\n        \"headerText\": \"Created By\",\n        \"field\": \"created_by\",\n        \"resizable\": \"enabled\",\n        \"width\": 140,\n        \"template\": \"created_by_template\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\"\n    },\n    {\n        \"headerText\": \"Creation Date\",\n        \"field\": \"created_date\",\n        \"resizable\": \"enabled\",\n        \"width\": 150,\n        \"template\": \"date_template\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 150px;\"\n    }\n]"
+    },
+    "stored_Appl_Code": {
+      "type": "string",
+      "defaultValue": "PROJECT_LIST_ADMIN"
+    }
+  }
+}

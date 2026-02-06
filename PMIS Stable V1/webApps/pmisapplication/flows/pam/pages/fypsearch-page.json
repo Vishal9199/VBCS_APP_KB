@@ -1,0 +1,611 @@
+{
+  "title": "Search Five Year Plan Details",
+  "description": "Smart Search page for NWS PMIS Five Year Plan Details with comprehensive filtering and search capabilities",
+  "variables": {
+    "ActiveFlag": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "data": [
+          {
+            "id": "Y",
+            "label": "Active"
+          },
+          {
+            "id": "N",
+            "label": "Inactive"
+          }
+        ],
+        "keyAttributes": "id"
+      }
+    },
+      "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "getPmispamFiveyearplandtlLovBudgetnumListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "budget_number",
+        "itemsPath": "items",
+        "responseType": "getPmispamFiveyearplandtlLovBudgetnumResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "budget_number"
+          ]
+        },
+        "fetchChain": "getPmispamFiveyearplandtlLovBudgetnumFetch"
+      }
+    },
+    "getPmispamFiveyearplandtlLovCategoryListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getPmispamLovProjectCategory",
+        "itemsPath": "items",
+        "keyAttributes": "lookup_value_id",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        },
+        "fetchChain": "getPmispamLovProjectCategoryFetch"
+      }
+    },
+    "getPmispamFiveyearplandtlLovFyplannameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "fy_plan_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamFiveyearplandtlLovFyplannameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "fy_plan_name"
+          ]
+        },
+        "fetchChain": "getPmispamFiveyearplandtlLovFyplannameFetch"
+      }
+    },
+    "getPmispamFiveyearplandtlLovProjectnameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "project_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamFiveyearplandtlLovProjectnameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "project_name"
+          ]
+        },
+        "fetchChain": "getPmispamFiveyearplandtlLovProjectnameFetch"
+      }
+    },
+    "getPmispamFiveyearplandtlLovRegionListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getPmisLovRegionName",
+        "itemsPath": "items",
+        "keyAttributes": "lookup_value_id",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        },
+        "fetchChain": "getPmisLovRegionNameFetch"
+      }
+    },
+    "hasPrev": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "pagination": {
+      "type": "object",
+      "defaultValue": {
+        "is_next": false,
+        "is_prev": true
+      }
+    },
+    "paginationDisplay": {
+      "type": "string",
+      "defaultValue": "0 - 0 of 0 items"
+    },
+    "totalRecords": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "currentPage": {
+      "type": "number",
+      "defaultValue": 1
+    },
+"searchContext": {
+    "type": "object",
+    "defaultValue": {
+      "$search": {
+        "filters": {
+          "FyPlanNameFilter": {
+            "label": "FY Plan Name",
+            "options": {
+              "optionsData": "[[ $page.variables.getPmispamFiveyearplandtlLovFyplannameListSDP ]]",
+              "optionsKeys": {
+                "label": "fy_plan_name",
+                "value": "fy_plan_id"
+              }
+            }
+          },
+          "RegionNameFilter": {
+            "label": "Region",
+            "options": {
+              "optionsData": "[[ $page.variables.getPmispamFiveyearplandtlLovRegionListSDP ]]",
+              "optionsKeys": {
+                "label": "lookup_value_name",
+                "value": "lookup_value_id"
+              }
+            }
+          },
+          "ProjectNameFilter": {
+            "label": "Project Name",
+            "options": {
+              "optionsData": "[[ $page.variables.getPmispamFiveyearplandtlLovProjectnameListSDP ]]",
+              "optionsKeys": {
+                "label": "project_name",
+                "value": "project_id"
+              }
+            }
+          },
+          "BudgetNumberFilter": {
+            "label": "Budget Number",
+            "options": {
+              "optionsData": "[[ $page.variables.getPmispamFiveyearplandtlLovBudgetnumListSDP ]]",
+              "optionsKeys": {
+                "label": "budget_number",
+                "value": "budget_number"
+              }
+            }
+          },
+          "CategoryFilter": {
+            "label": "Category Name",
+            "options": {
+              "optionsData": "[[ $page.variables.getPmispamFiveyearplandtlLovCategoryListSDP ]]",
+              "optionsKeys": {
+                "label": "lookup_value_name",
+                "value": "lookup_value_id"
+              }
+            }
+          },
+          "ActiveFlagFilter": {
+            "label": "Status",
+            "options": {
+              "optionsData": "[[ $page.variables.ActiveFlag ]]",
+              "optionsKeys": {
+                "label": "label",
+                "value": "id"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+
+      "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/fiveyearplansearchconfig.json' ]]"
+      }
+    },
+    "searchObj": {
+      "type": {
+        "in_limit": "string",
+        "in_offset": "string",
+        "p_category_id": "string",
+        "p_keyword": "string",
+        "p_fy_plan_id": "string",
+        "p_fy_plan_name": "string",
+        "p_english_project_name": "string",
+        "p_region_id": "string",
+        "p_region_name": "string",
+        "p_project_id": "string",
+        "p_project_name": "string",
+        "p_budget_number": "string",
+        "p_status": "string"
+
+      },
+      "defaultValue": {
+        "in_limit": "10",
+        "in_offset": "0",
+        "p_category_id": "",
+        "p_keyword": "",
+        "p_fy_plan_id": "",
+        "p_fy_plan_name": "",
+        "p_english_project_name": "",
+        "p_region_id": "",
+        "p_region_name": "",
+        "p_project_id": "",
+        "p_project_name": "",
+        "p_budget_number": "",
+        "p_status": ""
+      }
+    },
+    "fiveYearPlanADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "FiveYearPlanType",
+        "keyAttributes": "fy_plan_id"
+      }
+    },
+    "currentOffset": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "hasNext": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "totalCount": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "currentCount": {
+      "type": "number",
+      "defaultValue": 0
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getPmisLovRegionName": {
+      "endpoint": "getPmisLovRegionName",
+      "service": "PmisSetup",
+      "path": "response"
+    },
+    "@decorators.getPmispamFiveyearplandtlLovBudgetnumResponse": {
+      "endpoint": "getPmispamFiveyearplandtlLovBudgetnum",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamFiveyearplandtlLovCategoryResponse": {
+      "endpoint": "getPmispamFiveyearplandtlLovCategory",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamFiveyearplandtlLovFyplannameResponse": {
+      "endpoint": "getPmispamFiveyearplandtlLovFyplanname",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamFiveyearplandtlLovProjectnameResponse": {
+      "endpoint": "getPmispamFiveyearplandtlLovProjectname",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamFiveyearplandtlLovRegionResponse": {
+      "endpoint": "getPmispamFiveyearplandtlLovRegion",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovProjectCategory": {
+      "endpoint": "getPmispamLovProjectCategory",
+      "service": "PAM",
+      "path": "response"
+    },
+    "FiveYearPlanType": {
+      "fy_plan_id": "number",
+      "object_version_num": "number",
+      "fy_plan_name": "string",
+      "project_id": "number",
+      "project_name": "string",
+      "master_plan_name": "string",
+      "category": "string",
+      "region_name": "string",
+      "parent_project_id": "number",
+      "parent_project_name": "string",
+      "project_category_id": "string",
+      "project_category_code": "string",
+      "project_category": "string",
+      "fy_calendar_id": "number",
+      "fyp_calendar_name": "string",
+      "english_project_name": "string",
+      "arabic_project_name": "string",
+      "budget_number": "string",
+      "financial_status_id": "number",
+      "financial_status_code": "string",
+      "financial_status": "string",
+      "technical_status_id": "number",
+      "technical_status_code": "string",
+      "technical_status": "string",
+      "active_flag": "string",
+      "inactive_date": "string",
+      "design_schedule": "string",
+      "execution_schedule": "string",
+      "tendor_schedule": "string",
+      "operation_schedule": "string",
+      "req_budget_val": "number",
+      "est_buget_value": "number",
+      "scp_approved_value": "number",
+      "comments": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "getPmisLovRegionName": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispamFiveyearplandtlLovBudgetnumResponse": {
+      "items": [
+        {
+          "budget_number": "string"
+        }
+      ]
+    },
+    "getPmispamFiveyearplandtlLovCategoryResponse": {
+      "items": [
+        {
+          "lookup_type_code": "string",
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispamFiveyearplandtlLovFyplannameResponse": {
+      "items": [
+        {
+          "fy_plan_id": "number",
+          "fy_plan_name": "string"
+        }
+      ]
+    },
+    "getPmispamFiveyearplandtlLovProjectnameResponse": {
+      "items": [
+        {
+          "project_id": "number",
+          "project_name": "string"
+        }
+      ]
+    },
+    "getPmispamFiveyearplandtlLovRegionResponse": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispamLovProjectCategory": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    }
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      }
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-search.css"
+    ]
+  },
+  "constants": {
+    "columnsVar": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "frozenEdge": "start",
+          "resizable": "disabled",
+          "sortable": "disabled",
+          "width": 100,
+          "template": "actions",
+          "headerStyle": "white-space: nowrap; min-width: 100px;",
+          "style": ""
+        },
+        {
+          "headerText": "FY Plan Name",
+          "field": "fy_plan_name",
+          "frozenEdge": "start",
+          "resizable": "enabled",
+          "width": 180,
+          "template": "edit_link",
+          "headerStyle": "white-space: nowrap; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "English Project Name",
+          "field": "english_project_name",
+          "resizable": "enabled",
+          "width": 220,
+          "template": "english_project_name",
+          "headerStyle": "white-space: nowrap; min-width: 220px;",
+          "style": ""
+        },
+        {
+          "headerText": "Region Name",
+          "field": "region_name",
+          "resizable": "enabled",
+          "width": 150,
+          "template": "region_name",
+          "headerStyle": "white-space: nowrap; min-width: 150px;",
+          "style": ""
+        },
+        {
+          "headerText": "Project Name",
+          "field": "project_name",
+          "resizable": "enabled",
+          "width": 180,
+          "template": "project_name",
+          "headerStyle": "white-space: nowrap; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Budget Number",
+          "field": "budget_number",
+          "resizable": "enabled",
+          "width": 160,
+          "template": "budget_number",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": ""
+        },
+        {
+          "headerText": "FYP Calendar Name",
+          "field": "fyp_calendar_name",
+          "resizable": "enabled",
+          "width": 180,
+          "template": "fyp_calendar_name",
+          "headerStyle": "white-space: nowrap; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Financial Status",
+          "field": "financial_status",
+          "resizable": "enabled",
+          "width": 160,
+          "template": "financial_status",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": ""
+        },
+        {
+          "headerText": "Technical Status",
+          "field": "technical_status",
+          "resizable": "enabled",
+          "width": 160,
+          "template": "technical_status",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": ""
+        }
+      ]
+    }
+  },
+  "eventListeners": {
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "ButtonActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "createBtnAction": {
+      "chains": [
+        {
+          "chain": "onClickCreateNav",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "nextBtnAction": {
+      "chains": [
+        {
+          "chain": "onHasNext",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "prevBtnAction": {
+      "chains": [
+        {
+          "chain": "onHasPrev",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "onClickreset",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+
+  }
+}

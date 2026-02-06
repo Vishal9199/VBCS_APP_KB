@@ -1,0 +1,37 @@
+{
+    "items": [
+        {
+            "fy_budget_cost_id": 1450,
+            "object_version_num": 1,
+            "fy_plan_id": 1445,
+            "fy_plan_name": "Five - year plan Feb-4-1",
+            "fy_calendar_id": 1296,
+            "fyp_calendar_name": "Five Year Plan - 2021",
+            "year_value1": 125000,
+            "year_value2": 150000,
+            "year_value3": 175000,
+            "year_value4": 200000,
+            "year_value5": 225000,
+            "additional_info": "Budget allocation for infrastructure expansion under five-year plan.",
+            "created_by": "PMIS_ADMIN",
+            "created_date": "2026-02-04T13:44:49Z",
+            "last_updated_by": "PMIS_ADMIN",
+            "last_updated_date": "2026-02-04T13:44:49Z",
+            "last_updated_login": "PMIS_ADMIN"
+        }
+    ],
+    "hasMore": false,
+    "limit": 0,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/fiveyearplandtl/budgetcost/getbyhdrid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/fiveyearplandtl/budgetcost/item"
+        }
+    ]
+}

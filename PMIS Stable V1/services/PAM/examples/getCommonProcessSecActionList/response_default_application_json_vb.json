@@ -1,0 +1,45 @@
+{
+    "items": [
+        {
+            "approval_instance_num": null,
+            "action_id": 6281,
+            "appr_request_id": 1080,
+            "transaction_id": 273,
+            "version_number": 1,
+            "transaction_num": "273",
+            "approval_category_code": "APPROVER",
+            "requester_user_id": "100000005219102",
+            "requester_email_id": "muna.maawali@testowwsc.nama.om",
+            "approver_user_id": "100000005249893",
+            "approver_email_id": "bilal.balushi@testowwsc.nama.om",
+            "approver_level": 2,
+            "status_code": "O",
+            "created_by": "muna.maawali@testowwsc.nama.om",
+            "creation_date": "2026-01-10T09:28:58.607777Z",
+            "last_updated_by": "issa.shaibani@testowwsc.nama.om",
+            "last_update_date": "2026-01-11T15:28:59Z",
+            "last_update_login": "issa.shaibani@testowwsc.nama.om",
+            "approval_role_code": "TEST_CASE",
+            "approval_role_name": "Test Case",
+            "approval_type": "APPROVAL"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/common/process/sec/action/list"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/common/process/sec/action/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/common/process/sec/action/list"
+        }
+    ]
+}

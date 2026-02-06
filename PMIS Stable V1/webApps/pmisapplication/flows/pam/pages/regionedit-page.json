@@ -1,0 +1,163 @@
+{
+  "title": "Region Management",
+  "description": "Add/Edit Region Details for PMIS Projects",
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-option": {
+        "path": "ojs/ojoption"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-progress-bar": {
+        "path": "ojs/ojprogress-bar"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  },
+  "types": {
+    "@decorators.getPmisRegionDtl": {
+      "endpoint": "getPmisRegionDtl",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "RegionHeader": {
+      "created_by": "string",
+      "creation_date": "string",
+      "last_update_date": "string",
+      "last_update_login": "string",
+      "last_updated_by": "string",
+      "person_id": "number",
+      "project_id": "number",
+      "project_number": "string",
+      "region_id": "number",
+      "region_name": "string",
+      "responsible_person": "string",
+      "tender_name": "string",
+      "tender_number": "string"
+    },
+    "AboutInfo": {
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    }
+
+  },
+  "variables": {
+    "pNavCode": {
+      "type": "string",
+      "defaultValue": "CREATE",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "pNavId": {
+      "type": "string",
+      "defaultValue": "0",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "regionHeaderVar": {
+      "type": "RegionHeader"
+    },
+    "about": {
+      "type": "AboutInfo"
+    },
+    "formValidVar": {
+      "type": "string"
+    },
+    "aToolGeneric": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Save",
+          "id": "save"
+        },
+        {
+          "label": "Save & Close",
+          "id": "saveClose"
+        },
+        {
+          "label": "About",
+          "id": "about"
+        }
+      ]
+    },
+    "regionId": {
+      "type": "string",
+      "input": "fromUrl"
+    }
+
+  },
+  "metadata": {},
+  "chains": {},
+  "eventListeners": {
+    "regionEditPageSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "closePageAction"
+        }
+      ]
+    },
+    "regionEditPageSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "secondaryActionListener",
+          "parameters": {
+            "actionId": "{{$event.detail.secondaryItem}}",
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    },
+    "ojSpAdvancedCreateEditPrimaryAction": {
+      "chains": [
+        {
+          "chain": "primaryActionListener"
+        }
+      ]
+    },
+    "ojSpAdvancedCreateEditSecondaryAction": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "secondaryActionListener"
+        }
+      ]
+    }
+
+  }
+}

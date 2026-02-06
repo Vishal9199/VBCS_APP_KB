@@ -1,0 +1,333 @@
+<style>
+
+  oj-option#service_spec_page_h_cancelAction
+  {
+    display: none !important;
+  }
+  #service-spec-name .oj-text-field-container,
+  #tender-name .oj-text-field-container,
+  #score-of-service .oj-text-field-container,
+  #expected-schedule .oj-text-field-container,
+  #project-introduction .oj-text-field-container,
+  #excepted-deliverables .oj-text-field-container,
+  #additional-information .oj-text-field-container
+  {
+    min-height: 6rem !important;
+  }
+  .oj-button-toggle.oj-default.oj-button-cta-chrome,
+  .oj-button-toggle.oj-focus-only.oj-button-cta-chrome,
+  .oj-button.oj-default.oj-button-cta-chrome .oj-button-button,
+  .oj-button.oj-focus-only.oj-button-cta-chrome .oj-button-button {
+    background-color: #ffffff !important;
+    border-color: var(--oj-button-call-to-action-chrome-border-color);
+    color: rgb(0 0 0);
+  }
+</style>
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div>
+        <oj-sp-advanced-create-edit id="service_spec_page" page-title="Service Specification" page-subtitle=" "
+          display-options.responsive-padding="on" primary-action.label="Close" display-mode="light"
+          on-sp-primary-action="[[$listeners.serviceSpecPageSpPrimaryAction]]"
+          on-sp-secondary-action="[[$listeners.serviceSpecPageSpSecondaryAction]]"
+          secondary-actions="[[ $variables.aToolGeneric ]]">
+
+          <div slot="main" style="padding-top: 0; margin-top: 0;">
+            <div style="margin-top: 0;">
+
+              <!-- Service Specification Form Section -->
+              <div style="padding: 0.5rem;" class="">
+                <oj-collapsible id="service-spec-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+                  style="margin-top: 0;" disabled="true">
+                  <span slot="header" style="font-weight: bold; color: white;">Service Specification Details</span>
+                  <oj-validation-group id="serviceSpecValidId" valid="{{ $variables.formValidation }}">
+                    <oj-form-layout max-columns="2" label-edge="start" label-width="40%" colspan-wrap="wrap"
+                      user-assistance-density="compact" class="oj-formlayout-full-width">
+
+                    <!-- Row 1: Spec Number, Spec Name -->
+                      <oj-input-text id="service-spec-num" label-hint="Service Specification Number"
+                        placeholder="Service Specification Number"
+                        value="{{ $variables.serviceSpecVar.service_spec_num }}" style="width: 21rem;" class=""
+                        disabled="true"></oj-input-text>
+                      <oj-input-text id="service-spec-status" label-hint="Status" placeholder="Draft"
+                        value="{{ $variables.serviceSpecVar.status_name }}" style="width: 21rem;" disabled="true"></oj-input-text>
+                      <oj-input-text id="budget-number" label-hint="Budget Number"
+                        value="{{ $variables.serviceSpecVar.budget_number }}" style="width: 21rem;" required="true"></oj-input-text>
+                      <oj-input-text id="tender-number" label-hint="Tender Number" placeholder="Tender Number"
+                        value="{{ $variables.serviceSpecVar.tender_number }}" style="width: 21rem;" required="true"></oj-input-text>
+                      <oj-text-area id="service-spec-name" label-hint="Service Specification Name"
+                        placeholder="Service Specification Name"
+                        value="{{ $variables.serviceSpecVar.service_spec_name }}" style="width: 21rem;" required="true"></oj-text-area>
+
+                    <!-- Row 2: Tender Number, Tender Name -->
+
+                    <!-- Row 3: Budget Number, Score of Service -->
+                      <oj-text-area id="score-of-service" label-hint="Score of Service" placeholder="Score of Service"
+                        value="{{ $variables.serviceSpecVar.score_of_service }}" style="width: 21rem;" required="true"></oj-text-area>
+
+                    <!-- Row 4: Project Introduction -->
+                      <oj-text-area id="project-introduction" label-hint="Project Introduction"
+                        placeholder="Project Introduction" value="{{ $variables.serviceSpecVar.project_introduction }}"
+                        style="width: 21rem;" rows="4" required="true"></oj-text-area>
+
+                    <!-- Row 5: Expected Schedule -->
+                      <oj-text-area id="expected-schedule" label-hint="Expected Schedule"
+                        placeholder="Expected Schedule" value="{{ $variables.serviceSpecVar.expected_schedule }}"
+                        style="width: 21rem;" rows="4" required="true"></oj-text-area>
+
+                    <!-- Row 6: Expected Deliverables -->
+                      <oj-text-area id="tender-name" label-hint="Tender Name" placeholder="Tender Name"
+                        value="{{ $variables.serviceSpecVar.tender_name }}" style="width: 21rem;" required="true"></oj-text-area>
+                      <oj-text-area id="excepted-deliverables" label-hint="Expected Deliverables"
+                        placeholder="Expected Deliverables"
+                        value="{{ $variables.serviceSpecVar.excepted_deliverables }}" style="width: 21rem;" rows="4"
+                        required="true"></oj-text-area>
+                    <!-- <oj-select-single id="budget-number" label-hint="Budget Number"
+                      value="{{ $variables.serviceSpecVar.budget_number }}" style="width: 21rem;">
+                    </oj-select-single> -->
+                      <oj-text-area label-hint="Additional Information" style="width: 21rem;"
+                        value="{{ $variables.serviceSpecVar.additional_info }}" id="additional-information"></oj-text-area>
+                    </oj-form-layout>
+                  </oj-validation-group>
+                </oj-collapsible>
+              </div>
+
+            </div>
+          </div>
+
+        </oj-sp-advanced-create-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+<oj-dialog id="loadingDialog" style="width: 300px; overflow: hidden;" cancel-behavior="none" drag-affordance="title-bar"
+  header-decoration="off" position.at.vertical="top" position.my.vertical="top">
+  <div slot="body" style="text-align: center; padding: 2rem;">
+    <oj-progress-circle value="-1"></oj-progress-circle>
+    <p style="margin-top: 1rem; font-weight: 500;">Loading Project List Data...</p>
+  </div>
+</oj-dialog>
+
+
+
+<!-- APPROVAL DIALOGS STARTS HERE -->
+
+<!-- Submit Popup -->
+<oj-dialog dialog-title="Submit" id="submitDialog" drag-affordance="title-bar" cancel-behavior="icon"
+  resize-behavior="resizable" position.at.vertical="top" position.my.vertical="top"
+  style="overflow: hidden; width: 414px;" header-decoration="off">
+
+  <div slot="footer" style="margin-top: -1rem;">
+    <oj-button id="BtnOk" style="margin-left:0.5%;margin-right:1.5%;" label="Ok"
+      on-oj-action="[[$listeners.btnOkAction2]]" class="" chroming="solid"></oj-button>
+    <oj-button id="BtnCancel" style="margin-left:0.5%;margin-right:1.5%;" label="Cancel" class=""
+      chroming="solid" on-oj-action="[[$listeners.btnCancelAction]]"></oj-button>
+  </div>
+  <p class="oj-p" slot="body" style="margin-top: 1rem; font-weight: bold;">Are you sure you want to submit the request?</p>
+</oj-dialog>
+
+<!-- Approval Popup -->
+<oj-dialog dialog-title="Approve" id="approveDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;" header-decoration="off">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-input-text label-hint="Comments" user-assistance-density="compact" placeholder="Comments" id="approveCmt"
+      required="true" value="{{ $flow.variables.responseComments }}"></oj-input-text>
+  </div>
+  <div slot="footer">
+    <oj-button id="appBtn" on-oj-action="[[$listeners.appBtnAction]]"
+      disabled="[[ !$flow.variables.responseComments ]]">Ok</oj-button>
+    <oj-button id="appCancel" on-oj-action="[[$listeners.appCancelAction]]">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Reject Popup -->
+<oj-dialog dialog-title="Reject" id="rejectDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;" header-decoration="off">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-validation-group valid="{{ $flow.variables.actionValidation.isRejectFormValid }}"
+      :id="[[ $flow.variables.actionValidation.rejectValidation ]]">
+      <oj-input-text label-hint="Comments" placeholder="Please Enter the Reason For Rejection." required="true"
+        id="rejectCmt" user-assistance-density="compact" value="{{ $flow.variables.responseComments }}">
+      </oj-input-text>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-validation-group>
+      <oj-button id="rejBtn" on-oj-action="[[$listeners.rejBtnAction]]"
+        disabled="[[ !$flow.variables.responseComments ]]">Ok</oj-button>
+      <oj-button id="rejCancel" on-oj-action="[[$listeners.rejCancelAction]]">Cancel</oj-button>
+    </oj-validation-group>
+  </div>
+</oj-dialog>
+
+<!-- Withdraw -->
+<oj-dialog dialog-title="Withdraw" id="withdrawDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-validation-group :id="[[ $flow.variables.actionValidation.withdrawValidation ]]"
+      valid="{{ $flow.variables.actionValidation.isWithdrawFormValid }}">
+      <oj-input-text label-hint="Comments" placeholder="Please Enter the Reason For Withdraw"
+        user-assistance-density="compact" required="true" value="{{ $flow.variables.responseComments }}">
+      </oj-input-text>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-validation-group>
+      <oj-button id="withdrawOk" on-oj-action="[[$listeners.withdrawOkAction]]"
+        disabled="[[ !$flow.variables.responseComments ]]">Ok</oj-button>
+      <oj-button id="withdrawcancel" on-oj-action="[[$listeners.withdrawcancelAction]]">Cancel</oj-button>
+    </oj-validation-group>
+  </div>
+</oj-dialog>
+
+<!-- Reassign -->
+<oj-dialog dialog-title="Reassign" id="ReassignDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;" drag-affordance="title-bar" header-decoration="off">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-validation-group :id="[[ $flow.variables.actionValidation.reassignValidation ]]"
+      valid="{{ $flow.variables.actionValidation.isReassignFormValid }}">
+      <oj-form-layout class="oj-formlayout-full-width" user-assistance-density="compact">
+        <oj-input-text label-hint="* Current Approver" style="width: 21rem; margin-bottom: 10px;"
+          value="{{ $application.user.username }}" disabled="true" class="oj-form-control-full-width oj-sm-12">
+        </oj-input-text>
+        <oj-select-single label-hint="Reassign To" item-text="full_name" required="true" id="reassignto"
+          value="{{ $flow.variables.updateActionObj.p_to_person_id }}" style="margin-bottom: 10px;"
+          data="[[ $flow.variables.getApprovalProcessEmployeeListListSDP ]]">
+          <template slot="collectionTemplate" data-oj-as="collection">
+            <oj-table scroll-policy="loadMoreOnScroll" horizontal-grid-visible="disabled" vertical-grid-visible="disabled"
+              selection-mode='{"row": "single"}' columns-default='{"resizable": "disabled","sortable": "disabled"}'
+              class="oj-select-results" columns='[{"headerText":"Reassign Approver","field":"full_name"}]'
+              on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]"
+              selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}">
+            </oj-table>
+          </template>
+        </oj-select-single>
+        <oj-input-text label-hint="Comments" placeholder="Please Enter Reassign Reason" required="true" id="reassignCmt"
+          value="{{ $flow.variables.responseComments }}">
+        </oj-input-text>
+      </oj-form-layout>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-validation-group>
+      <oj-button id="reassignOk" on-oj-action="[[$listeners.reassignOkAction]]"
+        disabled="[[ !$flow.variables.updateActionObj.p_to_person_id || !$flow.variables.responseComments ]]">Ok</oj-button>
+      <oj-button id="reassignCancel" on-oj-action="[[$listeners.reassignCancelAction]]">Cancel</oj-button>
+    </oj-validation-group>
+  </div>
+</oj-dialog>
+
+<!-- require more info -->
+<oj-dialog dialog-title="Employee More Information" id="moreinfoDialog" style="overflow: hidden; width: 510px;"
+  cancel-behavior="icon" position.at.vertical="top" position.my.vertical="top" header-decoration="off">
+  <div style="margin-top: 1rem;">
+    <oj-validation-group>
+      <!-- <oj-radioset label-hint="Require More Information" required="true" class="oj-sm-12"
+        value="{{ $flow.variables.updateActionObj.P_MORE_INFO_TYPE }}">
+        <oj-option value="RIM">Request Info from Employee</oj-option>
+        <oj-option value="RIA">Send Back & Restart Process</oj-option>
+      </oj-radioset> -->
+      <oj-radioset label-hint="Require More Information" required="true" class="oj-sm-12"
+        value="{{ $flow.variables.updateActionObj.p_more_info_type }}">
+        <oj-option value="MAINTAIN">Return to employee for corrections and resubmission to me</oj-option>
+        <oj-option value="RETURN">Return to employee for re-initiation</oj-option>
+      </oj-radioset>
+      <oj-text-area id="app-1" label-hint="Comments" placeholder="Please Enter More Information Comments"
+        style="width: 21rem; margin-bottom:6px;" required="true" class="oj-sm-12"
+        value="{{ $flow.variables.responseComments }}" user-assistance-density="compact">
+      </oj-text-area>
+    </oj-validation-group>
+    <br>
+    <oj-validation-group style="display:flex; justify-content:flex-end;">
+      <oj-button class="" chroming="outlined" id="moreinfoOk" on-oj-action="[[$listeners.moreinfoOkAction]]"
+        disabled="[[ !$flow.variables.updateActionObj.p_more_info_type || !$flow.variables.responseComments ]]">Ok
+      </oj-button>
+      <oj-button class="" chroming="outlined" id="moreinfoCancel"
+        on-oj-action="[[$listeners.moreinfoCancelAction]]">Cancel</oj-button>
+    </oj-validation-group>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="Approver More Information" id="rpaDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;" drag-affordance="title-bar">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-validation-group :id="[[ $flow.variables.actionValidation.rpaValidation ]]" valid="{{ $flow.variables.actionValidation.isRpaFormValid }}">
+      <oj-select-single label-hint="More Info. Approver" item-text="person_name" required="true" id="apprMoreInfo"
+        value="{{ $flow.variables.updateActionObj.p_to_person_id }}" style="margin-bottom: 5px;"
+        user-assistance-density="compact" data="[[$variables.getCommonPreviousApprovalListListSDP]]">
+        <template slot="collectionTemplate" data-oj-as="collection">
+          <oj-table scroll-policy="loadMoreOnScroll" horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+            columns-default='{"sortable":"disabled"}' class="oj-select-results"
+            columns='[{"headerText":"Level","field":"approver_level","resizable":"enabled","sortable":"disabled"},{"headerText":"Employee Number","field":"person_number","sortable":"disabled","resizable":"enabled"},{"headerText":"More Info. Approver","field":"person_name","resizable":"enabled","sortable":"disabled"}]'
+            on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]"
+            selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}" display="grid"
+            selection-mode.row="single"></oj-table>
+        </template>
+      </oj-select-single>
+    </oj-validation-group>
+    <oj-input-text label-hint="Approver Comments" user-assistance-density="compact" placeholder="Approver Comments"
+      id="rpaApproverCmt" required="true" value="{{ $flow.variables.responseComments }}">
+    </oj-input-text>
+  </div>
+  <div slot="footer">
+    <oj-button id="rpaAppBtn" disabled="[[ !$flow.variables.responseComments ]]" on-oj-action="[[$listeners.rpaAppBtnAction]]">Ok</oj-button>
+    <oj-button id="rpaCancel" on-oj-action="[[$listeners.rpaCancelAction]]">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+
+
+<!-- Approver Response Popup (RPA) -->
+<oj-dialog dialog-title="Approver Response" id="apprResponseDialog" cancel-behavior="icon" position.at.vertical="top"
+  position.my.vertical="top" style="overflow: hidden;">
+  <div slot="body" style="margin-top: 1rem;">
+    <oj-validation-group :id="[[ $flow.variables.actionValidation.rpaResponseValidation ]]" valid="{{ $flow.variables.actionValidation.isRpaResponseFormValid }}">
+      <oj-input-text label-hint="Comments" user-assistance-density="compact" placeholder="Comments" id="apprResponseCmt"
+        required="true" value="{{ $flow.variables.responseComments }}">
+      </oj-input-text>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-button id="apprResponseBtn"
+      disabled="[[ !$flow.variables.responseComments ]]" on-oj-action="[[$listeners.apprResponseBtnAction]]">Ok</oj-button>
+    <oj-button id="appResponseCancel" on-oj-action="[[$listeners.appCancelAction]]">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+
+<oj-dialog dialog-title="About" id="aboutDialog" cancel-behavior="icon" style="width: 400px; overflow: hidden;"
+  resize-behavior="resizable" position.my.vertical="top" position.at.vertical="top" drag-affordance="title-bar"
+  header-decoration="off">
+  <div slot="body">
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-sm-12 oj-md-12">
+        <oj-form-layout label-edge='start' columns="1" style="margin-top:23px;margin-left:-20px"
+          user-assistance-density="compact" direction="column" class="oj-formlayout-full-width"
+          label-width="45%">
+          <oj-input-text label-hint="Created By:" style="margin-bottom: -6px;" value="{{ $variables.about.created_by }}"
+            readonly="true" user-assistance-density="compact">
+          </oj-input-text>
+          <oj-input-text label-hint="Created Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.created_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated By:" style="margin-bottom: -6px;"
+            value="{{ $variables.about.last_updated_by }}" readonly="true" user-assistance-density="compact"></oj-input-text>
+          <oj-input-text label-hint="Created Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.last_updated_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated Login:" value="{{ $variables.about.last_updated_login }}" style="margin-bottom: -6px;"
+            readonly="true" user-assistance-density="compact">
+          </oj-input-text>
+        </oj-form-layout>
+      </div>
+    </div>
+  </div>
+  <div slot="footer">
+    <oj-button id="aboutButtonCancel_AC" label="Ok"
+      chroming="outlined" style="margin-top:-20px !important;" on-oj-action="[[$listeners.aboutButtonCancelACAction]]"></oj-button>
+  </div>
+</oj-dialog>

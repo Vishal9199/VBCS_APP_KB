@@ -1,0 +1,40 @@
+define([
+  'vb/action/actionChain',
+  'vb/action/actions',
+  'vb/action/actionUtils',
+], (
+  ActionChain,
+  Actions,
+  ActionUtils
+) => {
+  'use strict';
+
+  class vbBeforeExitListener extends ActionChain {
+
+    /**
+     * @param {Object} context
+     * @param {Object} params
+     * @param {any} params.event
+     * @return {{cancelled:boolean}} 
+     */
+    async run(context, { event }) {
+      const { $page, $flow, $application, $constants, $variables } = context;
+
+      
+      // Navigation from this page can be canceled by returning an object with the property cancelled set to true. This is useful when the page state is dirty and navigation should not be allowed before saving.
+
+
+      if (event.dirtyDataStatus === 'dirty') {
+
+        const unsavedChangesDialogOpen = await Actions.callComponentMethod(context, {
+          selector: '#unsavedChangesDialog',
+          method: 'open',
+        });
+        
+      }
+      return { cancelled: event.dirtyDataStatus === 'dirty' };
+    }
+  }
+
+  return vbBeforeExitListener;
+});

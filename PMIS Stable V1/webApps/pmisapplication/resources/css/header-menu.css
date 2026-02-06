@@ -1,0 +1,156 @@
+/**
+ * To theme your application, just override the variable values you want to change. To find which variables can be changed,
+ * see the JET documentation at https://www.oracle.com/webfolder/technetwork/jet/jsdocs/CssVariablesOverview.html
+ * In general, we recommend using the Stable theme, as it reduces the chances of being impacted by changes over time.
+ */
+
+:root {
+  /* --oj-html-font-family:  -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif; */
+  /* --oj-html-font-size:   1em; */
+}
+
+/* Main drawer container */
+
+#menuBtn .oj-button-text{
+  padding: 0px !important;
+}
+/* Navigation list */
+.oj-navigationlist {
+  /* padding: 35px 0; */
+}
+
+/* Navigation items 
+.oj-navigationlist-item-element:active {
+    background-color: #f1f5f9;
+    color: #fff !important;
+} */
+
+/* selected border */
+.oj-navigationlist-item.oj-selected {
+  border-color: transparent;
+}
+
+.oj-navigationlist-item-element.oj-expanded>.oj-navigationlist-group-item {
+  border-left: 2px solid transparent;
+}
+
+
+/* Navigation content */
+.oj-navigationlist-item-content {
+  padding: 12px 16px !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 8px !important;
+  transition: all 0.2s ease !important;
+  text-decoration: none !important;
+}
+
+
+
+/* Navigation text -- Parent text color*/
+.oj-navigationlist-item-label {
+  color: #084c4c !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  transition: color 0.2s ease !important;
+}
+
+.oj-navigationlist-item.oj-selected{
+  background-color: transparent !important;
+}
+
+/* menu label */
+.oj-navigationlist-item:hover {
+  background-color: transparent !important;
+}
+.oj-navigationlist-item-element{
+ min-height: 0px !important;
+ 
+}
+.oj-listview-current-item{
+  background-color: transparent !important;
+
+}
+.oj-navigationlist-item a{
+  padding: 0px !important;
+}
+.oj-navigationlist-group-item.oj-navigationlist-item{
+   height: 25px !important;
+}
+
+/* .oj-navigationlist-item-element.oj-expanded .oj-navigationlist-item-label,
+.oj-navigationlist-item-element.oj-expanded .oj-component-icon {
+  color: #773C47 !important;
+} */
+
+
+/* Expand/Collapse icon ----icon color*/
+.oj-navigationlist-collapse-icon,.oj-navigationlist-expand-icon{
+  margin-right: 8px !important;
+  background-color: transparent !important;
+  color: #084c4c !important;
+
+}
+
+
+/* Group/nested items */
+.oj-navigationlist-group .oj-navigationlist-group-item {
+  /* background-color: #773C47 !important; */
+  margin: 4px 0 !important;
+  padding:0 25px 0 30px !important;
+}
+.oj-navigationlist-group .oj-navigationlist-item-element>a{
+    padding: 0 30px !important;
+    height: 25px !important;
+}
+.oj-navigationlist-depth-2 {
+  height: 30px !important;
+}
+.oj-navigationlist-group .oj-navigationlist-item-element.oj-default {
+  background-color: transparent !important;
+}
+
+.oj-navigationlist-group .oj-navigationlist-item-element.oj-hover {
+  background-color: transparent !important;
+}
+
+.oj-navigationlist-group .oj-navigationlist-group-item:hover {
+  background-color: transparent !important;
+}
+
+/* sub menu items label and icon color */
+.oj-navigationlist-item-element .oj-navigationlist-group .oj-navigationlist-item-label {
+  color: #000 !important;
+  font-size: 14px !important;
+}
+
+.oj-navigationlist-item-element .oj-navigationlist-group .oj-component-icon {
+  color: #000 !important;
+}
+
+.oj-navigationlist-group .oj-navigationlist-group-item:hover .oj-navigationlist-item-label,
+.oj-navigationlist-group .oj-navigationlist-item-element:hover>a .oj-navigationlist-item-label {
+  color: #000 !important;
+}
+
+.oj-navigationlist-group .oj-navigationlist-group-item:hover .oj-component-icon {
+  color: #000 !important;
+}
+
+/* Remove complex animations and effects */
+.oj-navigationlist-item-content:after,
+.oj-navigationlist-item-label:before {
+  display: none !important;
+}
+
+/*Menu Selection Color -Start */
+.oj-navigationlist-depth-2.oj-selected{
+ background-color: #084c4c !important;
+
+}
+
+.oj-navigationlist-depth-2.oj-selected .oj-navigationlist-item-label{
+ color: #fff !important;
+}
+
+/*Menu Selection Color -End */

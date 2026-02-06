@@ -1,0 +1,337 @@
+{
+  "metadata": {},
+  "title": "PAM Schedule Details Add/Edit",
+  "description": "Add/Edit page for PAM Schedule Details with Schedule Information, Budget Information, and Schedule Dates sections",
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "oj-sp/simple-create-edit/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  },
+  "types": {
+    "@decorators.getPmispamConceptstudyLovConsultantResponse": {
+      "endpoint": "getPmispamConceptstudyLovConsultant",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamConceptstudyLovMilestoneResponse": {
+      "endpoint": "getPmispamConceptstudyLovMilestone",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamConceptstudyLovPhaseResponse": {
+      "endpoint": "getPmispamConceptstudyLovPhase",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamConceptstudyLovProjectnameResponse": {
+      "endpoint": "getPmispamConceptstudyLovProjectname",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamConceptstudyLovUserResponse": {
+      "endpoint": "getPmispamConceptstudyLovUser",
+      "service": "PAM",
+      "path": "response"
+    },
+    "getPmispamConceptstudyLovConsultantResponse": {
+      "items": [
+        {
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispamConceptstudyLovMilestoneResponse": {
+      "items": [
+        {
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispamConceptstudyLovPhaseResponse": {
+      "items": [
+        {
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispamConceptstudyLovProjectnameResponse": {
+      "items": [
+        {
+          "project_id": "number",
+          "project_name": "string"
+        }
+      ]
+    },
+    "getPmispamConceptstudyLovUserResponse": {
+      "items": [
+        {
+          "person_full_name": "string",
+          "person_number": "string",
+          "user_id": "number"
+        }
+      ]
+    },
+    "PAMScheduleDetail": {
+      "created_date": "string",
+      "cs_dtl_id": "number",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "object_version_num": "number",
+      "project_id": "number",
+      "phase_id": "number",
+      "milestone_id": "number",
+      "cs_senior_mgr_id": "number",
+      "cs_planning_mgr_id": "number",
+      "consultant_id": "number",
+      "budget_amount": "number",
+      "planned_start_date": "string",
+      "planned_end_date": "string",
+      "revised_start_date": "string",
+      "revised_end_date": "string",
+      "actual_start_date": "string",
+      "actual_end_date": "string",
+      "completion_percentage": "number",
+      "remarks": "string",
+      "created_by": "string",
+      "last_updated_by": "string"
+    },
+    "about": {
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    }
+  },
+  "variables": {
+    "about": {
+      "type": "about"
+    },
+    "aToolBar": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Save",
+          "id": "save",
+          "icon": "oj-ux-ico-save"
+        },
+        {
+          "label": "Save & Close",
+          "id": "saveClose",
+          "icon": "oj-ux-ico-save-and-close"
+        },
+        {
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ]
+    },
+    "editMode": {
+      "type": "string"
+    },
+    "formValidation": {
+      "type": "string"
+    },
+    "formValidation2": {
+      "type": "string"
+    },
+    "formValidation3": {
+      "type": "string"
+    },
+    "getPmispamConceptstudyLovConsultantListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamConceptstudyLovConsultantResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        },
+        "fetchChain": "getPmispamConceptstudyLovConsultantFetch"
+      }
+    },
+    "getPmispamConceptstudyLovMilestoneListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamConceptstudyLovMilestoneResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        },
+        "fetchChain": "getPmispamConceptstudyLovMilestoneFetch"
+      }
+    },
+    "getPmispamConceptstudyLovPhaseListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamConceptstudyLovPhaseResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        },
+        "fetchChain": "getPmispamConceptstudyLovPhaseFetch"
+      }
+    },
+    "getPmispamConceptstudyLovProjectnameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "project_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamConceptstudyLovProjectnameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "project_name"
+          ]
+        },
+        "fetchChain": "getPmispamConceptstudyLovProjectnameFetch"
+      }
+    },
+    "getPmispamConceptstudyLovUserListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "itemsPath": "items",
+        "responseType": "getPmispamConceptstudyLovUserResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "person_full_name"
+          ]
+        },
+        "keyAttributes": "user_id",
+        "fetchChain": "getPmispamConceptstudyLovUserFetch"
+      }
+    },
+    "pamScheduleDetailVar": {
+      "type": "PAMScheduleDetail",
+      "defaultValue": {
+        "created_by": "[[ $application.user.email ]]",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "last_updated_by": "[[ $application.user.email ]]",
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "object_version_num": 0,
+        "project_id": 0
+      }
+    },
+    "pNavCode": {
+      "type": "string",
+      "defaultValue": "CREATE",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "pNavId": {
+      "type": "string",
+      "defaultValue": "0",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "mode": {
+      "type": "string",
+      "defaultValue": "create"
+    }
+
+  },
+  "eventListeners": {
+    "scheduleeditpageidSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "closebuttonaction",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "scheduleeditpageidSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "secondary_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+
+  }
+}

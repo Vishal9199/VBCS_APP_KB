@@ -1,0 +1,29 @@
+{
+    "P_OUTPUT": [
+        {
+            "document_id": 7876,
+            "document_name": "FILE",
+            "document_category": "FILE",
+            "document_type": "FILE",
+            "description": "ADMIN FILE",
+            "appl_code": "SERVICE_SPECIFICATION",
+            "transaction_id": null,
+            "reference_id": null,
+            "title": "FILE",
+            "url": null,
+            "type": null,
+            "additional_info": null,
+            "created_by": "ADMIN",
+            "created_date": "2026-01-31T12:16:27Z",
+            "last_updated_by": "ADMIN",
+            "last_updated_date": "2026-01-31T12:16:27Z",
+            "last_updated_login": "ADMIN",
+            "links": [
+                {
+                    "rel": "file",
+                    "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/attachment/7876/content"
+                }
+            ]
+        }
+    ]
+}

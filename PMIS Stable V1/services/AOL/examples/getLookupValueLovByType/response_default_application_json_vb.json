@@ -1,0 +1,226 @@
+{
+    "items": [
+        {
+            "lookup_type_id": 2900,
+            "lookup_type_code": "WS_TANKER_NORTH_BATINAH",
+            "lookup_type_name": "WS Tanker North Batinah",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        },
+        {
+            "lookup_type_id": 2920,
+            "lookup_type_code": "WS_TANKER_NORTH_SHARQIYA",
+            "lookup_type_name": "WS Tanker North Sharqiya",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        },
+        {
+            "lookup_type_id": 4660,
+            "lookup_type_code": "SUP_RENEW_ATT_HOTELS",
+            "lookup_type_name": "Sup Renew Att Hotels",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        },
+        {
+            "lookup_type_id": 4661,
+            "lookup_type_code": "SUP_RENEW_ATT_AGENT",
+            "lookup_type_name": "Sup Renew Att Agent",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        },
+        {
+            "lookup_type_id": 4681,
+            "lookup_type_code": "SUP_RENEW_ATT_OIA_ENTITIES",
+            "lookup_type_name": "Sup Renew Att OIA Entities",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        },
+        {
+            "lookup_type_id": 4700,
+            "lookup_type_code": "SUP_RENEW_ATT_GOVERNMENT",
+            "lookup_type_name": "Sup Renew Att Government",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        },
+        {
+            "lookup_type_id": 4720,
+            "lookup_type_code": "SUP_RENEW_ATT_FREELANCER",
+            "lookup_type_name": "Sup Renew Att Freelancer",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        },
+        {
+            "lookup_type_id": 4760,
+            "lookup_type_code": "SUP_RENEW_ATT_OTHERS",
+            "lookup_type_name": "Sup Renewal Att Others",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        },
+        {
+            "lookup_type_id": 5891,
+            "lookup_type_code": "CIC_INVOICE_STATUS",
+            "lookup_type_name": "Cic Invoice Status",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        },
+        {
+            "lookup_type_id": 6145,
+            "lookup_type_code": "PMIS_001",
+            "lookup_type_name": "Pmis 001",
+            "dependent_lookup_type_code": "PAYMENT_STATUS",
+            "dependent_lookup_type_name": "Payment Status",
+            "dependent_lookup_type_id": 5915
+        },
+        {
+            "lookup_type_id": 5923,
+            "lookup_type_code": "SUPP_RENEWAL_SUPPLIER_TYPES",
+            "lookup_type_name": "Supp Renewal Supplier Types",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        },
+        {
+            "lookup_type_id": 41,
+            "lookup_type_code": "APPROVER_TYPE",
+            "lookup_type_name": "Approver Type",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        },
+        {
+            "lookup_type_id": 21,
+            "lookup_type_code": "EXCHANGE_RATE_TYPE",
+            "lookup_type_name": "Exchange Rate Type",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        },
+        {
+            "lookup_type_id": 321,
+            "lookup_type_code": "HOUSE_CONNECTION_AL_BATINAH_NORTH",
+            "lookup_type_name": "House Connection Al Batinah North",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        },
+        {
+            "lookup_type_id": 821,
+            "lookup_type_code": "TANKER_MUSANDAM",
+            "lookup_type_name": "Tanker Musandam",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        },
+        {
+            "lookup_type_id": 841,
+            "lookup_type_code": "TANKER_SOUTH_SHARQIYA",
+            "lookup_type_name": "Tanker South Sharqiya",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        },
+        {
+            "lookup_type_id": 908,
+            "lookup_type_code": "TANKER_HEAD_OFFICE",
+            "lookup_type_name": "Tanker Head Office",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        },
+        {
+            "lookup_type_id": 954,
+            "lookup_type_code": "HOUSE_CONNECTION_HEAD_OFFICE",
+            "lookup_type_name": "House Connection Head Office",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        },
+        {
+            "lookup_type_id": 968,
+            "lookup_type_code": "HOUSE_CONNECTION_ASH_SHARQIYAH_NORTH",
+            "lookup_type_name": "House Connection Ash Sharqiyah North ",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        },
+        {
+            "lookup_type_id": 241,
+            "lookup_type_code": "TANKER_NORTH_BATINAH",
+            "lookup_type_name": "Tanker North Batinah",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        },
+        {
+            "lookup_type_id": 25,
+            "lookup_type_code": "STATUS",
+            "lookup_type_name": "Status",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        },
+        {
+            "lookup_type_id": 104,
+            "lookup_type_code": "DATA_RESTRICTION",
+            "lookup_type_name": "Data Restriction",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        },
+        {
+            "lookup_type_id": 541,
+            "lookup_type_code": "VEHICLE_CODE",
+            "lookup_type_name": "Vehicle Code",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        },
+        {
+            "lookup_type_id": 701,
+            "lookup_type_code": "TANKER_MUSCAT",
+            "lookup_type_name": "Tanker Muscat",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        },
+        {
+            "lookup_type_id": 910,
+            "lookup_type_code": "HOUSE_CONNECTION_NORTH_BATINA",
+            "lookup_type_name": "House Connection North Batina",
+            "dependent_lookup_type_code": null,
+            "dependent_lookup_type_name": null,
+            "dependent_lookup_type_id": null
+        }
+    ],
+    "hasMore": true,
+    "limit": 25,
+    "offset": 0,
+    "count": 25,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol/lookup/pmis/lov/dependlookup"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol/metadata-catalog/lookup/pmis/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol/lookup/pmis/lov/dependlookup"
+        },
+        {
+            "rel": "next",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol/lookup/pmis/lov/dependlookup?offset=25"
+        }
+    ]
+}

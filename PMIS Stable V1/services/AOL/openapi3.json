@@ -1,0 +1,1078 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "ORDS",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "vb-catalog://backends/ORDS_AOL",
+            "description": "ORDS"
+        }
+    ],
+    "paths": {
+        "/lookup/type/search": {
+            "post": {
+                "operationId": "postLookupTypeSearch",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostLookupTypeSearchRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postLookupTypeSearch/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostLookupTypeSearchResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postLookupTypeSearch/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/lookup/type/process": {
+            "post": {
+                "operationId": "postLookupTypeProcess",
+                "parameters": [
+                    {
+                        "name": "X-cache-code",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "x-vb": {
+                            "defaultValue": "2nJlRzp6eCH4Rjsy/lSSPlxUmdO+NfNyYFkue7CWC+Y="
+                        }
+                    },
+                    {
+                        "name": "X-cache-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "x-vb": {
+                            "defaultValue": "aN65/2bP4WFqtZgsnqHceEwnXQ8qB/Lcdk87EOQ+zzY="
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostLookupTypeProcessRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postLookupTypeProcess/request_application_json_vb.json",
+                                    "summary": "Example stored by VB User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostLookupTypeProcessResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postLookupTypeProcess/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+               },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/lookup/value/search": {
+            "post": {
+                "operationId": "postLookupValueSearch",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostLookupValueSearchRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postLookupValueSearch/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostLookupValueSearchResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postLookupValueSearch/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/lookup/value/process": {
+            "post": {
+                "operationId": "postLookupValueProcess",
+                "parameters": [
+                    {
+                        "name": "X-cache-code",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "x-vb": {
+                            "defaultValue": "2nJlRzp6eCH4Rjsy/lSSPlxUmdO+NfNyYFkue7CWC+Y="
+                        }
+                    },
+                    {
+                        "name": "X-cache-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "x-vb": {
+                            "defaultValue": "aN65/2bP4WFqtZgsnqHceEwnXQ8qB/Lcdk87EOQ+zzY="
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostLookupValueProcessRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postLookupValueProcess/request_application_json_vb.json",
+                                    "summary": "Example stored by VB User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostLookupValueProcessResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postLookupValueProcess/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/lookup/type/lov/type/name": {
+            "get": {
+                "operationId": "getLookupTypeLovTypeName",
+                "parameters": [
+{
+                        "name": "search_var",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "p_lookup_prefix",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "x-vb": {
+                            "defaultValue": "pmis"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetLookupTypeLovTypeName"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getLookupTypeLovTypeName/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/lookup/type/lov/child/type/name": {
+            "get": {
+                "operationId": "getLookupTypeLovChildTypeName",
+                "parameters": [
+                    {
+                        "name": "search_var",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "p_lookup_type_code",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetLookupTypeLovChildTypeName"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getLookupTypeLovChildTypeName/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/application/lov/app/code": {
+            "get": {
+                "operationId": "getApplicationLovAppCode",
+                "parameters": [
+                    {
+                        "name": "search_var",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetApplicationLovAppCode"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getApplicationLovAppCode/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/application/lov/active/application": {
+            "get": {
+                "operationId": "getApplicationLovActiveApplication",
+                "parameters": [
+                    {
+                        "name": "search_var",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetApplicationLovActiveApplication"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getApplicationLovActiveApplication/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/lookup/pmis/lov/dependlookup": {
+            "get": {
+                "operationId": "getLookupValueLovByType",
+                "parameters": [
+{
+                        "name": "search_var",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "p_lookup_prefix",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetLookupPmisLovDependlookup"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getLookupValueLovByType/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/lookup/pmis/lov/depend/lookupvalue": {
+            "get": {
+                "operationId": "getLookupPmisLovDependLookupvalue",
+                "parameters": [
+                    {
+                        "name": "p_dependent_lookup_type_code",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "search_var",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetLookupPmisLovDependLookupvalue"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getLookupPmisLovDependLookupvalue/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PostLookupTypeSearchRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostLookupTypeSearchResponse": {
+                "type": "object",
+                "properties": {
+                    "OUT_COUNT": {
+                        "type": "integer"
+                    },
+                    "OUT_DESCRIPTION": {
+                        "type": "string"
+                    },
+                    "OUT_HAS_NEXT": {
+                        "type": "string"
+                    },
+                    "OUT_STATUS": {
+                        "type": "string"
+                    },
+                    "OUT_TOTAL_COUNT": {
+                        "type": "integer"
+                    },
+                    "P_OUTPUT": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "lookup_type_id": {
+                                    "type": "integer"
+                                },
+                                "object_version_num": {
+                                    "type": "integer"
+                                },
+                                "lookup_type_code": {
+                                    "type": "string"
+                                },
+                                "lookup_type_name": {
+                                    "type": "string"
+                                },
+                                "remarks": {
+                                    "type": "string"
+                                },
+                                "active_flag": {
+                                    "type": "string"
+                                },
+                                "effective_start_date": {
+                                    "type": "string"
+                                },
+                                "effective_end_date": {
+                                    "type": "string"
+                                },
+                                "application_id": {
+                                    "type": "integer"
+                                },
+                                "application_code": {
+                                    "type": "string"
+                                },
+                                "application_name": {
+                                    "type": "string"
+                                },
+                                "attribute_json": {
+                                    "type": "string"
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "created_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_updated_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_login": {
+                                    "type": "string"
+                                },
+                                "dependent_lookup_type_id": {
+                                    "nullable": true
+                                },
+                                "dependent_lookup_type_code": {
+                                    "nullable": true
+                                },
+                                "dependent_lookup_type_name": {
+                                    "nullable": true
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostLookupTypeProcessRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostLookupTypeProcessResponse": {
+                "type": "object",
+                "properties": {
+                    "P_ERR_CODE": {
+                        "type": "string"
+                    },
+                    "P_ERR_MSG": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostLookupValueSearchRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostLookupValueProcessRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostLookupValueProcessResponse": {
+                "type": "object",
+                "properties": {
+                    "P_ERR_CODE": {
+                        "type": "string"
+                    },
+                    "P_ERR_MSG": {
+                        "type": "string"
+                    }
+                }
+            },
+            "GetLookupTypeLovTypeName": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "lookup_type_id": {
+                                    "type": "integer"
+                                },
+                                "lookup_type_code": {
+                                    "type": "string"
+                                },
+                                "lookup_type_name": {
+                                    "type": "string"
+                                },
+                                "application_code": {
+                                    "type": "string"
+                                },
+                                "application_name": {
+                                    "type": "string"
+                                }
+
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostLookupValueSearchResponse": {
+                "type": "object",
+                "properties": {
+                    "OUT_COUNT": {
+                        "type": "integer"
+                    },
+                    "OUT_DESCRIPTION": {
+                        "type": "string"
+                    },
+                    "OUT_HAS_NEXT": {
+                        "type": "string"
+                    },
+                    "OUT_STATUS": {
+                        "type": "string"
+                    },
+                    "OUT_TOTAL_COUNT": {
+                        "type": "integer"
+                    },
+                    "P_OUTPUT": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "lookup_value_id": {
+                                    "type": "integer"
+                                },
+                                "object_version_num": {
+                                    "type": "integer"
+                                },
+                                "lookup_type_id": {
+                                    "type": "integer"
+                                },
+                                "lookup_type_code": {
+                                    "type": "string"
+                                },
+                                "lookup_type_name": {
+                                    "type": "string"
+                                },
+                                "lookup_value_code": {
+                                    "type": "string"
+                                },
+                                "lookup_value_name": {
+                                    "type": "string"
+                                },
+                                "remarks": {
+                                    "type": "string"
+                                },
+                                "child_lookup_type_id": {
+                                    "nullable": true
+                                },
+                                "child_lookup_type_code": {
+
+                                    "nullable": true
+                                },
+                                "child_lookup_type_name": {
+
+                                    "nullable": true
+                                },
+                                "display_order": {
+                                    "type": "integer"
+                                },
+                                "active_flag": {
+                                    "type": "string"
+                                },
+                                "effective_start_date": {
+                                    "type": "string"
+                                },
+                                "effective_end_date": {
+                                    "type": "string"
+                                },
+                                "attribute_json": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "created_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_updated_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_login": {
+                                    "type": "string"
+                                },
+                                "dependent_lookup_type_id": {
+                                    "nullable": true
+                                },
+                                "dependent_lookup_value_id": {
+                                    "nullable": true
+                                },
+                                "dependent_lookup_type_code": {
+                                    "nullable": true
+                                },
+                                "dependent_lookup_type_name": {
+                                    "nullable": true
+                                },
+                                "dependent_lookup_value_code": {
+                                    "nullable": true
+                                },
+                                "dependent_lookup_value_name": {
+                                    "nullable": true
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetLookupTypeLovChildTypeName": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "lookup_type_id": {
+                                    "type": "integer"
+                                },
+                                "lookup_type_code": {
+                                    "type": "string"
+                                },
+                                "lookup_type_name": {
+                                    "type": "string"
+                                },
+                                "application_code": {
+                                    "type": "string"
+                                },
+                                "application_name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetApplicationLovAppCode": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "application_id": {
+                                    "type": "integer"
+                                },
+                                "application_code": {
+                                    "type": "string"
+                                },
+                                "application_name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetApplicationLovActiveApplication": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "application_id": {
+                                    "type": "integer"
+                                },
+                                "application_code": {
+                                    "type": "string"
+                                },
+                                "application_name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetLookupPmisLovDependlookupBytypeid": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "lookup_type_id": {
+                                    "type": "integer"
+                                },
+                                "lookup_type_code": {
+                                    "type": "string"
+                                },
+                                "lookup_type_name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetLookupPmisLovDependlookup": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "lookup_type_id": {
+                                    "type": "integer"
+                                },
+                                "lookup_type_code": {
+                                    "type": "string"
+                                },
+                                "lookup_type_name": {
+                                    "type": "string"
+                                },
+                                "dependent_lookup_type_code": {
+                                    "type": "string"
+                                },
+                                "dependent_lookup_type_name": {
+                                    "type": "string"
+                                },
+                                "dependent_lookup_type_id": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetLookupPmisLovDependLookupvalue": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "lookup_value_id": {
+                                    "type": "integer"
+                                },
+                                "lookup_value_code": {
+                                    "type": "string"
+                                },
+                                "lookup_value_name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

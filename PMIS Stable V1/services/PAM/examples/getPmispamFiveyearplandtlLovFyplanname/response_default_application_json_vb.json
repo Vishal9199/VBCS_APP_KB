@@ -1,0 +1,30 @@
+{
+    "items": [
+        {
+            "fy_plan_id": 1227,
+            "fy_plan_name": "3rd-5yearplan"
+        },
+        {
+            "fy_plan_id": 1,
+            "fy_plan_name": "1st-5yearplan"
+        },
+        {
+            "fy_plan_id": 2,
+            "fy_plan_name": "2nd-5yearplan"
+        }
+    ],
+    "hasMore": false,
+    "limit": 0,
+    "offset": 0,
+    "count": 3,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/fiveyearplandtl/lov/fyplanname"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/fiveyearplandtl/lov/item"
+        }
+    ]
+}

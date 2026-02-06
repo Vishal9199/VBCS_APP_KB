@@ -1,0 +1,490 @@
+{
+  "title": "Project Charter Smart Search",
+  "description": "Smart Search page for Project Charter with filters and pagination",
+  "variables": {
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "paginationDisplay": {
+      "type": "string",
+      "defaultValue": "0 - 0 of 0 items"
+    },
+    "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "ReferenceNumberFilter": {
+              "label": "Reference Number",
+              "options": {
+                "optionsData": "[[ $page.variables.getRefNumberLovListSDP ]]",
+                "optionsKeys": {
+                  "label": "lov_label",
+                  "value": "lov_value"
+                }
+              }
+            },
+            "RegionFilter": {
+              "label": "Region",
+              "options": {
+                "optionsData": "[[ $page.variables.getRegionLovListSDP ]]",
+                "optionsKeys": {
+                  "label": "lookup_value_name",
+                  "value": "lookup_value_id"
+                }
+              }
+            },
+            "ProjectNameFilter": {
+              "label": "Project Name",
+              "options": {
+                "optionsData": "[[ $page.variables.getProjectLovListSDP ]]",
+                "optionsKeys": {
+                  "label": "project_charter_name",
+                  "value": "project_id"
+                }
+              }
+            }
+          }
+        }
+      },
+      "description": "{\n    \"$search\": {\n        \"filters\": {\n            \"ReferenceNumberFilter\": {\n                \"label\": \"Reference Number\",\n                \"options\": {\n                    \"optionsData\": \"[[ $page.variables.getRefNumberLovListSDP ]]\",\n                    \"optionsKeys\": {\n                        \"label\": \"lov_label\",\n                        \"value\": \"lov_value\"\n                    }\n                }\n            },\n            \"RegionFilter\": {\n                \"label\": \"Region\",\n                \"options\": {\n                    \"optionsData\": \"[[ $page.variables.getRegionLovListSDP ]]\",\n                    \"optionsKeys\": {\n                        \"label\": \"lookup_value_name\",\n                        \"value\": \"lookup_value_id\"\n                    }\n                }\n            },\n            \"ProjectNameFilter\": {\n                \"label\": \"Project Name\",\n                \"options\": {\n                    \"optionsData\": \"[[ $page.variables.getProjectLovListSDP ]]\",\n                    \"optionsKeys\": {\n                        \"label\": \"project_charter_name\",\n                        \"value\": \"project_id\"\n                    }\n                }\n            },\n            \"StatusFilter\": {\n                \"label\": \"Status\",\n                \"options\": {\n                    \"optionsData\": \"[[ $page.variables.getStatusLovListSDP ]]\",\n                    \"optionsKeys\": {\n                        \"label\": \"status_name\",\n                        \"value\": \"status_id\"\n                    }\n                }\n            },\n            \"DateRangeFilter\": {\n                \"label\": \"Date Range\"\n            }\n        }\n    }\n}"
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/projectchartersearchconfig.json' ]]"
+      }
+    },
+    "searchObj": {
+      "type": {
+        "in_limit": "number",
+        "in_offset": "number",
+        "p_project_charter_id": "string",
+        "p_project_id": "string",
+        "p_project_charter_name": "string",
+        "p_project_category": "string",
+        "p_ref_num": "string",
+        "p_region_id": "string",
+        "p_region_code": "string",
+        "p_region_name": "string",
+        "p_budget_number": "string",
+        "p_project_owner": "string",
+        "p_execution_director": "string",
+        "p_status_id": "string",
+        "p_status_code": "string",
+        "p_from_date": "string",
+        "p_to_date": "string",
+        "p_keyword": "string",
+        "p_created_by": "string"
+      },
+      "defaultValue": {
+        "in_limit": 10,
+        "in_offset": 0,
+        "p_project_charter_id": "",
+        "p_project_id": "",
+        "p_project_charter_name": "",
+        "p_project_category": "",
+        "p_ref_num": "",
+        "p_region_id": "",
+        "p_region_code": "",
+        "p_region_name": "",
+        "p_budget_number": "",
+        "p_project_owner": "",
+        "p_execution_director": "",
+        "p_status_id": "",
+        "p_status_code": "",
+        "p_from_date": "",
+        "p_to_date": "",
+        "p_keyword": "",
+        "p_created_by": ""
+      }
+    },
+    "projectCharterADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "ProjectCharterType",
+        "keyAttributes": "project_charter_id"
+      }
+    },
+    "getRefNumberLovListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "itemsPath": "items",
+        "responseType": "getRefNumberLovResponse",
+        "fetchChain": "getRefNumberLovFetch",
+        "keyAttributes": "lov_value"
+      }
+    },
+    "getRegionLovListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getPmisLovRegionName",
+        "itemsPath": "items",
+        "keyAttributes": "lookup_value_id",
+        "fetchChain": "getPmisLovRegionNameFetch"
+
+      }
+    },
+    "getProjectLovListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getPmispamProjectcharterLovProjectname",
+        "itemsPath": "items",
+        "keyAttributes": "project_charter_name",
+        "fetchChain": "getPmispamProjectcharterLovProjectnameFetch"
+      }
+    },
+    "currentPage": {
+      "type": "number",
+      "defaultValue": 1
+    },
+    "totalRecords": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "hasNext": {
+      "type": "string",
+      "defaultValue": "N"
+    },
+    "pagination": {
+      "type": "object",
+      "defaultValue": {
+        "is_next": false,
+        "is_prev": true
+      }
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getPmisLovRegionName": {
+      "endpoint": "getPmisLovRegionName",
+      "service": "PmisSetup",
+      "path": "response"
+    },
+    "@decorators.getPmispamProjectcharterLovProjectname": {
+      "endpoint": "getPmispamProjectcharterLovProjectname",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getRefNumberLovResponse": {
+      "endpoint": "getRefNumberLov",
+      "service": "ProjectCharterService",
+      "path": "response"
+    },
+    "@decorators.getRegionLovResponse": {
+      "endpoint": "getRegionLov",
+      "service": "ProjectCharterService",
+      "path": "response"
+    },
+    "@decorators.getProjectLovResponse": {
+      "endpoint": "getProjectLov",
+      "service": "ProjectCharterService",
+      "path": "response"
+    },
+    "@decorators.getStatusLovResponse": {
+      "endpoint": "getStatusLov",
+      "service": "ProjectCharterService",
+      "path": "response"
+    },
+    "getPmisLovRegionName": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispamProjectcharterLovProjectname": {
+      "items": [
+        {
+          "project_charter_id": "number",
+          "project_charter_name": "string"
+        }
+      ]
+    },
+    "getRefNumberLovResponse": {
+      "items": [
+        {
+          "lov_label": "string",
+          "lov_value": "string"
+        }
+      ]
+    },
+    "getRegionLovResponse": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getProjectLovResponse": {
+      "items": [
+        {
+          "project_id": "number",
+          "project_charter_name": "string"
+        }
+      ]
+    },
+    "getStatusLovResponse": {
+      "items": [
+        {
+          "status_id": "number",
+          "status_name": "string"
+        }
+      ]
+    },
+    "ProjectCharterType": {
+      "project_charter_id": "number",
+      "object_version_num": "number",
+      "project_id": "number",
+      "project_charter_name": "string",
+      "project_category": "string",
+      "ref_num": "string",
+      "region_id": "string",
+      "region_code": "string",
+      "region_name": "string",
+      "related_sons": "string",
+      "budget_number": "string",
+      "principle_purpose": "string",
+      "other_purpose": "string",
+      "justification": "string",
+      "main_feature": "string",
+      "oper_philosophy": "string",
+      "capex_requirement": "string",
+      "location_pl": "string",
+      "service_req_obj": "string",
+      "overview_project": "string",
+      "project_owner": "string",
+      "execution_director": "string",
+      "design": "string",
+      "construction": "string",
+      "testing_commissioning": "string",
+      "design_date": "string",
+      "construction_date": "string",
+      "testing_commissioning_date": "string",
+      "tender_award": "string",
+      "estimated_capex_cost": "number",
+      "estimated_opex_cost": "number",
+      "procurement_assumption": "string",
+      "operating_principle": "string",
+      "manager_status": "string",
+      "wf_item_type": "string",
+      "wf_item_key": "string",
+      "status_id": "number",
+      "status_code": "string",
+      "status_name": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    }
+
+  },
+  "eventListeners": {
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "ButtonActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    },
+    "resetBtnAction": {
+    "chains": [
+      {
+        "chain": "resetSearchAction"
+      }
+    ]
+  },
+  "refreshBtnAction": {
+    "chains": [
+      {
+        "chain": "refreshSearchAction"
+      }
+    ]
+  },
+  "exportBtnAction": {
+    "chains": [
+      {
+        "chain": "exportToExcelAction"
+      }
+    ]
+  },
+  "createBtnAction": {
+    "chains": [
+      {
+        "chain": "createProjectCharterAction"
+      }
+    ]
+  },
+  "preBtnAction": {
+    "chains": [
+      {
+        "chain": "previousPageAction"
+      }
+    ]
+  },
+  "nxtBtnAction": {
+    "chains": [
+      {
+        "chain": "nextPageAction"
+      }
+    ]
+  }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      }
+
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-search.css"
+    ]
+  },
+  "constants": {
+    "columnsVar": {
+      "type": "object[]",
+      "description": "[\n    {\n        \"headerText\": \"Actions\",\n        \"field\": \"\",\n        \"resizable\": \"enabled\",\n        \"sortable\": \"disabled\",\n        \"frozenEdge\": \"start\",\n        \"width\": 100,\n        \"template\": \"actions\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 100px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Project Charter ID\",\n        \"field\": \"project_charter_id\",\n        \"resizable\": \"enabled\",\n        \"width\": 180,\n        \"sortable\": \"enabled\",\n        \"template\": \"project_charter_id\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Object Version\",\n        \"field\": \"object_version_num\",\n        \"resizable\": \"enabled\",\n        \"width\": 140,\n        \"template\": \"object_version_num\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Project ID\",\n        \"field\": \"project_id\",\n        \"resizable\": \"enabled\",\n        \"width\": 120,\n        \"template\": \"project_id\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 120px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Project Charter Name\",\n        \"field\": \"project_charter_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 200,\n        \"template\": \"project_charter_name\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 200px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Project Category\",\n        \"field\": \"project_category\",\n        \"resizable\": \"enabled\",\n        \"width\": 160,\n        \"template\": \"project_category\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Reference Number\",\n        \"field\": \"ref_num\",\n        \"resizable\": \"enabled\",\n        \"width\": 170,\n        \"template\": \"ref_num\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 170px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Region ID\",\n        \"field\": \"region_id\",\n        \"resizable\": \"enabled\",\n        \"width\": 120,\n        \"template\": \"region_id\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 120px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Region Code\",\n        \"field\": \"region_code\",\n        \"resizable\": \"enabled\",\n        \"width\": 140,\n        \"template\": \"region_code\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Region Name\",\n        \"field\": \"region_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 150,\n        \"template\": \"region_name\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 150px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Related SONs\",\n        \"field\": \"related_sons\",\n        \"resizable\": \"enabled\",\n        \"width\": 140,\n        \"template\": \"related_sons\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Budget Number\",\n        \"field\": \"budget_number\",\n        \"resizable\": \"enabled\",\n        \"width\": 150,\n        \"template\": \"budget_number\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 150px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Principle Purpose\",\n        \"field\": \"principle_purpose\",\n        \"resizable\": \"enabled\",\n        \"width\": 170,\n        \"template\": \"principle_purpose\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 170px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Other Purpose\",\n        \"field\": \"other_purpose\",\n        \"resizable\": \"enabled\",\n        \"width\": 150,\n        \"template\": \"other_purpose\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 150px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Justification\",\n        \"field\": \"justification\",\n        \"resizable\": \"enabled\",\n        \"width\": 140,\n        \"template\": \"justification\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Main Feature\",\n        \"field\": \"main_feature\",\n        \"resizable\": \"enabled\",\n        \"width\": 140,\n        \"template\": \"main_feature\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Operational Philosophy\",\n        \"field\": \"oper_philosophy\",\n        \"resizable\": \"enabled\",\n        \"width\": 200,\n        \"template\": \"oper_philosophy\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 200px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"CAPEX Requirement\",\n        \"field\": \"capex_requirement\",\n        \"resizable\": \"enabled\",\n        \"width\": 180,\n        \"template\": \"capex_requirement\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Location PL\",\n        \"field\": \"location_pl\",\n        \"resizable\": \"enabled\",\n        \"width\": 140,\n        \"template\": \"location_pl\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Service Request Objective\",\n        \"field\": \"service_req_obj\",\n        \"resizable\": \"enabled\",\n        \"width\": 220,\n        \"template\": \"service_req_obj\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 220px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Project Overview\",\n        \"field\": \"overview_project\",\n        \"resizable\": \"enabled\",\n        \"width\": 170,\n        \"template\": \"overview_project\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 170px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Project Owner\",\n        \"field\": \"project_owner\",\n        \"resizable\": \"enabled\",\n        \"width\": 150,\n        \"template\": \"project_owner\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 150px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Execution Director\",\n        \"field\": \"execution_director\",\n        \"resizable\": \"enabled\",\n        \"width\": 170,\n        \"template\": \"execution_director\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 170px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Design\",\n        \"field\": \"design\",\n        \"resizable\": \"enabled\",\n        \"width\": 120,\n        \"template\": \"design\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 120px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Construction\",\n        \"field\": \"construction\",\n        \"resizable\": \"enabled\",\n        \"width\": 140,\n        \"template\": \"construction\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Testing Commissioning\",\n        \"field\": \"testing_commissioning\",\n        \"resizable\": \"enabled\",\n        \"width\": 200,\n        \"template\": \"testing_commissioning\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 200px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Design Date\",\n        \"field\": \"design_date\",\n        \"resizable\": \"enabled\",\n        \"width\": 130,\n        \"template\": \"date\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 130px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Construction Date\",\n        \"field\": \"construction_date\",\n        \"resizable\": \"enabled\",\n        \"width\": 160,\n        \"template\": \"date\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Testing Commissioning Date\",\n        \"field\": \"testing_commissioning_date\",\n        \"resizable\": \"enabled\",\n        \"width\": 230,\n        \"template\": \"date\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 230px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Tender Award\",\n        \"field\": \"tender_award\",\n        \"resizable\": \"enabled\",\n        \"width\": 140,\n        \"template\": \"date\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Estimated CAPEX Cost\",\n        \"field\": \"estimated_capex_cost\",\n        \"resizable\": \"enabled\",\n        \"width\": 190,\n        \"template\": \"estimated_capex_cost\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 190px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Estimated OPEX Cost\",\n        \"field\": \"estimated_opex_cost\",\n        \"resizable\": \"enabled\",\n        \"width\": 180,\n        \"template\": \"estimated_opex_cost\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Procurement Assumption\",\n        \"field\": \"procurement_assumption\",\n        \"resizable\": \"enabled\",\n        \"width\": 210,\n        \"template\": \"procurement_assumption\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 210px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Operating Principle\",\n        \"field\": \"operating_principle\",\n        \"resizable\": \"enabled\",\n        \"width\": 180,\n        \"template\": \"operating_principle\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Manager Status\",\n        \"field\": \"manager_status\",\n        \"resizable\": \"enabled\",\n        \"width\": 150,\n        \"template\": \"manager_status\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 150px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"WF Item Type\",\n        \"field\": \"wf_item_type\",\n        \"resizable\": \"enabled\",\n        \"width\": 140,\n        \"template\": \"wf_item_type\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"WF Item Key\",\n        \"field\": \"wf_item_key\",\n        \"resizable\": \"enabled\",\n        \"width\": 130,\n        \"template\": \"wf_item_key\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 130px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Status ID\",\n        \"field\": \"status_id\",\n        \"resizable\": \"enabled\",\n        \"width\": 120,\n        \"template\": \"status_id\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 120px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Status Code\",\n        \"field\": \"status_code\",\n        \"resizable\": \"enabled\",\n        \"width\": 130,\n        \"template\": \"status_code\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 130px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Status Name\",\n        \"field\": \"status_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 140,\n        \"template\": \"badge\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Additional Info\",\n        \"field\": \"additional_info\",\n        \"resizable\": \"enabled\",\n        \"width\": 150,\n        \"template\": \"additional_info\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 150px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Created By\",\n        \"field\": \"created_by\",\n        \"resizable\": \"enabled\",\n        \"width\": 130,\n        \"template\": \"created_by\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 130px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Created Date\",\n        \"field\": \"created_date\",\n        \"resizable\": \"enabled\",\n        \"width\": 140,\n        \"template\": \"date\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Last Updated By\",\n        \"field\": \"last_updated_by\",\n        \"resizable\": \"enabled\",\n        \"width\": 160,\n        \"template\": \"last_updated_by\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Last Updated Date\",\n        \"field\": \"last_updated_date\",\n        \"resizable\": \"enabled\",\n        \"width\": 170,\n        \"template\": \"date\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 170px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Last Updated Login\",\n        \"field\": \"last_updated_login\",\n        \"resizable\": \"enabled\",\n        \"width\": \"\",\n        \"template\": \"last_updated_login\",\n        \"headerStyle\": \"white-space: nowrap;\",\n        \"style\": \"\"\n    }\n]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "sortable": "disabled",
+          "frozenEdge": "start",
+          "width": 100,
+          "template": "actions",
+          "headerStyle": "white-space: nowrap; min-width: 100px;",
+          "style": ""
+        },
+        {
+          "headerText": "Project Charter Name",
+          "field": "project_charter_name",
+          "resizable": "enabled",
+          "width": 200,
+          "template": "project_charter_name",
+          "headerStyle": "white-space: nowrap; min-width: 200px;",
+          "style": ""
+        },
+        {
+          "headerText": "Reference Number",
+          "field": "ref_num",
+          "resizable": "enabled",
+          "width": 170,
+          "template": "ref_num",
+          "headerStyle": "white-space: nowrap; min-width: 170px;",
+          "style": ""
+        },
+        {
+          "headerText": "Region Name",
+          "field": "region_name",
+          "resizable": "enabled",
+          "width": 150,
+          "template": "region_name",
+          "headerStyle": "white-space: nowrap; min-width: 150px;",
+          "style": ""
+        },
+        {
+          "headerText": "Related SONs",
+          "field": "related_sons",
+          "resizable": "enabled",
+          "width": "",
+          "template": "related_sons",
+          "headerStyle": "white-space: nowrap; min-width: 140px;",
+          "style": ""
+        },
+        {
+          "headerText": "Budget Number",
+          "field": "budget_number",
+          "resizable": "enabled",
+          "width": 200,
+          "template": "budget_number",
+          "headerStyle": "white-space: nowrap; min-width: 150px;",
+          "style": ""
+        },
+        {
+          "headerText": "Status Name",
+          "field": "status_name",
+          "resizable": "enabled",
+          "width": 140,
+          "template": "badge",
+          "headerStyle": "white-space: nowrap; min-width: 140px;",
+          "style": ""
+        }
+      ]
+    }
+  }
+}

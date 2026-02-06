@@ -1,0 +1,914 @@
+{
+  "metadata": {},
+  "title": "Project Charter Management",
+  "description": "Add/Edit Project Charter with Details, Risks, Costs, and Attachments for comprehensive project planning and tracking.",
+  "variables": {
+    "isCostOrRisk": {
+      "type": "string"
+    },
+    "isEstCreate": {
+      "type": "string",
+      "defaultValue": "Y"
+    },
+    "isRiskCreate": {
+      "type": "string",
+      "defaultValue": "Y"
+    },
+    "passKey": {
+      "type": "string"
+    },
+    "passPayload": {
+      "type": "string"
+    },
+    "projectCharterVar": {
+      "type": "ProjectCharter",
+      "defaultValue": {
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "object_version_num": 0,
+        "created_by": "[[ $application.user.email ]]",
+        "last_updated_by": "[[ $application.user.email ]]",
+        "last_updated_login": "[[ $application.user.email ]]"
+      }
+    },
+    "majorRiskVar": {
+      "type": "MajorRisk",
+      "defaultValue": {
+        "created_by": "[[ $application.user.email ]]",
+        "last_updated_by": "[[ $application.user.email ]]",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]"
+      }
+    },
+    "estimateCostVar": {
+      "type": "EstimateCost",
+      "defaultValue": {
+        "created_by": "[[ $application.user.email ]]",
+        "last_updated_by": "[[ $application.user.email ]]",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]"
+      }
+    },
+    "ADPmajorRisk": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "MajorRisk",
+        "keyAttributes": "major_risk_id"
+      }
+    },
+    "ADPestimateCost": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "EstimateCost",
+        "keyAttributes": "est_cost_id"
+      }
+    },
+    "selectedAttachmentTab": {
+      "type": "string",
+      "defaultValue": "location-plan-tab"
+    },
+    "editMode": {
+      "type": "string",
+      "defaultValue": "add"
+    },
+    "pNavCode": {
+      "type": "string",
+      "defaultValue": "CREATE",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "pNavId": {
+      "type": "string",
+      "defaultValue": "0",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "enterType": {
+      "type": "string"
+    },
+    "inputProjectDtls": {
+      "type": {
+        "refNum": "string",
+        "projectName": "string",
+        "projectId": "number"
+      }
+    },
+    "valueFromLov": {
+      "type": {
+        "regionCode": "string"
+      }
+    },
+    "estimateCostMode": {
+      "type": "string",
+      "defaultValue": "add"
+    },
+    "majorRiskMode": {
+      "type": "string",
+      "defaultValue": "add"
+    },
+    "getPmisLovRegionNameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PmisSetup/getPmisLovRegionName",
+        "responseType": "getPmisLovRegionName",
+        "itemsPath": "items",
+        "keyAttributes": "lookup_value_id"
+      }
+    },
+    "getPmispamLovProjectCharterLocationListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PAM/getPmispamLovProjectCharterLocationList",
+        "keyAttributes": "location_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamLovProjectCharterLocationListResponse",
+        "uriParams": {
+          "regionCode": "{{ $variables.valueFromLov.regionCode }}"
+        },
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "location_name"
+          ]
+        }
+      }
+    },
+    "getPmisLovProjectCharterStatusListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PAM/getPmisLovProjectCharterStatusList",
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getPmisLovProjectCharterStatusListResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "status_name"
+          ]
+        }
+      }
+    },
+    "projectCharterId": {
+      "type": "number"
+    },
+    "aToolGeneric": {
+      "type": "object[]"
+    },
+    "taskId": {
+      "type": "string",
+      "input": "fromUrl"
+    }
+
+  },
+  "types": {
+    "@decorators.getPmisLovRegionName": {
+      "endpoint": "getPmisLovRegionName",
+      "service": "PmisSetup",
+      "path": "response"
+    },
+    "getPmisLovRegionName": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "ProjectCharter": {
+      "project_charter_id": "number",
+      "object_version_num": "number",
+      "project_id": "number",
+      "project_charter_name": "string",
+      "project_category": "string",
+      "ref_num": "string",
+      "region_id": "number",
+      "region_code": "string",
+      "region_name": "string",
+      "related_sons": "string",
+      "budget_number": "string",
+      "principle_purpose": "string",
+      "other_purpose": "string",
+      "justification": "string",
+      "main_feature": "string",
+      "oper_philosophy": "string",
+      "capex_requirement": "string",
+      "location_pl": "string",
+      "service_req_obj": "string",
+      "overview_project": "string",
+      "project_owner": "string",
+      "execution_director": "string",
+      "design": "string",
+      "construction": "string",
+      "testing_commissioning": "string",
+      "design_date": "string",
+      "construction_date": "string",
+      "testing_commissioning_date": "string",
+      "tender_award": "string",
+      "estimated_capex_cost": "number",
+      "estimated_opex_cost": "number",
+      "procurement_assumption": "string",
+      "operating_principle": "string",
+      "manager_status": "string",
+      "wf_item_type": "string",
+      "wf_item_key": "string",
+      "status_id": "number",
+      "status_code": "string",
+      "status_name": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "MajorRisk": {
+      "major_risk_id": "number",
+      "object_version_num": "number",
+      "project_charter_id": "number",
+      "project_charter_name": "string",
+      "ref_num": "string",
+      "major_risk_title": "string",
+      "description": "string",
+      "impact": "string",
+      "mitigation": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "EstimateCost": {
+      "est_cost_id": "number",
+      "object_version_num": "number",
+      "project_charter_id": "number",
+      "project_charter_name": "string",
+      "est_capax_cost": "string",
+      "capax_unit": "string",
+      "est_opex_cost": "string",
+      "opex_unit": "string",
+      "ref_num": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "@decorators.getPmisLovRegionNameListResponse": {
+      "endpoint": "getPmisLovRegionNameList",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovProjectCharterLocationListResponse": {
+      "endpoint": "getPmispamLovProjectCharterLocationList",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmisLovProjectCharterStatusListResponse": {
+      "endpoint": "getPmisLovProjectCharterStatusList",
+      "service": "PAM",
+      "path": "response"
+    },
+    "getPmisLovRegionNameListResponse": {
+      "items": [
+        {
+          "lookup_value_id": "number",
+          "lookup_value_code": "string",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispamLovProjectCharterLocationListResponse": {
+      "items": [
+        {
+          "location_id": "number",
+          "location_code": "string",
+          "location_name": "string",
+          "region_code": "string"
+        }
+      ]
+    },
+    "getPmisLovProjectCharterStatusListResponse": {
+      "items": [
+        {
+          "lookup_value_id": "number",
+          "lookup_value_code": "string",
+          "status_name": "string"
+        }
+      ]
+    }
+
+  },
+  "eventListeners": {
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "onCancelDelete_Est_Dialog",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "onOkLine_DeleteAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "projectCharterEditPageSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "onPageCloseAction",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "projectCharterEditPageSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "secondaryActionHandler",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "regionValueItem": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    },
+    "estcostAddBtnAction": {
+      "chains": [
+        {
+          "chain": "openEstimateCostDialogChain"
+        }
+      ]
+    },
+    "estcostRefreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshEstimateCostChain"
+        }
+      ]
+    },
+    "estcostEditAction": {
+      "chains": [
+        {
+          "chain": "editEstimateCostChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "estcostDeleteAction": {
+      "chains": [
+        {
+          "chain": "onDeleteAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "estcostSaveCloseAction": {
+      "chains": [
+        {
+          "chain": "onEstimateCostLineSave",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "isSaveAndClose": "Y"
+          }
+        }
+      ]
+    },
+    "estcostSaveAddAnotherAction": {
+      "chains": [
+        {
+          "chain": "onEstimateCostLineSave",
+          "parameters": {
+            "isSaveAndClose": "N"
+          }
+        }
+      ]
+    },
+    "estcostCancelAction": {
+      "chains": [
+        {
+          "chain": "cancelEstimateCostDialogChain"
+        }
+      ]
+    },
+    "riskAddBtnAction": {
+      "chains": [
+        {
+          "chain": "openMajorRiskDialogChain"
+        }
+      ]
+    },
+    "riskRefreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshMajorRiskChain"
+        }
+      ]
+    },
+    "riskEditAction": {
+      "chains": [
+        {
+          "chain": "editMajorRiskChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "riskDeleteAction": {
+      "chains": [
+        {
+          "chain": "onDelete_Risk_Dialog",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "riskSaveCloseAction": {
+      "chains": [
+        {
+          "chain": "onMajorRiskLineSave",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "isSaveAndClose": "Y"
+          }
+        }
+      ]
+    },
+    "riskSaveAddAnotherAction": {
+      "chains": [
+        {
+          "chain": "onMajorRiskLineSave",
+          "parameters": {
+            "isSaveAndClose": "N"
+          }
+        }
+      ]
+    },
+    "riskCancelAction": {
+      "chains": [
+        {
+          "chain": "cancelMajorRiskDialogChain"
+        }
+      ]
+    },
+    "primaryActionAction": {
+      "chains": [
+        {
+          "chain": "saveAndCloseChain"
+        }
+      ]
+    },
+    "submitActionAction": {
+      "chains": [
+        {
+          "chain": "submitChain"
+        }
+      ]
+    },
+    "printActionAction": {
+      "chains": [
+        {
+          "chain": "printChain"
+        }
+      ]
+    },
+    "exportActionAction": {
+      "chains": [
+        {
+          "chain": "exportChain"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "oj-sp/simple-create-edit/loader"
+      },
+      "oj-switcher": {
+        "path": "ojs/ojswitcher"
+      },
+      "oj-tab-bar": {
+        "path": "ojs/ojnavigationlist"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-progress-bar-circular": {
+        "path": "ojs/ojprogressbar"
+      }
+
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  },
+  "chains": {},
+  "constants": {
+    "estCostColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "width": 80,
+          "template": "estcost_actions_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Est. CAPEX Cost",
+          "field": "est_capax_cost",
+          "sortable": "enabled",
+          "resizable": "enabled",
+          "width": 210,
+          "template": "estcost_capex_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+
+        },
+        {
+          "headerText": "CAPEX Unit",
+          "field": "capax_unit",
+          "sortable": "enabled",
+          "resizable": "enabled",
+          "width": 170,
+          "template": "estcost_capex_unit_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+
+        },
+        {
+          "headerText": "Est. OPEX Cost",
+          "field": "est_opex_cost",
+          "sortable": "enabled",
+          "resizable": "enabled",
+          "width": 210,
+          "template": "estcost_opex_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+
+        },
+        {
+          "headerText": "OPEX Unit",
+          "field": "opex_unit",
+          "sortable": "enabled",
+          "resizable": "enabled",
+          "width": 150,
+          "template": "estcost_opex_unit_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+
+        },
+        {
+          "headerText": "Additional Info",
+          "field": "additional_info",
+          "sortable": "enabled",
+          "resizable": "enabled",
+          "width": "",
+          "template": "estcost_info_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+
+        }
+      ]
+    },
+    "majorRisksColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "width": 80,
+          "template": "risk_actions_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Major Risk Title",
+          "field": "major_risk_title",
+          "sortable": "enabled",
+          "resizable": "enabled",
+          "width": 200,
+          "template": "risk_title_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+
+        },
+        {
+          "headerText": "Description",
+          "field": "description",
+          "sortable": "enabled",
+          "resizable": "enabled",
+          "width": 250,
+          "template": "risk_description_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+
+        },
+        {
+          "headerText": "Impact",
+          "field": "impact",
+          "sortable": "enabled",
+          "resizable": "enabled",
+          "width": 150,
+          "template": "risk_impact_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+
+        },
+        {
+          "headerText": "Mitigation",
+          "field": "mitigation",
+          "sortable": "enabled",
+          "resizable": "enabled",
+          "width": "",
+          "template": "risk_mitigation_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+
+        }
+      ]
+    },
+    "apprProcess": {
+      "type": "string",
+      "defaultValue": "PROJECT_CHARTER"
+    },
+    "stored_Appl_Code": {
+      "type": "string",
+      "defaultValue": "PROJECT_CHARTER"
+    },
+    "toolPending": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Approve",
+          "id": "approve",
+          "icon": "oj-ux-ico-check-circle"
+        },
+        {
+          "label": "Reject",
+          "id": "reject",
+          "icon": "oj-ux-ico-close-circle"
+        },
+        {
+          "id": "reassign",
+          "label": "Reassign",
+          "icon": "oj-ux-ico-assign-to-me"
+        },
+        {
+
+          "label": "Approver More Info",
+          "id": "apprMoreInfo",
+          "icon": "oj-ux-ico-app-info"
+        },
+        {
+
+          "id": "requireMoreInfo",
+          "label": "Employee More Information",
+          "icon": "oj-ux-ico-request-information"
+        },
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+        {
+          "label": "Attachment",
+          "id": "attachment",
+          "icon": "oj-ux-ico-attachment"
+        },
+{
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ],
+        "uniqueItems": true
+    },
+    "toolDraft": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Save",
+          "id": "save",
+          "icon": "oj-ux-ico-save"
+        },
+        {
+          "label": "Submit",
+          "id": "submit",
+          "icon": "oj-ux-ico-success"
+        },
+        {
+          "label": "Save & Close",
+          "id": "saveClose",
+          "icon": "oj-ux-ico-save-and-close"
+        },
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+{
+          "label": "Attachment",
+          "id": "attachment",
+          "icon": "oj-ux-ico-attachment"
+        },
+        {
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ],
+      "uniqueItems": true
+    },
+    "toolError": {
+      "defaultValue": [
+        {
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        },
+{
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        }
+      ],
+      "uniqueItems": true,
+      "type": "object[]"
+    },
+    "toolFinal": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+        {
+          "label": "Attachment",
+          "id": "attachment",
+          "icon": "oj-ux-ico-attachment"
+        },
+{
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ],
+      "uniqueItems": true,
+      "description": "{\n        \"label\": \"Export\",\n        \"id\": \"export\",\n        \"icon\": \"oj-ux-ico-acl-export\"\n    },"
+    },
+    "toolRPA": {
+      "defaultValue": [
+        {
+          "label": "Approver Response",
+          "id": "apprResponseMoreInfo",
+          "icon": "oj-ux-ico-app-info"
+        },
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+        {
+          "label": "Attachment",
+          "id": "attachment",
+          "icon": "oj-ux-ico-attachment"
+        },
+{
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ],
+      "type": "object[]",
+      "uniqueItems": true
+    },
+    "toolWithDraw": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "id": "withdraw",
+          "label": "Withdraw",
+          "icon": "oj-ux-ico-withdraw-request"
+        },
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+{
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ],
+      "uniqueItems": true,
+      "description": "{\n        \"label\": \"Export\",\n        \"id\": \"export\",\n        \"icon\": \"oj-ux-ico-acl-export\"\n    },"
+    }
+  }
+}

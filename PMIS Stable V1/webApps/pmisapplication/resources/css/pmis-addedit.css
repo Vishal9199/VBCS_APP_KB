@@ -1,0 +1,529 @@
+/**
+ * PMIS Calendar Add/Edit Page CSS with Calendar Theme Color: #084c4c
+ * Following working project structure and patterns
+ */
+
+:root {
+  --oj-form-layout-start-edge-label-to-value-padding: 0.4rem;
+  --oj-form-layout-top-edge-label-to-value-padding: 0rem;
+  --oj-text-field-height: 2.25rem;
+  --oj-button-height: 2.5rem;
+}
+
+/* oj-button#nextBtn, oj-button#prevBtn {
+    background-color: #084c4c;
+} */
+.oj-button.oj-hover.oj-button-outlined-chrome .oj-button-button,
+.oj-button-toggle.oj-hover.oj-button-outlined-chrome .oj-button-button {
+    background-color: #084c4c !important;  /* Use your theme's hover color */
+    border-color: #084c4c !important;
+    color: white !important;
+}
+
+/* Button Active/Hover Combo States */
+.oj-button.oj-hover.oj-active.oj-button-outlined-chrome .oj-button-button,
+.oj-button.oj-active.oj-button-outlined-chrome .oj-button-button {
+    background-color: #084c4c !important;  /* Darker active shade */
+    border-color: #084c4c !important;
+    color: white !important;
+}
+
+.oj-button.oj-default.oj-button-outlined-chrome .oj-button-button:hover,
+.oj-button.oj-focus-only.oj-button-outlined-chrome .oj-button-button:hover {
+    background-color: #084c4c !important;
+    border-color: white !important;
+    border-radius: 5px;
+    color: white !important; /* ✅ WHITE TEXT ON HOVER */
+}
+
+.oj-button-toggle.oj-default.oj-button-outlined-chrome:hover,
+.oj-button-toggle.oj-focus-only.oj-button-outlined-chrome:hover,
+.oj-button.oj-default.oj-button-outlined-chrome:hover .oj-button-button,
+.oj-button.oj-focus-only.oj-button-outlined-chrome:hover .oj-button-button {
+    background-color: #084c4c !important;
+    border-color: white !important;  /* ✅ WHITE BORDER ON HOVER */
+    border-radius: 5px;
+    color: white !important;         /* ✅ WHITE TEXT ON HOVER */
+}
+.oj-button-toggle.oj-hover.oj-default.oj-button-outlined-chrome,
+.oj-button-toggle.oj-hover.oj-focus-only.oj-button-outlined-chrome {
+    border-color: white !important;
+    border-radius: 5px;
+    background-color: #084c4c !important;
+}
+/* Collapsible Header Styling - Calendar Theme Color #084c4c */
+.oj-collapsible-header {
+  background-color: #084c4c !important;
+  border-bottom: 1px solid #084c4c !important;
+}
+
+span#nextBtn_oj21\|text {
+    color: white !important;
+}
+
+.oj-collapsible-open-icon:before {
+  color: white !important;
+}
+
+a.oj-component-icon.oj-clickable-icon-nocontext.oj-collapsible-header-icon.oj-collapsible-close-icon {
+  color: white !important;
+}
+
+.oj-collapsible-header-wrapper {
+  background-color: #084c4c !important;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+oj-sp-header-create-edit .oj-sp-header-create-edit-emo-button {
+  margin-inline-start: var(--oj-core-spacing-2x);
+  height: -webkit-fill-available;
+}
+
+/* Primary Button (Save & Close, Save) Styling */
+.oj-button.oj-default.oj-button-cta-chrome .oj-button-button,
+.oj-button.oj-hover.oj-button-cta-chrome .oj-button-button {
+  background-color: white !important;
+  color: black;
+}
+
+/* Hover styles for all CTA chrome buttons */
+.oj-button-cta-chrome:hover button {
+  background-color: #fff !important;
+  color: black !important;
+}
+
+.oj-button-cta-chrome:hover .oj-button-text {
+  color: #000 !important;
+}
+
+.oj-button-toggle.oj-disabled, .oj-button.oj-disabled .oj-button-button {
+  cursor: not-allowed;
+}
+
+/* #calendar_admin_page  */
+oj-sp-header-create-edit .oj-sp-header-create-edit-bg-light
+/* , */
+/* #region_edit_page oj-sp-header-create-edit .oj-sp-header-create-edit-bg-light,
+#lookup_addedit oj-sp-header-create-edit .oj-sp-header-create-edit-bg-light,
+#service_spec_page oj-sp-header-create-edit .oj-sp-header-create-edit-bg-light,
+#project_list_edit_page oj-sp-header-create-edit .oj-sp-header-create-edit-bg-light,
+#project_charter_edit_page oj-sp-header-create-edit .oj-sp-header-create-edit-bg-light,
+#attachment_flow_page oj-sp-header-create-edit .oj-sp-header-create-edit-bg-light */
+ {
+  background-color: #084c4c !important;
+}
+
+#oj_attachment oj-sp-header-create-edit .oj-sp-header-create-edit-bg-light {
+  background-color: #084c4c !important;
+}
+
+oj-sp-header-create-edit .oj-sp-header-create-edit-title-sm-up {
+  color: white !important;
+}
+
+oj-sp-header-create-edit .oj-sp-header-create-edit-header-strip {
+  background-image: none;
+}
+
+.BaseButtonStyles_styles_sizes_sm__jvi3ds2d {
+  border-color: white;
+  color: white !important;
+}
+
+.oj-button.oj-default.oj-button-half-chrome .oj-button-icon,
+.oj-button.oj-focus-only.oj-button-half-chrome .oj-button-icon {
+  font-size: 1.5rem !important;
+}
+
+.oj-button-menu-icon-only-dropdown-icon:before,
+.oj-fwk-icon-dots-horizontal:before,
+.oj-navigationlist-overflow-item-icon:before,
+.oj-tabbar-overflow-item-icon:before {
+  /* content: "\f136"; */
+  border-color: white !important;
+  color: white;
+}
+
+/* ========================================================================================================== */
+/* Table Styling - Start */
+/* ========================================================================================================== */
+
+.oj-table-column-header-cell {
+  color: white;
+  background-color: #084c4c;
+  font-weight: bold;
+  border-color: #ededed;
+}
+
+.oj-table-column-header {
+  font-size: initial;
+  position: relative;
+  float: none;
+  text-overflow: inherit;
+  overflow: inherit;
+  white-space: normal;
+  display: inline-flex;
+  align-items: center;
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.oj-table {
+  position: relative;
+  line-height: normal;
+  min-width: 240px;
+  min-height: auto;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.oj-table-body-row {
+  height: auto !important;
+  min-height: 0rem !important;
+  font-size: 12px;
+  font-weight: medium;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.oj-table .oj-table-data-cell {
+  height: 25px !important;
+  min-height: 25px !important;
+  padding: 2px 6px !important;
+  line-height: 18px !important;
+  font-size: 12px !important;
+}
+
+oj-table .oj-table-header-row {
+  height: 24px !important;
+  min-height: 24px !important;
+}
+
+.oj-table-grid-display .oj-table-header .oj-table-column-header-cell {
+  padding: 0 8px !important;
+  height: 10px !important;
+  line-height: 1 !important;
+  font-size: 13px !important;
+}
+
+/* Table Header Text Wrapping Prevention */
+.oj-table-column-header-cell * {
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+  font-size: 13px !important;
+}
+
+/* Table Row Hover Effect */
+.oj-table-data-row:hover {
+  background-color: rgba(8, 76, 76, 0.05);
+}
+
+/* Table Styling - End */
+
+
+/* ========================================================================================================== */
+/* Button Styling - Start */
+/* ========================================================================================================== */
+
+/* span#calendar_admin_page_h_primaryActionFromHeader_primaryActionCta_oj26\|text,
+span#region_edit_page_h_primaryActionFromHeader_primaryActionCta_oj26\|text,
+span#lookup_addedit_h_primaryActionFromHeader_primaryActionCta_oj26\|text,
+span#service_spec_page_h_primaryActionFromHeader_primaryActionCta_oj26\|text,
+span#project_list_edit_page_h_primaryActionFromHeader_primaryActionCta_oj26\|text,
+span#project_charter_edit_page_h_primaryActionFromHeader_primaryActionCta_oj26\|text,
+span#attachment_flow_page_h_primaryActionFromHeader_primaryActionCta_oj26\|text
+ {
+    color: black !important;
+} */
+
+/* Outlined Buttons */
+.oj-button-toggle.oj-default.oj-button-outlined-chrome, 
+.oj-button-toggle.oj-disabled.oj-button-outlined-chrome, 
+.oj-button-toggle.oj-focus-only.oj-button-outlined-chrome, 
+.oj-button.oj-default.oj-button-outlined-chrome .oj-button-button,
+.oj-button.oj-hover.oj-button-cta-chrome .oj-button-button,
+.oj-button.oj-default.oj-button-cta-chrome .oj-button-button,
+.oj-button.oj-disabled.oj-button-outlined-chrome .oj-button-button, 
+.oj-button.oj-focus-only.oj-button-outlined-chrome .oj-button-button {
+  border-color: white !important;
+  background-image: none;
+  background-color: #084c4c !important;
+  height: 2.25rem !important;
+  color: white !important;
+}
+
+.oj-button.oj-hover.oj-button-cta-chrome .oj-button-button,
+.oj-button.oj-default.oj-button-cta-chrome .oj-button-button {
+  background-color: white !important;
+  border-color: white !important;
+  color: black !important
+}
+
+/* Button Icons */
+.oj-ux-ico-plus:before {
+  content: '\f320';
+  color: white !important;
+}
+
+.oj-ux-ico-edit:before {
+  color: #000000 !important;
+}
+
+.oj-ux-ico-trash:before {
+  color: #dc3545 !important;
+}
+
+.oj-ux-ico-export:before {
+  content: '\f24d';
+  color: white !important;
+}
+
+.oj-ux-ico-refresh:before {
+  content: '\f32f';
+  color: white !important;
+}
+
+/* Button icon pointer events */
+.oj-button .oj-button-icon {
+  pointer-events: none !important;
+}
+
+/* Button Styling - End */
+
+
+/* ========================================================================================================== */
+/* Custom Button Alignment - Start */
+/* ========================================================================================================== */
+
+.custom-button-align {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Custom Button Alignment - End */
+
+
+/* ========================================================================================================== */
+/* Panel and Collapsible Styling - Start */
+/* ========================================================================================================== */
+
+.oj-panel.oj-panel-shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.oj-panel.oj-selected {
+  border-left: 4px solid #084c4c;
+}
+
+/* Panel and Collapsible Styling - End */
+
+
+/* ========================================================================================================== */
+/* Form Layout Styling - Start */
+/* ========================================================================================================== */
+
+.oj-form-layout .oj-formlayout-labels-inline .oj-label {
+  color: #495057;
+  font-weight: 500;
+}
+
+/* Reduce form field spacing */
+.oj-form>.oj-flex>.oj-flex-item:not(.oj-formlayout-nested-formlayout):not(.oj-formlayout-nested-labelvalue) {
+  padding: 4px !important;
+}
+
+.oj-form-layout .oj-form.oj-enabled .oj-text-field.oj-read-only .oj-text-field-container {
+  border-width: var(--oj-text-field-border-width);
+  background-color: transparent;
+  height: var(--oj-text-field-height);
+  padding: 3px;
+  min-height: 1rem;
+}
+
+/* Form Layout Styling - End */
+
+
+/* ========================================================================================================== */
+/* Input Field Styling - Start */
+/* ========================================================================================================== */
+
+.oj-text-field .oj-text-field-container {
+  position: relative;
+  box-sizing: border-box;
+  border-style: solid;
+  transition: border-color .1s linear;
+  border-color: var(--oj-text-field-border-color);
+  border-width: var(--oj-text-field-border-width);
+  border-radius: var(--oj-text-field-border-radius);
+  background-color: var(--oj-text-field-bg-color);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  height: var(--oj-text-field-height);
+  border: solid 1px grey;
+  font-size: 12px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.oj-text-field-readonly {
+  min-height: 0;
+  font-size: 12px !important;
+}
+
+.oj-text-field.oj-disabled .oj-text-field-input {
+  color: black;
+  background-color: #dedcde;
+}
+
+.oj-text-field.oj-disabled .oj-text-field-container {
+  border-color: var(--oj-text-field-border-color-disabled);
+  background-color: #f6f6f6;
+  border: solid 1px #171616;
+}
+
+.oj-inputtext-input:focus,
+.oj-inputnumber-input:focus,
+.oj-select-single .oj-select-choice:focus,
+.oj-textarea-input:focus {
+  border-color: #084c4c;
+  box-shadow: 0 0 0 0.2rem rgba(8, 76, 76, 0.25);
+}
+
+/* Input Field Styling - End */
+
+
+/* ========================================================================================================== */
+/* Switch Styling - Start */
+/* ========================================================================================================== */
+
+.oj-switch-thumb {
+  background-color: #ffffff;
+}
+
+.oj-switch.oj-selected .oj-switch-track {
+  background-color: #084c4c;
+}
+
+/* Switch Styling - End */
+
+
+/* ========================================================================================================== */
+/* Dialog Styling - Start */
+/* ========================================================================================================== */
+
+oj-dialog-header {
+  background-color: #084c4c;
+  padding: 21px 35px 0px 40px !important;
+}
+
+.oj-dialog-title {
+  color: white;
+  font-family: "Oracle Sans", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: -21px;
+  margin-top: -18px;
+}
+
+.oj-dialog .oj-fwk-icon {
+  color: white;
+  margin-top: 1rem;
+}
+
+.oj-dialog .oj-fwk-icon:before {
+  color: white;
+}
+
+/* Dialog Styling - End */
+
+
+/* ========================================================================================================== */
+/* Tab Styling - Start */
+/* ========================================================================================================== */
+
+.oj-tabbar-horizontal:not(.oj-tabbar-icon-only) .oj-tabbar-item.oj-selected {
+  background-color: #084c4c !important;
+}
+
+.oj-selected>a.oj-tabbar-item-content .oj-tabbar-item-label {
+  color: white;
+}
+
+/* Tab Styling - End */
+
+
+/* ========================================================================================================== */
+/* Search Filter Chip Styling - Start */
+/* ========================================================================================================== */
+
+button.oj-sp-filter-chip-chrome.oj-sp-filter-chip-complex.oj-sp-filter-chip-container.oj-sp-helper-white-space-nowrap.oj-sp-filter-chip-clickable.oj-sm-padding-0 {
+  background-color: #ffffff !important;
+}
+
+.oj-sp-filter-chip-suggested .oj-sp-smart-search-complex-chip-label {
+  color: black !important;
+}
+
+oj-sp-smart-search .oj-sp-filter-chip-suggested .oj-sp-smart-search-complex-chip-value {
+  color: #000000 !important;
+}
+
+/* Search Filter Chip Styling - End */
+
+
+/* ========================================================================================================== */
+/* Responsive Design - Mobile - Start */
+/* ========================================================================================================== */
+
+@media (max-width: 768px) {
+  .oj-form-layout[max-columns="2"] {
+    max-columns: 1;
+  }
+  
+  .oj-table {
+    font-size: 0.875rem;
+  }
+}
+
+/* Responsive Design - Mobile - End */
+
+
+/* ========================================================================================================== */
+/* Print Styles - Start */
+/* ========================================================================================================== */
+
+@media print {
+  .oj-button {
+    display: none !important;
+  }
+  
+  .oj-table {
+    width: 100%;
+    font-size: 10pt;
+  }
+  
+  .oj-panel {
+    border: 1px solid #000;
+    break-inside: avoid;
+  }
+}
+
+/* Print Styles - End */
+
+oj-option.oj-complete.oj-menu-divider {
+  display: none !important;
+}
+
+/* oj-option#calendar_admin_page_h_cancelAction,
+oj-option#region_edit_page_h_cancelAction,
+oj-option#service_spec_page_h_cancelAction,
+oj-option#oj_exssp1_h_cancelAction,
+oj-option#project_list_edit_page_h_cancelAction,
+oj-option#project_charter_edit_page_h_cancelAction
+ {
+  display: none !important;
+} */

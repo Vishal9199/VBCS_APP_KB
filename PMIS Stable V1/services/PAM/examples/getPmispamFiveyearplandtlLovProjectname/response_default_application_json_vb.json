@@ -1,0 +1,30 @@
+{
+    "items": [
+        {
+            "project_id": 1200,
+            "project_name": "PROJ_TEST 001"
+        },
+        {
+            "project_id": 1005,
+            "project_name": "MP 001"
+        },
+        {
+            "project_id": 1008,
+            "project_name": "ProJeCt"
+        }
+    ],
+    "hasMore": false,
+    "limit": 0,
+    "offset": 0,
+    "count": 3,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/fiveyearplandtl/lov/projectname"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/fiveyearplandtl/lov/item"
+        }
+    ]
+}

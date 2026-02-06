@@ -1,0 +1,32 @@
+{
+    "items": [
+        {
+            "lookup_value_id": 6157,
+            "lookup_value_code": "FIVE_YEAR_PLAN",
+            "lookup_value_name": "Five Year Plan"
+        },
+        {
+            "lookup_value_id": 6156,
+            "lookup_value_code": "MASTER_PLAN",
+            "lookup_value_name": "Master Plan"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 2,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmis/lov/calendar/type"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmis/lov/calendar/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmis/lov/calendar/type"
+        }
+    ]
+}

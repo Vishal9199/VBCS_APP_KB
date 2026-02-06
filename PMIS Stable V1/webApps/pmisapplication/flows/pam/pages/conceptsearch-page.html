@@ -1,0 +1,179 @@
+<style>
+  .oj-sp-header-general-overview-header-strip {
+    display: none;
+  }
+</style>
+
+<div id="sampleDemo1" class="demo-padding demo-container">
+  <div id="componentDemoContent1" style="width: 1px; min-width: 100%;">
+    <div id="mainContent1">
+      <oj-sp-smart-search-page id="oj_exssp1" page-title="PAM Schedule Details">
+
+        <!--Search Section -->
+        <oj-flex slot="search" class="oj-sm-padding-2x" style="align-items: center;">
+          <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-space-between"
+            style="width: 100%; align-items: flex-start; padding: 0 1rem;">
+            <div style="flex: 1; margin-right: 1rem;">
+              <oj-sp-smart-search filter-criterion="{{ $variables.filterCriterion }}"
+                search-config="[[ $variables.searchConfiguration.provider ]]"
+                search-context="[[ $variables.searchContext ]]" id="pam_smartsearch"
+                ask-hint="Search schedule details here...">
+              </oj-sp-smart-search>
+            </div>
+            <div style="display: flex; gap: 0.25rem; margin-left: 1rem; margin-top: 1px; flex-wrap: wrap;">
+              <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Reset" id="resetBtn"
+                on-oj-action="[[$listeners.resetBtnAction]]">
+                <span slot="startIcon" class="oj-ux-ico-reset"></span>
+              </oj-button>
+              <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Refresh"
+                id="refreshBtn" on-oj-action="[[$listeners.refreshBtnAction]]">
+                <span slot="startIcon" class="oj-ux-ico-refresh"></span>
+              </oj-button>
+              <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Create"
+                id="createBtn" on-oj-action="[[$listeners.createBtnAction]]">
+                <span slot="startIcon" class="oj-ux-ico-plus"></span>
+              </oj-button>
+            </div>
+          </div>
+        </oj-flex>
+
+        <!--Table Section -->
+        <div id="sampleDemo" class="demo-padding demo-container">
+          <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+            <div id="searchMainContent">
+
+              <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-space-between"
+                style="width: 100%; align-items: flex-start; padding: 0 1rem;">
+                <div style="flex: 1; margin-right: 1rem;">
+                </div>
+                <!-- <div style="display: flex; gap: 0.25rem; margin-left: 1rem; margin-top: 1px; flex-wrap: wrap;">
+                  <oj-button style="margin:0.125rem;" label="Add Schedule" chroming="outlined" id="addScheduleBtn">
+                    <span slot="startIcon" class="oj-ux-ico-plus"></span>
+                  </oj-button>
+                </div> -->
+              </div>
+
+              <div class="oj-flex">
+                <!-- PAM Schedule Table -->
+                <oj-table scroll-policy="loadMoreOnScroll" class="oj-sm-width-full oj-bg-body" display="grid"
+                  horizontal-grid-visible="enabled" vertical-grid-visible="enabled" selection-mode.row="single"
+                  selection-mode.column="single" id="pamScheduleTable" data="[[ $variables.pamScheduleADP ]]"
+                  columns="{{ $constants.columnsvar}}">
+
+                  <!-- Template Slots -->
+                  <template slot="actions_template">
+                    <div style="display: flex; gap: 4px; justify-content: center;">
+                      <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                        on-oj-action="[[$listeners.buttonAction]]">
+                        <span slot="startIcon" class="oj-ux-ico-edit"></span>
+                      </oj-button>
+                      <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                        on-oj-action="[[$listeners.buttonAction2]]">
+                        <span slot="startIcon" class="oj-ux-ico-trash"></span>
+                      </oj-button>
+                    </div>
+                  </template>
+
+                  <template slot="project_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="phase_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="milestone_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="senior_mgr_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="planning_mgr_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="consultant_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="budget_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="date_template">
+                    <oj-input-date value="[[ $current.data ]]" readonly="true"
+                      converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'>
+                    </oj-input-date>
+                  </template>
+
+                  <template slot="percentage_template">
+                    <oj-bind-text value="[[ $current.data + '%' ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="remarks_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                </oj-table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagination Section -->
+        <div class="oj-flex oj-sm-justify-content-center" style="margin-top: 0.25rem; gap: 1rem;">
+          <div class="oj-flex-item oj-sm-flex-initial">
+            <oj-button label="Prev" chroming="outlined" id="prevBtn" on-oj-action="[[$listeners.prevBtnAction]]"
+              disabled="[[ $variables.pagination.is_prev ]]">
+              <span slot="startIcon" class="oj-ux-ico-back"></span>
+            </oj-button>
+          </div>
+
+          <div style="display: flex; align-items: center; width: fit-content; min-width: 120px; max-width: 130px;">
+            <oj-input-text id="pagination-details" disabled="true" aria-label="Pagination Details"
+              value="{{ $variables.paginationDisplay }}"></oj-input-text>
+          </div>
+          <div class="oj-flex-item oj-sm-flex-initial">
+            <oj-button label="Next" chroming="outlined" id="nextBtn" class=""
+              on-oj-action="[[$listeners.nextBtnAction]]" disabled="[[ $variables.pagination.is_next ]]">
+              <span slot="endIcon" class="oj-ux-ico-forward-next"></span>
+            </oj-button>
+          </div>
+        </div>
+
+      </oj-sp-smart-search-page>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Dialog -->
+<oj-dialog style="display:none; width: 500px; overflow: hidden;" dialog-title="Warning" id="delete_dialog"
+  cancel-behavior="icon" header-decoration="off" drag-affordance="title-bar" position.at.vertical="top"
+  position.my.vertical="top">
+  <div slot="body" style="margin-top: 1.5rem;">
+    <div class="oj-flex">Are you sure you want to delete the record?</div>
+  </div>
+  <div slot="footer">
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction3]]" >Ok</oj-button>
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction4]]" >Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Progress Dialog -->
+<oj-dialog id="progressDialog" dialog-title="Processing" style="width: 300px;" cancel-behavior="none">
+  <div slot="body" style="text-align: center; padding: 2rem;">
+    <oj-progress-bar value="-1"></oj-progress-bar>
+    <p style="margin-top: 1rem;">Please wait...</p>
+  </div>
+</oj-dialog>
+
+
+<oj-dialog id="loadingDialog" style="width: 300px;" cancel-behavior="none" drag-affordance="title-bar"
+  header-decoration="off" position.at.vertical="top" position.my.vertical="top">
+  <div slot="body" style="text-align: center; padding: 2rem;">
+    <oj-progress-circle value="-1"></oj-progress-circle>
+    <p style="margin-top: 1rem; font-weight: 500;">Loading Schedule List Data...</p>
+  </div>
+</oj-dialog>
