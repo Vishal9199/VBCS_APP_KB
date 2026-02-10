@@ -1,0 +1,760 @@
+{
+  "title": "PAM Schedule Details Search",
+  "description": "Smart Search page for PAM Schedule Details with inline table editing",
+  "variables": {
+    "currentCount": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "currentOffset": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "currentPage": {
+      "type": "number",
+      "defaultValue": 1
+    },
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "getProjectLovListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PAM/getPmispamConceptstudyLovProjectname",
+        "responseType": "getPmispamConceptstudyLovProjectname",
+        "itemsPath": "items",
+        "keyAttributes": "project_id",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "project_name"
+          ]
+        }
+      }
+    },
+    "getPhaseLovListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PAM/getPmispamConceptstudyLovPhase",
+        "responseType": "getPmispamConceptstudyLovPhase",
+        "itemsPath": "items",
+        "keyAttributes": "lookup_value_id",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        }
+      }
+    },
+    "getMilestoneLovListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PAM/getPmispamConceptstudyLovMilestone",
+        "responseType": "getPmispamConceptstudyLovMilestone",
+        "itemsPath": "items",
+        "keyAttributes": "lookup_value_id",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        }
+      }
+    },
+    "getConsultantLovListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PAM/getPmispamConceptstudyLovConsultant",
+        "responseType": "getPmispamConceptstudyLovConsultant",
+        "itemsPath": "items",
+        "keyAttributes": "lookup_value_id",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        }
+      }
+    },
+    "getSeniorManagerLovListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PAM/getPmispamConceptstudyLovSeniorManager",
+        "responseType": "getPmispamConceptstudyLovSeniorManager",
+        "itemsPath": "items",
+        "keyAttributes": "user_id",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "user_name"
+          ]
+        }
+      }
+    },
+    "getPlanningManagerLovListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PAM/getPmispamConceptstudyLovPlanningManager",
+        "responseType": "getPmispamConceptstudyLovPlanningManager",
+        "itemsPath": "items",
+        "keyAttributes": "user_id",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "user_name"
+          ]
+        }
+      }
+    },
+    "hasNext": {
+      "type": "string",
+      "defaultValue": "N"
+    },
+    "pagination": {
+      "type": "object",
+      "defaultValue": {
+        "is_next": false,
+        "is_prev": true
+      }
+    },
+    "paginationDisplay": {
+      "type": "string",
+      "defaultValue": "0 - 0 of 0 items"
+    },
+    "passKey": {
+      "type": "string"
+    },
+    "passPayload": {
+      "type": "string"
+    },
+    "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "ProjectFilter": {
+              "label": "Project",
+              "options": {
+                "optionsData": "[[ $page.variables.getProjectLovListSDP ]]",
+                "optionsKeys": {
+                  "label": "project_name",
+                  "value": "project_id"
+                }
+              }
+            },
+            "PhaseFilter": {
+              "label": "Phase",
+              "options": {
+                "optionsData": "[[ $page.variables.getPhaseLovListSDP ]]",
+                "optionsKeys": {
+                  "label": "lookup_value_name",
+                  "value": "lookup_value_name"
+                }
+              }
+            },
+            "MilestoneFilter": {
+              "label": "Milestone",
+              "options": {
+                "optionsData": "[[ $page.variables.getMilestoneLovListSDP ]]",
+                "optionsKeys": {
+                  "label": "lookup_value_name",
+                  "value": "lookup_value_name"
+                }
+              }
+            },
+            "ConsultantFilter": {
+              "label": "Consultant",
+              "options": {
+                "optionsData": "[[ $page.variables.getConsultantLovListSDP ]]",
+                "optionsKeys": {
+                  "label": "lookup_value_name",
+                  "value": "lookup_value_name"
+                }
+              }
+            },
+            "DateRangeFilter": {
+              "label": "Date Range"
+            }
+          }
+        }
+      }
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/pamschedulesearchconfig.json' ]]"
+      }
+    },
+    "searchObj": {
+      "type": {
+        "in_limit": "string",
+        "in_offset": "string",
+        "p_consultant_name": "string",
+        "p_milestone": "string",
+        "p_phase_name": "string",
+        "p_planned_end_date": "string",
+        "p_planned_start_date": "string",
+        "p_project_id": "string",
+        "p_project_name": "string",
+        "p_keyword": "string"
+      },
+      "defaultValue": {
+        "in_limit": "10",
+        "in_offset": "0",
+        "p_project_id": "",
+        "p_project_name": "",
+        "p_phase_name": "",
+        "p_milestone": "",
+        "p_consultant_name": "",
+        "p_planned_start_date": "",
+        "p_planned_end_date": "",
+        "p_keyword": ""
+      }
+    },
+    "pamScheduleADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "PAMScheduleType",
+        "keyAttributes": "cs_dtl_id"
+      }
+    },
+    "bufferDPTable": {
+      "type": "application:ojs/ojbufferingdataprovider",
+      "constructorParams": [
+        "{{ $variables.pamScheduleADP }}",
+        null
+      ]
+    },
+    "lvCurrentRow": {
+      "type": "currentRowType"
+    },
+    "lvNextValue": {
+      "type": "number",
+      "defaultValue": -1
+    },
+    "p_start_date": {
+      "type": "string"
+    },
+    "p_end_date": {
+      "type": "string"
+    },
+    "selectedScheduleId": {
+      "type": "number"
+    },
+    "showDeleteDialog": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "deleteScheduleId": {
+      "type": "number"
+    },
+    "totalCount": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "totalRecords": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "editMode": {
+      "type": "string",
+      "defaultValue": "create"
+    },
+    "pNavCode": {
+      "type": "string",
+      "defaultValue": "CREATE"
+    },
+    "pNavId": {
+      "type": "string"
+    }
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getPmispamConceptstudyLovConsultant": {
+      "endpoint": "getPmispamConceptstudyLovConsultant",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamConceptstudyLovMilestone": {
+      "endpoint": "getPmispamConceptstudyLovMilestone",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamConceptstudyLovPhase": {
+      "endpoint": "getPmispamConceptstudyLovPhase",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamConceptstudyLovProjectname": {
+      "endpoint": "getPmispamConceptstudyLovProjectname",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamConceptstudyLovSeniorManager": {
+      "endpoint": "getPmispamConceptstudyLovSeniorManager",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamConceptstudyLovPlanningManager": {
+      "endpoint": "getPmispamConceptstudyLovPlanningManager",
+      "service": "PAM",
+      "path": "response"
+    },
+    "getPmispamConceptstudyLovConsultant": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispamConceptstudyLovMilestone": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispamConceptstudyLovPhase": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispamConceptstudyLovProjectname": {
+      "items": [
+        {
+          "project_id": "number",
+          "project_name": "string"
+        }
+      ]
+    },
+    "getPmispamConceptstudyLovSeniorManager": {
+      "items": [
+        {
+          "user_id": "number",
+          "user_name": "string"
+        }
+      ]
+    },
+    "getPmispamConceptstudyLovPlanningManager": {
+      "items": [
+        {
+          "user_id": "number",
+          "user_name": "string"
+        }
+      ]
+    },
+    "PAMScheduleType": {
+      "cs_dtl_id": "number",
+      "milestone": "string",
+      "object_version_num": "number",
+      "planning_manager_name": "string",
+      "project_id": "number",
+      "project_name": "string",
+      "phase_id": "number",
+      "phase_name": "string",
+      "milestone_id": "number",
+      "cs_senior_mgr_id": "number",
+      "senior_manager_name": "string",
+      "cs_planning_mgr_id": "number",
+      "consultant_id": "number",
+      "consultant_name": "string",
+      "budget_amount": "number",
+      "planned_start_date": "string",
+      "planned_end_date": "string",
+      "revised_start_date": "string",
+      "revised_end_date": "string",
+      "actual_start_date": "string",
+      "actual_end_date": "string",
+      "completion_percentage": "number",
+      "remarks": "string",
+      "created_by": "string",
+      "creation_date": "string",
+      "last_updated_by": "string",
+      "last_update_date": "string"
+    },
+    "currentRowType": {
+      "cs_dtl_id": "number",
+      "milestone": "string",
+      "object_version_num": "number",
+      "planning_manager_name": "string",
+      "project_id": "number",
+      "project_name": "string",
+      "phase_id": "number",
+      "phase_name": "string",
+      "milestone_id": "number",
+      "cs_senior_mgr_id": "number",
+      "senior_manager_name": "string",
+      "cs_planning_mgr_id": "number",
+      "consultant_id": "number",
+      "consultant_name": "string",
+      "budget_amount": "number",
+      "planned_start_date": "string",
+      "planned_end_date": "string",
+      "revised_start_date": "string",
+      "revised_end_date": "string",
+      "actual_start_date": "string",
+      "actual_end_date": "string",
+      "completion_percentage": "number",
+      "remarks": "string",
+      "created_by": "string",
+      "creation_date": "string",
+      "last_updated_by": "string",
+      "last_update_date": "string"
+    }
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      },
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-progress-bar": {
+        "path": "ojs/ojprogress-bar"
+      }
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-search.css"
+    ]
+  },
+  "eventListeners": {
+    "addRowBtnAction": {
+      "chains": [
+        {
+          "chain": "addrowactionchain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "onDeleteAction",
+          "parameters": {
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "buttonAction3": {
+      "chains": [
+        {
+          "chain": "okdeleteaction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction4": {
+      "chains": [
+        {
+          "chain": "canceldeleteaction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "nextBtnAction": {
+      "chains": [
+        {
+          "chain": "nextbuttonaction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "pamScheduleTableBeforeRowEdit": {
+      "chains": [
+        {
+          "chain": "TableBeforeRowEditChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "accept": "{{$event.detail.accept}}",
+            "rowContext": "{{$event.detail.rowContext}}",
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}"
+          }
+        }
+      ]
+    },
+    "pamScheduleTableBeforeRowEditEnd": {
+      "chains": [
+        {
+          "chain": "TableBeforeRowEditEndChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "accept": "{{$event.detail.accept}}",
+            "setUpdatedItem": "{{$event.detail.setUpdatedItem}}",
+            "rowContext": "{{$event.detail.rowContext}}",
+            "cancelEdit": "{{$event.detail.cancelEdit}}",
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}"
+          }
+        }
+      ]
+    },
+    "prevBtnAction": {
+      "chains": [
+        {
+          "chain": "previousbuttonaction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshactionchain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "resetbuttonaction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "tblBeforeRowEdit": {
+      "chains": [
+        {
+          "chain": "TableBeforeRowEditChain",
+          "parameters": {
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}"
+          }
+        }
+      ]
+    },
+    "tblBeforeRowEditEnd": {
+      "chains": [
+        {
+          "chain": "TableBeforeRowEditEndChain",
+          "parameters": {
+            "cancelEdit": "{{$event.detail.cancelEdit}}",
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}",
+            "updatedRow": "[[ $variables.lvCurrentRow ]]"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+
+  },
+  "constants": {
+    "columnsvar": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Action",
+          "field": "",
+          "resizable": "enabled",
+          "width": 100,
+          "template": "Action",
+          "headerStyle": "white-space: nowrap; min-width: 100px;",
+          "style": ""
+        },
+        {
+          "headerText": "Project Name",
+          "field": "project_name",
+          "resizable": "enabled",
+          "width": 200,
+          "template": "Project Name",
+          "headerStyle": "white-space: nowrap; min-width: 200px;",
+          "style": ""
+        },
+        {
+          "headerText": "Consultant Name",
+          "field": "consultant_name",
+          "resizable": "enabled",
+          "width": 180,
+          "template": "Consultant Name",
+          "headerStyle": "white-space: nowrap; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Budget Amount",
+          "field": "budget_amount",
+          "resizable": "enabled",
+          "width": 150,
+          "template": "Budget Amount",
+          "headerStyle": "white-space: nowrap; min-width: 150px;",
+          "style": ""
+        },
+        {
+          "headerText": "Phase",
+          "field": "phase_name",
+          "resizable": "enabled",
+          "width": 150,
+          "template": "Phase",
+          "headerStyle": "white-space: nowrap; min-width: 150px;",
+          "style": ""
+        },
+        {
+          "headerText": "Milestone",
+          "field": "milestone",
+          "resizable": "enabled",
+          "width": 180,
+          "template": "Milestone",
+          "headerStyle": "white-space: nowrap; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Senior Concept Engineer",
+          "field": "senior_manager_name",
+          "resizable": "enabled",
+          "width": 200,
+          "template": "Senior Concept Engineer",
+          "headerStyle": "white-space: nowrap; min-width: 200px;",
+          "style": ""
+        },
+        {
+          "headerText": "Planning Manager",
+          "field": "planning_manager_name",
+          "resizable": "enabled",
+          "width": 180,
+          "template": "Planning Manager",
+          "headerStyle": "white-space: nowrap; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Planned Start Date",
+          "field": "planned_start_date",
+          "resizable": "enabled",
+          "width": 160,
+          "template": "Planned Start Date",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": ""
+        },
+        {
+          "headerText": "Planned End Date",
+          "field": "planned_end_date",
+          "resizable": "enabled",
+          "width": 160,
+          "template": "Planned End Date",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": ""
+        },
+        {
+          "headerText": "Actual Start Date",
+          "field": "actual_start_date",
+          "resizable": "enabled",
+          "width": 160,
+          "template": "Actual Start Date",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": ""
+        },
+        {
+          "headerText": "Actual End Date",
+          "field": "actual_end_date",
+          "resizable": "enabled",
+          "width": 160,
+          "template": "Actual End Date",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": ""
+        },
+        {
+          "headerText": "% of Completion",
+          "field": "completion_percentage",
+          "resizable": "enabled",
+          "width": 150,
+          "template": "% of Completion",
+          "headerStyle": "white-space: nowrap; min-width: 150px;",
+          "style": ""
+        },
+        {
+          "headerText": "Remarks",
+          "field": "remarks",
+          "resizable": "enabled",
+          "width": "",
+          "template": "Remarks",
+          "headerStyle": "white-space: nowrap;",
+          "style": ""
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+    "items": [
+        {
+            "lookup_value_id": 6160,
+            "lookup_value_code": "IMPROVEMENT",
+            "lookup_value_name": "Improvement",
+            "lookup_type_code": "PMIS_PRJ_CATEGORY"
+        }
+    ],
+    "hasMore": false,
+    "limit": 0,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/fiveyearplandtl/lov/category?searchVal=Improvement"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/fiveyearplandtl/lov/item"
+        }
+    ]
+}

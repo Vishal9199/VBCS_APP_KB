@@ -1,0 +1,25 @@
+{
+    "OUT_COUNT": 1,
+    "OUT_DESCRIPTION": "Records retrieved successfully",
+    "OUT_HAS_NEXT": "N",
+    "OUT_STATUS": "SUCCESS",
+    "OUT_TOTAL_COUNT": 1,
+    "P_OUTPUT": [
+        {
+            "cal_hdr_id": 758,
+            "object_version_num": 0,
+            "calendar_type_id": 1234,
+            "calendar_type_code": null,
+            "calendar_type": null,
+            "calendar_name": "2025 Project Calendar",
+            "description": "Main project",
+            "enabled_flag": "Y",
+            "additional_info": "Additional notes or metadata",
+            "created_by": "JOHN.DOE",
+            "created_date": "2026-01-26T15:11:07Z",
+            "last_updated_by": "JOHN.DOE",
+            "last_updated_date": "2026-01-26T15:11:07Z",
+            "last_updated_login": "JOHN.DOE"
+        }
+    ]
+}

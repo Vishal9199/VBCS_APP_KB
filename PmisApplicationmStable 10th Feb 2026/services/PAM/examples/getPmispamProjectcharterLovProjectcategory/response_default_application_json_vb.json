@@ -1,0 +1,40 @@
+{
+    "items": [
+        {
+            "project_category": "Opex PDD"
+        },
+        {
+            "project_category": "Capex Large"
+        },
+        {
+            "project_category": "Opex Large"
+        },
+        {
+            "project_category": "Opex Large"
+        },
+        {
+            "project_category": "Opex Large"
+        },
+        {
+            "project_category": "Capex Large"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 6,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/projectcharter/lov/projectcategory"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/projectcharter/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/projectcharter/lov/projectcategory"
+        }
+    ]
+}

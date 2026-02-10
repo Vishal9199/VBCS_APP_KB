@@ -1,0 +1,256 @@
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+  <oj-sp-advanced-create-edit id="oj_ssce1" page-title="Five Year Plan " page-subtitle=" " display-mode="light"
+    display-options.next="off"
+    secondary-actions='[{"label":"Save","id":"save","icon":"oj-ux-ico-save","display":"on"},{"label":"Save&amp;Close","id":"saveclose","icon":"oj-ux-ico-save-and-close"},{"label":"About","id":"about","icon":"oj-ux-ico-information"}]'
+    primary-action.label="Close" on-sp-secondary-action="[[$listeners.ojSsce1SpSecondaryAction]]"
+    on-sp-primary-action="[[$listeners.ojSsce1SpPrimaryAction]]">
+    
+<div slot="main" style="padding-top: 0; margin-top: 0.1rem; min-width: 100%;">
+            <div style="margin-top: 0;">
+
+<oj-collapsible id="fiveyearplan-info-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+                style="margin-top: 0;" disabled="true">
+                <span slot="header" style="font-weight: bold; color: white; ">Five Year Plan</span>
+                
+                  <div style="padding: 1rem;">
+                    <oj-bind-if test="[[ $variables.pNavCode === 'CREATE' ]]">
+                    <oj-validation-group id="fiveyearplan_info_validation" valid="{{ $variables.formValidation }}" >
+                      <oj-form-layout max-columns="2" label-edge="start" colspan-wrap="wrap"
+                        user-assistance-density="compact" direction="row" class="oj-formlayout-full-width">
+                      <oj-input-text id="five-year-plan" label-hint="Five Year Plan Name"
+                        style="width: 16rem; margin-bottom: -6px;" user-assistance-density="compact" required="true"
+                        value="{{ $variables.postFypHdrVar.fy_plan_name }}"></oj-input-text>
+                      <oj-select-single id="project-category" label-hint="Porject Category" style="width: 16rem;"
+                        item-text="lookup_value_name" required="true"
+                        value="{{ $variables.postFypHdrVar.project_category_id }}"
+                        data="[[$variables.getPmispamLovPmisprojectCategoryListSDP]]"
+                        on-value-item-changed="[[$listeners.projectCategoryValueItem]]"></oj-select-single>
+                      <oj-select-single id="master-plan" label-hint="Master Plan Calendar Name" style="width: 16rem;"
+                        item-text="calendar_name" value="{{ $variables.postFypHdrVar.mp_calendar_id }}"
+                        data="[[$variables.getPmisLovCalendarNameListSDP]]" required="true"></oj-select-single>
+                      <oj-select-single id="calendar-type" label-hint="Parent Project Name" style="width: 16rem;"
+                        item-text="project_name" value="{{ $variables.postFypHdrVar.parent_project_id }}"
+                        data="[[$variables.getPmispamLovMasterplanProjectnameListSDP]]"></oj-select-single>
+                      <oj-select-single id="master-plan" label-hint="Five Year Plan Calendar Name" style="width: 16rem;"
+                        item-text="calendar_name" required="true" value="{{ $variables.postFypHdrVar.fy_calendar_id }}"
+                        data="[[$variables.getPmisLovCalendarNameListSDP2]]"></oj-select-single>
+                      <div>
+                      <oj-bind-if test="[[ $variables.pNavCode === 'CREATE' ]]">
+                      <oj-button label="Get Projects" style="margin-left: 20rem;"
+                        on-oj-action="[[$listeners.buttonAction]]"></oj-button>
+                      </oj-bind-if>
+                      </div>
+                      </oj-form-layout>
+                    </oj-validation-group>
+                    </oj-bind-if>
+                  </div>
+                
+                <oj-if test="[[ $variables.pNavCode === 'EDIT' ]]">
+                  <div style="padding: 1rem;">
+                     <oj-validation-group id="fiveyearplan_info_validation" valid="{{ $variables.formValidation }}" >
+                    <oj-form-layout max-columns="2" label-edge="start" colspan-wrap="wrap"
+                      user-assistance-density="compact" direction="row" class="oj-formlayout-full-width">
+                      <oj-input-text id="five-year-plan" label-hint="Five Year Plan Name"
+                        style="width: 16rem; margin-bottom: -6px;" user-assistance-density="compact" 
+                        value="{{ $variables.postFypHdrVar.fy_plan_name }}" disabled="true"></oj-input-text>
+					  
+					  
+                      <oj-input-text id="region" label-hint="Region" style="width: 16rem; margin-bottom: -6px;"
+                        user-assistance-density="compact"  
+                        value="{{ $variables.postFypHdrVar.region_name }}" disabled="true"></oj-input-text>
+					  
+					  
+                      <oj-input-text id="project-name" label-hint="Project Name"
+                        style="width: 16rem; margin-bottom: -6px;" user-assistance-density="compact"
+                        value="{{ $variables.postFypHdrVar.project_name }}" disabled="true"></oj-input-text>
+					  
+					  <!-- <oj-input-text id="description" label-hint="Description" 
+                        style="width: 16rem; margin-bottom: -6px;" user-assistance-density="compact" required="true"
+                        value="{{ $variables.postFypHdrVar.fy_plan_name }}" disabled="true">
+                      </oj-input-text> -->
+					  
+					  
+                      <oj-input-text id="category" label-hint="Category" style="width: 16rem; margin-bottom: -6px;"
+                        user-assistance-density="compact" value="{{ $variables.postFypHdrVar.category }}"
+                        disabled="true"></oj-input-text>
+					  
+					  
+                      <oj-input-text id="project-category1" label-hint="Project Category"
+                        style="width: 16rem; margin-bottom: -6px;" user-assistance-density="compact"
+                        value="{{ $variables.postFypHdrVar.project_category }}" disabled="true"></oj-input-text>
+                    </oj-form-layout>
+                     </oj-validation-group>
+                  </div>
+                </oj-if>
+              </oj-collapsible>
+<br>
+                    <oj-bind-if test="[[ $variables.pNavCode === 'CREATE' ]]">
+                <oj-collapsible id="fiveyearplan-budget-info-section" expanded="true"
+                  class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 0;" disabled="true">
+                  <span slot="header" style="font-weight: bold; color: white; ">Select Project Based on the Budget Year Plan</span>
+                  <oj-table scroll-policy="loadMoreOnScroll" columns="{{ $variables.fypprojectColumns }}"
+                    data="[[ $variables.fypprojectsADP ]]" columns-default.sortable="disabled"
+                    columns-default.resizable="enabled" class="oj-sm-width-full oj-bg-body" display="grid"
+                    selection-mode.row="single" on-first-selected-row-changed="[[$listeners.tableFirstSelectedRow]]" 
+                  >
+                    <template slot="select_action_template">
+                      <oj-ext-checkbox-switch value="{{ $current.key === $variables.postFypHdrVar.project_id }}"
+                        on-value-changed="[[$listeners.booleanCheckboxComponentValue]]"></oj-ext-checkbox-switch>
+                    </template>
+                  </oj-table>
+                </oj-collapsible>
+                    </oj-bind-if>
+
+                    <oj-bind-if test="[[ $variables.pNavCode === 'EDIT' ]]">
+                <oj-collapsible id="schedule-info-section" expanded="true"
+                  class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 0;" disabled="true">
+                  <span slot="header" style="font-weight: bold;color:white; ">Schedule for Implementation Information</span>
+                  <div style="padding: 1rem;">
+                    <oj-form-layout max-columns="2" label-edge="start" colspan-wrap="wrap"
+                      user-assistance-density="compact" direction="column" class="oj-formlayout-full-width">
+                      <oj-input-text id="english-name" label-hint="Official project Name in English"
+                        placeholder="English Name" style="width: 16rem; margin-bottom: -6px;"
+                        user-assistance-density="compact" value="{{ $variables.postFypHdrVar.english_project_name }}"></oj-input-text>
+						
+                      <oj-input-text id="arabic-name" label-hint="Official project Name in Arabic"
+                        placeholder="Arabic Name" style="width: 16rem; margin-bottom: -6px;"
+                        user-assistance-density="compact" value="{{ $variables.postFypHdrVar.arabic_project_name }}"></oj-input-text>	
+						
+                      <oj-input-text id="estimated-cost" label-hint="Estimated Contract Price" placeholder="price"
+                        style="width: 16rem; margin-bottom: -6px;" user-assistance-density="compact"
+                        value="{{ $variables.postFypHdrVar.est_buget_value }}" ></oj-input-text>	
+                        
+                      <oj-select-single id="financial-status" label-hint="Financial Status" style="width: 16rem;"
+                        data="[[$variables.getPmispamLovPamFinancialstatusListSDP]]" item-text="lookup_value_name"
+                        value="{{ $variables.postFypHdrVar.financial_status_id }}"></oj-select-single>
+						 
+                      <oj-select-single id="technical-status" label-hint="Technical Status" style="width: 16rem;"
+                        data="[[$variables.getPmispamLovPamTechnicalstatusListSDP]]" item-text="lookup_value_name"
+                        value="{{ $variables.postFypHdrVar.technical_status_id }}"></oj-select-single>
+                      <oj-select-single id="design" label-hint="Design" style="width: 16rem;"
+                        data="[[$variables.getPmispamLovPamMonthyearListSDP]]" item-text="month_year"
+                        value="{{ $variables.postFypHdrVar.design_schedule }}"></oj-select-single>
+						
+                      <oj-select-single id="tender" label-hint="Tender" style="width: 16rem;"
+                        data="[[$variables.getPmispamLovPamMonthyearListSDP2]]" item-text="month_year"
+                        value="{{ $variables.postFypHdrVar.tendor_schedule }}"></oj-select-single>
+						
+                      <oj-select-single id="execution" label-hint="Execution" style="width: 16rem;"
+                        data="[[$variables.getPmispamLovPamMonthyearListSDP3]]" item-text="month_year"
+                        value="{{ $variables.postFypHdrVar.execution_schedule }}"></oj-select-single>
+						
+                      <oj-select-single id="operation" label-hint="Operation" style="width: 16rem;"
+                        data="[[$variables.getPmispamLovPamMonthyearListSDP4]]" item-text="month_year"
+                        value="{{ $variables.postFypHdrVar.operation_schedule }}"></oj-select-single>
+						
+                      <oj-switch id="active-flag-switch" label-hint="Status"
+                        value="{{ $variables.postFypHdrVar.active_flag === 'Y' ? true : false }}"
+                        on-value-changed="[[$listeners.activeFlagSwitchValue]]"></oj-switch>
+                    </oj-form-layout>
+                  </div>
+                </oj-collapsible>
+                    </oj-bind-if>
+                    
+                    <br>
+                    <oj-bind-if test="[[ $variables.pNavCode === 'EDIT' ]]">
+                <oj-collapsible id="budget-schedule-info-section" expanded="true"
+                  class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 0;" disabled="true">
+                  <span slot="header" style="font-weight: bold;color:white; ">Budget Schedule Information</span>
+                  <div style="padding: 1rem;">
+                    <oj-form-layout max-columns="2" label-edge="start" colspan-wrap="wrap"
+                      user-assistance-density="compact" direction="row" class="oj-formlayout-full-width">
+                      <oj-input-text id="moe-budget-number" label-hint="MOE Budget Number"
+                        style="width: 16rem; margin-bottom: -6px;" user-assistance-density="compact"
+                        value="{{ $variables.postFypHdrVar.budget_number }}"></oj-input-text>
+						
+                      <oj-input-text id="request-budget-number" label-hint="Requested Budget Value"
+                         style="width: 16rem; margin-bottom: -6px;"
+                        user-assistance-density="compact" value="{{ $variables.postFypHdrVar.req_budget_val }}"></oj-input-text>	
+						
+                      <oj-input-text id="moe-approved-budget" label-hint="MOE Approved Budget Value"
+                        style="width: 16rem; margin-bottom: -6px;" user-assistance-density="compact"
+                        value="{{ $variables.postFypHdrVar.scp_approved_value }}" ></oj-input-text>
+						
+                      <oj-input-text id="five-year-calendar" label-hint="Five Year Calendar Name"
+                        style="width: 16rem; margin-bottom: -6px;" user-assistance-density="compact"
+                        value="{{ $variables.postFypHdrVar.fyp_calendar_name }}" disabled="true" ></oj-input-text>	
+                      
+                    </oj-form-layout>
+                  </div>
+                </oj-collapsible>
+                    </oj-bind-if>
+                <br>
+                    <oj-bind-if test="[[ $variables.pNavCode === 'EDIT' ]]">
+                      <oj-collapsible id="budget-schedule-info-section" expanded="true" disabled="true"
+                      class="oj-panel oj-panel-shadow-md oj-selected" style="padding-bottom:2rem;">
+                <oj-table id="fyp-budget-entry-table" data="[[ $variables.fypBudgetTableADP ]]"
+                  columns="[[ $variables.fypBugetColumnsVar ]]" columns-default.sortable="disabled"
+                  columns-default.resizable="enabled" class="oj-sm-width-full budget-horizontal-table" display="grid"
+                  style="margin-top: 0; border-radius: 0 0 4px 4px;" horizontal-grid-visible="enabled"
+                  vertical-grid-visible="enabled" selection-mode.row="single" selection-mode.column="single">
+
+        <!-- Plan Name Template -->
+   
+
+        <!-- Year Value 1 Input Template -->
+                  <template slot="year_value1_template">
+                    <oj-bind-if test="[[ $variables.calendarFiveYearrangesADP.data.length >= 1 ]]">
+                      <oj-input-number id="year-value-1" value="{{ $variables.postFypCostVar.year_value1 }}" min="0"
+                        converter='{"type": "number", "options": {"style": "decimal", "minimumFractionDigits": 3, "maximumFractionDigits": 3}}'
+                        style="width: 100%;" class="budget-table-input" user-assistance-density="compact"></oj-input-number>
+                    </oj-bind-if>
+                  </template>
+
+        <!-- Year Value 2 Input Template -->
+                  <template slot="year_value2_template">
+                    <oj-bind-if test="[[ $variables.calendarFiveYearrangesADP.data.length >= 2 ]]">
+                      <oj-input-number id="year-value-2" value="{{ $variables.postFypCostVar.year_value2 }}" min="0"
+                        converter='{"type": "number", "options": {"style": "decimal", "minimumFractionDigits": 3, "maximumFractionDigits": 3}}'
+                        style="width: 100%;" class="budget-table-input" user-assistance-density="compact"></oj-input-number>
+                    </oj-bind-if>
+                  </template>
+
+        <!-- Year Value 3 Input Template -->
+                  <template slot="year_value3_template">
+                    <oj-bind-if test="[[ $variables.calendarFiveYearrangesADP.data.length >= 3 ]]">
+                      <oj-input-number id="year-value-3" value="{{ $variables.postFypCostVar.year_value3 }}" min="0"
+                        converter='{"type": "number", "options": {"style": "decimal", "minimumFractionDigits": 3, "maximumFractionDigits": 3}}'
+                        style="width: 100%;" class="budget-table-input" user-assistance-density="compact"></oj-input-number>
+                    </oj-bind-if>
+                  </template>
+
+        <!-- Year Value 4 Input Template -->
+                  <template slot="year_value4_template">
+                    <oj-bind-if test="[[ $variables.calendarFiveYearrangesADP.data.length >= 4 ]]">
+                      <oj-input-number id="year-value-4" value="{{ $variables.postFypCostVar.year_value4 }}" min="0"
+                        converter='{"type": "number", "options": {"style": "decimal", "minimumFractionDigits": 3, "maximumFractionDigits": 3}}'
+                        style="width: 100%;" class="budget-table-input" user-assistance-density="compact"></oj-input-number>
+                    </oj-bind-if>
+                  </template>
+
+        <!-- Year Value 5 Input Template -->
+                  <template slot="year_value5_template">
+                    <oj-bind-if test="[[ $variables.calendarFiveYearrangesADP.data.length >= 5 ]]">
+                      <oj-input-number id="year-value-5" value="{{ $variables.postFypCostVar.year_value5 }}" min="0"
+                        converter='{"type": "number", "options": {"style": "decimal", "minimumFractionDigits": 3, "maximumFractionDigits": 3}}'
+                        style="width: 100%;" class="budget-table-input" user-assistance-density="compact"></oj-input-number>
+                    </oj-bind-if>
+                  </template>
+                </oj-table>
+                      </oj-collapsible>
+                    </oj-bind-if>
+    
+
+              
+            </div>
+</div>
+
+
+
+  </oj-sp-advanced-create-edit>
+ 
+</div>
+  </div>
+</div>

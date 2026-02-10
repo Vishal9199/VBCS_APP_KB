@@ -1,0 +1,25 @@
+{
+  "description": "Smart Search Configuration for PMIS Calendar Administration",
+  "filters": {
+    "CalendarTypeFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Calendar Type",
+      "options": {
+        "field": "lookup_value_id",
+        "optionsData": "[[ $search.filters.CalendarTypeFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.CalendarTypeFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+    "CalendarNameFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Calendar Name",
+      "options": {
+        "field": "calendar_name",
+        "optionsData": "[[ $search.filters.CalendarNameFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.CalendarNameFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    }
+  }
+}

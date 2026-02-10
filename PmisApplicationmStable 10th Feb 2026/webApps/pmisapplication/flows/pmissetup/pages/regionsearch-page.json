@@ -1,0 +1,513 @@
+{
+  "title": "Region Smart Search",
+  "description": "Smart Search page for Region Management with filters for Region Name, Project Name, Tender Number, and Regional Manager",
+  "variables": {
+  "filterCriterion": {
+    "type": "any",
+    "onValueChanged": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "filterCriterionListener"
+        }
+      ]
+    }
+  },
+    "passKey": {
+      "type": "string"
+    },
+    "passPayload": {
+      "type": "string"
+    },
+    "searchConfiguration": {
+    "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+    "defaultValue": {
+      "url": "[[ $application.path + 'resources/data/regionsearchconfig.json' ]]"
+    }
+  },
+  "searchContext": {
+    "type": "object",
+    "defaultValue": {
+      "$search": {
+        "filters": {
+          "RegionNameFilter": {
+            "label": "Region Name",
+            "options": {
+              "optionsData": "[[ $page.variables.getRegionNameLovSDP ]]",
+              "optionsKeys": {
+                "label": "lookup_value_name",
+                "value": "lookup_value_id"
+              }
+            }
+          },
+            "ResponsiblePersonNameFilter": {
+              "label": "Responsible Person",
+              "options": {
+                "optionsData": "[[ $page.variables.getRegionalManagerLovSDP ]]",
+                "optionsKeys": {
+                  "label": "display_name",
+                  "value": "user_id"
+                }
+              }
+            }
+        }
+      }
+    },
+      "description": "{\n    \"$search\": {\n        \"filters\": {\n            \"RegionNameFilter\": {\n                \"label\": \"Region Name\",\n                \"options\": {\n                    \"optionsData\": \"[[ $page.variables.getRegionNameLovSDP ]]\",\n                    \"optionsKeys\": {\n                        \"label\": \"region_name\",\n                        \"value\": \"region_name\"\n                    }\n                }\n            },\n            \"ProjectNumberFilter\": {\n                \"label\": \"Project Name\",\n                \"options\": {\n                    \"optionsData\": \"[[ $page.variables.getProjectNumberLovSDP ]]\",\n                    \"optionsKeys\": {\n                        \"label\": \"project_number\",\n                        \"value\": \"project_number\"\n                    }\n                }\n            },\n            \"TenderNumberFilter\": {\n                \"label\": \"Tender Number\",\n                \"options\": {\n                    \"optionsData\": \"[[ $page.variables.getTenderNumberLovSDP ]]\",\n                    \"optionsKeys\": {\n                        \"label\": \"tender_number\",\n                        \"value\": \"tender_number\"\n                    }\n                }\n            },\n            \"RegionalManagerFilter\": {\n                \"label\": \"Regional Manager\",\n                \"options\": {\n                    \"optionsData\": \"[[ $page.variables.getRegionalManagerLovSDP ]]\",\n                    \"optionsKeys\": {\n                        \"label\": \"responsible_person\",\n                        \"value\": \"responsible_person\"\n                    }\n                }\n            }\n        }\n    }\n}"
+  },
+  "getRegionNameLovSDP": {
+    "type": "vb/ServiceDataProvider",
+    "defaultValue": {
+      "endpoint": "PmisSetup/getPmisLovRegionName",
+        "responseType": "getPmisLovRegionName",
+        "itemsPath": "items",
+        "keyAttributes": "lookup_value_id"
+    }
+  },
+  "getProjectNumberLovSDP": {
+    "type": "vb/ServiceDataProvider",
+    "defaultValue": {
+      "endpoint": "RegionService/getProjectNumberLov",
+      "keyAttributes": "project_number",
+      "itemsPath": "items",
+      "responseType": "ProjectLovType",
+      "transformsContext": {
+        "vb-textFilterAttributes": [
+          "project_number"
+        ]
+      }
+    }
+  },
+  "getTenderNumberLovSDP": {
+    "type": "vb/ServiceDataProvider",
+    "defaultValue": {
+      "endpoint": "RegionService/getTenderNumberLov",
+      "keyAttributes": "tender_number",
+      "itemsPath": "items",
+      "responseType": "TenderLovType",
+      "transformsContext": {
+        "vb-textFilterAttributes": [
+          "tender_number"
+        ]
+      }
+    }
+  },
+  "getRegionalManagerLovSDP": {
+    "type": "vb/ServiceDataProvider",
+    "defaultValue": {
+    "endpoint": "PmisSetup/getPmisLovRegionResponsiblePerson",
+    "responseType": "getPmisLovRegionResponsiblePerson",
+    "itemsPath": "items",
+    "keyAttributes": "user_id",
+    "fetchChain": "getPmisLovRegionResponsiblePersonFetch"
+  }
+  },
+  "regionADP": {
+    "type": "vb/ArrayDataProvider2",
+    "defaultValue": {
+      "itemType": "RegionType",
+      "keyAttributes": "region_dtl_id"
+    }
+  },
+  "searchObj": {
+    "type": {
+      "in_limit": "string",
+      "in_offset": "string",
+      "p_region_id": "string",
+      "p_region_name": "string",
+      "p_project_id": "string",
+      "p_project_number": "string",
+      "p_tender_number": "string",
+      "p_tender_name": "string",
+      "p_responsible_person": "string",
+      "p_person_id": "string",
+      "p_created_by": "string",
+      "p_keyword": "string"
+    },
+    "defaultValue": {
+      "in_limit": "10",
+      "in_offset": "0",
+      "p_region_id": "",
+      "p_region_name": "",
+      "p_project_id": "",
+      "p_project_number": "",
+      "p_tender_number": "",
+      "p_tender_name": "",
+      "p_responsible_person": "",
+      "p_person_id": "",
+      "p_created_by": "",
+      "p_keyword": ""
+    }
+  },
+  "pagination": {
+    "type": {
+      "is_next": "boolean",
+      "is_prev": "boolean"
+    },
+    "defaultValue": {
+      "is_next": true,
+      "is_prev": true
+    }
+  },
+  "currentPage": {
+    "type": "number",
+    "defaultValue": 1
+  },
+  "totalRecords": {
+    "type": "number",
+    "defaultValue": 0
+  },
+  "vShowFragment": {
+    "type": "boolean",
+    "defaultValue": false
+  },
+  "about": {
+    "type": "AboutType"
+  }
+
+},
+  "metadata": {},
+  "types": {
+    "@decorators.getPmisLovRegionName": {
+      "endpoint": "getPmisLovRegionName",
+      "service": "PmisSetup",
+      "path": "response"
+    },
+    "@decorators.getPmisLovRegionResponsiblePerson": {
+      "endpoint": "getPmisLovRegionResponsiblePerson",
+      "service": "PmisSetup",
+      "path": "response"
+    },
+    "@decorators.RegionType": {
+      "endpoint": "getRegionData",
+      "service": "RegionService",
+      "path": "response"
+    },
+    "getPmisLovRegionName": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmisLovRegionResponsiblePerson": {
+      "items": [
+        {
+          "display_name": "string",
+          "email_address": "string",
+          "person_full_name": "string",
+          "person_number": "string",
+          "user_id": "number"
+
+        }
+      ]
+    },
+    "RegionType": {
+      "region_dtl_id": "number",
+      "objective_version_num": "number",
+      "project_id": "number",
+      "tender_id": "number",
+      "tender_number": "string",
+      "responsible_person_id": "number",
+      "responsible_person_name": "string",
+      "person_id": "number",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "ProjectLovType": {
+      "project_number": "string"
+    },
+    "TenderLovType": {
+      "tender_number": "string"
+    },
+    "RegionalManagerLovType": {
+      "responsible_person": "string"
+    },
+    "SearchParametersType": {
+      "in_limit": "string",
+      "in_offset": "string",
+      "p_region_id": "number",
+      "p_region_name": "string",
+      "p_project_id": "number",
+      "p_project_number": "string",
+      "p_tender_number": "string",
+      "p_tender_name": "string",
+      "p_responsible_person": "string",
+      "p_person_id": "number",
+      "p_created_by": "string",
+      "p_keyword": "string"
+    },
+    "AboutType": {
+      "created_by": "string",
+      "creation_date": "string",
+      "last_updated_by": "string",
+      "last_update_date": "string",
+      "last_update_login": "string"
+    }
+
+  },
+  "eventListeners": {
+    "aboutBtnAction": {
+      "chains": [
+        {
+          "chain": "onAboutAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "onAboutOkAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "onEditAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "buttonAction3": {
+      "chains": [
+        {
+          "chain": "onDeleteAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "buttonAction4": {
+      "chains": [
+        {
+          "chain": "onOkDeleteAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "createBtnAction": {
+      "chains": [
+        {
+          "chain": "onCreateAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "exportBtnAction": {
+      "chains": [
+        {
+          "chain": "onExportAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "nextBtnAction": {
+      "chains": [
+        {
+          "chain": "nextBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "prevBtnAction": {
+      "chains": [
+        {
+          "chain": "prevBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "onResetAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-date-time": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      }
+
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-search.css"
+    ]
+  },
+  "constants": {
+    "columnsVar": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Action",
+          "field": "",
+          "resizable": "enabled",
+          "sortable": "disabled",
+          "frozenEdge": "start",
+          "width": 100,
+          "template": "actions",
+          "headerStyle": "white-space: nowrap; min-width: 100px;",
+          "style": ""
+
+        },
+        {
+          "headerText": "Region Name",
+          "field": "region_name",
+          "resizable": "enabled",
+          "width": 160,
+          "template": "region_name",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": ""
+        },
+        {
+          "headerText": "Tender Number",
+          "field": "tender_number",
+          "resizable": "enabled",
+          "width": 160,
+          "template": "tender_number",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": ""
+        },
+        {
+          "headerText": "Tender Name",
+          "field": "tender_name",
+          "resizable": "enabled",
+          "width": 240,
+          "template": "tender_name",
+          "headerStyle": "white-space: nowrap; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Project Number",
+          "field": "project_number",
+          "resizable": "enabled",
+          "width": 160,
+          "template": "project_number",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": ""
+        },
+        {
+          "headerText": "Regional Manager",
+          "field": "responsible_person_name",
+          "resizable": "enabled",
+          "width": "",
+          "template": "responsible_person",
+          "headerStyle": "white-space: nowrap; min-width: 180px;",
+          "style": ""
+        }
+      ],
+      "description": "[\n    {\n        \"headerText\": \"Action\",\n        \"field\": \"\",\n        \"resizable\": \"enabled\",\n        \"sortable\": \"disabled\",\n        \"frozenEdge\": \"start\",\n        \"width\": 100,\n        \"template\": \"actions\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 100px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Region Name\",\n        \"field\": \"region_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 160,\n        \"template\": \"region_name\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Tender Number\",\n        \"field\": \"tender_number\",\n        \"resizable\": \"enabled\",\n        \"width\": 160,\n        \"template\": \"tender_number\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Tender Name\",\n        \"field\": \"tender_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 270,\n        \"template\": \"tender_name\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Project Number\",\n        \"field\": \"project_number\",\n        \"resizable\": \"enabled\",\n        \"width\": 160,\n        \"template\": \"project_number\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Regional Manager\",\n        \"field\": \"responsible_person_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 210,\n        \"template\": \"responsible_person\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Created By\",\n        \"field\": \"created_by\",\n        \"resizable\": \"enabled\",\n        \"width\": 140,\n        \"template\": \"created_by\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Creation Date\",\n        \"field\": \"created_date\",\n        \"resizable\": \"enabled\",\n        \"width\": 140,\n        \"template\": \"date\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Last Updated By\",\n        \"field\": \"last_updated_by\",\n        \"resizable\": \"enabled\",\n        \"width\": 160,\n        \"template\": \"last_updated_by\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Last Update Date\",\n        \"field\": \"last_updated_date\",\n        \"resizable\": \"enabled\",\n        \"width\": 160,\n        \"template\": \"date\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Last Update Login\",\n        \"field\": \"last_updated_login\",\n        \"resizable\": \"enabled\",\n        \"width\": \"\",\n        \"template\": \"last_update_login\",\n        \"headerStyle\": \"white-space: nowrap;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"About\",\n        \"field\": \"about\",\n        \"sortable\": \"disabled\",\n        \"resizable\": \"enabled\",\n        \"template\": \"about\",\n        \"width\": 61,\n        \"className\": \"oj-helper-text-align-center\"\n    }\n]"
+    }
+  }
+}

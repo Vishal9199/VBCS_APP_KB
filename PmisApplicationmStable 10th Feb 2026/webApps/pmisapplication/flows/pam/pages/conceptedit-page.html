@@ -1,0 +1,210 @@
+<style>
+  oj-option#scheduleeditpageid_h_cancelAction {
+    display: none !important;
+  }
+</style>
+
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div>
+        <oj-sp-advanced-create-edit id="scheduleeditpageid" page-title="PAM Schedule Details" page-subtitle=" "
+          display-options.responsive-padding="on" primary-action.label="Close"
+          secondary-actions="[[ $variables.aToolBar ]]"
+          on-sp-primary-action="[[$listeners.scheduleeditpageidSpPrimaryAction]]"
+          on-sp-secondary-action="[[$listeners.scheduleeditpageidSpSecondaryAction]]">
+
+          <div slot="main" style="padding-top: 0; margin-top: 0;">
+            <div style="margin-top: 0;">
+
+              <!-- Schedule Information Section -->
+              <oj-collapsible id="schedule-info-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+                style="margin-top: 0;">
+                <span slot="header" style="font-weight: bold; color: white;">Schedule Information</span>
+                <div style="padding: 1rem;">
+                  <oj-validation-group valid="{{ $variables.formValidation }}">
+                    <oj-form-layout max-columns="3" label-edge="start" label-width="45%" colspan-wrap="wrap">
+
+                      <oj-select-single id="project" label-hint="Project"
+                        value="{{ $variables.pamScheduleDetailVar.project_id }}" item-text="project_name"
+                        style="width: 16rem;" user-assistance-density="compact"
+                        data="[[ $variables.getPmispamConceptstudyLovProjectnameListSDP ]]" required="true">
+                      </oj-select-single>
+
+                      <oj-select-single id="phase" label-hint="Phase"
+                        value="{{ $variables.pamScheduleDetailVar.phase_id }}" item-text="lookup_value_name"
+                        style="width: 16rem;" user-assistance-density="compact"
+                        data="[[$variables.getPmispamConceptstudyLovPhaseListSDP]]" required="true">
+                      </oj-select-single>
+
+                      <oj-select-single id="milestone" label-hint="Milestone"
+                        value="{{ $variables.pamScheduleDetailVar.milestone_id }}" item-text="lookup_value_name"
+                        style="width: 16rem;" user-assistance-density="compact"
+                        data="[[$variables.getPmispamConceptstudyLovMilestoneListSDP]]" required="true">
+                      </oj-select-single>
+
+                      <!-- <oj-select-single id="senior-manager" label-hint="Senior Manager"
+                      value="{{ $variables.pamScheduleDetailVar.cs_senior_mgr_id }}" item-text="user_name"
+                      style="width: 16rem;" user-assistance-density="compact">
+                    </oj-select-single> -->
+
+                      <oj-select-single item-text="person_full_name" id="senior-manager" label-hint="Senior Manager"
+                        aria-label="oj-select-single" style="width: 16rem;" user-assistance-density="compact"
+                        value="{{ $variables.pamScheduleDetailVar.cs_senior_mgr_id }}"
+                        data="[[$variables.getPmispamConceptstudyLovUserListSDP]]" required="true">
+
+                        <template slot="collectionTemplate" data-oj-as="collection">
+                          <oj-table style="max-width:750px; max-height:300px;" id="table1"
+                            horizontal-grid-visible="disabled" vertical-grid-visible="disabled"
+                            class="oj-select-results" selected.row="[[collection.selected]]"
+                            current-row="{{collection.currentRow}}"
+                            columns='[{"headerText":"Person Number","field":"person_number","style":"width:100px","sortable":"disabled"},{"headerText":"Person Name","field":"person_full_name"}]'
+                            on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]">
+                            <template slot="cellTemplate" data-oj-as="cell">
+                              <oj-bind-text value="[[cell.data]]"></oj-bind-text>
+                            </template>
+                          </oj-table>
+                        </template>
+
+                      </oj-select-single>
+                      <!-- <oj-select-single id="planning-manager" label-hint="Planning Manager"
+                      value="{{ $variables.pamScheduleDetailVar.cs_planning_mgr_id }}" item-text="user_name"
+                      style="width: 16rem;" user-assistance-density="compact">
+                    </oj-select-single> -->
+
+                      <oj-select-single item-text="person_full_name" id="planning-manager" label-hint="Planning Manager"
+                        aria-label="oj-select-single" style="width: 16rem;" user-assistance-density="compact"
+                        value="{{ $variables.pamScheduleDetailVar.cs_planning_mgr_id }}"
+                        data="[[$variables.getPmispamConceptstudyLovUserListSDP]]" required="true">
+
+                        <template slot="collectionTemplate" data-oj-as="collection">
+                          <oj-table style="max-width:750px; max-height:300px;" id="table2"
+                            horizontal-grid-visible="disabled" vertical-grid-visible="disabled"
+                            class="oj-select-results" selected.row="[[collection.selected]]"
+                            current-row="{{collection.currentRow}}"
+                            columns='[{"headerText":"Person Number","field":"person_number","style":"width:100px","sortable":"disabled"},{"headerText":"Person Name","field":"person_full_name"}]'
+                            on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]">
+
+                            <template slot="cellTemplate" data-oj-as="cell">
+                              <oj-bind-text value="[[cell.data]]"></oj-bind-text>
+                            </template>
+
+                          </oj-table>
+                        </template>
+
+                      </oj-select-single>
+
+
+                      <oj-select-single id="consultant" label-hint="Consultant"
+                        value="{{ $variables.pamScheduleDetailVar.consultant_id }}" item-text="lookup_value_name"
+                        style="width: 16rem;" user-assistance-density="compact"
+                        data="[[$variables.getPmispamConceptstudyLovConsultantListSDP]]" required="true">
+                      </oj-select-single>
+
+                      <oj-text-area id="remarks" label-hint="Remarks" placeholder="Remarks"
+                        value="{{ $variables.pamScheduleDetailVar.remarks }}" style="width: 16rem;" rows="3"
+                        user-assistance-density="compact">
+                      </oj-text-area>
+
+                    </oj-form-layout>
+                  </oj-validation-group>
+                </div>
+              </oj-collapsible>
+
+              <!-- Budget Information Section -->
+              <oj-collapsible id="budget-info-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+                style="margin-top: 1rem;">
+                <span slot="header" style="font-weight: bold; color: white;">Budget Information</span>
+                <div style="padding: 1rem;">
+                  <oj-validation-group valid="{{ $variables.formValidation2 }}">
+                    <oj-form-layout max-columns="3" label-edge="start" label-width="45%" colspan-wrap="wrap">
+
+                      <oj-input-number id="budget-amount" label-hint="Budget Amount" placeholder="Budget Amount"
+                        value="{{ $variables.pamScheduleDetailVar.budget_amount }}" style="width: 16rem;"
+                        user-assistance-density="compact" required="true">
+                      </oj-input-number>
+
+                      <oj-input-number id="completion-percentage" label-hint="Completion Percentage"
+                        placeholder="Completion Percentage"
+                        value="{{ $variables.pamScheduleDetailVar.completion_percentage }}" min="0" max="100"
+                        style="width: 16rem;" user-assistance-density="compact" required="true" >
+                        <!-- <span slot="suffix">%</span> -->
+                      </oj-input-number>
+
+                    </oj-form-layout>
+                  </oj-validation-group>
+                </div>
+              </oj-collapsible>
+
+              <!-- Schedule Dates Section -->
+              <oj-collapsible id="schedule-dates-section" expanded="true"
+                class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 1rem;">
+                <span slot="header" style="font-weight: bold; color: white;">Schedule Dates</span>
+                <div style="padding: 1rem;">
+                  <oj-validation-group valid="{{ $variables.formValidation3 }}">
+                    <oj-form-layout max-columns="3" label-edge="start" label-width="45%" colspan-wrap="wrap">
+
+                      <oj-input-date id="planned-start-date" label-hint="Planned Start Date"
+                        value="{{ $variables.pamScheduleDetailVar.planned_start_date }}"
+                        converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}' style="width: 16rem;"
+                        user-assistance-density="compact" max="[[ $variables.pamScheduleDetailVar.planned_end_date ]]"
+                        required="true">
+                      </oj-input-date>
+
+                      <oj-input-date id="planned-end-date" label-hint="Planned End Date"
+                        value="{{ $variables.pamScheduleDetailVar.planned_end_date }}"
+                        converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}' style="width: 16rem;"
+                        user-assistance-density="compact" min="[[ $variables.pamScheduleDetailVar.planned_start_date ]]"
+                        required="true">
+                      </oj-input-date>
+
+                      <oj-input-date id="revised-start-date" label-hint="Revised Start Date"
+                        value="{{ $variables.pamScheduleDetailVar.revised_start_date }}"
+                        converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}' style="width: 16rem;"
+                        user-assistance-density="compact" max="[[ $variables.pamScheduleDetailVar.revised_end_date ]]"
+                        required="true">
+                      </oj-input-date>
+
+                      <oj-input-date id="revised-end-date" label-hint="Revised End Date"
+                        value="{{ $variables.pamScheduleDetailVar.revised_end_date }}"
+                        converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}' style="width: 16rem;"
+                        user-assistance-density="compact" min="[[ $variables.pamScheduleDetailVar.revised_start_date ]]"
+                        required="true">
+                      </oj-input-date>
+
+                      <oj-input-date id="actual-start-date" label-hint="Actual Start Date"
+                        value="{{ $variables.pamScheduleDetailVar.actual_start_date }}"
+                        converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}' style="width: 16rem;"
+                        user-assistance-density="compact" max="[[ $variables.pamScheduleDetailVar.actual_end_date ]]"
+                        required="true">
+                      </oj-input-date>
+
+                      <oj-input-date id="actual-end-date" label-hint="Actual End Date"
+                        value="{{ $variables.pamScheduleDetailVar.actual_end_date }}"
+                        converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}' style="width: 16rem;"
+                        user-assistance-density="compact" min="[[ $variables.pamScheduleDetailVar.actual_start_date ]]"
+                        required="true">
+                      </oj-input-date>
+
+                    </oj-form-layout>
+                  </oj-validation-group>
+                </div>
+              </oj-collapsible>
+
+            </div>
+          </div>
+
+        </oj-sp-advanced-create-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<oj-dialog id="loadingDialog" style="width: 300px; overflow: hidden;" cancel-behavior="none" drag-affordance="title-bar"
+  header-decoration="off" position.at.vertical="top" position.my.vertical="top">
+  <div slot="body" style="text-align: center; padding: 2rem;">
+    <oj-progress-circle value="-1"></oj-progress-circle>
+    <p style="margin-top: 1rem; font-weight: 500;">Loading Project List Data...</p>
+  </div>
+</oj-dialog>

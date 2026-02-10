@@ -1,0 +1,31 @@
+{
+    "items": [
+        {
+            "year_prompt": "2017-2020"
+        },
+        {
+            "year_prompt": "2020-2023"
+        },
+        {
+            "year_prompt": "2023-2026"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 3,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/budgetcost/yearprompts"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/budgetcost/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/budgetcost/yearprompts"
+        }
+    ]
+}

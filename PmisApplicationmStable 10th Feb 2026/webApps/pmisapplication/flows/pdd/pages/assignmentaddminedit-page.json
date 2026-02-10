@@ -1,0 +1,175 @@
+{
+  "metadata": {},
+  "title": "Project Assignment Add/Edit",
+  "description": "Add/Edit page for Project Assignment Management with Project & Tender Information and User Assignments sections",
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "oj-sp/simple-create-edit/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      }
+
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  },
+  "types": {
+    "@decorators.getPmispamLovUsersResponse": {
+      "endpoint": "getPmispamLovUsers",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamProjectassignmentadminLovProjectResponse": {
+      "endpoint": "getPmispamProjectassignmentadminLovProject",
+      "service": "PAM",
+      "path": "response"
+    },
+    "getPmispamLovUsersResponse": {
+      "items": [
+        {
+          "person_full_name": "string",
+          "person_number": "string",
+          "user_id": "number"
+        }
+      ]
+    },
+    "getPmispamProjectassignmentadminLovProjectResponse": {
+      "items": [
+        {
+          "project_id": "number",
+          "project_name": "string"
+        }
+      ]
+    },
+    "ProjectAssignmentType": {
+      "project_assignment_id": "number",
+      "object_version_num": "number",
+      "project_id": "number",
+      "ora_project_id": "number",
+      "tender_id": "number",
+      "tender_number": "string",
+      "line_num": "number",
+      "senior_mgr_user_id": "number",
+      "proj_mgr_user_id": "number",
+      "proj_engg_user_id": "number",
+      "focal_point_user_id": "number",
+      "comments": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "creation_date": "string",
+      "last_updated_by": "string",
+      "last_update_date": "string",
+      "last_update_login": "string"
+    }
+
+  },
+  "variables": {
+    "getPmispamLovUsersListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PAM/getPmispamLovUsers",
+        "keyAttributes": "user_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamLovUsersResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "person_full_name"
+          ]
+        }
+      }
+    },
+    "getPmispamProjectassignmentadminLovProjectListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PAM/getPmispamProjectassignmentadminLovProject",
+        "keyAttributes": "project_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamProjectassignmentadminLovProjectResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "project_name"
+          ]
+        }
+      }
+    },
+    "projectAssignmentVar": {
+      "type": "ProjectAssignmentType"
+    },
+    "aToolBar": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Save",
+          "id": "save",
+          "icon": "oj-ux-ico-save"
+        },
+        {
+          "label": "Save & Close",
+          "id": "saveClose",
+          "icon": "oj-ux-ico-save-and-close"
+        },
+        {
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ]
+    },
+    "pageMode": {
+      "type": "string",
+      "defaultValue": "create"
+    },
+     "pNavCode": {
+      "type": "string",
+      "defaultValue": "CREATE",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "pNavId": {
+      "type": "string",
+      "defaultValue": "0",
+      "required": true,
+      "input": "fromUrl"
+    }
+
+  },
+  "eventListeners": {
+    "assignmentadminidSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "closebuttonaction",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    }
+  }
+}

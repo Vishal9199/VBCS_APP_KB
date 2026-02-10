@@ -1,0 +1,680 @@
+/**
+ * PMIS Calendar Smart Search Page Theme with User Specified Color: #084c4c
+ * Organized CSS with clear topic sections for easy maintenance
+ */
+ 
+/* ========================================================================================================== */
+/* Root Variables - Start */
+/* ========================================================================================================== */
+
+:root {
+  --user-primary-color: #01474d;
+  /* default background */
+  --user-button-hover: #116971;
+  /* hover shade */
+  --user-button-active: #003337;
+  /* click/active shade */
+  --user-button-text: #ffffff;
+  /* text color */
+
+  --oj-button-height: 2rem;
+  --oj-form-layout-start-edge-label-to-value-padding: 0.4rem;
+  --oj-form-layout-top-edge-label-to-value-padding: 0rem;
+  --oj-text-field-height: 1.75rem;
+
+  --oj-collection-grid-row-height: 0.6rem;
+  --oj-collection-grid-header-height: 1.25rem;
+}
+
+.oj-ux-ico-oracle-o::before {
+  content: '\f345';
+  color: black;
+}
+
+.oj-table-sort-icon-container:hover .oj-component-icon {
+  color: #fff;
+  cursor: pointer !important;
+}
+
+.oj-table-sort-icon-container .oj-component-icon {
+  font-size: 13px;
+  height: 13px;
+  width: 13px;
+  color: #ccc;
+  transition: color 0.2s ease;
+}
+
+/* Root Variables - End */
+
+
+/* ========================================================================================================== */
+/* Page Container Fit - Start */
+/* ========================================================================================================== */
+
+.oj-sp-public-primary-content-container {
+    min-height: fit-content !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    box-sizing: border-box !important;
+}
+
+/* Page Container Fit - End */
+
+
+/* ========================================================================================================== */
+/* Smart Search Page Header - Start */
+/* ========================================================================================================== */
+
+.oj-sp-header-general-overview-header-strip {
+  display: none;
+}
+
+#oj_exssp1_h_selectContext {
+   display: none;
+}
+
+#oj_exssp1_h_pageTitle {
+  color: white !important;
+  font-weight: bold;
+}
+
+#lookup_sm_h_pageTitle {
+  color: white !important;
+  font-weight: bold;
+}
+
+#landing_page_h_pageTitle {
+  color: white !important;
+  font-weight: bold;
+}
+
+/* Smart Search Page Header - End */
+
+
+/* ========================================================================================================== */
+/* Button Enable Style - Start */
+/* ========================================================================================================== */
+
+.oj-button.oj-default.oj-button-outlined-chrome .oj-button-button {
+    background-color: #084c4c !important;
+    color: white !important;
+}
+
+.oj-button-toggle.oj-default.oj-button-outlined-chrome, 
+.oj-button-toggle.oj-disabled.oj-button-outlined-chrome, 
+.oj-button-toggle.oj-focus-only.oj-button-outlined-chrome, 
+.oj-button.oj-default.oj-button-outlined-chrome .oj-button-button, 
+.oj-button.oj-disabled.oj-button-outlined-chrome .oj-button-button, 
+.oj-button.oj-focus-only.oj-button-outlined-chrome .oj-button-button {
+    border-color: white !important;
+    background-image: none;
+    background-color: #084c4c !important;
+}
+
+.oj-button-toggle.oj-default.oj-button-outlined-chrome, 
+.oj-button-toggle.oj-focus-only.oj-button-outlined-chrome, 
+.oj-button.oj-default.oj-button-outlined-chrome .oj-button-button, 
+.oj-button.oj-focus-only.oj-button-outlined-chrome .oj-button-button {
+    color: white !important;
+}
+
+/* Button Enable Style - End */
+
+/* ========================================================================================================== */
+/* Button Hover Style - Start */
+/* ========================================================================================================== */
+
+/* Button Hover Fix - Outlined Chrome */
+.oj-button.oj-hover.oj-button-outlined-chrome .oj-button-button,
+.oj-button-toggle.oj-hover.oj-button-outlined-chrome .oj-button-button {
+    background-color: #084c4c !important;  /* Use your theme's hover color */
+    border-color: #084c4c !important;
+    color: white !important;
+}
+
+/* Button Active/Hover Combo States */
+.oj-button.oj-hover.oj-active.oj-button-outlined-chrome .oj-button-button,
+.oj-button.oj-active.oj-button-outlined-chrome .oj-button-button {
+    background-color: #084c4c !important;  /* Darker active shade */
+    border-color: #084c4c !important;
+    color: white !important;
+}
+
+.oj-button.oj-default.oj-button-outlined-chrome .oj-button-button:hover,
+.oj-button.oj-focus-only.oj-button-outlined-chrome .oj-button-button:hover {
+    background-color: #084c4c !important;
+    border-color: white !important;
+    border-radius: 5px;
+    color: white !important; /* ✅ WHITE TEXT ON HOVER */
+}
+
+.oj-button-toggle.oj-default.oj-button-outlined-chrome:hover,
+.oj-button-toggle.oj-focus-only.oj-button-outlined-chrome:hover,
+.oj-button.oj-default.oj-button-outlined-chrome:hover .oj-button-button,
+.oj-button.oj-focus-only.oj-button-outlined-chrome:hover .oj-button-button {
+    background-color: #084c4c !important;
+    border-color: white !important;  /* ✅ WHITE BORDER ON HOVER */
+    border-radius: 5px;
+    color: white !important;         /* ✅ WHITE TEXT ON HOVER */
+}
+
+/* Specific button hover targeting for Smart Search buttons */
+.oj-ux-ico-plus:hover,
+.oj-ux-ico-reset:hover,
+.oj-ux-ico-refresh:hover,
+.oj-ux-ico-export-excel-data:hover {
+    color: white !important;
+}
+
+/* Ensure button containers maintain white styling on hover */
+.oj-button.oj-enabled.oj-button-outlined-chrome:hover,
+.oj-button.oj-hover.oj-button-outlined-chrome .oj-button-button {
+    border: 1px solid white !important; 
+    border-radius: 6px;
+    color: white !important;
+}
+
+/* Button Icon hover states - WHITE */
+.oj-ux-ico-plus:hover:before,
+.oj-ux-ico-reset:hover:before,
+.oj-ux-ico-refresh:hover:before,
+.oj-ux-ico-export-excel-data:hover:before {
+    color: white !important;
+}
+
+/* Button Enabled Hover - Extra Coverage */
+/* .oj-button.oj-hover.oj-default.oj-button-outlined-chrome .oj-button-button,
+.oj-button.oj-hover.oj-focus-only.oj-button-outlined-chrome .oj-button-button {
+    background-color: #084c4c !important;
+    border-color: white !important;
+    border-radius: 5px;
+    color: white !important;
+} */
+
+/* Button Enabled Hover - Container */
+.oj-button.oj-hover.oj-button-outlined-chrome {
+    border-color: white !important;
+    border-radius: 5px;
+}
+
+/* Button Enabled Hover - Toggle States */
+.oj-button-toggle.oj-hover.oj-default.oj-button-outlined-chrome,
+.oj-button-toggle.oj-hover.oj-focus-only.oj-button-outlined-chrome {
+    border-color: white !important;
+    border-radius: 5px;
+    background-color: #084c4c !important;
+}
+
+/* Button Enabled Hover - Final Coverage */
+.oj-button:hover.oj-button-outlined-chrome,
+.oj-button:hover.oj-button-outlined-chrome .oj-button-button {
+    border-color: white !important;
+    border-radius: 5px;
+    color: white !important;
+}
+
+/* Button Enabled Hover Style - End */
+
+/* ========================================================================================================== */
+/* Button Disabled Style - Start */
+/* ========================================================================================================== */
+
+.oj-button-toggle.oj-disabled, 
+.oj-button.oj-disabled .oj-button-button {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.oj-button-toggle.oj-disabled.oj-button-outlined-chrome, .oj-button.oj-disabled.oj-button-outlined-chrome .oj-button-button
+ {
+  color: white;
+}
+
+/* Button Disabled Style - End */
+
+
+/* ========================================================================================================== */
+/* Button Icons Color - Start */
+/* ========================================================================================================== */
+
+.oj-ux-ico-plus:before {
+  content: '\f320';
+  color: white !important;
+}
+
+.oj-ux-ico-reset:before {
+  content: '\f92f';
+  color: white !important;
+}
+
+.oj-ux-ico-refresh:before {
+  content: '\f32f';
+  color: white !important;
+}
+
+.oj-ux-ico-export-excel-data:before {
+  content: '\f93c';
+  color: white !important;
+}
+
+.oj-ux-ico-back:before {
+  content: '\f139';
+  color: white !important;
+}
+
+.oj-ux-ico-forward-next:before {
+  content: '\f61f';
+  color: white !important;
+}
+
+/* Button Icons Color - End */
+
+
+/* ========================================================================================================== */
+/* Table Structure - Start */
+/* ========================================================================================================== */
+
+.oj-table {
+    position: relative;
+    line-height: normal;
+    min-width: 240px;
+    min-height: auto;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+/* Table Structure - End */
+
+
+/* ========================================================================================================== */
+/* Table Header Style - Start */
+/* ========================================================================================================== */
+
+.oj-table-column-header-cell {
+    color: white;
+    background-color: #084c4c;
+    font-weight: bold;
+    border-color: #ededed;
+}
+
+.oj-table-column-header {
+    font-size: initial;
+    position: relative;
+    float: none;
+    text-overflow: inherit;
+    overflow: inherit;
+    white-space: normal;
+    display: inline-flex;
+    align-items: center;
+    font-weight: bold;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Table Header Style - End */
+
+
+/* ========================================================================================================== */
+/* Table Header Text Wrapping Prevention - Start */
+/* CRITICAL: Prevents header text from breaking into multiple lines */
+/* ========================================================================================================== */
+
+.oj-table th,
+.oj-table-column-header-cell,
+.oj-table-column-header,
+.oj-table-column-header *,
+oj-table .oj-table-column-header-cell,
+.oj-table .oj-table-column-header {
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    flex-wrap: nowrap !important;
+}
+
+/* Table Header Text Wrapping Prevention - End */
+
+
+/* ========================================================================================================== */
+/* Table Body Row Style - Start */
+/* ========================================================================================================== */
+
+.oj-table-body-row {
+  height: auto !important;
+  min-height: 0rem !important;
+  font-size: 12px;
+  font-weight: medium;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Table Body Row Style - End */
+
+
+/* ========================================================================================================== */
+/* Table Data Cell Style - Start */
+/* ========================================================================================================== */
+
+.oj-table .oj-table-data-cell {
+  height: 20px !important;
+  min-height: 20px !important;
+  padding: 2px 6px !important;
+  line-height: 16px !important;
+  font-size: 12px !important;
+}
+
+/* Table Data Cell Style - End */
+
+
+/* ========================================================================================================== */
+/* Table Row Hover Effect - Start */
+/* ========================================================================================================== */
+
+.oj-table-data-row:hover {
+    background-color: rgba(8, 76, 76, 0.05);
+}
+
+/* Table Row Hover Effect - End */
+
+
+/* ========================================================================================================== */
+/* Table Action Column Style - Start */
+/* ========================================================================================================== */
+
+.oj-button-sm {
+    height: 20px !important;
+}
+
+.oj-ux-ico-edit:before {
+  color: black !important;
+}
+
+.oj-ux-ico-trash:before {
+  color: #dc3545 !important;
+}
+
+/* Table Action Column Style - End */
+
+
+/* ========================================================================================================== */
+/* Smart Search Filter Style - Start */
+/* ========================================================================================================== */
+
+.oj-typography-body-xs, .oj-typography-caption-1 {
+    font-size: var(--oj-typography-body-xs-font-size) !important;
+    font-weight: 374 !important;
+    line-height: var(--oj-typography-body-xs-line-height) !important;
+}
+
+oj-sp-smart-search-page .oj-sp-checkbox-template-wrapper, 
+oj-sp-smart-search-page .oj-sp-template-wrapper {
+    padding-left: var(--oj-sp-template-padding-horizontal) !important;
+    padding-right: var(--oj-sp-template-padding-horizontal) !important;
+    /* background-color: white !important; */
+    background-color: #084c4c !important;
+}
+
+/* Smart Search Filter Style - End */
+
+
+/* ========================================================================================================== */
+/* Smart Search Filter Chip Style - Start */
+/* ========================================================================================================== */
+
+.oj-sp-filter-chip-chrome {
+  background-color: #ffffff !important;
+}
+
+.oj-sp-filter-chip-suggested .oj-sp-smart-search-complex-chip-label {
+  color: black !important;
+}
+
+oj-sp-smart-search .oj-sp-filter-chip-suggested .oj-sp-smart-search-complex-chip-value {
+  color: #000000 !important;
+}
+
+/* Smart Search Filter Chip Style - End */
+
+
+/* ========================================================================================================== */
+/* Pagination Display Style - Start */
+/* ========================================================================================================== */
+
+.pagination-text-area {
+    border: 1px solid #084c4c !important;
+    background-color: #e6f2f2 !important;
+    height: 1.75rem !important;
+}
+
+/* Pagination Display Style - End */
+
+
+/* ========================================================================================================== */
+/* Pagination Button Style - Start */
+/* ========================================================================================================== */
+
+.oj-textarea .oj-text-field-container {
+    height: 1.75rem;
+}
+
+.oj-button-toggle.oj-disabled, .oj-button.oj-disabled .oj-button-button {
+  cursor: not-allowed;
+}
+/* #prevBtn, #nextBtn {
+} */
+
+/* #prevBtn[disabled], #nextBtn[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+} */
+
+/* Pagination Button Style - End */
+
+
+/* ========================================================================================================== */
+/* Input Field Style - Start */
+/* ========================================================================================================== */
+
+.oj-text-field .oj-text-field-container {
+  position: relative;
+  box-sizing: border-box;
+  border-style: solid;
+  transition: border-color .1s linear;
+  border-color: var(--oj-text-field-border-color);
+  border-width: var(--oj-text-field-border-width);
+  border-radius: var(--oj-text-field-border-radius);
+  background-color: var(--oj-text-field-bg-color);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  height: var(--oj-text-field-height);
+  border: solid 1px grey;
+  font-size: 12px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Input Field Style - End */
+
+
+/* ========================================================================================================== */
+/* Input Field Readonly Style - Start */
+/* ========================================================================================================== */
+
+.oj-text-field-readonly {
+  min-height: 0;
+  font-size: 12px !important;
+}
+
+.oj-text-field.oj-read-only .oj-text-field-container {
+  border-width: var(--oj-text-field-border-width);
+  background-color: transparent;
+  height: var(--oj-text-field-height);
+  padding: 3px;
+  min-height: 1rem;
+}
+
+/* Input Field Readonly Style - End */
+
+
+/* ========================================================================================================== */
+/* Input Field Disabled Style - Start */
+/* ========================================================================================================== */
+
+.oj-text-field.oj-disabled .oj-text-field-input {
+  color: black;
+  background-color: #dedcde;
+}
+
+.oj-text-field.oj-disabled .oj-text-field-container {
+  border-color: var(--oj-text-field-border-color-disabled);
+  background-color: #f6f6f6;
+  border: solid 1px #171616;
+}
+
+/* Input Field Disabled Style - End */
+
+
+/* ========================================================================================================== */
+/* Date Picker Style - Start */
+/* ========================================================================================================== */
+
+.oj-inputdate-input {
+  font-size: 12px !important;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Date Picker Style - End */
+
+
+/* ========================================================================================================== */
+/* Select Single (Dropdown) Style - Start */
+/* ========================================================================================================== */
+
+.oj-select-single .oj-select-choice {
+  font-size: 12px !important;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Select Single (Dropdown) Style - End */
+
+
+/* ========================================================================================================== */
+/* Dialog Style - Start */
+/* ========================================================================================================== */
+
+.oj-dialog .oj-dialog-header {
+  background-color: #084c4c;
+  color: white;
+  font-weight: bold;
+}
+
+.oj-dialog .oj-dialog-header .oj-dialog-title {
+  color: white;
+}
+
+.oj-dialog .oj-fwk-icon {
+  color: white;
+  margin-top: 1rem;
+}
+
+.oj-dialog .oj-fwk-icon:before {
+  color: white;
+}
+
+/* Dialog Style - End */
+
+
+/* ========================================================================================================== */
+/* Form Layout Style - Start */
+/* ========================================================================================================== */
+
+.oj-form-layout .oj-formlayout-labels-inline .oj-label {
+  color: #495057;
+  font-weight: 500;
+}
+
+/* Form Layout Style - End */
+
+
+/* ========================================================================================================== */
+/* Collapsible Section Style - Start */
+/* ========================================================================================================== */
+
+.oj-collapsible-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+/* Collapsible Section Style - End */
+
+
+/* ========================================================================================================== */
+/* Panel Style - Start */
+/* ========================================================================================================== */
+
+.oj-panel.oj-panel-shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.oj-panel.oj-selected {
+  border-left: 4px solid #084c4c;
+}
+
+/* Panel Style - End */
+
+
+/* ========================================================================================================== */
+/* Responsive Design - Mobile - Start */
+/* ========================================================================================================== */
+
+@media (max-width: 768px) {
+    .oj-table {
+        font-size: 0.875rem;
+    }
+    
+    .oj-button-md {
+        font-size: 0.875rem;
+    }
+    
+    .oj-form-layout[max-columns="3"] {
+        max-columns: 1;
+    }
+}
+
+/* Responsive Design - Mobile - End */
+
+
+/* ========================================================================================================== */
+/* Print Styles - Start */
+/* ========================================================================================================== */
+
+@media print {
+    .oj-button,
+    .pagination-section {
+        display: none !important;
+    }
+    
+    .oj-table {
+        width: 100%;
+        font-size: 10pt;
+    }
+    
+    .oj-collapsible {
+        border: 1px solid #000;
+        break-inside: avoid;
+    }
+}
+
+/* Print Styles - End */
+
+
+/* ========================================================================================================== */
+/* Custom Utility Classes - Start */
+/* ========================================================================================================== */
+
+.custom-button-align {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Custom Utility Classes - End */

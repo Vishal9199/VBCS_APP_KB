@@ -1,0 +1,168 @@
+{
+  "title": "Project Assignment Smart Search",
+  "description": "Smart Search page for Project Assignment with filters for Tender Number, Project Number, Project Name, and Date Range",
+  "variables": {
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "TenderNumberFilter": {
+              "label": "Tender Number",
+              "options": {
+                "field": "tender_number"
+              }
+            },
+            "ProjectNumberFilter": {
+              "label": "Project Number",
+              "options": {
+                "field": "project_id"
+              }
+            },
+            "ProjectNameFilter": {
+              "label": "Project Name",
+              "options": {
+                "field": "project_name"
+              }
+            },
+            "DateRangeFilter": {
+              "label": "Date Range"
+            }
+          }
+        }
+      }
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/projectassignmentsearchconfig.json' ]]"
+      }
+    },
+    "searchObj": {
+      "type": {
+        "IN_LIMIT": "string",
+        "IN_OFFSET": "string",
+        "P_TENDER_NUMBER": "string",
+        "P_PROJECT_NUMBER": "string",
+        "P_PROJECT_NAME": "string",
+        "P_FROM_DATE": "string",
+        "P_TO_DATE": "string"
+      },
+      "defaultValue": {
+        "IN_LIMIT": "30",
+        "IN_OFFSET": "0",
+        "P_TENDER_NUMBER": "",
+        "P_PROJECT_NUMBER": "",
+        "P_PROJECT_NAME": "",
+        "P_FROM_DATE": "",
+        "P_TO_DATE": ""
+      }
+    },
+    "projectAssignmentADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "ProjectAssignmentType",
+        "keyAttributes": "project_assignment_id"
+      }
+    },
+    "currentPage": {
+      "type": "number",
+      "defaultValue": 1
+    },
+    "totalRecords": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "pageSize": {
+      "type": "number",
+      "defaultValue": 30
+    }
+  },
+  "types": {
+    "ProjectAssignmentType": {
+      "project_assignment_id": "number",
+      "object_version_num": "number",
+      "project_id": "number",
+      "ora_project_id": "number",
+      "tender_id": "number",
+      "tender_number": "string",
+      "line_num": "number",
+      "senior_mgr_user_id": "number",
+      "proj_mgr_user_id": "number",
+      "proj_engg_user_id": "number",
+      "focal_point_user_id": "number",
+      "comments": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_update_login": "string",
+      "project_name": "string",
+      "senior_mgr_name": "string",
+      "proj_mgr_name": "string",
+      "proj_engg_name": "string",
+      "focal_point_name": "string"
+    }
+  },
+  "metadata": {},
+  "eventListeners": {
+    "createBtnAction": {
+      "chains": [
+        {
+          "chain": "createactionchain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    }
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      }
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-search.css"
+    ]
+  }
+}

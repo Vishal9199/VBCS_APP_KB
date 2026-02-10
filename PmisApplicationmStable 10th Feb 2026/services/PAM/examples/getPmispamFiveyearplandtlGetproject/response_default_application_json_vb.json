@@ -1,0 +1,29 @@
+{
+    "items": [
+        {
+            "project_id": 1338,
+            "budget_year_id": 1001,
+            "calendar_name": "Master Calendar Plan 01",
+            "fycp_id": 1330,
+            "five_year_calendar_name": "Five Year Plan - 2026",
+            "project_name": "Plan Feb-3-4",
+            "year_prompt": "2026-2030",
+            "year_value": 90000,
+            "project_category_code": "LARGE"
+        }
+    ],
+    "hasMore": false,
+    "limit": 0,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/fiveyearplandtl/getproject?p_fycp_id=1330&p_mp_cal_id=1001&p_PROJECT_CATEGORY_CODE=LARGE"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/fiveyearplandtl/item"
+        }
+    ]
+}

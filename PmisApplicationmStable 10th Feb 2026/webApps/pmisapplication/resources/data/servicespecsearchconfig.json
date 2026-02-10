@@ -1,0 +1,77 @@
+{
+  "description": "Smart Search Configuration for NWS PMIS Details",
+  "filters": {
+
+    "ServiceSpecFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Service Specification No",
+      "options": {
+        "field": "service_spec_num",
+        "optionsData": "[[ $search.filters.ServiceSpecFilter.options.optionsData ]]",
+        "optionsKeys": {
+          "value": "value",
+          "label": "label"
+        }
+      },
+      "data": {
+        "lovFor": "SERVICE_SPEC"
+      }
+    },
+    "BudgetFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Project Number",
+      "options": {
+        "field": "project_number",
+        "optionsData": "[[ $search.filters.BudgetFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.BudgetFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+
+    
+    "ProjectNameFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Project Name",
+      "options": {
+        "field": "project_name",
+        "optionsData": "[[ $search.filters.ProjectNameFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.ProjectNameFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+
+
+    "TenderNumberFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Tender Number",
+      "options": {
+        "field": "tender_number",
+        "optionsData": "[[ $search.filters.TenderNumberFilter.options.optionsData ]]",
+        "optionsKeys": {
+          "value": "value",
+          "label": "label"
+        }
+      },
+      "data": {
+        "lovFor": "TENDER_NUMBER"
+      }
+    },
+
+    "TenderNameFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Tender Name",
+      "options": {
+        "field": "tender_name",
+        "optionsData": "[[ $search.filters.TenderNameFilter.options.optionsData ]]",
+        "optionsKeys": {
+          "value": "value",
+          "label": "label"
+        }
+      },
+      "data": {
+        "lovFor": "TENDER_NAME"
+      }
+    }
+
+  }
+}

@@ -1,0 +1,202 @@
+{
+    "items": [
+        {
+            "lookup_value_id": 26,
+            "lookup_type_id": 25,
+            "lookup_type_code": "STATUS",
+            "lookup_type_name": "Status",
+            "lookup_value_code": "DRA",
+            "lookup_value_name": "Draft",
+            "display_order": 1,
+            "active_flag": "Y"
+        },
+        {
+            "lookup_value_id": 27,
+            "lookup_type_id": 25,
+            "lookup_type_code": "STATUS",
+            "lookup_type_name": "Status",
+            "lookup_value_code": "PEN",
+            "lookup_value_name": "Pending",
+            "display_order": 2,
+            "active_flag": "Y"
+        },
+        {
+            "lookup_value_id": 28,
+            "lookup_type_id": 25,
+            "lookup_type_code": "STATUS",
+            "lookup_type_name": "Status",
+            "lookup_value_code": "APR",
+            "lookup_value_name": "Approved",
+            "display_order": 3,
+            "active_flag": "Y"
+        },
+        {
+            "lookup_value_id": 29,
+            "lookup_type_id": 25,
+            "lookup_type_code": "STATUS",
+            "lookup_type_name": "Status",
+            "lookup_value_code": "REJ",
+            "lookup_value_name": "Rejected",
+            "display_order": 4,
+            "active_flag": "Y"
+        },
+        {
+            "lookup_value_id": 30,
+            "lookup_type_id": 25,
+            "lookup_type_code": "STATUS",
+            "lookup_type_name": "Status",
+            "lookup_value_code": "DEL",
+            "lookup_value_name": "Delete",
+            "display_order": 5,
+            "active_flag": "Y"
+        },
+        {
+            "lookup_value_id": 31,
+            "lookup_type_id": 25,
+            "lookup_type_code": "STATUS",
+            "lookup_type_name": "Status",
+            "lookup_value_code": "CLO",
+            "lookup_value_name": "Closed",
+            "display_order": 6,
+            "active_flag": "Y"
+        },
+        {
+            "lookup_value_id": 32,
+            "lookup_type_id": 25,
+            "lookup_type_code": "STATUS",
+            "lookup_type_name": "Status",
+            "lookup_value_code": "BEA",
+            "lookup_value_name": "Beaten",
+            "display_order": 7,
+            "active_flag": "Y"
+        },
+        {
+            "lookup_value_id": 33,
+            "lookup_type_id": 25,
+            "lookup_type_code": "STATUS",
+            "lookup_type_name": "Status",
+            "lookup_value_code": "REA",
+            "lookup_value_name": "Reassign",
+            "display_order": 8,
+            "active_flag": "Y"
+        },
+        {
+            "lookup_value_id": 34,
+            "lookup_type_id": 25,
+            "lookup_type_code": "STATUS",
+            "lookup_type_name": "Status",
+            "lookup_value_code": "WR",
+            "lookup_value_name": "Withdrawn",
+            "display_order": 9,
+            "active_flag": "Y"
+        },
+        {
+            "lookup_value_id": 35,
+            "lookup_type_id": 25,
+            "lookup_type_code": "STATUS",
+            "lookup_type_name": "Status",
+            "lookup_value_code": "RIM",
+            "lookup_value_name": "Return for Information",
+            "display_order": 10,
+            "active_flag": "Y"
+        },
+        {
+            "lookup_value_id": 36,
+            "lookup_type_id": 25,
+            "lookup_type_code": "STATUS",
+            "lookup_type_name": "Status",
+            "lookup_value_code": "RIA",
+            "lookup_value_name": "Return for Information",
+            "display_order": 11,
+            "active_flag": "Y"
+        },
+        {
+            "lookup_value_id": 37,
+            "lookup_type_id": 25,
+            "lookup_type_code": "STATUS",
+            "lookup_type_name": "Status",
+            "lookup_value_code": "INP",
+            "lookup_value_name": "Inprogress",
+            "display_order": 12,
+            "active_flag": "Y"
+        },
+        {
+            "lookup_value_id": 38,
+            "lookup_type_id": 25,
+            "lookup_type_code": "STATUS",
+            "lookup_type_name": "Status",
+            "lookup_value_code": "CMPL",
+            "lookup_value_name": "Completed",
+            "display_order": 13,
+            "active_flag": "Y"
+        },
+        {
+            "lookup_value_id": 39,
+            "lookup_type_id": 25,
+            "lookup_type_code": "STATUS",
+            "lookup_type_name": "Status",
+            "lookup_value_code": "ERR",
+            "lookup_value_name": "Errored",
+            "display_order": 14,
+            "active_flag": "N"
+        },
+        {
+            "lookup_value_id": 40,
+            "lookup_type_id": 25,
+            "lookup_type_code": "STATUS",
+            "lookup_type_name": "Status",
+            "lookup_value_code": "CAN",
+            "lookup_value_name": "Cancelled",
+            "display_order": 15,
+            "active_flag": "N"
+        },
+        {
+            "lookup_value_id": 2041,
+            "lookup_type_id": 25,
+            "lookup_type_code": "STATUS",
+            "lookup_type_name": "Status",
+            "lookup_value_code": "NTY",
+            "lookup_value_name": "Notification Send",
+            "display_order": 16,
+            "active_flag": "Y"
+        },
+        {
+            "lookup_value_id": 5860,
+            "lookup_type_id": 25,
+            "lookup_type_code": "STATUS",
+            "lookup_type_name": "Status",
+            "lookup_value_code": "SUB",
+            "lookup_value_name": "Submitted for Approval",
+            "display_order": 18,
+            "active_flag": "Y"
+        },
+        {
+            "lookup_value_id": 5720,
+            "lookup_type_id": 25,
+            "lookup_type_code": "STATUS",
+            "lookup_type_name": "Status",
+            "lookup_value_code": "RPA",
+            "lookup_value_name": "Return to Previous Approver",
+            "display_order": 17,
+            "active_flag": "Y"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 18,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/common/lov/lookup"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/common/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/common/lov/lookup"
+        }
+    ]
+}

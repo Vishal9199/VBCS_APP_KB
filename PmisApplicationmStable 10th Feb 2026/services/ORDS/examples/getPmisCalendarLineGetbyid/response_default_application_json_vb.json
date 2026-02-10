@@ -1,0 +1,52 @@
+{
+    "items": [
+        {
+            "xxpmis_cal_hdr_id": null,
+            "xxpmis_cal_line_id": 103,
+            "line_num": 3,
+            "from_year": 2026,
+            "to_year": 2027,
+            "prompt": "Test 01",
+            "description": "Test Desc 01",
+            "enabled_flag": "Y",
+            "last_update_date": "2026-01-17T17:27:36Z",
+            "last_updated_by": null,
+            "creation_date": "2026-01-17T17:27:36Z",
+            "created_by": null,
+            "last_update_login": null,
+            "attribute1": null,
+            "attribute2": null,
+            "attribute3": null,
+            "attribute4": null,
+            "attribute5": null,
+            "attribute6": null,
+            "attribute7": null,
+            "attribute8": null,
+            "attribute9": null,
+            "attribute10": null,
+            "attribute11": null,
+            "attribute12": null,
+            "attribute13": null,
+            "attribute14": null,
+            "attribute15": null
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmis/calendar/line/getbyid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmis/calendar/line/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmis/calendar/line/getbyid"
+        }
+    ]
+}

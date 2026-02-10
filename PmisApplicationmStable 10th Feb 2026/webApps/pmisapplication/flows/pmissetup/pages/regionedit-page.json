@@ -1,0 +1,244 @@
+{
+  "title": "Region Management",
+  "description": "Add/Edit Region Details for PMIS Projects",
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-option": {
+        "path": "ojs/ojoption"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-progress-bar": {
+        "path": "ojs/ojprogress-bar"
+      }
+
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  },
+  "types": {
+    "@decorators.getPmisLovRegionNameResponse": {
+      "endpoint": "getPmisLovRegionName",
+      "service": "PmisSetup",
+      "path": "response"
+    },
+    "@decorators.getPmisLovRegionResponsiblePersonResponse": {
+      "endpoint": "getPmisLovRegionResponsiblePerson",
+      "service": "PmisSetup",
+      "path": "response"
+    },
+    "@decorators.getPmisRegionDtl": {
+      "endpoint": "getPmisRegionDtl",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "getPmisLovRegionNameResponse": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmisLovRegionResponsiblePersonResponse": {
+      "items": [
+        {
+          "email_address": "string",
+          "person_full_name": "string",
+          "person_number": "string",
+          "user_id": "number"
+        }
+      ]
+    },
+    "RegionHeader": {
+      "region_dtl_id": "number",
+      "object_version_num": "number",
+      "region_id": "number",
+      "tender_id": "number",
+      "tender_number": "string",
+      "project_id": "number",
+      "responsible_person_id": "number",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "AboutInfo": {
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    }
+
+  },
+  "variables": {
+    "getPmisLovRegionNameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getPmisLovRegionNameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        },
+        "fetchChain": "getPmisLovRegionNameFetch"
+      }
+    },
+    "getPmisLovRegionResponsiblePersonListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "user_id",
+        "itemsPath": "items",
+        "responseType": "getPmisLovRegionResponsiblePersonResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "person_full_name"
+          ]
+        },
+        "fetchChain": "getPmisLovRegionResponsiblePersonFetch"
+      }
+    },
+    "pNavCode": {
+      "type": "string",
+      "defaultValue": "CREATE",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "pNavId": {
+      "type": "string",
+      "defaultValue": "0",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "regionHeaderVar": {
+      "type": "RegionHeader",
+      "defaultValue": {
+        "created_by": "[[ $application.user.email ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_by": "[[ $application.user.email ]]",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "object_version_num": 0
+      }
+    },
+    "about": {
+      "type": "AboutInfo"
+    },
+    "formValidVar": {
+      "type": "string"
+    },
+    "aToolGeneric": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Save",
+          "id": "save"
+        },
+        {
+          "label": "Save & Close",
+          "id": "saveClose"
+        },
+        {
+          "label": "About",
+          "id": "about"
+        }
+      ]
+    },
+    "regionId": {
+      "type": "string",
+      "input": "fromUrl"
+    }
+
+  },
+  "metadata": {},
+  "chains": {},
+  "eventListeners": {
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "onDialogOkAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "regionEditPageSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "closePageAction"
+        }
+      ]
+    },
+    "regionEditPageSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "secondaryActionListener",
+          "parameters": {
+            "actionId": "{{$event.detail.secondaryItem}}",
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    },
+    "ojSpAdvancedCreateEditPrimaryAction": {
+      "chains": [
+        {
+          "chain": "primaryActionListener"
+        }
+      ]
+    },
+    "ojSpAdvancedCreateEditSecondaryAction": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "secondaryActionListener"
+        }
+      ]
+    }
+
+  }
+}

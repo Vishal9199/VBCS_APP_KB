@@ -1,0 +1,153 @@
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div>
+        <oj-sp-advanced-create-edit page-title="Project Assignment Admin" page-subtitle="  "
+          display-options.responsive-padding="on" primary-action.label="Close" id="assignmentadminid"
+          secondary-actions="[[ $variables.aToolBar ]]"
+          on-sp-primary-action="[[$listeners.assignmentadminidSpPrimaryAction]]" >
+
+          <div slot="main" style="padding-top: 0; margin-top: 0;">
+            <div style="margin-top: 0;">
+
+              <!-- Section 1: Project & Tender Information -->
+              <oj-collapsible id="project-tender-section" expanded="true"
+                class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 0;">
+                <span slot="header" style="font-weight: bold; color: white;">Project & Tender Information</span>
+                <div style="padding: 1rem;">
+                  <oj-form-layout max-columns="3" label-edge="start" label-width="45%" colspan-wrap="wrap">
+
+                    <!-- Project ID -->
+                    <oj-select-single id="project-id" label-hint="Project"
+                      value="{{ $variables.projectAssignmentVar.project_id }}" style="width: 16rem;"
+                      user-assistance-density="compact" required="true"
+                      data="[[$variables.getPmispamProjectassignmentadminLovProjectListSDP]]" item-text="project_name">
+                    </oj-select-single>
+
+                    <!-- Oracle Project ID -->
+                    <oj-input-number id="ora-project-id" label-hint="Oracle Project ID" placeholder="Oracle Project ID"
+                      value="{{ $variables.projectAssignmentVar.ora_project_id }}" user-assistance-density="compact"
+                      style="width: 16rem;" required="true">
+                    </oj-input-number>
+
+                    <!-- Tender ID -->
+                    <oj-input-number id="tender-id" label-hint="Tender ID" placeholder="Tender ID"
+                      value="{{ $variables.projectAssignmentVar.tender_id }}" user-assistance-density="compact"
+                      style="width: 16rem;" required="true">
+                    </oj-input-number>
+
+                    <!-- Tender Number -->
+                    <oj-input-text id="tender-number" label-hint="Tender Number" placeholder="Tender Number"
+                      value="{{ $variables.projectAssignmentVar.tender_number }}" user-assistance-density="compact"
+                      style="width: 16rem;" required="true">
+                    </oj-input-text>
+
+                    <!-- Comments -->
+                    <oj-text-area id="comments" label-hint="Comments" placeholder="Comments"
+                      value="{{ $variables.projectAssignmentVar.comments }}" user-assistance-density="compact"
+                      style="width: 16rem;" colspan="2">
+                    </oj-text-area>
+
+                  </oj-form-layout>
+                </div>
+              </oj-collapsible>
+
+              <!-- Section 2: User Assignments -->
+              <oj-collapsible id="user-assignments-section" expanded="true"
+                class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 1rem;">
+                <span slot="header" style="font-weight: bold; color: white;">User Assignments</span>
+                <div style="padding: 1rem;">
+                  <oj-form-layout max-columns="3" label-edge="start" label-width="45%" colspan-wrap="wrap">
+
+                    <!-- Senior Manager -->
+                    <oj-select-single id="senior-mgr-user-id" label-hint="Senior Manager"
+                      value="{{ $variables.projectAssignmentVar.senior_mgr_user_id }}" user-assistance-density="compact"
+                      style="width: 16rem;" required="true" data="[[$variables.getPmispamLovUsersListSDP]]"
+                      item-text="person_full_name">
+
+                      <template slot="collectionTemplate" data-oj-as="collection">
+                          <oj-table style="max-width:750px; max-height:300px;" id="table1"
+                            horizontal-grid-visible="disabled" vertical-grid-visible="disabled"
+                            class="oj-select-results" selected.row="[[collection.selected]]"
+                            current-row="{{collection.currentRow}}"
+                            columns='[{"headerText":"Person Number","field":"person_number","style":"width:100px","sortable":"disabled"},{"headerText":"Person Name","field":"person_full_name"}]'
+                            on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]">
+                            <template slot="cellTemplate" data-oj-as="cell">
+                              <oj-bind-text value="[[cell.data]]"></oj-bind-text>
+                            </template>
+                          </oj-table>
+                        </template>
+                    </oj-select-single>
+
+                    <!-- Project Manager -->
+                    <oj-select-single id="proj-mgr-user-id" label-hint="Project Manager"
+                      value="{{ $variables.projectAssignmentVar.proj_mgr_user_id }}" user-assistance-density="compact"
+                      style="width: 16rem;" required="true" data="[[$variables.getPmispamLovUsersListSDP]]"
+                      item-text="person_full_name">
+
+                      <template slot="collectionTemplate" data-oj-as="collection">
+                          <oj-table style="max-width:750px; max-height:300px;" id="table1"
+                            horizontal-grid-visible="disabled" vertical-grid-visible="disabled"
+                            class="oj-select-results" selected.row="[[collection.selected]]"
+                            current-row="{{collection.currentRow}}"
+                            columns='[{"headerText":"Person Number","field":"person_number","style":"width:100px","sortable":"disabled"},{"headerText":"Person Name","field":"person_full_name"}]'
+                            on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]">
+                            <template slot="cellTemplate" data-oj-as="cell">
+                              <oj-bind-text value="[[cell.data]]"></oj-bind-text>
+                            </template>
+                          </oj-table>
+                        </template>
+                    </oj-select-single>
+
+                    <!-- Project Engineer -->
+                    <oj-select-single id="proj-engg-user-id" label-hint="Project Engineer"
+                      value="{{ $variables.projectAssignmentVar.proj_engg_user_id }}" user-assistance-density="compact"
+                      style="width: 16rem;" required="true" data="[[$variables.getPmispamLovUsersListSDP]]"
+                      item-text="person_full_name">
+
+                      <template slot="collectionTemplate" data-oj-as="collection">
+                          <oj-table style="max-width:750px; max-height:300px;" id="table1"
+                            horizontal-grid-visible="disabled" vertical-grid-visible="disabled"
+                            class="oj-select-results" selected.row="[[collection.selected]]"
+                            current-row="{{collection.currentRow}}"
+                            columns='[{"headerText":"Person Number","field":"person_number","style":"width:100px","sortable":"disabled"},{"headerText":"Person Name","field":"person_full_name"}]'
+                            on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]">
+                            <template slot="cellTemplate" data-oj-as="cell">
+                              <oj-bind-text value="[[cell.data]]"></oj-bind-text>
+                            </template>
+                          </oj-table>
+                        </template>
+                    </oj-select-single>
+
+                    <!-- Focal Point -->
+                    <oj-select-single id="focal-point-user-id" label-hint="Focal Point"
+                      value="{{ $variables.projectAssignmentVar.focal_point_user_id }}"
+                      user-assistance-density="compact" style="width: 16rem;" required="true"
+                      data="[[$variables.getPmispamLovUsersListSDP]]" item-text="person_full_name">
+
+                      <template slot="collectionTemplate" data-oj-as="collection">
+                          <oj-table style="max-width:750px; max-height:300px;" id="table1"
+                            horizontal-grid-visible="disabled" vertical-grid-visible="disabled"
+                            class="oj-select-results" selected.row="[[collection.selected]]"
+                            current-row="{{collection.currentRow}}"
+                            columns='[{"headerText":"Person Number","field":"person_number","style":"width:100px","sortable":"disabled"},{"headerText":"Person Name","field":"person_full_name"}]'
+                            on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]">
+                            <template slot="cellTemplate" data-oj-as="cell">
+                              <oj-bind-text value="[[cell.data]]"></oj-bind-text>
+                            </template>
+                          </oj-table>
+                        </template>
+                    </oj-select-single>
+
+                  </oj-form-layout>
+                </div>
+              </oj-collapsible>
+
+            </div>
+          </div>
+
+        </oj-sp-advanced-create-edit>
+      </div>
+    </div>
+  </div>
+</div>

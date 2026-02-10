@@ -1,0 +1,307 @@
+<style>
+  .oj-sp-header-general-overview-header-strip {
+    display: none;
+  }
+</style>
+
+<div id="sampleDemo1" class="demo-padding demo-container">
+  <div id="componentDemoContent1" style="width: 1px; min-width: 100%;">
+    <div id="mainContent1">
+      <oj-sp-smart-search-page page-title="Project Assignment Admin" page-subtitle=" " id="oj_exssp1">
+
+        <!--Search Section -->
+        <oj-flex slot="search" class="oj-sm-padding-2x" style="align-items: center;">
+          <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-space-between"
+            style="width: 100%; align-items: flex-start; padding: 0 1rem;">
+            <div style="flex: 1; margin-right: 1rem;">
+              <oj-sp-smart-search id="freq_smartsearch" ask-hint="Search Projects"
+                filter-criterion="{{ $variables.filterCriterion }}"
+                search-config="[[ $variables.searchConfiguration.provider ]]"
+                search-context="[[ $variables.searchContext ]]">
+              </oj-sp-smart-search>
+            </div>
+            <div style="display: flex; gap: 0.25rem; margin-left: 1rem; margin-top: 1px; flex-wrap: wrap;">
+              <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Reset" id="resetBtn">
+                <span slot="startIcon" class="oj-ux-ico-reset"></span>
+              </oj-button>
+              <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Refresh"
+                id="refreshBtn">
+                <span slot="startIcon" class="oj-ux-ico-refresh"></span>
+              </oj-button>
+              <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Create"
+                id="createBtn" on-oj-action="[[$listeners.createBtnAction]]">
+                <span slot="startIcon" class="oj-ux-ico-plus"></span>
+              </oj-button>
+            </div>
+          </div>
+        </oj-flex>
+
+        <!--Table Section -->
+        <div id="sampleDemo" class="demo-padding demo-container">
+          <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+            <div id="searchMainContent">
+
+              <div class="oj-flex">
+                <!-- oj-search-table -->
+                <oj-table scroll-policy="loadMoreOnScroll" class="oj-sm-width-full oj-bg-body" display="grid"
+                  horizontal-grid-visible="enabled" vertical-grid-visible="enabled" selection-mode.row="single"
+                  id="searchProjectAssignmentTbl" data="{{ $variables.projectAssignmentADP }}" columns='[
+    {
+      "headerText": "Actions",
+      "field": "",
+      "resizable": "enabled",
+      "width": 100,
+      "template": "actions",
+      "headerStyle": "white-space: nowrap; min-width: 100px;",
+      "style": ""
+    },
+    {
+      "headerText": "Assignment ID",
+      "field": "project_assignment_id",
+      "resizable": "enabled",
+      "width": 150,
+      "sortable": "enabled",
+      "template": "project_assignment_id",
+      "headerStyle": "white-space: nowrap; min-width: 150px;",
+      "style": ""
+    },
+    {
+      "headerText": "Tender Number",
+      "field": "tender_number",
+      "resizable": "enabled",
+      "width": 160,
+      "template": "tender_number",
+      "headerStyle": "white-space: nowrap; min-width: 160px;",
+      "style": ""
+    },
+    {
+      "headerText": "Project ID",
+      "field": "project_id",
+      "resizable": "enabled",
+      "width": 130,
+      "sortable": "enabled",
+      "template": "project_id",
+      "headerStyle": "white-space: nowrap; min-width: 130px;",
+      "style": ""
+    },
+    {
+      "headerText": "Project Name",
+      "field": "project_name",
+      "resizable": "enabled",
+      "width": 200,
+      "template": "project_name",
+      "headerStyle": "white-space: nowrap; min-width: 200px;",
+      "style": ""
+    },
+    {
+      "headerText": "Oracle Project ID",
+      "field": "ora_project_id",
+      "resizable": "enabled",
+      "width": 160,
+      "template": "ora_project_id",
+      "headerStyle": "white-space: nowrap; min-width: 160px;",
+      "style": ""
+    },
+    {
+      "headerText": "Tender ID",
+      "field": "tender_id",
+      "resizable": "enabled",
+      "width": 130,
+      "template": "tender_id",
+      "headerStyle": "white-space: nowrap; min-width: 130px;",
+      "style": ""
+    },
+    {
+      "headerText": "Line Number",
+      "field": "line_num",
+      "resizable": "enabled",
+      "width": 130,
+      "template": "line_num",
+      "headerStyle": "white-space: nowrap; min-width: 130px;",
+      "style": ""
+    },
+    {
+      "headerText": "Senior Manager",
+      "field": "senior_mgr_name",
+      "resizable": "enabled",
+      "width": 180,
+      "template": "senior_mgr_name",
+      "headerStyle": "white-space: nowrap; min-width: 180px;",
+      "style": ""
+    },
+    {
+      "headerText": "Project Manager",
+      "field": "proj_mgr_name",
+      "resizable": "enabled",
+      "width": 180,
+      "template": "proj_mgr_name",
+      "headerStyle": "white-space: nowrap; min-width: 180px;",
+      "style": ""
+    },
+    {
+      "headerText": "Project Engineer",
+      "field": "proj_engg_name",
+      "resizable": "enabled",
+      "width": 180,
+      "template": "proj_engg_name",
+      "headerStyle": "white-space: nowrap; min-width: 180px;",
+      "style": ""
+    },
+    {
+      "headerText": "Focal Point",
+      "field": "focal_point_name",
+      "resizable": "enabled",
+      "width": 160,
+      "template": "focal_point_name",
+      "headerStyle": "white-space: nowrap; min-width: 160px;",
+      "style": ""
+    },
+    {
+      "headerText": "Comments",
+      "field": "comments",
+      "resizable": "enabled",
+      "width": 200,
+      "template": "comments",
+      "headerStyle": "white-space: nowrap; min-width: 200px;",
+      "style": ""
+    },
+    {
+      "headerText": "Created By",
+      "field": "created_by",
+      "resizable": "enabled",
+      "width": 150,
+      "template": "created_by",
+      "headerStyle": "white-space: nowrap; min-width: 150px;",
+      "style": ""
+    },
+    {
+      "headerText": "Creation Date",
+      "field": "created_date",
+      "resizable": "enabled",
+      "width": 140,
+      "template": "date",
+      "headerStyle": "white-space: nowrap; min-width: 140px;",
+      "style": ""
+    },
+    {
+      "headerText": "Last Updated By",
+      "field": "last_updated_by",
+      "resizable": "enabled",
+      "width": 160,
+      "template": "last_updated_by",
+      "headerStyle": "white-space: nowrap; min-width: 160px;",
+      "style": ""
+    },
+    {
+      "headerText": "Last Update Date",
+      "field": "last_updated_date",
+      "resizable": "enabled",
+      "width": "",
+      "template": "date",
+      "headerStyle": "white-space: nowrap;",
+      "style": ""
+    }
+  ]'>
+
+                  <!-- Template Slots -->
+                  <template slot="actions">
+                    <div style="display: flex; gap: 4px;">
+                      <oj-button display="icons" chroming="borderless" id="editBtn">
+                        <span slot="startIcon" class="oj-ux-ico-edit"></span>
+                      </oj-button>
+                      <oj-button display="icons" chroming="borderless" id="deleteBtn">
+                        <span slot="startIcon" class="oj-ux-ico-delete"></span>
+                      </oj-button>
+                    </div>
+                  </template>
+
+                  <template slot="project_assignment_id">
+                    <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                  </template>
+
+                  <template slot="tender_number">
+                    <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                  </template>
+
+                  <template slot="project_id">
+                    <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                  </template>
+
+                  <template slot="project_name">
+                    <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                  </template>
+
+                  <template slot="ora_project_id">
+                    <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                  </template>
+
+                  <template slot="tender_id">
+                    <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                  </template>
+
+                  <template slot="line_num">
+                    <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                  </template>
+
+                  <template slot="senior_mgr_name">
+                    <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                  </template>
+
+                  <template slot="proj_mgr_name">
+                    <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                  </template>
+
+                  <template slot="proj_engg_name">
+                    <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                  </template>
+
+                  <template slot="focal_point_name">
+                    <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                  </template>
+
+                  <template slot="comments">
+                    <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                  </template>
+
+                  <template slot="created_by">
+                    <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                  </template>
+
+                  <template slot="last_updated_by">
+                    <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                  </template>
+
+                  <template slot="date">
+                    <oj-input-date value="[[$current.data]]" readonly="true"
+                      converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'>
+                    </oj-input-date>
+                  </template>
+
+                </oj-table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagination Section -->
+        <div class="oj-flex oj-sm-justify-content-center" style="margin-top: 0.25rem; gap: 1rem;">
+          <div class="oj-flex-item oj-sm-flex-initial">
+            <oj-button label="Prev" chroming="outlined" id="prevBtn">
+              <span slot="startIcon" class="oj-ux-ico-back"></span>
+            </oj-button>
+          </div>
+
+          <div style="display: flex; align-items: center; width: fit-content; min-width: 120px; max-width: 130px;">
+            <oj-input-text id="pagination-details" disabled="true" aria-label="Pagination Details"></oj-input-text>
+          </div>
+          <div class="oj-flex-item oj-sm-flex-initial">
+            <oj-button label="Next" chroming="outlined" id="nextBtn" class="">
+              <span slot="endIcon" class="oj-ux-ico-forward-next"></span>
+            </oj-button>
+          </div>
+        </div>
+
+      </oj-sp-smart-search-page>
+    </div>
+  </div>
+</div>

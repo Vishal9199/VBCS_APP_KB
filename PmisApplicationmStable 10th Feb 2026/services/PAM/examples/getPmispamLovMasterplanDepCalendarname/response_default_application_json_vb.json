@@ -1,0 +1,28 @@
+{
+    "items": [
+        {
+            "cal_hdr_id": 776,
+            "calendar_type_code": "MASTER_PLAN",
+            "calendar_type": "Master Plan",
+            "calendar_name": "EE 01"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/lov/masterplan/dep/calendarname"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/lov/masterplan/dep/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/lov/masterplan/dep/calendarname"
+        }
+    ]
+}

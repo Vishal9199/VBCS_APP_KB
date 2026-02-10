@@ -1,0 +1,53 @@
+{
+    "items": [
+        {
+            "budget_cost_id": 2084,
+            "object_version_num": 0,
+            "project_id": 2083,
+            "budget_year_id": 1001,
+            "calendar_name": "Master Calendar Plan 01",
+            "five_year_prj_flag": "N",
+            "project_name": "NWS | 4i Apps",
+            "project_category": "OPD",
+            "project_category_code": "OPD",
+            "year_prompt1": "2021-2025",
+            "year_value1": 20,
+            "year_prompt2": "2026-2030",
+            "year_value2": 0,
+            "year_prompt3": "2031-2035",
+            "year_value3": 0,
+            "year_prompt4": "2036-2040",
+            "year_value4": 0,
+            "year_prompt5": "2041-2045",
+            "year_value5": 0,
+            "year_prompt6": null,
+            "year_value6": 0,
+            "year_prompt7": null,
+            "year_value7": 0,
+            "additional_info": "123",
+            "created_by": "dinesh.kumar@owwsc.nama.om",
+            "created_date": "2026-02-10T17:48:15Z",
+            "last_updated_by": "dinesh.kumar@owwsc.nama.om",
+            "last_updated_date": "2026-02-10T17:48:15Z",
+            "last_updated_login": "dinesh.kumar@owwsc.nama.om"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/masterplan/linebudgetcost/getbyid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/masterplan/linebudgetcost/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/masterplan/linebudgetcost/getbyid"
+        }
+    ]
+}

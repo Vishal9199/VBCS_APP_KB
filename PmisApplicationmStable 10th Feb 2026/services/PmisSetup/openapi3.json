@@ -1,0 +1,1599 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "ORDS CUST",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "vb-catalog://backends/ORDS_CUST",
+            "description": "ORDS CUST"
+        }
+    ],
+    "paths": {
+        "/pmis/calendar/line/process": {
+            "post": {
+                "operationId": "postCalendarLineProcess",
+                "parameters": [
+                    {
+                        "name": "x-session-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-session-code",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostPmisCalendarLineProcessRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postCalendarLine/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostPmisCalendarLineProcessResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postCalendarLineProcess/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pmis/calendar/process": {
+            "post": {
+                "operationId": "postPmisCalendarProcess",
+                "parameters": [
+                    {
+                        "name": "x-session-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-session-code",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostPmisCalendarProcessRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postPmisCalendarProcess/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostPmisCalendarProcessResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postPmisCalendarProcess/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pmis/calendar/line/search": {
+            "post": {
+                "operationId": "postPmisCalendarLineSearch",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostPmisCalendarLineSearchRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postPmisCalendarLineSearch/request_application_json_vb.json",
+                                    "summary": "Example stored by VB User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostPmisCalendarLineSearchResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postPmisCalendarLineSearch/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pmis/calendar/search": {
+            "post": {
+                "operationId": "postPmisCalendarSearch",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostPmisCalendarSearchRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postPmisCalendarSearch/request_application_json_vb.json",
+                                    "summary": "Example stored by VB User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostPmisCalendarSearchResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postPmisCalendarSearch/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pmis/lov/calendar/name": {
+            "get": {
+                "operationId": "getPmisLovCalendarName",
+                "parameters": [
+{
+                        "name": "searchVal",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "P_CALENDAR_TYPE_CODE",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetPmisLovCalendarName"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getPmisLovCalendarName/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pmis/lov/calendar/type": {
+            "get": {
+                "operationId": "getPmisLovCalendarType",
+                "parameters": [
+                    {
+                        "name": "searchVal",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetPmisLovCalendarType"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getPmisLovCalendarType/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pmis/calendar/line/dtl": {
+            "get": {
+                "operationId": "getPmisCalendarLineDtl",
+                "parameters": [
+                    {
+                        "name": "x-session-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetPmisCalendarDtl"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getPmisCalendarDtl/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pmis/calendar/dtl": {
+            "get": {
+                "operationId": "getPmisCalendarDtl",
+                "parameters": [
+                    {
+                        "name": "x-session-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetPmisCalendarDtl"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getPmisCalendarDtl/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pmis/calendar/line/getbyid": {
+            "get": {
+                "operationId": "getPmisCalendarLineGetbyid",
+                "parameters": [
+                    {
+                        "name": "x-session-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetPmisCalendarLineGetbyid"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getPmisCalendarLineGetbyid/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+         "/pmis/region/search": {
+            "post": {
+                "operationId": "postRegionSearch",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostPmisRegionSearchRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postRegionSearch/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostPmisRegionSearchResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postRegionSearch/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pmis/region/dtl": {
+            "get": {
+                "operationId": "getPmisRegionDtl",
+                "parameters": [
+                    {
+                        "name": "x-session-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetPmisRegionDtl"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getPmisRegionDtl/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pmis/region/process": {
+            "post": {
+                "operationId": "postPmisRegionProcess",
+                "parameters": [
+                    {
+                        "name": "x-session-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-session-code",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostPmisRegionProcessRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postPmisRegionProcess/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostPmisRegionProcessResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postPmisRegionProcess/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/common/user/menu": {
+            "get": {
+                "operationId": "getUserMenu",
+                "parameters": [
+                    {
+                        "name": "x-cache-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetCommonUserMenu"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getCommonUserMenu/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pmis/lov/year": {
+            "get": {
+                "operationId": "getPmisLovYear",
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetPmisLovYear"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getPmisLovYear/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pmis/lov/region/name": {
+            "get": {
+                "operationId": "getPmisLovRegionName",
+                "parameters": [
+                    {
+                        "name": "searchVal",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetPmisLovRegionName"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getPmisLovRegionName/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pmis/lov/region/responsible/person": {
+            "get": {
+                "operationId": "getPmisLovRegionResponsiblePerson",
+                "parameters": [
+                    {
+                        "name": "searchVal",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetPmisLovRegionResponsiblePerson"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getPmisLovRegionResponsiblePerson/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/pmis/attachment/type": {
+            "get": {
+                "operationId": "getPmisAttachmentType",
+                "parameters": [
+                    {
+                        "name": "searchVal",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetPmisAttachmentType"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getPmisAttachmentType/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PostPmisCalendarLineProcessResponse": {
+                "type": "object",
+                "properties": {
+                    "P_ERR_CODE": {
+                        "type": "string"
+                    },
+                    "P_ERR_MSG": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostPmisCalendarLineProcessRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostPmisCalendarProcessRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostPmisCalendarProcessResponse": {
+                "type": "object",
+                "properties": {
+                    "P_ERR_CODE": {
+                        "type": "string"
+                    },
+                    "P_ERR_MSG": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostPmisCalendarLineSearchRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostPmisCalendarLineSearchResponse": {
+                "type": "object",
+                "properties": {
+                    "OUT_COUNT": {
+                        "type": "integer"
+                    },
+                    "OUT_DESCRIPTION": {
+                        "type": "string"
+                    },
+                    "OUT_HAS_NEXT": {
+                        "type": "string"
+                    },
+                    "OUT_STATUS": {
+                        "type": "string"
+                    },
+                    "OUT_TOTAL_COUNT": {
+                        "type": "integer"
+                    },
+                    "P_OUTPUT": {
+                        "type": "array",
+                        "items": {
+                        }
+                    }
+                }
+            },
+            "PostPmisCalendarSearchRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostPmisCalendarSearchResponse": {
+                "type": "object",
+                "properties": {
+                    "OUT_COUNT": {
+                        "type": "integer"
+                    },
+                    "OUT_DESCRIPTION": {
+                        "type": "string"
+                    },
+                    "OUT_HAS_NEXT": {
+                        "type": "string"
+                    },
+                    "OUT_STATUS": {
+                        "type": "string"
+                    },
+                    "OUT_TOTAL_COUNT": {
+                        "type": "integer"
+                    },
+                    "P_OUTPUT": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "cal_hdr_id": {
+                                    "type": "integer"
+                                },
+                                "object_version_num": {
+                                    "type": "integer"
+                                },
+                                "calendar_type_id": {
+                                    "type": "integer"
+                                },
+                                "calendar_type_code": {
+                                    "nullable": true
+                                },
+                                "calendar_type": {
+
+                                    "nullable": true
+                                },
+                                "calendar_name": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "enabled_flag": {
+                                    "type": "string"
+                                },
+                                "additional_info": {
+                                    "type": "string"
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "created_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_updated_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_login": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetPmisLovCalendarName": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "calendar_name": {
+                                    "type": "string"
+                                },
+                                "cal_hdr_id": {
+                                    "type": "integer"
+                                },
+                                "calendar_type_id": {
+                                    "type": "integer"
+                                },
+                                "calendar_type_code": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetPmisLovCalendarType": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "lookup_value_id": {
+                                    "type": "integer"
+                                },
+                                "lookup_value_code": {
+                                    "type": "string"
+                                },
+                                "lookup_value_name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetPmisCalendarDtl": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "cal_hdr_id": {
+                                    "type": "integer"
+                                },
+                                "object_version_num": {
+                                    "type": "integer"
+                                },
+                                "calendar_type_id": {
+                                    "type": "integer"
+                                },
+                                "calendar_type_code": {
+                                    "nullable": true
+                                },
+                                "calendar_type": {
+                                    "nullable": true
+                                },
+                                "calendar_name": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "enabled_flag": {
+                                    "type": "string"
+                                },
+                                "additional_info": {
+                                    "type": "string"
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "created_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_updated_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_login": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetPmisCalendarLineGetbyid": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "cal_line_id": {
+                                    "type": "integer"
+                                },
+                                "object_version_num": {
+                                    "type": "integer"
+                                },
+                                "cal_hdr_id": {
+                                    "type": "integer"
+                                },
+                                "calendar_name": {
+                                    "type": "string"
+                                },
+                                "calendar_type_code": {
+                                    "nullable": true
+                                },
+                                "calendar_type": {
+                                    "nullable": true
+                                },
+                                "line_num": {
+                                    "type": "integer"
+                                },
+                                "from_year": {
+                                    "type": "integer"
+                                },
+                                "to_year": {
+                                    "type": "integer"
+                                },
+                                "prompt": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "enabled_flag": {
+                                    "type": "string"
+                                },
+                                "additional_info": {
+                                    "type": "string"
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "created_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_updated_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_login": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostPmisRegionSearchRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostPmisRegionSearchResponse": {
+                "type": "object",
+                "properties": {
+                    "OUT_COUNT": {
+                        "type": "integer"
+                    },
+                    "OUT_DESCRIPTION": {
+                        "type": "string"
+                    },
+                    "OUT_HAS_NEXT": {
+                        "type": "string"
+                    },
+                    "OUT_STATUS": {
+                        "type": "string"
+                    },
+                    "OUT_TOTAL_COUNT": {
+                        "type": "integer"
+                    },
+                    "P_OUTPUT": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "region_id": {
+                                    "type": "integer"
+                                },
+                                "region_name": {
+                                    "type": "string"
+                                },
+                                "project_id": {
+                                    "type": "integer"
+                                },
+                                "project_number": {
+                                    "type": "string"
+                                },
+                                "tender_number": {
+                                    "type": "string"
+                                },
+                                "responsible_person": {
+                                    "type": "string"
+                                },
+                                "person_id": {
+                                    "type": "integer"
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "creation_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_update_date": {
+                                    "type": "string"
+                                },
+                                "last_update_login": {
+                                    "type": "string"
+                                },
+                                "tender_name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetPmisRegionDtl": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "region_dtl_id": {
+                                    "type": "integer"
+                                },
+                                "object_version_num": {
+                                    "type": "integer"
+                                },
+                                "region_id": {
+                                    "type": "integer"
+                                },
+                                "tender_id": {
+                                    "nullable": true
+                                },
+                                "tender_number": {
+                                    "type": "string"
+                                },
+                                "project_id": {
+                                    "type": "integer"
+                                },
+                                "responsible_person_id": {
+                                    "type": "integer"
+                                },
+                                "responsible_person_name": {
+                                    "type": "string"
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "created_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_updated_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_login": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostPmisRegionProcessRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostPmisRegionProcessResponse": {
+                "type": "object",
+                "properties": {
+                    "P_ERR_CODE": {
+                        "type": "string"
+                    },
+                    "P_ERR_MSG": {
+                        "type": "string"
+                    }
+                }
+            },
+            "GetCommonUserMenu": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "user_name": {
+                                    "type": "string"
+                                },
+                                "final_json": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetPmisLovYear": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "display_year": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetPmisLovRegionName": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "lookup_value_id": {
+                                    "type": "integer"
+                                },
+                                "lookup_value_code": {
+                                    "type": "string"
+                                },
+                                "lookup_value_name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetPmisLovRegionResponsiblePerson": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "user_id": {
+                                    "type": "integer"
+                                },
+                                "display_name": {
+                                    "type": "string"
+                                },
+                                "person_number": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "person_full_name": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "email_address": {
+                                    "type": "string"
+                                }
+
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetPmisAttachmentType": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "lookup_value_id": {
+                                    "type": "integer"
+                                },
+                                "object_version_num": {
+                                    "type": "integer"
+                                },
+                                "lookup_type_id": {
+                                    "type": "integer"
+                                },
+                                "lookup_type_code": {
+                                    "type": "string"
+                                },
+                                "lookup_type_name": {
+                                    "type": "string"
+                                },
+                                "lookup_value_code": {
+                                    "type": "string"
+                                },
+                                "lookup_value_name": {
+                                    "type": "string"
+                                },
+                                "remarks": {
+                                    "type": "string"
+                                },
+                                "child_lookup_type_id": {
+                                    "nullable": true
+                                },
+                                "child_lookup_type_code": {
+                                    "nullable": true
+                                },
+                                "child_lookup_type_name": {
+                                    "nullable": true
+                                },
+                                "display_order": {
+                                    "type": "integer"
+                                },
+                                "active_flag": {
+                                    "type": "string"
+                                },
+                                "effective_start_date": {
+                                    "type": "string"
+                                },
+                                "effective_end_date": {
+                                    "type": "string"
+                                },
+                                "attribute_json": {
+                                    "nullable": true
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "created_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_updated_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_login": {
+                                    "type": "string"
+                                },
+                                "dependent_lookup_type_id": {
+                                    "type": "integer"
+                                },
+                                "dependent_lookup_value_id": {
+                                    "nullable": true
+                                },
+                                "dependent_lookup_type_code": {
+                                    "nullable": true
+                                },
+                                "dependent_lookup_type_name": {
+                                    "nullable": true
+                                },
+                                "dependent_lookup_value_code": {
+                                    "nullable": true
+                                },
+                                "dependent_lookup_value_name": {
+                                    "nullable": true
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

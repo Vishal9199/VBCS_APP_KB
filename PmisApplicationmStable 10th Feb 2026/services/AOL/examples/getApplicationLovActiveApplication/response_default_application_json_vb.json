@@ -1,0 +1,27 @@
+{
+    "items": [
+        {
+            "application_id": 24,
+            "application_code": "NWS_CUSTOM_APPLICATION",
+            "application_name": "NWS Custom Application"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol/application/lov/active/application"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol/metadata-catalog/application/lov/active/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol/application/lov/active/application"
+        }
+    ]
+}

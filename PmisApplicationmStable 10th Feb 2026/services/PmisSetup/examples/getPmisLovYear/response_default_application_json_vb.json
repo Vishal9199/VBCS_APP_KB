@@ -1,0 +1,82 @@
+{
+    "items": [
+        {
+            "display_year": 2017
+        },
+        {
+            "display_year": 2018
+        },
+        {
+            "display_year": 2019
+        },
+        {
+            "display_year": 2020
+        },
+        {
+            "display_year": 2021
+        },
+        {
+            "display_year": 2022
+        },
+        {
+            "display_year": 2023
+        },
+        {
+            "display_year": 2024
+        },
+        {
+            "display_year": 2025
+        },
+        {
+            "display_year": 2026
+        },
+        {
+            "display_year": 2027
+        },
+        {
+            "display_year": 2028
+        },
+        {
+            "display_year": 2029
+        },
+        {
+            "display_year": 2030
+        },
+        {
+            "display_year": 2031
+        },
+        {
+            "display_year": 2032
+        },
+        {
+            "display_year": 2033
+        },
+        {
+            "display_year": 2034
+        },
+        {
+            "display_year": 2035
+        },
+        {
+            "display_year": 2036
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 20,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmis/lov/year"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmis/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmis/lov/year"
+        }
+    ]
+}

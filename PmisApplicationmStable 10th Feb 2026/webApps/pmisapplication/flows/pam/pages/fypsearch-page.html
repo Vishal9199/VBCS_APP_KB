@@ -1,0 +1,208 @@
+<style>
+.oj-sp-header-general-overview-header-strip {
+  display: none;
+}
+.oj-ux-ico-overflow-h:before {
+  color: white !important;
+}
+</style>
+
+<div id="sampleDemo1" class="demo-padding demo-container">
+<div id="componentDemoContent1" style="width: 1px; min-width: 100%;">
+<div id="mainContent1">
+<oj-sp-smart-search-page id="oj_exssp1" page-title="Search Five Year Plan Details" page-subtitle=" ">
+
+<!--Search Section -->
+<oj-flex slot="search" class="oj-sm-padding-2x" style="align-items: center;">
+  <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-space-between" style="width: 100%; align-items: flex-start; padding: 0 1rem;">
+    <div style="flex: 1; margin-right: 1rem;">
+      <oj-sp-smart-search id="freq_smartsearch" search-config="[[ $variables.searchConfiguration.provider ]]"
+        search-context="[[ $variables.searchContext ]]" filter-criterion="{{ $variables.filterCriterion }}"
+        ask-hint="Search here">
+      </oj-sp-smart-search>
+    </div>
+     <div style="display: flex; gap: 0.25rem; margin-left: 1rem; margin-top: 1px; flex-wrap: wrap;">
+      <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Reset" id="resetBtn"
+        on-oj-action="[[$listeners.resetBtnAction]]">
+        <span slot="startIcon" class="oj-ux-ico-reset"></span>
+      </oj-button>
+      <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Refresh" id="refreshBtn">
+        <span slot="startIcon" class="oj-ux-ico-refresh"></span>
+      </oj-button>
+      <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Export" id="exportBtn">
+        <span slot="startIcon" class="oj-ux-ico-export-excel-data"></span>
+      </oj-button>
+      <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Create" id="createBtn"
+        on-oj-action="[[$listeners.createBtnAction]]">
+        <span slot="startIcon" class="oj-ux-ico-plus"></span>
+      </oj-button>
+    </div>
+  </div>
+</oj-flex>
+
+<!--Table Section -->
+<div id="sampleDemo" class="demo-padding demo-container">
+<div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+<div id="searchMainContent">
+
+<div class="oj-flex-bar-end oj-helper-justify-content-flex-end">
+  <oj-button id="add-project-btn" label="Add Project" chroming="outlined"
+    on-oj-action="[[$listeners.addProjectBtnAction]]">
+          <span class="oj-ux-ico-plus" slot="startIcon"></span>
+  </oj-button>
+</div>
+
+<div class="oj-flex">
+<oj-table scroll-policy="loadMoreOnScroll" class="oj-sm-width-full oj-bg-body" display="grid"
+  horizontal-grid-visible="enabled" vertical-grid-visible="enabled" selection-mode.row="single"
+  selection-mode.column="single" id="searchFiveYearPlanTbl" columns="{{ $constants.columnsVar }}"
+  data="[[ $variables.fiveYearPlanADP ]]">
+
+<!-- Template Slots
+<template slot="actions">
+  <div style="display: flex; gap: 4px; justify-content: center;">
+    <oj-button display="icons" chroming="borderless" class="oj-button-sm" id="editBtn">
+      "startIcon" class="oj-ux-ico-edit" style="font-size: 18px;"></span>
+    </oj-button>
+    <oj-button display="icons" chroming="borderless" class="oj-button-sm" id="deleteBtn">
+      "startIcon" class="oj-ux-ico-trash" style="font-size: 18px;"></span>
+    </oj-button>
+  </div>
+</template> -->
+
+<!-- Template Slots -->
+<template slot="actions">
+  <div style="display: flex; gap: 4px; justify-content: center;">
+    <oj-button display="icons" chroming="borderless" class="oj-button-sm" on-oj-action="[[$listeners.buttonAction]]">
+      <span slot="startIcon" class="oj-ux-ico-edit" style="font-size: 18px;"></span>
+    </oj-button>
+    <oj-button display="icons" chroming="borderless" class="oj-button-sm" >
+      <span slot="startIcon" class="oj-ux-ico-trash" style="font-size: 18px;"></span>
+    </oj-button>
+    <!-- <oj-button display="icons" chroming="borderless" class="oj-button-sm">
+      <span slot="startIcon" class="oj-ux-ico-info"></span>
+    </oj-button> -->
+  </div>
+</template>
+
+<template slot="edit_link">
+  <a style="font-weight: bold; color: #01474d; cursor: pointer;">
+    <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+  </a>
+</template>
+
+<template slot="english_project_name">
+  <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>  
+</template>
+
+<template slot="region_name">
+  <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>  
+</template>
+
+<template slot="project_name">
+  <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>  
+</template>
+
+<template slot="budget_number">
+  <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>  
+</template>
+
+<template slot="fyp_calendar_name">
+  <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>  
+</template>
+
+<template slot="financial_status">
+  <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>  
+</template>
+
+<template slot="technical_status">
+  <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>  
+</template>
+
+</oj-table>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Pagination Section -->
+<div class="oj-flex oj-sm-justify-content-center" style="margin-top: 0.25rem; gap: 1rem;">
+  <div class="oj-flex-item oj-sm-flex-initial">
+    <oj-button label="Prev" chroming="outlined" id="prevBtn" disabled="[[ !$variables.hasPrev ]]"
+      on-oj-action="[[$listeners.prevBtnAction]]">
+      "startIcon" class="oj-ux-ico-back"></span>
+    </oj-button>
+  </div>
+  <div style="display: flex; align-items: center; width: fit-content; min-width: 120px; max-width: 130px;">
+    <oj-input-text value="{{ $variables.paginationDisplay }}" id="pagination-details" disabled="true"
+      aria-label="Pagination Details"></oj-input-text>
+  </div>
+  <div class="oj-flex-item oj-sm-flex-initial">
+    <oj-button label="Next" chroming="outlined" id="nextBtn" disabled="[[ !$variables.hasNext ]]"
+      on-oj-action="[[$listeners.nextBtnAction]]">
+      "endIcon" class="oj-ux-ico-forward-next"></span>
+    </oj-button>
+  </div>
+</div>
+
+</oj-sp-smart-search-page>
+</div>
+</div>
+</div>
+
+<!-- Loading Dialog -->
+<oj-dialog id="loadingDialog" style="width: 300px;" cancel-behavior="none" drag-affordance="title-bar"
+  header-decoration="off" position.at.vertical="top" position.my.vertical="top">
+  <div slot="body" style="text-align: center; padding: 2rem;">
+    <oj-progress-circle value="-1"></oj-progress-circle>
+    <p style="margin-top: 1rem; font-weight: 500;">Loading Five Year Plan Data...</p>
+  </div>
+</oj-dialog>
+
+
+<oj-dialog id="lovDialog" dialog-title="Add Projects" cancel-behavior="icon" style="overflow: hidden; width: 360px;"
+  header-decoration="off">
+
+  <div slot="body" class="oj-lg-margin-2x-top">
+    <oj-form-layout label-edge="top" direction="column" class="oj-formlayout-full-width"
+      user-assistance-density="compact">
+      <!-- LOV -->
+
+      <!-- Disabled Field 1 -->
+      <oj-select-single label-hint="Five Year Plan" data="[[$variables.getPmispamFiveyearplandtlLovFyplannameListSDP2]]"
+        item-text="fy_plan_name" value="{{ $variables.fiveyearPlanvar.fy_plan_id }}"
+        on-value-item-changed="[[$listeners.selectValueItem]]">
+        <template slot="collectionTemplate" data-oj-as="collection">
+            <oj-table scroll-policy="loadMoreOnScroll" selection-mode='{"row": "single"}'
+              columns-default='{"resizable": "disabled","sortable": "disabled"}' class="oj-select-results"
+              columns='[{"headerText":"Five Year Plan","field":"fy_plan_name"}, {"headerText":"Five Year Calendar Name","field":"fyp_calendar_name"}]'
+              on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]"
+              selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}"
+              horizontal-grid-visible="enabled" vertical-grid-visible="enabled">
+            </oj-table>
+          </template>
+        </oj-select-single>
+      <oj-input-text label-hint="Five Year Calendar Name"  disabled="true"
+        class="oj-sm-margin-top-3x" value="{{ $variables.fiveyearPlanvar.fyp_calendar_name }}">
+      </oj-input-text>
+    </oj-form-layout>
+
+    <!-- Disabled Field 2 -->
+    <!-- <oj-input-text label-hint="Region" value="[[ $variables.regionName ]]" disabled="true" class="oj-sm-margin-top-3x">
+    </oj-input-text> -->
+
+  </div>
+
+  <div slot="footer" class="oj-flex oj-sm-justify-content-flex-end oj-sm-align-items-flex-start"
+    style="margin-top: -2rem;">
+    <oj-button chroming="outlined" label="Cancel" >
+      Cancel
+    </oj-button>
+
+    <oj-button chroming="outlined" class="oj-sm-margin-start-2x"
+       label="Ok" on-oj-action="[[$listeners.buttonAction2]]">
+      OK
+    </oj-button>
+  </div>
+
+</oj-dialog>

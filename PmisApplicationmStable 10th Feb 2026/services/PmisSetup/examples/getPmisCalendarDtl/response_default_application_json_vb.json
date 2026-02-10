@@ -1,0 +1,38 @@
+{
+    "items": [
+        {
+            "cal_hdr_id": 758,
+            "object_version_num": 0,
+            "calendar_type_id": 1234,
+            "calendar_type_code": null,
+            "calendar_type": null,
+            "calendar_name": "2025 Project Calendar",
+            "description": "Main project",
+            "enabled_flag": "Y",
+            "additional_info": "Additional notes or metadata",
+            "created_by": "JOHN.DOE",
+            "created_date": "2026-01-26T15:11:07Z",
+            "last_updated_by": "JOHN.DOE",
+            "last_updated_date": "2026-01-26T15:11:07Z",
+            "last_updated_login": "JOHN.DOE"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmis/calendar/dtl"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmis/calendar/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmis/calendar/dtl"
+        }
+    ]
+}

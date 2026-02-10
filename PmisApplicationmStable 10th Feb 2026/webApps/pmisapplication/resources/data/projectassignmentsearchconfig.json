@@ -1,0 +1,49 @@
+{
+    "description": "Smart Search Configuration for Project Assignment Application",
+    "filters": {
+        "TenderNumberFilter": {
+            "type": "oj-sp/smart-search/default-filters/TextFilter",
+            "label": "Tender Number",
+            "options": {
+                "field": "tender_number"
+            },
+            "data": {}
+        },
+        "ProjectNumberFilter": {
+            "type": "oj-sp/smart-search/default-filters/TextFilter",
+            "label": "Project Number",
+            "options": {
+                "field": "project_id"
+            },
+            "data": {}
+        },
+        "ProjectNameFilter": {
+            "type": "oj-sp/smart-search/default-filters/TextFilter",
+            "label": "Project Name",
+            "options": {
+                "field": "project_name"
+            },
+            "data": {}
+        },
+        "DateRangeFilter": {
+            "type": "oj-sp/smart-search/default-filters/DateRangeFilter",
+            "label": "Date Range",
+            "options": {
+                "field": "created_date",
+                "startDate": "[[ $page.variables.p_start_date ]]",
+                "endDate": "[[ $page.variables.p_end_date ]]",
+                "value": "",
+                "converter": {
+                    "type": "datetime",
+                    "options": {
+                        "pattern": "dd-MMM-yyyy"
+                    }
+                }
+            },
+            "data": {
+                "start": "[[ $functions.pastDate() ]]",
+                "end": "[[ $functions.todayDate() ]]"
+            }
+        }
+    }
+}

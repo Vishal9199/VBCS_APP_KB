@@ -1,0 +1,690 @@
+{
+  "title": "PMIS Service Specification Smart Search",
+  "description": "Smart Search page for PMIS Service Specification",
+  "variables": {
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "getBudgetLovSDP": {
+
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getPmispamServicespecLovBudgetnumber",
+        "itemsPath": "items",
+        "keyAttributes": "project_id",
+        "fetchChain": "getPmispamServicespecLovBudgetnumberFetch"
+      }
+    },
+    "getProjectNameLovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "responseType": "getPmispamServicespecLovProjectName",
+        "itemsPath": "items",
+        "keyAttributes": "project_name",
+        "fetchChain": "getPmispamServicespecLovBudgetnumberFetch2"
+      }
+    },
+    "getServiceSpecLovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getPmispamLovServicespecCommon",
+        "itemsPath": "items",
+        "headers": {
+          "lovFor": "SERVICE_SPEC"
+        },
+        "keyAttributes": "value",
+        "fetchChain": "getPmispamLovServicespecCommonFetch2"
+      }
+    },
+    "getStatusLovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getCommonLovLookup",
+        "itemsPath": "items",
+        "headers": {
+          "p_lookup_type_code": "STATUS"
+        },
+        "keyAttributes": "lookup_value_id",
+        "fetchChain": "getCommonLovLookupFetch"
+      }
+    },
+    "getTenderNumberLovSDP": {
+      "defaultValue": {
+        "responseType": "getPmispamLovServicespecCommon2",
+        "itemsPath": "items",
+        "keyAttributes": "value",
+        "fetchChain": "getPmispamLovServicespecCommonFetch4"
+      },
+      "type": "vb/ServiceDataProvider"
+    },
+    "pagination": {
+    "type": "object",
+    "defaultValue": {
+      "is_next": false,
+      "is_prev": true
+    }
+  },
+    "paginationDisplay": {
+      "type": "string",
+      "defaultValue": "0 - 0 of 0 items"
+    },
+    "passKey": {
+      "type": "string"
+    },
+    "passPayload": {
+      "type": "string"
+    },
+    "serviceSpecADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "postPmispamServicespecSearch",
+        "keyAttributes": "service_spec_id"
+      }
+    },
+    "totalRecords": {
+    "type": "number",
+    "defaultValue": 0
+  },
+  "currentPage": {
+    "type": "number",
+    "defaultValue": 1
+  },
+  "vShowFragment": {
+    "type": "boolean",
+    "defaultValue": false
+  },
+  "encSearchObj": {
+    "type": "object",
+    "defaultValue": {
+      "payload": ""
+    }
+  },
+    "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "ServiceSpecFilter": {
+              "label": "Service Specification No",
+              "options": {
+                "field": "service_spec_num",
+                "optionsData": "[[ $page.variables.getServiceSpecLovSDP ]]",
+                "optionsKeys": {
+                  "label": "label",
+                  "value": "value"
+                }
+              },
+              "data": {
+                "lovFor": "SERVICE_SPEC"
+              }
+            },
+            "BudgetFilter": {
+              "label": "Budget Number",
+              "options": {
+                "field": "project_number",
+                "optionsData": "[[ $page.variables.getBudgetLovSDP]]",
+                 "optionsKeys": {
+                        "label": "project_number",
+                        "value": "project_id"
+                    }
+              },
+              "data": {}
+            },
+            "ProjectNameFilter": {
+              "label": "Project Name",
+              "options": {
+                "field": "project_number",
+                "optionsData": "[[ $page.variables.getProjectNameLovSDP]]",
+                "optionsKeys": {
+                  "label": "project_name",
+                  "value": "project_name"
+                }
+              },
+              "data": {}
+            },
+            "TenderNameFilter": {
+              "label": "Tender Name",
+              "options": {
+                "field": "tender_name",
+                "optionsData": "[[ $page.variables.getTenderLovSDP ]]",
+                "optionsKeys": {
+                  "label": "label",
+                  "value": "value"
+                }
+              },
+              "data": {
+                "lovFor": "TENDER_NAME"
+              }
+            },
+            "TenderNumberFilter": {
+              "label": "Tender Number",
+              "options": {
+                "field": "tender_number",
+                "optionsData": "[[ $page.variables.getTenderNumberLovSDP]]",
+                "optionsKeys": {
+                  "label": "label",
+                  "value": "value"
+                }
+              },
+              "data": {
+                "lovFor": "TENDER_NUMBER"
+              }
+            },
+            "DateRangeFilter": {
+              "label": "Created Date",
+              "options": {
+                "field": "created_date",
+                "startDate": "[[ $variables.p_start_date ]]",
+                "endDate": "[[ $variables.p_end_date ]]",
+                "minDate": "2019-11-14",
+                "maxDate": "2025-12-31"
+              }
+            },
+            "StatusFilter": {
+              "label": "Status",
+              "options": {
+                "field": "status_id",
+                "optionsData": "[[ $page.variables.getStatusLovSDP ]]",
+                "optionsKeys": {
+                  "label": "lookup_value_name",
+                  "value": "lookup_value_id"
+                }
+              }
+            }
+
+          }
+        }
+      }
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/servicespecsearchconfig.json' ]]"
+      }
+    },
+    "searchObj": {
+      "type": {
+        "in_limit": "string",
+        "in_offset": "string",
+        "p_from_date": "string",
+        "p_keyword": "string",
+        "p_project_name": "string",
+        "p_spec_id": "string",
+        "p_spec_num": "string",
+        "p_spec_name": "string",
+        "p_tender_number": "string",
+        "p_tender_name": "string",
+        "p_budget_number": "string",
+        "p_status_id": "string",
+        "p_created_by": "string",
+        "p_to_date": "string"
+
+      },
+      "defaultValue": {
+        "in_limit": "10",
+        "in_offset": "0",
+        "p_keyword": "",
+        "p_project_name": "",
+        "p_spec_num": "",
+        "p_spec_name": "",
+        "p_tender_number": "",
+        "p_tender_name": "",
+        "p_budget_number": "",
+        "p_created_by": "",
+        "p_spec_id": "",
+        "p_status_id": ""
+      }
+    },
+    "p_start_date": {
+      "type": "string"
+    },
+    "p_end_date": {
+      "type": "string"
+    },
+    "getTenderLovSDP": {
+      "defaultValue": {
+
+        "responseType": "getPmispamLovServicespecCommon",
+        "itemsPath": "items",
+        "headers": {
+          "lovFor": "TENDER"
+        },
+        "keyAttributes": "value",
+        "fetchChain": "getPmispamLovServicespecCommonFetch3"
+      },
+      "type": "vb/ServiceDataProvider"
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getCommonLovLookup": {
+      "endpoint": "getCommonLovLookup",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovServicespecCommon": {
+      "endpoint": "getPmispamLovServicespecCommon",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovServicespecCommon2": {
+      "endpoint": "getPmispamLovServicespecCommon",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamServicespecLovBudgetnumber": {
+      "endpoint": "getPmispamServicespecLovBudgetnumber",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamServicespecLovProjectName": {
+      "endpoint": "getPmispamServicespecLovBudgetnumber",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.postPmispamServicespecSearch": {
+      "endpoint": "postPmispamServicespecSearch",
+      "service": "PAM",
+      "path": "response"
+    },
+    "getCommonLovLookup": {
+      "items": [
+        {
+          "active_flag": "string",
+          "display_order": "number",
+          "lookup_type_code": "string",
+          "lookup_type_id": "number",
+          "lookup_type_name": "string",
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispamLovBudgetCommon": {
+      "items": [
+        {
+          "label": "string",
+          "value": "string"
+        }
+      ]
+    },
+    "getPmispamLovServicespecCommon": {
+      "items": [
+        {
+          "label": "string",
+          "value": "string"
+        }
+      ]
+    },
+    "getPmispamLovServicespecCommon2": {
+      "items": [
+        {
+          "label": "string",
+          "value": "string"
+        }
+      ]
+    },
+    "getPmispamServicespecLovBudgetnumber": {
+      "items": [
+        {
+          "project_id": "number",
+          "project_name": "string",
+          "project_number": "string"
+        }
+      ]
+    },
+    "getPmispamServicespecLovProjectName": {
+      "items": [
+        {
+          "project_id": "number",
+          "project_name": "string",
+          "project_number": "string"
+        }
+      ]
+    },
+    "postPmispamServicespecSearch": {
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "excepted_deliverables": "string",
+      "expected_schedule": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "object_version_num": "any",
+      "project_introduction": "string",
+      "project_number": "string",
+      "score_of_service": "string",
+      "service_spec_id": "number",
+      "service_spec_name": "string",
+      "service_spec_num": "string",
+      "status_code": "string",
+      "status_id": "number",
+      "status_name": "string",
+      "tender_name": "string",
+      "tender_number": "string"
+
+    }
+
+  },
+  "eventListeners": {
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "onEditAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "onDeleteAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "buttonAction3": {
+      "chains": [
+        {
+          "chain": "cancelDeleteAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction4": {
+      "chains": [
+        {
+          "chain": "onOkDeleteAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "createBtnAction": {
+      "chains": [
+        {
+          "chain": "onCreateAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "exportBtnAction": {
+      "chains": [
+        {
+          "chain": "onHdrExportAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "nxtBtnAction": {
+      "chains": [
+        {
+          "chain": "nextBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "preBtnAction": {
+      "chains": [
+        {
+          "chain": "prevBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "onRefreshAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "ButtonActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      }
+    },
+    "modules": {
+      "xlsx": {
+        "path": "https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"
+      },
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-search.css"
+    ]
+  },
+  "constants": {
+    "tableColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "frozenEdge": "start",
+          "sortable": "disabled",
+          "resizable": "enabled",
+          "width": 100,
+          "template": "actions",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+
+        },
+        {
+          "headerText": "Spec Number",
+          "field": "service_spec_num",
+          "frozenEdge": "start",
+          "resizable": "enabled",
+          "width": 150,
+          "template": "service_spec_num",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+
+        },
+        {
+          "headerText": "Spec Name",
+          "field": "service_spec_name",
+          "resizable": "enabled",
+          "width": 200,
+          "template": "service_spec_name",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Tender Number",
+          "field": "tender_number",
+          "resizable": "enabled",
+          "width": 150,
+          "template": "tender_number",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Tender Name",
+          "field": "tender_name",
+          "resizable": "enabled",
+          "width": 200,
+          "template": "tender_name",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Budget Number",
+          "field": "project_number",
+          "resizable": "enabled",
+          "width": 150,
+          "template": "budget_number",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }        ,
+        {
+          "headerText": "Project Introduction",
+          "field": "project_introduction",
+          "resizable": "enabled",
+          "width": 200,
+          "template": "project_introduction",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }        ,
+        {
+          "headerText": "Score of Service",
+          "field": "score_of_service",
+          "resizable": "enabled",
+          "width": 150,
+          "template": "score_of_service",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }        ,
+        {
+          "headerText": "Expected Deliverables",
+          "field": "excepted_deliverables",
+          "resizable": "enabled",
+          "width": 200,
+          "template": "excepted_deliverables",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }        ,
+        {
+          "headerText": "Expected Schedule",
+          "field": "expected_schedule",
+          "resizable": "enabled",
+          "width": 180,
+          "template": "expected_schedule",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }        ,
+        {
+          "headerText": "Status",
+          "field": "status_name",
+          "resizable": "enabled",
+          "width": 120,
+          "template": "status_badge",
+          "headerStyle": "white-space: normal;",
+          "className": "oj-helper-text-align-center",
+          "style": ""
+        }        ,
+        {
+          "headerText": "Additional Info",
+          "field": "additional_info",
+          "resizable": "enabled",
+          "width": 180,
+          "template": "additional_info",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }        ,
+        {
+          "headerText": "Created By",
+          "field": "created_by",
+          "resizable": "enabled",
+          "width": 140,
+          "template": "created_by",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }
+      ],
+      "description": ""
+    }
+  }
+}

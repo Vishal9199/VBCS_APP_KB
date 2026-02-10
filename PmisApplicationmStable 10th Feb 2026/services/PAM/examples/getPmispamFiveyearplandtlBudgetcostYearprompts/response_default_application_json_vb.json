@@ -1,0 +1,33 @@
+{
+    "items": [
+        {
+            "year": 2021
+        },
+        {
+            "year": 2022
+        },
+        {
+            "year": 2023
+        },
+        {
+            "year": 2024
+        },
+        {
+            "year": 2025
+        }
+    ],
+    "hasMore": false,
+    "limit": 0,
+    "offset": 0,
+    "count": 5,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/fiveyearplandtl/budgetcost/yearprompts"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/fiveyearplandtl/budgetcost/item"
+        }
+    ]
+}

@@ -1,0 +1,142 @@
+{
+    "items": [
+        {
+            "mp_ref_id": 1259,
+            "mp_ref_num": "Ref_No_1259",
+            "mp_ref_plan_name": "OK MASTER PLAN",
+            "budget_year_id": 1001
+        },
+        {
+            "mp_ref_id": 1219,
+            "mp_ref_num": "Ref_No_1219",
+            "mp_ref_plan_name": "Plan A(Master)",
+            "budget_year_id": 1001
+        },
+        {
+            "mp_ref_id": 1002,
+            "mp_ref_num": "MP-2026-1002",
+            "mp_ref_plan_name": "Master Plan – Phase 2",
+            "budget_year_id": 2026
+        },
+        {
+            "mp_ref_id": 1460,
+            "mp_ref_num": "Ref_No_1460",
+            "mp_ref_plan_name": "Haya",
+            "budget_year_id": 1001
+        },
+        {
+            "mp_ref_id": 1239,
+            "mp_ref_num": "Ref_No_1239",
+            "mp_ref_plan_name": "MASTER TEST",
+            "budget_year_id": 1001
+        },
+        {
+            "mp_ref_id": 1500,
+            "mp_ref_num": "Ref_No_1500",
+            "mp_ref_plan_name": "Master Plan Feb -10",
+            "budget_year_id": 1001
+        },
+        {
+            "mp_ref_id": 1441,
+            "mp_ref_num": null,
+            "mp_ref_plan_name": "Nama Water Services",
+            "budget_year_id": 1001
+        },
+        {
+            "mp_ref_id": 1279,
+            "mp_ref_num": "Ref_No_1279",
+            "mp_ref_plan_name": "Master Plan Feb -3",
+            "budget_year_id": 1001
+        },
+        {
+            "mp_ref_id": 1003,
+            "mp_ref_num": "M)-2026-1003",
+            "mp_ref_plan_name": "Master Plan – Phase 3",
+            "budget_year_id": 2027
+        },
+        {
+            "mp_ref_id": 1442,
+            "mp_ref_num": "Ref_No_1442",
+            "mp_ref_plan_name": "Nama Water Services",
+            "budget_year_id": 1001
+        },
+        {
+            "mp_ref_id": 1444,
+            "mp_ref_num": "Ref_No_1444",
+            "mp_ref_plan_name": "Oracle | 4i Apps",
+            "budget_year_id": 1001
+        },
+        {
+            "mp_ref_id": 1139,
+            "mp_ref_num": "Ref_No_1139",
+            "mp_ref_plan_name": "1",
+            "budget_year_id": null
+        },
+        {
+            "mp_ref_id": 1445,
+            "mp_ref_num": "Ref_No_1445",
+            "mp_ref_plan_name": "Haya",
+            "budget_year_id": 1001
+        },
+        {
+            "mp_ref_id": 1179,
+            "mp_ref_num": "Ref_No_1179",
+            "mp_ref_plan_name": "Try Plan",
+            "budget_year_id": 1001
+        },
+        {
+            "mp_ref_id": 1119,
+            "mp_ref_num": "Ref_No_1119",
+            "mp_ref_plan_name": "Plan A",
+            "budget_year_id": null
+        },
+        {
+            "mp_ref_id": 1359,
+            "mp_ref_num": "Ref_No_1359",
+            "mp_ref_plan_name": "Master Plan Feb -8",
+            "budget_year_id": 1001
+        },
+        {
+            "mp_ref_id": 1480,
+            "mp_ref_num": "Ref_No_1480",
+            "mp_ref_plan_name": "aaaaaa",
+            "budget_year_id": 1001
+        },
+        {
+            "mp_ref_id": 1001,
+            "mp_ref_num": "MP-2026-1001",
+            "mp_ref_plan_name": "Master Plan – Phase 1",
+            "budget_year_id": 2025
+        },
+        {
+            "mp_ref_id": 1443,
+            "mp_ref_num": "Ref_No_1443",
+            "mp_ref_plan_name": "Oracle",
+            "budget_year_id": 1001
+        },
+        {
+            "mp_ref_id": 1000,
+            "mp_ref_num": "MP-2026-2001",
+            "mp_ref_plan_name": "Master Plan - 2001",
+            "budget_year_id": null
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 20,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/lov/masterplan/referenceno"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/lov/masterplan/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/lov/masterplan/referenceno"
+        }
+    ]
+}

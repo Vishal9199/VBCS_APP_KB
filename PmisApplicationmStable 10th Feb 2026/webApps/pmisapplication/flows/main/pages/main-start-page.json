@@ -1,0 +1,159 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "pamMenuItemsADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "data": [
+          {
+            "id": "1",
+            "label": "Project List Admin",
+            "flow": "pam",
+            "page": "projectlistedit"
+          },
+          {
+            "id": "2",
+            "label": "Service Specification",
+            "flow": "pam",
+            "page": "searchspecedit"
+          },
+          {
+            "id": "3",
+            "label": "Project Charter",
+            "flow": "pam",
+            "page": "projectchartersearch"
+          },
+          {
+            "id": "4",
+            "label": "Concept Study",
+            "flow": "pam",
+            "page": "conceptsearch"
+          },
+          {
+            "id": "5",
+            "label": "Five Year Plan",
+            "flow": "pam",
+            "page": "fypsearch"
+          }
+        ],
+        "keyAttributes": "id",
+        "itemType": "menuItemType"
+      }
+    },
+    "pddMenuItemsADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+         "data": [
+          {
+            "id": "1",
+            "label": "Project Assignment Admin",
+            "flow": "pdd",
+            "page": "assignmentadmin"
+          }
+        ],
+        "keyAttributes": "id",
+        "itemType": "menuItemType"
+      }
+    },
+    "pmisSetupMenuItemsADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "data": [
+          {
+            "id": "1",
+            "label": "Calendar",
+            "flow": "pmissetup",
+            "page": "calendarsearch"
+          },
+          {
+            "id": "2",
+            "label": "Region",
+            "flow": "pmissetup",
+            "page": "regionsearch"
+          },
+          {
+            "id": "3",
+            "label": "Lookup",
+            "flow": "pmissetup",
+            "page": "lookupsearch"
+          }
+        ],
+        "keyAttributes": "id",
+        "itemType": "menuItemType"
+      }
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "menuItemType": {
+      "id": "string",
+      "label": "string",
+      "flow": "string",
+      "page": "string"
+    }
+  },
+  "eventListeners": {
+    "pamListItemAction": {
+      "chains": [
+        {
+          "chain": "ListViewItemActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "eventContext": "{{$event.detail.context}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{$event.detail.context.data.key}}"
+          }
+        }
+      ]
+    },
+    "pddsetuplist": {
+     "chains": [
+        {
+          "chain": "pddsetupactions",
+          "parameters": {
+            "event": "{{$event}}",
+            "eventContext": "{{$event.detail.context}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "pmisSetupListItemAction": {
+      "chains": [
+        {
+          "chain": "pmisSetupActions",
+          "parameters": {
+            "event": "{{$event}}",
+            "eventContext": "{{$event.detail.context}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-list-item-layout": {
+        "path": "ojs/ojlistitemlayout"
+      },
+      "oj-list-view": {
+        "path": "ojs/ojlistview"
+      },
+      "oj-panel": {
+        "path": "ojs/ojpanel"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-search.css"
+    ]
+  }
+}
