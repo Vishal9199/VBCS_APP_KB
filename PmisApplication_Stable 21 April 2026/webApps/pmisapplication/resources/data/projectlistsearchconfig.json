@@ -1,0 +1,25 @@
+{
+    "description": "Smart Search Configuration for PDD Projectlist Page",
+    "filters": {
+        "ProjectlistOraProjectNameFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Ora Project Name",
+            "options": {
+                "field": "ora_project_id",
+                "optionsData": "[[ $search.filters.ProjectlistOraProjectNameFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.ProjectlistOraProjectNameFilter.options.optionsKeys ]]"
+            },
+            "data": {}
+        },
+        "ProjectlistProjectFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Project Name",
+            "options": {
+                "field": "project_id",
+                "optionsData": "[[ $search.filters.ProjectlistProjectFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.ProjectlistProjectFilter.options.optionsKeys ]]"
+            },
+            "data": {}
+        }
+    }
+}

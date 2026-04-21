@@ -1,0 +1,378 @@
+{
+  "title": "Completion Search",
+  "description": "Smart Search page for Completion - read-only table with Create, Edit, Delete",
+  "variables": {
+    "currentPage": {
+      "type": "string"
+    },
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "getProjectLovListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "itemsPath": "items",
+        "responseType": "getPmispddCompletionadminLovTendernumber",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "project_number",
+            "project_name"
+          ]
+        },
+        "fetchChain": "getCompletionLovTenderFetch",
+        "keyAttributes": "project_number"
+      }
+    },
+    "gettendernamelovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "itemsPath": "items",
+        "responseType": "getPmispddCompletionadminLovTendernumber",
+        "fetchChain": "getCompletionLovTenderFetch",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "tender_name",
+            "tender_number"
+          ]
+        },
+        "keyAttributes": "tender_name"
+      }
+    },
+    "pagination": {
+      "type": "object",
+      "defaultValue": {
+        "is_next": false,
+        "is_prev": true
+      }
+    },
+    "getTenderLovListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "itemsPath": "items",
+        "responseType": "getPmispddCompletionadminLovTendernumber",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "tender_name",
+            "tender_number"
+          ]
+        },
+        "fetchChain": "getCompletionLovTenderFetch",
+        "keyAttributes": "tender_number"
+      }
+    },
+    "paginationDisplay": {
+      "type": "string"
+    },
+    "passKey": {
+      "type": "string"
+    },
+    "passPayload": {
+      "type": "string"
+    },
+    "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "TenderNumberFilter": {
+              "label": "Tender Number",
+              "options": {
+                "optionsData": "[[ $page.variables.getTenderLovListSDP ]]",
+                "optionsKeys": {
+                  "label": "tender_number",
+                  "value": "tender_id"
+                }
+              }
+            },
+            "TenderNameFilter": {
+              "label": "Tender Name",
+              "options": {
+                "optionsData": "[[ $page.variables.getTenderLovListSDP ]]",
+                "optionsKeys": {
+                  "label": "tender_name",
+                  "value": "tender_id"
+                }
+              }
+            },
+            "ProjectNumberFilter": {
+              "label": "Project Number",
+              "options": {
+                "optionsData": "[[ $page.variables.getProjectLovListSDP ]]",
+                "optionsKeys": {
+                  "label": "project_number",
+                  "value": "project_id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/completionsearchconfig.json' ]]"
+      }
+    },
+    "searchObj": {
+      "type": {
+        "in_limit": "string",
+        "in_offset": "string",
+        "p_project_number": "string",
+        "p_tender_number": "string",
+        "p_tender_name": "string",
+        "p_keyword": "string"
+      },
+      "defaultValue": {
+        "in_limit": "10",
+        "in_offset": "0",
+        "p_project_number": "",
+        "p_tender_number": "",
+        "p_tender_name": "",
+        "p_keyword": ""
+      }
+    },
+    "completionADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "CompletionType",
+        "keyAttributes": "completion_id"
+      }
+    },
+    "deleteCompletionId": {
+      "type": "number"
+    },
+    "totalRecords": {
+      "type": "number",
+      "defaultValue": 0
+    }
+
+  },
+  "types": {
+    "@decorators.getPmispddCompletionadminLovTendernumber": {
+      "endpoint": "getPmispddCompletionadminLovTendernumber",
+      "service": "PDD",
+      "path": "response"
+    },
+    "CompletionType": {
+      "completion_id": "number",
+      "object_version_num": "number",
+      "ora_project_id": "number",
+      "ora_project_number": "string",
+      "ora_project_name": "string",
+      "tender_id": "number",
+      "tender_number": "string",
+      "tender_name": "string",
+      "five_year_plan_name": "string",
+      "supplier_id": "number",
+      "supplier_name": "string",
+      "consultant_name": "string",
+      "commencement_date": "string",
+      "completion_close_flag": "string",
+      "completion_prime": "number",
+      "orig_completion_date": "string",
+      "extended_completion_date": "string",
+      "actual_completion_date": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "getCompletionLovProjectResponse": {
+      "items": [
+        {
+          "project_id": "number",
+          "project_number": "string",
+          "project_name": "string"
+        }
+      ]
+    },
+    "getCompletionLovTenderResponse": {
+      "items": [
+        {
+          "tender_id": "number",
+          "tender_number": "string",
+          "tender_name": "string"
+        }
+      ]
+    },
+    "getPmispddCompletionadminLovTendernumber": {
+      "items": [
+        {
+          "project_id": "number",
+          "project_name": "string",
+          "project_number": "string",
+          "supplier_id": "number",
+          "supplier_name": "string",
+          "tender_id": "number",
+          "tender_name": "string",
+          "tender_number": "string"
+        }
+      ]
+    }
+  },
+  "constants": {
+    "columnsvar": {
+      "type": "object[]",
+      "defaultValue": "[[ [\n    {\n        \"headerText\": \"Action\",\n        \"field\": \"\",\n        \"resizable\": \"enabled\",\n        \"width\": 100,\n        \"template\": \"Action\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 100px;\"\n    },\n    {\n        \"headerText\": \"Project Name\",\n        \"field\": \"ora_project_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 200,\n        \"template\": \"Project Name\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 200px;\"\n    },\n    {\n        \"headerText\": \"Tender Name\",\n        \"field\": \"tender_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 200,\n        \"template\": \"Tender Name\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 200px;\"\n    },\n    {\n        \"headerText\": \"Supplier Name\",\n        \"field\": \"supplier_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 180,\n        \"template\": \"Supplier Name\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\"\n    },\n    {\n        \"headerText\": \"Consultant Name\",\n        \"field\": \"consultant_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 180,\n        \"template\": \"Consultant Name\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\"\n    },\n    {\n        \"headerText\": \"Commencement Date\",\n        \"field\": \"commencement_date\",\n        \"resizable\": \"enabled\",\n        \"width\": 180,\n        \"template\": \"Date\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\"\n    },\n    {\n        \"headerText\": \"Original Completion Date\",\n        \"field\": \"orig_completion_date\",\n        \"resizable\": \"enabled\",\n        \"width\": 200,\n        \"template\": \"Date\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 200px;\"\n    },\n    {\n        \"headerText\": \"Extended Completion Date\",\n        \"field\": \"extended_completion_date\",\n        \"resizable\": \"enabled\",\n        \"width\": 200,\n        \"template\": \"Date\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 200px;\"\n    },\n    {\n        \"headerText\": \"Actual Completion Date\",\n        \"field\": \"actual_completion_date\",\n        \"resizable\": \"enabled\",\n        \"width\": 200,\n        \"template\": \"Date\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 200px;\"\n    },\n    {\n        \"headerText\": \"Five Year Plan\",\n        \"field\": \"five_year_plan_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 180,\n        \"template\": \"Five Year Plan\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\"\n    },\n    {\n        \"headerText\": \"Completion Prime\",\n        \"field\": \"completion_prime\",\n        \"resizable\": \"enabled\",\n        \"width\": 160,\n        \"template\": \"Completion Prime\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\"\n    },\n    {\n        \"headerText\": \"Close Flag\",\n        \"field\": \"completion_close_flag\",\n        \"resizable\": \"enabled\",\n        \"width\": 120,\n        \"template\": \"Close Flag\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 120px;\"\n    }\n] ]]"
+    }
+  },
+  "eventListeners": {
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "Editactionchain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "deletebuttonaction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "buttonAction3": {
+      "chains": [
+        {
+          "chain": "canceldeleteactionchain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction4": {
+      "chains": [
+        {
+          "chain": "okdeletebuttonaction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "createBtnAction": {
+      "chains": [
+        {
+          "chain": "createbuttonaction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "filterCriterionListener": {
+      "chains": [
+        {
+          "chain": "filterCriterionListener",
+          "parameters": {
+            "event": "{{ $event }}"
+          }
+        }
+      ]
+    },
+    "nextBtnAction": {
+      "chains": [
+        {
+          "chain": "nextactionchain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "prevBtnAction": {
+      "chains": [
+        {
+          "chain": "prevactionchain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-search.css"
+    ],
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    }
+  }
+}

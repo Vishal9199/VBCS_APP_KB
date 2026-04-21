@@ -1,0 +1,539 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "budgetControlADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "budgetControlType",
+        "keyAttributes": "budget_control_header_id"
+      }
+    },
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "hasNext": {
+      "type": "boolean"
+    },
+    "hasPrev": {
+      "type": "boolean"
+    },
+    "lvBudgetCurrentRow": {
+      "type": "BudgetLineCurrentRowType"
+    },
+    "lvBudgetHasLines": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "paginationDisplay": {
+      "type": "string",
+      "defaultValue": "0 - 0 of 0 items"
+    },
+    "passKey": {
+      "type": "string"
+    },
+    "passPayload": {
+      "type": "string"
+    },
+    "planTypeADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "data": [
+          {
+            "id": "P1",
+            "label": "P1"
+          },
+          {
+            "id": "P2",
+            "label": "P2"
+          },
+          {
+            "id": "P3",
+            "label": "P3"
+          }
+        ],
+        "keyAttributes": "id"
+      }
+    },
+    "projectDetail": {
+      "type": {
+        "project_id": "number",
+        "project_name": "string",
+        "project_number": "string",
+        "tender_id": "number",
+        "tender_name": "string",
+        "tender_number": "string"
+      }
+    },
+    "pTenderId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/budgetcontolsearchconfig.json' ]]"
+      }
+    },
+    "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "PlanTypeFilter": {
+              "label": "Plan Type",
+              "options": {
+                "optionsData": "[[ $page.variables.planTypeADP ]]",
+                "optionsKeys": {
+                  "label": "label",
+                  "value": "id"
+                }
+              }
+            },
+            "YearFilter": {
+              "label": "Year",
+              "options": {
+                "optionsData": "[[ $page.variables.yearSDP ]]",
+                "optionsKeys": {
+                  "label": "display_year",
+                  "value": "display_year"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "searchObj": {
+      "type": {
+        "in_limit": "string",
+        "in_offset": "string",
+        "p_plan_type": "string",
+        "p_tender_id": "string",
+        "p_year": "string"
+      },
+      "defaultValue": {
+        "in_limit": "5"
+      }
+    },
+    "lvBudgetTableColumns": {
+      "type": "object[]"
+    },
+    "budgetLinesADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "BudgetLineType",
+        "keyAttributes": "budget_control_line_id"
+      }
+    },
+    "yearSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getPmisLovYear",
+        "itemsPath": "items",
+        "keyAttributes": "display_year",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "display_year"
+          ]
+        },
+        "fetchChain": "getPmisLovYearFetch"
+      }
+    },
+    "paginationText": {
+      "type": "string",
+      "defaultValue": "Showing 0 to 0 of 0 records"
+    },
+    "currentPage": {
+      "type": "number",
+      "defaultValue": 1
+    },
+    "totalRecords": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "hasNextPage": {
+      "type": "string",
+      "defaultValue": "N"
+    },
+    "isPrevDisabled": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "Disable state for Previous button"
+    },
+    "isNextDisabled": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "Disable state for Next button"
+    },
+    "pagination": {
+      "type": "object",
+      "defaultValue": {
+        "is_next": false,
+        "is_prev": true
+      }
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getPmisLovYear": {
+      "endpoint": "getPmisLovYear",
+      "service": "PmisSetup",
+      "path": "response"
+    },
+    "budgetControlType": {
+  "budget_control_header_id": "number",
+  "object_version_num": "number",
+  "ora_project_id": "number",
+  "ora_project_number": "string",
+  "ora_project_name": "string",
+  "tender_id": "number",
+  "tender_number": "string",
+  "tender_name": "string",
+  "year": "number",
+  "region_id": "number",
+  "region_code": "string",
+  "region": "string",
+  "plan_type": "string",
+  "scope_of_work": "string",
+  "anticipated_contract": "number",
+  "original_base_line": "number",
+  "additional_info": "string",
+  "created_by": "string",
+  "created_date": "string",
+  "last_updated_by": "string",
+  "last_updated_date": "string",
+  "last_updated_login": "string"
+},
+    "getPmisLovYear": {
+      "items": [
+        {
+          "display_year": "number"
+        }
+      ]
+    },
+    "BudgetLineCurrentRowType": {
+      "budget_control_line_id": "number",
+      "object_version_num": "number",
+      "budget_control_header_id": "number",
+      "year": "number",
+      "plan_type": "string",
+      "meaning_id": "number",
+      "meaning_code": "string",
+      "meaning": "string",
+      "prior_years": "number",
+      "january": "number",
+      "february": "number",
+      "march": "number",
+      "april": "number",
+      "may": "number",
+      "june": "number",
+      "july": "number",
+      "august": "number",
+      "september": "number",
+      "october": "number",
+      "november": "number",
+      "december": "number",
+      "total_curr_year": "number",
+      "total_bal_next_year": "number",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "BudgetLineType": {
+      "budget_control_line_id": "number",
+      "object_version_num": "number",
+      "budget_control_header_id": "number",
+      "year": "number",
+      "plan_type": "string",
+      "meaning_id": "number",
+      "meaning_code": "string",
+      "meaning": "string",
+      "prior_years": "number",
+      "january": "number",
+      "february": "number",
+      "march": "number",
+      "april": "number",
+      "may": "number",
+      "june": "number",
+      "july": "number",
+      "august": "number",
+      "september": "number",
+      "october": "number",
+      "november": "number",
+      "december": "number",
+      "total_curr_year": "number",
+      "total_bal_next_year": "number",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    }
+  },
+  "eventListeners": {
+    "addProjectBtnAction": {
+      "chains": [
+        {
+          "chain": "onAddBudget_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "ButtonActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "onDeleteAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "buttonAction3": {
+      "chains": [
+        {
+          "chain": "onOkDeleteAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction4": {
+      "chains": [
+        {
+          "chain": "onCancelDelete_Action",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "createBtnAction": {
+      "chains": [
+        {
+          "chain": "onClickClose",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "nextBtnAction": {
+      "chains": [
+        {
+          "chain": "nextPageAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "prevBtnAction": {
+      "chains": [
+        {
+          "chain": "prevPageAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "onRefresh_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "onReset_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "searchFiveYearPlanTblFirstSelectedRow": {
+      "chains": [
+        {
+          "chain": "TableFirstSelectedRowChangeChain1",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "rowKey": "{{$event.detail.value.key}}",
+            "rowData": "{{$event.detail.value.data}}",
+            "firstSelectedRow": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-list-view": {
+        "path": "ojs/ojlistview"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-collection-container": {
+        "path": "oj-sp/collection-container/loader"
+      },
+      "oj-sp-empty-state": {
+        "path": "oj-sp/empty-state/loader"
+      },
+      "oj-sp-list-item-template": {
+        "path": "oj-sp/list-item-template/loader"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      }
+
+    },
+    "modules": {
+      "ojConverterNumber": {
+        "path": "ojs/ojconverter-number"
+      },
+      "ojValidationNumber": {
+        "path": "ojs/ojvalidation-number"
+      }
+    }
+  },
+  "@dt": {
+    "iconClass": "vbdt-dynamic-icon-17-icoSmartSearchPage48Svg"
+  },
+  "constants": {
+    "columnsVar": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "frozenEdge": "start",
+          "resizable": "disabled",
+          "sortable": "disabled",
+          "template": "actions",
+          "headerStyle": "white-space: nowrap; min-width: 100px;",
+          "style": ""
+        },
+        {
+          "headerText": "Project Name",
+          "field": "ora_project_name",
+          "resizable": "enabled",
+          "template": "edit_link",
+          "headerStyle": "white-space: nowrap; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Region Name",
+          "field": "region",
+          "resizable": "enabled",
+          "template": "region_name",
+          "headerStyle": "white-space: nowrap; min-width: 150px;",
+          "style": ""
+        },
+        {
+          "headerText": "Plan Type",
+          "field": "plan_type",
+          "headerStyle": "white-space: nowrap; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Year",
+          "field": "year",
+          "frozenEdge": "start",
+          "resizable": "enabled",
+          "headerStyle": "white-space: nowrap; min-width: 180px;",
+          "style": ""
+        }
+      ]
+    }
+  }
+}

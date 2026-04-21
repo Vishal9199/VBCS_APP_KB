@@ -1,0 +1,218 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+
+    "attachmentTableData": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "getApprovalhistory",
+        "keyAttributes": "action_history_id"
+      }
+    },
+    "pScreenName": {
+      "type": "string",
+      "defaultValue": "Approval History",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "pTrxId": {
+      "type": "number",
+      "defaultValue": 0,
+      "required": true,
+      "input": "fromUrl"
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getApprovalhistory": {
+      "endpoint": "getApprovalhistory",
+      "service": "approval",
+      "path": "response"
+    },
+    "getApprovalhistory": {
+      "action_comments": "string",
+      "action_date": "string",
+      "action_history_id": "number",
+      "action_id": "number",
+      "action_sequence_num": "number",
+      "action_type": "string",
+      "action_type_code": "string",
+      "action_type_id": "number",
+      "appr_category_code": "string",
+      "appr_category_id": "number",
+      "appr_category_name": "string",
+      "appr_hierarchy_id": "number",
+      "appr_level": "number",
+      "appr_request_code": "string",
+      "appr_request_name": "string",
+      "appr_role_id": "number",
+      "appr_type_code": "string",
+      "appr_type_id": "number",
+      "appr_type_name": "string",
+      "approval_pcs_instance_num": "string",
+      "approval_role_code": "string",
+      "approval_role_name": "string",
+      "approver_email_id": "string",
+      "approver_person_number": "any",
+      "approver_user_name": "any",
+      "created_by": "string",
+      "creation_date": "string",
+      "last_update_date": "string",
+      "last_update_login": "string",
+      "last_updated_by": "string",
+      "requester_email_address": "any",
+      "requester_email_disp_name": "any",
+      "requester_person_number": "any",
+      "requester_user": "any",
+      "requester_user_id": "number",
+      "response_user": "any",
+      "response_user_id": "number",
+      "row_num": "number",
+      "status_code": "string",
+      "transaction_id": "number",
+      "transaction_num": "string",
+      "version_number": "number"
+    }
+  },
+  "eventListeners": {
+    "smartSearchPageTemplateSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "onRefresh_AC",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "smartSearchPageTemplateSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "onClose_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "onLoad"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-file-picker": {
+        "path": "ojs/ojfilepicker"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-date-time": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-label": {
+        "path": "ojs/ojlabel"
+      },
+      "oj-paging-control": {
+        "path": "ojs/ojpagingcontrol"
+      },
+      "oj-progress-bar": {
+        "path": "ojs/ojprogress-bar"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-switcher": {
+        "path": "ojs/ojswitcher"
+      },
+      "oj-tab-bar": {
+        "path": "ojs/ojnavigationlist"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-search.css"
+    ]
+  },
+  "constants": {
+    "TableColumnList": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "S.No",
+          "field": "row_num",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Approver",
+          "field": "approver_email_id",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Role",
+          "field": "approval_role_name",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Action",
+          "field": "action_type",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Comments",
+          "field": "action_comments",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Action Date",
+          "field": "action_date",
+          "resizable": "enabled",
+          "template": "date"
+        }
+      ]
+    }
+  }
+}

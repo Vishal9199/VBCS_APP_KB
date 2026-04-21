@@ -1,0 +1,102 @@
+{
+    "items": [
+        {
+            "lookup_value_id": 6174,
+            "lookup_value_code": "MUS",
+            "lookup_value_name": "Musandam"
+        },
+        {
+            "lookup_value_id": 6180,
+            "lookup_value_code": "DHA",
+            "lookup_value_name": "Adh Dhahirah"
+        },
+        {
+            "lookup_value_id": 6181,
+            "lookup_value_code": "SSO",
+            "lookup_value_name": "Ash Sharqiyah South"
+        },
+        {
+            "lookup_value_id": 6184,
+            "lookup_value_code": "SS",
+            "lookup_value_name": "Ash Sharqiyah"
+        },
+        {
+            "lookup_value_id": 6185,
+            "lookup_value_code": "BT",
+            "lookup_value_name": "Al Batinah"
+        },
+        {
+            "lookup_value_id": 6186,
+            "lookup_value_code": "GENERAL",
+            "lookup_value_name": "General"
+        },
+        {
+            "lookup_value_id": 6172,
+            "lookup_value_code": "MCS",
+            "lookup_value_name": "Muscat-Seeb"
+        },
+        {
+            "lookup_value_id": 6173,
+            "lookup_value_code": "MCM",
+            "lookup_value_name": "Muscat"
+        },
+        {
+            "lookup_value_id": 6176,
+            "lookup_value_code": "DAK",
+            "lookup_value_name": "Al Dakhliyah"
+        },
+        {
+            "lookup_value_id": 6178,
+            "lookup_value_code": "BSO",
+            "lookup_value_name": "Al Batinah South"
+        },
+        {
+            "lookup_value_id": 6182,
+            "lookup_value_code": "WUS",
+            "lookup_value_name": "Al Wusta"
+        },
+        {
+            "lookup_value_id": 6171,
+            "lookup_value_code": "MCB",
+            "lookup_value_name": "Muscat - Bawshar"
+        },
+        {
+            "lookup_value_id": 6175,
+            "lookup_value_code": "SNO",
+            "lookup_value_name": "Ash Sharqiyah North"
+        },
+        {
+            "lookup_value_id": 6177,
+            "lookup_value_code": "BUR",
+            "lookup_value_name": "Al Buraymi"
+        },
+        {
+            "lookup_value_id": 6179,
+            "lookup_value_code": "BNO",
+            "lookup_value_name": "Al Batinah North"
+        },
+        {
+            "lookup_value_id": 6183,
+            "lookup_value_code": "IRP",
+            "lookup_value_name": "Inter-Regional"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 16,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmis/lov/region/name"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmis/lov/region/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmis/lov/region/name"
+        }
+    ]
+}

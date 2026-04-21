@@ -1,0 +1,444 @@
+{
+  "title": "Projectlist Smart Search",
+  "description": "Smart Search page for Projectlist management",
+  "variables": {
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "getProjectlistProjectLovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "responseType": "getPmispamFiveyearplandtlLovProjectname",
+        "itemsPath": "items",
+        "keyAttributes": "project_id",
+        "fetchChain": "getPmispamFiveyearplandtlLovProjectnameFetch"
+      }
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/projectlistsearchconfig.json' ]]"
+      }
+    },
+    "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "ProjectlistOraProjectNameFilter": {
+              "label": "Project Name",
+              "options": {
+                "optionsData": "[[ $page.variables.getProjectlistOraProjectNameLovSDP ]]",
+                "optionsKeys": {
+                  "label": "project_name",
+                  "value": "ora_project_id"
+                }
+              }
+            },
+            "ProjectlistProjectFilter": {
+              "label": "Project Number",
+              "options": {
+                "optionsData": "[[ $page.variables.getProjectlistProjectLovSDP ]]",
+                "optionsKeys": {
+                  "label": "project_name",
+                  "value": "project_id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "getProjectlistOraProjectNameLovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "responseType": "getPmispddProjectlistLovProject",
+        "itemsPath": "items",
+        "keyAttributes": "ora_project_id",
+        "fetchChain": "getPmispddProjectlistLovProjectFetch"
+      }
+    },
+    "projectlistADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "ProjectListType",
+        "keyAttributes": "pdd_project_id"
+      }
+    },
+    "searchObj": {
+      "type": {
+        "in_limit": "string",
+        "in_offset": "string",
+        "p_ora_project_id": "string",
+        "p_project_id": "string",
+        "p_keyword": "string"
+      },
+      "defaultValue": {
+        "in_limit": "10",
+        "in_offset": "0",
+        "p_ora_project_id": "",
+        "p_project_id": "",
+        "p_keyword": ""
+      }
+    },
+    "pagination": {
+      "type": {
+        "is_next": "boolean",
+        "is_prev": "boolean"
+      },
+      "defaultValue": {
+        "is_next": true,
+        "is_prev": true
+      }
+    },
+    "currentPage": {
+      "type": "number",
+      "defaultValue": 1
+    },
+    "selectedrow": {
+      "type": "string"
+    },
+    "totalRecords": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "vShowFragment": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "about": {
+      "type": "AboutType"
+    },
+    "selectedKey": {
+      "type": "any"
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getPmispamFiveyearplandtlLovProjectname": {
+      "endpoint": "getPmispamFiveyearplandtlLovProjectname",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispddProjectlistLovProject": {
+      "endpoint": "getPmispddProjectlistLovProject",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.ProjectlistType": {
+      "endpoint": "postProjectListSearch",
+      "service": "PDD",
+      "path": "response"
+    },
+    "getPmispamFiveyearplandtlLovProjectname": {
+      "items": [
+        {
+          "project_id": "number",
+          "project_name": "string"
+        }
+      ]
+    },
+    "getPmispddProjectlistLovProject": {
+      "items": [
+        {
+          "ora_project_id": "number",
+          "project_name": "string",
+          "project_number": "string"
+        }
+      ]
+    },
+    "ProjectlistOraProjectNameLovType": {
+      "ora_project_name": "string"
+    },
+    "ProjectlistOraProjectNumberLovType": {
+      "ora_project_number": "string"
+    },
+    "AboutType": {
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_update_login": "string",
+      "last_updated_date": "string"
+    },
+    "ProjectListType": {
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "object_version_num": "number",
+      "ora_project_id": "number",
+      "ora_project_name": "string",
+      "ora_project_number": "string",
+      "pdd_project_id": "number",
+      "tender_id": "number",
+      "tender_name": "string",
+      "tender_number": "string"
+    }
+
+  },
+  "eventListeners": {
+    "aboutBtnAction": {
+      "chains": [
+        {
+          "chain": "onAboutAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "aboutOkAction": {
+      "chains": [
+        {
+          "chain": "onAboutOkAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "editBtnAction": {
+      "chains": [
+        {
+          "chain": "onEditAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "deleteBtnAction": {
+      "chains": [
+        {
+          "chain": "onDeleteAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "confirmDeleteAction": {
+      "chains": [
+        {
+          "chain": "onConfirmDeleteAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "cancelDeleteAction": {
+      "chains": [
+        {
+          "chain": "onCancelDeleteAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "createBtnAction": {
+      "chains": [
+        {
+          "chain": "onCreateAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "exportBtnAction": {
+      "chains": [
+        {
+          "chain": "onExportAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "nextBtnAction": {
+      "chains": [
+        {
+          "chain": "nextBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "prevBtnAction": {
+      "chains": [
+        {
+          "chain": "prevBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "resetFilter_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-date-time": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      }
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  },
+  "constants": {
+    "columnsVar": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Action",
+          "field": "",
+          "frozenEdge": "start",
+          "resizable": "enabled",
+          "sortable": "disabled",
+          "width": 100,
+          "template": "actions",
+          "headerStyle": "white-space:nowrap;min-width:100px;",
+          "style": ""
+        },
+        {
+          "headerText": "Project Name",
+          "field": "ora_project_name",
+          "resizable": "enabled",
+          "width": 270,
+          "headerStyle": "white-space:nowrap;min-width:160px;",
+          "style": ""
+        },
+        {
+          "headerText": "Project Number",
+          "field": "ora_project_number",
+          "resizable": "enabled",
+          "width": 180,
+          "headerStyle": "white-space:nowrap;min-width:160px;",
+          "style": ""
+        },
+        {
+          "headerText": "Tender Name",
+          "field": "tender_name",
+          "resizable": "enabled",
+          "width": 270,
+          "headerStyle": "white-space:nowrap;min-width:160px;",
+          "style": ""
+        },
+        {
+          "headerText": "Tender Number",
+          "field": "tender_number",
+          "resizable": "enabled",
+          "width": "",
+          "headerStyle": "white-space:nowrap;min-width:160px;",
+          "style": ""
+        }
+      ]
+    }
+  }
+}

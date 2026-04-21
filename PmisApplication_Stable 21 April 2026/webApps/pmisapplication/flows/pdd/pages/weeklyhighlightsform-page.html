@@ -1,0 +1,436 @@
+<style>
+  /* ============================================================
+     TAB BAR - Scoped to .wh-tabbar-container
+     Full-width blue bottom line, selected tab lifts above it
+     ============================================================ */
+
+  .wh-tabbar-container .oj-navigationlist-horizontal {
+    border-bottom: 2px solid #084c4c !important;
+  }
+
+  .wh-tabbar-container .oj-navigationlist-horizontal .oj-navigationlist-item-element {
+    background-color: transparent !important;
+    border: 1px solid #c8c8c8 !important;
+    border-bottom: none !important;
+    margin-right: 0.15rem;
+    border-radius: 3px 3px 0 0;
+  }
+
+  .wh-tabbar-container .oj-navigationlist-horizontal .oj-navigationlist-item-element.oj-selected {
+    background-color: #ffffff !important;
+    border: 1px solid #c8c8c8 !important;
+    border-bottom: 2px solid #ffffff !important;
+    margin-bottom: -2px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .wh-tabbar-container .oj-navigationlist-horizontal .oj-navigationlist-item-element.oj-selected a,
+  .wh-tabbar-container .oj-navigationlist-horizontal .oj-navigationlist-item-element.oj-selected a:visited {
+    color: #084c4c !important;
+    font-weight: 700 !important;
+  }
+
+  .wh-tabbar-container .oj-navigationlist-horizontal .oj-navigationlist-item-element a {
+    color: #333 !important;
+    font-weight: 500 !important;
+  }
+
+  /* ============================================================
+     WEEKLY HIGHLIGHTS TABLE
+     ============================================================ */
+
+  .wh-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+  /* Label column - fixed narrow */
+  .wh-th-label,
+  .wh-td-label {
+    width: 90px;
+    min-width: 90px;
+    max-width: 90px;
+  }
+
+  /* Highlight & Lowlight - equal 50/50 split */
+  .wh-th-col,
+  .wh-td-cell {
+    width: calc((100% - 90px) / 2);
+  }
+
+  /* Header row */
+  .wh-th-label,
+  .wh-th-col {
+    padding: 0.5rem 0.75rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #333;
+    background-color: #f5f5f5;
+    border: 1px solid #d0d0d0;
+    text-align: left;
+  }
+
+  .wh-th-label {
+    background-color: transparent;
+    border-top: none;
+    border-left: none;
+    border-bottom: 1px solid #d0d0d0;
+  }
+
+  /* Row label - right-aligned, vertically centered */
+  .wh-td-label {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #333;
+    text-align: right;
+    vertical-align: middle;
+    padding: 0.75rem;
+    border: 1px solid #d0d0d0;
+    background-color: #fafafa;
+    white-space: nowrap;
+  }
+
+  /* Textarea cell */
+  .wh-td-cell {
+    padding: 0.4rem;
+    border: 1px solid #d0d0d0;
+    vertical-align: top;
+  }
+
+  /* Force oj-text-area to fill cell fully */
+  .wh-td-cell oj-text-area {
+    width: 100% !important;
+    display: block;
+  }
+
+  .wh-td-cell oj-text-area .oj-text-field-container {
+    width: 100% !important;
+    min-height: 10rem !important;
+  }
+
+  .wh-td-cell oj-text-area textarea {
+    width: 100% !important;
+    box-sizing: border-box;
+    min-height: 10rem;
+  }
+</style>
+
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+
+      <oj-sp-advanced-create-edit id="weeklyHighlightsformid" primary-action.label="Close"
+        page-title="Weekly Highlights Form" page-subtitle=" " secondary-actions="[[ $variables.aToolBar ]]"
+        on-sp-primary-action="[[$listeners.weeklyHighlightsformidSpPrimaryAction]]"
+        on-sp-secondary-action="[[$listeners.weeklyHighlightsformidSpSecondaryAction]]">
+
+        <div slot="main" style="padding-top: 0; margin-top: 0.1rem; min-width: 100%;">
+
+          <!-- ============================================================ -->
+          <!-- PROJECT DETAILS SECTION                                      -->
+          <!-- ============================================================ -->
+          <oj-collapsible id="projectDetailsCollapsible" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+            style="margin-top: 1rem;">
+            <span slot="header" style="font-weight: bold; color: white;">Project Details</span>
+            <div style="padding: 1rem;">
+              <oj-form-layout max-columns="2" label-edge="start" label-width="35%" colspan-wrap="wrap"
+                user-assistance-density="compact">
+
+                <oj-input-text id="whProjectNumber" label-hint="Project Number" placeholder="Project Number"
+                  user-assistance-density="compact" style="width: 16rem;"
+                  value="{{ $variables.headerInfoVar.projectNumber }}" disabled="true">
+                </oj-input-text>
+
+                <oj-input-text id="whProjectName" label-hint="Project Name" placeholder="Project Name"
+                  user-assistance-density="compact" style="width: 16rem;"
+                  value="{{ $variables.headerInfoVar.projectName }}" disabled="true">
+                </oj-input-text>
+
+                <oj-input-text id="whTenderNumber" label-hint="Tender Number" placeholder="Tender Number"
+                  user-assistance-density="compact" style="width: 16rem;"
+                  value="{{ $variables.headerInfoVar.tenderNumber }}" disabled="true">
+                </oj-input-text>
+
+                <oj-input-text id="whPeriod" label-hint="Period" placeholder="Period" user-assistance-density="compact"
+                  style="width: 16rem;" value="{{ $variables.periodName }}" disabled="true">
+                </oj-input-text>
+
+              </oj-form-layout>
+            </div>
+          </oj-collapsible>
+
+          <!-- ============================================================ -->
+          <!-- WEEKLY HIGHLIGHTS ENTRY SECTION                              -->
+          <!-- ============================================================ -->
+          <oj-collapsible id="weeklyHighlightsCollapsible" expanded="true"
+            class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 1rem;">
+            <span slot="header" style="font-weight: bold; color: white;">Weekly Highlights Entry</span>
+            <div style="padding: 1rem;">
+
+              <!-- Week Tab Bar — scoped class wh-tabbar-container avoids global CSS conflicts -->
+              <div class="wh-tabbar-container" style="margin-bottom: 0;">
+                <oj-tab-bar id="weekTabBar" selection="{{ $variables.selectedWeekTab }}" display="all" edge="top">
+                  <ul>
+                    <li id="week1"><a href="#">Week1</a></li>
+                    <li id="week2"><a href="#">Week2</a></li>
+                    <li id="week3"><a href="#">Week3</a></li>
+                    <li id="week4"><a href="#">Week4</a></li>
+                    <li id="week5"><a href="#">Week5</a></li>
+                  </ul>
+                </oj-tab-bar>
+              </div>
+
+              <!-- Week Tab Switcher -->
+              <div class="demo-switcher-container">
+                <oj-switcher value="[[ $variables.selectedWeekTab ]]">
+
+                  <!-- ==================== WEEK 1 ==================== -->
+                  <div slot="week1">
+                    <oj-validation-group id="week1ValidationGroup">
+                      <table class="wh-table">
+                        <thead>
+                          <tr>
+                            <th class="wh-th-label"></th>
+                            <th class="wh-th-col">Highlight(Achievements/ Successes)</th>
+                            <th class="wh-th-col">Lowlight(Challenges/Issues)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="wh-td-label">A.Project</td>
+                            <td class="wh-td-cell">
+                              <oj-text-area id="week1HighlightProjects" placeholder="Enter highlights..." rows="6"
+                                resize-behavior="vertical" user-assistance-density="compact" style="width: 100%;"
+                                value="{{ $variables.weeklyHighlightsVar.week1_highlight_projects }}">
+                              </oj-text-area>
+                            </td>
+                            <td class="wh-td-cell">
+                              <oj-text-area id="week1LowlightProjects" placeholder="Enter lowlights..." rows="6"
+                                resize-behavior="vertical" user-assistance-density="compact" style="width: 100%;"
+                                value="{{ $variables.weeklyHighlightsVar.week1_lowlight_projects }}">
+                              </oj-text-area>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="wh-td-label">B.HSE</td>
+                            <td class="wh-td-cell">
+                              <oj-text-area id="week1HighlightHse" placeholder="Enter highlights..." rows="6"
+                                resize-behavior="vertical" user-assistance-density="compact" style="width: 100%;"
+                                value="{{ $variables.weeklyHighlightsVar.week1_highlight_hse }}">
+                              </oj-text-area>
+                            </td>
+                            <td class="wh-td-cell">
+                              <oj-text-area id="week1LowlightHse" placeholder="Enter lowlights..." rows="6"
+                                resize-behavior="vertical" user-assistance-density="compact" style="width: 100%;"
+                                value="{{ $variables.weeklyHighlightsVar.week1_lowlight_hse }}">
+                              </oj-text-area>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </oj-validation-group>
+                  </div>
+
+                  <!-- ==================== WEEK 2 ==================== -->
+                  <div slot="week2">
+                    <oj-validation-group id="week2ValidationGroup">
+                      <table class="wh-table">
+                        <thead>
+                          <tr>
+                            <th class="wh-th-label"></th>
+                            <th class="wh-th-col">Highlight(Achievements/ Successes)</th>
+                            <th class="wh-th-col">Lowlight(Challenges/Issues)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="wh-td-label">A.Project</td>
+                            <td class="wh-td-cell">
+                              <oj-text-area id="week2HighlightProjects" placeholder="Enter highlights..." rows="6"
+                                resize-behavior="vertical" user-assistance-density="compact" style="width: 100%;"
+                                value="{{ $variables.weeklyHighlightsVar.week2_highlight_projects }}">
+                              </oj-text-area>
+                            </td>
+                            <td class="wh-td-cell">
+                              <oj-text-area id="week2LowlightProjects" placeholder="Enter lowlights..." rows="6"
+                                resize-behavior="vertical" user-assistance-density="compact" style="width: 100%;"
+                                value="{{ $variables.weeklyHighlightsVar.week2_lowlight_projects }}">
+                              </oj-text-area>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="wh-td-label">B.HSE</td>
+                            <td class="wh-td-cell">
+                              <oj-text-area id="week2HighlightHse" placeholder="Enter highlights..." rows="6"
+                                resize-behavior="vertical" user-assistance-density="compact" style="width: 100%;"
+                                value="{{ $variables.weeklyHighlightsVar.week2_highlight_hse }}">
+                              </oj-text-area>
+                            </td>
+                            <td class="wh-td-cell">
+                              <oj-text-area id="week2LowlightHse" placeholder="Enter lowlights..." rows="6"
+                                resize-behavior="vertical" user-assistance-density="compact" style="width: 100%;"
+                                value="{{ $variables.weeklyHighlightsVar.week2_lowlight_hse }}">
+                              </oj-text-area>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </oj-validation-group>
+                  </div>
+
+                  <!-- ==================== WEEK 3 ==================== -->
+                  <div slot="week3">
+                    <oj-validation-group id="week3ValidationGroup">
+                      <table class="wh-table">
+                        <thead>
+                          <tr>
+                            <th class="wh-th-label"></th>
+                            <th class="wh-th-col">Highlight(Achievements/ Successes)</th>
+                            <th class="wh-th-col">Lowlight(Challenges/Issues)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="wh-td-label">A.Project</td>
+                            <td class="wh-td-cell">
+                              <oj-text-area id="week3HighlightProjects" placeholder="Enter highlights..." rows="6"
+                                resize-behavior="vertical" user-assistance-density="compact" style="width: 100%;"
+                                value="{{ $variables.weeklyHighlightsVar.week3_highlight_projects }}">
+                              </oj-text-area>
+                            </td>
+                            <td class="wh-td-cell">
+                              <oj-text-area id="week3LowlightProjects" placeholder="Enter lowlights..." rows="6"
+                                resize-behavior="vertical" user-assistance-density="compact" style="width: 100%;"
+                                value="{{ $variables.weeklyHighlightsVar.week3_lowlight_projects }}">
+                              </oj-text-area>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="wh-td-label">B.HSE</td>
+                            <td class="wh-td-cell">
+                              <oj-text-area id="week3HighlightHse" placeholder="Enter highlights..." rows="6"
+                                resize-behavior="vertical" user-assistance-density="compact" style="width: 100%;"
+                                value="{{ $variables.weeklyHighlightsVar.week3_highlight_hse }}">
+                              </oj-text-area>
+                            </td>
+                            <td class="wh-td-cell">
+                              <oj-text-area id="week3LowlightHse" placeholder="Enter lowlights..." rows="6"
+                                resize-behavior="vertical" user-assistance-density="compact" style="width: 100%;"
+                                value="{{ $variables.weeklyHighlightsVar.week3_lowlight_hse }}">
+                              </oj-text-area>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </oj-validation-group>
+                  </div>
+
+                  <!-- ==================== WEEK 4 ==================== -->
+                  <div slot="week4">
+                    <oj-validation-group id="week4ValidationGroup">
+                      <table class="wh-table">
+                        <thead>
+                          <tr>
+                            <th class="wh-th-label"></th>
+                            <th class="wh-th-col">Highlight(Achievements/ Successes)</th>
+                            <th class="wh-th-col">Lowlight(Challenges/Issues)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="wh-td-label">A.Project</td>
+                            <td class="wh-td-cell">
+                              <oj-text-area id="week4HighlightProjects" placeholder="Enter highlights..." rows="6"
+                                resize-behavior="vertical" user-assistance-density="compact" style="width: 100%;"
+                                value="{{ $variables.weeklyHighlightsVar.week4_highlight_projects }}">
+                              </oj-text-area>
+                            </td>
+                            <td class="wh-td-cell">
+                              <oj-text-area id="week4LowlightProjects" placeholder="Enter lowlights..." rows="6"
+                                resize-behavior="vertical" user-assistance-density="compact" style="width: 100%;"
+                                value="{{ $variables.weeklyHighlightsVar.week4_lowlight_projects }}">
+                              </oj-text-area>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="wh-td-label">B.HSE</td>
+                            <td class="wh-td-cell">
+                              <oj-text-area id="week4HighlightHse" placeholder="Enter highlights..." rows="6"
+                                resize-behavior="vertical" user-assistance-density="compact" style="width: 100%;"
+                                value="{{ $variables.weeklyHighlightsVar.week4_highlight_hse }}">
+                              </oj-text-area>
+                            </td>
+                            <td class="wh-td-cell">
+                              <oj-text-area id="week4LowlightHse" placeholder="Enter lowlights..." rows="6"
+                                resize-behavior="vertical" user-assistance-density="compact" style="width: 100%;"
+                                value="{{ $variables.weeklyHighlightsVar.week4_lowlight_hse }}">
+                              </oj-text-area>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </oj-validation-group>
+                  </div>
+
+                  <!-- ==================== WEEK 5 ==================== -->
+                  <div slot="week5">
+                    <oj-validation-group id="week5ValidationGroup">
+                      <table class="wh-table">
+                        <thead>
+                          <tr>
+                            <th class="wh-th-label"></th>
+                            <th class="wh-th-col">Highlight(Achievements/ Successes)</th>
+                            <th class="wh-th-col">Lowlight(Challenges/Issues)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="wh-td-label">A.Project</td>
+                            <td class="wh-td-cell">
+                              <oj-text-area id="week5HighlightProjects" placeholder="Enter highlights..." rows="6"
+                                resize-behavior="vertical" user-assistance-density="compact" style="width: 100%;"
+                                value="{{ $variables.weeklyHighlightsVar.week5_highlight_projects }}">
+                              </oj-text-area>
+                            </td>
+                            <td class="wh-td-cell">
+                              <oj-text-area id="week5LowlightProjects" placeholder="Enter lowlights..." rows="6"
+                                resize-behavior="vertical" user-assistance-density="compact" style="width: 100%;"
+                                value="{{ $variables.weeklyHighlightsVar.week5_lowlight_projects }}">
+                              </oj-text-area>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="wh-td-label">B.HSE</td>
+                            <td class="wh-td-cell">
+                              <oj-text-area id="week5HighlightHse" placeholder="Enter highlights..." rows="6"
+                                resize-behavior="vertical" user-assistance-density="compact" style="width: 100%;"
+                                value="{{ $variables.weeklyHighlightsVar.week5_highlight_hse }}">
+                              </oj-text-area>
+                            </td>
+                            <td class="wh-td-cell">
+                              <oj-text-area id="week5LowlightHse" placeholder="Enter lowlights..." rows="6"
+                                resize-behavior="vertical" user-assistance-density="compact" style="width: 100%;"
+                                value="{{ $variables.weeklyHighlightsVar.week5_lowlight_hse }}">
+                              </oj-text-area>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </oj-validation-group>
+                  </div>
+
+                </oj-switcher>
+              </div>
+              <!-- End Switcher -->
+
+            </div>
+          </oj-collapsible>
+
+        </div>
+      </oj-sp-advanced-create-edit>
+
+    </div>
+  </div>
+</div>

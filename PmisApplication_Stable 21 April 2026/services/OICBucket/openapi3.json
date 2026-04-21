@@ -1,0 +1,188 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Ocivunodeapp Nws Nama Om",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "vb-catalog://backends/OICBucket"
+        }
+    ],
+    "paths": {
+        "/object": {
+            "get": {
+                "operationId": "getObject",
+                "parameters": [
+                    {
+                        "name": "location",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetObject"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getObject/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany",
+                    "queryParameters": {}
+                }
+            }
+        },
+        "/upload": {
+            "post": {
+                "operationId": "postUpload",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostUploadRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "summary": "Example stored by VB User",
+                                    "externalValue": "./examples/postUpload/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostUploadResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postUpload/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/delete": {
+            "delete": {
+                "operationId": "deleteDelete",
+                "parameters": [
+                    {
+                        "name": "location",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeleteDeleteResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/deleteDelete/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "GetObject": {
+                "type": "object",
+                "properties": {
+                    "fileName": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostUploadRequest": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "location": {
+                                "type": "string"
+                            },
+                            "file": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "PostUploadResponse": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "objectName": {
+                        "type": "string"
+                    },
+                    "bucketName": {
+                        "type": "string"
+                    },
+                    "namespaceName": {
+                        "type": "string"
+                    },
+                    "verifiedSize": {
+                        "nullable": true
+                    },
+                    "fileSize": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "DeleteDeleteResponse": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

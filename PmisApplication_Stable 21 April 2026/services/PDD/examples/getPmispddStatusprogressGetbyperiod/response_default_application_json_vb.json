@@ -1,0 +1,46 @@
+{
+    "items": [
+        {
+            "progress_id": 10104,
+            "object_version_num": 0,
+            "ora_project_id": 203083,
+            "ora_project_number": "22411025",
+            "ora_project_name": "22411025",
+            "tender_id": 7615,
+            "tender_number": "29/3/26-1",
+            "tender_name": "29/3/26-1",
+            "period": "JUN-26",
+            "physical_planned_perc": "dfgh",
+            "actual_completed_perc": "ghj",
+            "period_summary": "fgh",
+            "work_performed": "ghj",
+            "work_planned": "ghj",
+            "actual_items": "gh",
+            "issues": null,
+            "additional_info": null,
+            "created_by": "dinesh.kumar@owwsc.nama.om",
+            "created_date": "2026-03-31T05:22:39.176043Z",
+            "last_updated_by": "dinesh.kumar@owwsc.nama.om",
+            "last_updated_date": "2026-03-31T05:22:39.176043Z",
+            "last_updated_login": "dinesh.kumar@owwsc.nama.om"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/statusprogress/getbyperiod?p_period=JUN-26&p_tender_id=7615&p_project_id=203083"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/statusprogress/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/statusprogress/getbyperiod?p_period=JUN-26&p_tender_id=7615&p_project_id=203083"
+        }
+    ]
+}

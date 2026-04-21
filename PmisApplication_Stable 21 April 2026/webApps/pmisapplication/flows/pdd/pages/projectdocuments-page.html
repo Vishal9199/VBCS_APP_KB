@@ -1,0 +1,643 @@
+<style>
+  .table-action-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* ========================================================================================================== */
+  /* Attachment Column - Count Badge & Upload Button                                                            */
+  /* ========================================================================================================== */
+
+  .attachment-count-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    padding: 0 0.35rem;
+    background-color: #084c4c;
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 999px;
+    line-height: 1;
+    cursor: default;
+  }
+
+  .doc-upload-btn {
+    color: #084c4c !important;
+  }
+
+  .doc-upload-btn:hover {
+    color: #0a6e6e !important;
+  }
+
+  /* Attachment Column - End */
+</style>
+
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+
+      <!-- ============================================================ -->
+      <!-- ADVANCED CREATE EDIT CONTAINER                                -->
+      <!-- ============================================================ -->
+      <oj-sp-advanced-create-edit id="projectDocumentsPage" page-title="Project Documents Management" page-subtitle=" "
+        display-options.responsive-padding="on" primary-action.label="Close"
+        secondary-actions='[{"label":"save","id":"saveClose","icon":"oj-ux-ico-save"}]'
+        on-sp-primary-action="[[$listeners.projectDocumentsPageSpPrimaryAction]]"
+        on-sp-secondary-action="[[$listeners.projectDocumentsPageSpSecondaryAction]]">
+
+        <div slot="main" style="padding-top: 0; margin-top: 0;">
+          <div style="margin-top: 0;">
+
+            <!-- ============================================================ -->
+            <!-- SECTION 1: PROJECT DETAILS (READ-ONLY)                       -->
+            <!-- ============================================================ -->
+            <oj-collapsible id="project-details-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+              style="margin-bottom: 0.25rem;">
+
+              <span slot="header" class="section-header-text" style="color: white;">
+                <!-- <span class="oj-ux-ico-folder-open section-header-icon"></span> -->
+              Project Details
+              </span>
+
+              <div>
+                <oj-form-layout max-columns="3" label-edge="start" label-width="45%" user-assistance-density="compact">
+
+                  <oj-input-text id="project-number" label-hint="Project Number"
+                    value="{{ $variables.projectDetailsVar.project_number }}" style="width: 16rem;" disabled="true">
+                  </oj-input-text>
+
+                  <oj-input-text id="project-name" label-hint="Project Name"
+                    value="{{ $variables.projectDetailsVar.project_name }}" style="width: 16rem;" disabled="true">
+                  </oj-input-text>
+
+                  <oj-input-text id="tender-number" label-hint="Tender Number"
+                    value="{{ $variables.projectDetailsVar.tender_number }}" style="width: 16rem;" disabled="true">
+                  </oj-input-text>
+
+                </oj-form-layout>
+              </div>
+            </oj-collapsible>
+
+            <!-- ============================================================ -->
+            <!-- SECTION 2: DOCUMENTS TABBED SECTION                          -->
+            <!-- ============================================================ -->
+            <oj-collapsible id="documents-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+              style="margin-bottom: 0.25rem;">
+
+              <span slot="header" class="section-header-text" style="color: white;">
+                <span class="oj-ux-ico-attach section-header-icon"></span>
+              Project Documents
+              </span>
+
+              <div>
+
+                <!-- TAB BAR -->
+                <div class="demo-tabbar-container">
+                  <oj-tab-bar id="docTabBar" selection="{{ $variables.selectedDocTab }}" edge="top" display="all">
+                    <ul>
+                      <li id="static-tab">
+                        <a href="#">
+                          <!-- <span class="oj-ux-ico-file tab-icon"></span> -->
+                          Static Documents
+                        </a>
+                      </li>
+                      <li id="dynamic-tab">
+                        <a href="#">
+                          <!-- <span class="oj-ux-ico-refresh tab-icon"></span> -->
+                          Dynamic Documents
+                        </a>
+                      </li>
+                      <li id="output-tab">
+                        <a href="#">
+                          <!-- <span class="oj-ux-ico-export tab-icon"></span> -->
+                          Output Documents
+                        </a>
+                      </li>
+                      <li id="other-tab">
+                        <a href="#">
+                          <!-- <span class="oj-ux-ico-ellipsis tab-icon"></span> -->
+                          Other Documents
+                        </a>
+                      </li>
+                    </ul>
+                  </oj-tab-bar>
+                </div>
+
+                <!-- SWITCHER FOR TABS -->
+                <div class="demo-switcher-container" style="margin-top: 0.5rem;">
+                  <oj-switcher value="[[ $variables.selectedDocTab ]]">
+
+                    <!-- ================================================ -->
+                    <!-- TAB 1: STATIC DOCUMENTS                           -->
+                    <!-- ================================================ -->
+                    <div slot="static-tab">
+
+                      <div class="table-action-bar oj-helper-justify-content-flex-end" style="margin-bottom: 0.5rem;">
+                        
+                        <!-- <oj-button id="addStaticDoc" chroming="outlined" class="doc-add-btn"
+                          on-oj-action="[[$listeners.addStaticDocAction]]">
+                          <span slot="startIcon" class="oj-ux-ico-plus"></span>
+                          Add Document
+                        </oj-button> -->
+                      </div>
+
+                      <oj-table id="staticDocTable" data="[[ $variables.ADPStaticDocs ]]"
+                        scroll-policy="loadMoreOnScroll" selection-mode.row="single" style="width: 100%;"
+                        columns="{{ $constants.commonTableColumns }}" display="grid" horizontal-grid-visible="enabled"
+                        vertical-grid-visible="enabled">
+
+                        <!-- ── Shared slot templates ── -->
+
+                        <template slot="ColAction">
+                          <div class="custom-button-align">
+                            <oj-button id="viewStaticRow" display="icons" chroming="borderless" class="doc-view-btn"
+                              on-oj-action="[[$listeners.viewStaticRowAction]]">
+                              <span slot="startIcon" class="oj-ux-ico-edit"></span>
+                            </oj-button>
+                            <oj-button id="deleteStaticRow" display="icons" chroming="borderless"
+                              class="doc-delete-btn" on-oj-action="[[$listeners.deleteStaticRowAction]]">
+                              <span slot="startIcon" class="oj-ux-ico-trash"></span>
+                            </oj-button>
+                          </div>
+                        </template>
+
+                        <template slot="ColDocName">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="attachmentDoc">
+                          <div class="custom-button-align">
+
+                            <span class="attachment-count-badge" on-click="[[$listeners.spanClick]]">
+                              <oj-bind-text value="[[$current.row.attachment_count ?? 0]]"></oj-bind-text>
+                            </span>
+
+                            <oj-button id="uploadStaticAttach" display="icons" chroming="borderless"
+                              class="doc-upload-btn" on-oj-action="[[$listeners.addStaticDocAction]]">
+                              <span slot="startIcon" class="oj-ux-ico-upload"></span>
+                            </oj-button>
+                          </div>
+                        </template>
+
+                        <template slot="ColDocType">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="ColDescription">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="ColFileSize">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="ColMimeType">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="ColCreatedBy">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="ColCreatedDate">
+                          <oj-bind-text value="[[$application.functions.normalizeDate($current.data)]]"></oj-bind-text>
+                        </template>
+
+                      </oj-table>
+                    </div>
+
+                    <!-- ================================================ -->
+                    <!-- TAB 2: DYNAMIC DOCUMENTS                          -->
+                    <!-- ================================================ -->
+                    <div slot="dynamic-tab">
+
+                      <div class="table-action-bar oj-helper-justify-content-flex-end" style="margin-bottom: 0.5rem;">
+                        <!-- <span class="table-section-title">
+                          <span class="oj-ux-ico-refresh" style="margin-right: 0.4rem;"></span>
+                        Dynamic Documents
+                        </span> -->
+                        <!-- <oj-button id="addDynamicDoc" chroming="outlined" class="doc-add-btn"
+                          on-oj-action="[[$listeners.addStaticDocAction]]">
+                          <span slot="startIcon" class="oj-ux-ico-plus"></span>
+                          Add Document
+                        </oj-button> -->
+                      </div>
+
+                      <oj-table id="dynamicDocTable" data="[[ $variables.ADPDynamicDocs ]]"
+                        scroll-policy="loadMoreOnScroll" selection-mode.row="single" style="width: 100%;"
+                        columns="{{ $constants.commonTableColumns }}" display="grid" horizontal-grid-visible="enabled"
+                        vertical-grid-visible="enabled">
+
+                        <template slot="ColAction">
+                          <div class="custom-button-align">
+                            <oj-button id="viewDynamicRow" display="icons" chroming="borderless" class="doc-view-btn"
+                              on-oj-action="[[$listeners.viewDynamicRowAction]]">
+                              <span slot="startIcon" class="oj-ux-ico-edit"></span>
+                            </oj-button>
+                            <oj-button id="deleteDynamicRow" display="icons" chroming="borderless"
+                              class="doc-delete-btn">
+                              <span slot="startIcon" class="oj-ux-ico-trash"></span>
+                            </oj-button>
+                          </div>
+                        </template>
+
+                        <template slot="ColDocName">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="attachmentDoc">
+                          <div class="custom-button-align">
+                            <span class="attachment-count-badge">
+                              <oj-bind-text value="[[$current.row.attachment_count ?? 0]]"></oj-bind-text>
+                            </span>
+                            <oj-button id="uploadDynamicAttach" display="icons" chroming="borderless"
+                              class="doc-upload-btn" on-oj-action="[[$listeners.addStaticDocAction]]">
+                              <span slot="startIcon" class="oj-ux-ico-upload"></span>
+                            </oj-button>
+                          </div>
+                        </template>
+
+                        <template slot="ColDocType">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="ColDescription">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="ColFileSize">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="ColMimeType">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="ColCreatedBy">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="ColCreatedDate">
+                          <oj-bind-text value="[[$application.functions.normalizeDate($current.data)]]"></oj-bind-text>
+                        </template>
+
+                      </oj-table>
+                    </div>
+
+                    <!-- ================================================ -->
+                    <!-- TAB 3: OUTPUT DOCUMENTS                           -->
+                    <!-- ================================================ -->
+                    <div slot="output-tab">
+
+                      <div class="table-action-bar oj-helper-justify-content-flex-end" style="margin-bottom: 0.5rem;">
+                        <!-- <span class="table-section-title">
+                          <span class="oj-ux-ico-export" style="margin-right: 0.4rem;"></span>
+                        Output Documents
+                        </span> -->
+                        <!-- <oj-button id="addOutputDoc" chroming="outlined" class="doc-add-btn"
+                          on-oj-action="[[$listeners.addStaticDocAction]]">
+                          <span slot="startIcon" class="oj-ux-ico-plus"></span>
+                          Add Document
+                        </oj-button> -->
+                      </div>
+
+                      <oj-table id="outputDocTable" data="[[ $variables.ADPOutputDocs ]]"
+                        scroll-policy="loadMoreOnScroll" selection-mode.row="single" style="width: 100%;"
+                        columns="{{ $constants.commonTableColumns }}" display="grid" horizontal-grid-visible="enabled"
+                        vertical-grid-visible="enabled">
+
+                        <template slot="ColAction">
+                          <div class="custom-button-align">
+                            <oj-button id="viewOutputRow" display="icons" chroming="borderless" class="doc-view-btn"
+                              on-oj-action="[[$listeners.viewOutputRowAction]]">
+                              <span slot="startIcon" class="oj-ux-ico-edit"></span>
+                            </oj-button>
+                            <oj-button id="deleteOutputRow" display="icons" chroming="borderless"
+                              class="doc-delete-btn">
+                              <span slot="startIcon" class="oj-ux-ico-trash"></span>
+                            </oj-button>
+                          </div>
+                        </template>
+
+                        <template slot="ColDocName">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="attachmentDoc">
+                          <div class="custom-button-align">
+                            <span class="attachment-count-badge">
+                              <oj-bind-text value="[[$current.row.attachment_count ?? 0]]"></oj-bind-text>
+                            </span>
+                            <oj-button id="uploadOutputAttach" display="icons" chroming="borderless"
+                              class="doc-upload-btn" on-oj-action="[[$listeners.addStaticDocAction]]">
+                              <span slot="startIcon" class="oj-ux-ico-upload"></span>
+                            </oj-button>
+                          </div>
+                        </template>
+
+                        <template slot="ColDocType">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="ColDescription">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="ColFileSize">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="ColMimeType">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="ColCreatedBy">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="ColCreatedDate">
+                          <oj-bind-text value="[[$application.functions.normalizeDate($current.data)]]"></oj-bind-text>
+                        </template>
+
+                      </oj-table>
+                    </div>
+
+                    <!-- ================================================ -->
+                    <!-- TAB 4: OTHER DOCUMENTS                            -->
+                    <!-- ================================================ -->
+                    <div slot="other-tab">
+
+                      <div class="table-action-bar oj-helper-justify-content-flex-end" style="margin-bottom: 0.25rem;">
+                        <!-- <span class="table-section-title">
+                          <span class="oj-ux-ico-ellipsis" style="margin-right: 0.4rem;"></span>
+                        Other Documents
+                        </span> -->
+                        <!-- <oj-button id="addOtherDoc" chroming="outlined" class="doc-add-btn"
+                          on-oj-action="[[$listeners.addStaticDocAction]]">
+                          <span slot="startIcon" class="oj-ux-ico-plus"></span>
+                          Add Document
+                        </oj-button> -->
+                      </div>
+
+                      <oj-table id="otherDocTable" data="[[ $variables.ADPOtherDocs ]]" scroll-policy="loadMoreOnScroll"
+                        selection-mode.row="single" style="width: 100%;" columns="{{ $constants.commonTableColumns }}"
+                        display="grid" horizontal-grid-visible="enabled" vertical-grid-visible="enabled">
+
+                        <template slot="ColAction">
+                          <div class="custom-button-align">
+                            <oj-button id="viewOtherRow" display="icons" chroming="borderless" class="doc-view-btn"
+                              on-oj-action="[[$listeners.viewOtherRowAction]]">
+                              <span slot="startIcon" class="oj-ux-ico-edit"></span>
+                            </oj-button>
+                            <oj-button id="deleteOtherRow" display="icons" chroming="borderless" class="doc-delete-btn">
+                              <span slot="startIcon" class="oj-ux-ico-trash"></span>
+                            </oj-button>
+                          </div>
+                        </template>
+
+                        <template slot="ColDocName">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="attachmentDoc">
+                          <div class="custom-button-align">
+                            <span class="attachment-count-badge">
+                              <oj-bind-text value="[[$current.row.attachment_count ?? 0]]"></oj-bind-text>
+                            </span>
+                            <oj-button id="uploadOtherAttach" display="icons" chroming="borderless"
+                              class="doc-upload-btn" on-oj-action="[[$listeners.addStaticDocAction]]">
+                              <span slot="startIcon" class="oj-ux-ico-upload"></span>
+                            </oj-button>
+                          </div>
+                        </template>
+
+                        <template slot="ColDocType">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="ColDescription">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="ColFileSize">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="ColMimeType">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="ColCreatedBy">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </template>
+
+                        <template slot="ColCreatedDate">
+                          <oj-bind-text value="[[$application.functions.normalizeDate($current.data)]]"></oj-bind-text>
+                        </template>
+
+                      </oj-table>
+                    </div>
+
+                  </oj-switcher>
+                </div>
+                <!-- END SWITCHER -->
+
+              </div>
+            </oj-collapsible>
+            <!-- END DOCUMENTS SECTION -->
+
+          </div>
+        </div>
+        <!-- END MAIN SLOT -->
+
+      </oj-sp-advanced-create-edit>
+
+    </div>
+  </div>
+</div>
+
+<oj-dialog dialog-title="Attachment" id="attachmentDialog" cancel-behavior="icon" style="overflow: hidden;"
+  position.at.vertical="top" position.my.vertical="top" drag-affordance="title-bar" resize-behavior="resizable"
+  header-decoration="off">
+
+  <div slot="body">
+    <oj-validation-group valid="{{ $variables.formObj.addDialogValidate }}" id="attachment-validation">
+      <oj-form-layout id="attachmentFormLayout" label-edge="start" direction="row" max-columns="2"
+        user-assistance-density="compact" class="oj-formlayout-full-width">
+
+        <oj-radioset label-hint="Type" required="true" class="oj-choice-direction-row" id="radio"
+          value="{{ $variables.attachmentObj.P_TYPE }}">
+          <oj-option value="FILE">File</oj-option>
+          <oj-option value="TEXT">Text</oj-option>
+          <oj-option value="URL">URL</oj-option>
+        </oj-radioset>
+
+        <!-- FILE Type Fields -->
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'FILE' ]]">
+          <div style="text-align:center; grid-column: 1 / -1;">
+            <oj-file-picker id="attachment-file-picker" selection-mode="single"
+              on-oj-select="[[$listeners.attachmentFilePickerSelect]]">
+              <oj-button slot="trigger" label="Upload" chroming="outlined">
+                <span slot="startIcon" class="oj-ux-ico-upload" style="color: white;"></span>
+              </oj-button>
+            </oj-file-picker>
+          </div>
+        </oj-bind-if>
+
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'FILE' ]]">
+          <oj-input-text id="attachment-file-name" label-hint="File Name" style="width:16rem;" disabled="true"
+            value="{{ $variables.attachmentObj.P_DOCUMENT_NAME }}">
+          </oj-input-text>
+        </oj-bind-if>
+
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'FILE' ]]">
+          <oj-input-text id="attachment-file-type" value="{{ $variables.attachmentObj.P_DOCUMENT_TYPE }}"
+            label-hint="File Type" style="width:16rem;" disabled="true">
+          </oj-input-text>
+        </oj-bind-if>
+
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'FILE' ]]">
+          <oj-input-text id="attachment-file-desc" value="{{ $variables.attachmentObj.P_DESCRIPTION }}"
+            label-hint="Description" style="width:16rem;">
+          </oj-input-text>
+        </oj-bind-if>
+
+        <!-- URL Type Fields -->
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'URL' ]]">
+          <oj-input-text id="attachment-url" label-hint="URL" value="{{ $variables.attachmentObj.P_URL }}"
+            required="true" style="width:16rem;">
+          </oj-input-text>
+        </oj-bind-if>
+
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'URL' ]]">
+          <oj-input-text id="attachment-url-desc" value="{{ $variables.attachmentObj.P_DESCRIPTION }}"
+            label-hint="Description" style="width:16rem;">
+          </oj-input-text>
+        </oj-bind-if>
+
+        <!-- TEXT Type Fields -->
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'TEXT' ]]">
+          <oj-input-text id="attachment-text-title" value="{{ $variables.attachmentObj.P_TITLE }}" label-hint="Title"
+            style="width:16rem;" required="true">
+          </oj-input-text>
+        </oj-bind-if>
+
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'TEXT' ]]">
+          <oj-input-text id="attachment-text-desc" value="{{ $variables.attachmentObj.P_DESCRIPTION }}"
+            label-hint="Description" style="width:16rem;">
+          </oj-input-text>
+        </oj-bind-if>
+
+      </oj-form-layout>
+    </oj-validation-group>
+  </div>
+
+  <div slot="footer" style="display:flex; justify-content:flex-end; margin-top:0.5rem; height: 30px;">
+
+    <oj-button id="attachment-save-add" chroming="outlined" label="Save & Add"
+      style="margin-left:0.5%;margin-right:0.5%;" on-oj-action="[[$listeners.attachmentSaveAddAction]]">
+      <span class="oj-ux-ico-save" slot="startIcon" style="color: white;"></span>
+    </oj-button>
+
+    <oj-button id="attachment-save-close" chroming="outlined" label="Save & Close"
+      style="margin-left:0.5%;margin-right:0.5%;" on-oj-action="[[$listeners.attachmentSaveCloseAction2]]">
+      <span class="oj-ux-ico-save" slot="startIcon" style="color: white;"></span>
+    </oj-button>
+
+    <oj-button id="attachment-cancel" chroming="outlined" label="Cancel" style="margin-left:0.5%;margin-right:0.5%;"
+      on-oj-action="[[$listeners.attachmentCancelAction]]">
+      <span class="oj-ux-ico-cancel-s" slot="startIcon" style="color: white;"></span>
+    </oj-button>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="" id="loadingDialog" cancel-behavior="none" modality="modal" resize-behavior="none"
+  style=" text-align: center; width: 350px; overflow: hidden;" drag-affordance="none" class="" header-decoration="off">
+  <div slot="body">
+    <div style="padding: 2rem 1rem; text-align: center;">
+      <!-- Loading Animation -->
+      <div style="margin-bottom: 1.5rem;">
+        <oj-progress-circle size="lg" value="-1"></oj-progress-circle>
+      </div>
+      <!-- Loading Message -->
+      <div style="margin-bottom: 1rem;">
+        <h4 style="color: #333; margin: 0 0 0.5rem 0; font-weight: 500;">
+          <oj-bind-text value="[[ 'Please Wait' ]]"></oj-bind-text>
+        </h4>
+      </div>
+    </div>
+  </div>
+</oj-dialog>
+
+
+
+
+
+
+<oj-dialog dialog-title="Attachments" id="attachmentPopup" initial-visibility="hide" resize-behavior="resizable"
+  drag-affordance="title-bar" header-decoration="off" position.my.vertical="top" position.at.vertical="top"
+  style="width: 1200px; max-width: 95vw;">
+  <div slot="body" style="padding: 0.5rem 0; overflow: hidden;">
+    <oj-table id="attachmentPopupTable" scroll-policy="loadMoreOnScroll" selection-mode.row="single" display="grid"
+      horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+      columns="{{ $constants.attachmentPopupColumns }}" data="[[ $variables.attachmentPopupADP ]]" style="width: 100%;">
+
+      <template slot="action">
+
+        <oj-button display="icons" chroming="solid" class="" id="deleteBtn" style="padding-left:15px;"
+          on-oj-action="[[$listeners.deleteBtnAction]]">
+          <span class="oj-ux-ico-trash" slot="startIcon" style="font-size: 18px;"></span>
+        </oj-button>
+
+        <oj-button display="icons" chroming="solid" class="" id="downloadBtn" style="padding-left:15px;"
+          on-oj-action="[[$listeners.downloadBtnAction]]">
+          <span class="oj-ux-ico-download" slot="startIcon" style="font-size: 18px;"></span>
+        </oj-button>
+
+      </template>
+      <template slot="ColCreatedDate">
+        <oj-bind-text value="[[$application.functions.normalizeDate($current.data)]]"></oj-bind-text>
+      </template>
+    </oj-table>
+  </div>
+  <div slot="footer" style="display: flex; justify-content: flex-end; padding: 0.5rem;">
+    <oj-button label="Ok" chroming="outlined" on-oj-action="[[$listeners.onCloseAttachmentPopupEvent]]"></oj-button>
+  </div>
+</oj-dialog>
+
+
+
+<oj-dialog dialog-title="Delete" id="deleteDialog" cancel-behavior="icon" modality="modal" resize-behavior="none"
+  style="width: 400px;" position.at.vertical="top" position.my.vertical="top">
+  <div slot="body">
+    <div style="padding: 1rem; text-align: center;">
+      <!-- Warning Icon -->
+      <div style="margin-bottom: 1rem;">
+        <span class="oj-ux-ico-warning" style="font-size: 3rem; color: #ff6b35;"></span>
+      </div>
+      <!-- Confirmation Message -->
+      <div style="margin-bottom: 1rem;">
+        <h4 style="color: #333; margin: 0 0 0.5rem 0;">Are you sure?</h4>
+        <p style="color: #666; margin: 0; line-height: 1.4;">
+          Do you want to delete this attachment? This action cannot be undone.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div slot="footer" style="display: flex; justify-content: end; gap: 0.5rem; padding: 1rem;">
+    <!-- Delete Button (Danger Style) -->
+    <oj-button id="confirmDeleteBtn" chroming="danger" label="Yes, Delete" style="min-width: 120px;"
+      on-oj-action="[[$listeners.confirmDeleteBtnAction]]">
+      <span class="oj-ux-ico-delete" slot="startIcon"></span>
+    </oj-button>
+    <!-- Cancel Button -->
+    <oj-button id="cancelDeleteBtn" chroming="outlined" label="Cancel" style="min-width: 120px;"
+      on-oj-action="[[$listeners.cancelDeleteBtnAction]]">
+      <span class="oj-ux-ico-cancel" slot="startIcon"></span>
+    </oj-button>
+  </div>
+</oj-dialog>

@@ -1,0 +1,473 @@
+{
+  "title": "Project Schedule Details",
+  "description": "Project Schedule Details Management with Inline Editing",
+  "variables": {
+    "about": {
+      "type": "about"
+    },
+    "fetchedMilestoneListADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "milestoneADPType"
+      }
+    },
+    "headerDtls": {
+      "type": {
+        "projectName": "string",
+        "projectNumber": "string",
+        "tenderNumber": "string"
+      }
+    },
+    "milestoneListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "responseType": "getPmispddScheduleLovMilestone",
+        "itemsPath": "items",
+        "keyAttributes": "lookup_value_id",
+        "fetchChain": "getPmispddScheduleLovMilestoneFetch",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        }
+      }
+    },
+    "projectNumber": {
+      "type": "string",
+      "defaultValue": ""
+    },
+    "projectName": {
+      "type": "string",
+      "defaultValue": ""
+    },
+    "pTenderId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "tempPayload": {
+      "type": "string"
+    },
+    "tenderNumber": {
+      "type": "string",
+      "defaultValue": ""
+    },
+    "projectId": {
+      "type": "number"
+    },
+    "tenderId": {
+      "type": "number"
+    },
+    "scheduleADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "scheduleType",
+        "keyAttributes": "proj_schd_id"
+      }
+    },
+    "bufferDPSchedule": {
+      "type": "application:ojs/ojbufferingdataprovider",
+      "constructorParams": [
+        "{{ $variables.scheduleADP }}",
+        null
+      ]
+    },
+    "lvCurrentRow": {
+      "type": "currentRowType"
+    },
+    "lvNextValue": {
+      "type": "number",
+      "defaultValue": -1
+    },
+    "deleteConfirmDialog": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "deleteRowKey": {
+      "type": "any"
+    },
+    "deleteRowIndex": {
+      "type": "number"
+    },
+    "searchObj": {
+      "type": {
+        "in_limit": "string",
+        "in_offset": "string",
+        "p_project_id": "number",
+        "p_tender_id": "number"
+      },
+      "defaultValue": {
+        "in_limit": "250",
+        "in_offset": "0"
+      }
+    },
+    "rowToEdit": {
+      "type": {
+        "rowKey": "number"
+      }
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getPmispddScheduleLovMilestone": {
+      "endpoint": "getPmispddScheduleLovMilestone",
+      "service": "PDD",
+      "path": "response"
+    },
+    "getPmispddScheduleLovMilestone": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "milestoneADPType": {
+      "lookup_value_code": "string",
+      "lookup_value_id": "number",
+      "lookup_value_name": "string"
+    },
+    "milestoneType": {
+      "milestone_id": "number",
+      "milestone_code": "string",
+      "project_milestone": "string"
+    },
+    "scheduleType": {
+      "proj_schd_id": "number",
+      "object_version_num": "number",
+      "ora_project_id": "number",
+      "tender_id": "number",
+      "milestone_id": "number",
+      "milestone_code": "string",
+      "project_milestone": "string",
+      "planned_start_date": "string",
+      "planned_end_date": "string",
+      "revised_start_date": "string",
+      "revised_end_date": "string",
+      "actual_start_date": "string",
+      "actual_end_date": "string",
+      "comments": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "currentRowType": {
+      "proj_schd_id": "number",
+      "object_version_num": "number",
+      "ora_project_id": "number",
+      "tender_id": "number",
+      "milestone_id": "number",
+      "milestone_code": "string",
+      "project_milestone": "string",
+      "planned_start_date": "string",
+      "planned_end_date": "string",
+      "revised_start_date": "string",
+      "revised_end_date": "string",
+      "actual_start_date": "string",
+      "actual_end_date": "string",
+      "comments": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "about": {
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    }
+  },
+  "chains": {},
+  "eventListeners": {
+    "aboutButtonCancelACAction": {
+      "chains": [
+        {
+          "chain": "onAboutClose_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "onEditBtn_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "ojSsce1SpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "onClosePrimaryAction",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "ojSsce1SpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "onSecondaryActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "chain": "vbEnterListener"
+        }
+      ]
+    },
+    "ojSsce1Action": {
+      "chains": [
+        {
+          "chain": "handlePageActions",
+          "parameters": {
+            "actionId": "{{ $event.detail.id }}"
+          }
+        }
+      ]
+    },
+    "tblBeforeRowEdit": {
+      "chains": [
+        {
+          "chain": "TableBeforeRowEditChain",
+          "parameters": {
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}"
+          }
+        }
+      ]
+    },
+    "tblBeforeRowEditEnd": {
+      "chains": [
+        {
+          "chain": "TableBeforeRowEditEndChain",
+          "parameters": {
+            "cancelEdit": "{{ $event.detail.cancelEdit }}",
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}",
+            "updatedRow": "{{ $variables.lvCurrentRow }}"
+          }
+        }
+      ]
+    },
+    "deleteAction": {
+      "chains": [
+        {
+          "chain": "onDelete",
+          "parameters": {
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "$current"
+          }
+        }
+      ]
+    },
+    "confirmDeleteAction": {
+      "chains": [
+        {
+          "chain": "confirmDelete"
+        }
+      ]
+    },
+    "cancelDeleteAction": {
+      "chains": [
+        {
+          "chain": "cancelDelete"
+        }
+      ]
+    },
+    "addRowAction": {
+      "chains": [
+        {
+          "chain": "onAdd"
+        }
+      ]
+    },
+    "logAction": {
+      "chains": [
+        {
+          "chain": "logBufferContent"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-panel": {
+        "path": "ojs/ojpanel"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "ojs/ojsimplecrudcommon"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      }
+
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  },
+  "constants": {
+    "scheduleColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Action",
+          "field": "",
+          "frozenEdge": "start",
+          "template": "Action",
+          "width": 120,
+          "sortable": "disabled",
+          "resizable": "disabled"
+        },
+        {
+          "headerText": "Milestone",
+          "field": "project_milestone",
+          "frozenEdge": "start",
+          "template": "Milestone",
+          "width": 200,
+          "sortable": "enabled",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Planned Start Date",
+          "field": "planned_start_date",
+          "template": "PlannedStartDate",
+          "width": 160,
+          "sortable": "enabled",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Planned End Date",
+          "field": "planned_end_date",
+          "template": "PlannedEndDate",
+          "width": 160,
+          "sortable": "enabled",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Revised Planned Start Date",
+          "field": "revised_start_date",
+          "template": "RevisedStartDate",
+          "width": 200,
+          "sortable": "enabled",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Revised Planned End Date",
+          "field": "revised_end_date",
+          "template": "RevisedEndDate",
+          "width": 200,
+          "sortable": "enabled",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Actual Start Date",
+          "field": "actual_start_date",
+          "template": "ActualStartDate",
+          "width": 160,
+          "sortable": "enabled",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Actual End Date",
+          "field": "actual_end_date",
+          "template": "ActualEndDate",
+          "width": 160,
+          "sortable": "enabled",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Last Update Date",
+          "field": "last_updated_date",
+          "template": "LastUpdateDate",
+          "width": 180,
+          "sortable": "enabled",
+          "resizable": "enabled"
+        },
+        {
+          "headerText": "Remarks",
+          "field": "comments",
+          "template": "Remarks",
+          "width": "",
+          "sortable": "enabled",
+          "resizable": "enabled"
+        }
+      ]
+    }
+  }
+}

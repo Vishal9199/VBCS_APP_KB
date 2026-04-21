@@ -1,0 +1,63 @@
+{
+    "items": [
+        {
+            "risk_id": 1,
+            "object_version_num": 1,
+            "ora_project_id": 300000090427447,
+            "ora_project_number": "RG5Z1-CA",
+            "ora_project_name": "RG5Z1-CA",
+            "tender_id": 17001,
+            "tender_number": "NW-RFQ-1119-2025",
+            "tender_name": "Construction of Anoxic tank at Ibra RG-CA",
+            "risk_number": 1,
+            "risk_category_id": 6756,
+            "risk_category_code": "TECHNICAL_ESTIMATE_ASSUMPTIONS",
+            "risk_category": "Technical Estimate Assumptions Constraints",
+            "risk_description": "PMIS PDD Risk Category",
+            "causes": "Test",
+            "consequence": "Test 1",
+            "expected_occurrence": "Test 001",
+            "likelihood_id": 6780,
+            "likelihood_code": "LIKELY",
+            "likelihood": "Likely",
+            "scope": 1,
+            "time": 2,
+            "cost": 3,
+            "qhse": 4,
+            "strength": "5",
+            "overall_risk_rating": "Moderate",
+            "risk_response_strategy": "Accept",
+            "prevent_cont_actions": "Test 001",
+            "owner_id": 300000008961743,
+            "owner_code": null,
+            "owner": null,
+            "action_owner": "5737",
+            "expected_retirement": null,
+            "status": "Open",
+            "additional_info": "Test",
+            "created_by": "Vishal",
+            "created_date": "2026-02-19T23:18:56.525Z",
+            "last_updated_by": "Vishal",
+            "last_updated_date": "2026-02-19T23:19:09.557Z",
+            "last_updated_login": "Vishal"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/riskmanage/getbyid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/riskmanage/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/riskmanage/getbyid"
+        }
+    ]
+}

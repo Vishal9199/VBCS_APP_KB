@@ -1,0 +1,296 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "getPmispddCompletionadminLovTendernumberListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "tender_id",
+        "itemsPath": "items",
+        "responseType": "getPmispddCompletionadminLovTendernumberResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "tender_number",
+            "tender_name"
+          ]
+        },
+        "fetchChain": "getPmispddCompletionadminLovTendernumberFetch"
+      }
+    },
+    "maintenanceadminSearchVar": {
+      "type": "maintenanceadminSearch",
+      "defaultValue": {
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "last_updated_by": "[[ $application.user.email ]]",
+        "created_by": "[[ $application.user.email ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "fv_plan_name": "VBCSNEW"
+      }
+    },
+    "aToolBar": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Attachment",
+          "id": "attachment",
+          "icon": "oj-ux-ico-attachment"
+        },
+        {
+          "label": "Save",
+          "id": "save",
+          "icon": "oj-ux-ico-save"
+        }
+      ]
+    },
+    "attachmentObj": {
+      "type": {
+        "P_DOCUMENT_NAME": "string",
+        "P_DOCUMENT_CATEGORY": "string",
+        "P_DOCUMENT_TYPE": "string",
+        "P_DOCUMENT_FILE": "any",
+        "P_DESCRIPTION": "string",
+        "P_APPL_CODE": "string",
+        "P_REFERENCE_TYPE": "string",
+        "P_TRANSACTION_ID": "string",
+        "P_TYPE": "string",
+        "P_TITLE": "string",
+        "P_URL": "string",
+        "P_CREATED_BY": "string"
+      },
+      "defaultValue": {
+        "P_CREATED_BY": "[[ $application.user.email ]]"
+      }
+    },
+    "P_APPLICATION_CODE": {
+      "type": "string",
+      "defaultValue": "PMIS",
+      "input": "none"
+    },
+    "pNavCode": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "pNavEncId": {
+      "type": "string"
+    },
+    "pNavId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getPmispddCompletionadminLovTendernumberResponse": {
+      "endpoint": "getPmispddCompletionadminLovTendernumber",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.maintenanceadminSearch": {
+      "endpoint": "postPmispddMaintenanceadminSearch",
+      "service": "PDD",
+      "path": "response"
+    },
+    "getPmispddCompletionadminLovTendernumberResponse": {
+      "items": [
+        {
+          "project_id": "number",
+          "project_name": "string",
+          "project_number": "string",
+          "supplier_id": "number",
+          "supplier_name": "string",
+          "tender_id": "number",
+          "tender_name": "string",
+          "tender_number": "string"
+        }
+      ]
+    },
+    "maintenanceadminSearch": {
+      "actual_completion_date": "string",
+      "additional_info": "string",
+      "consultant_name": "string",
+      "contract_commencement_date": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "end_maintenance_period": "string",
+      "fv_plan_name": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "maintenance_id": "number",
+      "maintenance_period": "string",
+      "object_version_num": "number",
+      "ora_project_id": "number",
+      "ora_project_name": "string",
+      "ora_project_number": "string",
+      "orig_completion_date": "string",
+      "rev_completion_date": "string",
+      "substantial_completion_date": "string",
+      "supplier_id": "number",
+      "supplier_name": "any",
+      "tender_id": "number",
+      "tender_name": "string",
+      "tender_number": "string"
+    }
+  },
+  "eventListeners": {
+    "attachmentCancelAction": {
+      "chains": [
+        {
+          "chain": "cancelAttachmentDialogBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "attachmentFilePickerSelect": {
+      "chains": [
+        {
+          "chain": "FilePickerSelectChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "files": "[[ Array.prototype.slice.call($event.detail.files) ]]",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "attachmentSaveAddAction": {
+      "chains": [
+        {
+          "chain": "saveAttachmentDialogBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "aboutOKBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "tenderNumberValueItem": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    },
+    "maintenanceProcessSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "AdvancedCreateAndEditPageTemplateSpSecondaryActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}"
+          }
+        }
+      ]
+    },
+    "maintenanceProcessSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "AdvancedCreateAndEditPageTemplateSpPrimaryActionChain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-file-picker": {
+        "path": "ojs/ojfilepicker"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-label": {
+        "path": "ojs/ojlabel"
+      },
+      "oj-progress-bar": {
+        "path": "ojs/ojprogress-bar"
+      },
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ],
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    }
+  },
+  "constants": {
+    "SIZE_LIMIT": {
+      "type": "string",
+      "defaultValue": "2MB"
+    }
+  }
+}

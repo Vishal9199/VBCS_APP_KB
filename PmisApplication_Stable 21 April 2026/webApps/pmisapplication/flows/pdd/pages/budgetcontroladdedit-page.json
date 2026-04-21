@@ -1,0 +1,508 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "about": {
+      "type": "about"
+    },
+    "formValidation": {
+      "type": "string"
+    },
+    "getPmisLovRegionNameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PmisSetup/getPmisLovRegionName",
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getPmisLovRegionNameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        }
+      }
+    },
+    "getPmisLovYearListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PmisSetup/getPmisLovYear",
+        "keyAttributes": "display_year",
+        "itemsPath": "items",
+        "responseType": "getPmisLovYearResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "display_year"
+          ]
+        }
+      }
+    },
+    "pNavCode": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "pNavEncId": {
+      "type": "string"
+    },
+    "pNavId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "postBudgetHdrVar": {
+      "type": "getPmispddBudgetcontrolGetbyhdrid"
+    },
+    "postContractVar": {
+      "type": "getPmispddContractGetbytenderid",
+      "defaultValue": {
+        "last_updated_by": "[[ $application.user.email ]]",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "created_by": "[[ $application.user.email ]]"
+      }
+    },
+    "pTenderId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "budgetLinesADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "BudgetLineType",
+        "keyAttributes": "budget_control_line_id"
+      }
+    },
+    "bufferDPBudgetLines": {
+      "type": "application:ojs/ojbufferingdataprovider",
+      "constructorParams": [
+        "{{ $variables.budgetLinesADP }}",
+        null
+      ]
+    },
+    "lvBudgetCurrentRow": {
+      "type": "BudgetLineCurrentRowType"
+    },
+    "lvBudgetNextValue": {
+      "type": "number",
+      "defaultValue": -1
+    },
+    "lvBudgetEditMode": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "lvBudgetHasLines": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "lvBudgetTableColumns": {
+      "type": "object[]"
+    },
+    "lvBudgetIsSaving": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "budgetLinesSearchObj": {
+      "type": {
+        "in_limit": "string",
+        "in_offset": "string",
+        "p_budget_control_header_id": "string"
+      },
+      "defaultValue": {
+        "in_limit": "250",
+        "in_offset": "0"
+      }
+    }
+
+  },
+  "metadata": {
+    "dynamicContainerMetadata": {
+      "type": "vb/ContainerMetadataProviderDescriptor"
+    }
+  },
+  "types": {
+    "@decorators.getPmisLovRegionNameResponse": {
+      "endpoint": "getPmisLovRegionName",
+      "service": "PmisSetup",
+      "path": "response"
+    },
+    "@decorators.getPmisLovYearResponse": {
+      "endpoint": "getPmisLovYear",
+      "service": "PmisSetup",
+      "path": "response"
+    },
+    "@decorators.getPmispddBudgetcontrolGetbyhdrid": {
+      "endpoint": "getPmispddBudgetcontrolGetbyhdrid",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getPmispddContractGetbytenderid": {
+      "endpoint": "getPmispddContractGetbytenderid",
+      "service": "PDD",
+      "path": "response"
+    },
+    "getPmisLovRegionNameResponse": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmisLovYearResponse": {
+      "items": [
+        {
+          "display_year": "number"
+        }
+      ]
+    },
+    "getPmispddBudgetcontrolGetbyhdrid": {
+      
+          "additional_info": "any",
+          "anticipated_contract": "number",
+          "budget_control_header_id": "number",
+          "created_by": "string",
+          "created_date": "string",
+          "last_updated_by": "string",
+          "last_updated_date": "string",
+          "last_updated_login": "string",
+          "object_version_num": "number",
+          "ora_project_id": "number",
+          "ora_project_name": "string",
+          "ora_project_number": "string",
+          "original_base_line": "number",
+          "plan_type": "string",
+          "region": "any",
+          "region_code": "any",
+          "region_id": "number",
+          "scope_of_work": "any",
+          "tender_id": "number",
+          "tender_name": "string",
+          "tender_number": "string",
+          "year": "number"
+    },
+    "getPmispddContractGetbytenderid": {
+      
+          "additional_info": "string",
+          "contract_amount": "string",
+          "contract_id": "number",
+          "created_by": "string",
+          "created_date": "string",
+          "last_updated_by": "string",
+          "last_updated_date": "string",
+          "last_updated_login": "string",
+          "mobilization_end_date": "string",
+          "mobilization_start_date": "string",
+          "object_version_num": "number",
+          "ora_project_id": "number",
+          "ora_project_name": "string",
+          "ora_project_number": "string",
+          "supplier_id": "number",
+          "supplier_name": "string",
+          "tender_id": "number",
+          "tender_name": "string",
+          "tender_number": "string",
+          "work_completion_date": "string",
+          "work_start_date": "string"
+    },
+    "BudgetLineType": {
+      "budget_control_line_id": "number",
+      "object_version_num": "number",
+      "budget_control_header_id": "number",
+      "year": "number",
+      "plan_type": "string",
+      "meaning_id": "number",
+      "meaning_code": "string",
+      "meaning": "string",
+      "prior_years": "number",
+      "january": "number",
+      "february": "number",
+      "march": "number",
+      "april": "number",
+      "may": "number",
+      "june": "number",
+      "july": "number",
+      "august": "number",
+      "september": "number",
+      "october": "number",
+      "november": "number",
+      "december": "number",
+      "total_curr_year": "number",
+      "total_bal_next_year": "number",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "BudgetLineCurrentRowType": {
+      "budget_control_line_id": "number",
+      "object_version_num": "number",
+      "budget_control_header_id": "number",
+      "year": "number",
+      "plan_type": "string",
+      "meaning_id": "number",
+      "meaning_code": "string",
+      "meaning": "string",
+      "prior_years": "number",
+      "january": "number",
+      "february": "number",
+      "march": "number",
+      "april": "number",
+      "may": "number",
+      "june": "number",
+      "july": "number",
+      "august": "number",
+      "september": "number",
+      "october": "number",
+      "november": "number",
+      "december": "number",
+      "total_curr_year": "number",
+      "total_bal_next_year": "number",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "about": {
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    }
+  },
+  "eventListeners": {
+    "aboutButtonCancelACAction": {
+      "chains": [
+        {
+          "chain": "onCloseAbout_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    },
+    "budgetcontrolidSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "onClickCancel"
+        }
+      ]
+    },
+    "budgetcontrolidSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "AdvancedCreateAndEditPageTemplateSpSecondaryActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{ $event.detail.secondaryItem }}"
+          }
+        }
+      ]
+    },
+    "btnEnterBudgetAction": {
+      "chains": [
+        {
+          "chain": "onClickEnterBudget"
+        }
+      ]
+    },
+    "btnUpdateBudgetAction": {
+      "chains": [
+        {
+          "chain": "onClickUpdateBudget"
+        }
+      ]
+    },
+    "btnSaveBudgetAction": {
+      "chains": [
+        {
+          "chain": "onClickSaveBudget"
+        }
+      ]
+    },
+    "budgetBeforeRowEdit": {
+      "chains": [
+        {
+          "chain": "BudgetBeforeRowEditChain",
+          "parameters": {
+            "rowKey": "{{ $event.detail.rowContext.status.rowKey }}",
+            "rowIndex": "{{ $event.detail.rowContext.status.rowIndex }}",
+            "rowData": "{{ $event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data }}"
+          }
+        }
+      ]
+    },
+    "budgetBeforeRowEditEnd": {
+      "chains": [
+        {
+          "chain": "BudgetBeforeRowEditEndChain",
+          "parameters": {
+            "cancelEdit": "{{ $event.detail.cancelEdit }}",
+            "rowKey": "{{ $event.detail.rowContext.status.rowKey }}",
+            "rowIndex": "{{ $event.detail.rowContext.status.rowIndex }}",
+            "rowData": "{{ $event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data }}",
+            "updatedRow": "[[ $variables.lvBudgetCurrentRow ]]"
+          }
+        }
+      ]
+    },
+    "yearLovAction": {
+      "chains": [
+        {
+          "chain": "onYearChange_AC",
+          "parameters": {
+            "selectedYear": "{{$event.detail.value}}"
+          }
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      },
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-combobox-one": {
+        "path": "ojs/ojselectcombobox"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-option": {
+        "path": "ojs/ojoption"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-sp-message-unsaved-changes": {
+        "path": "oj-sp/message-unsaved-changes/loader"
+      },
+      "oj-sp-vertical-anchor-navigator": {
+        "path": "oj-sp/vertical-anchor-navigator/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ],
+    "modules": {
+      "ojConverterNumber": {
+        "path": "ojs/ojconverter-number"
+      },
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      },
+      "ojValidationNumber": {
+        "path": "ojs/ojvalidation-number"
+      }
+    }
+  },
+  "@dt": {
+    "iconClass": "vbdt-dynamic-icon-1-icoAdvancedCreateAndEdit48Svg"
+  },
+  "layouts": {
+    "containerLayout1": {
+      "label": "Container Rule Set 1",
+      "layoutType": "container",
+      "layouts": {
+        "case1": {
+          "label": "Case 1",
+          "layoutType": "container",
+          "layout": {
+            "sectionTemplateMap": {
+              "template1": "template1",
+              "template2": "template2"
+            },
+            "displayProperties": [
+              "template1",
+              "template2"
+            ]
+          }
+        }
+      },
+      "rules": [
+        "containerLayout1-rule1"
+      ]
+    },
+    "containerLayout1-rule1": {
+      "expression": "case1"
+    }
+  },
+  "templates": {
+    "template1": {
+      "title": "Section 1",
+      "description": "Sample Section 1",
+      "extensible": "byReference",
+      "@dt": {
+        "type": "section",
+        "layout": "containerLayout1"
+      },
+      "dependencies": [
+        "oj-dynamic/form/loader",
+        "oj-sp/section/loader"
+      ],
+      "labelHint": "Sample Section 1"
+    },
+    "template2": {
+      "title": "Section 2",
+      "description": "Sample Section 2",
+      "extensible": "byReference",
+      "@dt": {
+        "layout": "containerLayout1",
+        "type": "section"
+      },
+      "dependencies": [
+        "oj-dynamic/form/loader",
+        "oj-sp/section/loader"
+      ],
+      "labelHint": "Sample Section 2"
+    }
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "title": "Change Request Search Page",
+  "description": "Search page for Change Request with Project Details and Change Request table.",
+  "imports": {
+    "components": {
+      "oj-button": { "path": "ojs/ojbutton" },
+      "oj-collapsible": { "path": "ojs/ojcollapsible" },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-form-layout": { "path": "ojs/ojformlayout" },
+      "oj-input-date": { "path": "ojs/ojdatetimepicker" },
+      "oj-input-number": { "path": "ojs/ojinputnumber" },
+      "oj-input-text": { "path": "ojs/ojinputtext" },
+      "oj-bind-text": { "path": "ojs/ojbindtext" },
+      "oj-bind-if": { "path": "ojs/ojbindif" },
+      "oj-progress-bar": {
+        "path": "ojs/ojprogress-bar"
+      },
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "oj-sp/simple-create-edit/loader"
+      },
+      "oj-toolbar": { "path": "ojs/ojtoolbar" },
+      "oj-sp-smart-search-page": { "path": "oj-sp/smart-search-page/loader" },
+      "oj-table": { "path": "ojs/ojtable" }
+
+    },
+    "modules": {
+      "ojConverterNumber": {
+        "path": "ojs/ojconverter-number"
+      },
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      },
+      "ojValidationNumber": {
+        "path": "ojs/ojvalidation-number"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  },
+  "types": {
+    "ProjectType": {
+      "project_id": "number",
+      "tender_id": "number",
+      "project_number": "string",
+      "project_name": "string",
+      "tender_number": "string"
+
+    },
+    "ChangeRequestType": {
+      "change_request_id": "number",
+      "department": "string",
+      "object_version_num": "number",
+      "ora_project_id": "number",
+      "tender_id": "number",
+      "cr_number": "string",
+      "title": "string",
+      "initiator": "string",
+      "position": "string",
+      "department_id": "number",
+      "cr_date": "string",
+      "time_impact": "string",
+      "cost_impact": "number",
+      "time_frame": "string",
+      "description": "string",
+      "relation_to_original_scope": "string",
+      "importance_and_justification": "string",
+      "wf_item_type": "string",
+      "wf_item_key": "string",
+      "status_id": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+
+    }
+  },
+  "variables": {
+    "currentPage": {
+      "type": "any"
+    },
+    "paginationDisplay": {
+      "type": "string"
+    },
+    "projectObj": {
+      "type": "ProjectType",
+      "defaultValue": {
+        "project_id": 0,
+        "tender_id": 0,
+        "project_number": "",
+        "project_name": "",
+        "tender_number": ""
+      }
+    },
+
+     "pagination": {
+      "type": "object",
+      "defaultValue": {
+        "is_next": false,
+        "is_prev": true
+      }
+    },
+    "getProjectSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "ChangeRequestService/getProjectDetails",
+        "keyAttributes": "ora_project_id",
+        "itemsPath": "items",
+        "responseType": "ProjectType"
+      }
+    },
+    "changeRequestADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "ChangeRequestType",
+        "keyAttributes": "change_request_id"
+      }
+    },
+    "getChangeRequestSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "ChangeRequestService/getChangeRequestList",
+        "keyAttributes": "change_request_id",
+        "itemsPath": "items",
+        "responseType": "ChangeRequestType"
+      }
+    },
+    "currentRowData": {
+      "type": "ChangeRequestType"
+    },
+    "pTenderId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "searchObj": {
+      "type": {
+        "in_limit": "string",
+        "in_offset": "string",
+        "p_tender_id": "string"
+      },
+      "defaultValue": {
+        "in_limit": "10",
+        "in_offset": "0"
+      }
+    },
+    "totalRecords": {
+      "type": "string"
+    }
+
+  },
+  "metadata": {},
+  "eventListeners": {
+    "createAction": {
+      "chains": [
+        {
+          "chain": "createactionchain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "crSearchPageidSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "AdvancedCreateAndEditPageTemplateSpPrimaryActionChain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "editRowBtnAction": {
+      "chains": [
+        {
+          "chain": "editactionchain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "nextBtnAction": {
+      "chains": [
+        {
+          "chain": "nextactionchain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "prevBtnAction": {
+      "chains": [
+        {
+          "chain": "prevactionchain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+
+  }
+}

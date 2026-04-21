@@ -1,0 +1,56 @@
+{
+    "backends": {
+        "ORDS_CUST": {
+            "servers": [
+                {
+                    "url": "vb-catalog://backends.tenant/ORDS_CUST",
+                    "description": "Overridden Default Server-UAT DB\n",
+                    "x-vb": {
+                        "forceProxy": "cors",
+                        "authentication": {
+                            "authenticated": {
+                                "type": "oauth2_client_credentials",
+                                "clientIdCredentials": "vb_8db3c127-4479-4bd1-af72-9f565a7cec9d",
+                                "authUrl": "https://nwsuatapex.nws.nama.om/ords/nws_cust/oauth/token"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "OICBucket": {
+            "servers": [
+                {
+                    "url": "https://ocivunodeapp.nws.nama.om/owwsc/object/api",
+                    "description": "Ocivunodeapp Nws Nama Om",
+                    "x-vb": {
+                        "authentication": {
+                            "authenticated": {
+                                "type": "basic",
+                                "credentials": "vb_daeb7806-6446-4ee1-b4f5-924225da6904"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "ORDS_CUST_DEV": {
+            "servers": [
+                {
+                    "url": "vb-catalog://backends.tenant/ORDS_CUST_DEV",
+                    "description": "Overridden Dev DB",
+                    "x-vb": {
+                        "authentication": {
+                            "authenticated": {
+                                "type": "oauth2_client_credentials",
+                                "clientIdCredentials": "vb_d775300d-efae-4c74-b733-f06b61588794",
+                                "authUrl": "https://nwsuatapex.nws.nama.om/ords/nws_cust/oauth/token"
+                            }
+                        },
+                        "forceProxy": "cors"
+                    }
+                }
+            ]
+        }
+      }
+}

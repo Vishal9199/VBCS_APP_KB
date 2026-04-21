@@ -1,0 +1,313 @@
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div>
+
+        <oj-sp-advanced-create-edit id="changecontrolPageSp" page-title="Change Variation Control"
+          page-subtitle="Manage Change / Variation Control Details" display-options.responsive-padding="on"
+          primary-action.label="Close" secondary-actions="[[ $variables.aToolBar ]]"
+          on-sp-secondary-action="[[$listeners.changecontrolPageSpSpSecondaryAction]]"
+          on-sp-primary-action="[[$listeners.changecontrolPageSpSpPrimaryAction]]">
+
+          <div slot="main" style="padding-top: 0; margin-top: 0;">
+            <div style="margin-top: 0;">
+
+              <!-- ============================================================ -->
+              <!-- Section 1: Project Details (Read-Only)                       -->
+              <!-- ============================================================ -->
+              <oj-collapsible id="project-details-section" expanded="true"
+                class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 0;">
+                <span slot="header" style="font-weight: bold; color: white;">Project Details</span>
+                <div style="padding: 1rem;">
+                  <oj-form-layout max-columns="2" label-edge="start" label-width="40%" colspan-wrap="wrap">
+
+                    <oj-input-text id="project-number" label-hint="Project Number" placeholder="Project Number"
+                      value="{{ $variables.projectHeaderVar.project_number }}" style="width: 16rem;"
+                      user-assistance-density="compact" disabled="true">
+                    </oj-input-text>
+
+                    <oj-input-text id="project-name" label-hint="Project Name" placeholder="Project Name"
+                      value="{{ $variables.projectHeaderVar.project_name }}" style="width: 16rem;"
+                      user-assistance-density="compact" disabled="true">
+                    </oj-input-text>
+
+                    <oj-input-text id="tender-number" label-hint="Tender Number" placeholder="Tender Number"
+                      value="{{ $variables.projectHeaderVar.tender_number }}" style="width: 16rem;"
+                      user-assistance-density="compact" disabled="true">
+                    </oj-input-text>
+
+                    <oj-input-text id="tender-name" label-hint="Tender Name" placeholder="Tender Name"
+                      value="{{ $variables.projectHeaderVar.tender_name }}" style="width: 16rem;"
+                      user-assistance-density="compact" disabled="true"
+                      >
+                    </oj-input-text>
+
+                  </oj-form-layout>
+                </div>
+              </oj-collapsible>
+
+              <!-- ============================================================ -->
+              <!-- Section 2: Contract Value (Read-Only)                        -->
+              <!-- ============================================================ -->
+              <oj-collapsible id="contract-value-section" expanded="true"
+                class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 1rem;">
+                <span slot="header" style="font-weight: bold; color: white;">Contract Value</span>
+                <div style="padding: 1rem;">
+                  <oj-form-layout max-columns="2" label-edge="start" label-width="45%" colspan-wrap="wrap">
+
+                    <oj-input-number id="original-contract-value" label-hint="Original Contract Value"
+                      placeholder="Original Contract Value" readonly="true" style="width: 16rem;"
+                      user-assistance-density="compact" value="{{ $variables.original_contract_value }}">
+                    </oj-input-number>
+
+                    <oj-input-number id="revised-contract-amount" label-hint="Revised Contract Amount"
+                      placeholder="Revised Contract Amount" readonly="true" style="width: 16rem;"
+                      user-assistance-density="compact" value="{{ $variables.revised_contract_amount }}">
+                    </oj-input-number>
+
+                  </oj-form-layout>
+                </div>
+              </oj-collapsible>
+
+              <div class="oj-flex-bar-end oj-helper-justify-content-flex-end">
+                      <oj-button style="margin:0.125rem;padding-top:5px;" chroming="outlined" class="oj-button-md"
+                        label="Add Row" id="addRowBtn" on-oj-action="[[$listeners.addRowBtnAction]]">
+                        <span slot="startIcon" class="oj-ux-ico-plus"></span>
+                      </oj-button>
+                    </div>
+
+              <!-- ============================================================ -->
+              <!-- Section 3: Change / Variation Control Details (Inline BDP)  -->
+              <!-- ============================================================ -->
+              <oj-collapsible id="change-control-section" expanded="true"
+                class="oj-panel oj-panel-shadow-md oj-selected" >
+                <span slot="header" style="font-weight: bold; color: white;">Change / Variation Control Details</span>
+                <div style="padding: 1rem;">
+
+                  <!-- Table Action Buttons -->
+                  
+
+                  <!-- Inline BDP Table - columns driven by tablecolumns variable -->
+                  <div class="oj-flex">
+                    <oj-table scroll-policy="loadMoreOnScroll" class="oj-sm-width-full oj-bg-body" display="grid"
+                      horizontal-grid-visible="enabled" vertical-grid-visible="enabled" id="changeControlTbl"
+                      data="[[ $variables.bufferDPChangeControlTable.instance ]]"
+                      columns="[[ $variables.tablecolumns ]]" columns-default.sortable="disabled"
+                      columns-default.resizable="enabled" edit-mode="rowEdit" edit-row="{{ $variables.rowToEdit }}" selection-mode.row="single"
+                      on-oj-before-row-edit="[[$listeners.changeControlTblBeforeRowEdit]]"
+                      on-oj-before-row-edit-end="[[$listeners.changeControlTblBeforeRowEditEnd]]">
+
+                      <!-- Actions Column -->
+                      <template slot="actionsTemplate">
+                        <div class="custom-button-align">
+                          <oj-button display="icons" chroming="borderless" id="delete-row-btn"
+                            on-oj-action="[[$listeners.deleteRowBtnAction]]">
+                            <span slot="startIcon" class="oj-ux-ico-trash"></span>
+                          </oj-button>
+                        </div>
+                      </template>
+
+                      <!-- CR No Column (LOV) -->
+                      <template slot="crNumberTemplate">
+                        <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                          <oj-select-single item-text="cr_number"
+                            value="{{ $variables.lvCurrentChangeControlRow.change_request_id }}" id="crno"
+                            aria-label="crno" data="[[$variables.getPmispddChangecontrolLovCrListSDP]]"
+                            on-value-item-changed="[[$listeners.crnoValueItem]]">
+                          </oj-select-single>
+                        </oj-bind-if>
+                      </template>
+
+                      <!-- VO No Column (Editable Text) -->
+                      <template slot="voNumberTemplate">
+                        <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                          <oj-input-text placeholder="VO No"
+                            value="{{ $variables.lvCurrentChangeControlRow.vo_number }}">
+                          </oj-input-text>
+                        </oj-bind-if>
+                      </template>
+
+                      <!-- Project Manager Column (Editable Text) -->
+                      <template slot="projectManagerTemplate">
+                        <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                          <oj-input-text placeholder="Project Manager"
+                            value="{{ $variables.lvCurrentChangeControlRow.project_manager }}">
+                          </oj-input-text>
+                        </oj-bind-if>
+                      </template>
+
+                      <!-- Initiator Column (Editable Text) -->
+                      <template slot="initiatorTemplate">
+                        <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                          <oj-input-text placeholder="Initiator"
+                            value="{{ $variables.lvCurrentChangeControlRow.initiator }}">
+                          </oj-input-text>
+                        </oj-bind-if>
+                      </template>
+
+                      <!-- EOT Days Column (Editable Number) -->
+                      <template slot="timeImpactTemplate">
+                        <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                          <oj-input-number placeholder="EOT Days"
+                            value="{{ $variables.lvCurrentChangeControlRow.time_impact }}">
+                          </oj-input-number>
+                        </oj-bind-if>
+                      </template>
+
+                      <!-- Addition A OMR (Editable Number) -->
+                      <template slot="additionATemplate">
+                        <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                          <oj-input-number placeholder="Addition A"
+                            value="{{ $variables.lvCurrentChangeControlRow.addition_a }}"
+                            on-value-changed="[[$listeners.inputNumberValue]]">
+                          </oj-input-number>
+                        </oj-bind-if>
+                      </template>
+
+                      <!-- Omission B OMR (Editable Number) -->
+                      <template slot="omissionBTemplate">
+                        <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                          <oj-input-number placeholder="Omission B"
+                            value="{{ $variables.lvCurrentChangeControlRow.omission_b }}"
+                            on-value-changed="[[$listeners.inputNumberValue2]]">
+                          </oj-input-number>
+                        </oj-bind-if>
+                      </template>
+
+                      <!-- Total Change C=A+B (Calculated - Read-Only) -->
+                      <template slot="totalChangeTemplate">
+                        <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                          <oj-input-number readonly="true"
+                            value="{{ $variables.lvCurrentChangeControlRow.total_change }}">
+                          </oj-input-number>
+                        </oj-bind-if>
+                      </template>
+
+                      <!-- Net Change D=A-B (Calculated - Read-Only) -->
+                      <template slot="netChangeTemplate">
+                        <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                          <oj-input-number readonly="true"
+                            value="{{ $variables.lvCurrentChangeControlRow.net_change }}">
+                          </oj-input-number>
+                        </oj-bind-if>
+                      </template>
+
+                      <!-- Net Percent Change (Calculated - Read-Only) -->
+                      <template slot="netPercentTemplate">
+                        <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                          <oj-input-number readonly="true"
+                            value="{{ $variables.lvCurrentChangeControlRow.net_percentage_of_change }}">
+                          </oj-input-number>
+                        </oj-bind-if>
+                      </template>
+
+                      <!-- Total Vol of Change (Calculated - Read-Only) -->
+                      <template slot="totalVolTemplate">
+                        <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                          <oj-input-number readonly="true"
+                            value="{{ $variables.lvCurrentChangeControlRow.total_vol_of_change }}">
+                          </oj-input-number>
+                        </oj-bind-if>
+                      </template>
+
+                      <!-- Status Column (LOV: Open / Close) -->
+                      <template slot="statusTemplate">
+                        <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                          <oj-select-single id="status-select" item-text="lookup_value_name"
+                            value="{{ $variables.lvCurrentChangeControlRow.status }}" aria-label="status"
+                            data="[[$variables.getPmispddStakeholderLovStatusListSDP]]"
+                            on-value-item-changed="[[$listeners.statusSelectValueItem]]">
+                          </oj-select-single>
+                        </oj-bind-if>
+                      </template>
+
+                      <!-- If Open Column (LOV - Open Reason) -->
+                      <template slot="ifOpenTemplate">
+                        <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                          <oj-select-single id="open-reason-select" item-text="lookup_value_name"
+                            value="{{ $variables.lvCurrentChangeControlRow.open_reason_id }}" aria-label="openreason"
+                            data="[[$variables.getPmispddChangecontrolLovIfopenListSDP]]"
+                            on-value-item-changed="[[$listeners.openReasonSelectValueItem]]">
+                          </oj-select-single>
+                        </oj-bind-if>
+                      </template>
+
+                      <!-- Remarks Column (Editable Text) -->
+                      <template slot="remarksTemplate">
+                        <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                          <oj-input-text placeholder="Remarks"
+                            value="{{ $variables.lvCurrentChangeControlRow.remarks }}">
+                          </oj-input-text>
+                        </oj-bind-if>
+                      </template>
+
+                    </oj-table>
+                  </div>
+
+                </div>
+              </oj-collapsible>
+
+            </div>
+          </div>
+        </oj-sp-advanced-create-edit>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<oj-dialog style="display:none; width: 500px; overflow: hidden;" dialog-title="Warning" id="delete_dialog"
+  cancel-behavior="icon" header-decoration="off" drag-affordance="title-bar" position.at.vertical="top"
+  position.my.vertical="top">
+  <div slot="body" style="margin-top: 1.5rem;">
+    <div class="oj-flex">Are you sure you want to delete the record?</div>
+  </div>
+  <div slot="footer">
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction2]]" >Ok</oj-button>
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction]]" >Cancel</oj-button>
+  </div>
+</oj-dialog>

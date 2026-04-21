@@ -1,0 +1,197 @@
+<style>
+.oj-sp-header-general-overview-header-strip {
+  display: none;
+}
+</style>
+
+<div id="sampleDemo1" class="demo-padding demo-container">
+<div id="componentDemoContent1" style="width: 1px; min-width: 100%;">
+<div id="mainContent1">
+
+  <!-- <oj-bind-if test="[[ $variables.showNavigationMenu ]]">
+    <oj-vb-fragment bridge="[[vbBridge]]" id="navMenuFragment" name="pddsearchmenu">
+    </oj-vb-fragment>
+  </oj-bind-if> -->
+
+<oj-sp-smart-search-page id="oj_exssp1" page-title="Search" page-subtitle=" ">
+
+<!--Search Section -->
+<oj-flex slot="search" class="oj-sm-padding-2x" style="align-items: center;">
+  <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-space-between" style="width: 100%; align-items: flex-start; padding: 0 1rem;">
+    <div style="flex: 1; margin-right: 1rem;">
+      <oj-sp-smart-search id="freq_smartsearch" ask-hint="Search here..."
+        filter-criterion="{{ $variables.filterCriterion }}"
+        search-config="[[ $variables.searchConfiguration.provider ]]" search-context="[[ $variables.searchContext ]]">
+      </oj-sp-smart-search>
+    </div>
+    <div style="display: flex; gap: 0.25rem; margin-left: 1rem; margin-top: 1px; flex-wrap: wrap;">
+      <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Reset" id="resetBtn"
+      on-oj-action="[[$listeners.resetBtnAction]]">
+        <span slot="startIcon" class="oj-ux-ico-reset"></span>
+      </oj-button>
+      <oj-button style="margin:0.125rem;" label="Refresh" chroming="outlined" id="refreshBtn"
+      on-oj-action="[[$listeners.refreshBtnAction]]">
+        <span slot="startIcon" class="oj-ux-ico-refresh"></span>
+      </oj-button>
+      <oj-button style="margin:0.125rem;" label="Export" chroming="outlined" id="exportBtn"
+      on-oj-action="[[$listeners.exportBtnAction]]">
+        <span slot="startIcon" class="oj-ux-ico-export-excel-data"></span>
+      </oj-button>
+      <!-- <oj-button style="margin:0.125rem;" label="Create" chroming="outlined" id="createBtn">
+        <span slot="startIcon" class="oj-ux-ico-plus"></span>
+      </oj-button> -->
+    </div>
+  </div>
+</oj-flex>
+
+<!--Table Section -->
+<div id="sampleDemo" class="demo-padding demo-container">
+<div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+<div id="searchMainContent">
+
+<!-- <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-space-between" style="width: 100%; align-items: flex-start; padding: 0 1rem;">
+  <div style="flex: 1; margin-right: 1rem;">
+  </div>
+  <div style="display: flex; gap: 0.25rem; margin-left: 1rem; margin-top: 1px; flex-wrap: wrap;">
+    <oj-button style="margin:0.125rem;" label="Refresh" chroming="outlined" id="refreshBtn">
+      <span slot="startIcon" class="oj-ux-ico-refresh"></span>
+    </oj-button>
+    <oj-button style="margin:0.125rem;" label="Export" chroming="outlined" id="exportBtn">
+      <span slot="startIcon" class="oj-ux-ico-export-excel-data"></span>
+    </oj-button>
+    <oj-button style="margin:0.125rem;" label="Create" chroming="outlined" id="createBtn">
+      <span slot="startIcon" class="oj-ux-ico-plus"></span>
+    </oj-button>
+  </div>
+</div> -->
+
+<div class="oj-flex">
+<!-- oj-search-table -->
+<oj-table scroll-policy="loadMoreOnScroll" class="oj-sm-width-full oj-bg-body" display="grid"
+  horizontal-grid-visible="enabled" vertical-grid-visible="enabled" selection-mode.row="single"
+  selection-mode.column="single" id="searchProjectAssignmentTbl"
+  data="[[ $variables.projectAssignmentADP ]]"
+  columns="[[ $constants.tableColumns ]]">
+
+<!-- Tender Number Template -->
+<template slot="tender_number_template">
+  <a style="font-weight: bold; color: #084c4c;" target="_blank">
+    <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+  </a>
+</template>
+
+<!-- Project Name Template -->
+<template slot="project_number_template">
+  <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>  
+</template>
+
+<!-- Senior Manager Template -->
+<template slot="project_name_template">
+  <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>  
+</template>
+
+<!-- Project Manager Template -->
+<template slot="tender_number_template">
+  <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>  
+</template>
+
+<!-- Project Name Template -->
+<template slot="tender_name_template">
+  <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>  
+</template>
+
+<!-- Senior Manager Template -->
+<template slot="tender_type_template">
+  <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>  
+</template>
+
+<!-- Project Manager Template -->
+<template slot="region_template">
+  <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>  
+</template>
+
+<!-- Project Manager Template -->
+<template slot="senior_manager_template">
+  <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>  
+</template>
+
+<!-- Project Manager Template -->
+<template slot="project_manager_template">
+  <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>  
+</template>
+
+<!-- Date Template -->
+<template slot="date_template">
+  <oj-input-date value="[[$current.data]]" readonly="true"
+    converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'>
+  </oj-input-date>
+</template>
+
+</oj-table>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Pagination Section -->
+
+<div class="oj-flex oj-sm-justify-content-center" style="margin-top: 0.25rem; gap: 0.5rem;">
+  <!-- Previous Button -->
+  <div class="oj-flex-item oj-sm-flex-initial">
+    <oj-button label="Prev" chroming="outlined" id="prevBtn" disabled="[[ $variables.pagination.is_prev ]]"
+      on-oj-action="[[$listeners.preBtnAction]]">
+      <span slot="startIcon" class="oj-ux-ico-back"></span>
+    </oj-button>
+  </div>
+
+  <!-- Pagination Display (Disabled Input Text) -->
+  <div style="display: flex; align-items: center; width: fit-content; min-width: 120px; max-width: 130px;">
+    <oj-input-text value="{{ $variables.paginationDisplay }}" id="pagination-details" disabled="true"
+      aria-label="Pagination Details">
+    </oj-input-text>
+  </div>
+
+  <!-- Next Button -->
+  <div class="oj-flex-item oj-sm-flex-initial">
+    <oj-button label="Next" chroming="outlined" id="nextBtn" disabled="[[ $variables.pagination.is_next ]]"
+      on-oj-action="[[$listeners.nxtBtnAction]]">
+      <span slot="endIcon" class="oj-ux-ico-forward-next"></span>
+    </oj-button>
+  </div>
+</div>
+<!-- <div class="oj-flex oj-sm-justify-content-center" style="margin-top: 1rem;">
+  <oj-bind-if test="[[true]]">
+    <oj-toolbar chroming="solid" class="oj-flex-item oj-sm-flex-initial">
+      <oj-button id="preBtn" chroming="outlined">
+        <span slot="startIcon" class="oj-ux-ico-back"></span>
+        <span>Prev</span>
+      </oj-button>
+      <oj-text-area class="pagination-text-area" readonly="true" value="[[ $variables.paginationText ]]" rows="1"></oj-text-area>
+      <oj-button id="nxtBtn" chroming="outlined">
+        <span>Next</span>
+        <span slot="endIcon" class="oj-ux-ico-forward-next"></span>
+      </oj-button>
+    </oj-toolbar>
+  </oj-bind-if>
+</div> -->
+
+</oj-sp-smart-search-page>
+</div>
+</div>
+</div>
+
+
+<oj-dialog id="loadingDialog" dialog-title="Loading" style="width: 350px;" cancel-behavior="none" modality="modal">
+
+  <div slot="body">
+    <div style="padding: 1.5rem; text-align: center;">
+      <oj-progress-circle value="-1" size="lg" style="display: inline-block; margin-bottom: 1rem;">
+      </oj-progress-circle>
+
+      <p style="margin: 0; font-size: 1.1rem; color: #333;">
+        Fetching project assignments...
+      </p>
+    </div>
+  </div>
+
+</oj-dialog>

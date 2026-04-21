@@ -1,0 +1,192 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "formValidation": {
+      "type": "string"
+    },
+    "pNavCode": {
+      "type": "string"
+    },
+    "pNavEncId": {
+      "type": "string"
+    },
+    "pNavId": {
+      "type": "string"
+    },
+    "postContractVar": {
+      "type": "getPmispddContractGetbytenderid",
+      "defaultValue": {
+        "last_updated_by": "[[ $application.user.email ]]",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "created_by": "[[ $application.user.email ]]"
+      }
+    },
+    "pTenderId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    }
+
+  },
+  "metadata": {
+    "dynamicContainerMetadata": {
+      "type": "vb/ContainerMetadataProviderDescriptor"
+    }
+  },
+  "types": {
+    "@decorators.getPmispddContractGetbytenderid": {
+      "endpoint": "getPmispddContractGetbytenderid",
+      "service": "PDD",
+      "path": "response"
+    },
+    "getPmispddContractGetbytenderid": {
+      
+          "additional_info": "string",
+          "contract_amount": "string",
+          "contract_id": "number",
+          "created_by": "string",
+          "created_date": "string",
+          "last_updated_by": "string",
+          "last_updated_date": "string",
+          "last_updated_login": "string",
+          "mobilization_end_date": "string",
+          "mobilization_start_date": "string",
+          "object_version_num": "number",
+          "ora_project_id": "number",
+          "ora_project_name": "string",
+          "ora_project_number": "string",
+          "supplier_id": "number",
+          "supplier_name": "string",
+          "tender_id": "number",
+          "tender_name": "string",
+          "tender_number": "string",
+          "work_completion_date": "string",
+          "work_start_date": "string"
+    }
+  },
+  "eventListeners": {
+
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    },
+    "contractidSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "onClickCancel"
+        }
+      ]
+    },
+    "contractidSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "AdvancedCreateAndEditPageTemplateSpSecondaryActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{ $event.detail.secondaryItem }}"
+          }
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-sp-message-unsaved-changes": {
+        "path": "oj-sp/message-unsaved-changes/loader"
+      },
+      "oj-sp-vertical-anchor-navigator": {
+        "path": "oj-sp/vertical-anchor-navigator/loader"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  },
+  "@dt": {
+    "iconClass": "vbdt-dynamic-icon-1-icoAdvancedCreateAndEdit48Svg"
+  },
+  "layouts": {
+    "containerLayout1": {
+      "label": "Container Rule Set 1",
+      "layoutType": "container",
+      "layouts": {
+        "case1": {
+          "label": "Case 1",
+          "layoutType": "container",
+          "layout": {
+            "sectionTemplateMap": {
+              "template1": "template1",
+              "template2": "template2"
+            },
+            "displayProperties": [
+              "template1",
+              "template2"
+            ]
+          }
+        }
+      },
+      "rules": [
+        "containerLayout1-rule1"
+      ]
+    },
+    "containerLayout1-rule1": {
+      "expression": "case1"
+    }
+  },
+  "templates": {
+    "template1": {
+      "title": "Section 1",
+      "description": "Sample Section 1",
+      "extensible": "byReference",
+      "@dt": {
+        "type": "section",
+        "layout": "containerLayout1"
+      },
+      "dependencies": [
+        "oj-dynamic/form/loader",
+        "oj-sp/section/loader"
+      ],
+      "labelHint": "Sample Section 1"
+    },
+    "template2": {
+      "title": "Section 2",
+      "description": "Sample Section 2",
+      "extensible": "byReference",
+      "@dt": {
+        "layout": "containerLayout1",
+        "type": "section"
+      },
+      "dependencies": [
+        "oj-dynamic/form/loader",
+        "oj-sp/section/loader"
+      ],
+      "labelHint": "Sample Section 2"
+    }
+  }
+}

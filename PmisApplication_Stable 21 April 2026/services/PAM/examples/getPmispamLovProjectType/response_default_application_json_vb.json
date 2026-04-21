@@ -1,0 +1,37 @@
+{
+    "items": [
+        {
+            "lookup_value_id": 6188,
+            "lookup_value_code": "OPEX",
+            "lookup_value_name": "Opex"
+        },
+        {
+            "lookup_value_id": 6189,
+            "lookup_value_code": "ADHOC",
+            "lookup_value_name": "Adhoc"
+        },
+        {
+            "lookup_value_id": 6187,
+            "lookup_value_code": "CAPEX",
+            "lookup_value_name": "Capex"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 3,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/lov/project/type"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/lov/project/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/lov/project/type"
+        }
+    ]
+}

@@ -1,0 +1,262 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "aToolBarList": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Attachment",
+          "id": "attachment",
+          "icon": "oj-ux-ico-attachment"
+        },
+        {
+          "label": "Save",
+          "id": "save",
+          "icon": "oj-ux-ico-save"
+        }
+      ]
+    },
+     "attachmentObj": {
+      "type": {
+
+        "P_DOCUMENT_NAME": "string",
+        "P_DOCUMENT_CATEGORY": "string",
+        "P_DOCUMENT_TYPE": "string",
+        "P_DOCUMENT_FILE": "any",
+        "P_DESCRIPTION": "string",
+        "P_APPL_CODE": "string",
+        "P_REFERENCE_TYPE": "string",
+        "P_TRANSACTION_ID": "string",
+        "P_TYPE": "string",
+        "P_TITLE": "string",
+        "P_URL": "string",
+        "P_CREATED_BY": "string"
+
+      },
+      "defaultValue": {     
+       "P_CREATED_BY": "[[ $application.user.email ]]"
+       
+      }
+    },
+    "P_APPLICATION_CODE": {
+      "type": "string",
+      "defaultValue": "PMIS",
+      "input": "none"
+    },
+    "getStatusprogressbyperiodVar": {
+      "type": "getPmispddStatusprogressGetbyperiod",
+      "defaultValue": {
+        "last_updated_login": "[[ $application.user.email ]]",
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_by": "[[ $application.user.email ]]",
+        "created_by": "Thiru",
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "object_version_num": 0
+      }
+    },
+    "headerInfoVar": {
+      "type": "HeaderInfo"
+    },
+    "periodName": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "pNavCode": {
+      "type": "string"
+    },
+    "pNavEncId": {
+      "type": "string"
+    },
+    "pNavId": {
+      "type": "string"
+    },
+    "pTenderId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getPmispddStatusprogressGetbyperiod": {
+      "endpoint": "getPmispddStatusprogressGetbyperiod",
+      "service": "PDD",
+      "path": "response"
+    },
+    "getPmispddStatusprogressGetbyperiod": {
+          "actual_completed_perc": "string",
+          "actual_items": "string",
+          "additional_info": "string",
+          "created_by": "string",
+          "created_date": "string",
+          "issues": "string",
+          "last_updated_by": "string",
+          "last_updated_date": "string",
+          "last_updated_login": "string",
+          "object_version_num": "number",
+          "ora_project_id": "number",
+          "ora_project_name": "string",
+          "ora_project_number": "string",
+          "period": "string",
+          "period_summary": "string",
+          "physical_planned_perc": "string",
+          "progress_id": "number",
+          "tender_id": "number",
+          "tender_name": "string",
+          "tender_number": "string",
+          "work_performed": "string",
+          "work_planned": "string"
+    },
+     "HeaderInfo": {
+      "projectName": "string",
+      "projectNumber": "string",
+      "tenderName": "string",
+      "tenderNumber": "string"
+    }
+  },
+  "eventListeners": {
+    "attachmentCancelAction": {
+      "chains": [
+        {
+          "chain": "cancelAttachmentDialogBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "attachmentFilePickerSelect": {
+      "chains": [
+        {
+          "chain": "FilePickerSelectChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "files": "[[ Array.prototype.slice.call($event.detail.files) ]]",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "attachmentSaveAddAction": {
+      "chains": [
+        {
+          "chain": "saveAttachmentDialogBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "aboutOKBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "statusProgressSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "AdvancedCreateAndEditPageTemplateSpPrimaryActionChain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "statusProgressSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "AdvancedCreateAndEditPageTemplateSpSecondaryActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-file-picker": {
+        "path": "ojs/ojfilepicker"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-label": {
+        "path": "ojs/ojlabel"
+      },
+      "oj-option": {
+        "path": "ojs/ojoption"
+      },
+      "oj-radioset": {
+        "path": "ojs/ojradioset"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ],
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    }
+  },
+  "constants": {
+    "SIZE_LIMIT": {
+      "type": "string",
+      "defaultValue": "2MB"
+    }
+  }
+}

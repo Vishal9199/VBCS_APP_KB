@@ -1,0 +1,59 @@
+{
+    "items": [
+        {
+            "weekly_highlights_id": 4692,
+            "object_version_num": 0,
+            "ora_project_id": 300000090427447,
+            "ora_project_number": "RG5Z1-CA",
+            "ora_project_name": "RG5Z1-CA",
+            "tender_id": 17001,
+            "tender_number": "NW-RFQ-1119-2025",
+            "tender_name": "Construction of Anoxic tank at Ibra RG-CA",
+            "period": "JAN-24",
+            "week1_highlight_projects": "dasfs",
+            "week1_highlight_hse": "dfsdsgf",
+            "week1_lowlight_projects": "ffgff",
+            "week1_lowlight_hse": "fdgds",
+            "week2_highlight_projects": null,
+            "week2_highlight_hse": null,
+            "week2_lowlight_projects": null,
+            "week2_lowlight_hse": null,
+            "week3_highlight_projects": null,
+            "week3_highlight_hse": null,
+            "week3_lowlight_projects": null,
+            "week3_lowlight_hse": null,
+            "week4_highlight_projects": null,
+            "week4_highlight_hse": null,
+            "week4_lowlight_projects": null,
+            "week4_lowlight_hse": null,
+            "week5_highlight_projects": null,
+            "week5_highlight_hse": null,
+            "week5_lowlight_projects": null,
+            "week5_lowlight_hse": null,
+            "additional_info": null,
+            "created_by": "dinesh.kumar",
+            "created_date": "2026-02-24T10:06:05.445987Z",
+            "last_updated_by": "dinesh.kumar",
+            "last_updated_date": "2026-02-24T10:06:05.445987Z",
+            "last_updated_login": "dinesh.kumar"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/weeklyhighlights/getbyperiod?p_period=JAN-24"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/weeklyhighlights/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/weeklyhighlights/getbyperiod?p_period=JAN-24"
+        }
+    ]
+}

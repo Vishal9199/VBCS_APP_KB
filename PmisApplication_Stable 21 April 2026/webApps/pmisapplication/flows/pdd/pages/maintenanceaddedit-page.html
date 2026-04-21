@@ -1,0 +1,334 @@
+<style>
+  #maintenanceProcess_h_cancelAction {
+    display: none !important;
+  }
+
+  #details .oj-text-field.oj-read-only .oj-text-field-container {
+    background-color: transparent;
+    height: var(--oj-text-field-height);
+    padding: 3px;
+    min-height: 1rem;
+    border: none !important;
+  }
+</style>
+
+
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+
+
+      <oj-sp-advanced-create-edit id="maintenanceProcess" display-options.responsive-padding="on"
+        primary-action.label="Close" page-title="Maintenance Details"
+        on-sp-secondary-action="[[$listeners.maintenanceProcessSpSecondaryAction]]"
+        secondary-actions="[[ $variables.aToolBar ]]"
+        on-sp-primary-action="[[$listeners.maintenanceProcessSpPrimaryAction]]">
+
+        <div slot="main" style="padding-top: 0; margin-top: 0.1rem; min-width: 100%;">
+          <div style="margin-top: 0;">
+
+
+
+            <!-- ============================================================ -->
+            <!-- SECTION 1: MAINTENANCE PROJECT DETAILS                       -->
+            <!-- ============================================================ -->
+            <oj-collapsible id="maintenanceProjectDetailsCollapsible" expanded="true"
+              class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 1rem;">
+              <span slot="header" style="font-weight: bold; color: white;">Maintenance Project Details</span>
+              <div style="margin-top: 0; padding: 1rem; border-left: 4px;">
+                <oj-form-layout max-columns="2" label-edge="start" label-width="30%" colspan-wrap="wrap">
+
+                  <!-- LEFT COLUMN -->
+
+                  <!-- Tender Number (Required + Search) -->
+                  <!-- <oj-input-text id="maintenanceTenderNumber" label-hint="Tender Number" placeholder="Tender Number"
+                    required="true" user-assistance-density="compact" style="width: 16rem;">
+                    <div slot="end">
+                      <oj-button display="icons" chroming="borderless" label="Search Tender" >
+                        <span class="oj-ux-ico-search" slot="startIcon"></span>
+                      </oj-button>
+                    </div>
+                  </oj-input-text> -->
+
+                  <!-- Tender Number (LOV) -->
+                  <oj-select-single id="tenderNumber" label-hint="Tender Number" item-text="tender_number"
+                    user-assistance-density="compact" required="true" style="width: 16rem;"
+                    data="[[$variables.getPmispddCompletionadminLovTendernumberListSDP]]"
+                    value="{{ $variables.maintenanceadminSearchVar.tender_id }}" placeholder="Select Tender Number"
+                    on-value-item-changed="[[$listeners.tenderNumberValueItem]]">
+
+                    <template slot="collectionTemplate" data-oj-as="collection">
+    <oj-table 
+      style="max-width:750px; max-height:300px;" 
+      id="project_lov_table" 
+      horizontal-grid-visible="disabled" 
+      vertical-grid-visible="disabled"
+      class="oj-select-results" 
+      selected.row="[[collection.selected]]"
+      current-row="{{collection.currentRow}}"
+      columns='[
+        
+        {"headerText":"Tender Number","field":"tender_number"},
+        {"headerText":"Tender Name","field":"tender_name"}
+      ]'
+      on-oj-row-action="[[collection.handleRowAction]]" 
+      data="[[collection.data]]">
+
+      <template slot="cellTemplate" data-oj-as="cell">
+        <oj-bind-text value="[[String(cell.data)]]"></oj-bind-text>
+      </template>
+    </oj-table>
+  </template>
+                  </oj-select-single>
+
+                  <!-- Project Number (Readonly) -->
+                  <oj-input-text id="maintenanceProjectNumber" label-hint="Project Number" placeholder="Project Number"
+                    readonly="true" user-assistance-density="compact" style="width: 16rem;"
+                    value="{{ $variables.maintenanceadminSearchVar.ora_project_number }}">
+                  </oj-input-text>
+
+                  <!-- Project Name (Readonly) -->
+                  <oj-input-text id="maintenanceProjectName" label-hint="Project Name" placeholder="Project Name"
+                    readonly="true" user-assistance-density="compact" style="width: 16rem;"
+                    value="{{ $variables.maintenanceadminSearchVar.ora_project_name }}">
+                  </oj-input-text>
+
+                  <!-- Contractor (Readonly) -->
+                  <oj-input-text id="maintenanceContractor" label-hint="Contractor" placeholder="Contractor"
+                    readonly="true" user-assistance-density="compact" style="width: 16rem;"
+                    value="{{ $variables.maintenanceadminSearchVar.supplier_name }}">
+                  </oj-input-text>
+
+                  <!-- Tender Name (Readonly) -->
+                  <oj-input-text id="maintenanceTenderName" label-hint="Tender Name" placeholder="Tender Name"
+                    readonly="true" user-assistance-density="compact" style="width: 16rem;"
+                    value="{{ $variables.maintenanceadminSearchVar.tender_name }}">
+                  </oj-input-text>
+
+                  <!-- Consultant Name (Readonly) -->
+                  <oj-input-text id="maintenanceConsultantName" label-hint="Consultant Name"
+                    placeholder="Consultant Name" user-assistance-density="compact" style="width: 16rem;"
+                    value="{{ $variables.maintenanceadminSearchVar.consultant_name }}">
+                  </oj-input-text>
+
+                </oj-form-layout>
+              </div>
+            </oj-collapsible>
+
+
+            <!-- ============================================================ -->
+            <!-- SECTION 2: CONTRACT INFORMATION                              -->
+            <!-- ============================================================ -->
+            <oj-collapsible id="maintenanceContractInfoCollapsible" expanded="true"
+              class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 1rem;">
+              <span slot="header" style="font-weight: bold; color: white;">Contract Information</span>
+              <div style="padding: 1rem;">
+                <oj-validation-group id="maintenanceContractValidation">
+                  <oj-form-layout max-columns="2" label-edge="start" label-width="35%" colspan-wrap="wrap"
+                    user-assistance-density="compact">
+
+                    <!-- LEFT COLUMN -->
+
+                    <!-- Maintenance Commencement Date -->
+                    <oj-input-date id="maintenanceCommencementDate" label-hint="Maintenance Commencement Date"
+                      placeholder="Select Date" user-assistance-density="compact" style="width: 16rem;"
+                      value="{{ $variables.maintenanceadminSearchVar.contract_commencement_date }}"
+                      converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}'>
+                    </oj-input-date>
+
+                    <!-- Actual Completion Date -->
+                    <oj-input-date id="maintenanceActualCompletionDate" label-hint="Actual Completion Date"
+                      placeholder="Select Date" user-assistance-density="compact" style="width: 16rem;"
+                      value="{{ $variables.maintenanceadminSearchVar.actual_completion_date }}"
+                      converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}'>
+                    </oj-input-date>
+
+                    <!-- Original Completion Date -->
+                    <oj-input-date id="maintenanceOriginalCompletionDate" label-hint="Original Completion Date"
+                      placeholder="Select Date" user-assistance-density="compact" style="width: 16rem;"
+                      value="{{ $variables.maintenanceadminSearchVar.orig_completion_date }}"
+                      converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}'>
+                    </oj-input-date>
+
+                    <!-- Start Of Maintenance Period -->
+                    <oj-input-date id="maintenanceStartPeriod" label-hint="Start Of Maintenance Period"
+                      placeholder="Select Date" user-assistance-density="compact" style="width: 16rem;"
+                      value="{{ $variables.maintenanceadminSearchVar.maintenance_period }}"
+                      converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}'>
+                    </oj-input-date>
+
+                    <!-- Revised Completion Date -->
+                    <oj-input-date id="maintenanceRevisedCompletionDate" label-hint="Revised Completion Date"
+                      placeholder="Select Date" user-assistance-density="compact" style="width: 16rem;"
+                      value="{{ $variables.maintenanceadminSearchVar.rev_completion_date }}"
+                      converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}'>
+                    </oj-input-date>
+
+                    <!-- End of Maintenance Period -->
+                    <oj-input-date id="maintenanceEndPeriod" label-hint="End of Maintenance Period"
+                      placeholder="Select Date" user-assistance-density="compact" style="width: 16rem;"
+                      value="{{ $variables.maintenanceadminSearchVar.end_maintenance_period }}"
+                      converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}'>
+                    </oj-input-date>
+
+                    <!-- Substantial Completion Date -->
+                    <oj-input-date id="maintenanceSubstantialCompletionDate" label-hint="Substantial Completion Date"
+                      placeholder="Select Date" user-assistance-density="compact" style="width: 16rem;"
+                      value="{{ $variables.maintenanceadminSearchVar.substantial_completion_date }}"
+                      converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}'>
+                    </oj-input-date>
+
+                    <!-- RIGHT: Upload area (left as-is per requirement) -->
+
+                  </oj-form-layout>
+                </oj-validation-group>
+              </div>
+            </oj-collapsible>
+
+          </div>
+        </div>
+      </oj-sp-advanced-create-edit>
+
+    </div>
+  </div>
+</div>
+
+
+<oj-dialog id="progressDialog" dialog-title="Processing" style="width: 300px;" cancel-behavior="none">
+  <div slot="body" style="text-align: center; padding: 2rem;">
+    <oj-progress-bar value="-1"></oj-progress-bar>
+    <p style="margin-top: 1rem;">Please wait...</p>
+  </div>
+</oj-dialog>
+
+<oj-dialog id="loadingDialog" style="width: 300px;" cancel-behavior="none" drag-affordance="title-bar"
+  header-decoration="off" position.at.vertical="top" position.my.vertical="top">
+  <div slot="body" style="text-align: center; padding: 2rem;">
+    <oj-progress-circle value="-1"></oj-progress-circle>
+    <p style="margin-top: 1rem; font-weight: 500;">Loading Maintenance Data...</p>
+  </div>
+</oj-dialog>
+
+
+
+<!-- About Dialog -->
+
+<oj-dialog dialog-title="About" id="details" cancel-behavior="icon"
+  style="overflow: hidden; min-width: 30%; width: 30%;" position.at.vertical="top">
+  <div slot="body">
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-sm-12 oj-md-12">
+        <oj-form-layout label-edge='start' readonly="true" user-assistance-density="compact" label-width="40%">
+          <oj-input-text label-hint="Created By:" value="{{ $variables.maintenanceadminSearchVar.created_by }}"
+            readonly="true">
+          </oj-input-text>
+          <oj-input-date label-hint="Created Date : "
+            converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy hh:mm a"}}'
+            value="{{ $variables.maintenanceadminSearchVar.created_date }}" readonly="true"
+            class="oj-form-control-width-sm">
+          </oj-input-date>
+          <oj-input-text label-hint="Last Updated By:"
+            value="{{ $variables.maintenanceadminSearchVar.last_updated_by }}" readonly="true">
+          </oj-input-text>
+          <oj-input-date label-hint="Last Updated Date : "
+            converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy hh:mm a"}}'
+            value="{{ $variables.maintenanceadminSearchVar.last_updated_date }}" readonly="true"
+            class="oj-form-control-width-sm"></oj-input-date>
+          <oj-input-text label-hint="Last Login By:"
+            value="{{ $variables.maintenanceadminSearchVar.last_updated_login }}" readonly="true">
+          </oj-input-text>
+
+        </oj-form-layout>
+      </div>
+    </div>
+  </div>
+  <div slot="footer" style="padding: 0px 32px 32px 32px">
+    <oj-button on-oj-action="[[$listeners.buttonAction]]">Ok</oj-button>
+  </div>
+</oj-dialog>
+
+
+
+
+<oj-dialog dialog-title="Attachment" id="attachmentDialog" cancel-behavior="icon" style="width:35%;"
+  position.at.vertical="top" position.my.vertical="top">
+
+  <div slot="body">
+    <oj-validation-group id="attachment-validation">
+      <oj-form-layout id="attachmentFormLayout" label-edge="start" direction="row" max-columns="1"
+        style="margin-top:2%;" label-width="35%" user-assistance-density="compact">
+        <!-- File Upload -->
+        <oj-label show-required="true" style="font-weight: 600;">File Upload</oj-label>
+        <oj-file-picker id="attachment-file-picker" selection-mode="single"
+          on-oj-select="[[$listeners.attachmentFilePickerSelect]]">
+          <oj-button slot="trigger" label="Upload" chroming="solid" class="oj-button-full-width" id="bankUpload">
+            <span slot="startIcon" class="oj-ux-ico-upload"></span>
+          </oj-button>
+        </oj-file-picker>
+
+
+        <!-- File Name with Download -->
+        <oj-input-text id="attachment-file-name" label-hint="File Name" style="width: 16rem;" required="true"
+          user-assistance-density="compact" value="{{ $variables.attachmentObj.P_DOCUMENT_NAME }}" readonly="true">
+          <div slot="end">
+            <!-- <oj-bind-if
+                                test="[[ $variables.fileDownload && $variables.attachmentObj.P_DOC_ID &&
+                                  $variables.attachmentObj.P_DOC_ID !== null &&
+                                  $variables.attachmentObj.P_DOC_ID !== '' ]]">
+                                <oj-button display="icons" chroming="borderless" label="Download"
+                                  style="background-color:transparent;"
+                                  on-oj-action="[[$listeners.iconOnlyBtnAction3]]"
+                                  disabled="[[ $variables.trainVar == 6 ]]">
+                                  <span class="oj-ux-ico-download" slot="startIcon" style="color:#d35400;"></span>
+                                </oj-button>
+                              </oj-bind-if> -->
+          </div>
+        </oj-input-text>
+
+
+        <!-- File Type with Delete -->
+        <oj-input-text id="attachment-file-type" label-hint="File Type" style="width: 16rem;" required="true"
+          user-assistance-density="compact" value="{{ $variables.attachmentObj.P_DOCUMENT_TYPE }}" readonly="true">
+          <div slot="end">
+            <!-- <oj-bind-if
+                                test="[[ $variables.canDelete && $variables.attachmentObj.P_DOC_ID &&
+                                  $variables.attachmentObj.P_DOC_ID !== null &&
+                                  $variables.attachmentObj.P_DOC_ID !== '' ]]">
+                                <oj-button display="icons" chroming="borderless" label="Delete"
+                                  style="background-color:transparent;"
+                                  on-oj-action="[[$listeners.iconOnlyBtnAction]]"
+                                  disabled="[[ $variables.trainVar == 6 || $variables.otherDisableVar ]]">
+                                  <span class="oj-ux-ico-delete-all" slot="startIcon" style="color:red;"></span>
+                                </oj-button>
+                              </oj-bind-if> -->
+          </div>
+        </oj-input-text>
+
+        <oj-input-text id="attachment-file-desc" value="{{ $variables.attachmentObj.P_DESCRIPTION }}"
+          label-hint="Description" style="width:16rem;">
+        </oj-input-text>
+
+
+
+
+      </oj-form-layout>
+    </oj-validation-group>
+  </div>
+
+  <div slot="footer" style="display:flex; justify-content:flex-end; margin-top:1rem;">
+
+    <oj-button id="attachment-save-add" chroming="solid" label="Save" style="margin-left:0.5%;margin-right:0.5%;"
+      on-oj-action="[[$listeners.attachmentSaveAddAction]]">
+      <!-- <span class="oj-ux-ico-save" slot="startIcon"></span> -->
+    </oj-button>
+
+    <!-- <oj-button id="attachment-save-close" chroming="callToAction" label="Save & Close">
+      <span class="oj-ux-ico-save" slot="startIcon"></span>
+    </oj-button> -->
+
+    <oj-button id="attachment-cancel" chroming="solid" label="Cancel" style="margin-left:0.5%;margin-right:0.5%;"
+      on-oj-action="[[$listeners.attachmentCancelAction]]">
+      <!-- <span class="oj-ux-ico-cancel-s" slot="startIcon"></span> -->
+    </oj-button>
+  </div>
+</oj-dialog>

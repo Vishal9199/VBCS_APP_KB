@@ -1,0 +1,42 @@
+{
+    "items": [
+        {
+            "budget_control_header_id": 1,
+            "object_version_num": 1,
+            "ora_project_id": 300000090427449,
+            "ora_project_number": "789BEN234",
+            "ora_project_name": "VBCS-Feb-10-1",
+            "tender_id": 17002,
+            "tender_number": "NW-RFQ-17002-2026",
+            "tender_name": "Test Tender Name 001",
+            "year": 2026,
+            "region_id": null,
+            "region_code": null,
+            "region": null,
+            "plan_type": "P1",
+            "scope_of_work": null,
+            "anticipated_contract": null,
+            "original_base_line": null,
+            "additional_info": null,
+            "created_by": "Atiq",
+            "created_date": "2026-02-19T11:31:34.682Z",
+            "last_updated_by": "Atiq",
+            "last_updated_date": "2026-02-19T11:31:45.246Z",
+            "last_updated_login": "Atiq"
+        }
+    ],
+    "hasMore": false,
+    "limit": 0,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/budgetcontrol/getbyhdrid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/budgetcontrol/item"
+        }
+    ]
+}

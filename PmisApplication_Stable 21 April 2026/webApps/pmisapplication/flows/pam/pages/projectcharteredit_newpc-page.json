@@ -1,0 +1,2126 @@
+{
+  "metadata": {},
+  "title": "Project Charter Form Edit (Copy)",
+  "description": "Add/Edit Project Charter with Details, Risks, Costs, and Attachments for comprehensive project planning and tracking.",
+  "variables": {
+    "about": {
+      "type": "about"
+    },
+    "current_level": {
+      "type": "number"
+    },
+    "display_parentPC_Name": {
+      "type": "string"
+    },
+    "getApprovalSelectgroupListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "approval/getApprovalSelectgroup",
+        "keyAttributes": "approval_role_code",
+        "itemsPath": "items",
+        "responseType": "getApprovalSelectgroupResponse",
+        "headers": {
+          "p_level": "{{ $variables.stored_level }}"
+        },
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "user_role_name"
+          ]
+        }
+      }
+    },
+    "getPmispamProjectcharterLovParentprojectcharterListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "parent_project_charter_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamProjectcharterLovParentprojectcharterResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "parent_ref_num"
+          ]
+        },
+        "fetchChain": "getPmispamProjectcharterLovParentprojectcharterFetch"
+      }
+    },
+    "getRefNumberLovListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "lov_value",
+        "itemsPath": "items",
+        "responseType": "getRefNumberLovResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lov_label"
+          ]
+        },
+        "fetchChain": "getRefNumberLovFetch"
+      }
+    },
+    "isCostOrRisk": {
+      "type": "string"
+    },
+    "isEstCreate": {
+      "type": "string",
+      "defaultValue": "Y"
+    },
+    "isFirstApproverUpdated": {
+      "type": "string",
+      "defaultValue": "N"
+    },
+    "isRiskCreate": {
+      "type": "string",
+      "defaultValue": "Y"
+    },
+    "mandatoryRefDocADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "keyAttributes": "lookup_value_id"
+      }
+    },
+    "getMandatoryRefDocLookupSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PAM/getCommonLovLookup",
+        "responseType": "getCommonLovLookup",
+        "itemsPath": "items",
+        "headers": {
+          "p_lookup_type_code": "PMIS_PROJECT_CHARTER_MANDATORY_REF_DOC"
+        }
+      }
+    },
+    "passKey": {
+      "type": "string"
+    },
+    "passPayload": {
+      "type": "string"
+    },
+    "postApiVar": {
+      "type": "postApi"
+    },
+    "Ppcid": {
+      "type": "number",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "projectCharterSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "responseType": "getPmispamFiveyearplandtlLovProjectname",
+        "itemsPath": "items",
+        "keyAttributes": "project_id",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "project_name",
+            "budget_number"
+          ]
+        },
+        "fetchChain": "getPmispamFiveyearplandtlLovProjectnameFetch"
+      }
+    },
+    "projectCharterVar": {
+      "type": "ProjectCharter",
+      "defaultValue": {
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "object_version_num": 0,
+        "created_by": "[[ $application.user.email ]]",
+        "last_updated_by": "[[ $application.user.email ]]",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "parent_project_charter_id": "[[ $variables.Ppcid ]]"
+      }
+    },
+    "majorRiskVar": {
+      "type": "MajorRisk",
+      "defaultValue": {
+        "created_by": "[[ $application.user.email ]]",
+        "last_updated_by": "[[ $application.user.email ]]",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]"
+      }
+    },
+    "estimateCostVar": {
+      "type": "EstimateCost",
+      "defaultValue": {
+        "created_by": "[[ $application.user.email ]]",
+        "last_updated_by": "[[ $application.user.email ]]",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]"
+      }
+    },
+    "ADPmajorRisk": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "MajorRisk",
+        "keyAttributes": "major_risk_id"
+      }
+    },
+    "ADPestimateCost": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "EstimateCost",
+        "keyAttributes": "est_cost_id"
+      }
+    },
+    "selectedApproverUser_id": {
+      "type": "number"
+    },
+    "selectedAttachmentTab": {
+      "type": "string",
+      "defaultValue": "location-plan-tab"
+    },
+    "editMode": {
+      "type": "string",
+      "defaultValue": "add"
+    },
+    "pNavCode": {
+      "type": "string",
+      "defaultValue": "CREATE",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "pNavId": {
+      "type": "string",
+      "defaultValue": "0",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "enterType": {
+      "type": "string"
+    },
+    "inputProjectDtls": {
+      "type": {
+        "refNum": "string",
+        "projectName": "string",
+        "projectId": "number"
+      }
+    },
+    "stored_level": {
+      "type": "string"
+    },
+    "valueFromLov": {
+      "type": {
+        "regionCode": "string"
+      }
+    },
+    "estimateCostMode": {
+      "type": "string",
+      "defaultValue": "add"
+    },
+    "majorRiskMode": {
+      "type": "string",
+      "defaultValue": "add"
+    },
+    "getPmisLovRegionNameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PmisSetup/getPmisLovRegionName",
+        "responseType": "getPmisLovRegionName",
+        "itemsPath": "items",
+        "keyAttributes": "lookup_value_id"
+      }
+    },
+    "getPmispamLovProjectCharterLocationListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PAM/getPmispamLovProjectCharterLocationList",
+        "keyAttributes": "location_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamLovProjectCharterLocationListResponse",
+        "uriParams": {
+          "regionCode": "{{ $variables.valueFromLov.regionCode }}"
+        },
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "location_name"
+          ]
+        }
+      }
+    },
+    "getPmisLovProjectCharterStatusListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PAM/getPmisLovProjectCharterStatusList",
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getPmisLovProjectCharterStatusListResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "status_name"
+          ]
+        }
+      }
+    },
+    "projectCharterId": {
+      "type": "number"
+    },
+    "aToolGeneric": {
+      "type": "object[]"
+    },
+    "taskId": {
+      "type": "string",
+      "input": "fromUrl",
+      "required": true
+    },
+    "qhseVar": {
+      "type": "QhseVar"
+    },
+    "ADPmilestone": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "MilestoneRow",
+        "keyAttributes": "milestone_id"
+      }
+    },
+    "milestoneVar": {
+      "type": "MilestoneRow",
+      "defaultValue": {
+        "milestone_id": 0
+      }
+    },
+    "milestoneNextId": {
+      "type": "number",
+      "defaultValue": 1
+    },
+    "isMilestoneCreate": {
+      "type": "string",
+      "defaultValue": "Y"
+    },
+    "dependencyVar": {
+      "type": "Dependency",
+      "defaultValue": {
+        "created_by": "[[ $application.user.email ]]",
+        "last_updated_by": "[[ $application.user.email ]]",
+        "last_updated_login": "[[ $application.user.email ]]"
+      }
+    },
+    "ADPdependency": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "Dependency",
+        "keyAttributes": "dependency_id"
+      }
+    },
+    "isDependencyCreate": {
+      "type": "string",
+      "defaultValue": "Y"
+    },
+    "oicbucket": {
+      "type": "postUpload"
+    },
+    "attachmentObj": {
+      "type": {
+        "P_DOCUMENT_NAME": "string",
+        "P_DOCUMENT_CATEGORY": "string",
+        "P_DOCUMENT_TYPE": "string",
+        "P_DOCUMENT_FILE": "any",
+        "P_DESCRIPTION": "string",
+        "P_APPL_CODE": "string",
+        "P_REFERENCE_TYPE": "string",
+        "P_TRANSACTION_ID": "string",
+        "P_TYPE": "string",
+        "P_TITLE": "string",
+        "P_URL": "string",
+        "P_CREATED_BY": "string"
+      },
+      "defaultValue": {
+        "P_APPL_CODE": "Project Charter",
+        "P_CREATED_BY": "[[ $application.user.email ]]",
+        "P_TYPE": "FILE"
+      }
+    },
+    "formObj": {
+      "type": {
+        "addDialogValidate": "string"
+      }
+    },
+    "P_APPLICATION_CODE": {
+      "type": "string",
+      "defaultValue": "Project Charter"
+    },
+    "adpAttachmentFile": {
+      "type": "vb/ArrayDataProvider2"
+    },
+    "adpAttachmentText": {
+      "type": "vb/ArrayDataProvider2"
+    },
+    "adpAttachmentUrl": {
+      "type": "vb/ArrayDataProvider2"
+    },
+    "attachmentPopupADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "keyAttributes": "document_id"
+      }
+    },
+    "currentMandatoryRefDocRow": {
+      "type": "object"
+    },
+    "updateAction": {
+      "type": {
+        "P_ACTION_ID": "number",
+        "P_ACTION_CODE": "string",
+        "P_ACTION_USER_IDCS": "string",
+        "P_TRX_ID": "number",
+        "P_INSTANCE_NUMBER": "string",
+        "P_APPR_LEVEL": "number",
+        "P_ACTION_USER": "string",
+        "P_COMMENTS": "string",
+        "P_NEXT_APPROVER_ID": "number",
+        "P_FROM_PERSON_ID": "number"
+
+      }
+    },
+    "SubmitVar": {
+      "type": {
+        "P_TRX_ID": "number",
+        "P_USER_ID": "number",
+        "P_APPR_PROCESS": "string",
+        "P_TYPE": "string"
+      }
+    },
+    "submitProcess": {
+      "type": {
+        "params": {
+          "applicationName": "string",
+          "processName": "string",
+          "applicationVersion": "string"
+        },
+        "dataObject": {
+          "startWebFormArgs": {
+            "callSubmitPackage": "string",
+            "p_APPR_PROCESS": "string",
+            "p_TRX_ID": "number",
+            "p_ACTION_ID": "number",
+            "p_USER_ID": "number"
+          }
+        }
+      }
+    },
+    "putTaskByNumber": {
+      "type": {
+        "comment": "string",
+        "outcome": "string",
+        "nextApprover": "number"
+      }
+    },
+    "WithdrawVAR": {
+      "type": {
+        "action": "string",
+        "instanceActionProps": {
+          "reason": "string"
+        }
+      }
+    },
+    "PCSInstanceUpdate": {
+      "type": {
+        "action": "string",
+        "instanceActionProps": {
+          "reason": "string"
+        }
+      }
+    },
+    "approveValid": {
+      "type": "string"
+    },
+    "rejectValid": {
+      "type": "string"
+    },
+    "withdrawValid": {
+      "type": "string"
+    },
+    "reassignvalid": {
+      "type": "string"
+    },
+    "requireMoreFormValid": {
+      "type": "string"
+    },
+    "mailBody": {
+      "type": "object"
+    },
+    "nextApproverLovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "fetchChain": "getGetreassignLovIdcsFetch",
+        "itemsPath": "items",
+        "responseType": "getPmispamLovUsers",
+        "keyAttributes": "user_id"
+      }
+    },
+    "selectgroupADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "getApprovalSelectgroup",
+        "keyAttributes": "approval_role_code"
+      }
+    },
+    "selectedApprovalGroup": {
+      "type": {
+        "hierarchy_list_id": "number",
+        "approval_role_code": "string",
+        "p_appr_level": "number",
+        "user_role_name": "string",
+        "user_role_id": "number"
+
+      }
+    },
+    "showApprovalGroupLov": {
+      "type": "boolean",
+      "defaultValue": false
+    }
+
+  },
+  "types": {
+    "@decorators.getApprovalSelectgroup": {
+      "endpoint": "getApprovalSelectgroup",
+      "service": "approval",
+      "path": "response"
+    },
+    "@decorators.getApprovalSelectgroupResponse": {
+      "endpoint": "getApprovalSelectgroup",
+      "service": "approval",
+      "path": "response"
+    },
+    "@decorators.getCommonLovLookup": {
+      "endpoint": "getCommonLovLookup",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmisLovRegionName": {
+      "endpoint": "getPmisLovRegionName",
+      "service": "PmisSetup",
+      "path": "response"
+    },
+    "@decorators.getPmispamFiveyearplandtlLovProjectname": {
+      "endpoint": "getPmispamFiveyearplandtlLovProjectname",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovUsers": {
+      "endpoint": "getPmispamLovUsers",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamProjectcharterLovParentprojectcharterResponse": {
+      "endpoint": "getPmispamProjectcharterLovParentprojectcharter",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getRefNumberLovResponse": {
+      "endpoint": "getRefNumberLov",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.postApi": {
+      "endpoint": "postApi",
+      "service": "RTFReport",
+      "path": "request"
+    },
+    "getApprovalSelectgroup": {
+          "active_flag": "string",
+          "approval_role_code": "string",
+          "attribute_json": "any",
+          "category_code": "string",
+          "category_id": "number",
+          "category_name": "string",
+          "created_by": "string",
+          "created_date": "string",
+          "from_limit": "any",
+          "function_code": "string",
+          "function_id": "number",
+          "function_name": "string",
+          "hierarchy_code": "string",
+          "hierarchy_id": "number",
+          "hierarchy_list_id": "number",
+          "hierarchy_name": "string",
+          "last_updated_by": "string",
+          "last_updated_date": "string",
+          "last_updated_login": "string",
+          "level_num": "number",
+          "object_version_num": "number",
+          "person_id": "any",
+          "person_name": "any",
+          "person_number": "any",
+          "remarks": "any",
+          "to_limit": "any",
+          "type_code": "string",
+          "type_id": "number",
+          "type_name": "string",
+          "user_id": "any",
+          "user_name": "any",
+          "user_role_id": "number",
+          "user_role_name": "string"
+    },
+    "getApprovalSelectgroupResponse": {
+      "items": [
+        {
+          "approval_role_code": "string",
+          "user_role_name": "string",
+          "level_num": "number"
+        }
+      ]
+    },
+    "getCommonLovLookup": {
+      "items": [
+        {
+          "active_flag": "string",
+          "display_order": "number",
+          "lookup_type_code": "string",
+          "lookup_type_id": "number",
+          "lookup_type_name": "string",
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmisLovRegionName": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispamFiveyearplandtlLovProjectname": {
+      "items": [
+        {
+          "budget_number": "string",
+          "project_id": "number",
+          "project_name": "string"
+        }
+      ]
+    },
+    "getPmispamLovUsers": {
+      "items": [
+        {
+          "active_flag": "string",
+          "business_group_id": "number",
+          "created_by": "string",
+          "creation_date": "string",
+          "email_address": "string",
+          "end_date": "any",
+          "last_update_date": "string",
+          "last_update_login": "string",
+          "last_updated_by": "string",
+          "person_full_name": "string",
+          "person_id": "number",
+          "person_name": "string",
+          "person_number": "string",
+          "source_rowid": "string",
+          "start_date": "string",
+          "trx_source": "string",
+          "user_guid": "string",
+          "user_id": "number",
+          "user_name": "string"
+        }
+      ]
+    },
+    "getPmispamProjectcharterLovParentprojectcharterResponse": {
+      "items": [
+        {
+          "parent_project_charter_id": "number",
+          "parent_project_charter_name": "string",
+          "parent_ref_num": "string"
+
+        }
+      ]
+    },
+    "getRefNumberLovResponse": {
+      "items": [
+        {
+          "lov_label": "string",
+          "lov_value": "string"
+        }
+      ]
+    },
+    "postApi": {
+      "REPORT_NAME": "string",
+      "REPORT_PARAMETERS": {
+        "P_PROJECT_CHARTER_ID": "number"
+      },
+      "REPORT_TYPE": "string"
+    },
+    "ProjectCharter": {
+      "parent_project_charter_id": "number",
+      "project_charter_id": "number",
+      "object_version_num": "number",
+      "project_title": "string",
+      "project_description": "string",
+      "project_id": "number",
+      "project_charter_name": "string",
+      "project_category": "string",
+      "project_number": "string",
+      "project_objective": "string",
+      "project_scope": "string",
+      "ref_num": "string",
+      "revision": "number",
+      "region_id": "number",
+      "region_code": "string",
+      "region_name": "string",
+      "related_sons": "string",
+      "principle_purpose": "string",
+      "other_purpose": "string",
+      "justification": "string",
+      "main_feature": "string",
+      "oper_philosophy": "string",
+      "capex_requirement": "string",
+      "location_pl": "string",
+      "service_req_obj": "string",
+      "overview_project": "string",
+      "project_owner": "string",
+      "execution_director": "string",
+      "design": "string",
+      "construction": "string",
+      "success_criteria": "string",
+      "strength": "string",
+      "weakness": "string",
+      "opportunities": "string",
+      "threats": "string",
+      "hse_integration_req": "string",
+      "responsibilities": "string",
+      "testing_commissioning": "string",
+      "design_date": "string",
+      "construction_date": "string",
+      "testing_commissioning_date": "string",
+      "tender_award": "string",
+      "estimated_capex_cost": "number",
+      "estimated_opex_cost": "number",
+      "procurement_assumption": "string",
+      "operating_principle": "string",
+      "approver_id": "number",
+      "manager_status": "string",
+      "wf_item_type": "string",
+      "wf_item_key": "string",
+      "status_id": "number",
+      "status_code": "string",
+      "status_name": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "workflow_status": "string"
+    },
+    "MajorRisk": {
+      "major_risk_id": "number",
+      "object_version_num": "number",
+      "project_charter_id": "number",
+      "project_charter_name": "string",
+      "ref_num": "string",
+      "major_risk_title": "string",
+      "description": "string",
+      "impact": "string",
+      "mitigation": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "EstimateCost": {
+      "est_cost_id": "number",
+      "object_version_num": "number",
+      "project_charter_id": "number",
+      "project_charter_name": "string",
+      "est_capax_cost": "string",
+      "capax_unit": "string",
+      "est_opex_cost": "string",
+      "opex_unit": "string",
+      "ref_num": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "@decorators.getPmisLovRegionNameListResponse": {
+      "endpoint": "getPmisLovRegionNameList",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovProjectCharterLocationListResponse": {
+      "endpoint": "getPmispamLovProjectCharterLocationList",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmisLovProjectCharterStatusListResponse": {
+      "endpoint": "getPmisLovProjectCharterStatusList",
+      "service": "PAM",
+      "path": "response"
+    },
+    "getPmisLovRegionNameListResponse": {
+      "items": [
+        {
+          "lookup_value_id": "number",
+          "lookup_value_code": "string",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispamLovProjectCharterLocationListResponse": {
+      "items": [
+        {
+          "location_id": "number",
+          "location_code": "string",
+          "location_name": "string",
+          "region_code": "string"
+        }
+      ]
+    },
+    "getPmisLovProjectCharterStatusListResponse": {
+      "items": [
+        {
+          "lookup_value_id": "number",
+          "lookup_value_code": "string",
+          "status_name": "string"
+        }
+      ]
+    },
+    "about": {
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "QhseVar": {
+      "swot_strengths": "string",
+      "swot_weaknesses": "string",
+      "swot_opportunities": "string",
+      "swot_threats": "string",
+      "hse_design_integration": "string",
+      "hse_design_measures": "string",
+      "environmental_compliance": "string",
+      "operational_risk": "string",
+      "responsibilities_design": "string",
+      "responsibilities_hse": "string",
+      "responsibilities_tender": "string",
+      "initiator_contact": "string",
+      "initiator_signature": "string",
+      "initiation_date": "string",
+      "auth1_name": "string",
+      "auth1_signature": "string",
+      "auth1_date": "string",
+      "auth2_name": "string",
+      "auth2_signature": "string",
+      "auth2_date": "string",
+      "auth3_name": "string",
+      "auth3_signature": "string",
+      "auth3_date": "string",
+      "auth4_name": "string",
+      "auth4_signature": "string",
+      "auth4_date": "string"
+    },
+    "MilestoneRow": {
+      "milestone_id": "number",
+      "object_version_num": "number",
+      "project_charter_id": "number",
+      "project_charter_name": "string",
+      "milestone": "string",
+      "by_target_date": "string",
+      "ref_num": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "Dependency": {
+      "dependency_id": "number",
+      "object_version_num": "number",
+      "project_charter_id": "number",
+      "project_charter_name": "string",
+      "project_dependencies": "string",
+      "dependency_details": "string",
+      "impacts_consequences": "string",
+      "ref_num": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "@decorators.postUpload": {
+      "endpoint": "postUpload",
+      "service": "OICBucket",
+      "path": "request"
+    },
+    "postUpload": {
+      "data": {
+        "file": "string",
+        "location": "string"
+      }
+    }
+
+  },
+  "eventListeners": {
+    "aboutButtonCancelACAction": {
+      "chains": [
+        {
+          "chain": "onAboutClose_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "approvalGroupSelectValueItem": {
+      "chains": [
+        {
+          "chain": "onApprovalGroupChanged",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "approverToSelectValueItem": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain2",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "onCancelDelete_Est_Dialog",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "onOkLine_DeleteAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction3": {
+      "chains": [
+        {
+          "chain": "onCloseAttachmentPopup",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction4": {
+      "chains": [
+        {
+          "chain": "ButtonActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction5": {
+      "chains": [
+        {
+          "chain": "updateHdr_Approver_Id",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction6": {
+      "chains": [
+        {
+          "chain": "closePcDialog",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction7": {
+      "chains": [
+        {
+          "chain": "okPcBtn_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction8": {
+      "chains": [
+        {
+          "chain": "closePCPopup",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction9": {
+      "chains": [
+        {
+          "chain": "onClosePC_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnAction": {
+      "chains": [
+        {
+          "chain": "onDeleteAttachment_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "editBtnAction": {
+      "chains": [
+        {
+          "chain": "onDownload_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "parentProjectValueItem": {
+      "chains": [
+        {
+          "chain": "parentPc_LOV_Change_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "projectCharterEditPageSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "onPageCloseAction",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "projectCharterEditPageSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "secondaryActionHandler",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "projectLovValueItem": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain1",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "regionValueItem": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "uploadAction": {
+      "chains": [
+        {
+          "chain": "openMandatoryRefDocAttachmentDialog",
+          "parameters": {
+            "current": "{{ $current }}",
+            "event": "{{ $event }}",
+            "originalEvent": "{{ $current.originalEvent }}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    },
+    "estcostAddBtnAction": {
+      "chains": [
+        {
+          "chain": "openEstimateCostDialogChain"
+        }
+      ]
+    },
+    "estcostRefreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshEstimateCostChain"
+        }
+      ]
+    },
+    "estcostEditAction": {
+      "chains": [
+        {
+          "chain": "editEstimateCostChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "estcostDeleteAction": {
+      "chains": [
+        {
+          "chain": "onDeleteAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "estcostSaveCloseAction": {
+      "chains": [
+        {
+          "chain": "onEstimateCostLineSave",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "isSaveAndClose": "Y"
+          }
+        }
+      ]
+    },
+    "estcostSaveAddAnotherAction": {
+      "chains": [
+        {
+          "chain": "onEstimateCostLineSave",
+          "parameters": {
+            "isSaveAndClose": "N"
+          }
+        }
+      ]
+    },
+    "estcostCancelAction": {
+      "chains": [
+        {
+          "chain": "cancelEstimateCostDialogChain"
+        }
+      ]
+    },
+    "riskAddBtnAction": {
+      "chains": [
+        {
+          "chain": "openMajorRiskDialogChain"
+        }
+      ]
+    },
+    "riskRefreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshMajorRiskChain"
+        }
+      ]
+    },
+    "riskEditAction": {
+      "chains": [
+        {
+          "chain": "editMajorRiskChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "riskDeleteAction": {
+      "chains": [
+        {
+          "chain": "onDelete_Risk_Dialog",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "riskSaveCloseAction": {
+      "chains": [
+        {
+          "chain": "onMajorRiskLineSave",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "isSaveAndClose": "Y"
+          }
+        }
+      ]
+    },
+    "riskSaveAddAnotherAction": {
+      "chains": [
+        {
+          "chain": "onMajorRiskLineSave",
+          "parameters": {
+            "isSaveAndClose": "N"
+          }
+        }
+      ]
+    },
+    "riskCancelAction": {
+      "chains": [
+        {
+          "chain": "cancelMajorRiskDialogChain"
+        }
+      ]
+    },
+    "primaryActionAction": {
+      "chains": [
+        {
+          "chain": "saveAndCloseChain"
+        }
+      ]
+    },
+    "submitActionAction": {
+      "chains": [
+        {
+          "chain": "submitChain"
+        }
+      ]
+    },
+    "printActionAction": {
+      "chains": [
+        {
+          "chain": "printChain"
+        }
+      ]
+    },
+    "exportActionAction": {
+      "chains": [
+        {
+          "chain": "exportChain"
+        }
+      ]
+    },
+    "milestoneAddBtnAction": {
+      "chains": [
+        {
+          "chain": "openMilestoneDialogChain"
+        }
+      ]
+    },
+    "milestoneEditAction": {
+      "chains": [
+        {
+          "chain": "editMilestoneChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "milestoneDeleteAction": {
+      "chains": [
+        {
+          "chain": "deleteMilestoneChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "milestoneSaveCloseAction": {
+      "chains": [
+        {
+          "chain": "onMilestoneLineSave",
+          "parameters": {
+            "isSaveAndClose": "Y"
+          }
+        }
+      ]
+    },
+    "milestoneSaveAddAnotherAction": {
+      "chains": [
+        {
+          "chain": "onMilestoneLineSave",
+          "parameters": {
+            "isSaveAndClose": "N"
+          }
+        }
+      ]
+    },
+    "milestoneCancelAction": {
+      "chains": [
+        {
+          "chain": "cancelMilestoneDialogChain"
+        }
+      ]
+    },
+    "dependencyAddBtnAction": {
+      "chains": [
+        {
+          "chain": "openDependencyDialogChain"
+        }
+      ]
+    },
+    "dependencyRefreshBtnAction": {
+      "chains": [
+        {
+          "chain": "loadDependencies"
+        }
+      ]
+    },
+    "dependencyEditAction": {
+      "chains": [
+        {
+          "chain": "editDependencyChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "dependencyDeleteAction": {
+      "chains": [
+        {
+          "chain": "onDelete_Dependency_Dialog",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "dependencySaveCloseAction": {
+      "chains": [
+        {
+          "chain": "onDependencyLineSave",
+          "parameters": {
+            "isSaveAndClose": "Y"
+          }
+        }
+      ]
+    },
+    "dependencySaveAddAnotherAction": {
+      "chains": [
+        {
+          "chain": "onDependencyLineSave",
+          "parameters": {
+            "isSaveAndClose": "N"
+          }
+        }
+      ]
+    },
+    "dependencyCancelAction": {
+      "chains": [
+        {
+          "chain": "cancelDependencyDialogChain"
+        }
+      ]
+    },
+    "attachmentCancelAction": {
+      "chains": [
+        {
+          "chain": "onClickCancelMandatoryRefDoc",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "attachmentFilePickerSelect": {
+      "chains": [
+        {
+          "chain": "FilePickerSelectChainMandatoryRefDoc",
+          "parameters": {
+            "event": "{{$event}}",
+            "files": "[[ Array.prototype.slice.call($event.detail.files) ]]",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "attachmentSaveAddAction": {
+      "chains": [
+        {
+          "chain": "onSaveAddNewMandatoryRefDoc",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "attachmentSaveCloseAction2": {
+      "chains": [
+        {
+          "chain": "onClickSaveMandatoryRefDoc",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "uploadMandatoryRefDocAction": {
+      "chains": [
+        {
+          "chain": "openMandatoryRefDocAttachmentDialog",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "viewStaticRowAction": {
+      "chains": [
+        {
+          "chain": "onOpenAttchmentDialog",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "moreActionEvent": {
+  "chains": [
+    {
+      "chain": "moreAction",
+      "parameters": {
+        "actionId": "{{$event.detail.actionId}}"
+      }
+    }
+  ]
+},
+"approveOKAction": {
+  "chains": [{ "chain": "ApproveOKDialogAction" }]
+},
+"approveCancelAction": {
+  "chains": [{ "chain": "ApproveCancelDialog" }]
+},
+"rejectOKAction": {
+  "chains": [{ "chain": "RejectSubmitAction" }]
+},
+"rejectCancelAction": {
+  "chains": [{ "chain": "RejectCancelButton" }]
+},
+"withdrawOKAction": {
+  "chains": [{ "chain": "WithdrawOk" }]
+},
+"withdrawCancelAction": {
+  "chains": [{ "chain": "WithdrawCancelButton" }]
+},
+"reassignOKAction": {
+  "chains": [{ "chain": "ReassignOK" }]
+},
+"reassignCancelAction": {
+  "chains": [{ "chain": "ReassignCancelButton" }]
+},
+"requireMoreInfoOKAction": {
+  "chains": [{ "chain": "RequireMoreInfoOkAction" }]
+},
+"requireMoreInfoCancelAction": {
+  "chains": [{ "chain": "RequireMoreInfoCancelAction" }]
+}
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-file-picker": {
+        "path": "ojs/ojfilepicker"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-option": {
+        "path": "ojs/ojoption"
+      },
+      "oj-radioset": {
+        "path": "ojs/ojradioset"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "oj-sp/simple-create-edit/loader"
+      },
+      "oj-switcher": {
+        "path": "ojs/ojswitcher"
+      },
+      "oj-tab-bar": {
+        "path": "ojs/ojnavigationlist"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-progress-bar-circular": {
+        "path": "ojs/ojprogressbar"
+      }
+
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  },
+  "constants": {
+    "attachmentPopupColumns": {
+      "defaultValue": [
+        {
+          "headerText": "Action",
+          "template": "action",
+          "frozenEdge": "start",
+          "sortable": "disabled",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": 180
+
+        },
+        {
+          "headerText": "Document Name",
+          "field": "document_name",
+          "frozenEdge": "start",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": 270
+
+        },
+        {
+          "headerText": "Document Type",
+          "field": "document_type",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": 100
+        },
+        {
+          "headerText": "Description",
+          "field": "description",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": 240
+        },
+        {
+          "headerText": "File Name",
+          "field": "document_name",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": 200
+        },
+        {
+          "headerText": "Created By",
+          "field": "created_by",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": 160
+        },
+        {
+          "headerText": "Created Date",
+          "field": "created_date",
+          "template": "ColCreatedDate",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": ""
+        }
+      ],
+      "type": "object[]"
+    },
+    "estCostColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "width": 80,
+          "template": "estcost_actions_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Planned Cost Component",
+          "field": "est_capax_cost",
+          "sortable": "enabled",
+          "resizable": "enabled",
+          "width": "",
+          "template": "estcost_capex_template",
+          "headerStyle": "white-space: normal;",
+          "className": "oj-helper-text-align-right",
+          "style": ""
+        },
+        {
+          "headerText": "Planned Cost (RO)",
+          "field": "est_opex_cost",
+          "sortable": "enabled",
+          "resizable": "enabled",
+          "width": "",
+          "template": "estcost_opex_template",
+          "className": "oj-helper-text-align-right",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }
+      ],
+      "description": "[\n    {\n        \"headerText\": \"Actions\",\n        \"field\": \"\",\n        \"resizable\": \"enabled\",\n        \"width\": 80,\n        \"template\": \"estcost_actions_template\",\n        \"headerStyle\": \"white-space: normal;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Summary CAPEX Cost\",\n        \"field\": \"est_capax_cost\",\n        \"sortable\": \"enabled\",\n        \"resizable\": \"enabled\",\n        \"width\": 210,\n        \"template\": \"estcost_capex_template\",\n        \"headerStyle\": \"white-space: normal;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"CAPEX Unit\",\n        \"field\": \"capax_unit\",\n        \"sortable\": \"enabled\",\n        \"resizable\": \"enabled\",\n        \"width\": 170,\n        \"template\": \"estcost_capex_unit_template\",\n        \"headerStyle\": \"white-space: normal;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Summary OPEX Cost\",\n        \"field\": \"est_opex_cost\",\n        \"sortable\": \"enabled\",\n        \"resizable\": \"enabled\",\n        \"width\": 210,\n        \"template\": \"estcost_opex_template\",\n        \"headerStyle\": \"white-space: normal;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"OPEX Unit\",\n        \"field\": \"opex_unit\",\n        \"sortable\": \"enabled\",\n        \"resizable\": \"enabled\",\n        \"width\": 150,\n        \"template\": \"estcost_opex_unit_template\",\n        \"headerStyle\": \"white-space: normal;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Additional Info\",\n        \"field\": \"additional_info\",\n        \"sortable\": \"enabled\",\n        \"resizable\": \"enabled\",\n        \"width\": \"\",\n        \"template\": \"estcost_info_template\",\n        \"headerStyle\": \"white-space: normal;\",\n        \"style\": \"\"\n    }\n]"
+    },
+    "majorRisksColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "width": 80,
+          "template": "risk_actions_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Major Risk Title",
+          "field": "major_risk_title",
+          "sortable": "enabled",
+          "resizable": "enabled",
+          "width": 200,
+          "template": "risk_title_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Description",
+          "field": "description",
+          "sortable": "enabled",
+          "resizable": "enabled",
+          "width": 250,
+          "template": "risk_description_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Impact",
+          "field": "impact",
+          "sortable": "enabled",
+          "resizable": "enabled",
+          "width": 150,
+          "template": "risk_impact_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Mitigation",
+          "field": "mitigation",
+          "sortable": "enabled",
+          "resizable": "enabled",
+          "width": "",
+          "template": "risk_mitigation_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }
+      ]
+    },
+    "apprProcess": {
+      "type": "string",
+      "defaultValue": "PMIS_PROJECT_CHARTER_ET"
+    },
+    "mandatoryRefDocColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Ref No.",
+          "field": "lookup_value_code",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": 140
+        },
+        {
+          "headerText": "Document Title",
+          "field": "lookup_value_name",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": ""
+        },
+        {
+          "headerText": "Actions",
+          "field": "",
+          "template": "Actions",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": 80
+
+        },
+        {
+          "headerText": "Uploaded",
+          "field": "attachment_count",
+          "template": "mandatoryRefDocUploadStatus",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;text-align:center;",
+          "style": "text-align:center;",
+          "resizable": "enabled",
+          "width": 100
+        },
+        {
+          "headerText": "Rev.",
+          "field": "rev",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": 80
+        },
+        {
+          "headerText": "Remarks",
+          "field": "",
+          "template": "remarks",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": 100
+        }
+      ]
+    },
+    "stored_Appl_Code": {
+      "type": "string",
+      "defaultValue": "PROJECT_CHARTER"
+    },
+    "toolPending": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Approve",
+          "id": "approve",
+          "icon": "oj-ux-ico-check-circle"
+        },
+        {
+          "label": "Reject",
+          "id": "reject",
+          "icon": "oj-ux-ico-close-circle"
+        },
+        {
+          "id": "reassign",
+          "label": "Reassign",
+          "icon": "oj-ux-ico-assign-to-me"
+        },
+        {
+          "label": "Approver More Info",
+          "id": "apprMoreInfo",
+          "icon": "oj-ux-ico-app-info"
+        },
+        {
+          "id": "requireMoreInfo",
+          "label": "Employee More Information",
+          "icon": "oj-ux-ico-request-information"
+        },
+        {
+          "label": "Generate Report",
+          "id": "generateReport",
+          "icon": "oj-ux-ico-report"
+        },
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+        {
+          "label": "Attachment",
+          "id": "attachment",
+          "icon": "oj-ux-ico-attachment"
+        },
+        {
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ],
+      "uniqueItems": true
+    },
+    "toolDraft": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Save",
+          "id": "save",
+          "icon": "oj-ux-ico-save"
+        },
+        {
+          "label": "Submit",
+          "id": "submit",
+          "icon": "oj-ux-ico-success"
+        },
+        {
+          "label": "Save & Close",
+          "id": "saveClose",
+          "icon": "oj-ux-ico-save-and-close"
+        },
+        {
+          "label": "Generate Report",
+          "id": "generateReport",
+          "icon": "oj-ux-ico-report"
+        },
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+        {
+          "label": "Attachment",
+          "id": "attachment",
+          "icon": "oj-ux-ico-attachment"
+        },
+        {
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ],
+      "uniqueItems": true
+    },
+    "toolError": {
+      "defaultValue": [
+        {
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        },
+        {
+          "label": "Generate Report",
+          "id": "generateReport",
+          "icon": "oj-ux-ico-report"
+        },
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        }
+      ],
+      "uniqueItems": true,
+      "type": "object[]"
+    },
+    "toolFinal": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Generate Report",
+          "id": "generateReport",
+          "icon": "oj-ux-ico-report"
+        },
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+        {
+          "label": "Attachment",
+          "id": "attachment",
+          "icon": "oj-ux-ico-attachment"
+        },
+        {
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ],
+      "uniqueItems": true,
+      "description": "{\n        \"label\": \"Export\",\n        \"id\": \"export\",\n        \"icon\": \"oj-ux-ico-acl-export\"\n    },"
+    },
+    "toolRPA": {
+      "defaultValue": [
+        {
+          "label": "Approver Response",
+          "id": "apprResponseMoreInfo",
+          "icon": "oj-ux-ico-app-info"
+        },
+        {
+          "label": "Generate Report",
+          "id": "generateReport",
+          "icon": "oj-ux-ico-report"
+        },
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+        {
+          "label": "Attachment",
+          "id": "attachment",
+          "icon": "oj-ux-ico-attachment"
+        },
+        {
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ],
+      "type": "object[]",
+      "uniqueItems": true
+    },
+    "toolWithDraw": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "id": "withdraw",
+          "label": "Withdraw",
+          "icon": "oj-ux-ico-withdraw-request"
+        },
+        {
+          "label": "Generate Report",
+          "id": "generateReport",
+          "icon": "oj-ux-ico-report"
+        },
+        {
+          "label": "Approval History",
+          "id": "approvalHistory",
+          "icon": "oj-ux-ico-clock-history"
+        },
+        {
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ],
+      "uniqueItems": true,
+      "description": "{\n        \"label\": \"Export\",\n        \"id\": \"export\",\n        \"icon\": \"oj-ux-ico-acl-export\"\n    },"
+    },
+    "milestoneColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "width": 80,
+          "template": "milestone_actions_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Milestone",
+          "field": "milestone",
+          "resizable": "enabled",
+          "width": "",
+          "template": "milestone_name_template",
+          "headerStyle": "white-space: normal;"
+        },
+        {
+          "headerText": "Target Date",
+          "field": "by_target_date",
+          "resizable": "enabled",
+          "width": 200,
+          "template": "milestone_date_template",
+          "headerStyle": "white-space: normal;"
+        }
+      ]
+    },
+    "dependencyColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "width": 80,
+          "template": "dependency_actions_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Project Dependencies",
+          "field": "project_dependencies",
+          "resizable": "enabled",
+          "width": 220,
+          "template": "dependency_project_dependencies_template",
+          "headerStyle": "white-space: normal;"
+        },
+        {
+          "headerText": "Dependency Details",
+          "field": "dependency_details",
+          "resizable": "enabled",
+          "width": 220,
+          "template": "dependency_details_template",
+          "headerStyle": "white-space: normal;"
+        },
+        {
+          "headerText": "Impacts & Consequences",
+          "field": "impacts_consequences",
+          "resizable": "enabled",
+          "width": 220,
+          "template": "dependency_impacts_template",
+          "headerStyle": "white-space: normal;"
+        },
+        {
+          "headerText": "Additional Info",
+          "field": "additional_info",
+          "resizable": "enabled",
+          "width": "",
+          "template": "dependency_info_template",
+          "headerStyle": "white-space: normal;"
+        }
+      ]
+    },
+    "SIZE_LIMIT": {
+      "type": "string",
+      "defaultValue": "2MB"
+    },
+    "toolFourthLevel": {
+      "defaultValue": [
+        {
+          "label": "Initiate PC",
+          "id": "initiateAnotherPC",
+          "icon": "oj-ux-ico-new-version"
+        },
+        {
+          "label": "Close",
+          "id": "closeRequest",
+          "icon": "oj-ux-ico-close-circle"
+        }
+      ],
+      "uniqueItems": true,
+      "type": "object[]"
+    }
+
+  }
+}

@@ -1,0 +1,75 @@
+{
+    "items": [
+        {
+            "project_charter_id": 10216,
+            "object_version_num": 1,
+            "project_id": 4337,
+            "project_charter_name": "DN in Mawalleh 11 Part 1",
+            "project_category": "Capex Large",
+            "project_description": "Test",
+            "parent_project_charter_id": null,
+            "ref_num": "PC-1",
+            "parent_ref_num": null,
+            "region_id": "6180",
+            "region_code": "DHA",
+            "region_name": "Adh Dhahirah",
+            "related_sons": null,
+            "project_number": "22415074",
+            "principle_purpose": "1",
+            "other_purpose": "1",
+            "justification": "1",
+            "main_feature": "1",
+            "oper_philosophy": "1",
+            "capex_requirement": "1",
+            "location_pl": "1",
+            "service_req_obj": "1",
+            "overview_project": "1",
+            "project_owner": "1",
+            "execution_director": "1",
+            "design": null,
+            "construction": null,
+            "testing_commissioning": null,
+            "design_date": "2026-04-01T00:00:00Z",
+            "construction_date": "2026-04-02T00:00:00Z",
+            "testing_commissioning_date": "2026-04-03T00:00:00Z",
+            "tender_award": "2026-04-04T00:00:00Z",
+            "estimated_capex_cost": null,
+            "estimated_opex_cost": null,
+            "procurement_assumption": "123",
+            "operating_principle": "123",
+            "project_scope": null,
+            "project_objective": null,
+            "success_criteria": null,
+            "manager_status": null,
+            "wf_item_type": null,
+            "wf_item_key": null,
+            "status_id": 26,
+            "status_code": "DRA",
+            "status_name": "Draft",
+            "additional_info": null,
+            "created_by": "dinesh.kumar@owwsc.nama.om",
+            "created_date": "2026-04-01T09:01:11Z",
+            "last_updated_by": "dinesh.kumar@owwsc.nama.om",
+            "last_updated_date": "2026-04-01T09:02:40Z",
+            "last_updated_login": "dinesh.kumar@owwsc.nama.om"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/projectcharter/hdr/getbyid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/projectcharter/hdr/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/projectcharter/hdr/getbyid"
+        }
+    ]
+}

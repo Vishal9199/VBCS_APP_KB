@@ -1,0 +1,197 @@
+{
+  "title": "Projectlist Management",
+  "description": "Add/Edit Projectlist Details",
+  "imports": {
+    "components": {
+      "oj-button": { "path": "ojs/ojbutton" },
+      "oj-form-layout": { "path": "ojs/ojformlayout" },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": { "path": "ojs/ojinputtext" },
+      "oj-input-number": { "path": "ojs/ojinputnumber" },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": { "path": "ojs/ojinputtext" },
+      "oj-select-single": { "path": "ojs/ojselectsingle" },
+      "oj-option": { "path": "ojs/ojoption" },
+      "oj-sp-advanced-create-edit": { "path": "oj-sp/advanced-create-edit/loader" },
+      "oj-validation-group": { "path": "ojs/ojvalidationgroup" },
+      "oj-dialog": { "path": "ojs/ojdialog" },
+      "oj-progress-bar": { "path": "ojs/ojprogress-bar" }
+
+    },
+    "css": ["/resources/css/pmis-addedit.css"]
+  },
+  "types": {
+    "@decorators.getPmispamFiveyearplandtlLovProjectname": {
+      "endpoint": "getPmispamFiveyearplandtlLovProjectname",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispddProjectlistLovProject": {
+      "endpoint": "getPmispddProjectlistLovProject",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getProjectlistDetail": {
+      "endpoint": "getPmispddProjectlistGetbyid",
+      "service": "PDD",
+      "path": "response"
+    },
+    "getPmispamFiveyearplandtlLovProjectname": {
+      "items": [
+        {
+          "project_id": "number",
+          "project_name": "string"
+        }
+      ]
+    },
+    "getPmispddProjectlistLovProject": {
+      "items": [
+        {
+          "ora_project_id": "number",
+          "project_name": "string",
+          "project_number": "string",
+          "tender_id": "number"
+        }
+      ]
+    },
+    "ProjectlistHeader": {
+      "pdd_project_id": "number",
+      "object_version_num": "number",
+      "project_id": "number",
+      "ora_project_id": "number",
+      "tender_id": "number",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "AboutInfo": {
+      "created_by": "string",
+      "creation_date": "string",
+      "last_updated_by": "string",
+      "last_update_date": "string",
+      "last_update_login": "string"
+    },
+    "OraProjectLovType": {
+      "ora_project_id": "number",
+      "project_name": "string",
+      "project_number": "string"
+    }
+
+  },
+  "variables": {
+    "displayDtlVar": {
+      "type": {
+
+        "tenderName": "string",
+        "tenderNumber": "string"
+      },
+      "input": "fromCaller"
+    },
+    "pNavCode": {
+      "type": "string",
+      "defaultValue": "CREATE",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "pNavId": {
+      "type": "string",
+      "defaultValue": "0",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "projectlistHeaderVar": { "type": "ProjectlistHeader",
+       "defaultValue": {
+        "created_by": "[[ $application.user.email ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_by": "[[ $application.user.email ]]",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "object_version_num": 0
+      }
+   },
+    "about": { "type": "AboutInfo" },
+    "formValidVar": { "type": "string" },
+    "aToolGeneric": {
+      "type": "object[]",
+      "defaultValue": [
+        { "label": "Save", "id": "save",
+           "icon": "oj-ux-ico-save"
+     }
+      ]
+    },
+    "oraProjectLovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getPmispddProjectlistLovProject",
+        "itemsPath": "items",
+        "keyAttributes": "ora_project_id",
+        "fetchChain": "getPmispddProjectlistLovProjectFetch"
+      }
+    },
+    "projectLovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "responseType": "getPmispamFiveyearplandtlLovProjectname",
+        "itemsPath": "items",
+        "keyAttributes": "project_id",
+        "fetchChain": "getPmispamFiveyearplandtlLovProjectnameFetch"
+      }
+    }
+
+  },
+  "metadata": {},
+  "chains": {},
+  "eventListeners": {
+    "onPrimaryAction": {
+      "chains": [{ "chain": "closePageAction" }]
+    },
+    "onSecondaryAction": {
+      "chains": [
+        {
+          "chain": "secondaryActionListener",
+          "parameters": {
+            "actionId": "{{$event.detail.secondaryItem}}",
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "oraProjectIdFieldValueItem": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": { "event": "{{ $event }}" },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    },
+    "aboutOkAction": {
+      "chains": [{ "chain": "closeAboutDialog" }]
+    }
+
+  }
+}

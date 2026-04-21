@@ -1,0 +1,35 @@
+{
+    "OUT_COUNT": 1,
+    "OUT_DESCRIPTION": "Records retrieved successfully",
+    "OUT_HAS_NEXT": "N",
+    "OUT_STATUS": "SUCCESS",
+    "OUT_TOTAL_COUNT": 1,
+    "P_OUTPUT": [
+        {
+            "proj_schd_id": 1,
+            "object_version_num": 1,
+            "ora_project_id": 300000090427447,
+            "ora_project_number": "RG5Z1-CA",
+            "ora_project_name": "RG5Z1-CA",
+            "tender_id": 17002,
+            "tender_number": "NW-RFQ-17002-2026",
+            "tender_name": "Test Tender Name 001",
+            "milestone_id": 11,
+            "milestone_code": null,
+            "project_milestone": null,
+            "planned_start_date": "2026-02-14T21:45:23Z",
+            "planned_end_date": "2026-02-15T21:45:26Z",
+            "revised_start_date": "2026-02-23T21:45:33Z",
+            "revised_end_date": "2026-02-28T21:45:41Z",
+            "actual_start_date": "2026-02-25T21:45:46Z",
+            "actual_end_date": "2026-02-27T21:45:50Z",
+            "comments": "Test Comment",
+            "additional_info": "Test Additional Information",
+            "created_by": "Vishal",
+            "created_date": "2026-02-14T21:46:23.945Z",
+            "last_updated_by": "Vishal",
+            "last_updated_date": "2026-02-14T21:46:32.637Z",
+            "last_updated_login": "Vishal"
+        }
+    ]
+}

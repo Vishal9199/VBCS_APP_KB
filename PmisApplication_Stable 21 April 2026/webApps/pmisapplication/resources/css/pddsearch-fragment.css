@@ -1,0 +1,349 @@
+/**
+ * Navigation Fragment Theme with User Specified Color: #084c4c
+ * Hierarchical navigation drawer with expandable menu items
+ */
+
+/* ========================================================================================================== */
+/* Root Variables - Start */
+/* ========================================================================================================== */
+
+:root {
+  --nav-primary-color: #084c4c;
+  --nav-primary-hover: #063938;
+  --nav-primary-light: #0a6060;
+}
+
+/* Root Variables - End */
+
+
+/* ========================================================================================================== */
+/* Fragment Container - Start */
+/* ========================================================================================================== */
+
+.nav-fragment-container {
+  position: relative;
+  display: inline-block;
+}
+
+.menu-button-wrapper {
+  display: inline-block;
+}
+
+/* Fragment Container - End */
+
+
+/* ========================================================================================================== */
+/* Menu Toggle Button - Start */
+/* ========================================================================================================== */
+
+.menu-toggle-button {
+  background-color: var(--nav-primary-color) !important;
+  border-color: var(--nav-primary-color) !important;
+  border-radius: 4px;
+  /* padding: 0.15rem; */
+  transition: all 0.3s ease;
+}
+
+.menu-toggle-button:hover {
+  background-color: var(--nav-primary-hover) !important;
+  transform: scale(1.05);
+}
+
+.menu-toggle-button .oj-ux-ico-menu:before {
+  color: white !important;
+  font-size: 1.5rem;
+}
+
+/* Menu Toggle Button - End */
+
+
+/* ========================================================================================================== */
+/* Drawer Container - Start */
+/* ========================================================================================================== */
+
+.navigation-drawer {
+  width: 300px;
+  max-width: 80vw;
+  height: 100vh;
+  background-color: #ffffff;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Drawer Container - End */
+
+
+/* ========================================================================================================== */
+/* Drawer Header - Start */
+/* ========================================================================================================== */
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.1rem;
+  background-color: var(--nav-primary-color);
+  color: white;
+  border-bottom: 2px solid var(--nav-primary-hover);
+}
+
+.drawer-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: white;
+}
+
+.drawer-close-button {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0.25rem;
+  transition: transform 0.2s ease;
+}
+
+.drawer-close-button:hover {
+  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.drawer-close-button .oj-ux-ico-close:before {
+  color: white !important;
+  font-size: 1.25rem;
+}
+
+/* Drawer Header - End */
+
+
+/* ========================================================================================================== */
+/* Drawer Content - Start */
+/* ========================================================================================================== */
+
+.drawer-content {
+  padding: 0;
+  overflow-y: auto;
+  height: calc(100vh - 70px);
+}
+
+/* Drawer Content - End */
+
+
+/* ========================================================================================================== */
+/* Navigation List Structure - Start */
+/* ========================================================================================================== */
+
+.navigation-list {
+  width: 100%;
+}
+
+.navigation-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navigation-list > ul > li {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Navigation List Structure - End */
+
+
+/* ========================================================================================================== */
+/* Navigation Item Links - Start */
+/* ========================================================================================================== */
+
+.nav-item-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.875rem 1rem;
+  color: #333;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.nav-item-link:hover {
+  /* background-color: rgba(8, 76, 76, 0.08); */
+  color: var(--nav-primary-color);
+  padding-left: 1.25rem;
+}
+
+.nav-item-text {
+  flex: 1;
+  font-weight: 500;
+}
+
+/* Navigation Item Links - End */
+
+
+/* ========================================================================================================== */
+/* Parent Navigation Items - Start */
+/* ========================================================================================================== */
+
+.nav-item-parent {
+  position: relative;
+}
+
+.parent-link {
+  font-weight: 600;
+  color: var(--nav-primary-color);
+}
+
+.parent-link .nav-expand-icon {
+  color: var(--nav-primary-color);
+  transition: transform 0.3s ease;
+}
+
+.nav-item-parent.expanded .parent-link .nav-expand-icon {
+  transform: rotate(180deg) !important;
+}
+
+/* Parent Navigation Items - End */
+
+
+/* ========================================================================================================== */
+/* Child Navigation Items - Start */
+/* ========================================================================================================== */
+
+.nav-children {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: #f8f9fa;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.nav-item-parent.expanded .nav-children {
+  max-height: 500px;
+}
+
+.nav-item-child {
+  border-bottom: 1px solid #e9ecef;
+}
+
+.nav-item-child:last-child {
+  border-bottom: none;
+}
+
+.child-link {
+  padding-left: 2.5rem !important;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.child-link:hover {
+  background-color: rgba(8, 76, 76, 0.05);
+  color: var(--nav-primary-color);
+  padding-left: 2.75rem !important;
+}
+
+.child-link .nav-item-text {
+  font-weight: 400;
+}
+
+/* Child Navigation Items - End */
+
+
+/* ========================================================================================================== */
+/* Active/Selected Navigation Item - Start */
+/* ========================================================================================================== */
+
+.oj-navigationlist-item-element.oj-selected .nav-item-link {
+  background-color: var(--nav-primary-color) !important;
+  color: white !important;
+  border-left: 4px solid var(--nav-primary-hover);
+  font-weight: 600;
+}
+
+.oj-navigationlist-item-element.oj-selected .nav-item-link .nav-item-text {
+  color: white !important;
+}
+
+/* Active/Selected Navigation Item - End */
+
+
+/* ========================================================================================================== */
+/* Navigation Icons - Start */
+/* ========================================================================================================== */
+
+.nav-expand-icon:before {
+  font-size: 1rem;
+}
+
+/* Navigation Icons - End */
+
+
+/* ========================================================================================================== */
+/* Scrollbar Styling - Start */
+/* ========================================================================================================== */
+
+.drawer-content::-webkit-scrollbar {
+  /* width: 8px; */
+  width: 0px;
+}
+
+.drawer-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.drawer-content::-webkit-scrollbar-thumb {
+  background: var(--nav-primary-color);
+  border-radius: 4px;
+}
+
+.drawer-content::-webkit-scrollbar-thumb:hover {
+  background: var(--nav-primary-hover);
+}
+
+/* Scrollbar Styling - End */
+
+
+/* ========================================================================================================== */
+/* Responsive Design - Mobile - Start */
+/* ========================================================================================================== */
+
+@media (max-width: 768px) {
+  .navigation-drawer {
+    width: 280px;
+  }
+  
+  .drawer-title {
+    font-size: 1.1rem;
+  }
+  
+  .nav-item-link {
+    font-size: 0.9rem;
+    padding: 0.75rem 0.875rem;
+  }
+  
+  .child-link {
+    padding-left: 2rem !important;
+  }
+}
+
+/* Responsive Design - Mobile - End */
+
+
+/* ========================================================================================================== */
+/* Animation Classes - Start */
+/* ========================================================================================================== */
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.navigation-drawer.oj-drawer-popup-open {
+  animation: slideIn 0.3s ease;
+}
+
+/* Animation Classes - End */

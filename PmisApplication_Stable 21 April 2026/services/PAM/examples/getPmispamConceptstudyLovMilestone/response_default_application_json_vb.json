@@ -1,0 +1,67 @@
+{
+    "items": [
+        {
+            "lookup_value_id": 6337,
+            "lookup_value_code": "TECHNICAL_AND_MAIN_PBA",
+            "lookup_value_name": "Technical And Main Pba"
+        },
+        {
+            "lookup_value_id": 6332,
+            "lookup_value_code": "SON",
+            "lookup_value_name": "Statement Of Need"
+        },
+        {
+            "lookup_value_id": 6333,
+            "lookup_value_code": "SERVICE_SPEC",
+            "lookup_value_name": "Service Specification"
+        },
+        {
+            "lookup_value_id": 6334,
+            "lookup_value_code": "CONSULTANT_PROPOSAL",
+            "lookup_value_name": "Consultant Proposal"
+        },
+        {
+            "lookup_value_id": 6335,
+            "lookup_value_code": "COMMENCEMENT_OF_CONCEPT",
+            "lookup_value_name": "Commencement Of Concept"
+        },
+        {
+            "lookup_value_id": 6336,
+            "lookup_value_code": "CONCEPT_STUDY",
+            "lookup_value_name": "Concept Study"
+        },
+        {
+            "lookup_value_id": 6338,
+            "lookup_value_code": "PROJECT_CHARTER",
+            "lookup_value_name": "Project Charter"
+        },
+        {
+            "lookup_value_id": 6339,
+            "lookup_value_code": "PROJECT_AND_BUDGET_OPC",
+            "lookup_value_name": "Project And Budget Opc"
+        },
+        {
+            "lookup_value_id": 6340,
+            "lookup_value_code": "PROJECT_COMPLETED",
+            "lookup_value_name": "Project Completed"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 9,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/conceptstudy/lov/milestone"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/conceptstudy/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/conceptstudy/lov/milestone"
+        }
+    ]
+}

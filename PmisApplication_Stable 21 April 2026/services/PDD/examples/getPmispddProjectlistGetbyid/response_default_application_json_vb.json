@@ -1,0 +1,35 @@
+{
+    "items": [
+        {
+            "pdd_project_id": 1,
+            "object_version_num": 1,
+            "project_id": 1944,
+            "ora_project_id": 300000090427447,
+            "tender_id": 17001,
+            "additional_info": "Test Info",
+            "created_by": "Vishal",
+            "created_date": "2026-03-03T11:26:09.18Z",
+            "last_updated_by": "Vishal",
+            "last_updated_date": "2026-03-03T11:26:18.513Z",
+            "last_updated_login": "Vishal"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/projectlist/getbyid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/projectlist/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/projectlist/getbyid"
+        }
+    ]
+}

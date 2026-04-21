@@ -1,0 +1,62 @@
+{
+    "items": [
+        {
+            "project_id": 818,
+            "object_version_num": 1,
+            "mp_ref_id": 1001,
+            "mp_ref_num": "MP-2026-1001",
+            "mp_ref_plan_name": "Master Plan – Phase 1",
+            "project_type_id": 10,
+            "project_type_code": null,
+            "project_type": null,
+            "project_category_id": 20,
+            "project_category_code": null,
+            "project_category": null,
+            "project_name": "Urban Infrastructure Upgrade",
+            "project_long_name": "Urban Infrastructure Upgrade – Roads, Drainage, Utilities",
+            "region_id": 3,
+            "region_code": null,
+            "region_name": null,
+            "project_location_id": 45,
+            "project_location_code": "FOR_YOUR_INFO",
+            "project_location": "For Your Information",
+            "category_id": 7,
+            "category_code": null,
+            "category": null,
+            "description": "Master plan for phased urban infrastructure development",
+            "five_year_prj_flag": "Y",
+            "latest_est_budget_val": 250000000,
+            "scp_approved_budget_val": 200000000,
+            "active_flag": "Y",
+            "inactive_date": null,
+            "budget_year_id": 2025,
+            "cal_hdr_id": null,
+            "calendar_name": null,
+            "comments": "Initial master plan creation",
+            "additional_info": "Prepared as per planning committee approval",
+            "created_by": "VBCS_USER",
+            "created_date": "2026-01-27T11:25:20Z",
+            "last_updated_by": "VBCS_USER",
+            "last_updated_date": "2026-01-27T11:25:20Z",
+            "last_updated_login": "VBCS_USER"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/masterplan/header/getbyid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/masterplan/header/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/masterplan/header/getbyid"
+        }
+    ]
+}

@@ -1,0 +1,57 @@
+{
+    "items": [
+        {
+            "contact_id": 2667,
+            "object_version_num": 1,
+            "ora_project_id": 5001,
+            "ora_project_number": null,
+            "ora_project_name": null,
+            "tender_id": 2001,
+            "tender_number": null,
+            "tender_name": null,
+            "supplier_id": 3001,
+            "supplier_name": null,
+            "post_office_box": "P.O. Box 12345",
+            "postal_code": "560001",
+            "contact_person_1": "Rajesh Kumar",
+            "position_1": "Project Manager",
+            "email_1": "rajesh.kumar@supplier.com",
+            "mobile_cp1": "+91-9876543210",
+            "telephone_1": "+91-80-12345678",
+            "fax_1": "+91-80-12345679",
+            "contact_person_2": "Priya Sharma",
+            "position_2": "Technical Lead",
+            "email_2": "priya.sharma@supplier.com",
+            "mobile_cp2": "+91-9876543211",
+            "telephone_2": "+91-80-12345680",
+            "fax_2": "+91-80-12345681",
+            "telephone": "+91-80-12345682",
+            "fax": "+91-80-12345683",
+            "email": "info@supplier.com",
+            "additional_info": null,
+            "created_by": "ADMIN_USER",
+            "created_date": "2026-02-15T12:09:59.107476Z",
+            "last_updated_by": "ADMIN_USER",
+            "last_updated_date": "2026-02-15T12:09:59.107476Z",
+            "last_updated_login": "ADMIN_USER"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/contact/getbytenderid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/contact/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/contact/getbytenderid"
+        }
+    ]
+}

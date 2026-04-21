@@ -1,0 +1,228 @@
+{
+    "items": [
+        {
+            "parent_ref_num": "PC-1",
+            "parent_project_charter_id": 10269,
+            "parent_project_charter_name": "DN in Mawalleh 11 Part 1"
+        },
+        {
+            "parent_ref_num": "PC-3",
+            "parent_project_charter_id": 10286,
+            "parent_project_charter_name": "DN in Mawalleh 11 Part 1"
+        },
+        {
+            "parent_ref_num": "PC-6",
+            "parent_project_charter_id": 10308,
+            "parent_project_charter_name": null
+        },
+        {
+            "parent_ref_num": "PC-23",
+            "parent_project_charter_id": 10367,
+            "parent_project_charter_name": null
+        },
+        {
+            "parent_ref_num": "PC-26",
+            "parent_project_charter_id": 10371,
+            "parent_project_charter_name": "DN in Mawalleh 11 Part 1"
+        },
+        {
+            "parent_ref_num": "PC-29",
+            "parent_project_charter_id": 10378,
+            "parent_project_charter_name": null
+        },
+        {
+            "parent_ref_num": "PC-31",
+            "parent_project_charter_id": 10380,
+            "parent_project_charter_name": null
+        },
+        {
+            "parent_ref_num": "PC-42",
+            "parent_project_charter_id": 10397,
+            "parent_project_charter_name": "Nakhal Al-Awabi Wadi Al-Maawil"
+        },
+        {
+            "parent_ref_num": "PC-7",
+            "parent_project_charter_id": 10310,
+            "parent_project_charter_name": null
+        },
+        {
+            "parent_ref_num": "PC-9",
+            "parent_project_charter_id": 10320,
+            "parent_project_charter_name": null
+        },
+        {
+            "parent_ref_num": "PC-14",
+            "parent_project_charter_id": 10336,
+            "parent_project_charter_name": "DN in Mawalleh 11 Part 1"
+        },
+        {
+            "parent_ref_num": "PC-27",
+            "parent_project_charter_id": 10376,
+            "parent_project_charter_name": "DN in Mawalleh 11 Part 1"
+        },
+        {
+            "parent_ref_num": "PC-28",
+            "parent_project_charter_id": 10377,
+            "parent_project_charter_name": null
+        },
+        {
+            "parent_ref_num": "PC-35",
+            "parent_project_charter_id": 10384,
+            "parent_project_charter_name": null
+        },
+        {
+            "parent_ref_num": "PC-37",
+            "parent_project_charter_id": 10386,
+            "parent_project_charter_name": null
+        },
+        {
+            "parent_ref_num": "PC-39",
+            "parent_project_charter_id": 10388,
+            "parent_project_charter_name": null
+        },
+        {
+            "parent_ref_num": "PC-2",
+            "parent_project_charter_id": 10285,
+            "parent_project_charter_name": "DN in Mawalleh 11 Part 1"
+        },
+        {
+            "parent_ref_num": "PC-15",
+            "parent_project_charter_id": 10342,
+            "parent_project_charter_name": "DN in Mawalleh 11 Part 1"
+        },
+        {
+            "parent_ref_num": "PC-17",
+            "parent_project_charter_id": 10351,
+            "parent_project_charter_name": "DN in Mawalleh 11 Part 1"
+        },
+        {
+            "parent_ref_num": "PC-18",
+            "parent_project_charter_id": 10355,
+            "parent_project_charter_name": "DN in Mawalleh 11 Part 1"
+        },
+        {
+            "parent_ref_num": "PC-22",
+            "parent_project_charter_id": 10366,
+            "parent_project_charter_name": null
+        },
+        {
+            "parent_ref_num": "PC-25",
+            "parent_project_charter_id": 10370,
+            "parent_project_charter_name": "DN in Mawalleh 11 Part 1"
+        },
+        {
+            "parent_ref_num": "PC-34",
+            "parent_project_charter_id": 10383,
+            "parent_project_charter_name": null
+        },
+        {
+            "parent_ref_num": "PC-38",
+            "parent_project_charter_id": 10387,
+            "parent_project_charter_name": null
+        },
+        {
+            "parent_ref_num": "PC-40",
+            "parent_project_charter_id": 10389,
+            "parent_project_charter_name": null
+        },
+        {
+            "parent_ref_num": "PC-41",
+            "parent_project_charter_id": 10391,
+            "parent_project_charter_name": "General Consultancy Services"
+        },
+        {
+            "parent_ref_num": "PC-43",
+            "parent_project_charter_id": 10402,
+            "parent_project_charter_name": "Nakhal Al-Awabi Wadi Al-Maawil"
+        },
+        {
+            "parent_ref_num": "PC-4",
+            "parent_project_charter_id": 10296,
+            "parent_project_charter_name": "DN in Mawalleh 11 Part 1"
+        },
+        {
+            "parent_ref_num": "PC-13",
+            "parent_project_charter_id": 10334,
+            "parent_project_charter_name": "DN in Mawalleh 11 Part 1"
+        },
+        {
+            "parent_ref_num": "PC-16",
+            "parent_project_charter_id": 10345,
+            "parent_project_charter_name": "Consultancy of DN in Bidbid"
+        },
+        {
+            "parent_ref_num": "PC-19",
+            "parent_project_charter_id": 10362,
+            "parent_project_charter_name": "DN in Mawalleh 11 Part 1"
+        },
+        {
+            "parent_ref_num": "PC-24",
+            "parent_project_charter_id": 10369,
+            "parent_project_charter_name": null
+        },
+        {
+            "parent_ref_num": "PC-32",
+            "parent_project_charter_id": 10381,
+            "parent_project_charter_name": null
+        },
+        {
+            "parent_ref_num": "PC-33",
+            "parent_project_charter_id": 10382,
+            "parent_project_charter_name": null
+        },
+        {
+            "parent_ref_num": "PC-5",
+            "parent_project_charter_id": 10306,
+            "parent_project_charter_name": null
+        },
+        {
+            "parent_ref_num": "PC-10",
+            "parent_project_charter_id": 10325,
+            "parent_project_charter_name": "DN in Mawalleh 11 Part 1"
+        },
+        {
+            "parent_ref_num": "PC-11",
+            "parent_project_charter_id": 10329,
+            "parent_project_charter_name": "DN in Mawalleh 11 Part 1"
+        },
+        {
+            "parent_ref_num": "PC-12",
+            "parent_project_charter_id": 10331,
+            "parent_project_charter_name": "DN in Mawalleh 11 Part 1"
+        },
+        {
+            "parent_ref_num": "PC-20",
+            "parent_project_charter_id": 10364,
+            "parent_project_charter_name": "DN in Mawalleh 11 Part 1"
+        },
+        {
+            "parent_ref_num": "PC-21",
+            "parent_project_charter_id": 10365,
+            "parent_project_charter_name": null
+        },
+        {
+            "parent_ref_num": "PC-30",
+            "parent_project_charter_id": 10379,
+            "parent_project_charter_name": null
+        },
+        {
+            "parent_ref_num": "PC-36",
+            "parent_project_charter_id": 10385,
+            "parent_project_charter_name": null
+        }
+    ],
+    "hasMore": false,
+    "limit": 0,
+    "offset": 0,
+    "count": 42,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/projectcharter/lov/parentprojectcharter?p_project_charter_id=10315"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/projectcharter/lov/item"
+        }
+    ]
+}

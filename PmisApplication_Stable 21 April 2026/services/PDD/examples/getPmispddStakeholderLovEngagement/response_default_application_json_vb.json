@@ -1,0 +1,47 @@
+{
+    "items": [
+        {
+            "lookup_value_id": 6718,
+            "lookup_value_code": "LEADING",
+            "lookup_value_name": "Leading"
+        },
+        {
+            "lookup_value_id": 6720,
+            "lookup_value_code": "RESISTANT",
+            "lookup_value_name": "Resistant"
+        },
+        {
+            "lookup_value_id": 6719,
+            "lookup_value_code": "NEUTRAL",
+            "lookup_value_name": "Neutral"
+        },
+        {
+            "lookup_value_id": 6721,
+            "lookup_value_code": "SUPPORTIVE",
+            "lookup_value_name": "Supportive"
+        },
+        {
+            "lookup_value_id": 6722,
+            "lookup_value_code": "UNAWARE",
+            "lookup_value_name": "Unaware"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 5,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/stakeholder/lov/engagement"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/stakeholder/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/stakeholder/lov/engagement"
+        }
+    ]
+}

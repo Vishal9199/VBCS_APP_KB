@@ -1,0 +1,293 @@
+{
+  "variables": {
+    "about": {
+      "type": "about"
+    },
+    "ADPissue": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "issueType",
+        "keyAttributes": "issue_id"
+      }
+    },
+    "issueBufferDP": {
+      "type": "application:ojs/ojbufferingdataprovider",
+      "constructorParams": [
+        "{{ $variables.ADPissue }}",
+        null
+      ]
+    },
+    "lvCurrentRow": {
+      "type": "object",
+      "defaultValue": {}
+    },
+    "lvRowToEdit": {
+      "type": { "rowKey": "number" }
+    },
+    "lvNextValue": {
+      "type": "number",
+      "defaultValue": -1
+    },
+    "lvDeleteKey": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "lvDeleteRowData": {
+      "type": "object",
+      "defaultValue": {}
+    },
+    "project_id": {
+      "type": "number"
+    },
+    "projectName":   { "type": "string", "defaultValue": "" },
+    "projectNumber": { "type": "string", "defaultValue": "" },
+    "pTenderId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "tender_id": {
+      "type": "number"
+    },
+    "tenderNumber":  { "type": "string", "defaultValue": "" },
+    "ADPscope": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": { "keyAttributes": "value" }
+    },
+    "ADPpriority": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": { "keyAttributes": "value" }
+    },
+    "ADPprogress": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": { "keyAttributes": "value" }
+    }
+
+  },
+
+  "types": {
+    "issueType": {
+      "issue_id":                   "number",
+      "object_version_num":         "number",
+      "ora_project_id":             "number",
+      "tender_id":                  "number",
+      "issue_number":               "number",
+      "date_raised":                "string",
+      "issue_description":          "string",
+      "scope":                      "number",
+      "time":                       "number",
+      "cost":                       "number",
+      "qhse":                       "number",
+      "total_score":                "number",
+      "priority":                   "string",
+      "action":                     "string",
+      "owner":                      "string",
+      "outcome":                    "string",
+      "due_date_for_resolution":    "string",
+      "resolution_progress_update": "string",
+      "progress":                   "number",
+      "status":                     "string",
+      "data_resolved":              "string",
+      "additional_info":            "string",
+      "created_by":                 "string",
+      "created_date":               "string",
+      "last_updated_by":            "string",
+      "last_updated_date":          "string",
+      "last_updated_login":         "string"
+    },
+    "about": {
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    }
+  },
+
+  "constants": {
+    "issueColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        { "headerText": "Actions",                      "field": "",                          
+          "frozenEdge": "start",
+          "template": "issueActionTemplate",        "width": 110, "sortable": "disabled",                            "headerStyle": "white-space: normal;" 
+     },
+        { "headerText": "Issue Number",                     "field": "issue_number",              
+          "template": "issueNumber",
+          "width": 120,  "sortable": "disabled", "resizable": "enabled",                                           "headerStyle": "white-space: normal;", 
+          "headerClassName": "oj-helper-text-align-right",
+          "className": "oj-helper-text-align-right"
+     },
+        { "headerText": "Date Raised",                  "field": "date_raised",               "template": "issueDateRaisedTemplate",    "width": 150, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Issue Description",            "field": "issue_description",         "template": "issueDescTemplate",          "width": 220, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Scope",                        "field": "scope",                     "template": "issueScopeTemplate",         "width": 80,  "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;",
+           "headerClassName": "oj-helper-text-align-right",
+          "className": "oj-helper-text-align-right"
+     },
+        { "headerText": "Time",                         "field": "time",                      "template": "issueTimeTemplate",          "width": 80,  "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;",
+           "headerClassName": "oj-helper-text-align-right",
+          "className": "oj-helper-text-align-right"
+     },
+        { "headerText": "Cost",                         "field": "cost",                      "template": "issueCostTemplate",          "width": 80,  "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;",
+           "headerClassName": "oj-helper-text-align-right",
+          "className": "oj-helper-text-align-right"
+     },
+        { "headerText": "QHSE",                         "field": "qhse",                      "template": "issueQhseTemplate",          "width": 80,  "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;",
+           "headerClassName": "oj-helper-text-align-right",
+          "className": "oj-helper-text-align-right"
+     },
+        { "headerText": "Total Score",                  "field": "total_score",               "template": "issueTotalScoreTemplate",    "width": 110, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;",
+           "headerClassName": "oj-helper-text-align-right",
+          "className": "oj-helper-text-align-right"
+     },
+        { "headerText": "Priority",                     "field": "priority",                  "template": "issuePriorityTemplate",      "width": 130, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Action",                       "field": "action",                    "template": "issueActionFieldTemplate",   "width": 200, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Owner",                        "field": "owner",                     "template": "issueOwnerTemplate",         "width": 150, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Outcome",                      "field": "outcome",                   "template": "issueOutcomeTemplate",       "width": 180, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Due Date for Resolution",      "field": "due_date_for_resolution",   "template": "issueDueDateTemplate",       "width": 180, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Resolution Progress Update",   "field": "resolution_progress_update","template": "issueResProgressTemplate",   "width": 210, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Progress %",                   "field": "progress",                  "template": "issueProgressTemplate",      "width": 120, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Status",                       "field": "status",                    "template": "issueStatusTemplate",        "width": 140, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Date Resolved",                "field": "data_resolved",             "template": "issueDataResolvedTemplate",  "width": 160, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" }
+      ]
+    }
+  },
+
+  "eventListeners": {
+    "aboutButtonCancelACAction": {
+      "chains": [
+        {
+          "chain": "onCloseAbout_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": { "event": "{{ $event }}" },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    },
+    "issueTableBeforeRowEdit": {
+      "chains": [
+        {
+          "chain": "issueBeforeRowEditChain",
+          "parameters": {
+            "rowKey":   "{{ $event.detail.rowContext.status.rowKey }}",
+            "rowIndex": "{{ $event.detail.rowContext.status.rowIndex }}",
+            "rowData":  "{{ $event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data }}"
+          }
+        }
+      ]
+    },
+    "issueTableBeforeRowEditEnd": {
+      "chains": [
+        {
+          "chain": "issueBeforeRowEditEndChain",
+          "parameters": {
+            "cancelEdit": "{{ $event.detail.cancelEdit }}",
+            "rowKey":     "{{ $event.detail.rowContext.status.rowKey }}",
+            "rowIndex":   "{{ $event.detail.rowContext.status.rowIndex }}",
+            "rowData":    "{{ $event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data }}",
+            "updatedRow": "[[ $variables.lvCurrentRow ]]"
+          }
+        }
+      ]
+    },
+    "addIssueBtnAction": {
+      "chains": [{ "chain": "onAddIssue" }]
+    },
+    "saveIssueBtnAction": {
+      "chains": [{ "chain": "onSaveIssue" }]
+    },
+    "issueEditBtnAction": {
+      "chains": [
+        {
+          "chain": "onEditIssue",
+          "parameters": { "key": "{{ $current.key }}" }
+        }
+      ]
+    },
+    "issueDeleteBtnAction": {
+      "chains": [
+        {
+          "chain": "onDeleteIssue",
+          "parameters": {
+            "key":     "{{ $current.key }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "issueConfirmDeleteAction": {
+      "chains": [{ "chain": "onConfirmDeleteIssue" }]
+    },
+    "issueCancelDeleteAction": {
+      "chains": [{ "chain": "onCancelDeleteIssue" }]
+    },
+    "closeIssueBtnAction": {
+      "chains": [{ "chain": "onClosePrimary_AC" }]
+    },
+    "issueSecondaryAction": {
+      "chains": [
+        {
+          "chain": "issueSecondaryActionChain",
+          "parameters": { "actionId": "{{ $event.detail.secondaryItem }}",
+             "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "event": "{{$event}}"
+      }
+        }
+      ]
+    },
+    "vbExit": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbExitListener"
+        }
+      ]
+    }
+
+  },
+
+  "imports": {
+    "components": {
+      "oj-button":                  { "path": "ojs/ojbutton" },
+      "oj-bind-if":                 { "path": "ojs/ojbindif" },
+      "oj-bind-text":               { "path": "ojs/ojbindtext" },
+      "oj-dialog":                  { "path": "ojs/ojdialog" },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date":              { "path": "ojs/ojdatetimepicker" },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-text":              { "path": "ojs/ojinputtext" },
+      "oj-progress-circle":         { "path": "ojs/ojprogress-circle" },
+      "oj-select-single":           { "path": "ojs/ojselectsingle" },
+      "oj-sp-advanced-create-edit": { "path": "oj-sp/advanced-create-edit/loader" },
+      "oj-table":                   { "path": "ojs/ojtable" },
+      "oj-text-area":               { "path": "ojs/ojinputtext" },
+      "oj-toolbar":                 { "path": "ojs/ojtoolbar" }
+
+    },
+    "modules": {
+      "ojConverterNumber": {
+        "path": "ojs/ojconverter-number"
+      },
+      "ojValidationDateTime": { "path": "ojs/ojvalidation-datetime" },
+      "ojValidationNumber": {
+        "path": "ojs/ojvalidation-number"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  }
+}

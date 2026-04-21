@@ -1,0 +1,40 @@
+{
+    "items": [
+        {
+            "calendar_name": "Master Calendar Plan 01",
+            "cal_hdr_id": 1001,
+            "calendar_type_id": 6156,
+            "calendar_type_code": "MASTER_PLAN"
+        },
+        {
+            "calendar_name": "Test Calendar 01",
+            "cal_hdr_id": 1192,
+            "calendar_type_id": 6156,
+            "calendar_type_code": "MASTER_PLAN"
+        },
+        {
+            "calendar_name": "CAL Name 1",
+            "cal_hdr_id": 776,
+            "calendar_type_id": 6156,
+            "calendar_type_code": "MASTER_PLAN"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 3,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmis/lov/calendar/name?P_CALENDAR_TYPE_CODE=MASTER_PLAN"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmis/lov/calendar/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmis/lov/calendar/name?P_CALENDAR_TYPE_CODE=MASTER_PLAN"
+        }
+    ]
+}

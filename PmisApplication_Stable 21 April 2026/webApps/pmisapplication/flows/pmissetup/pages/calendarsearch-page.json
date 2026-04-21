@@ -1,0 +1,432 @@
+{
+  "title": "PMIS Calendar Smart Search",
+  "description": "Smart Search page for PMIS Calendar Administration with filters for Calendar Type, Calendar Name, Date Range, and Status",
+  "variables": {
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+  "pagination": {
+    "type": "object",
+    "defaultValue": {
+      "is_next": false,
+      "is_prev": true
+    }
+  },
+    "passKey": {
+      "type": "string"
+    },
+    "passPayload": {
+      "type": "string"
+    },
+    "totalRecords": {
+    "type": "number",
+    "defaultValue": 0
+  },
+  "currentPage": {
+    "type": "number",
+    "defaultValue": 1
+  },
+  "vShowFragment": {
+    "type": "boolean",
+    "defaultValue": false
+  },
+  "encSearchObj": {
+    "type": "object",
+    "defaultValue": {
+      "payload": ""
+    }
+  },
+    "getCalendarTypeLovListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getPmisLovCalendarType",
+        "itemsPath": "items",
+        "keyAttributes": "lookup_value_code",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        },
+        "fetchChain": "getPmisLovCalendarTypeFetch"
+      }
+    },
+    "getCalendarNameLovListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getPmisLovCalendarName",
+        "itemsPath": "items",
+        "keyAttributes": "calendar_name",
+        "fetchChain": "getPmisLovCalendarNameFetch"
+      }
+    },
+    "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "CalendarTypeFilter": {
+              "label": "Calendar Type",
+              "options": {
+                "optionsData": "[[ $page.variables.getCalendarTypeLovListSDP ]]",
+                "optionsKeys": {
+                  "label": "lookup_value_name",
+                  "value": "lookup_value_id"
+                }
+              }
+            },
+            "CalendarNameFilter": {
+              "label": "Calendar Name",
+              "options": {
+                "optionsData": "[[ $page.variables.getCalendarNameLovListSDP ]]",
+                "optionsKeys": {
+                  "label": "calendar_name",
+                  "value": "calendar_name"
+                }
+              }
+            },
+            "StatusFilter": {
+              "label": "Status"
+            }
+          }
+        }
+      },
+      "description": "{\n    \"$search\": {\n        \"filters\": {\n            \"CalendarTypeFilter\": {\n                \"label\": \"Calendar Type\",\n                \"options\": {\n                    \"optionsData\": \"[[ $page.variables.getCalendarTypeLovListSDP ]]\",\n                    \"optionsKeys\": {\n                        \"label\": \"lookup_value_name\",\n                        \"value\": \"lookup_value_code\"\n                    }\n                }\n            },\n            \"CalendarNameFilter\": {\n                \"label\": \"Calendar Name\",\n                \"options\": {\n                    \"optionsData\": \"[[ $page.variables.getCalendarNameLovListSDP ]]\",\n                    \"optionsKeys\": {\n                        \"label\": \"calendar_name\",\n                        \"value\": \"calendar_name\"\n                    }\n                }\n            },\n            \"DateRangeFilter\": {\n                \"label\": \"Creation Date Range\"\n            },\n            \"StatusFilter\": {\n                \"label\": \"Status\"\n            }\n        }\n    }\n}"
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/calendarsearchconfig.json' ]]"
+      }
+    },
+    "searchObj": {
+      "type": {
+        "in_limit": "string",
+        "in_offset": "string",
+        "p_created_by": "string",
+        "p_calendar_id": "string",
+        "p_calendar_type": "string",
+        "p_calendar_name": "string",
+        "p_enabled_flag": "string",
+        "p_keyword": "string"
+      },
+      "defaultValue": {
+        "in_limit": "10",
+        "in_offset": "0",
+        "p_created_by": "",
+        "p_calendar_id": "",
+        "p_calendar_type": "",
+        "p_calendar_name": "",
+        "p_enabled_flag": "",
+        "p_keyword": ""
+      }
+    },
+    "calendarADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "CalendarHeaderType",
+        "keyAttributes": "cal_hdr_id"
+      }
+    },
+    "p_start_date": {
+      "type": "string"
+    },
+    "p_end_date": {
+      "type": "string"
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.CalendarHeaderType": {
+      "endpoint": "postPmisCalendarSearch",
+      "service": "PmisSetup",
+      "path": "response"
+    },
+    "@decorators.getPmisLovCalendarName": {
+      "endpoint": "getPmisLovCalendarName",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.getPmisLovCalendarType": {
+      "endpoint": "getPmisLovCalendarType",
+      "service": "PmisSetup",
+      "path": "response"
+    },
+    "CalendarHeaderType": {
+      "additional_info": "string",
+      "cal_hdr_id": "number",
+      "calendar_name": "string",
+      "calendar_type": "any",
+      "calendar_type_code": "any",
+      "calendar_type_id": "number",
+      "created_by": "string",
+      "created_date": "string",
+      "description": "string",
+      "enabled_flag": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "object_version_num": "number"
+    },
+    "getPmisLovCalendarName": {
+      "items": [
+        {
+          "calendar_name": "string"
+        }
+      ]
+    },
+    "getPmisLovCalendarType": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    }
+  },
+  "eventListeners": {
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "onEditAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "onDeleteAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "buttonAction3": {
+      "chains": [
+        {
+          "chain": "cancelDeleteAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction4": {
+      "chains": [
+        {
+          "chain": "onOkDeleteAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "createBtnAction": {
+      "chains": [
+        {
+          "chain": "onCreateAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "exportBtnAction": {
+      "chains": [
+        {
+          "chain": "onHdrExportAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "nextBtnAction": {
+      "chains": [
+        {
+          "chain": "nextBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "prevBtnAction": {
+      "chains": [
+        {
+          "chain": "prevBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "onRefreshAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "ButtonActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      }
+    },
+    "modules": {
+      "xlsx": {
+        "path": "https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"
+      },
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-search.css"
+    ]
+  },
+  "constants": {
+    "tableColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Action",
+          "field": "",
+          "resizable": "enabled",
+          "sortable": "disabled",
+          "frozenEdge": "start",
+          "width": 100,
+          "template": "actions",
+          "headerStyle": "white-space: nowrap; min-width: 100px;",
+          "style": ""
+
+        },
+        {
+          "headerText": "Calendar Type",
+          "field": "calendar_type",
+          "resizable": "enabled",
+          "width": 180,
+          "sortable": "enabled",
+          "template": "calendar_type",
+          "headerStyle": "white-space: nowrap; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Calendar Name",
+          "field": "calendar_name",
+          "resizable": "enabled",
+          "width": 180,
+          "sortable": "enabled",
+          "template": "calendar_name",
+          "headerStyle": "white-space: nowrap; min-width: 180px;",
+          "style": ""
+        },
+        {
+          "headerText": "Description",
+          "field": "description",
+          "resizable": "enabled",
+          "width": 350,
+          "template": "description",
+          "headerStyle": "white-space: nowrap; min-width: 250px;",
+          "style": ""
+        },
+        {
+          "headerText": "Enabled Flag",
+          "field": "enabled_flag",
+          "resizable": "enabled",
+          "width": "",
+          "template": "enabled_flag",
+          "headerStyle": "white-space: nowrap; min-width: 140px;",
+          "style": ""
+        }
+      ],
+      "description": "[\n    {\n        \"headerText\": \"Action\",\n        \"field\": \"\",\n        \"resizable\": \"enabled\",\n        \"sortable\": \"disabled\",\n        \"frozenEdge\": \"start\",\n        \"width\": 100,\n        \"template\": \"actions\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 100px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Calendar Type\",\n        \"field\": \"calendar_type\",\n        \"resizable\": \"enabled\",\n        \"width\": 180,\n        \"sortable\": \"enabled\",\n        \"template\": \"calendar_type\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Calendar Name\",\n        \"field\": \"calendar_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 180,\n        \"sortable\": \"enabled\",\n        \"template\": \"calendar_name\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Description\",\n        \"field\": \"description\",\n        \"resizable\": \"enabled\",\n        \"width\": 250,\n        \"template\": \"description\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 250px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Enabled Flag\",\n        \"field\": \"enabled_flag\",\n        \"resizable\": \"enabled\",\n        \"width\": 140,\n        \"template\": \"enabled_flag\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Created By\",\n        \"field\": \"created_by\",\n        \"resizable\": \"enabled\",\n        \"width\": 140,\n        \"template\": \"created_by\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 140px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Creation Date\",\n        \"field\": \"creation_date\",\n        \"resizable\": \"enabled\",\n        \"width\": 150,\n        \"template\": \"date\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 150px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Last Updated By\",\n        \"field\": \"last_updated_by\",\n        \"resizable\": \"enabled\",\n        \"width\": 160,\n        \"template\": \"last_updated_by\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Last Update Date\",\n        \"field\": \"last_update_date\",\n        \"resizable\": \"enabled\",\n        \"width\": \"\",\n        \"template\": \"date\",\n        \"headerStyle\": \"white-space: nowrap;\",\n        \"style\": \"\"\n    }\n]"
+    }
+  }
+}

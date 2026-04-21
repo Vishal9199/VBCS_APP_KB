@@ -1,0 +1,591 @@
+<style>
+  oj-c-button#qualityControlPage_h_cancelAction {
+    display: none;
+  }
+</style>
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div>
+
+        <oj-sp-advanced-create-edit id="qualityControlPage" page-title="Quality Control Details" page-subtitle=" "
+          display-options.responsive-padding="on" primary-action.label="Close"
+          secondary-actions='[{"label":"About","id":"about","display":"off"}]'
+          on-sp-primary-action="[[$listeners.qualityControlPageSpPrimaryAction]]"
+          on-sp-secondary-action="[[$listeners.qualityControlPageSpSecondaryAction]]">
+
+          <div slot="main" style="padding-top: 0; margin-top: 0;">
+            <div style="margin-top: 0;">
+
+              <!-- Project Details Header Section (Readonly) -->
+              <oj-collapsible id="projectDetailsSection" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+                style="margin-top: 0;" disabled="true">
+                <span slot="header" style="font-weight: bold; color: white;">Project Details</span>
+                <div style="padding: 1rem;">
+                  <oj-form-layout max-columns="2" label-edge="start" direction="row" class="oj-formlayout-full-width"
+                    user-assistance-density="compact">
+                    <oj-input-text id="projectNumber" label-hint="Project Number"
+                      value="[[ $page.variables.projectNumber ]]" style="width: 16rem;" disabled="true">
+                    </oj-input-text>
+                    <oj-input-text id="projectName" label-hint="Project Name" value="[[ $page.variables.projectName ]]"
+                      style="width: 16rem;" disabled="true">
+                    </oj-input-text>
+                    <oj-input-text id="tenderNumber" label-hint="Tender Number"
+                      value="[[ $page.variables.tenderNumber ]]" style="width: 16rem;" disabled="true">
+                    </oj-input-text>
+                    <oj-input-text id="period" label-hint="Period" value="[[ $page.variables.period ]]"
+                      style="width: 16rem;" disabled="true">
+                    </oj-input-text>
+                  </oj-form-layout>
+                </div>
+              </oj-collapsible>
+
+              <!-- Quality Control Tabbed Section -->
+              <oj-collapsible id="qualityControlSection" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+                style="margin-top: 1rem;" disabled="true">
+                <span slot="header" style="font-weight: bold; color: white;">Quality Control Details</span>
+                <div style="padding: 1rem;">
+
+                  <!-- Tab Bar -->
+                  <div class="demo-tabbar-container">
+                    <oj-tab-bar id="qualityControlTabBar" edge="top" selection="{{ $page.variables.selectedTab }}"
+                      class="oj-margin-top" on-selection-changed="[[$listeners.qualityControlTabBarSelection]]">
+                      <ul>
+                        <li id="qualityAssurance"><a href="#">Quality Assurance</a></li>
+                        <li id="continualImprovement"><a href="#">Continual Improvement</a></li>
+                        <li id="qualityControl"><a href="#">Quality Control</a></li>
+                        <li id="disciplineWiseInspection"><a href="#">Discipline Wise Inspection</a></li>
+                      </ul>
+                    </oj-tab-bar>
+                  </div>
+
+                  <!-- Tab Content Switcher -->
+                  <div class="demo-switcher-container">
+                    <oj-switcher value="[[ $page.variables.selectedTab ]]">
+
+                      <!-- ====================================================== -->
+                      <!-- TAB 1: Quality Assurance                               -->
+                      <!-- ====================================================== -->
+                      <div slot="qualityAssurance">
+                        <div style="display:flex; justify-content:flex-end; margin-bottom:0.25rem;">
+                          <oj-button id="addQualityAssuranceBtn" chroming="outlined"
+                            on-oj-action="[[$listeners.addQualityAssuranceBtnAction]]"
+                            disabled="[[ $page.variables.qualityAssuranceADP.data.length > 0 ]]">
+                            <span slot="startIcon" class="oj-ux-ico-plus"></span>Add Row
+                          </oj-button>
+                          <oj-button id="saveQualityAssuranceBtn" chroming="outlined"
+                            on-oj-action="[[$listeners.saveQualityAssuranceBtnAction]]" style="margin-left: 0.5rem;">
+                            <span slot="startIcon" class="oj-ux-ico-save" style="color: white;"></span>Save
+                          </oj-button>
+                        </div>
+
+                        <oj-table id="qualityAssuranceTable" data="[[ $page.variables.qaBufferDP.instance ]]"
+                          columns="[[ $page.constants.qualityAssuranceColumns ]]" scroll-policy="loadMoreOnScroll"
+                          horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+                          edit-row="{{ $variables.qaRowToEdit }}"
+                          columns-default.sortable="disabled" columns-default.resizable="enabled"
+                          class="oj-sm-width-full oj-bg-body" display="grid" selection-mode.row="single"
+                          edit-mode="rowEdit" on-oj-before-row-edit="[[$listeners.qaTableBeforeRowEdit]]"
+                          on-oj-before-row-edit-end="[[$listeners.qaTableBeforeRowEditEnd]]">
+
+                          <!-- Actions Column -->
+                          <template slot="qaActionTemplate">
+                            <div class="custom-button-align">
+                              <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                                on-oj-action="[[$listeners.buttonAction4]]">
+                                <span slot="startIcon" class="oj-ux-ico-edit" style="font-size: 18px;"></span>
+                              </oj-button>
+                            </div>
+                          </template>
+
+                          <!-- Activity (readonly) -->
+                          <template slot="activityTemplate">
+                            <!-- <oj-bind-if test="[[ $current.mode === 'navigation' ]]"> -->
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            <!-- </oj-bind-if> -->
+                            <!-- <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-text value="[[ $page.variables.qaCurrentRow.activity_name ]]" readonly="true"
+                                style="width:100%;"></oj-input-text>
+                            </oj-bind-if> -->
+                          </template>
+
+                          <!-- Done For Month (editable) -->
+                          <template slot="activityDoneForMonthTemplate">
+                            <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </oj-bind-if>
+                            <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-text value="{{ $page.variables.qaCurrentRow.activity_done_for_month }}"
+                                placeholder="Enter value" style="width:100%;"
+                                on-value-changed="[[$listeners.inputTextValue]]"></oj-input-text>
+                            </oj-bind-if>
+                          </template>
+
+                          <!-- Total Cumulative (editable) -->
+                          <template slot="activityTotalCummTemplate">
+                            <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </oj-bind-if>
+                            <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-number value="{{ $page.variables.qaCurrentRow.activity_total_cumm }}"
+                                placeholder="Enter value" style="width:100%;" readonly="true" tabindex="-1"></oj-input-number>
+                            </oj-bind-if>
+                          </template>
+
+                          <!-- Remark (editable) -->
+                          <template slot="activityRemarkTemplate">
+                            <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </oj-bind-if>
+                            <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-text value="{{ $page.variables.qaCurrentRow.activity_remark }}"
+                                placeholder="Enter remark" style="width:100%;"></oj-input-text>
+                            </oj-bind-if>
+                          </template>
+
+                        </oj-table>
+                      </div>
+
+                      <!-- ====================================================== -->
+                      <!-- TAB 2: Continual Improvement                           -->
+                      <!-- ====================================================== -->
+                      <div slot="continualImprovement">
+                        <div style="display:flex; justify-content:flex-end; margin-bottom:0.25rem;">
+                          <oj-button id="addContinualImproveBtn" chroming="outlined"
+                            on-oj-action="[[$listeners.addContinualImproveBtnAction]]"
+                            disabled="[[ $page.variables.continualImproveADP.data.length > 0 ]]">
+                            <span slot="startIcon" class="oj-ux-ico-plus"></span>Add Row
+                          </oj-button>
+                          <oj-button id="saveContinualImproveBtn" chroming="outlined"
+                            on-oj-action="[[$listeners.saveContinualImproveBtnAction]]" style="margin-left: 0.5rem;">
+                            <span slot="startIcon" class="oj-ux-ico-save" style="color: white;"></span>Save
+                          </oj-button>
+                        </div>
+
+                        <oj-table id="continualImproveTable" data="[[ $page.variables.ciBufferDP.instance ]]"
+                          columns="[[ $page.constants.continualImproveColumns ]]" scroll-policy="loadMoreOnScroll"
+                          horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+                          edit-row="{{ $variables.ciRowToEdit }}"
+                          columns-default.sortable="disabled" columns-default.resizable="enabled"
+                          class="oj-sm-width-full oj-bg-body" display="grid" selection-mode.row="single"
+                          edit-mode="rowEdit" on-oj-before-row-edit="[[$listeners.ciTableBeforeRowEdit]]"
+                          on-oj-before-row-edit-end="[[$listeners.ciTableBeforeRowEditEnd]]">
+
+                          <!-- Actions Column -->
+                          <template slot="ciActionTemplate">
+                            <div class="custom-button-align">
+                              <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                                on-oj-action="[[$listeners.buttonAction3]]">
+                                <span slot="startIcon" class="oj-ux-ico-edit" style="font-size: 18px;"></span>
+                              </oj-button>
+                            </div>
+                          </template>
+
+                          <!-- Mechanism Type (readonly) -->
+                          <template slot="mechanismTypeTemplate">
+                            <!-- <oj-bind-if test="[[ $current.mode === 'navigation' ]]"> -->
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            <!-- </oj-bind-if> -->
+                            <!-- <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-text value="[[ $page.variables.ciCurrentRow.mechanism_type ]]" readonly="true"
+                                style="width:100%;"></oj-input-text>
+                            </oj-bind-if> -->
+                          </template>
+
+                          <!-- For the Month (editable) -->
+                          <template slot="mechanismForMonthTemplate">
+                            <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </oj-bind-if>
+                            <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-text value="{{ $page.variables.ciCurrentRow.mechanism_for_month }}"
+                                placeholder="Enter value" style="width:100%;"
+                                on-value-changed="[[$listeners.inputTextValue2]]"></oj-input-text>
+                            </oj-bind-if>
+                          </template>
+
+                          <!-- Total Cumulative (readonly) -->
+                          <template slot="mechanismTotalCummTemplate">
+                            <!-- <oj-bind-if test="[[ $current.mode === 'navigation' ]]"> -->
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            <!-- </oj-bind-if> -->
+                            <!-- <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-number value="[[ $page.variables.ciCurrentRow.mechanism_total_cumm ]]"
+                                readonly="true" style="width:100%;"></oj-input-number>
+                            </oj-bind-if> -->
+                          </template>
+
+                          <!-- Pending/Open (editable) -->
+                          <template slot="mechanismPendingOpenTemplate">
+                            <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </oj-bind-if>
+                            <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-text value="{{ $page.variables.ciCurrentRow.mechanism_pending_open }}"
+                                placeholder="Enter value" style="width:100%;"
+                                on-value-changed="[[$listeners.inputTextValue3]]"></oj-input-text>
+                            </oj-bind-if>
+                          </template>
+
+                          <!-- Closed NCR (readonly) -->
+                          <template slot="closedNcrTemplate">
+                            <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                              <oj-bind-text value="[[ $variables.tempNcrValue ]]"></oj-bind-text>
+                            </oj-bind-if>
+                            <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-text value="{{ $variables.tempNcrValue }}" readonly="true" style="width:100%;"
+                                tabindex="-1">
+                              </oj-input-text>
+                            </oj-bind-if>
+                          </template>
+
+                          <!-- Remarks (editable) -->
+                          <template slot="mechanismRemarksTemplate">
+                            <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </oj-bind-if>
+                            <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-text value="{{ $page.variables.ciCurrentRow.mechanism_remarks }}"
+                                placeholder="Enter remarks" style="width:100%;"></oj-input-text>
+                            </oj-bind-if>
+                          </template>
+
+                        </oj-table>
+                      </div>
+
+                      <!-- ====================================================== -->
+                      <!-- TAB 3: Quality Control                                 -->
+                      <!-- ====================================================== -->
+                      <div slot="qualityControl">
+                        <div style="display:flex; justify-content:flex-end; margin-bottom:0.25rem;">
+                          <oj-button id="addQualityControlBtn" chroming="outlined"
+                            on-oj-action="[[$listeners.addQualityControlBtnAction]]"
+                            disabled="[[ $page.variables.qualityControlADP.data.length > 0 ]]">
+                            <span slot="startIcon" class="oj-ux-ico-plus"></span>Add Row
+                          </oj-button>
+                          <oj-button id="saveQualityControlBtn" chroming="outlined"
+                            on-oj-action="[[$listeners.saveQualityControlBtnAction]]" style="margin-left: 0.5rem;">
+                            <span slot="startIcon" class="oj-ux-ico-save" style="color: white;"></span>Save
+                          </oj-button>
+                        </div>
+
+                        <oj-table id="qualityControlTable" data="[[ $page.variables.qcBufferDP.instance ]]"
+                          columns="[[ $page.constants.qualityControlColumns ]]" scroll-policy="loadMoreOnScroll"
+                          horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+                          edit-row="{{ $variables.qcRowToEdit }}"
+                          columns-default.sortable="disabled" columns-default.resizable="enabled"
+                          class="oj-sm-width-full oj-bg-body" display="grid" selection-mode.row="single"
+                          edit-mode="rowEdit" on-oj-before-row-edit="[[$listeners.qcTableBeforeRowEdit]]"
+                          on-oj-before-row-edit-end="[[$listeners.qcTableBeforeRowEditEnd]]">
+
+                          <!-- Actions Column -->
+                          <template slot="qcActionTemplate">
+                            <div class="custom-button-align">
+                              <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                                on-oj-action="[[$listeners.buttonAction2]]">
+                                <span slot="startIcon" class="oj-ux-ico-edit" style="font-size: 18px;"></span>
+                              </oj-button>
+                            </div>
+                          </template>
+
+                          <!-- Type of Tests (readonly) -->
+                          <template slot="qualityControlTemplate">
+                            <!-- <oj-bind-if test="[[ $current.mode === 'navigation' ]]"> -->
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            <!-- </oj-bind-if> -->
+                            <!-- <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-text value="[[ $page.variables.qcCurrentRow.quality_control ]]" readonly="true"
+                                style="width:100%;"></oj-input-text>
+                            </oj-bind-if> -->
+                          </template>
+
+                          <!-- Total for the Month (editable) -->
+                          <template slot="qcTotalMonthTemplate">
+                            <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </oj-bind-if>
+                            <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-text value="{{ $page.variables.qcCurrentRow.qc_total_month }}"
+                                placeholder="Enter value" style="width:100%;"
+                                on-value-changed="[[$listeners.inputTextValue4]]"></oj-input-text>
+                            </oj-bind-if>
+                          </template>
+
+                          <!-- Satisfactory for the Month (editable) -->
+                          <template slot="qcSatisfiedMonthTemplate">
+                            <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </oj-bind-if>
+                            <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-text value="{{ $page.variables.qcCurrentRow.qc_satisfied_month }}"
+                                placeholder="Enter value" style="width:100%;"
+                                on-value-changed="[[$listeners.inputTextValue4]]"></oj-input-text>
+                            </oj-bind-if>
+                          </template>
+
+                          <!-- Failed for the Month (editable) -->
+                          <template slot="qcFailedMonthTemplate">
+                            <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </oj-bind-if>
+                            <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-text value="{{ $page.variables.qcCurrentRow.qc_failed_month }}"
+                                placeholder="Enter value" style="width:100%;"
+                                on-value-changed="[[$listeners.inputTextValue4]]"></oj-input-text>
+                            </oj-bind-if>
+                          </template>
+
+                          <!-- Total Cumulative (editable) -->
+                          <template slot="qcTotalCummTemplate">
+                            <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </oj-bind-if>
+                            <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-text value="{{ $page.variables.qcCurrentRow.qc_total_cumm }}"
+                                placeholder="Enter value" style="width:100%;" readonly="true"></oj-input-text>
+                            </oj-bind-if>
+                          </template>
+
+                          <!-- Satisfied Cumulative (editable) -->
+                          <template slot="qcSatisfiedCummTemplate">
+                            <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </oj-bind-if>
+                            <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-text value="{{ $page.variables.qcCurrentRow.qc_satisfied_cumm }}"
+                                placeholder="Enter value" style="width:100%;" readonly="true"></oj-input-text>
+                            </oj-bind-if>
+                          </template>
+
+                          <!-- Failed Cumulative (readonly) -->
+                          <template slot="qcTotalFailedTemplate">
+                            <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </oj-bind-if>
+                            <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-text value="[[ $page.variables.qcCurrentRow.qc_total_failed ]]"
+                                readonly="true" style="width:100%;"></oj-input-text>
+                            </oj-bind-if>
+                          </template>
+
+                          <!-- % Failure (readonly) -->
+                          <template slot="percentFailureTemplate">
+                            <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </oj-bind-if>
+                            <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-text value="[[ $page.variables.qcCurrentRow.percent_failure ]]"
+                                readonly="true" style="width:100%;"></oj-input-text>
+                            </oj-bind-if>
+                          </template>
+
+                          <!-- Major Reason (editable) -->
+                          <template slot="failedReasonTemplate">
+                            <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </oj-bind-if>
+                            <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-text value="{{ $page.variables.qcCurrentRow.failed_reason }}"
+                                placeholder="Enter reason" style="width:100%;"></oj-input-text>
+                            </oj-bind-if>
+                          </template>
+
+                        </oj-table>
+                      </div>
+
+                      <!-- ====================================================== -->
+                      <!-- TAB 4: Discipline Wise Inspection                      -->
+                      <!-- ====================================================== -->
+                      <div slot="disciplineWiseInspection">
+                        <div style="display:flex; justify-content:flex-end; margin-bottom:0.25rem;">
+                          <oj-button id="addDisciplineBtn" chroming="outlined"
+                            on-oj-action="[[$listeners.addDisciplineBtnAction]]"
+                            disabled="[[ $page.variables.disciplineADP.data.length > 0 ]]">
+                            <span slot="startIcon" class="oj-ux-ico-plus"></span>Add Row
+                          </oj-button>
+                          <oj-button id="saveDisciplineBtn" chroming="outlined"
+                            on-oj-action="[[$listeners.saveDisciplineBtnAction]]" style="margin-left: 0.5rem;">
+                            <span slot="startIcon" class="oj-ux-ico-save" style="color: white;"></span>Save
+                          </oj-button>
+                        </div>
+
+                        <oj-table id="disciplineTable" data="[[ $page.variables.discBufferDP.instance ]]"
+                          columns="[[ $page.constants.disciplineColumns ]]" scroll-policy="loadMoreOnScroll"
+                          horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+                          edit-row="{{ $variables.discRowToEdit }}"
+                          columns-default.sortable="disabled" columns-default.resizable="enabled"
+                          class="oj-sm-width-full oj-bg-body" display="grid" selection-mode.row="single"
+                          edit-mode="rowEdit" on-oj-before-row-edit="[[$listeners.discTableBeforeRowEdit]]"
+                          on-oj-before-row-edit-end="[[$listeners.discTableBeforeRowEditEnd]]">
+
+                          <!-- Actions Column -->
+                          <template slot="discActionTemplate">
+                            <div class="custom-button-align">
+                              <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                                on-oj-action="[[$listeners.buttonAction]]">
+                                <span slot="startIcon" class="oj-ux-ico-edit" style="font-size: 18px;"></span>
+                              </oj-button>
+                            </div>
+                          </template>
+
+                          <!-- Discipline (readonly) -->
+                          <template slot="disciplineTypeTemplate">
+                            <!-- <oj-bind-if test="[[ $current.mode === 'navigation' ]]"> -->
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            <!-- </oj-bind-if> -->
+                            <!-- <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-text value="[[ $page.variables.discCurrentRow.discipline_type ]]"
+                                readonly="true" style="width:100%;"></oj-input-text>
+                            </oj-bind-if> -->
+                          </template>
+
+                          <!-- Total RFI (editable) -->
+                          <template slot="discTotalRfiTemplate">
+                            <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </oj-bind-if>
+                            <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-text value="{{ $page.variables.discCurrentRow.disc_total_rfi }}"
+                                on-value-changed="[[$listeners.onDiscValueChange]]"
+                                placeholder="Enter value" style="width:100%;"></oj-input-text>
+                            </oj-bind-if>
+                          </template>
+
+                          <!-- Approved RFI (editable) -->
+                          <template slot="discApprovedRfiTemplate">
+                            <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </oj-bind-if>
+                            <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-text value="{{ $page.variables.discCurrentRow.disc_approved_rfi }}"
+                                on-value-changed="[[$listeners.onDiscValueChange]]"
+                                placeholder="Enter value" style="width:100%;"></oj-input-text>
+                            </oj-bind-if>
+                          </template>
+
+                          <!-- Rejected RFI (editable) -->
+                          <template slot="discRejectedRfiTemplate">
+                            <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </oj-bind-if>
+                            <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-text value="{{ $page.variables.discCurrentRow.disc_rejected_rfi }}"
+                                on-value-changed="[[$listeners.onDiscValueChange]]"
+                                placeholder="Enter value" style="width:100%;"></oj-input-text>
+                            </oj-bind-if>
+                          </template>
+
+                          <!-- Discipline Total Cumulative (editable) -->
+                          <template slot="discTotalRfiCummTemplate">
+                            <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </oj-bind-if>
+                            <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-number value="{{ $page.variables.discCurrentRow.disc_total_rfi_cumm }}"
+                                readonly="true" style="width:100%;" tabindex="-1"></oj-input-number>
+                            </oj-bind-if>
+                          </template>
+
+                          <!-- Approved Discipline Cumulative (editable) -->
+                          <template slot="discApprovedRfiCummTemplate">
+                            <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </oj-bind-if>
+                            <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-number value="{{ $page.variables.discCurrentRow.disc_approved_rfi_cumm }}"
+                                readonly="true" style="width:100%;" tabindex="-1"></oj-input-number>
+                            </oj-bind-if>
+                          </template>
+
+                          <!-- Rejected Cumulative (readonly) -->
+                          <template slot="discTotalRfisTemplate">
+                            <!-- <oj-bind-if test="[[ $current.mode === 'navigation' ]]"> -->
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            <!-- </oj-bind-if> -->
+                            <!-- <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-number value="[[ $page.variables.discCurrentRow.disc_total_rfis ]]"
+                                readonly="true" style="width:100%;"></oj-input-number>
+                            </oj-bind-if> -->
+                          </template>
+
+                          <!-- % Rejection (readonly) -->
+                          <template slot="percentRejectionTemplate">
+                            <!-- <oj-bind-if test="[[ $current.mode === 'navigation' ]]"> -->
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            <!-- </oj-bind-if> -->
+                            <!-- <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-number value="[[ $page.variables.discCurrentRow.percent_rejection ]]"
+                                readonly="true" style="width:100%;"></oj-input-number>
+                            </oj-bind-if> -->
+                          </template>
+
+                          <!-- Major Reasons (editable) -->
+                          <template slot="rejectedReasonTemplate">
+                            <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                              <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                            </oj-bind-if>
+                            <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                              <oj-input-text value="{{ $page.variables.discCurrentRow.rejected_reason }}"
+                                placeholder="Enter reason" style="width:100%;"></oj-input-text>
+                            </oj-bind-if>
+                          </template>
+
+                        </oj-table>
+                      </div>
+
+                    </oj-switcher>
+                  </div>
+
+                </div>
+              </oj-collapsible>
+
+            </div>
+          </div>
+        </oj-sp-advanced-create-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Progress Dialog -->
+<oj-dialog id="progressDialog" dialog-title="Processing..." style="display:none" modality="modal">
+  <div slot="body">
+    <oj-progress-bar value="-1"></oj-progress-bar>
+    <p>Please wait while we process your request...</p>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="About" id="aboutDialog" cancel-behavior="icon" style="width: 400px; overflow: hidden;"
+  resize-behavior="resizable" position.my.vertical="top" position.at.vertical="top" drag-affordance="title-bar"
+  header-decoration="off">
+  <div slot="body">
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-sm-12 oj-md-12">
+        <oj-form-layout label-edge='start' columns="1" style="margin-top:23px;margin-left:-20px"
+          user-assistance-density="compact" direction="column" class="oj-formlayout-full-width"
+          label-width="45%">
+          <oj-input-text label-hint="Created By:" style="margin-bottom: -6px;" value="{{ $variables.about.created_by }}"
+            readonly="true" user-assistance-density="compact">
+          </oj-input-text>
+          <oj-input-text label-hint="Created Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.created_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated By:" style="margin-bottom: -6px;"
+            value="{{ $variables.about.last_updated_by }}" readonly="true" user-assistance-density="compact"></oj-input-text>
+          <oj-input-text label-hint="Created Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.last_updated_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated Login:" value="{{ $variables.about.last_updated_login }}" style="margin-bottom: -6px;"
+            readonly="true" user-assistance-density="compact">
+          </oj-input-text>
+        </oj-form-layout>
+      </div>
+    </div>
+  </div>
+  <div slot="footer">
+    <oj-button id="aboutButtonCancel_AC" label="Ok"
+      chroming="outlined" style="margin-top:-20px !important;"></oj-button>
+  </div>
+</oj-dialog>

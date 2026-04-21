@@ -1,0 +1,55 @@
+{
+    "items": [
+        {
+            "project_assignment_id": 1,
+            "object_version_num": 1,
+            "project_id": 2025,
+            "project_name": "RG5Z1-CA",
+            "project_number": "RG5Z1-CA",
+            "ora_project_id": 300000090427447,
+            "ora_project_name": "RG5Z1-CA",
+            "ora_project_number": "RG5Z1-CA",
+            "tender_number": "NW-RFQ-1119-2025",
+            "tender_name": "Construction of Anoxic tank at Ibra RG-CA",
+            "pr_number": "NW-PR-1149-2025",
+            "po_number": "NWS-PO-1157-2025",
+            "supplier_id": 300000090011645,
+            "supplier_name": "Smart Technology",
+            "tender_id": 17001,
+            "line_num": 1,
+            "senior_mgr_user_id": 300000008961776,
+            "senior_manager_name": "Ahmed Hamed Salim Al Abdul Salam أحمد  آل عبد السلام",
+            "proj_mgr_user_id": 300000008962847,
+            "project_manager_name": "Salah Ali Hilal Al Hashimi صلاح  الهاشمي",
+            "proj_engg_user_id": 300000008962664,
+            "project_engineer_name": "Mashal Salim Saif Al Mahrouqi مشعل  المحروقي .",
+            "focal_point_user_id": 300000008964038,
+            "focal_point": "Ahmed Abdulqahar Ibrahim Al Khanjari أحمد  الخنجري",
+            "comments": null,
+            "additional_info": null,
+            "created_by": "ATIQ",
+            "created_date": "2026-02-11T10:18:07.347Z",
+            "last_updated_by": "ATIQ",
+            "last_updated_date": "2026-02-11T10:18:17.05Z",
+            "last_updated_login": "ATIQ"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/search/getbyid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/search/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/search/getbyid"
+        }
+    ]
+}

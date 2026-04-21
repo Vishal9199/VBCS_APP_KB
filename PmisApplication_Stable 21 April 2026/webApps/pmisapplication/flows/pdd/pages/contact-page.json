@@ -1,0 +1,170 @@
+{
+  "metadata": {},
+  "title": "Project Contact Details Management",
+  "description": "Comprehensive contact details management for project suppliers with two-panel layout for Contact Person 1 and Contact Person 2, including general contact information.",
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-input-email": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "oj-sp/simple-create-edit/loader"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ],
+    "modules": {
+      "ojValidationBase": {
+        "path": "ojs/ojvalidation-base"
+      }
+    }
+  },
+  "types": {
+    "ContactDetails": {
+      "contact_id": "number",
+      "object_version_num": "number",
+      "ora_project_id": "number",
+      "tender_id": "number",
+      "supplier_id": "number",
+      "post_office_box": "string",
+      "postal_code": "string",
+      "contact_person_1": "string",
+      "position_1": "string",
+      "email_1": "string",
+      "mobile_cp1": "string",
+      "telephone_1": "string",
+      "fax_1": "string",
+      "contact_person_2": "string",
+      "position_2": "string",
+      "email_2": "string",
+      "mobile_cp2": "string",
+      "telephone_2": "string",
+      "fax_2": "string",
+      "telephone": "string",
+      "fax": "string",
+      "email": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "HeaderInfo": {
+      "projectName": "string",
+      "projectNumber": "string",
+      "tenderName": "string",
+      "tenderNumber": "string"
+    }
+  },
+  "variables": {
+    "contactDetailsVar": {
+      "type": "ContactDetails",
+      "defaultValue": {
+        "last_updated_by": "[[ $application.user.email ]]",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "created_by": "[[ $application.user.email ]]",
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "contact_id": 0,
+        "object_version_num": 0
+      }
+    },
+    "aToolBar": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Save",
+          "id": "save",
+          "icon": "oj-ux-ico-save"
+        }
+      ]
+    },
+    "contactpersononevalidation": {
+      "type": "string"
+    },
+    "contactpersontwovalidation": {
+      "type": "string"
+    },
+    "generalcontactvalidation": {
+      "type": "string"
+    },
+    "headerInfoVar": {
+      "type": "HeaderInfo"
+    },
+    "pNavCode": {
+      "type": "string"
+    },
+    "pNavEncId": {
+      "type": "string"
+    },
+    "pNavId": {
+      "type": "string",
+      "required": false,
+      "input": "none"
+    },
+    "pTenderId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    }
+  },
+  "eventListeners": {
+    "projectcontactidSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "cancelprimaryactionchain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "projectcontactidSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "secondary_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+
+  }
+}

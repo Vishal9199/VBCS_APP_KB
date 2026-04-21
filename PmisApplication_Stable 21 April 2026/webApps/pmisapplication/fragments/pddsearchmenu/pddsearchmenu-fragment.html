@@ -1,0 +1,115 @@
+<!-- Navigation Menu Fragment -->
+<div class="nav-fragment-container">
+  
+  <!-- Menu Button (Hamburger) -->
+  <div class="menu-button-wrapper">
+    <oj-button 
+      id="menuButton" 
+      display="icons" 
+      chroming="borderless"
+      class="menu-toggle-button oj-button-sm" 
+      on-oj-action="[[$listeners.menuButtonAction2]]">
+      <span slot="startIcon" class="oj-ux-ico-menu" style="font-size: 18px;"></span>
+    </oj-button>
+  </div>
+
+  <!-- Drawer Component -->
+  <oj-drawer-popup
+    id="navDrawer"
+    edge="start"
+    opened="{{ $variables.drawerOpened }}"
+    modality="modeless"
+    class="navigation-drawer">
+    
+    <!-- Drawer Header -->
+    <div class="drawer-header">
+      <h3 class="drawer-title">Project Navigation</h3>
+      <oj-button 
+        id="closeDrawerButton" 
+        display="icons" 
+        chroming="borderless"
+        class="drawer-close-button" 
+        on-oj-action="[[$listeners.closeDrawerButtonAction2]]">
+        <span slot="startIcon" class="oj-ux-ico-close"></span>
+      </oj-button>
+    </div>
+
+    <!-- Drawer Content - Navigation List -->
+    <div class="drawer-content">
+      <oj-navigation-list
+        id="navList"
+        class="navigation-list"
+        selection="{{ $variables.selectedNavItem }}"
+        drill-mode="none"
+        edge="start">
+        
+        <ul>
+          <oj-bind-for-each data="[[ $variables.navigationData ]]">
+            <template>
+              
+              <!-- Parent Item without Children (Direct Navigation) -->
+              <oj-bind-if test="[[ !$current.data.children ]]">
+                <li :id="[[ $current.data.id ]]">
+                  <a 
+                    href="#" 
+                    class="nav-item-link"
+                    :data-path="[[ $current.data.path ]]"
+                    :data-item-id="[[ $current.data.id ]]"
+                    :data-item-name="[[ $current.data.name ]]"
+                    on-click="[[$listeners.navItemClick]]" target="_self">
+                    <span class="nav-item-text">
+                      <oj-bind-text value="[[ $current.data.name ]]"></oj-bind-text>
+                    </span>
+                  </a>
+                </li>
+              </oj-bind-if>
+              
+              <!-- Parent Item with Children (Expand/Collapse) -->
+              <oj-bind-if test="[[ $current.data.children ]]">
+                <li :id="[[ $current.data.id ]]" class="nav-item-parent">
+                  <a 
+                    href="#" 
+                    class="nav-item-link parent-link"
+                    :data-parent-id="[[ $current.data.id ]]"
+                    :data-has-children="true"
+                    on-click="[[$listeners.parentItemClick]]">
+                    <span class="nav-item-text">
+                      <oj-bind-text value="[[ $current.data.name ]]"></oj-bind-text>
+                    </span>
+                    <span class="oj-navigationlist-icon-only oj-ux-ico-chevron-down nav-expand-icon"></span>
+                  </a>
+                  
+                  <!-- Child Items -->
+                  <ul class="nav-children">
+                    <oj-bind-for-each data="[[ $current.data.children ]]">
+                      <template>
+                        <li :id="[[ $current.data.id ]]" class="nav-item-child">
+                          <a 
+                            href="#" 
+                            class="nav-item-link child-link"
+                            :data-path="[[ $current.data.path ]]"
+                            :data-item-id="[[ $current.data.id ]]"
+                            :data-item-name="[[ $current.data.name ]]"
+                            on-click="[[$listeners.childItemClick]]">
+                            <span class="nav-item-text">
+                              <oj-bind-text value="[[ $current.data.name ]]"></oj-bind-text>
+                            </span>
+                          </a>
+                        </li>
+                      </template>
+                    </oj-bind-for-each>
+                  </ul>
+                  
+                </li>
+              </oj-bind-if>
+              
+            </template>
+          </oj-bind-for-each>
+        </ul>
+        
+      </oj-navigation-list>
+    </div>
+    
+  </oj-drawer-popup>
+  
+</div>

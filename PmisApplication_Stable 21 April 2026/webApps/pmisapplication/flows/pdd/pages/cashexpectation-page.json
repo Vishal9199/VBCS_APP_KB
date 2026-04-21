@@ -1,0 +1,799 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "allFilterCriterion": {
+      "type": "any"
+    },
+    "askHint": {
+      "type": "string",
+      "defaultValue": "Search"
+    },
+    "bufferDPcahExpTable": {
+      "type": "application:ojs/ojbufferingdataprovider",
+      "constructorParams": [
+        "{{ $variables.cashExpADP }}",
+        null
+      ]
+    },
+    "cashExpADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "postPmispddCashexpectationSearch",
+        "keyAttributes": "cash_expectation_id"
+      }
+    },
+    "cashExpLOVSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "project_name",
+        "itemsPath": "items",
+        "responseType": "getPmispddCashexpectationLovProject2Response2",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "project_id"
+          ]
+        },
+        "fetchChain": "getPmispddCashexpectationLovProject2Fetch"
+      }
+    },
+    "count": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "currentPage": {
+      "type": "number"
+    },
+    "displayMode": {
+      "type": "string"
+    },
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "getPmispddCashexpectationLovProject2ListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "itemsPath": "items",
+        "responseType": "getPmispddCashexpectationLovProject2Response",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "project_name"
+          ]
+        },
+        "keyAttributes": "project_id",
+        "fetchChain": "getPmispddCashexpectationLovProject2Fetch2"
+      }
+    },
+    "getPmispddCashexpectationLovYearListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PDD/getPmispddCashexpectationLovYear",
+        "keyAttributes": "year_value",
+        "itemsPath": "items",
+        "responseType": "getPmispddCashexpectationLovYearResponse2",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "display_value"
+          ]
+        }
+      }
+    },
+    "lvCurrentcashExpRow": {
+      "type": "lvCurrentcashExpRow"
+    },
+    "hasNext": {
+      "type": "string",
+      "defaultValue": "N"
+    },
+    "pagination": {
+      "type": "object",
+      "defaultValue": {
+        "is_next": false,
+        "is_prev": true
+      }
+    },
+    "paginationDisplay": {
+      "type": "string",
+      "defaultValue": "0 - 0 of 0 items"
+    },
+    "passKey": {
+      "type": "string"
+    },
+    "lvNextValue": {
+      "type": "number",
+      "defaultValue": 9999999999
+    },
+    "rowToEdit": {
+      "type": {
+        "rowKey": "number"
+      }
+    },
+    "passPayload": {
+      "type": "string"
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/cashexpectationsearchconfig.json' ]]"
+      }
+    },
+     "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "ProjectNameFilter": {
+              "label": "Project Name",
+              "options": {
+                "optionsData": "[[ $variables.cashExpLOVSDP ]]",
+                "optionsKeys": {
+                  "label": "project_name",
+                  "value": "project_name"
+                }
+              }
+            },
+            "YearFilter": {
+              "label": "Year",
+              "options": {
+                "optionsData": "[[ $variables.YearLOVSdp ]]",
+                "optionsKeys": {
+                  "label": "display_value",
+                  "value": "display_value"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "searchObj": {
+      "type": {
+        "in_limit": "string",
+        "in_offset": "string",
+        "p_year": "string",
+        "p_project_id": "string",
+        "p_project_name": "string",
+        "p_keyword": "string"
+      },
+      "defaultValue": {
+        "in_limit": "10",
+        "in_offset": "0",
+        "p_project_id": "",
+        "p_project_name": "",
+        "p_year": "",
+        "p_keyword": ""
+      }
+    },
+    "searchResultsDP": {
+      "type": "vb/ServiceDataProvider2",
+      "constructorParams": [
+        {
+          "endpoint": "PDD/postPmispddCashexpectationSearch",
+          "keyAttributes": "cash_expectation_id",
+          "itemsPath": "items",
+          "uriParameters": {
+            "totalResults": true
+          }
+        }
+      ]
+    },
+    "searchResultsDPV": {
+      "type": "ojs/ojlistdataproviderview",
+      "constructorParams": [
+        "[[ $page.variables.searchResultsDP.instance ]]",
+        {
+          "filterCriterion": "[[ $page.variables.allFilterCriterion ]]"
+        }
+      ]
+    },
+    "selectContextData": {
+      "type": "vb/ArrayDataProvider"
+    },
+    "selectContextItemText": {
+      "type": "string",
+      "defaultValue": "label"
+    },
+    "selectContextLabelHint": {
+      "type": "string"
+    },
+    "selectContextValueItem": {
+      "type": "any"
+    },
+    "totalItemsCount": {
+      "type": "number",
+      "defaultValue": "[[ $page.variables.searchResultsDP.instance?.totalSize ]]"
+    },
+    "totalRecords": {
+      "type": "number"
+    },
+    "YearLOVSdp": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "itemsPath": "items",
+        "responseType": "getPmispddCashexpectationLovYearResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "display_value"
+          ]
+        },
+        "keyAttributes": "display_value",
+        "fetchChain": "getPmispddCashexpectationLovYearFetch"
+      }
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getPmispddCashexpectationLovProject2Response": {
+      "endpoint": "getPmispddCashexpectationLovProject2",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getPmispddCashexpectationLovProject2Response2": {
+      "endpoint": "getPmispddCashexpectationLovProject2",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getPmispddCashexpectationLovYearResponse": {
+      "endpoint": "getPmispddCashexpectationLovYear",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getPmispddCashexpectationLovYearResponse2": {
+      "endpoint": "getPmispddCashexpectationLovYear",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.lvCurrentcashExpRow": {
+      "endpoint": "postPmispddCashexpectationSearch",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.postPmispddCashexpectationSearch": {
+      "endpoint": "postPmispddCashexpectationSearch",
+      "service": "PDD",
+      "path": "response"
+    },
+    "action": {
+      "id": "string",
+      "label": "string",
+      "display": "string",
+      "icon": "string"
+    },
+    "getPmispddCashexpectationLovProject2Response": {
+      "items": [
+        {
+          "project_id": "number",
+          "project_name": "string",
+          "project_number": "string",
+          "region_name": "string",
+          "tender_number": "string",
+          "type": "string"
+        }
+      ]
+    },
+    "getPmispddCashexpectationLovProject2Response2": {
+      "items": [
+        {
+          "project_id": "number",
+          "project_name": "string",
+          "project_number": "string",
+          "region_name": "string",
+          "tender_number": "string",
+          "type": "string"
+        }
+      ]
+    },
+    "getPmispddCashexpectationLovYearResponse": {
+      "items": [
+        {
+          "display_value": "string",
+          "year_value": "string"
+        }
+      ]
+    },
+    "getPmispddCashexpectationLovYearResponse2": {
+      "items": [
+        {
+          "display_value": "string",
+          "year_value": "string"
+        }
+      ]
+    },
+    "lvCurrentcashExpRow": {
+      "additional_info": "string",
+      "apr_curr_year": "number",
+      "apr_next_year": "number",
+      "aug_curr_year": "number",
+      "aug_next_year": "number",
+      "cash_expectation_id": "number",
+      "created_by": "string",
+      "created_date": "string",
+      "dec_curr_year": "number",
+      "dec_next_year": "number",
+      "feb_curr_year": "number",
+      "feb_next_year": "number",
+      "jan_curr_year": "number",
+      "jan_next_year": "number",
+      "jul_curr_year": "number",
+      "jul_next_year": "number",
+      "jun_curr_year": "number",
+      "jun_next_year": "number",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "mar_curr_year": "number",
+      "mar_next_year": "number",
+      "may_curr_year": "number",
+      "may_next_year": "number",
+      "nov_curr_year": "number",
+      "nov_next_year": "number",
+      "object_version_num": "number",
+      "oct_curr_year": "number",
+      "oct_next_year": "number",
+      "project_id": "number",
+      "project_name": "string",
+      "project_number": "any",
+      "region_name": "string",
+      "sep_curr_year": "number",
+      "sep_next_year": "number",
+      "tender_number": "string",
+      "type": "string",
+      "year": "string"
+    },
+    "ojs/ojlistdataproviderview": {
+      "constructorType": "vb/InstanceFactory"
+    },
+    "postPmispddCashexpectationSearch": {
+      "additional_info": "string",
+      "apr_curr_year": "number",
+      "apr_next_year": "number",
+      "aug_curr_year": "number",
+      "aug_next_year": "number",
+      "cash_expectation_id": "number",
+      "created_by": "string",
+      "created_date": "string",
+      "dec_curr_year": "number",
+      "dec_next_year": "number",
+      "feb_curr_year": "number",
+      "feb_next_year": "number",
+      "jan_curr_year": "number",
+      "jan_next_year": "number",
+      "jul_curr_year": "number",
+      "jul_next_year": "number",
+      "jun_curr_year": "number",
+      "jun_next_year": "number",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "mar_curr_year": "number",
+      "mar_next_year": "number",
+      "may_curr_year": "number",
+      "may_next_year": "number",
+      "nov_curr_year": "number",
+      "nov_next_year": "number",
+      "object_version_num": "number",
+      "oct_curr_year": "number",
+      "oct_next_year": "number",
+      "project_id": "number",
+      "project_name": "string",
+      "project_number": "any",
+      "region_name": "string",
+      "sep_curr_year": "number",
+      "sep_next_year": "number",
+      "tender_number": "string",
+      "type": "string",
+      "year": "number"
+    },
+    "vb/ServiceDataProvider2": {
+      "constructorType": "vb/InstanceFactory"
+    }
+
+  },
+  "eventListeners": {
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "addrowactionchain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "onDeleteAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "buttonAction3": {
+      "chains": [
+        {
+          "chain": "okdeleteaction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction4": {
+      "chains": [
+        {
+          "chain": "canceldeleteaction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction5": {
+      "chains": [
+        {
+          "chain": "editactionchain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "lessonLearnedTableBeforeRowEdit": {
+      "chains": [
+        {
+          "chain": "TableBeforeRowEditChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "accept": "{{$event.detail.accept}}",
+            "rowContext": "{{$event.detail.rowContext}}",
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}"
+          }
+        }
+      ]
+    },
+    "lessonLearnedTableBeforeRowEditEnd": {
+      "chains": [
+        {
+          "chain": "TableBeforeRowEditEndChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "accept": "{{$event.detail.accept}}",
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshactionchain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "resetbuttonaction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "savebtnAction": {
+      "chains": [
+        {
+          "chain": "saveactionchain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "selectValueItem": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{ $current.key }}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "selectValueItem2": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain1",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{ $current.key }}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-list-view": {
+        "path": "ojs/ojlistview"
+      },
+      "oj-progress-bar": {
+        "path": "ojs/ojprogress-bar"
+      },
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-collection-container": {
+        "path": "oj-sp/collection-container/loader"
+      },
+      "oj-sp-empty-state": {
+        "path": "oj-sp/empty-state/loader"
+      },
+      "oj-sp-list-item-template": {
+        "path": "oj-sp/list-item-template/loader"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      }
+
+    },
+    "css": [
+      "/resources/css/pmis-search.css"
+    ]
+  },
+  "constants": {
+    "columnsvar": {
+      "type": "object[]",
+      "defaultValue": [
+         {
+          "headerText": "Action",
+          "field": "",
+          "template": "Action"
+        },
+        {
+          "headerText": "Project Name",
+          "field": "project_name",
+          "template": "Project Name"
+        },
+        {
+          "headerText": "Region Name",
+          "field": "region_name",
+          "template": "Region Name"
+        },
+        {
+          "headerText": "Tender Number",
+          "field": "tender_number",
+          "template": "Tender Number"
+        },
+        {
+          "headerText": "Year",
+          "field": "year",
+          "template": "Year"
+        },
+        {
+          "headerText": "Jan Curr Year",
+          "field": "jan_curr_year",
+          "template": "Jan Curr Year"
+        },
+        {
+          "headerText": "Jan Next Year",
+          "field": "jan_next_year",
+          "template": "Jan Next Year"
+        },
+        {
+          "headerText": "Feb Curr Year",
+          "field": "feb_curr_year",
+          "template": "Feb Curr Year"
+        },
+        {
+          "headerText": "Feb Next Year",
+          "field": "feb_next_year",
+          "template": "Feb Next Year"
+        },
+        {
+          "headerText": "Mar Curr Year",
+          "field": "mar_curr_year",
+          "template": "Mar Curr Year"
+        },
+        {
+          "headerText": "Mar Next Year",
+          "field": "mar_next_year",
+          "template": "Mar Next Year"
+        },
+        {
+          "headerText": "Apr Curr Year",
+          "field": "apr_curr_year",
+          "template": "Apr Curr Year"
+        },
+        {
+          "headerText": "Apr Next Year",
+          "field": "apr_next_year",
+          "template": "Apr Next Year"
+        },
+        {
+          "headerText": "May Curr Year",
+          "field": "may_curr_year",
+          "template": "May Curr Year"
+        },
+        {
+          "headerText": "May Next Year",
+          "field": "may_next_year",
+          "template": "May Next Year"
+        },
+        {
+          "headerText": "Jun Curr Year",
+          "field": "jun_curr_year",
+          "template": "Jun Curr Year"
+        },
+        {
+          "headerText": "Jun Next Year",
+          "field": "jun_next_year",
+          "template": "Jun Next Year"
+        },
+        {
+          "headerText": "Jul Curr Year",
+          "field": "jul_curr_year",
+          "template": "Jul Curr Year"
+        },
+        {
+          "headerText": "Jul Next Year",
+          "field": "jul_next_year",
+          "template": "Jul Next Year"
+        },
+        {
+          "headerText": "Aug Curr Year",
+          "field": "aug_curr_year",
+          "template": "Aug Curr Year"
+        },
+        {
+          "headerText": "Aug Next Year",
+          "field": "aug_next_year",
+          "template": "Aug Next Year"
+        },
+        {
+          "headerText": "Sep Curr Year",
+          "field": "sep_curr_year",
+          "template": "Sep Curr Year"
+        },
+        {
+          "headerText": "Sep Next Year",
+          "field": "sep_next_year",
+          "template": "Sep Next Year"
+        },
+        {
+          "headerText": "Oct Curr Year",
+          "field": "oct_curr_year",
+          "template": "Oct Curr Year"
+        },
+        {
+          "headerText": "Oct Next Year",
+          "field": "oct_next_year",
+          "template": "Oct Next Year"
+        },
+        {
+          "headerText": "Nov Curr Year",
+          "field": "nov_curr_year",
+          "template": "Nov Curr Year"
+        },
+        {
+          "headerText": "Nov Next Year",
+          "field": "nov_next_year",
+          "template": "Nov Next Year"
+        },
+        {
+          "headerText": "Dec Curr Year",
+          "field": "dec_curr_year",
+          "template": "Dec Curr Year"
+        },
+        {
+          "headerText": "Dec Next Year",
+          "field": "dec_next_year",
+          "template": "Dec Next Year"
+        },
+        {
+          "headerText": "Total Curr Year",
+          "field": "total_curr_year",
+          "template": "Total Curr Year"
+        },
+        {
+          "headerText": "Total Next Year",
+          "field": "total_next_year",
+          "template": "Total Next Year"
+        }
+      ]
+    }
+  },
+  "@dt": {
+    "iconClass": "vbdt-dynamic-icon-17-icoSmartSearchPage48Svg"
+  }
+}

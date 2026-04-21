@@ -1,0 +1,198 @@
+{
+  "title": "Status Update",
+  "description": "Status Update page for project details",
+  "variables": {
+    "getPmispddStatusupdateGetyearListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PDD/getPmispddStatusupdateGetyear",
+        "keyAttributes": "susearch_year",
+        "itemsPath": "items",
+        "responseType": "getPmispddStatusupdateGetyearResponse",
+        "headers": {
+          "x-session-id": "{{ $application.variables.pTenderId }}"
+        },
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "susearch_year"
+          ]
+        }
+      }
+    },
+    "headerInfoVar": {
+      "type": {
+        "project_id": "number",
+        "projectName": "string",
+        "projectNumber": "string",
+        "tender_id": "number",
+        "tenderNumber": "string"
+
+      },
+      "defaultValue": {
+        "projectName": "",
+        "projectNumber": "",
+        "tenderNumber": ""
+      }
+    },
+    "pTenderId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "susearch_year": {
+      "type": "string"
+    },
+    "tableADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "getPmispddStatusupdateGetmonth",
+        "keyAttributes": "month_num"
+      }
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getPmispddStatusupdateGetmonth": {
+      "endpoint": "getPmispddStatusupdateGetmonth",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getPmispddStatusupdateGetyearResponse": {
+      "endpoint": "getPmispddStatusupdateGetyear",
+      "service": "PDD",
+      "path": "response"
+    },
+    "getPmispddStatusupdateGetmonth": {
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+          "month_code": "string",
+          "month_display": "string",
+          "month_num": "number"
+
+    },
+    "getPmispddStatusupdateGetyearResponse": {
+      "items": [
+        {
+          "susearch_year": "string"
+        }
+      ]
+    },
+    "headerInfoType": {
+      "projectName": "string",
+      "projectNumber": "string",
+      "tenderNumber": "string",
+      "tenderName": "string"
+    }
+
+  },
+  "eventListeners": {
+    "flinkClick": {
+      "chains": [
+        {
+          "chain": "HyperlinkClickChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "projectstatusupdateidSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "AdvancedCreateAndEditPageTemplateSpPrimaryActionChain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "selectValueItem": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ],
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    }
+  },
+  "constants": {
+    "headerColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Period Name",
+          "field": "month_display",
+          "template": "periodNameTemplate"
+        },
+        {
+          "headerText": "Last Updated Date",
+          "field": "last_updated_date",
+          "template": "Date"
+        },
+        {
+          "headerText": "Last Updated By",
+          "field": "last_updated_by"
+        }
+      ]
+    }
+  }
+}

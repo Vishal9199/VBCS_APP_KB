@@ -1,0 +1,141 @@
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width:1px;min-width:100%;">
+    <div id="mainContent">
+      <div>
+        <oj-sp-advanced-create-edit id="projectlist_edit_page" page-title="Project List Management" page-subtitle=" "
+          display-options.responsive-padding="on" display-options.next="off" display-options.bottom-actions="on"
+          primary-action.label="Close" secondary-actions="[[ $variables.aToolGeneric ]]" display-mode="light"
+          on-sp-primary-action="[[$listeners.onPrimaryAction]]"
+          on-sp-secondary-action="[[$listeners.onSecondaryAction]]">
+
+          <div slot="main" style="padding-top:0;margin-top: 0.5rem;">
+            <div style="padding:1rem; margin-bottom: 0.25rem;" class="oj-panel oj-selected">
+              <oj-validation-group id="projectlist_validation" valid="{{ $variables.formValidVar }}">
+                <oj-form-layout max-columns="3" label-edge="start" label-width="40%" colspan-wrap="wrap"
+                  user-assistance-density="compact" direction="column">
+
+                  <!-- ORA Project (LOV) -->
+                  <!-- FIX: was binding to project_id with wrong endpoint; corrected to ora_project_id
+                       using getPmispddProjectlistLovProject, keyAttributes=ora_project_id, item-text=project_name -->
+                  <oj-select-single id="ora_project_id-field" label-hint="ORA Project"
+                    value="{{ $variables.projectlistHeaderVar.ora_project_id }}" style="width:16rem;"
+                    data="[[ $variables.oraProjectLovSDP ]]" item-text="project_name"
+                    placeholder="Select Oracle Project" required="true"
+                    on-value-item-changed="[[$listeners.oraProjectIdFieldValueItem]]">
+
+                    <template slot="collectionTemplate" data-oj-as="collection">
+                      <oj-table scroll-policy="loadMoreOnScroll"
+                        columns='[{"headerText":"Ora Project Name","field":"project_name", "sortable": "disabled"},{"headerText":"Ora Project Number","field":"project_number", "sortable": "disabled"}]'
+                        selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}"
+                        on-oj-row-action="[[collection.handleRowAction]]" data="[[ collection.data ]]"
+                        selection-mode.row="single" display="grid" style="overflow: hidden;">
+                        <template slot="cellTemplate" data-oj-as="cell">
+                          <oj-bind-text value="[[String(cell.data)]]"></oj-bind-text>
+                        </template>
+                      </oj-table>
+                    </template>
+                  </oj-select-single>
+
+                  <!-- Tender Id -->
+                  <!-- FIX: no LOV endpoint exists for tender in this API; using input-number -->
+                  <!-- <oj-input-number id="tender_id-field" label-hint="Tender Id"
+                    placeholder="Tender Id"
+                    value="{{ $variables.projectlistHeaderVar.tender_id }}"
+                    style="width:16rem;">
+                  </oj-input-number> -->
+
+                  <oj-select-single id="project_id-field" label-hint="Project"
+                    value="{{ $variables.projectlistHeaderVar.project_id }}"
+                    style="width:16rem;"
+                    data="[[ $variables.projectLovSDP ]]"
+                    item-text="project_name" placeholder="Select Project" required="true">
+                  </oj-select-single>
+
+                  <!-- Additional Info -->
+                  <!-- FIX: field was missing entirely from the original HTML -->
+                  <oj-text-area id="additional_info-field" label-hint="Additional Info"
+                    placeholder="Additional Info"
+                    value="{{ $variables.projectlistHeaderVar.additional_info }}"
+                    style="width:16rem;">
+                  </oj-text-area>
+
+                </oj-form-layout>
+              </oj-validation-group>
+            </div>
+
+            <div style="padding:1rem;" class="oj-panel oj-selected">
+              <!-- <oj-validation-group id="projectlist_validation2" valid="{{ $variables.formValidVar }}"> -->
+                <oj-form-layout max-columns="3" label-edge="start" label-width="40%" colspan-wrap="wrap"
+                  user-assistance-density="compact" direction="column">
+                
+                  <!-- Tender ID -->
+                  <!-- <oj-input-text id="tender_id-field2" label-hint="Tender Id" value="{{ $variables.projectlistHeaderVar.tender_id }}"
+                    readonly="true" style="width:16rem;">
+                  </oj-input-text> -->
+                
+                  <!-- Project Number -->
+                  <!-- <oj-input-text id="projectNameField" label-hint="Oracle Project Name"
+                    value="{{ $variables.displayDtlVar.oraProjectName }}" readonly="true" style="width:16rem;">
+                  </oj-input-text> -->
+                
+                  <!-- Project Name -->
+                  <!-- <oj-input-text id="projectNumberField" label-hint="Oracle Project Number"
+                    value="{{ $variables.displayDtlVar.oraProjectNumber }}" readonly="true" style="width:16rem;">
+                  </oj-input-text> -->
+                
+                  <!-- Tender Name -->
+                  <oj-input-text id="tenderNameField" label-hint="Tender Name"
+                    value="{{ $variables.displayDtlVar.tenderName }}" style="width:16rem;" disabled="true">
+                  </oj-input-text>
+                
+                  <!-- Tender Number -->
+                  <oj-input-text id="tenderNumberField" label-hint="Tender Number"
+                    value="{{ $variables.displayDtlVar.tenderNumber }}" style="width:16rem;" disabled="true">
+                  </oj-input-text>
+
+                </oj-form-layout>
+              <!-- </oj-validation-group> -->
+            </div>
+           </div>
+
+        </oj-sp-advanced-create-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Progress Dialog -->
+<oj-dialog dialog-title="Please wait..." id="progressMsg" class="wd200" style="overflow:hidden;"
+  position.at.vertical="top" position.my.vertical="top">
+  <div slot="body" style="margin-top:2.1rem;">
+    <div class="oj-flex full_stretch lg_button_width">
+      <oj-progress-bar class="full_stretch oj-flex-item oj-sm-12 oj-md-12" value="-1" style="zoom:2;"></oj-progress-bar>
+    </div>
+  </div>
+</oj-dialog>
+
+<!-- About Dialog -->
+<oj-dialog dialog-title="About" id="aboutDialog" cancel-behavior="icon" style="width:420px;overflow:hidden;"
+  position.at.vertical="top" position.my.vertical="top" drag-affordance="title-bar" header-decoration="off">
+  <div slot="body">
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-sm-12 oj-md-12">
+        <oj-form-layout label-edge="start" columns="1" style="margin-top:23px;margin-left:-20px;"
+          user-assistance-density="compact" direction="column" class="oj-formlayout-full-width" label-width="45%">
+          <oj-input-text label-hint="Created By:" style="margin-bottom:-6px;" value="{{ $variables.about.created_by }}" readonly="true"></oj-input-text>
+          <oj-input-text label-hint="Created Date:" readonly="true" style="margin-bottom:-6px;" user-assistance-density="compact"
+            converter='[[ {"type":"datetime","options":{"pattern":"dd-MMM-yyyy hh:mm a"}} ]]'
+            value="{{ $variables.about.creation_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated By:" style="margin-bottom:-6px;" value="{{ $variables.about.last_updated_by }}" readonly="true"></oj-input-text>
+          <oj-input-text label-hint="Last Update Date:" readonly="true" style="margin-bottom:-6px;" user-assistance-density="compact"
+            converter='[[ {"type":"datetime","options":{"pattern":"dd-MMM-yyyy hh:mm a"}} ]]'
+            value="{{ $variables.about.last_update_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated Login:" value="{{ $variables.about.last_update_login }}" style="margin-bottom:-6px;" readonly="true"></oj-input-text>
+        </oj-form-layout>
+      </div>
+    </div>
+  </div>
+  <div class="oj-flex-bar-end" slot="footer" style="margin-top:-2rem;">
+    <oj-button label="Ok" chroming="outlined" class="oj-flex-bar-end" on-oj-action="[[$listeners.aboutOkAction]]"></oj-button>
+  </div>
+</oj-dialog>

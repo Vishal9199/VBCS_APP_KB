@@ -1,0 +1,769 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "OPA CUSTOM RESOURCE",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "vb-catalog://backends/OPA_CUSTOM_RESOURCE",
+            "description": "OPA CUSTOM RESOURCE"
+        }
+    ],
+    "paths": {
+        "/v1/instances": {
+            "post": {
+                "operationId": "postProcessApiV1Instances",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/post/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {},
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/v1/tasks/{taskId}/complete": {
+            "parameters": [
+                {
+                    "name": "taskId",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "post": {
+                "operationId": "postV1TasksTaskIdComplete",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostV1TasksTaskIdCompleteRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postV1TasksTaskIdComplete/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {},
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/v1/tasks/{taskId}/payload": {
+            "parameters": [
+                {
+                    "name": "taskId",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "get": {
+                "operationId": "getV1TasksTaskIdPayload",
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetV1TasksTaskIdPayload"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/getV1TasksTaskIdPayload/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            },
+            "patch": {
+                "operationId": "patchV1TasksTaskIdPayload",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PatchV1TasksTaskIdPayloadRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/patchV1TasksTaskIdPayload/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PatchV1TasksTaskIdPayloadResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/patchV1TasksTaskIdPayload/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/v1/tasks/{taskId}": {
+            "parameters": [
+                {
+                    "name": "taskId",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "put": {
+                "operationId": "putV1TasksTaskId",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostV1TasksTaskIdRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postV1TasksTaskId/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostV1TasksTaskIdResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/postV1TasksTaskId/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/v1/tasks/{taskId}/reassign": {
+            "parameters": [
+                {
+                    "name": "taskId",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "post": {
+                "operationId": "postV1TasksTaskIdReassign",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostV1TasksTaskIdReassignRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postV1TasksTaskIdReassign/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {},
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/v1/instances/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "put": {
+                "operationId": "putV1InstancesId2",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PutV1InstancesIdRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/putV1InstancesId/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PutV1InstancesIdResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/putV1InstancesId/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/v1/instances/{instance_id}/target-activities": {
+            "parameters": [
+                {
+                    "name": "instance_id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "get": {
+                "operationId": "getV1InstancesInstance_idTargetActivities",
+                "parameters": [
+                    {
+                        "name": "fetchCompleted",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "x-vb": {
+                            "defaultValue": "true"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetV1InstancesInstance_idTarget-activities"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/getV1InstancesInstance_idTargetActivities/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PostRequest": {
+                "type": "object",
+                "properties": {
+                    "params": {
+                        "type": "object",
+                        "properties": {
+                            "processDefinitionId": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "dataObject": {
+                        "type": "object",
+                        "properties": {
+                            "startWebFormArgs": {
+                                "type": "object",
+                                "properties": {
+                                    "callSubmitPackage": {
+                                        "type": "string"
+                                    },
+                                    "p_APPR_PROCESS": {
+                                        "type": "string"
+                                    },
+                                    "p_TRX_ID": {
+                                        "type": "string"
+                                    },
+                                    "p_ACTION_ID": {
+                                        "type": "string"
+                                    },
+                                    "p_USER_ID": {
+                                        "type": "string"
+                                    },
+                                    "p_TYPE": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostV1TasksTaskIdCompleteRequest": {
+                "type": "object",
+                "properties": {
+                    "outcome": {
+                        "type": "string"
+                    },
+                    "comment": {
+                        "type": "string"
+                    }
+                }
+            },
+            "GetV1TasksTaskIdPayload": {
+                "type": "object",
+                "properties": {
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "href": {
+                                    "type": "string"
+                                },
+                                "rel": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "isAdhoc": {
+                        "type": "boolean"
+                    },
+                    "priority": {
+                        "type": "integer"
+                    },
+                    "state": {
+                        "type": "string"
+                    },
+                    "substate": {
+                        "type": "string"
+                    },
+                    "isEscalated": {
+                        "type": "boolean"
+                    },
+                    "reason": {
+                        "type": "object",
+                        "properties": {
+                            "user": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "assignee": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "action": {
+                                "type": "string"
+                            },
+                            "outcome": {
+                                "type": "string"
+                            },
+                            "date": {
+                                "type": "string"
+                            },
+                            "comment": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "reasonText": {
+                        "type": "string"
+                    },
+                    "assignee": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "outcome": {
+                        "type": "string"
+                    },
+                    "fromUser": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "type": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "createdBy": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "displayName": {
+                                "type": "string"
+                            },
+                            "type": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "createdDate": {
+                        "type": "string"
+                    },
+                    "lastUpdatedDate": {
+                        "type": "string"
+                    },
+                    "finishedDate": {
+                        "type": "string"
+                    },
+                    "completedDate": {
+                        "type": "string"
+                    },
+                    "assignedDate": {
+                        "type": "string"
+                    },
+                    "processName": {
+                        "type": "string"
+                    },
+                    "processDefinitionTitle": {
+                        "type": "string"
+                    },
+                    "processDefinitionDescription": {
+                        "type": "string"
+                    },
+                    "activityInstanceId": {
+                        "type": "string"
+                    },
+                    "processInstanceId": {
+                        "type": "string"
+                    },
+                    "processDefinitionId": {
+                        "type": "string"
+                    },
+                    "processDefinitionKey": {
+                        "type": "string"
+                    },
+                    "processExecutionId": {
+                        "type": "string"
+                    },
+                    "rootInstanceId": {
+                        "type": "string"
+                    },
+                    "rootProcessId": {
+                        "type": "string"
+                    },
+                    "taskDefinitionKey": {
+                        "type": "string"
+                    },
+                    "applicationName": {
+                        "type": "string"
+                    },
+                    "applicationTitle": {
+                        "type": "string"
+                    },
+                    "externalFormUrl": {
+                        "type": "string"
+                    },
+                    "candidateUsers": {
+                        "type": "array",
+                        "items": {}
+                    },
+                    "candidateGroups": {
+                        "type": "array",
+                        "items": {}
+                    },
+                    "availableActions": {
+                        "type": "object",
+                        "properties": {
+                            "system": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "actionId": {
+                                            "type": "string"
+                                        },
+                                        "isCommentMandatory": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            },
+                            "custom": {
+                                "type": "array",
+                                "items": {}
+                            }
+                        }
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {}
+                    }
+                }
+            },
+            "PatchV1TasksTaskIdPayloadRequest": {
+                "type": "object",
+                "properties": {
+                    "payload": {
+                        "type": "object",
+                        "properties": {
+                            "output": {
+                                "type": "object",
+                                "properties": {
+                                    "loginapprover": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PatchV1TasksTaskIdPayloadResponse": {
+                "type": "object",
+                "properties": {
+                    "dummy": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostV1TasksTaskIdRequest": {
+                "type": "object",
+                "properties": {
+                    "assignees": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string"
+                                },
+                                "id": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostV1TasksTaskIdResponse": {
+                "type": "object",
+                "properties": {
+                    "assignees": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string"
+                                },
+                                "id": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostV1TasksTaskIdReassignRequest": {
+                "type": "object",
+                "properties": {
+                    "identities": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "displayName": {
+                                    "type": "string"
+                                },
+                                "id": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "comment": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PutV1InstancesIdRequest": {
+                "type": "object",
+                "properties": {
+                    "action": {
+                        "type": "string"
+                    },
+                    "instanceActionProps": {
+                        "type": "object",
+                        "properties": {
+                            "reason": {
+                                "type": "string"
+                            },
+                            "terminateChildInstances": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "PutV1InstancesIdResponse": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                }
+            },
+            "GetV1InstancesInstance_idTarget-activities": {
+                "type": "object",
+                "properties": {
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "href": {
+                                    "type": "string"
+                                },
+                                "rel": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "activities": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "activityId": {
+                                    "type": "string"
+                                },
+                                "activityName": {
+                                    "type": "string"
+                                },
+                                "activityType": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

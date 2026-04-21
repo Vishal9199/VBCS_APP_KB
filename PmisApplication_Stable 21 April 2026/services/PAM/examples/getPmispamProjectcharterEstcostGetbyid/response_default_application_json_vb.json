@@ -1,0 +1,39 @@
+{
+    "items": [
+        {
+            "est_cost_id": 1382,
+            "object_version_num": 1,
+            "project_charter_id": 1313,
+            "project_charter_name": "OK NEW PRJ",
+            "est_capax_cost": "3500000",
+            "capax_unit": "INR",
+            "est_opex_cost": "600000",
+            "opex_unit": "INR",
+            "ref_num": "PC-2",
+            "additional_info": "Initial estimated cost for Phase-1 implementation",
+            "created_by": "VISHAL",
+            "created_date": "2026-02-04T04:13:57Z",
+            "last_updated_by": "VISHAL",
+            "last_updated_date": "2026-02-04T04:13:57Z",
+            "last_updated_login": "WEB_PORTAL"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/projectcharter/estcost/getbyid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/projectcharter/estcost/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/projectcharter/estcost/getbyid"
+        }
+    ]
+}

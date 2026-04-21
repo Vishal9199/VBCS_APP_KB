@@ -1,0 +1,769 @@
+{
+  "metadata": {},
+  "title": "Lookup Type",
+  "description": "Comprehensive Lookup Type Management Add/Edit page with Lookup Type form and Lookup Value table management with popup editing functionality.",
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-label": {
+        "path": "ojs/ojlabel"
+      },
+      "oj-option": {
+        "path": "ojs/ojoption"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "oj-sp/simple-create-edit/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-switch": {
+        "path": "ojs/ojswitch"
+      }
+
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  },
+  "types": {
+    "@decorators.getApplicationLovActiveApplicationResponse": {
+      "endpoint": "getApplicationLovActiveApplication",
+      "service": "Application",
+      "path": "response"
+    },
+    "@decorators.getLookupPmisLovDependLookupvalue": {
+      "endpoint": "getLookupPmisLovDependLookupvalue",
+      "service": "AOL",
+      "path": "response"
+    },
+    "@decorators.getLookupTypeLovChildTypeNameResponse": {
+      "endpoint": "getLookupTypeLovChildTypeName",
+      "service": "Look_Up",
+      "path": "response"
+    },
+    "@decorators.getLookupValueLovByType": {
+      "endpoint": "getLookupValueLovByType",
+      "service": "AOL",
+      "path": "response"
+    },
+    "@decorators.getLookupValueLovByTypeResponse": {
+      "endpoint": "getLookupValueLovByType",
+      "service": "AOL",
+      "path": "response"
+    },
+    "getApplicationLovActiveApplicationResponse": {
+      "items": [
+        {
+          "application_id": "number",
+          "application_name": "string"
+        }
+      ]
+    },
+    "getLookupPmisLovDependLookupvalue": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getLookupTypeLovChildTypeNameResponse": {
+      "items": [
+        {
+          "lookup_type_id": "number",
+          "lookup_type_name": "string"
+        }
+      ]
+    },
+    "getLookupValueLovByType": {
+      "items": [
+        {
+          "lookup_type_code": "string",
+          "lookup_type_id": "number",
+          "lookup_type_name": "string"
+        }
+      ]
+    },
+    "getLookupValueLovByTypeResponse": {
+      "items": [
+        {
+          "dependent_lookup_type_code": "string",
+          "dependent_lookup_type_id": "number",
+          "dependent_lookup_type_name": "string",
+          "lookup_type_code": "string",
+          "lookup_type_id": "number",
+          "lookup_type_name": "string"
+        }
+      ]
+    },
+    "LookupType": {
+      "lookup_type_id": "number",
+      "object_version_num": "number",
+      "lookup_type_code": "string",
+      "lookup_type_name": "string",
+      "remarks": "string",
+      "active_flag": "string",
+      "effective_start_date": "string",
+      "effective_end_date": "string",
+      "application_id": "number",
+      "attribute_json": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "dependent_lookup_type_id": "number",
+      "dependent_lookup_type_code": "string"
+    },
+    "LookupValue": {
+      "dependent_lookup_value_code": "string",
+      "dependent_lookup_value_name": "string",
+      "lookup_value_id": "number",
+      "object_version_num": "number",
+      "lookup_type_id": "number",
+      "lookup_value_code": "string",
+      "lookup_value_name": "string",
+      "remarks": "string",
+      "child_lookup_type_id": "number",
+      "display_order": "number",
+      "active_flag": "string",
+      "effective_start_date": "string",
+      "effective_end_date": "string",
+      "attribute_json": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "dependent_lookup_type_id": "number",
+      "dependent_lookup_value_id": "number"
+
+    }
+
+  },
+  "variables": {
+    "encryptedBody": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "getApplicationLovActiveApplicationListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "application_id",
+        "itemsPath": "items",
+        "responseType": "getApplicationLovActiveApplicationResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "application_name"
+          ]
+        },
+        "fetchChain": "getApplicationLovActiveApplicationFetch"
+      }
+    },
+    "getLookupTypeLovChildTypeNameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "lookup_type_id",
+        "itemsPath": "items",
+        "responseType": "getLookupTypeLovChildTypeNameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_type_name"
+          ]
+        },
+        "fetchChain": "getLookupTypeLovChildTypeNameFetch"
+      }
+    },
+    "getDependentLookupValueListSDP": {
+  "type": "vb/ServiceDataProvider",
+  "defaultValue": {
+
+        "responseType": "getLookupPmisLovDependLookupvalue",
+        "itemsPath": "items",
+        "keyAttributes": "lookup_value_id",
+        "fetchChain": "getLookupPmisLovDependLookupvalueFetch"
+
+  }
+},
+    "getLookupValueLovByTypeListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "itemsPath": "items",
+        "responseType": "getLookupValueLovByTypeResponse",
+        "fetchChain": "getLookupValueLovByTypeFetch",
+        "keyAttributes": "lookup_type_id"
+      }
+    },
+    "isValueFormValid": {
+      "type": "string"
+    },
+    "lookupValueCodeCustomMsg": {
+      "type": "object[]"
+    },
+    "searchObj": {
+      "type": {
+        "IN_LIMIT": "number",
+        "IN_OFFSET": "number",
+        "P_LOOKUP_TYPE_ID": "string",
+        "LOOKUP_TYPE_CODE": "string",
+        "LOOKUP_TYPE_NAME": "string",
+        "ACTIVE_FLAG": "string",
+        "APPLICATION_ID": "string",
+        "APPLICATION_CODE": "string"
+      },
+      "defaultValue": {
+        "IN_LIMIT": 8,
+        "IN_OFFSET": 0,
+        "P_LOOKUP_TYPE_ID": "",
+        "LOOKUP_TYPE_CODE": "",
+        "LOOKUP_TYPE_NAME": "",
+        "APPLICATION_ID": "",
+        "APPLICATION_CODE": ""
+      }
+    },
+    "searchValueObj": {
+      "type": {
+        "IN_LIMIT": "number",
+        "IN_OFFSET": "number",
+        "P_LOOKUP_VALUE_ID": "string",
+        "LOOKUP_TYPE_ID": "string",
+        "LOOKUP_TYPE_CODE": "string",
+        "LOOKUP_VALUE_CODE": "string",
+        "LOOKUP_VALUE_NAME": "string",
+        "ACTIVE_FLAG": "string",
+        "CHILD_LOOKUP_TYPE_ID": "string",
+        "DISPLAY_ORDER": "string"
+      },
+      "defaultValue": {
+        "IN_LIMIT": 4,
+        "IN_OFFSET": 0,
+        "P_LOOKUP_VALUE_ID": "",
+        "LOOKUP_TYPE_ID": "",
+        "LOOKUP_TYPE_CODE": "",
+        "LOOKUP_VALUE_CODE": "",
+        "LOOKUP_VALUE_NAME": "",
+        "ACTIVE_FLAG": "",
+        "CHILD_LOOKUP_TYPE_ID": "",
+        "DISPLAY_ORDER": ""
+      }
+    },
+    "pagination": {
+      "type": {
+        "next": "boolean",
+        "prev": "boolean"
+      },
+      "defaultValue": {
+        "next": false,
+        "prev": false
+      }
+    },
+    "key": {
+      "type": "string",
+      "input": "fromUrl"
+    },
+    "lookupTypeCodeCustomMsg": {
+      "type": "object[]"
+    },
+    "lookupTypeVar": {
+      "type": "LookupType",
+      "defaultValue": {
+        "effective_end_date": "4712-12-31",
+        "effective_start_date": "[[ $application.functions.getSysdate() ]]",
+        "active_flag": "Y",
+        "application_id": 25
+      },
+      "input": "none",
+      "required": false,
+      "dirtyDataBehavior": "track"
+    },
+    "ADPlookupValue": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+          "itemType": "LookupValue",
+          "keyAttributes": "lookup_value_id"
+        }    },
+    "lookupValueVar": {
+      "type": "LookupValue",
+      "defaultValue": {
+        "active_flag": "Y",
+        "effective_start_date": "[[ $application.functions.getSysdate() ]]",
+        "effective_end_date": "4712-12-31",
+        "object_version_num": 0,
+        "lookup_value_id": 0,
+        "remarks": " ",
+        "attribute_json": "null"
+      }
+    },
+    "isFormValid": {
+      "type": "string"
+    },
+    "canEdit": {
+      "type": "boolean",
+      "defaultValue": "[[ $variables.method === \"POST\" ]]"
+    },
+    "method": {
+      "type": "string",
+      "defaultValue": "POST",
+      "input": "fromUrl"
+    }
+
+  },
+  "eventListeners": {
+    "activeFlagSwitchValue": {
+      "chains": [
+        {
+          "chain": "statusHeaderAC",
+          "parameters": {
+            "value": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "enableEditAC"
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "addLookupValueAC"
+        }
+      ]
+    },
+    "cancelExitBtnAction": {
+      "chains": [
+        {
+          "chain": "cancelLeavePageAC"
+        }
+      ]
+    },
+    "deleteBtnNoAction": {
+      "chains": [
+        {
+          "chain": "cancelDeleteAC"
+        }
+      ]
+    },
+    "deleteBtnYesAction": {
+      "chains": [
+        {
+          "chain": "okDeleteAC"
+        }
+      ]
+    },
+    "dialogActiveFlagValue": {
+      "chains": [
+        {
+          "chain": "lookupValueActiveAC",
+          "parameters": {
+            "value": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "effectiveEndDateValue": {
+      "chains": [
+        {
+          "chain": "InputDateValueChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "hyperlinkClick": {
+      "chains": [
+        {
+          "chain": "editLookupValueAC",
+          "parameters": {
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "iconClick": {
+      "chains": [
+        {
+          "chain": "deleteValueActionAC",
+          "parameters": {
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "iconClick2": {
+      "chains": [
+        {
+          "chain": "editLookupValueAC",
+          "parameters": {
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "lookupTypeCodeValue3": {
+      "chains": [
+        {
+          "chain": "lookupTypeCodeAC",
+          "parameters": {
+            "value": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "lookupValueCancelAction": {
+      "chains": [
+        {
+          "chain": "cancelAddLookupValueAC"
+        }
+      ]
+    },
+    "lookupValueDialogClose": {
+      "chains": [
+        {
+          "chain": "DialogCloseChain"
+        }
+      ]
+    },
+    "lookupValueSaveAction": {
+      "chains": [
+        {
+          "chain": "saveLookupValueAC"
+        }
+      ]
+    },
+    "lookupValueSaveCloseAction": {
+      "chains": [
+        {
+          "chain": "saveAddAnotherLookupValueAC"
+        }
+      ]
+    },
+    "nxtBtnAction": {
+      "chains": [
+        {
+          "chain": "nextBtnAC"
+        }
+      ]
+    },
+    "preBtnAction": {
+      "chains": [
+        {
+          "chain": "prevBtnAC"
+        }
+      ]
+    },
+    "proceedExitBtnAction": {
+      "chains": [
+        {
+          "chain": "leavePageAC"
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshBtn",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbBeforeExit": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbBeforeExitListener"
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "chain": "PageVbEnterChain"
+        }
+      ]
+    },
+    "dialogLookupValueCodeValue2": {
+      "chains": [
+        {
+          "chain": "lookupValueCodeAC",
+          "parameters": {
+            "value": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "lookupPageSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpSecondaryActionChain",
+          "parameters": {
+            "actionId": "[[ $event.detail.secondaryItem ]]"
+          }
+        }
+      ]
+    },
+    "lookupPageSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpPrimaryActionChain"
+        }
+      ]
+    },
+    "lookupPageSpCancel": {
+      "chains": [
+        {
+          "chain": "SimpleCreateAndEditPageTemplateSpCancelChain"
+        }
+      ]
+    }
+
+  },
+  "constants": {
+    "lookupValueColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Display Order",
+          "field": "display_order",
+          "resizable": "enabled",
+          "width": 123,
+          "template": "display_order_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Lookup Value Code",
+          "field": "lookup_value_code",
+          "resizable": "enabled",
+          "width": "",
+          "template": "lookup_value_code_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Lookup Value Name",
+          "field": "lookup_value_name",
+          "resizable": "enabled",
+          "width": "",
+          "template": "lookup_value_name_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Child Lookup Type",
+          "field": "child_lookup_type_id",
+          "resizable": "enabled",
+          "width": 159,
+          "template": "child_lookup_type_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Dependent Lookup Value Code",
+          "field": "dependent_lookup_code_name",
+          "resizable": "enabled",
+          "width": 159,
+          "template": "child_lookup_type_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Dependent Lookup Value Name",
+          "field": "dependent_lookup_value_name",
+          "resizable": "enabled",
+          "width": 159,
+          "template": "child_lookup_type_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Effective Start Date",
+          "field": "effective_start_date",
+          "resizable": "enabled",
+          "width": 164,
+          "template": "start_date_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Effective End Date",
+          "field": "effective_end_date",
+          "resizable": "enabled",
+          "width": 160,
+          "template": "end_date_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "active_flag",
+          "resizable": "enabled",
+          "width": 70,
+          "template": "active_flag_template",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        }        ,
+        {
+          "headerText": "Remarks",
+          "field": "remarks",
+          "resizable": "enabled",
+          "width": "",
+          "template": "remarks_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }
+      ]
+    },
+    "lookupValueColumnsWithActions": {
+      "defaultValue": [
+          {
+            "headerText": "Actions",
+            "field": "",
+            "resizable": "enabled",
+            "width": 75,
+            "template": "lookup_value_actions_template",
+            "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+            "style": "text-align: center; vertical-align: middle;"
+          },
+          {
+            "headerText": "Display Order",
+            "field": "display_order",
+            "resizable": "enabled",
+            "width": 123,
+            "template": "display_order_template",
+            "headerStyle": "white-space: normal;",
+            "style": ""
+          },
+          {
+            "headerText": "Lookup Value Code",
+            "field": "lookup_value_code",
+            "resizable": "enabled",
+            "template": "lookup_value_code_template",
+            "headerStyle": "white-space: normal;",
+            "style": ""
+          },
+          {
+            "headerText": "Lookup Value Name",
+            "field": "lookup_value_name",
+            "resizable": "enabled",
+            "template": "lookup_value_name_template",
+            "headerStyle": "white-space: normal;",
+            "style": ""
+          },
+          {
+            "headerText": "Dependent Lookup Value Code",
+            "field": "dependent_lookup_value_code",
+            "resizable": "enabled",
+            "width": 159,
+            "headerStyle": "white-space: normal;",
+            "style": ""
+          },
+          {
+            "headerText": "Dependent Lookup Value Name",
+            "field": "dependent_lookup_value_name",
+            "resizable": "enabled",
+            "width": 159,
+            "headerStyle": "white-space: normal;",
+            "style": ""
+          },
+          {
+            "headerText": "Effective Start Date",
+            "field": "effective_start_date",
+            "resizable": "enabled",
+            "width": 164,
+            "template": "start_date_template",
+            "headerStyle": "white-space: normal;",
+            "style": ""
+          },
+          {
+            "headerText": "Effective End Date",
+            "field": "effective_end_date",
+            "resizable": "enabled",
+            "width": 160,
+            "template": "end_date_template",
+            "headerStyle": "white-space: normal;",
+            "style": ""
+          },
+          {
+            "headerText": "Status",
+            "field": "active_flag",
+            "resizable": "enabled",
+            "width": 70,
+            "template": "active_flag_template",
+            "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+            "style": "text-align: center; vertical-align: middle;"
+          },
+          {
+            "headerText": "Remarks",
+            "field": "remarks",
+            "template": "remarks_template",
+            "headerStyle": "white-space: normal;",
+            "style": ""
+          }
+        ],
+      "type": "object[]"
+    }
+  }
+}

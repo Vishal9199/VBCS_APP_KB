@@ -1,0 +1,37 @@
+{
+    "items": [
+        {
+            "milestone_id": 10229,
+            "object_version_num": 1,
+            "project_charter_id": 10216,
+            "project_charter_name": "DN in Mawalleh 11 Part 1",
+            "milestone": "Complete detailed design drawings and specifications",
+            "by_target_date": "2025-08-31T00:00:00Z",
+            "ref_num": "PC-1",
+            "additional_info": "Depends on final approval of project charter scope",
+            "created_by": "JOHN.DOE",
+            "created_date": "2026-04-02T12:44:57Z",
+            "last_updated_by": "JOHN.DOE",
+            "last_updated_date": "2026-04-02T12:44:57Z",
+            "last_updated_login": "JOHN.DOE"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/projectcharter/milestone/getbyprojectcharterid?p_project_charter_id=EFWX1g9vprx9WeDQAwZnL8LfrRTg60m-_9Mq_Ajgv-Dv13dJX59rj0SXq8bCIZ7V"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/projectcharter/milestone/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/projectcharter/milestone/getbyprojectcharterid?p_project_charter_id=EFWX1g9vprx9WeDQAwZnL8LfrRTg60m-_9Mq_Ajgv-Dv13dJX59rj0SXq8bCIZ7V"
+        }
+    ]
+}

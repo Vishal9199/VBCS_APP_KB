@@ -1,0 +1,34 @@
+{
+    "items": [
+        {
+            "tender_id": 7615,
+            "ora_project_id": 203083,
+            "tender_number": "29/3/26-1",
+            "ora_project_number": "22411025",
+            "tender_name": "29/3/26-1",
+            "ora_project_name": "22411025"
+        },
+        {
+            "tender_id": 7616,
+            "ora_project_id": 203082,
+            "tender_number": "29/3/26-2",
+            "ora_project_number": "22413033",
+            "tender_name": "29/3/26-2",
+            "ora_project_name": "22413033"
+        }
+    ],
+    "hasMore": false,
+    "limit": 0,
+    "offset": 0,
+    "count": 2,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/lov/tender/dtl?searchVal=29%2F3"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/lov/tender/item"
+        }
+    ]
+}

@@ -1,0 +1,31 @@
+{
+    "items": [
+        {
+            "calendar_type": "AA"
+        },
+        {
+            "calendar_type": "BB"
+        },
+        {
+            "calendar_type": "CC"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 3,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmis/lov/calendar/type"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmis/lov/calendar/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmis/lov/calendar/type"
+        }
+    ]
+}

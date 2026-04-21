@@ -1,0 +1,849 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "YearFilter": {
+              "label": "Year"
+            },
+            "PlanTypeFilter": {
+              "label": "Plan Type"
+            }
+          }
+        }
+      }
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/futureprojectsearchconfig.json' ]]"
+      }
+    },
+    "getSeniorManagerLovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "responseType": "getPmispamLovUsers2",
+        "itemsPath": "items",
+        "keyAttributes": "user_id",
+        "fetchChain": "getPmispamLovUsersFetch2"
+      }
+    },
+    "getProjectManagerLovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "responseType": "getPmispamLovUsers",
+        "itemsPath": "items",
+        "keyAttributes": "user_id",
+        "fetchChain": "getPmispamLovUsersFetch"
+      }
+    },
+    "getRegionLovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "responseType": "getPmisLovRegionName",
+        "itemsPath": "items",
+        "fetchChain": "getPmisLovRegionNameFetch",
+        "keyAttributes": "lookup_value_id"
+      }
+    },
+    "searchObj": {
+      "type": {
+        "in_limit": "string",
+        "in_offset": "string",
+        "p_keyword": "string",
+        "p_senior_mgr_usr_id": "string",
+        "p_project_mgr_id": "string",
+        "p_region_id": "string",
+        "p_year": "string",
+        "p_type": "string"
+      },
+      "defaultValue": {
+        "in_limit": "10",
+        "in_offset": "0",
+        "p_keyword": "",
+        "p_senior_mgr_usr_id": "",
+        "p_project_mgr_id": "",
+        "p_region_id": "",
+        "p_year": "",
+        "p_type": ""
+      }
+    },
+    "futureProjectADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "FutureProjectType",
+        "keyAttributes": "future_project_id"
+      }
+    },
+    "futureProjectBDP": {
+      "type": "application:ojs/ojbufferingdataprovider",
+      "constructorParams": [
+        "{{ $variables.futureProjectADP }}",
+        null
+      ]
+    },
+    "lvCurrentRow": {
+      "type": "object"
+    },
+    "lvNextValue": {
+      "type": "number",
+      "defaultValue": -1
+    },
+    "pNavCode": {
+      "type": "string",
+      "defaultValue": ""
+    },
+    "pNavId": {
+      "type": "string",
+      "defaultValue": ""
+    },
+    "OUT_TOTAL_COUNT": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "OUT_HAS_NEXT": {
+      "type": "string",
+      "defaultValue": "N"
+    },
+    "ADPseniorManager": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "keyAttributes": "user_id"
+      }
+    },
+    "ADPprojectManager": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "keyAttributes": "user_id"
+      }
+    },
+    "ADPregion": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "keyAttributes": "lookup_value_id"
+      }
+    },
+    "lvRowToEdit": {
+      "type": {
+        "rowKey": "number"
+      }
+    },
+    "getYearLovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "display_year",
+        "itemsPath": "items",
+        "responseType": "getPmisLovYearResponse",
+        "fetchChain": "getPmisLovYearFetch"
+      }
+    },
+    "ADPyear": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "keyAttributes": "display_year"
+      }
+    },
+    "ADPplanType": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "keyAttributes": "value",
+        "data": [
+          {
+            "label": "P1",
+            "value": "P1"
+          },
+          {
+            "label": "P2",
+            "value": "P2"
+          },
+          {
+            "label": "P3",
+            "value": "P3"
+          }
+        ]
+      }
+    }
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getPmisLovRegionName": {
+      "endpoint": "getPmisLovRegionName",
+      "service": "PmisSetup",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovUsers": {
+      "endpoint": "getPmispamLovUsers",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovUsers2": {
+      "endpoint": "getPmispamLovUsers",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispddSearchLovRegion": {
+      "endpoint": "getPmispddSearchLovRegion",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getSeniorManagerLovResponse": {
+      "endpoint": "getSeniorManagerLov",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getProjectManagerLovResponse": {
+      "endpoint": "getProjectManagerLov",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getRegionLovResponse": {
+      "endpoint": "getRegionLov",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.FutureProjectType": {
+      "endpoint": "postSearchFutureProjects",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getPmisLovYearResponse": {
+      "endpoint": "getPmisLovYear",
+      "service": "PmisSetup",
+      "path": "response"
+    },
+    "getPmisLovRegionName": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispamLovUsers": {
+      "items": [
+        {
+          "email_address": "string",
+          "person_full_name": "string",
+          "person_id": "number",
+          "person_name": "string",
+          "person_number": "string",
+          "user_id": "number",
+          "user_name": "string"
+        }
+      ]
+    },
+    "getPmispamLovUsers2": {
+      "items": [
+        {
+          "email_address": "string",
+          "person_full_name": "string",
+          "person_id": "number",
+          "person_name": "string",
+          "person_number": "string",
+          "user_id": "number",
+          "user_name": "string"
+        }
+      ]
+    },
+    "getPmispddSearchLovRegion": {
+      "items": [
+        {
+          "region_name": "string"
+        }
+      ]
+    },
+    "getSeniorManagerLovResponse": {
+      "items": [
+        {
+          "senior_mgr_usr_id": "number",
+          "senior_manager": "string"
+        }
+      ]
+    },
+    "getProjectManagerLovResponse": {
+      "items": [
+        {
+          "project_mgr_id": "number",
+          "project_manager": "string"
+        }
+      ]
+    },
+    "getRegionLovResponse": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "FutureProjectType": {
+      "future_project_id": "number",
+      "object_version_num": "number",
+      "project_name": "string",
+      "tender_number": "string",
+      "senior_mgr_usr_id": "number",
+      "senior_manager": "string",
+      "project_mgr_id": "number",
+      "project_manager": "string",
+      "region_id": "number",
+      "region_code": "string",
+      "region_name": "string",
+      "active_flag": "string",
+      "estimated_start_date": "string",
+      "estimated_end_date": "string",
+      "estimated_cost": "number",
+      "year": "number",
+      "type": "string",
+      "january": "number",
+      "february": "number",
+      "march": "number",
+      "april": "number",
+      "may": "number",
+      "june": "number",
+      "july": "number",
+      "august": "number",
+      "september": "number",
+      "october": "number",
+      "november": "number",
+      "december": "number",
+      "jan_actual": "number",
+      "feb_actual": "number",
+      "mar_actual": "number",
+      "apr_actual": "number",
+      "may_actual": "number",
+      "jun_actual": "number",
+      "jul_actual": "number",
+      "aug_actual": "number",
+      "sep_actual": "number",
+      "oct_actual": "number",
+      "nov_actual": "number",
+      "dec_actual": "number",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "getPmisLovYearResponse": {
+      "items": [
+        {
+          "display_year": "string"
+        }
+      ]
+    }
+  },
+  "eventListeners": {
+    "vbEnter": {
+      "chains": [
+        {
+          "chain": "vbEnterListener"
+        }
+      ]
+    },
+    "saveBtn": {
+      "chains": [
+        {
+          "chain": "onClickSaveAC"
+        }
+      ]
+    },
+    "refreshBtn": {
+      "chains": [
+        {
+          "chain": "SynADPFutureProjectsAC"
+        }
+      ]
+    },
+    "resetBtn": {
+      "chains": [
+        {
+          "chain": "resetSearchAC"
+        }
+      ]
+    },
+    "preBtn": {
+      "chains": [
+        {
+          "chain": "prevPageAC"
+        }
+      ]
+    },
+    "nxtBtn": {
+      "chains": [
+        {
+          "chain": "nextPageAC"
+        }
+      ]
+    },
+    "futureProjectsTblBeforeRowEdit": {
+      "chains": [
+        {
+          "chain": "TableBeforeRowEditChain",
+          "parameters": {
+            "rowKey": "{{ $event.detail.rowContext.status.rowKey }}",
+            "rowIndex": "{{ $event.detail.rowContext.status.rowIndex }}",
+            "rowData": "{{ $event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data }}"
+          }
+        }
+      ]
+    },
+    "futureProjectsTblBeforeRowEditEnd": {
+      "chains": [
+        {
+          "chain": "TableBeforeRowEditEndChain",
+          "parameters": {
+            "cancelEdit": "{{ $event.detail.cancelEdit }}",
+            "rowKey": "{{ $event.detail.rowContext.status.rowKey }}",
+            "rowIndex": "{{ $event.detail.rowContext.status.rowIndex }}",
+            "rowData": "{{ $event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data }}",
+            "updatedRow": "[[ $variables.lvCurrentRow ]]"
+          }
+        }
+      ]
+    },
+    "deleteConfirmBtn": {
+      "chains": [
+        {
+          "chain": "deleteRowAC"
+        }
+      ]
+    },
+    "deleteCancelBtn": {
+      "chains": [
+        {
+          "chain": "closeDeleteDialogAC"
+        }
+      ]
+    },
+    "deleteRowBtn": {
+      "chains": [
+        {
+          "chain": "openDeleteDialogAC",
+          "parameters": {
+            "rowKey": "{{ $current.key }}",
+            "rowData": "{{ $current.row }}"
+          }
+        }
+      ]
+    },
+    "addProjectBtn": {
+      "chains": [
+        {
+          "chain": "onAddProjectAC"
+        }
+      ]
+    }
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-progress-bar": {
+        "path": "ojs/ojprogress-bar"
+      }
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-search.css"
+    ]
+  },
+  "constants": {
+    "futureProjectColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "frozenEdge": "start",
+          "sortable": "disabled",
+          "resizable": "enabled",
+          "width": 90,
+          "template": "actions",
+          "headerStyle": "white-space: nowrap; min-width: 90px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: center;"
+        },
+        {
+          "headerText": "Year",
+          "field": "year",
+          "resizable": "enabled",
+          "width": 80,
+          "sortable": "enabled",
+          "template": "year_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 80px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Plan Type",
+          "field": "type",
+          "resizable": "enabled",
+          "width": 100,
+          "template": "type_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 100px; background-color: #084c4c; color: #ffffff;",
+          "style": ";"
+        },
+        {
+          "headerText": "Project Name",
+          "field": "project_name",
+          "resizable": "enabled",
+          "width": 200,
+          "sortable": "enabled",
+          "template": "project_name_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 200px; background-color: #084c4c; color: #ffffff;",
+          "style": ";"
+        },
+        {
+          "headerText": "Tender Number",
+          "field": "tender_number",
+          "resizable": "enabled",
+          "width": 150,
+          "template": "tender_number_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 150px; background-color: #084c4c; color: #ffffff;",
+          "style": ";"
+        },
+        {
+          "headerText": "General Manager",
+          "field": "senior_manager",
+          "resizable": "enabled",
+          "width": 180,
+          "template": "senior_manager_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 180px; background-color: #084c4c; color: #ffffff;",
+          "style": ";"
+        },
+        {
+          "headerText": "Project Manager",
+          "field": "project_manager",
+          "resizable": "enabled",
+          "width": 180,
+          "template": "project_manager_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 180px; background-color: #084c4c; color: #ffffff;",
+          "style": ";"
+        },
+        {
+          "headerText": "Region",
+          "field": "region_name",
+          "resizable": "enabled",
+          "width": 150,
+          "template": "region_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 150px; background-color: #084c4c; color: #ffffff;",
+          "style": ";"
+        },
+        {
+          "headerText": "Est. Start Date",
+          "field": "estimated_start_date",
+          "resizable": "enabled",
+          "width": 130,
+          "template": "est_start_date_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 130px; background-color: #084c4c; color: #ffffff;",
+          "style": ";"
+        },
+        {
+          "headerText": "Est. End Date",
+          "field": "estimated_end_date",
+          "resizable": "enabled",
+          "width": 130,
+          "template": "est_end_date_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 130px; background-color: #084c4c; color: #ffffff;",
+          "style": ";"
+        },
+        {
+          "headerText": "Est. Cost",
+          "field": "estimated_cost",
+          "resizable": "enabled",
+          "width": 130,
+          "template": "estimated_cost_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 130px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Jan Plan",
+          "field": "january",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "january_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Jan Actual",
+          "field": "jan_actual",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "jan_actual_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Feb Plan",
+          "field": "february",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "february_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Feb Actual",
+          "field": "feb_actual",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "feb_actual_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Mar Plan",
+          "field": "march",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "march_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Mar Actual",
+          "field": "mar_actual",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "mar_actual_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Apr Plan",
+          "field": "april",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "april_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Apr Actual",
+          "field": "apr_actual",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "apr_actual_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "May Plan",
+          "field": "may",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "may_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "May Actual",
+          "field": "may_actual",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "may_actual_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Jun Plan",
+          "field": "june",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "june_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Jun Actual",
+          "field": "jun_actual",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "jun_actual_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Jul Plan",
+          "field": "july",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "july_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Jul Actual",
+          "field": "jul_actual",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "jul_actual_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Aug Plan",
+          "field": "august",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "august_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Aug Actual",
+          "field": "aug_actual",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "aug_actual_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Sep Plan",
+          "field": "september",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "september_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Sep Actual",
+          "field": "sep_actual",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "sep_actual_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Oct Plan",
+          "field": "october",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "october_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Oct Actual",
+          "field": "oct_actual",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "oct_actual_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Nov Plan",
+          "field": "november",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "november_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Nov Actual",
+          "field": "nov_actual",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "nov_actual_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Dec Plan",
+          "field": "december",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "december_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Dec Actual",
+          "field": "dec_actual",
+          "resizable": "enabled",
+          "width": 110,
+          "template": "dec_actual_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 110px; background-color: #084c4c; color: #ffffff;",
+          "style": "text-align: right;"
+        },
+        {
+          "headerText": "Total Plan",
+          "field": "",
+          "resizable": "enabled",
+          "width": 120,
+          "template": "total_plan_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 120px; background-color: #084c4c; color: #ffffff;",
+          "style": "font-weight: bold; text-align: right;"
+        },
+        {
+          "headerText": "Total Actual",
+          "field": "",
+          "resizable": "enabled",
+          "width": 120,
+          "template": "total_actual_tmpl",
+          "headerStyle": "white-space: nowrap; min-width: 120px; background-color: #084c4c; color: #ffffff;",
+          "style": "font-weight: bold; text-align: right;"
+        }
+      ]
+    }
+  }
+}

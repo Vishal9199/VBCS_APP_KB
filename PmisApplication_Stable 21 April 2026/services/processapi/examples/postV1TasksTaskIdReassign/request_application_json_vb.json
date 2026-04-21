@@ -1,0 +1,17 @@
+{
+    "identities": [
+        {
+            "displayName": "apptestdev5 Fusion",
+            "id": "3ad568fe1dd24299b02d21d130349792",
+            "name": "apptestdev5@darwishholding.com",
+            "type": "USER"
+        },
+        {
+            "displayName": "apptestdev4 Fusion",
+            "id": "0c871830830244de8dc35907672ecd12",
+            "name": "apptestdev4@darwishholding.com",
+            "type": "USER"
+        }
+    ],
+    "comment": ""
+}

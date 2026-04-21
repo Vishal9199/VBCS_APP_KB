@@ -1,0 +1,682 @@
+{
+  "title": "PMIS Calendar Add/Edit",
+  "description": "Advanced Add/Edit page for PMIS Calendar Administration with header form and details table management",
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date-time": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-progress-bar": {
+        "path": "ojs/ojprogress-bar"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-switch": {
+        "path": "ojs/ojswitch"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ],
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    }
+  },
+  "variables": {
+    "calendarHeaderVar": {
+      "type": "CalendarHeaderType",
+      "defaultValue": {
+        "created_by": "[[ $application.user.email ]]",
+        "last_updated_by": "[[ $application.user.email ]]",
+        "enabled_flag": "Y",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "object_version_num": 0
+      }
+    },
+    "calendarLineVar": {
+      "type": "CalendarLineType",
+      "defaultValue": {
+
+        "created_by": "[[ $application.user.email ]]",
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_login": "[[ $application.user.email ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_by": "[[ $application.user.email ]]",
+        "object_version_num": 0
+
+      }
+    },
+    "ADPcalendarLines": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "CalendarLineType",
+        "keyAttributes": "cal_line_id"
+      }
+    },
+    "getPmisLovCalendarTypeListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PmisSetup/getPmisLovCalendarType",
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getPmisLovCalendarTypeResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        }
+      }
+    },
+    "getPmisLovYearListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PmisSetup/getPmisLovYear",
+        "keyAttributes": "display_year",
+        "itemsPath": "items",
+        "responseType": "getPmisLovYearResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "display_year"
+          ]
+        }
+      }
+    },
+    "isLineMethod": {
+      "type": "string"
+    },
+    "isMasterPlan": {
+      "type": "string"
+    },
+    "isSaveAndClose": {
+      "type": "string",
+      "defaultValue": "Y"
+    },
+    "lineKey": {
+      "type": "string"
+    },
+    "pNavCode": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "pNavId": {
+      "type": "string",
+      "defaultValue": "0",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "selectedLineIndex": {
+      "type": "number",
+      "defaultValue": -1
+    },
+    "selectedLineKey": {
+      "type": "any"
+    },
+    "isEditMode": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "pageMode": {
+      "type": "string",
+      "defaultValue": "create"
+    },
+    "calendarInfoValid": {
+      "type": "string"
+    },
+    "lineFormValid": {
+      "type": "string"
+    },
+    "about": {
+      "type": "AboutType"
+    },
+    "pagination": {
+      "type": "object",
+      "defaultValue": {
+        "is_next": false,
+        "is_prev": true
+      }
+    },
+    "toolActions": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Save",
+          "id": "save",
+          "icon": "oj-ux-ico-save"
+        },
+        {
+          "label": "Save & Close",
+          "id": "saveClose",
+          "icon": "oj-ux-ico-save-and-close"
+        },
+        {
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ],
+      "uniqueItems": true
+    },
+    "totalRecords": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "currentPage": {
+      "type": "number",
+      "defaultValue": 1
+    },
+    "searchObj": {
+      "type": {
+        "in_limit": "string",
+        "in_offset": "string",
+        "p_created_by": "string",
+        "p_keyword": "string",
+        "p_hdr_id": "string",
+        "p_line_id": "string",
+        "p_line_num": "string",
+        "p_from_year": "string",
+        "p_to_year": "string",
+        "p_prompt": "string",
+        "p_enabled_flag": "string"
+      },
+      "defaultValue": {
+        "in_limit": "10",
+        "in_offset": "0",
+        "p_created_by": "",
+        "p_keyword": "",
+        "p_hdr_id": "",
+        "p_line_id": "",
+        "p_line_num": "",
+        "p_from_year": "",
+        "p_to_year": "",
+        "p_prompt": "",
+        "p_enabled_flag": ""
+      }
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getPmisCalendarDtl": {
+      "endpoint": "getPmisCalendarDtl",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "@decorators.getPmisLovCalendarTypeResponse": {
+      "endpoint": "getPmisLovCalendarType",
+      "service": "PmisSetup",
+      "path": "response"
+    },
+    "@decorators.getPmisLovYearResponse": {
+      "endpoint": "getPmisLovYear",
+      "service": "PmisSetup",
+      "path": "response"
+    },
+    "@decorators.postPmisCalendarLineSearch": {
+      "endpoint": "postPmisCalendarLineSearch",
+      "service": "ORDS",
+      "path": "response"
+    },
+    "AboutType": {
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "CalendarLineType": {
+      "cal_line_id": "number",
+      "object_version_num": "number",
+      "cal_hdr_id": "number",
+      "line_num": "number",
+      "from_year": "number",
+      "to_year": "number",
+      "prompt": "string",
+      "description": "string",
+      "enabled_flag": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "CalendarHeaderType": {
+      "cal_hdr_id": "number",
+      "object_version_num": "number",
+      "calendar_type_id": "number",
+      "calendar_name": "string",
+      "description": "string",
+      "enabled_flag": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "getPmisLovCalendarTypeResponse": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmisLovYearResponse": {
+      "items": [
+        {
+          "display_year": "number"
+        }
+      ]
+    }
+
+  },
+  "eventListeners": {
+    "aboutBtnAction": {
+      "chains": [
+        {
+          "chain": "aboutBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "calendarAdminPageSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "onCloseAction",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "calendarAdminPageSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "onSecondaryAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "calendarTypeValueItem": {
+      "chains": [
+        {
+          "chain": "onCalendarTypeValueChange",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "createLineBtnAction": {
+      "chains": [
+        {
+          "chain": "onCreateLine",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "editLineBtnAction": {
+      "chains": [
+        {
+          "chain": "onEditLine",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "deleteLineBtnAction": {
+      "chains": [
+        {
+          "chain": "onDeleteLine",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "enabledFlagValue": {
+      "chains": [
+        {
+          "chain": "onHdrSwitchValueChange",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "fromYearValueItem": {
+      "chains": [
+        {
+          "chain": "fromYearValueItem",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "lineEnabledFlagValue": {
+      "chains": [
+        {
+          "chain": "SwitchValueChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "lineSaveAction": {
+      "chains": [
+        {
+          "chain": "onLineSave",
+          "parameters": {
+            "isSaveAndClose": "Y"
+          }
+        }
+      ]
+    },
+    "lineCancelAction": {
+      "chains": [
+        {
+          "chain": "onLineCancel",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "lineDialogClose": {
+      "chains": [
+        {
+          "chain": "onLineDialogClose",
+          "parameters": {
+            "event": "{{$event.detail.event}}"
+          }
+        }
+      ]
+    },
+    "deleteOkAction": {
+      "chains": [
+        {
+          "chain": "onDeleteOk",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteCancelAction": {
+      "chains": [
+        {
+          "chain": "onDeleteCancel",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "aboutOkAction": {
+      "chains": [
+        {
+          "chain": "onAboutOk",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "lineSaveAnotherAction": {
+      "chains": [
+        {
+          "chain": "onSaveAnother",
+          "parameters": {
+            "isSaveAndClose": "N",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "nextBtnAction": {
+      "chains": [
+        {
+          "chain": "onNextBtnAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "prevBtnAction": {
+      "chains": [
+        {
+          "chain": "onPrevBtnAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "refreshLineBtnAction": {
+      "chains": [
+        {
+          "chain": "onLineRefresh",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "toYearValueItem": {
+      "chains": [
+        {
+          "chain": "toYearValueItem",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    }
+
+  },
+  "constants": {
+    "lineTableColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Action",
+          "field": "",
+          "resizable": "enabled",
+          "width": 100,
+          "template": "actions_template",
+          "headerStyle": "white-space: nowrap; min-width: 100px;",
+          "style": ""
+        },
+        {
+          "headerText": "S.No",
+          "field": "line_num",
+          "resizable": "enabled",
+          "width": 100,
+          "sortable": "enabled",
+          "template": "line_num_template",
+          "headerStyle": "white-space: nowrap; min-width: 100px;",
+          "style": ""
+        },
+        {
+          "headerText": "From Year",
+          "field": "from_year",
+          "resizable": "enabled",
+          "sortable": "enabled",
+          "width": 140,
+          "template": "from_year_template",
+          "headerStyle": "white-space: nowrap; min-width: 140px;",
+          "style": ""
+        },
+        {
+          "headerText": "To Year",
+          "field": "to_year",
+          "resizable": "enabled",
+          "sortable": "enabled",
+          "width": 140,
+          "template": "from_year_template",
+          "headerStyle": "white-space: nowrap; min-width: 140px;",
+          "style": ""
+        },
+        {
+          "headerText": "Prompt",
+          "field": "prompt",
+          "resizable": "enabled",
+          "sortable": "enabled",
+          "width": 150,
+          "template": "prompt_template",
+          "headerStyle": "white-space: nowrap; min-width: 150px;",
+          "style": ""
+        },
+        {
+          "headerText": "Description",
+          "field": "description",
+          "resizable": "enabled",
+          "sortable": "enabled",
+          "width": 200,
+          "template": "description_template",
+          "headerStyle": "white-space: nowrap; min-width: 200px;",
+          "style": ""
+        },
+{
+          "headerText": "Enabled Flag",
+          "field": "enabled_flag",
+          "resizable": "enabled",
+          "sortable": "enabled",
+          "width": "",
+          "template": "enabled_flag_template",
+          "headerStyle": "white-space: nowrap;",
+          "style": ""
+        },
+        {
+          "headerText": "About",
+          "field": "about",
+          "sortable": "disabled",
+          "resizable": "enabled",
+          "template": "about",
+          "width": 61,
+          "className": "oj-helper-text-align-center"
+        }
+      ]
+    },
+    "secondaryActionsFinal": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ],
+      "uniqueItems": true
+    }
+  }
+}

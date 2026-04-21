@@ -1,0 +1,92 @@
+{
+    "items": [
+        {
+            "hierarchy_list_id": 7048,
+            "object_version_num": 0,
+            "hierarchy_id": 7041,
+            "hierarchy_code": "PMIS_PROJECT_CHARTER",
+            "hierarchy_name": "Pmis Project Charter",
+            "function_id": 6648,
+            "function_code": "PROJECT_CHARTER",
+            "function_name": "Project Charter",
+            "category_id": 46,
+            "category_code": "APPROVER",
+            "category_name": "Approver",
+            "type_id": 42,
+            "type_code": "USER_GROUP",
+            "type_name": "User Group",
+            "level_num": 2,
+            "user_id": null,
+            "user_name": null,
+            "person_id": null,
+            "person_number": null,
+            "person_name": null,
+            "user_role_id": 7043,
+            "approval_role_code": "PMIS_ASSET_PLANNING_GENERAL_MANAGER",
+            "user_role_name": "PMIS Asset Planning General Manager",
+            "from_limit": null,
+            "to_limit": null,
+            "remarks": null,
+            "active_flag": "Y",
+            "attribute_json": null,
+            "created_by": "Dinesh  Kumar P Dinesh  Kumar P",
+            "created_date": "2026-04-05T05:30:27Z",
+            "last_updated_by": "Dinesh  Kumar P Dinesh  Kumar P",
+            "last_updated_date": "2026-04-05T05:30:27Z",
+            "last_updated_login": "Dinesh  Kumar P Dinesh  Kumar P"
+        },
+        {
+            "hierarchy_list_id": 7051,
+            "object_version_num": 0,
+            "hierarchy_id": 7041,
+            "hierarchy_code": "PMIS_PROJECT_CHARTER",
+            "hierarchy_name": "Pmis Project Charter",
+            "function_id": 6648,
+            "function_code": "PROJECT_CHARTER",
+            "function_name": "Project Charter",
+            "category_id": 46,
+            "category_code": "APPROVER",
+            "category_name": "Approver",
+            "type_id": 42,
+            "type_code": "USER_GROUP",
+            "type_name": "User Group",
+            "level_num": 5,
+            "user_id": null,
+            "user_name": null,
+            "person_id": null,
+            "person_number": null,
+            "person_name": null,
+            "user_role_id": 7046,
+            "approval_role_code": "PMIS_CPD_OPD_GENERAL_MANAGER",
+            "user_role_name": "PMIS CPD OPD General Manager",
+            "from_limit": null,
+            "to_limit": null,
+            "remarks": null,
+            "active_flag": "Y",
+            "attribute_json": null,
+            "created_by": "Dinesh  Kumar P Dinesh  Kumar P",
+            "created_date": "2026-04-05T05:31:17Z",
+            "last_updated_by": "Dinesh  Kumar P Dinesh  Kumar P",
+            "last_updated_date": "2026-04-05T05:31:17Z",
+            "last_updated_login": "Dinesh  Kumar P Dinesh  Kumar P"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 2,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmis/approval/approval/selectgroup"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmis/approval/approval/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmis/approval/approval/selectgroup"
+        }
+    ]
+}

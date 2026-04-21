@@ -1,0 +1,718 @@
+{
+    "items": [
+        {
+            "project_id": 1015,
+            "project_name": "C7 - A'Seeb Extension Areas",
+            "budget_number": "MGC7-C"
+        },
+        {
+            "project_id": 1031,
+            "project_name": "Darsait New STP Construction",
+            "budget_number": "BAS-W-2025-037-NW-C"
+        },
+        {
+            "project_id": 6038,
+            "project_name": "A’Seeb STP Phase II",
+            "budget_number": "MGC22-C"
+        },
+        {
+            "project_id": 6040,
+            "project_name": "Sewer &TE connection to OBG",
+            "budget_number": "MGC11-CA"
+        },
+        {
+            "project_id": 7038,
+            "project_name": "Masira-Network Construction",
+            "budget_number": "RG6Z2-C"
+        },
+        {
+            "project_id": 16038,
+            "project_name": "OCEC Const. (PS & Bal. Work)",
+            "budget_number": "MGB100-C"
+        },
+        {
+            "project_id": 30038,
+            "project_name": "Completing Balance Sewerage",
+            "budget_number": "RG5Z1-CA"
+        },
+        {
+            "project_id": 37038,
+            "project_name": "Supervision Masirah SewerageNW",
+            "budget_number": "RG6Z-35-DS"
+        },
+        {
+            "project_id": 42038,
+            "project_name": "C NW STP Al-Musanah",
+            "budget_number": "MCT-WW-2024-002-NW-CS"
+        },
+        {
+            "project_id": 45040,
+            "project_name": "WK and Amerat Wet Connection",
+            "budget_number": "MGG-WK-CSME"
+        },
+        {
+            "project_id": 47039,
+            "project_name": "Balance Sohar Phase -III Const",
+            "budget_number": "RG1Z-1a-C"
+        },
+        {
+            "project_id": 49039,
+            "project_name": "construction Diversion CPS NW",
+            "budget_number": "MGB-B23-C"
+        },
+        {
+            "project_id": 52040,
+            "project_name": "Upgrading Jaalan Bu Ali STP",
+            "budget_number": "RG6Z-35a-D"
+        },
+        {
+            "project_id": 54038,
+            "project_name": "Construction of Reed Bed STP",
+            "budget_number": "RG5Z-121-DC"
+        },
+        {
+            "project_id": 58038,
+            "project_name": "A’Seeb STP Phase III",
+            "budget_number": "MGC-C13-D"
+        },
+        {
+            "project_id": 60038,
+            "project_name": "Design TE Wadi Outfall of A1",
+            "budget_number": "MGA-A21-D"
+        },
+        {
+            "project_id": 61038,
+            "project_name": "B7 packageA construction NW",
+            "budget_number": "MGB-B7A-C"
+        },
+        {
+            "project_id": 61039,
+            "project_name": "B7 package D construciton NW",
+            "budget_number": "MGB-B7D-C"
+        },
+        {
+            "project_id": 61040,
+            "project_name": "B7 package E construciton NW",
+            "budget_number": "MGB-B7E-C"
+        },
+        {
+            "project_id": 61042,
+            "project_name": "RCA & AH Construction",
+            "budget_number": "MGC-23-C"
+        },
+        {
+            "project_id": 63039,
+            "project_name": "Rehabilitation of Bukha STP",
+            "budget_number": "RG1Z-84-C"
+        },
+        {
+            "project_id": 63041,
+            "project_name": "Upgrading of Sohar STP",
+            "budget_number": "RG1Z-1b-C"
+        },
+        {
+            "project_id": 64038,
+            "project_name": "Design Ruwi Rehabilitation",
+            "budget_number": "MGG-G4-D"
+        },
+        {
+            "project_id": 65040,
+            "project_name": "Supervision Sohar NW PIII",
+            "budget_number": "RG1Z-1c-S"
+        },
+        {
+            "project_id": 68039,
+            "project_name": "Const. Anoxic Tank Ibra",
+            "budget_number": "RG5Z-122-C"
+        },
+        {
+            "project_id": 68040,
+            "project_name": "Const. Anoxic Tank Ibri",
+            "budget_number": "RG4Z-1-C"
+        },
+        {
+            "project_id": 72038,
+            "project_name": "DC for Mahoot Area",
+            "budget_number": "RG5Z-123-DC"
+        },
+        {
+            "project_id": 74040,
+            "project_name": "TE discharge  Wadi Al Janhi",
+            "budget_number": "MGA-A21-C"
+        },
+        {
+            "project_id": 75040,
+            "project_name": "Con.W.W Facilities in Mahout",
+            "budget_number": "RG5Z-124-C"
+        },
+        {
+            "project_id": 76043,
+            "project_name": "22412015",
+            "budget_number": "22412015"
+        },
+        {
+            "project_id": 76053,
+            "project_name": "22407016",
+            "budget_number": "22407016"
+        },
+        {
+            "project_id": 76054,
+            "project_name": "22411021",
+            "budget_number": "22411021"
+        },
+        {
+            "project_id": 76055,
+            "project_name": "22413037",
+            "budget_number": "22413037"
+        },
+        {
+            "project_id": 76056,
+            "project_name": "22413057",
+            "budget_number": "22413057"
+        },
+        {
+            "project_id": 76057,
+            "project_name": "22414034",
+            "budget_number": "22414034"
+        },
+        {
+            "project_id": 76062,
+            "project_name": "22414038",
+            "budget_number": "22414038"
+        },
+        {
+            "project_id": 76065,
+            "project_name": "22419010",
+            "budget_number": "22419010"
+        },
+        {
+            "project_id": 76085,
+            "project_name": "22412023",
+            "budget_number": "22412023"
+        },
+        {
+            "project_id": 76087,
+            "project_name": "22413033",
+            "budget_number": "22413033"
+        },
+        {
+            "project_id": 76088,
+            "project_name": "22414071",
+            "budget_number": "22414071"
+        },
+        {
+            "project_id": 76089,
+            "project_name": "22411012",
+            "budget_number": "22411012"
+        },
+        {
+            "project_id": 76092,
+            "project_name": "Sponsored Capex Projects",
+            "budget_number": "Sponsored Capex Projects"
+        },
+        {
+            "project_id": 76093,
+            "project_name": "22418008",
+            "budget_number": "22418008"
+        },
+        {
+            "project_id": 76094,
+            "project_name": "22419013",
+            "budget_number": "22419013"
+        },
+        {
+            "project_id": 76096,
+            "project_name": "W3121001",
+            "budget_number": "3121001"
+        },
+        {
+            "project_id": 76111,
+            "project_name": "22409124",
+            "budget_number": "22409124"
+        },
+        {
+            "project_id": 76112,
+            "project_name": "22414067",
+            "budget_number": "22414067"
+        },
+        {
+            "project_id": 76113,
+            "project_name": "22412033",
+            "budget_number": "22412033"
+        },
+        {
+            "project_id": 76116,
+            "project_name": "22415072",
+            "budget_number": "22415072"
+        },
+        {
+            "project_id": 76121,
+            "project_name": "22418007",
+            "budget_number": "22418007"
+        },
+        {
+            "project_id": 76123,
+            "project_name": "22420016",
+            "budget_number": "22420016"
+        },
+        {
+            "project_id": 76124,
+            "project_name": "22420017",
+            "budget_number": "22420017"
+        },
+        {
+            "project_id": 76143,
+            "project_name": "22414033",
+            "budget_number": "22414033"
+        },
+        {
+            "project_id": 76148,
+            "project_name": "22418006",
+            "budget_number": "22418006"
+        },
+        {
+            "project_id": 76164,
+            "project_name": "22414065",
+            "budget_number": "22414065"
+        },
+        {
+            "project_id": 76165,
+            "project_name": "22413055",
+            "budget_number": "22413055"
+        },
+        {
+            "project_id": 76166,
+            "project_name": "22415074",
+            "budget_number": "22415074"
+        },
+        {
+            "project_id": 76168,
+            "project_name": "22414069",
+            "budget_number": "22414069"
+        },
+        {
+            "project_id": 76170,
+            "project_name": "22413061",
+            "budget_number": "22413061"
+        },
+        {
+            "project_id": 76171,
+            "project_name": "22414029",
+            "budget_number": "22414029"
+        },
+        {
+            "project_id": 76173,
+            "project_name": "22418009",
+            "budget_number": "22418009"
+        },
+        {
+            "project_id": 76188,
+            "project_name": "22411016",
+            "budget_number": "22411016"
+        },
+        {
+            "project_id": 76189,
+            "project_name": "22412022",
+            "budget_number": "22412022"
+        },
+        {
+            "project_id": 76190,
+            "project_name": "22413058",
+            "budget_number": "22413058"
+        },
+        {
+            "project_id": 76196,
+            "project_name": "22410004",
+            "budget_number": "22410004"
+        },
+        {
+            "project_id": 76197,
+            "project_name": "22414066",
+            "budget_number": "22414066"
+        },
+        {
+            "project_id": 76202,
+            "project_name": "22412046",
+            "budget_number": "22412046"
+        },
+        {
+            "project_id": 76204,
+            "project_name": "22414070",
+            "budget_number": "22414070"
+        },
+        {
+            "project_id": 76206,
+            "project_name": "22419014",
+            "budget_number": "22419014"
+        },
+        {
+            "project_id": 76226,
+            "project_name": "22408030",
+            "budget_number": "22408030"
+        },
+        {
+            "project_id": 76230,
+            "project_name": "22413059",
+            "budget_number": "22413059"
+        },
+        {
+            "project_id": 76231,
+            "project_name": "22416002",
+            "budget_number": "22416002"
+        },
+        {
+            "project_id": 76234,
+            "project_name": "22419011",
+            "budget_number": "22419011"
+        },
+        {
+            "project_id": 76262,
+            "project_name": "22409004",
+            "budget_number": "22409004"
+        },
+        {
+            "project_id": 76266,
+            "project_name": "22413035",
+            "budget_number": "22413035"
+        },
+        {
+            "project_id": 76269,
+            "project_name": "22416001",
+            "budget_number": "22416001"
+        },
+        {
+            "project_id": 76270,
+            "project_name": "22413062",
+            "budget_number": "22413062"
+        },
+        {
+            "project_id": 76271,
+            "project_name": "22415075",
+            "budget_number": "22415075"
+        },
+        {
+            "project_id": 83040,
+            "project_name": "NetworkayitwaljahDarsait",
+            "budget_number": "MGG-ADW-C"
+        },
+        {
+            "project_id": 83043,
+            "project_name": "B1 Network Rehabilitation",
+            "budget_number": "MGB1-R-C"
+        },
+        {
+            "project_id": 84043,
+            "project_name": "Design for Barka NW&STP",
+            "budget_number": "RG2Z-10-1-D"
+        },
+        {
+            "project_id": 84044,
+            "project_name": "Design for Al Khabourah NW&STP",
+            "budget_number": "RG1Z-3-1-D"
+        },
+        {
+            "project_id": 84045,
+            "project_name": "Design for Suwayq NW&STP",
+            "budget_number": "RG1Z-1-1-D"
+        },
+        {
+            "project_id": 84046,
+            "project_name": "Con.Odor control Ibri STP",
+            "budget_number": "RG3Z-3a-C"
+        },
+        {
+            "project_id": 84047,
+            "project_name": "Con.Odor control Ibra STP",
+            "budget_number": "RG5Z-3a-C"
+        },
+        {
+            "project_id": 85043,
+            "project_name": "upgrade Hail Al Ghaf STP",
+            "budget_number": "MGQ1-DC"
+        },
+        {
+            "project_id": 86050,
+            "project_name": "Cons.Servies works MUSANAAH",
+            "budget_number": "RG2Z3-1-D"
+        },
+        {
+            "project_id": 86051,
+            "project_name": "Al Seeb Long Term Improvments",
+            "budget_number": "22423001"
+        },
+        {
+            "project_id": 86053,
+            "project_name": "Al Ayayn,Sint &Saih Al Maashi",
+            "budget_number": "22423002"
+        },
+        {
+            "project_id": 86054,
+            "project_name": "Network for Izki- phase 1",
+            "budget_number": "22423003"
+        },
+        {
+            "project_id": 87056,
+            "project_name": "Small CAPEX and Large Pockets",
+            "budget_number": "22423006"
+        },
+        {
+            "project_id": 87057,
+            "project_name": "General Consultancy Services",
+            "budget_number": "22423007"
+        },
+        {
+            "project_id": 87058,
+            "project_name": "DEEM strategic reservoirs",
+            "budget_number": "22423008"
+        },
+        {
+            "project_id": 87060,
+            "project_name": "B7B Netwoeks Construction",
+            "budget_number": "MGB-B7B-C"
+        },
+        {
+            "project_id": 87062,
+            "project_name": "Cons.Sewer Network C3C&D",
+            "budget_number": "MGC-C3C&D"
+        },
+        {
+            "project_id": 87063,
+            "project_name": "Construction C3 Aera B",
+            "budget_number": "MGC-C3B-C"
+        },
+        {
+            "project_id": 87066,
+            "project_name": "Consult-G2-STP and Networks",
+            "budget_number": "MGMU-G2-D"
+        },
+        {
+            "project_id": 87067,
+            "project_name": "Hay AL Naseem Networks",
+            "budget_number": "RG2Z-BH-C"
+        },
+        {
+            "project_id": 87068,
+            "project_name": "Nizwa- Manah TE Line Project",
+            "budget_number": "RG4Z-NTE-D"
+        },
+        {
+            "project_id": 87069,
+            "project_name": "Design of Nizwa Sewer System",
+            "budget_number": "RG4Z1-NSS-D"
+        },
+        {
+            "project_id": 87070,
+            "project_name": "Nakhal Al-Awabi Wadi Al-Maawil",
+            "budget_number": "22423009"
+        },
+        {
+            "project_id": 88070,
+            "project_name": "Contracts Management Services",
+            "budget_number": "MGCO-1-2023"
+        },
+        {
+            "project_id": 88071,
+            "project_name": "22423010",
+            "budget_number": "22423010"
+        },
+        {
+            "project_id": 88072,
+            "project_name": "Consultancy Services (A10)",
+            "budget_number": "MGA-A10-DS"
+        },
+        {
+            "project_id": 89074,
+            "project_name": "Cons.Sewer Network C5AC5B",
+            "budget_number": "MGC-C5aC5b-C"
+        },
+        {
+            "project_id": 89075,
+            "project_name": "Cons.Sewer Network C4",
+            "budget_number": "MGC-C4-C"
+        },
+        {
+            "project_id": 89076,
+            "project_name": "Const.Sewer Network C3AC3F",
+            "budget_number": "MGC-C3aC3f-C"
+        },
+        {
+            "project_id": 89077,
+            "project_name": "Consultancy ServicesC3C&D",
+            "budget_number": "MGC-C3bcd-S"
+        },
+        {
+            "project_id": 92077,
+            "project_name": "Const.Water Network in Barka",
+            "budget_number": "22423013"
+        },
+        {
+            "project_id": 92078,
+            "project_name": "Con.Supervsion-B7B & B7E",
+            "budget_number": "MGB-B7-BE-S"
+        },
+        {
+            "project_id": 92079,
+            "project_name": "Con.Supervision B7A & B7D",
+            "budget_number": "MGB-B7-AD-S"
+        },
+        {
+            "project_id": 93079,
+            "project_name": "Networks in Al-Rustaq zone1",
+            "budget_number": "22423015"
+        },
+        {
+            "project_id": 93080,
+            "project_name": "Distribution Network Manah",
+            "budget_number": "22413033"
+        },
+        {
+            "project_id": 94080,
+            "project_name": "Samail and Izki  Networks",
+            "budget_number": "22423017"
+        },
+        {
+            "project_id": 98080,
+            "project_name": "Consultancy For C3A&C3F&C3E",
+            "budget_number": "MGC-C3aC3fC3e-S"
+        },
+        {
+            "project_id": 99080,
+            "project_name": "Consultancy Supervision-C4",
+            "budget_number": "MGC-C4-S"
+        },
+        {
+            "project_id": 100080,
+            "project_name": "Consultancy ServicesC5aC5b",
+            "budget_number": "MGC-C5aC5b-S"
+        },
+        {
+            "project_id": 102080,
+            "project_name": "Con.Seeb Alnsab STP PPP",
+            "budget_number": "MGC-PPP2"
+        },
+        {
+            "project_id": 103080,
+            "project_name": "TE Tank Royal Office",
+            "budget_number": "MGB-TTRO-S"
+        },
+        {
+            "project_id": 104080,
+            "project_name": "NETWORK WADI A’SAHTAN",
+            "budget_number": "22424001"
+        },
+        {
+            "project_id": 108080,
+            "project_name": "Al Ghubrah Pump Station\t",
+            "budget_number": "22424003"
+        },
+        {
+            "project_id": 109080,
+            "project_name": "Consultancy of B1 Rehab ph-1",
+            "budget_number": "MCT-WW-2024-002-NW-CS"
+        },
+        {
+            "project_id": 111080,
+            "project_name": "CENTRAL LABORATORY in Al KHOUD",
+            "budget_number": "MCT-W-2024-005-Others-C"
+        },
+        {
+            "project_id": 115080,
+            "project_name": " MUDHAIBI NETWORKS P2",
+            "budget_number": "SHN-W-2024-008-NW-C"
+        },
+        {
+            "project_id": 119081,
+            "project_name": "NetworksAl-Amerat (A10)",
+            "budget_number": "MCT-WW-2024-014-NW-C"
+        },
+        {
+            "project_id": 119082,
+            "project_name": "Networks for Al-Amerat-AZ8-AZ9",
+            "budget_number": "MCT-WW-2024-013-NW-C"
+        },
+        {
+            "project_id": 120081,
+            "project_name": "Supervision Amerat A10",
+            "budget_number": "MCT-WW-2024-016-NW-CS"
+        },
+        {
+            "project_id": 121080,
+            "project_name": "NW,SN &TE Sultan Haitham City",
+            "budget_number": "MCT-IN-2024-017-NW-C"
+        },
+        {
+            "project_id": 134081,
+            "project_name": "Construction of J Akhdar Trunk",
+            "budget_number": "DAK-WW-2025-002-Multui-C"
+        },
+        {
+            "project_id": 135081,
+            "project_name": "HSE Management Services-C",
+            "budget_number": "MCT-IN-2025-04-Others-S"
+        },
+        {
+            "project_id": 135083,
+            "project_name": "HSE Management Services(A)",
+            "budget_number": "MCT-IN-2025-06-Others-S"
+        },
+        {
+            "project_id": 147082,
+            "project_name": "STP&PS Sultan Haitham City-DC",
+            "budget_number": "MCT-WW-2025-024-Multi-DC"
+        },
+        {
+            "project_id": 153081,
+            "project_name": "Nizwa–Manah TE",
+            "budget_number": "DAK-WW-2025-032-TE-C"
+        },
+        {
+            "project_id": 157083,
+            "project_name": "Consultancy Al Hazim 1 & 2",
+            "budget_number": "BAS-W-2025-038-NW-S"
+        },
+        {
+            "project_id": 173081,
+            "project_name": "Main Sewer Trunk in SHC",
+            "budget_number": "MCT-WW-2025-062-Others-C"
+        },
+        {
+            "project_id": 187082,
+            "project_name": "Consultancy Wadi Dayqah TP",
+            "budget_number": "MCT-W-2025-076-TP-CS"
+        },
+        {
+            "project_id": 203081,
+            "project_name": "Al-Thuraya City",
+            "budget_number": "MCT-W-2025-096-NW-C"
+        },
+        {
+            "project_id": 203082,
+            "project_name": "22413033",
+            "budget_number": "22413033"
+        },
+        {
+            "project_id": 203083,
+            "project_name": "22411025",
+            "budget_number": "22411025"
+        },
+        {
+            "project_id": 300000114652463,
+            "project_name": "Sinaw Network System",
+            "budget_number": "MCT-W-422-NW-DC"
+        }
+    ],
+    "hasMore": false,
+    "limit": 0,
+    "offset": 0,
+    "count": 140,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/projectcharter/lov/pclov"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/projectcharter/lov/item"
+        }
+    ]
+}

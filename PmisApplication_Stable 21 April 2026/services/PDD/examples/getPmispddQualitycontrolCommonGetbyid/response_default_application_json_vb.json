@@ -1,0 +1,27 @@
+{
+    "OUTPUT": [
+        {
+            "quality_assurance_id": 2949,
+            "object_version_num": 2,
+            "ora_project_id": 300000090427447,
+            "ora_project_number": "RG5Z1-CA",
+            "ora_project_name": "RG5Z1-CA",
+            "tender_id": 17001,
+            "tender_number": "NW-RFQ-1119-2025",
+            "tender_name": "Construction of Anoxic tank at Ibra RG-CA",
+            "period": "FEB-26",
+            "activity_id": 501,
+            "activity_code": null,
+            "activity_name": null,
+            "activity_done_for_month": "Inspection, Testing, Verification",
+            "activity_total_cumm": 12,
+            "activity_remark": "All activities completed successfully",
+            "additional_info": "No major issues found during QA process",
+            "created_by": "Vishal",
+            "created_date": "2026-02-17T08:54:00.637491Z",
+            "last_updated_by": "Vishal Kr",
+            "last_updated_date": "2026-02-17T08:58:51.228009Z",
+            "last_updated_login": "Vishal"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "items": [
+        {
+            "ora_project_id": 300000090427449,
+            "project_name": "VBCS-Feb-10-1",
+            "project_number": "789BEN234",
+            "tender_id": 17002
+        },
+        {
+            "ora_project_id": 300000090427447,
+            "project_name": "RG5Z1-CA",
+            "project_number": "RG5Z1-CA",
+            "tender_id": 17001
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 2,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/projectlist/lov/project"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/projectlist/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/projectlist/lov/project"
+        }
+    ]
+}

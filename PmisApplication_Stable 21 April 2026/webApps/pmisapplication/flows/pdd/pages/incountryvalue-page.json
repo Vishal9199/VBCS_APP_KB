@@ -1,0 +1,174 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "about": {
+      "type": "about"
+    },
+    "addEditMode": {
+      "type": "string",
+      "defaultValue": "CREATE"
+    },
+    "inputOraProjectId": {
+      "type": "number",
+      "defaultValue": 0,
+      "input": "fromUrl"
+    },
+    "inputTenderId": {
+      "type": "number",
+      "defaultValue": 0,
+      "input": "fromUrl"
+    },
+    "inputPddIncId": {
+      "type": "number",
+      "defaultValue": 0,
+      "input": "fromUrl"
+    },
+    "onloadData": {
+      "type": {
+        "projectName": "string",
+        "projectNumber": "string",
+        "tenderNumber": "string",
+        "percSME": "number",
+        "daysLeft": "number"
+      }
+    },
+    "inCountryValueVar": {
+      "type": {
+        "pddIncId": "number",
+        "oraProjectId": "number",
+        "tenderId": "number",
+        "percSme": "number",
+        "daysLeft": "number",
+        "percSmeMonth": "number",
+        "additionalInfo": "string"
+      }
+    },
+    "pTenderId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "tempDaysLeft": {
+      "type": "string"
+    }
+
+  },
+  "metadata": {
+    "dynamicContainerMetadata": {
+      "type": "vb/ContainerMetadataProviderDescriptor"
+    }
+  },
+  "types": {
+    "about": {
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    }
+  },
+  "eventListeners": {
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "onCloseAbout_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "inCountryValuePageSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "onClosePrimary_AC",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "inCountryValuePageSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "AdvancedCreateAndEditPageTemplateSpSecondaryActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "chain": "vbEnterListener",
+          "parameters": {}
+        }
+      ]
+    },
+    "saveAction": {
+      "chains": [
+        {
+          "chain": "saveAction"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-sp-message-unsaved-changes": {
+        "path": "oj-sp/message-unsaved-changes/loader"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      }
+
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ],
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    }
+  },
+  "@dt": {
+    "iconClass": "vbdt-dynamic-icon-1-icoAdvancedCreateAndEdit48Svg"
+  }
+}

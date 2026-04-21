@@ -1,0 +1,301 @@
+{
+  "description": "",
+  "routerFlow": "main",
+  "variables": {
+    "drawerOpen": {
+      "type": "boolean"
+    },
+    "MenuSelection": {
+      "type": "string"
+    },
+    "messageToast": {
+      "type": "string"
+    },
+    "messagesBannerADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "MessagesBannerType",
+        "keyAttributes": "id"
+      }
+    },
+    "messageId": {
+      "type": "string"
+    },
+    "messageADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "messageObj",
+        "keyAttributes": "id"
+      }
+    },
+    "popupOpen": {
+      "type": "string"
+    },
+    "navigationConfig": {
+      "type": "object",
+      "defaultValue": {
+        "pddgeneral": {
+          "page": "general-page",
+          "flow": "pdd"
+        },
+        "pddattribute": {
+          "page": "attribute-page",
+          "flow": "pdd"
+        },
+        "pddcontract-contract": {
+          "page": "contract-page",
+          "flow": "pdd"
+        },
+        "pddcontract-contact": {
+          "page": "contact-page",
+          "flow": "pdd"
+        },
+        "pddschedule": {
+          "page": "schedule",
+          "flow": "pdd"
+        },
+        "pddstatusupdate-progress": {
+          "page": "progress-page",
+          "flow": "pdd"
+        },
+        "pddstatusupdate-hse": {
+          "page": "hse-page",
+          "flow": "pdd"
+        },
+        "pddstatusupdate-quality": {
+          "page": "quality-control-page",
+          "flow": "pdd"
+        },
+        "pddpayment": {
+          "page": "payment-certification-page",
+          "flow": "pdd"
+        },
+        "pddbudget": {
+          "page": "budget-control-page",
+          "flow": "pdd"
+        },
+        "pddstakeholder": {
+          "page": "stakeholder-analysis-page",
+          "flow": "pdd"
+        },
+        "pddchangeorder": {
+          "page": "change-order-page",
+          "flow": "pdd"
+        },
+        "pddchangevariation": {
+          "page": "change-variation-register-page",
+          "flow": "pdd"
+        },
+        "pddrisk": {
+          "page": "risk-management-page",
+          "flow": "pdd"
+        },
+        "pddissue": {
+          "page": "issue-register-page",
+          "flow": "pdd"
+        },
+        "pddlesson": {
+          "page": "lesson-learned-page",
+          "flow": "pdd"
+        },
+        "pddweekly": {
+          "page": "weekly-highlights-page",
+          "flow": "pdd"
+        },
+        "pddincountryvalue": {
+          "page": "incountryvalue-page",
+          "flow": "pdd"
+        },
+        "pdddocuments": {
+          "page": "project-documents-page",
+          "flow": "pdd"
+        },
+        "pddqliksense": {
+          "page": "qliksense-dashboard-page",
+          "flow": "pdd"
+        }
+      }
+    }
+  },
+  "metadata": {},
+  "types": {
+    "MessagesBannerType": {
+      "id": "string",
+      "messageType": "string",
+      "primaryText": "string",
+      "primaryActionLabel": "string",
+      "secondaryText": "any",
+      "secondaryActionLabel": "string"
+    },
+    "messageObj": {
+      "autoTimeout": "number",
+      "category": "string",
+      "detail": "string",
+      "DisplayOptions": "string",
+      "id": "string",
+      "severity": "string",
+      "summary": "string",
+      "timestamp": "string"
+    }
+  },
+  "eventListeners": {
+    "application:spShowToast": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "showMessageToast"
+        }
+      ]
+    },
+    "hyperlinkClick": {
+      "chains": [
+        {
+          "parameters": {
+            "menuId": "{{ $event.target.closest('li').id }}"
+          },
+          "chain": "navigationMenuClickAction"
+        }
+      ]
+    },
+    "messagesBannerSpClose": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "closeMessageBanner"
+        }
+      ]
+    },
+    "navigationListSelection": {
+      "chains": [
+        {
+          "chain": "NavigationListSelectionChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "selection": "{{ $event.detail.value }}",
+            "selectionEvent": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "spanClick": {
+      "chains": [
+        {
+          "chain": "spanClickChain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "vbNotification": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}",
+            "fireNotifiObj": {
+              "autoTimeout": "{{ $event.displayMode==='transient'? 0 : -1 }}",
+              "detail": "{{ $event.message }}",
+              "id": "{{ $event.key }}",
+              "severity": "{{ $event.type }}",
+              "summary": "{{ $event.summary }}"
+            }
+          },
+          "chain": "showNotificationMessage"
+        }
+      ]
+    },
+    "menuToggleButtonAction": {
+      "chains": [
+        {
+          "chain": "openDrawerAction"
+        }
+      ]
+    },
+    "closeDrawerBtnAction": {
+      "chains": [
+        {
+          "chain": "closeDrawerAction"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-drawer-popup": {
+        "path": "ojs/ojdrawerpopup"
+      },
+      "oj-messages": {
+        "path": "ojs/ojmessages"
+      },
+      "oj-navigation-list": {
+        "path": "ojs/ojnavigationlist"
+      },
+      "oj-sp-messages-banner": {
+        "path": "oj-sp/messages-banner/loader"
+      },
+      "oj-sp-messages-toast": {
+        "path": "oj-sp/messages-toast/loader"
+      }
+    }
+  },
+  "translations": {},
+  "constants": {
+    "customRoleBasedPageMenu": {
+      "type": "string[]",
+      "defaultValue": [
+        "calendarsearch",
+        "regionsearch",
+        "lookupsearch",
+        "conceptsearch",
+        "fypsearch",
+        "projectchartesearch",
+        "projectlistsearch",
+        "servicespecsearch",
+        "projectlist"
+      ],
+      "description": "\"defaultValue\": [\n        \"calendarsearch\",\n        \"regionsearch\",\n        \"lookupsearch\",\n        \"conceptsearch\",\n        \"fypsearch\",\n        \"projectchartesearch\",\n        \"projectlistsearch\",\n        \"servicespecsearch\",\n        \"assignmentadmin\",\n        \"search\",\n        \"projectlist\"\n      ]"
+    },
+    "pagesWithMenu": {
+      "type": "string[]",
+      "defaultValue": [
+        "general",
+        "attribute",
+        "contract/contact",
+        "contract",
+        "contact",
+        "schedule",
+        "statusupdate",
+        "statusprogress",
+        "statushse",
+        "qualitycontrol",
+        "paymentcertification",
+        "budgetcontrolsearch",
+        "stakeholder",
+        "changeorder",
+        "changecontrol",
+        "riskmanage",
+        "issueregister"        ,
+        "lessonlearned"        ,
+        "weeklyhighlights"        ,
+        "projectdocuments"        ,
+        "qliksense",
+        "incountryvalue"
+      ]
+    }
+
+  }
+}

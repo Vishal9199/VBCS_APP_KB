@@ -1,0 +1,308 @@
+<style>
+
+  #details .oj-text-field.oj-read-only .oj-text-field-container {
+    background-color: transparent;
+    height: var(--oj-text-field-height);
+    padding: 3px;
+    min-height: 1rem;
+    border: none !important;
+  }
+
+</style>
+
+
+
+
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width:1px;min-width: 100%;">
+    <div id="mainContent">
+
+
+      <oj-sp-advanced-create-edit id="projectstatusupdateid" display-options.responsive-padding="on"
+        primary-action.label="Close" page-title="Lesson Learned" page-subtitle="  " display-mode="light"
+        on-sp-primary-action="[[$listeners.projectstatusupdateidSpPrimaryAction]]"
+        on-sp-secondary-action="[[$listeners.projectstatusupdateidSpSecondaryAction]]"
+        secondary-actions="[[ $variables.aToolBarList ]]">
+
+        <div slot="main" style="padding-top: 0; margin-top: 0.1rem; min-width: 100%;">
+          <div style="margin-top: 0;">
+
+
+            <oj-collapsible id="general-statusupdate-section" expanded="true"
+              class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 1rem;">
+              <span slot="header" style="font-weight: bold; color: white;">Project Details</span>
+              <div style="margin-top: 0; padding: 1rem; border-left: 4px;">
+                <oj-form-layout max-columns="3" label-edge="start" label-width="30%" colspan-wrap="wrap">
+
+                  <oj-input-text id="statusUpdateProjectName" label-hint="Project Name" placeholder="Project Name"
+                    value="{{ $variables.headerInfoVar.projectName }}" user-assistance-density="compact"
+                    style="width: 16rem;" disabled="true">
+                  </oj-input-text>
+
+                  <oj-input-text id="statusUpdateProjectNumber" label-hint="Project Number" placeholder="Project Number"
+                    value="{{ $variables.headerInfoVar.projectNumber }}" user-assistance-density="compact"
+                    style="width: 16rem;" disabled="true">
+                  </oj-input-text>
+
+                  <oj-input-text id="statusUpdateTenderNumber" label-hint="Tender Number" placeholder="Tender Number"
+                    value="{{ $variables.headerInfoVar.tenderNumber }}" user-assistance-density="compact"
+                    style="width: 16rem;" disabled="true">
+                  </oj-input-text>
+
+                </oj-form-layout>
+              </div>
+            </oj-collapsible>
+
+
+            <oj-collapsible id="general-statusupdate-section" expanded="true"
+              class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 1rem;">
+              <span slot="header" style="font-weight: bold; color: white;">Lesson Learned Details</span>
+
+              <!-- Add Button -->
+              <div class="oj-flex oj-helper-justify-content-flex-end">
+                <oj-button label="Add New Lesson" on-oj-action="[[$listeners.buttonAction]]">
+                  <span class="oj-ux-ico-plus" slot="startIcon"></span>
+                </oj-button>
+
+
+              </div>
+
+              <!-- Table -->
+              <div style="padding: 1rem;">
+                <oj-table scroll-policy="loadMoreOnScroll" class="oj-flex-item oj-sm-12 oj-md-12 oj-bg-body"
+                  display="grid" horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+                  id="lessonLearnedTable" data="[[ $variables.bufferDPlessonlearnedTable.instance ]]"
+                  columns="{{$constants.lessonTableColumns}}" edit-mode="rowEdit" selection-mode.row="single"
+                  on-oj-before-row-edit="[[$listeners.lessonLearnedTableBeforeRowEdit]]"
+                  on-oj-before-row-edit-end="[[$listeners.lessonLearnedTableBeforeRowEditEnd]]">
+
+                  <!-- Actions Template -->
+                  <template slot="actionsTemplate">
+                    <oj-button display="icons" chroming="borderless" class="oj-button-sm" style="padding-left:20px;"
+                      on-oj-action="[[$listeners.buttonAction2]]">
+                      <span slot="startIcon" class="oj-ux-ico-trash" role="img" style="font-size: 18px;" title="Delete Row"></span>
+                    </oj-button>
+                  </template>
+
+                  <!-- Period Template -->
+                  <template slot="periodTemplate">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                      <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                      <oj-input-text value="{{ $variables.lvCurrentLessonRow.period }}"></oj-input-text>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- Lesson Date Template -->
+                  <template slot="lessonDateTemplate">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                      <oj-bind-text value="[[ $current.data ? $page.functions.formatDisplayDate($current.data) : '' ]]">
+                      </oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                      <oj-input-date value="{{ $variables.lvCurrentLessonRow.lesson_date }}"></oj-input-date>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- Lesson Type Template - Select Single -->
+                  <template slot="lessonTypeTemplate">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                      <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-select-single value="{{ $variables.lvCurrentLessonRow.lesson_type }}" aria-label="Lesson Type"
+                      data="[[new oj.ArrayDataProvider([{value:'Positive',label:'Positive'},{value:'Negative',label:'Negative'}], {keyAttributes:'value'})]]"
+                      item-text="label" label-hint="">
+                    </oj-select-single>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- Lesson Category Template - Select Single -->
+                  <template slot="lessonCategoryTemplate">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                      <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                      <oj-select-single value="{{ $variables.lvCurrentLessonRow.lesson_category_id }}"
+                        aria-label="Lesson Category" item-text="lookup_value_name" label-hint=""
+                        data="[[$variables.getPmispddGeneralLovCommonListSDP]]"
+                        on-value-item-changed="[[$listeners.selectValueItem]]" required="true">
+                      </oj-select-single>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- Lesson Status Template -->
+                  <template slot="lessonStatusTemplate">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                      <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                      <oj-input-text value="{{ $variables.lvCurrentLessonRow.lesson_status }}"></oj-input-text>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- Lesson Impact Template -->
+                  <template slot="lessonImpactTemplate">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                      <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                      <oj-input-text value="{{ $variables.lvCurrentLessonRow.lesson_impact }}"></oj-input-text>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- Lesson Recommendation Template -->
+                  <template slot="lessonRecommendationTemplate">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                      <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                      <oj-input-text value="{{ $variables.lvCurrentLessonRow.lesson_recommendation }}"></oj-input-text>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- Logged By Template -->
+                  <template slot="loggedByTemplate">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                      <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                      <oj-input-text value="{{ $variables.lvCurrentLessonRow.logged_by }}"></oj-input-text>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- Continuous Process Template -->
+                  <template slot="continuousProcessTemplate">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                      <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                      <oj-input-text value="{{ $variables.lvCurrentLessonRow.continuous_process }}"></oj-input-text>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- Additional Info Template -->
+                  <template slot="additionalInfoTemplate">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                      <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                      <oj-input-text value="{{ $variables.lvCurrentLessonRow.additional_info }}"></oj-input-text>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- Created By Template -->
+                  <template slot="createdByTemplate">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                      <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                      <oj-input-text value="{{ $variables.lvCurrentLessonRow.created_by }}"></oj-input-text>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- Created Date Template -->
+                  <template slot="createdDateTemplate">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                      <oj-bind-text value="[[ $current.data ? $page.functions.formatDisplayDate($current.data) : '' ]]">
+                      </oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                      <oj-input-date value="{{ $variables.lvCurrentLessonRow.created_date }}"></oj-input-date>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- Last Updated By Template -->
+                  <template slot="lastUpdatedByTemplate">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                      <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                      <oj-input-text value="{{ $variables.lvCurrentLessonRow.last_updated_by }}"></oj-input-text>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- Last Updated Date Template -->
+                  <template slot="lastUpdatedDateTemplate">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                      <oj-bind-text value="[[ $current.data ? $page.functions.formatDisplayDate($current.data) : '' ]]">
+                      </oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                      <oj-input-date value="{{ $variables.lvCurrentLessonRow.last_updated_date }}"></oj-input-date>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- Last Updated Login Template -->
+                  <template slot="lastUpdatedLoginTemplate">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                      <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                      <oj-input-text value="{{ $variables.lvCurrentLessonRow.last_updated_login }}"></oj-input-text>
+                    </oj-bind-if>
+                  </template>
+
+                </oj-table>
+              </div>
+            </oj-collapsible>
+
+          </div>
+        </div>
+
+      </oj-sp-advanced-create-edit>
+
+
+    </div>
+  </div>
+</div>
+
+<oj-dialog dialog-title="Delete" id="DeleteDialog" style="display:none; width: 500px; overflow: hidden;"
+  dialog-title="Warning" id="delete_dialog" cancel-behavior="icon" header-decoration="off" drag-affordance="title-bar"
+  position.at.vertical="top" position.my.vertical="top">
+  <div slot="body" style="margin-top: 1.5rem;">
+    <p class="oj-lg-padding-4x-top">Are you sure to delete this Record?</p>
+  </div>
+  <div slot="footer">
+    <oj-button chroming="danger" on-oj-action="[[$listeners.buttonAction3]]">Yes</oj-button>
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction4]]">No</oj-button>
+  </div>
+</oj-dialog>
+
+
+<!-- About Dialog -->
+
+<oj-dialog dialog-title="About" id="details" cancel-behavior="icon"
+  style="overflow: hidden; min-width: 30%; width: 30%;" position.at.vertical="top">
+  <div slot="body">
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-sm-12 oj-md-12">
+        <oj-form-layout label-edge='start' readonly="true" user-assistance-density="compact" label-width="40%">
+          <oj-input-text label-hint="Created By:" value="{{ $variables.lvCurrentLessonRow.created_by }}"
+            readonly="true">
+          </oj-input-text>
+          <oj-input-date label-hint="Created Date : "
+            converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy hh:mm a"}}'
+            value="{{ $variables.lvCurrentLessonRow.created_date }}" readonly="true"
+            class="oj-form-control-width-sm">
+          </oj-input-date>
+          <oj-input-text label-hint="Last Updated By:"
+            value="{{ $variables.lvCurrentLessonRow.last_updated_by }}" readonly="true">
+          </oj-input-text>
+          <oj-input-date label-hint="Last Updated Date : "
+            converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy hh:mm a"}}'
+            value="{{ $variables.lvCurrentLessonRow.last_updated_date }}" readonly="true"
+            class="oj-form-control-width-sm"></oj-input-date>
+          <oj-input-text label-hint="Last Login By:"
+            value="{{ $variables.lvCurrentLessonRow.last_updated_login }}" readonly="true">
+          </oj-input-text>
+
+        </oj-form-layout>
+      </div>
+    </div>
+  </div>
+  <div slot="footer" style="padding: 0px 32px 32px 32px">
+    <oj-button on-oj-action="[[$listeners.buttonAction]]">Ok</oj-button>
+  </div>
+</oj-dialog>

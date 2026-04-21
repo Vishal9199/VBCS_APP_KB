@@ -1,0 +1,312 @@
+<style>
+  oj-option#lookup_addedit_h_cancelAction
+  {
+    display: none !important;
+  }
+</style>
+
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div>
+        <oj-sp-advanced-create-edit id="lookup_addedit" page-title="Lookup Type" display-options.responsive-padding="on"
+          primary-action.label="Save and Close" secondary-actions='[{"label":"Save","id":"save"}]'
+          on-sp-secondary-action="[[$listeners.lookupPageSpSecondaryAction]]"
+          on-sp-primary-action="[[$listeners.lookupPageSpPrimaryAction]]"
+          on-sp-cancel="[[$listeners.lookupPageSpCancel]]" badge.status="info"
+          badge.text="[[ $variables.lookupTypeVar.lookup_type_name ]]" page-subtitle=" " display-mode="light">
+
+          <div slot="main" style="background-color:white;">
+            <div style="margin-top: 0;">
+
+              <!-- Main Form Section - Lookup Type -->
+              <div class="oj-panel oj-panel-shadow-md oj-selected" style="padding: 3px; margin-top: 2px;">
+                <oj-validation-group valid="{{ $variables.isFormValid }}" id="lookup-type-validation">
+                  <oj-form-layout max-columns="2" label-edge="start" user-assistance-density="compact"
+                    direction="column" class="oj-formlayout-full-width" label-width="47%" style="margin-top: 0.1rem;">
+
+                    <!-- Lookup Type Code - Auto Convert to Upper Case -->
+                    <oj-input-text id="lookup-type-code" label-hint="Lookup Type Code" placeholder="Lookup Type Code"
+                      value="{{ $variables.lookupTypeVar.lookup_type_code }}" required="true"
+                      messages-custom="{{ $variables.lookupTypeCodeCustomMsg }}" readonly="[[ !$variables.canEdit ]]"
+                      on-value-changed="[[$listeners.lookupTypeCodeValue3]]" length.max="240" class=""
+                      >
+                      <div slot="end">
+                        <oj-bind-if test="[[ !$variables.canEdit ]]">
+                          <oj-button display="icons" chroming="borderless" label="Button"
+                            on-oj-action="[[$listeners.buttonAction]]" style="background-color:transparent;"
+                            id="iconOnlyBtn">
+                            <span class="oj-ux-ico-edit" id="span--655749004-1" slot="startIcon"></span>
+                          </oj-button>
+                        </oj-bind-if>
+                      </div>
+                    </oj-input-text>
+                    <oj-input-text id="lookup-type-name" label-hint="Lookup Type Name" placeholder="Lookup Type Name"
+                      value="{{ $variables.lookupTypeVar.lookup_type_name }}" required="true" length.max="240">
+                    </oj-input-text>
+
+                    <oj-select-single id="dependent-lov" label-hint="Dependent Lookup Type"
+                      value="{{ $variables.lookupTypeVar.dependent_lookup_type_id }}" item-text="lookup_type_name"
+                      style="width: 16rem;" data="[[$variables.getLookupValueLovByTypeListSDP]]">
+                    </oj-select-single>
+
+                    <!-- <oj-input-text id="dependent-lookup-type-name" label-hint="Dependent Lookup Type Name" placeholder="Dependent Lookup Type Name"
+                      value="{{ $variables.lookupTypeVar.lookup_type_name }}" required="true" length.max="240">
+                    </oj-input-text> -->
+
+                    <oj-select-single id="application-id" label-hint="Application Name"
+                      value="{{ $variables.lookupTypeVar.application_id }}" item-text="application_name"
+                      data="[[$variables.getApplicationLovActiveApplicationListSDP]]" disabled="true">
+                    </oj-select-single>
+
+                    <oj-switch id="active-flag-switch" value="{{ $variables.lookupTypeVar.active_flag === 'Y' }}"
+                      label-hint="Status" on-value-changed="[[$listeners.activeFlagSwitchValue]]">
+                    </oj-switch>
+
+                    <oj-input-date id="effective-start-date" label-hint="Effective Start Date"
+                      value="{{ $variables.lookupTypeVar.effective_start_date }}"
+                      converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'
+                      min="[[ $application.functions.getSysdate() ]]"
+                      max="[[ $variables.lookupTypeVar.effective_end_date ]]">
+                    </oj-input-date>
+
+                    <oj-input-date id="effective-end-date" label-hint="Effective End Date"
+                      value="{{ $variables.lookupTypeVar.effective_end_date }}"
+                      converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'
+                      on-value-changed="[[$listeners.effectiveEndDateValue]]"
+                      min="[[ $variables.lookupTypeVar.effective_start_date ]]"
+                      disabled='[[ $variables.lookupTypeVar.active_flag === "N" ]]'>
+                    </oj-input-date>
+
+                    <oj-text-area id="remarks" label-hint="Remarks" placeholder="Remarks"
+                      value="{{ $variables.lookupTypeVar.remarks }}" rows="4" length.counter="remaining"
+                      length.max="250">
+                    </oj-text-area>
+
+
+
+                  </oj-form-layout>
+                </oj-validation-group>
+              </div>
+
+              <!-- Lookup Value Table Section -->
+              <div>
+                <!-- Action Buttons for Lookup Value Table -->
+                <div
+                  style="color: #01474d; font-size: larger; font-weight: bold;margin-bottom:0rem; padding : 10px 15px;"
+                  class="oj-flex oj-sm-justify-content-space-between oj-sm-align-items-center">
+                  <oj-bind-text value="Lookup Value"></oj-bind-text>
+                  <div class="oj-flex oj-sm-justify-content-space-around oj-sm-align-items-center" style="gap:10px;">
+                    <oj-button style="margin:0.125rem;" label="Refresh" chroming="outlined" id="refreshBtn"
+                      on-oj-action="[[$listeners.refreshBtnAction]]">
+                      <span class="oj-ux-ico-refresh" slot="startIcon"></span>
+                    </oj-button>
+
+                    <oj-button label="Add" class="oj-flex-bar-end oj-helper-justify-content-flex-end"
+                      chroming="outlined" on-oj-action="[[$listeners.buttonAction2]]" id="addBtn">
+                      <span class="oj-ux-ico-plus" slot="startIcon"></span>
+                    </oj-button>
+                  </div>
+                </div>
+                <!-- Lookup Value Table -->
+                <oj-table id="lookup-value-table" data="{{ $variables.ADPlookupValue }}"
+                  columns="{{ ($flow.constants.accessObj.allowDelete || $flow.constants.accessObj.allowEdit) ? $constants.lookupValueColumnsWithActions : $constants.lookupValueColumns }}"
+                  columns-default.sortable="disabled" columns-default.resizable="enabled"
+                  class="oj-sm-width-full oj-bg-body" display="grid" selection-mode.row="none">
+
+                  <template slot="lookup_value_actions_template">
+
+                    <div class="oj-flex oj-sm-align-items-center oj-sm-justify-content-center" style="gap:15px;">
+                      <span class="oj-ux-ico-trash" on-click="[[$listeners.iconClick]]"
+                      style="cursor:pointer; font-size:20px;"></span>
+                      <span class="oj-ux-ico-edit" on-click="[[$listeners.iconClick2]]"
+                      style="cursor:pointer; font-size:20px;" ></span>
+                    </div>
+                  </template>
+
+                  <template slot="lookup_value_id_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="lookup_value_code_template">
+                    <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="lookup_value_name_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="display_order_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="child_lookup_type_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="active_flag_template">
+                    <oj-bind-if test='[[ $current.data === "Y" ]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/activeBtn.png' ]]">
+                    </oj-bind-if>
+                    <oj-bind-if test='[[ $current.data === "N" ]]'>
+                      <img slot="startIcon" :src="[[ $application.path + 'resources/images/inactive.png' ]]">
+                    </oj-bind-if>
+                  </template>
+
+                  <template slot="start_date_template">
+                    <oj-input-date value='[[typeof $current.data === "string" ? $current.data : null]]' readonly="true"
+                      converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'>
+                    </oj-input-date>
+                  </template>
+
+                  <template slot="end_date_template">
+                    <oj-input-date value='[[typeof $current.data === "string" ? $current.data : null]]' readonly="true"
+                      converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'>
+                    </oj-input-date>
+                  </template>
+
+                  <template slot="remarks_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                </oj-table>
+
+                <!-- Pagination Section -->
+                <div class="oj-flex oj-sm-justify-content-center">
+                  <oj-bind-if test="[[true]]">
+                    <oj-toolbar chroming="solid" class="oj-flex-item oj-sm-flex-initial">
+
+                      <oj-button label="Previous" chroming="outlined" disabled="[[ !$variables.pagination.prev ]]"
+                        id="preBtn" on-oj-action="[[$listeners.preBtnAction]]">
+                        <span slot="startIcon" class="oj-ux-ico-back"></span>
+                      </oj-button>
+
+                      <oj-button label="Next" chroming="outlined" disabled="[[ !$variables.pagination.next ]]"
+                        id="nxtBtn" on-oj-action="[[$listeners.nxtBtnAction]]">
+                        <span slot="endIcon" class="oj-ux-ico-forward-next"></span>
+                      </oj-button>
+
+                    </oj-toolbar>
+                  </oj-bind-if>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </oj-sp-advanced-create-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lookup Value Dialog -->
+<oj-dialog dialog-title="Lookup Value" id="lookupValueDialog" cancel-behavior="icon" resize-behavior="resizable"
+  drag-affordance="title-bar" style="width:1111px; overflow: hidden;"
+  on-oj-close="[[$listeners.lookupValueDialogClose]]" header-decoration="off">
+  <div slot="body" style="padding-top:10px; background-color:white;">
+    <div class="oj-panel oj-panel-shadow-md oj-selected">
+      <oj-validation-group id="lookupValueForm" valid="{{ $variables.isValueFormValid }}">
+        <oj-form-layout label-edge="start" direction="column" id="lookupValueFormLayout" max-columns="2"
+          user-assistance-density="compact">
+
+          <oj-input-text id="dialog-lookup-value-code" label-hint="Lookup Value Code" placeholder="Lookup Value Code"
+            value="{{ $variables.lookupValueVar.lookup_value_code }}" required="true" style="width: 16rem;"
+            on-value-changed="[[$listeners.dialogLookupValueCodeValue2]]"
+            messages-custom="{{ $variables.lookupValueCodeCustomMsg }}" length.max="30">
+          </oj-input-text>
+          <oj-input-text id="dialog-lookup-value-name" label-hint="Lookup Value Name" placeholder="Lookup Value Name"
+            value="{{ $variables.lookupValueVar.lookup_value_name }}" required="true" style="width: 16rem;"
+            length.max="240">
+          </oj-input-text>
+
+          <!-- <oj-select-single id="child-lookup-type-id" label-hint="Child Lookup Type"
+            value="{{ $variables.lookupValueVar.child_lookup_type_id }}"
+            data="[[$variables.getLookupTypeLovChildTypeNameListSDP]]" item-text="lookup_type_name"
+            style="width: 16rem;">
+          </oj-select-single> -->
+          
+          <!-- ⬇️⬇️⬇️ ADD FIELD #2 HERE ⬇️⬇️⬇️ -->
+          <!-- <oj-select-single id="dialog-dependent-lookup-value" label-hint="Dependent Lookup Value"
+            value="{{ $variables.lookupValueVar.dependent_lookup_value_id }}"
+            data="[[$variables.getDependentLookupValueListSDP]]" item-text="lookup_value_name" style="width: 16rem;">
+          </oj-select-single> -->
+          <oj-select-single id="dialog-dependent-lookup-value" label-hint="Dependent Lookup Value"
+            value="{{ $variables.lookupValueVar.dependent_lookup_value_id }}" data="[[$variables.getDependentLookupValueListSDP]]"
+            item-text="lookup_value_name" style="width: 16rem;">
+            <template slot="collectionTemplate" data-oj-as="collection">
+              <oj-table scroll-policy="loadMoreOnScroll" horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+                columns-default='{"sortable":"disabled"}' class="oj-select-results"
+                columns='[{"headerText":"Lookup Code","field":"lookup_value_code","resizable":"enabled","sortable":"disabled"},{"headerText":"Lookup Value","field":"lookup_value_name","sortable":"disabled","resizable":"enabled"}]'
+                on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]"
+                selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}" display="grid"
+                selection-mode.row="single"></oj-table>
+            </template>
+          </oj-select-single>
+
+          <oj-switch id="dialog-active-flag" label-hint="Status"
+            value="{{ $variables.lookupValueVar.active_flag === 'Y' }}"
+            on-value-changed="[[$listeners.dialogActiveFlagValue]]">
+          </oj-switch>
+
+          <oj-input-number id="dialog-display-order" label-hint="Display Order" placeholder="Display Order"
+            value="{{ $variables.lookupValueVar.display_order }}" style="width: 16rem;" disabled="true" min="1">
+          </oj-input-number>
+
+          <oj-input-date id="dialog-effective-start-date" label-hint="Effective Start Date"
+            value="{{ $variables.lookupValueVar.effective_start_date }}"
+            converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}' style="width: 16rem;"
+            min="[[ $application.functions.getSysdate() ]]" max="[[ $variables.lookupValueVar.effective_end_date ]]">
+          </oj-input-date>
+
+          <oj-input-date id="dialog-effective-end-date" label-hint="Effective End Date"
+            value="{{ $variables.lookupValueVar.effective_end_date }}"
+            converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}' style="width: 16rem;"
+            min="[[ $variables.lookupValueVar.effective_start_date ]]"
+            disabled='[[ $variables.lookupValueVar.active_flag === "N" ]]'>
+          </oj-input-date>
+
+          <oj-text-area id="dialog-remarks" label-hint="Remarks" placeholder="Remarks"
+            value="{{ $variables.lookupValueVar.remarks }}" style="width: 16rem;" length.counter="remaining"
+            length.max="250">
+          </oj-text-area>
+
+        </oj-form-layout>
+      </oj-validation-group>
+    </div>
+  </div>
+  <div slot="footer" style="background-color:white;">
+    <oj-button id="save-add-another" on-oj-action="[[$listeners.lookupValueSaveCloseAction]]" chroming="outlined">Save &
+      Add</oj-button>
+    <oj-button id="save-close" on-oj-action="[[$listeners.lookupValueSaveAction]]" chroming="outlined">Save & Close
+    </oj-button>
+    <oj-button id="cancel" on-oj-action="[[$listeners.lookupValueCancelAction]]" chroming="outlined">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="Delete" id="deleteLookupValueDialog" cancel-behavior="icon">
+  <div slot="body">
+    <h6 id="deletehid" style="font-size:medium; font-weight: bold;">Are you sure you want to delete this lookup value?
+    </h6>
+  </div>
+  <div slot="footer">
+    <oj-button id="deleteBtnYes" on-oj-action="[[$listeners.deleteBtnYesAction]]" chroming="outlined">Yes</oj-button>
+    <oj-button id="deleteBtnNo" on-oj-action="[[$listeners.deleteBtnNoAction]]" chroming="outlined">No</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Unsaved Changes Dialog -->
+<oj-dialog dialog-title="Unsaved Changes" id="unsavedChangesDialog" cancel-behavior="icon">
+  <div slot="body">
+    <h6 id="unsavedChangesText" style="font-size:medium; font-weight: bold;">Are you sure you want to leave this page?
+      Your changes will be lost.
+    </h6>
+  </div>
+  <div slot="footer">
+    <oj-button id="proceedExitBtn" chroming="outlined" on-oj-action="[[$listeners.proceedExitBtnAction]]">Leave
+    </oj-button>
+    <oj-button id="cancelExitBtn" chroming="outlined" on-oj-action="[[$listeners.cancelExitBtnAction]]">Cancel
+    </oj-button>
+  </div>
+</oj-dialog>

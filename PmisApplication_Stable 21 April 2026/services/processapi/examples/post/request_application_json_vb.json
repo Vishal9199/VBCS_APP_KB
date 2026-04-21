@@ -1,0 +1,15 @@
+{
+    "params": {
+        "processDefinitionId": "af7da406-6322-11f0-85c6-8a34dd8bb66e"
+    },
+    "dataObject": {
+        "startWebFormArgs": {
+            "callSubmitPackage": "NO",
+            "p_APPR_PROCESS": "STORE_TRANSFER",
+            "p_TRX_ID": "133246",
+            "p_ACTION_ID": "",
+            "p_USER_ID": "300000004339888",
+            "p_TYPE": ""
+        }
+    }
+}

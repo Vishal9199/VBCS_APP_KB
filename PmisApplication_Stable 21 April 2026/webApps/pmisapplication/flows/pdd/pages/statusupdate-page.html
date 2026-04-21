@@ -1,0 +1,82 @@
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+
+      <oj-sp-advanced-create-edit id="projectstatusupdateid" display-options.responsive-padding="on"
+        primary-action.label="Close" page-title="Status Update" page-subtitle="  "
+        on-sp-primary-action="[[$listeners.projectstatusupdateidSpPrimaryAction]]" display-mode="light">
+
+        <div slot="main" style="padding-top: 0; margin-top: 0.1rem; min-width: 100%;">
+          <div style="margin-top: 0;">
+
+            <oj-collapsible id="general-statusupdate-section" expanded="true"
+              class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 1rem;">
+              <span slot="header" style="font-weight: bold; color: white;">Project Details</span>
+              <div style="margin-top: 0; padding: 1rem; border-left: 4px;">
+                <oj-form-layout max-columns="3" label-edge="start" label-width="30%" colspan-wrap="wrap">
+
+                  <oj-input-text id="statusUpdateProjectName" label-hint="Project Name" placeholder="Project Name"
+                    value="{{ $variables.headerInfoVar.projectName }}" user-assistance-density="compact"
+                    style="width: 16rem;" disabled="true">
+                  </oj-input-text>
+
+                  <oj-input-text id="statusUpdateProjectNumber" label-hint="Project Number" placeholder="Project Number"
+                    value="{{ $variables.headerInfoVar.projectNumber }}" user-assistance-density="compact"
+                    style="width: 16rem;" disabled="true">
+                  </oj-input-text>
+
+                  <oj-input-text id="statusUpdateTenderNumber" label-hint="Tender Number" placeholder="Tender Number"
+                    value="{{ $variables.headerInfoVar.tenderNumber }}" user-assistance-density="compact"
+                    style="width: 16rem;" disabled="true">
+                  </oj-input-text>
+
+                </oj-form-layout>
+              </div>
+            </oj-collapsible>
+
+
+            <oj-collapsible id="general-statusupdate-section" expanded="true"
+              class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 1rem;">
+              <span slot="header" style="font-weight: bold; color: white;">Status Update Year</span>
+              <div style="padding: 1rem;">
+                <oj-validation-group id="general-statusupdate-validation">
+                  <oj-form-layout max-columns="2" label-edge="start" colspan-wrap="wrap">
+                    <oj-select-single label-hint="Year" style="width: 10rem;"
+                      data="[[$variables.getPmispddStatusupdateGetyearListSDP]]" item-text="susearch_year"
+                      on-value-item-changed="[[$listeners.selectValueItem]]" value="{{ $variables.susearch_year }}">
+                    </oj-select-single>
+                  </oj-form-layout>
+                </oj-validation-group>
+              </div>
+            </oj-collapsible>
+
+            <oj-collapsible id="general-statusupdate-section" expanded="true"
+              class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 1rem;">
+              <span slot="header" style="font-weight: bold; color: white;">Select Month</span>
+              <div style="padding: 1rem;">
+                <oj-table scroll-policy="loadMoreOnScroll" data="[[ $variables.tableADP ]]"
+                  columns="{{ $constants.headerColumns }}" display="grid">
+
+                  <template slot="periodNameTemplate">
+                    <a style="font-weight: bold;" target="_blank" id="flink" on-click="[[$listeners.flinkClick]]">
+                      <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    </a>
+                  </template>
+
+                  <template slot="Date">
+                  <oj-input-date value="[[$current.data]]" readonly="true"
+                    converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'></oj-input-date>
+                </template>
+                </oj-table>
+
+
+                
+
+              </div>
+            </oj-collapsible>
+          </div>
+        </div>
+      </oj-sp-advanced-create-edit>
+    </div>
+  </div>
+</div>

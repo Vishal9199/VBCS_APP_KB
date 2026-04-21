@@ -1,0 +1,137 @@
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <oj-sp-advanced-create-edit id="inCountryValuePage" page-title="In-Country Value" display-mode="light"
+        primary-action.label="Close"
+        secondary-actions='[{"label":"Save","id":"save","icon":"oj-ux-ico-save"}]'
+        on-sp-primary-action="[[$listeners.inCountryValuePageSpPrimaryAction]]"
+        on-sp-secondary-action="[[$listeners.inCountryValuePageSpSecondaryAction]]">
+
+        <div slot="main" style="width: 100%; margin-top: -1.75rem;">
+
+          <!-- ============================================================ -->
+          <!-- PANEL 1: Project Information (View Only / General Info)       -->
+          <!-- ============================================================ -->
+          <div class="oj-panel oj-panel-shadow-md oj-selected" style="margin-bottom: 0.25rem;">
+            <div style="padding:0.4rem 0.75rem; border-bottom:1px solid #dee2e6; border-radius: 5px; background-color: #084c4c;">
+              <span style="font-weight:600; font-size:1rem; color: white;">Project Information</span>
+            </div>
+            <div style="padding: 0.25rem;">
+              <oj-form-layout label-edge="start" max-columns="3" user-assistance-density="compact"
+                class="oj-formlayout-full-width">
+                <oj-input-text id="project-number" label-hint="Project Number"
+                  value="[[ $variables.onloadData.projectNumber ]]" class="oj-form-control-max-width-sm"
+                  disabled="true">
+                </oj-input-text>
+                <oj-input-text id="tender-number" label-hint="Tender Number"
+                  value="[[ $variables.onloadData.tenderNumber ]]" class="oj-form-control-max-width-sm" disabled="true">
+                </oj-input-text>
+                <oj-input-text id="project-name" label-hint="Project Name"
+                  value="[[ $variables.onloadData.projectName ]]" class="oj-form-control-max-width-sm" disabled="true">
+                </oj-input-text>
+                <!-- <oj-input-number id="perc-sme-display" label-hint="% SME (10% of Revised Contract)"
+                  value="[[ $variables.onloadData.percSME ]]" readonly="true" class="oj-form-control-max-width-sm">
+                </oj-input-number> -->
+                 <oj-bind-if test="[[ $variables.tempDaysLeft !== 'Completed' ]]">
+                  <oj-input-text id="days-left-display" label-hint="Days Left"
+                    value="[[ $variables.onloadData.daysLeft ]]" class="oj-form-control-max-width-sm" disabled="true">
+                  </oj-input-text>
+                 </oj-bind-if>
+                <oj-bind-if test="[[ $variables.tempDaysLeft === 'Completed' ]]">
+                  <oj-input-text id="days-left-display" label-hint="Days Left" value="[[ $variables.tempDaysLeft ]]"
+                    class="oj-form-control-max-width-sm" disabled="true">
+                  </oj-input-text>
+                </oj-bind-if>
+              </oj-form-layout>
+            </div>
+          </div>
+
+          <!-- ============================================================ -->
+          <!-- PANEL 2: In-Country Value Details (Form Layout / Editable)   -->
+          <!-- ============================================================ -->
+          <oj-collapsible id="incountry-details-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+            style="margin-bottom: 0.75rem;">
+            <span slot="header" style="font-weight:600; font-size:1rem; color: white;">In-Country Value Details</span>
+            <div style="padding:1rem;">
+              <oj-form-layout label-edge="start" max-columns="3" user-assistance-density="compact"
+                class="oj-formlayout-full-width">
+
+                <oj-input-number id="perc-sme" label-hint="% SME" placeholder="Enter % SME"
+                  value="{{ $variables.inCountryValueVar.percSme }}" style="width: 16rem;">
+                </oj-input-number>
+
+                <oj-input-number id="perc-sme-month" label-hint="% SME Monthly" placeholder="Enter % SME Monthly"
+                  value="{{ $variables.inCountryValueVar.percSmeMonth }}" style="width: 16rem;">
+                </oj-input-number>
+
+                <!-- <oj-bind-if test="[[ $variables.tempDaysLeft !== 'Completed' ]]">
+                  <oj-input-number id="days-left" label-hint="Days Left" placeholder="Days Left"
+                    value="{{ $variables.inCountryValueVar.daysLeft }}" readonly="true" style="width: 16rem;">
+                  </oj-input-number>
+                </oj-bind-if>
+
+                <oj-bind-if test="[[ $variables.tempDaysLeft === 'Completed' ]]">
+                  <oj-input-number id="days-left" label-hint="Days Left"
+                    value="{{ $variables.inCountryValueVar.daysLeft }}" readonly="true" class="oj-form-control-max-width-sm">
+                  </oj-input-number>
+                </oj-bind-if> -->
+
+                <oj-text-area id="additional-info" label-hint="Additional Information"
+                  placeholder="Enter Additional Information" value="{{ $variables.inCountryValueVar.additionalInfo }}"
+                  rows="4" style="width: 16rem;">
+                </oj-text-area>
+
+              </oj-form-layout>
+            </div>
+          </oj-collapsible>
+
+        </div>
+
+      </oj-sp-advanced-create-edit>
+    </div>
+  </div>
+</div>
+
+
+<!-- Progress Dialog - root level, outside oj-sp -->
+<oj-dialog id="progressDialog" cancel-behavior="none" dialog-title="Processing" style="width: 300px; overflow: hidden;">
+  <div slot="body" class="oj-flex oj-sm-align-items-center oj-sm-justify-content-center"
+    style="padding: 2rem; gap: 1rem;">
+    <oj-progress-circle size="sm" value="-1"></oj-progress-circle>
+    <span>Please wait...</span>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="About" id="aboutDialog" cancel-behavior="icon" style="overflow: hidden; width: 450px;"
+  position.at.vertical="top" drag-affordance="title-bar" header-decoration="off">
+  <div slot="body">
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-sm-12 oj-md-12">
+        <oj-form-layout label-edge='start' readonly="true" user-assistance-density="compact" label-width="40%">
+          <oj-input-text label-hint="Created By:" value="{{ $variables.about.created_by }}"
+            readonly="true">
+          </oj-input-text>
+          <oj-input-date label-hint="Created Date : "
+            converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy hh:mm a"}}'
+            value="{{ $variables.about.created_date }}" readonly="true"
+            class="oj-form-control-width-sm">
+          </oj-input-date>
+          <oj-input-text label-hint="Last Updated By:"
+            value="{{ $variables.about.last_updated_by }}" readonly="true">
+          </oj-input-text>
+          <oj-input-date label-hint="Last Updated Date : "
+            converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy hh:mm a"}}'
+            value="{{ $variables.about.last_updated_date }}" readonly="true"
+            class="oj-form-control-width-sm"></oj-input-date>
+          <oj-input-text label-hint="Last Login By:"
+            value="{{ $variables.about.last_updated_login }}" readonly="true">
+          </oj-input-text>
+
+        </oj-form-layout>
+      </div>
+    </div>
+  </div>
+  <div slot="footer" style="padding: 0px 32px 32px 32px">
+    <oj-button on-oj-action="[[$listeners.buttonAction]]">Ok</oj-button>
+  </div>
+</oj-dialog>

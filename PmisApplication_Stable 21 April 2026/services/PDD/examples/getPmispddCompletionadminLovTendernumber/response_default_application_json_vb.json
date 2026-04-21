@@ -1,0 +1,42 @@
+{
+    "items": [
+        {
+            "tender_id": 17002,
+            "project_id": 300000090427449,
+            "tender_number": "NW-RFQ-17002-2026",
+            "project_number": "789BEN234",
+            "tender_name": "Test Tender Name 001",
+            "project_name": "VBCS-Feb-10-1",
+            "supplier_id": 300000090011645,
+            "supplier_name": "Smart Technology"
+        },
+        {
+            "tender_id": 17001,
+            "project_id": 300000090427447,
+            "tender_number": "NW-RFQ-1119-2025",
+            "project_number": "RG5Z1-CA",
+            "tender_name": "Construction of Anoxic tank at Ibra RG-CA",
+            "project_name": "RG5Z1-CA",
+            "supplier_id": 300000090011645,
+            "supplier_name": "Smart Technology"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 2,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/completionadmin/lov/tendernumber"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/completionadmin/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/completionadmin/lov/tendernumber"
+        }
+    ]
+}

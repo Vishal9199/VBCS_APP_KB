@@ -1,0 +1,106 @@
+{
+    "items": [
+        {
+            "year": 2025,
+            "month": "JANUARY",
+            "period": "JAN-25",
+            "last_updated_by": null,
+            "last_updated_date": null
+        },
+        {
+            "year": 2025,
+            "month": "FEBRUARY",
+            "period": "FEB-25",
+            "last_updated_by": null,
+            "last_updated_date": null
+        },
+        {
+            "year": 2025,
+            "month": "MARCH",
+            "period": "MAR-25",
+            "last_updated_by": null,
+            "last_updated_date": null
+        },
+        {
+            "year": 2025,
+            "month": "APRIL",
+            "period": "APR-25",
+            "last_updated_by": null,
+            "last_updated_date": null
+        },
+        {
+            "year": 2025,
+            "month": "MAY",
+            "period": "MAY-25",
+            "last_updated_by": null,
+            "last_updated_date": null
+        },
+        {
+            "year": 2025,
+            "month": "JUNE",
+            "period": "JUN-25",
+            "last_updated_by": "dinesh.kumar@owwsc.nama.om",
+            "last_updated_date": "2026-03-31T10:57:50Z"
+        },
+        {
+            "year": 2025,
+            "month": "JULY",
+            "period": "JUL-25",
+            "last_updated_by": null,
+            "last_updated_date": null
+        },
+        {
+            "year": 2025,
+            "month": "AUGUST",
+            "period": "AUG-25",
+            "last_updated_by": null,
+            "last_updated_date": null
+        },
+        {
+            "year": 2025,
+            "month": "SEPTEMBER",
+            "period": "SEP-25",
+            "last_updated_by": null,
+            "last_updated_date": null
+        },
+        {
+            "year": 2025,
+            "month": "OCTOBER",
+            "period": "OCT-25",
+            "last_updated_by": null,
+            "last_updated_date": null
+        },
+        {
+            "year": 2025,
+            "month": "NOVEMBER",
+            "period": "NOV-25",
+            "last_updated_by": null,
+            "last_updated_date": null
+        },
+        {
+            "year": 2025,
+            "month": "DECEMBER",
+            "period": "DEC-25",
+            "last_updated_by": null,
+            "last_updated_date": null
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 12,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/statusupdate/getmonth?p_tender_id=7615&p_project_id=203083&p_year=2025"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/statusupdate/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/statusupdate/getmonth?p_tender_id=7615&p_project_id=203083&p_year=2025"
+        }
+    ]
+}

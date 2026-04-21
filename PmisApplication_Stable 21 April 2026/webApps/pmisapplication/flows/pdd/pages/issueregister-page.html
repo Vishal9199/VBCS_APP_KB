@@ -1,0 +1,388 @@
+<style>
+  oj-c-button#issueRegisterPage_h_cancelAction {
+    display: none;
+}
+</style>
+
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+
+      <oj-sp-advanced-create-edit id="issueRegisterPage" page-title="Issue Register" page-subtitle=" "
+        primary-action.label="Close"
+        secondary-actions='[{"label":"save","id":"saveClose","iconClass":"oj-ux-ico-save","icon":"oj-ux-ico-save"}]'
+        on-sp-primary-action="[[$listeners.closeIssueBtnAction]]"
+        on-sp-secondary-action="[[$listeners.issueSecondaryAction]]">
+
+        <div slot="main">
+
+          <!-- Project Information Panel -->
+          <div class="oj-panel oj-panel-shadow-md oj-selected" style="margin-bottom: 0.1rem; margin-top: -1.75rem">
+          
+            <!-- Panel Header -->
+            <div style="padding: 0.1rem 0.25rem; border-bottom:1px solid #dee2e6; background-color: #084c4c;">
+              <span style="font-weight:600; font-size:1rem; color: white;">Project Information</span>
+            </div>
+          
+            <!-- Panel Body -->
+            <div style="padding: 0.1rem;">
+              <oj-form-layout columns="3" max-columns="3" label-edge="start" user-assistance-density="compact">
+                <oj-input-text id="projectNumberFld" label-hint="Project Number" value="[[ $variables.projectNumber ]]"
+                  disabled="true">
+                </oj-input-text>
+                 <oj-input-text id="projectNameFld" label-hint="Project Name" value="[[ $variables.projectName ]]" disabled="true">
+                </oj-input-text>
+                <oj-input-text id="tenderNumberFld" label-hint="Tender Number" value="[[ $variables.tenderNumber ]]"
+                  disabled="true">
+                </oj-input-text>
+               
+              </oj-form-layout>
+            </div>
+          </div>
+
+          <!-- Issue Details Panel -->
+          <div class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 0.25rem;">
+
+            <!-- Panel Header + Toolbar -->
+            <div class="oj-flex oj-sm-align-items-center"
+              style="padding: 0.1rem 0.25rem; border-bottom: 1px solid #dee2e6; background-color: #084c4c;">
+              <div class="oj-flex-item">
+                <span style="font-weight: bold; color: white; font-size: 1rem;">Issue Details</span>
+              </div>
+              <div class="oj-flex-item oj-sm-flex-initial">
+                <oj-toolbar chroming="solid" style="margin-bottom: -0.25rem;">
+                  <oj-button chroming="outlined" on-oj-action="[[$listeners.addIssueBtnAction]]">
+                    <span slot="startIcon" class="oj-ux-ico-plus"></span>Add Row
+                  </oj-button>
+                  <!-- <oj-button chroming="outlined" on-oj-action="[[$listeners.saveIssueBtnAction]]">
+                    <span slot="startIcon" class="oj-ux-ico-save" style="color: white;"></span>Save
+                  </oj-button> -->
+                </oj-toolbar>
+              </div>
+            </div>
+
+            <!-- Issue Table -->
+            <div style="padding: 0.1rem;">
+              <oj-table id="issueTable" data="[[ $page.variables.issueBufferDP.instance ]]"
+                columns="[[ $page.constants.issueColumns ]]" scroll-policy="loadMoreOnScroll"
+                horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+                edit-row="{{ $variables.lvRowToEdit }}" columns-default.sortable="disabled"
+                columns-default.resizable="enabled" class="oj-sm-width-full oj-bg-body" display="grid"
+                selection-mode.row="single" edit-mode="rowEdit"
+                on-oj-before-row-edit="[[$listeners.issueTableBeforeRowEdit]]"
+                on-oj-before-row-edit-end="[[$listeners.issueTableBeforeRowEditEnd]]">
+
+                <!-- ═══ Actions Column (Edit + Delete) ═══ -->
+                <template slot="issueActionTemplate">
+                  <div class="oj-flex oj-sm-align-items-center" style="gap: 0.25rem;">
+                    <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                      on-oj-action="[[$listeners.issueEditBtnAction]]">
+                      <span slot="startIcon" class="oj-ux-ico-edit" style="font-size: 16px;"></span>
+                    </oj-button>
+                    <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                      on-oj-action="[[$listeners.issueDeleteBtnAction]]">
+                      <span slot="startIcon" class="oj-ux-ico-trash" style="font-size: 16px; color: #dc3545;"></span>
+                    </oj-button>
+                  </div>
+                </template>
+
+                <!-- ═══ Date Raised ═══ -->
+                <template slot="issueDateRaisedTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <!-- <oj-bind-text value="[[ $current.data ]]"></oj-bind-text> -->
+                    <oj-input-date value="[[ $current.data ]]"
+                      converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' readonly="true" style="width:100%;">
+                    </oj-input-date>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-input-date value="{{ $page.variables.lvCurrentRow.date_raised }}"
+                      converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}'
+                      style="width:100%;">
+                    </oj-input-date>
+                  </oj-bind-if>
+                </template>
+
+                <!-- ═══ Issue Number ═══ -->
+                <template slot="issueNumber">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-input-number style="width:100%;" value="{{ $variables.lvCurrentRow.issue_number }}"
+                      converter='{"type":"number","options":{"useGrouping":false}}'>
+                    </oj-input-number>
+                  </oj-bind-if>
+                </template>
+
+                <!-- ═══ Issue Description ═══ -->
+                <template slot="issueDescTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-input-text value="{{ $page.variables.lvCurrentRow.issue_description }}"
+                      style="width:100%;">
+                    </oj-input-text>
+                  </oj-bind-if>
+                </template>
+
+                <!-- ═══ Scope (Static 1-5) ═══ -->
+                <template slot="issueScopeTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-select-single id="issueScope" aria-label="Issue Scope" data="[[ $page.variables.ADPscope ]]"
+                      value="{{ $page.variables.lvCurrentRow.scope }}" item-text="label" style="width:100%;">
+                    </oj-select-single>
+                  </oj-bind-if>
+                </template>
+
+                <!-- ═══ Time (Static 1-5) ═══ -->
+                <template slot="issueTimeTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-select-single id="issueTime" aria-label="Issue Time" data="[[ $page.variables.ADPscope ]]"
+                      value="{{ $page.variables.lvCurrentRow.time }}" item-text="label" style="width:100%;">
+                    </oj-select-single>
+                  </oj-bind-if>
+                </template>
+
+                <!-- ═══ Cost (Static 1-5) ═══ -->
+                <template slot="issueCostTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-select-single id="issueCost" aria-label="Issue Cost" data="[[ $page.variables.ADPscope ]]"
+                      value="{{ $page.variables.lvCurrentRow.cost }}" item-text="label" style="width:100%;">
+                    </oj-select-single>
+                  </oj-bind-if>
+                </template>
+
+                <!-- ═══ QHSE (Static 1-5) ═══ -->
+                <template slot="issueQhseTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-select-single id="issueQHSE" aria-label="Issue QHSE" data="[[ $page.variables.ADPscope ]]"
+                      value="{{ $page.variables.lvCurrentRow.qhse }}" item-text="label" style="width:100%;">
+                    </oj-select-single>
+                  </oj-bind-if>
+                </template>
+
+                <!-- ═══ Total Score (computed, always readonly) ═══ -->
+                <template slot="issueTotalScoreTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <span style="font-weight: bold; color: #084c4c;">
+                      <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                    </span>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-input-number
+                      value="[[ ($page.variables.lvCurrentRow.scope||0) + ($page.variables.lvCurrentRow.time||0) + ($page.variables.lvCurrentRow.cost||0) + ($page.variables.lvCurrentRow.qhse||0) ]]"
+                      readonly="true">
+                    </oj-input-number>
+                  </oj-bind-if>
+                </template>
+
+                <!-- ═══ Priority ═══ -->
+                <template slot="issuePriorityTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <span class="[[ 'risk-badge risk-badge-' + ($current.data || 'low').toLowerCase() ]]">
+                      <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                    </span>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-select-single id="issuePriority" aria-label="Issue Priority"
+                      data="[[ $page.variables.ADPpriority ]]" value="{{ $page.variables.lvCurrentRow.priority }}"
+                      item-text="label" style="width:100%;">
+                    </oj-select-single>
+                  </oj-bind-if>
+                </template>
+
+                <!-- ═══ Action (text field) ═══ -->
+                <template slot="issueActionFieldTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-input-text value="{{ $page.variables.lvCurrentRow.action }}" style="width:100%;">
+                    </oj-input-text>
+                  </oj-bind-if>
+                </template>
+
+                <!-- ═══ Owner ═══ -->
+                <template slot="issueOwnerTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-input-text value="{{ $page.variables.lvCurrentRow.owner }}" style="width:100%;">
+                    </oj-input-text>
+                  </oj-bind-if>
+                </template>
+
+                <!-- ═══ Outcome ═══ -->
+                <template slot="issueOutcomeTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-input-text value="{{ $page.variables.lvCurrentRow.outcome }}" style="width:100%;">
+                    </oj-input-text>
+                  </oj-bind-if>
+                </template>
+
+                <!-- ═══ Due Date for Resolution ═══ -->
+                <template slot="issueDueDateTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <!-- <oj-bind-text value="[[ $current.data ]]"></oj-bind-text> -->
+                    <oj-input-date value="[[ $current.data ]]"
+                      converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' readonly="true" style="width:100%;">
+                    </oj-input-date>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-input-date value="{{ $page.variables.lvCurrentRow.due_date_for_resolution }}"
+                      converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' style="width:100%;">
+                    </oj-input-date>
+                  </oj-bind-if>
+                </template>
+
+                <!-- ═══ Resolution Progress Update ═══ -->
+                <template slot="issueResProgressTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-input-text value="{{ $page.variables.lvCurrentRow.resolution_progress_update }}" style="width:100%;">
+                    </oj-input-text>
+                  </oj-bind-if>
+                </template>
+
+                <!-- ═══ Progress % (Static LOV 10-100) ═══ -->
+                <template slot="issueProgressTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text
+                      value="[[ $current.data !== null && $current.data !== undefined ? $current.data + '%' : '' ]]">
+                    </oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-select-single id="issueProgress" aria-label="Issue Progress"
+                      data="[[ $page.variables.ADPprogress ]]" value="{{ $page.variables.lvCurrentRow.progress }}"
+                      item-text="label" placeholder="Select %" style="width:100%;">
+                    </oj-select-single>
+                  </oj-bind-if>
+                </template>
+
+                <!-- ═══ Status (auto-computed, always readonly) ═══ -->
+                <template slot="issueStatusTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <span class="[[ 'risk-status-badge risk-status-' + ($current.data || 'in-progress').toLowerCase().replace(' ', '-') ]]">
+                      <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                    </span>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <!-- <span class="[[ 'risk-status-badge risk-status-' + ($page.variables.lvCurrentRow.progress === 100 ? 'completed' : 'in-progress') ]]"
+                          style="padding: 0.25rem 0.5rem;">
+                      [[ $page.variables.lvCurrentRow.progress === 100 ? 'Completed' : 'In Progress' ]]
+                    </span> -->
+                    <oj-bind-text
+                      :class="[[ 'risk-status-badge risk-status-' + ($page.variables.lvCurrentRow.progress === 100 ? 'completed' : 'in-progress') ]]"
+                      style="padding: 0.25rem 0.5rem;"
+                      value="[[ $page.variables.lvCurrentRow.progress === 100 ? 'Completed' : 'In Progress' ]]"></oj-bind-text>
+                  </oj-bind-if>
+                </template>
+
+                <!-- ═══ Date Resolved ═══ -->
+                <template slot="issueDataResolvedTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <!-- <oj-bind-text value="[[ $current.data ]]"></oj-bind-text> -->
+                    <oj-input-date value="[[ $current.data ]]"
+                      converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' readonly="true" style="width:100%;">
+                    </oj-input-date>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-input-date value="{{ $page.variables.lvCurrentRow.data_resolved }}"
+                      converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' aria-label="Select date"
+                      style="width:100%;">
+                    </oj-input-date>
+                  </oj-bind-if>
+                </template>
+
+              </oj-table>
+            </div>
+          </div>
+
+        </div>
+        <!-- End slot="main" -->
+
+      </oj-sp-advanced-create-edit>
+
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Delete Confirmation Dialog ═══ -->
+<oj-dialog id="issueConfirmDialog" cancel-behavior="none" dialog-title="Confirm Delete" style="width: 420px; overflow: hidden;"
+  drag-affordance="title-bar" position.at.vertical="top" position.my.vertical="top" header-decoration="off">
+  <div slot="body" class="oj-flex oj-sm-align-items-center" style="margin-top: 0;">
+    <span style="font-size: 0.95rem;">
+      <strong>Are you sure you want to delete this issue record?</strong>
+    </span>
+  </div>
+  <div slot="footer" class="oj-flex oj-sm-justify-content-flex-end" style="gap: 0.5rem; padding: 0.75rem 1rem;">
+    <oj-button chroming="outlined" on-oj-action="[[$listeners.issueCancelDeleteAction]]">
+      Cancel
+    </oj-button>
+    <oj-button chroming="outlined" on-oj-action="[[$listeners.issueConfirmDeleteAction]]">Ok</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- ═══ Progress Dialog ═══ -->
+<oj-dialog id="issueProgressDialog" cancel-behavior="none" dialog-title="Processing" style="width: 300px;">
+  <div slot="body" class="oj-flex oj-sm-align-items-center oj-sm-justify-content-center"
+    style="padding: 2rem; gap: 1rem;">
+    <oj-progress-circle size="sm" value="-1"></oj-progress-circle>
+    <span>Please wait...</span>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="About" id="aboutDialog" cancel-behavior="icon" style="width: 450px; overflow: hidden;"
+  resize-behavior="resizable" position.my.vertical="top" position.at.vertical="top" drag-affordance="title-bar"
+  header-decoration="off">
+  <div slot="body">
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-sm-12 oj-md-12">
+        <oj-form-layout label-edge='start' columns="1" style="margin-top:23px;margin-left:-20px"
+          user-assistance-density="compact" direction="column" class="oj-formlayout-full-width"
+          label-width="45%">
+          <oj-input-text label-hint="Created By:" style="margin-bottom: -6px;" value="{{ $variables.about.created_by }}"
+            readonly="true" user-assistance-density="compact">
+          </oj-input-text>
+          <oj-input-text label-hint="Created Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.created_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated By:" style="margin-bottom: -6px;"
+            value="{{ $variables.about.last_updated_by }}" readonly="true" user-assistance-density="compact"></oj-input-text>
+          <oj-input-text label-hint="Last Updated Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.last_updated_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated Login:" value="{{ $variables.about.last_updated_login }}" style="margin-bottom: -6px;"
+            readonly="true" user-assistance-density="compact">
+          </oj-input-text>
+        </oj-form-layout>
+      </div>
+    </div>
+  </div>
+  <div slot="footer">
+    <oj-button id="aboutButtonCancel_AC" label="Ok"
+      chroming="outlined" style="margin-top:-20px !important;" on-oj-action="[[$listeners.aboutButtonCancelACAction]]"></oj-button>
+  </div>
+</oj-dialog>

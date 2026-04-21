@@ -1,0 +1,15 @@
+<!-- Dynamic Container Templates -->
+
+<template id="template1">
+  <oj-sp-section section-title="[[$labelHint]]">
+    <oj-dynamic-form id="section1DynForm" columns="2" valid="{{$variables.formState1}}"
+      on-transient-value-changed="[[$listeners.formTransientValue1]]"></oj-dynamic-form>
+  </oj-sp-section>
+</template>
+
+<template id="template2">
+  <oj-sp-section section-title="[[$labelHint]]">
+    <oj-dynamic-form id="section2DynForm" columns="2" valid="{{$variables.formState2}}"
+      on-transient-value-changed="[[$listeners.formTransientValue2]]"></oj-dynamic-form>
+  </oj-sp-section>
+</template>

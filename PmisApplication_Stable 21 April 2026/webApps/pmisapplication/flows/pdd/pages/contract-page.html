@@ -1,0 +1,61 @@
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+  <oj-sp-advanced-create-edit id="contractid" page-title="Contract" page-subtitle=" " primary-action.label="Close"
+    display-options.next="off" secondary-actions='[{"label":"Save","id":"save"}]'
+    on-sp-primary-action="[[$listeners.contractidSpPrimaryAction]]"
+    on-sp-secondary-action="[[$listeners.contractidSpSecondaryAction]]" display-mode="light">
+   
+<div slot="main" style="padding-top: 0; margin-top: 0.1rem; min-width: 100%;">
+            <div style="margin-top: 0;">
+
+              <oj-collapsible id="project-info-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+                style="margin-top: 0;" disabled="true">
+                <span slot="header" style="font-weight: bold; color: white; ">Project Details</span>
+                <oj-form-layout max-columns="2" label-edge="start" colspan-wrap="wrap"
+                        user-assistance-density="compact" direction="row" class="oj-formlayout-full-width">
+                       <oj-input-text label-hint="Project Number"
+                         value="{{ $variables.postContractVar.ora_project_number }}" disabled="true"></oj-input-text>
+                      <oj-input-text label-hint="Tender Number" value="{{ $variables.postContractVar.tender_number }}"
+                        disabled="true"></oj-input-text>
+                      <oj-input-text label-hint="Project Name"
+                        value="{{ $variables.postContractVar.ora_project_name }}" disabled="true"></oj-input-text>
+                      <oj-input-text label-hint="Tender Name" value="{{ $variables.postContractVar.tender_name }}"
+                        disabled="true"></oj-input-text>
+                  </oj-form-layout>
+              </oj-collapsible>
+
+              <oj-collapsible id="contract-info-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+                style="margin-top: 20px;" disabled="true">
+                <span slot="header" style="font-weight: bold; color: white; ">Contract Details</span>
+                  
+              <oj-validation-group id="contract_info_validation" valid="{{ $variables.formValidation }}" >
+                      <oj-form-layout max-columns="2" label-edge="start" colspan-wrap="wrap"
+                        user-assistance-density="compact" direction="row" class="oj-formlayout-full-width">
+                      <oj-input-text label-hint="Company Name" value="{{ $variables.postContractVar.supplier_name }}"
+                        disabled="true"></oj-input-text>
+                      <oj-input-text label-hint="Contract Amount"
+                        value="{{ $variables.postContractVar.contract_amount }}" disabled="true"></oj-input-text>
+                      <oj-input-date label-hint="Mobilization Start Date"
+                        value="{{ $variables.postContractVar.mobilization_start_date }}"
+                        converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'></oj-input-date>
+                     <oj-input-date label-hint="Mobilization End Date"
+                       value="{{ $variables.postContractVar.mobilization_end_date }}"
+                       converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'></oj-input-date>
+                      <oj-input-date label-hint="Work Start Date"
+                        value="{{ $variables.postContractVar.work_start_date }}"
+                        converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'></oj-input-date>
+                      <oj-input-date label-hint="Work End Date"
+                        value="{{ $variables.postContractVar.work_completion_date }}"
+                        converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'></oj-input-date>
+                      </oj-form-layout>
+              </oj-validation-group>
+
+              </oj-collapsible>
+            </div>
+</div>
+
+  </oj-sp-advanced-create-edit>
+  </div>
+  </div>
+</div>

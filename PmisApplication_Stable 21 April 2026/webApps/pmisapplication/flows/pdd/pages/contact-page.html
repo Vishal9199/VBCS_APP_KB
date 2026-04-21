@@ -1,0 +1,272 @@
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div>
+        <oj-sp-advanced-create-edit id="projectcontactid" display-options.responsive-padding="on"
+          primary-action.label="Close" page-title="Project Contact Information" page-subtitle="  "
+          secondary-actions="[[ $variables.aToolBar ]]"
+          on-sp-primary-action="[[$listeners.projectcontactidSpPrimaryAction]]"
+          on-sp-secondary-action="[[$listeners.projectcontactidSpSecondaryAction]]">
+
+          <div slot="main" style="padding-top: 0; margin-top: 0.1rem; min-width: 100%;">
+            <div style="margin-top: 0;">
+
+              <oj-collapsible id="general-contact-section" expanded="true"
+                class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 1rem;">
+                <span slot="header" style="font-weight: bold; color: white;">Project Details</span>
+                <div style="margin-top: 0; padding: 1rem; border-left: 4px;">
+                  <oj-form-layout max-columns="2" label-edge="start" label-width="40%" colspan-wrap="wrap">
+
+                    <oj-input-text id="project-name" label-hint="Project Name" placeholder="Project Name"
+                      value="{{ $variables.headerInfoVar.projectName }}" user-assistance-density="compact"
+                      style="width: 16rem;" disabled="true">
+                    </oj-input-text>
+
+                    <oj-input-text id="project-number" label-hint="Project Number" placeholder="Project Number"
+                      value="{{ $variables.headerInfoVar.projectNumber }}" user-assistance-density="compact"
+                      style="width: 16rem;" disabled="true">
+                    </oj-input-text>
+
+                    <oj-input-text id="tender-number" label-hint="Tender Number" placeholder="Tender Number"
+                      value="{{ $variables.headerInfoVar.tenderNumber }}" user-assistance-density="compact"
+                      style="width: 16rem;" disabled="true">
+                    </oj-input-text>
+
+                    <oj-input-text id="tender-name" label-hint="Tender Name" placeholder="Tender Name"
+                      value="{{ $variables.headerInfoVar.tenderName }}" user-assistance-density="compact"
+                      style="width: 16rem;" disabled="true">
+                    </oj-input-text>
+                  </oj-form-layout>
+                </div>
+              </oj-collapsible>
+
+
+
+              <!-- <oj-collapsible id="project-info-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+                style="margin-top: 0;" disabled="true">
+                <span slot="header" style="font-weight: bold; color: white; ">Project Details</span>
+                <oj-form-layout max-columns="2" label-edge="start" colspan-wrap="wrap" user-assistance-density="compact"
+                  direction="row" class="oj-formlayout-full-width">
+                  <oj-input-text label-hint="Project Number" value="{{ $variables.postContractVar.ora_project_number }}"
+                    disabled="true"></oj-input-text>
+                  <oj-input-text label-hint="Tender Number" value="{{ $variables.postContractVar.tender_number }}"
+                    disabled="true"></oj-input-text>
+                  <oj-input-text label-hint="Project Name" value="{{ $variables.postContractVar.ora_project_name }}"
+                    disabled="true"></oj-input-text>
+                  <oj-input-text label-hint="Tender Name" value="{{ $variables.postContractVar.tender_name }}"
+                    disabled="true"></oj-input-text>
+                </oj-form-layout>
+              </oj-collapsible> -->
+
+              <!-- General Contact Information Section (Collapsible) -->
+              <oj-collapsible id="general-contact-section" expanded="true"
+                class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 1rem;">
+                <span slot="header" style="font-weight: bold; color: white;">General Contact Information</span>
+                <div style="padding: 1rem;">
+                  <oj-validation-group id="general-contact-validation"
+                    valid="{{ $variables.generalcontactvalidation }}">
+                    <oj-form-layout max-columns="2" label-edge="start" label-width="40%" colspan-wrap="wrap">
+
+                      <oj-input-text id="post-office-box" label-hint="Post Office Box" placeholder="Post Office Box"
+                        value="{{ $variables.contactDetailsVar.post_office_box }}" style="width: 16rem;" required="true"
+                        user-assistance-density="compact">
+                      </oj-input-text>
+
+                      <oj-input-text id="postal-code" label-hint="Postal Code" placeholder="Postal Code"
+                        value="{{ $variables.contactDetailsVar.postal_code }}" required="true"
+                        user-assistance-density="compact" style="width: 16rem;">
+                      </oj-input-text>
+
+                      <oj-input-text id="general-telephone" label-hint="Telephone" placeholder="Telephone"
+                        value="{{ $variables.contactDetailsVar.telephone }}" user-assistance-density="compact"
+                        style="width: 16rem;" validators='[[ [
+  {
+    "type": "regexp",
+    "options": {
+      "pattern": "^[0-9]+$",
+      "messageDetail": "Please enter numbers only!"
+    }
+  }
+] ]]'>
+                      </oj-input-text>
+
+                      <oj-input-text id="general-fax" label-hint="Fax" placeholder="Fax"
+                        value="{{ $variables.contactDetailsVar.fax }}" user-assistance-density="compact"
+                        style="width: 16rem;">
+                      </oj-input-text>
+
+                      <oj-input-email id="general-email" label-hint="Email" placeholder="Email"
+                        value="{{ $variables.contactDetailsVar.email }}" required="true" style="width: 16rem;">
+                      </oj-input-email>
+
+                      <!-- <oj-text-area 
+                        id="additional-info" 
+                        label-hint="Additional Information"
+                        placeholder="Additional Information"
+                        value="{{ $variables.contactDetailsVar.additionalInfo }}"
+                        style="width: 16rem;"
+                        colspan="3"
+                        rows="3">
+                      </oj-text-area> -->
+
+                    </oj-form-layout>
+                  </oj-validation-group>
+                </div>
+              </oj-collapsible>
+
+              <!-- Contact Persons Section (Collapsible with Two-Panel Layout) -->
+              <oj-collapsible id="contact-persons-section" expanded="true"
+                class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 1rem;">
+                <span slot="header" style="font-weight: bold; color: white;">Contact Persons</span>
+                <div style="padding: 1rem;">
+
+                  <!-- Two Column Layout for Contact Persons -->
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+
+                    <!-- Left Panel - Contact Person 1 -->
+                    <div class="oj-panel oj-panel-shadow-md" style="padding: 1rem; background-color: #f8f9fa;">
+                      <h5
+                        style="color: #084c4c; margin-bottom: 1rem; border-bottom: 2px solid #084c4c; padding-bottom: 0.5rem;">
+                        Contact Person 1</h5>
+                      <oj-validation-group id="contact-person-1-validation"
+                        valid="{{ $variables.contactpersononevalidation }}">
+                        <oj-form-layout max-columns="1" label-edge="start" label-width="45%" colspan-wrap="wrap">
+
+                          <oj-input-text id="contact-person-1" label-hint="Contact Person"
+                            placeholder="Contact Person 1" value="{{ $variables.contactDetailsVar.contact_person_1 }}"
+                            required="true" user-assistance-density="compact" style="width: 100%;">
+                          </oj-input-text>
+
+                          <oj-input-text id="position-1" label-hint="Position" placeholder="Position 1"
+                            value="{{ $variables.contactDetailsVar.position_1 }}" required="true"
+                            user-assistance-density="compact" style="width: 100%;">
+                          </oj-input-text>
+
+                          <oj-input-text id="email-1" label-hint="Email" placeholder="Email 1"
+                            value="{{ $variables.contactDetailsVar.email_1 }}" required="true"
+                            user-assistance-density="compact" style="width: 100%;" validators='[[ [
+  {
+    "type": "regexp",
+    "options": {
+      "pattern": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
+      "messageDetail": "Please enter a valid email address!"
+    }
+  }
+] ]]'>
+                          </oj-input-text>
+
+                          <oj-input-text id="mobile-cp1" label-hint="Mobile" placeholder="Mobile CP1"
+                            value="{{ $variables.contactDetailsVar.mobile_cp1 }}" required="true"
+                            user-assistance-density="compact" style="width: 100%;" validators='[[ [
+  {
+    "type": "regexp",
+    "options": {
+      "pattern": "^[0-9]+$",
+      "messageDetail": "Please enter numbers only!"
+    }
+  }
+] ]]'>
+                          </oj-input-text>
+
+                          <oj-input-text id="telephone-1" label-hint="Telephone" placeholder="Telephone 1"
+                            value="{{ $variables.contactDetailsVar.telephone_1 }}" user-assistance-density="compact"
+                            style="width: 100%;" validators='[[ [
+  {
+    "type": "regexp",
+    "options": {
+      "pattern": "^[0-9]+$",
+      "messageDetail": "Please enter numbers only!"
+    }
+  }
+] ]]'>
+                          </oj-input-text>
+
+                          <oj-input-text id="fax-1" label-hint="Fax" placeholder="Fax 1"
+                            value="{{ $variables.contactDetailsVar.fax_1 }}" user-assistance-density="compact"
+                            style="width: 100%;">
+                          </oj-input-text>
+
+                        </oj-form-layout>
+                      </oj-validation-group>
+                    </div>
+
+                    <!-- Right Panel - Contact Person 2 -->
+                    <div class="oj-panel oj-panel-shadow-md" style="padding: 1rem; background-color: #f8f9fa;">
+                      <h5
+                        style="color: #084c4c; margin-bottom: 1rem; border-bottom: 2px solid #084c4c; padding-bottom: 0.5rem;">
+                        Contact Person 2</h5>
+                      <oj-validation-group id="contact-person-2-validation"
+                        valid="{{ $variables.contactpersontwovalidation }}">
+                        <oj-form-layout max-columns="1" label-edge="start" label-width="45%" colspan-wrap="wrap">
+
+                          <oj-input-text id="contact-person-2" label-hint="Contact Person"
+                            placeholder="Contact Person 2" value="{{ $variables.contactDetailsVar.contact_person_2 }}"
+                            required="true" user-assistance-density="compact" style="width: 100%;">
+                          </oj-input-text>
+
+                          <oj-input-text id="position-2" label-hint="Position" placeholder="Position 2"
+                            value="{{ $variables.contactDetailsVar.position_2 }}" required="true"
+                            user-assistance-density="compact" style="width: 100%;">
+                          </oj-input-text>
+
+                          <oj-input-text id="email-2" label-hint="Email" placeholder="Email 2"
+                            value="{{ $variables.contactDetailsVar.email_2 }}" user-assistance-density="compact"
+                            required="true" style="width: 100%;" validators='[[ [
+  {
+    "type": "regexp",
+    "options": {
+      "pattern": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
+      "messageDetail": "Please enter a valid email address!"
+    }
+  }
+] ]]'>
+                          </oj-input-text>
+
+                          <oj-input-text id="mobile-cp2" label-hint="Mobile" placeholder="Mobile CP2"
+                            value="{{ $variables.contactDetailsVar.mobile_cp2 }}" user-assistance-density="compact"
+                            required="true" style="width: 100%;" validators='[[ [
+  {
+    "type": "regexp",
+    "options": {
+      "pattern": "^[0-9]+$",
+      "messageDetail": "Please enter numbers only!"
+    }
+  }
+] ]]'>
+                          </oj-input-text>
+
+                          <oj-input-text id="telephone-2" label-hint="Telephone" placeholder="Telephone 2"
+                            value="{{ $variables.contactDetailsVar.telephone_2 }}" user-assistance-density="compact"
+                            style="width: 100%;" validators='[[ [
+  {
+    "type": "regexp",
+    "options": {
+      "pattern": "^[0-9]+$",
+      "messageDetail": "Please enter numbers only!"
+    }
+  }
+] ]]'>
+                          </oj-input-text>
+
+                          <oj-input-text id="fax-2" label-hint="Fax" placeholder="Fax 2"
+                            value="{{ $variables.contactDetailsVar.fax_2 }}" user-assistance-density="compact"
+                            style="width: 100%;">
+                          </oj-input-text>
+
+                        </oj-form-layout>
+                      </oj-validation-group>
+                    </div>
+
+                  </div>
+
+                </div>
+              </oj-collapsible>
+
+            </div>
+          </div>
+
+        </oj-sp-advanced-create-edit>
+      </div>
+    </div>
+  </div>
+</div>

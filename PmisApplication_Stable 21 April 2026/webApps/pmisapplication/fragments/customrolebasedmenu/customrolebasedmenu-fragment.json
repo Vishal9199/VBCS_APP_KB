@@ -1,0 +1,106 @@
+{
+  "description": "",
+  "eventListeners": {
+    "expandCollapseLinkClick": {
+      "chains": [
+        {
+          "chain": "showMoreAC"
+        }
+      ]
+    },
+    "hyperlinkClick": {
+      "chains": [
+        {
+          "chain": "onSelectMenu",
+          "parameters": {
+            "id": "[[ $current.data ]]"
+          }
+        }
+      ]
+    },
+    "menuBtnAction": {
+      "chains": [
+        {
+          "chain": "onClickMenu"
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "onLoad"
+        }
+      ]
+    }
+
+  },
+  "events": {},
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-drawer-popup": {
+        "path": "ojs/ojdrawerpopup"
+      },
+      "oj-navigation-list": {
+        "path": "ojs/ojnavigationlist"
+      }
+    },
+    "css": [
+      "/resources/css/header-menu.css"
+    ]
+  },
+  "types": {},
+  "variables": {
+    "currentPage": {
+      "type": "string"
+    },
+    "expandedNodes": {
+      "type": "any"
+    },
+    "isShowMore": {
+      "type": "boolean",
+      "defaultValue": true
+    },
+    "loginUser": {
+      "type": "string",
+      "description": "5536  muna.maawali@testowwsc.nama.om\n3064  fahad.harasi@testowwsc.nama.om\n5121  bilal.balushi@testowwsc.nama.om\n5544  issa.shaibani@testowwsc.nama.om\n5346  ahmed.darwashi@testowwsc.nama.om\n4014  mahfoudha.salmi@testowwsc.nama.om\n5957  Faiza.Albalushi@testowwsc.nama.om",
+      "defaultValue": "[[ $application.user.email ]]"
+    },
+    "menuData": {
+      "type": "any"
+    },
+    "navigationContent": {
+      "type": "any"
+    },
+    "openPopup": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "pagesWoPermission": {
+      "type": "string[]",
+      "defaultValue": [
+        "Test Page"
+      ]
+    }
+
+  },
+  "constants": {
+    "developerUser": {
+      "type": "string",
+      "defaultValue": "[[ $application.user.email ]]",
+      "description": "bilal.balushi@testowwsc.nama.om"
+    },
+    "MenuTitle": {
+      "type": "string",
+      "defaultValue": "NWS Custom Application"
+    }
+  },
+  "@dt": {
+    "usedFor": [
+      "page"
+    ]
+  }
+}

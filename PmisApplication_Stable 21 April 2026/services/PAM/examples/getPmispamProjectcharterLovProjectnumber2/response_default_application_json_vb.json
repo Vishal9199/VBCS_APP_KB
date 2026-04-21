@@ -1,0 +1,36 @@
+{
+    "items": [
+        {
+            "budget_number": "RG4Z-NTE-D"
+        },
+        {
+            "budget_number": "22415074"
+        },
+        {
+            "budget_number": "BAS-W-2025-038-NW-S"
+        },
+        {
+            "budget_number": "MCT-W-422-NW-DC"
+        },
+        {
+            "budget_number": "22413059"
+        },
+        {
+            "budget_number": "22414069"
+        }
+    ],
+    "hasMore": false,
+    "limit": 0,
+    "offset": 0,
+    "count": 6,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/projectcharter/lov/projectnumber"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/projectcharter/lov/item"
+        }
+    ]
+}

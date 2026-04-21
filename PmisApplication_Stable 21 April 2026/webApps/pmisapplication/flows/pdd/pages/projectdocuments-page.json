@@ -1,0 +1,704 @@
+{
+  "metadata": {},
+  "title": "Project Documents Management",
+  "description": "Project Documents Management page with Project Details (read-only) and tabbed tables for Static, Dynamic, Output and Other document attachments.",
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-file-picker": {
+        "path": "ojs/ojfilepicker"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-option": {
+        "path": "ojs/ojoption"
+      },
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-radioset": {
+        "path": "ojs/ojradioset"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-tab-bar": {
+        "path": "ojs/ojnavigationlist"
+      },
+      "oj-switcher": {
+        "path": "ojs/ojswitcher"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      },
+      "oj-label": {
+        "path": "ojs/ojlabel"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  },
+  "constants": {
+    "attachmentPopupColumns": {
+      "defaultValue": [
+        {
+          "headerText": "Action",
+          "template": "action",
+          "frozenEdge": "start",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": 180
+
+        },
+        {
+          "headerText": "Document Name",
+          "field": "document_name",
+          "frozenEdge": "start",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": 270
+
+        },
+        {
+          "headerText": "Document Type",
+          "field": "document_type",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": 100
+        },
+        {
+          "headerText": "Description",
+          "field": "description",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": 240
+        },
+        {
+          "headerText": "File Name",
+          "field": "document_name",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": 200
+        },
+        {
+          "headerText": "Created By",
+          "field": "created_by",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": 160
+        },
+        {
+          "headerText": "Created Date",
+          "field": "created_date",
+          "template": "ColCreatedDate",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": ""
+        }
+      ],
+      "type": "object[]"
+    },
+    "commonTableColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Document Name",
+          "field": "lookup_value_name",
+          "frozenEdge": "start",
+          "template": "ColDocName",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": 270
+
+        },
+        {
+          "headerText": "Attachment Actions",
+          "field": "",
+          "frozenEdge": "start",
+          "template": "attachmentDoc",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": 200
+        },
+        {
+          "headerText": "Document Type",
+          "field": "latest_type",
+          "template": "ColDocType",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": 100
+        },
+        {
+          "headerText": "Description",
+          "field": "latest_description",
+          "template": "ColDescription",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": 240
+        },
+        {
+          "headerText": "File Name (Latest)",
+          "field": "latest_doc_name",
+          "template": "ColFileSize",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": 200
+        },
+        {
+          "headerText": "MIME Type",
+          "field": "latest_mime",
+          "template": "ColMimeType",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": 140
+        },
+        {
+          "headerText": "Created By",
+          "field": "latest_created_by",
+          "template": "ColCreatedBy",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": 160
+        },
+        {
+          "headerText": "Created Date",
+          "field": "latest_created_date",
+          "template": "ColCreatedDate",
+          "headerStyle": "white-space:normal;background-color:#084c4c;color:white;font-weight:bold;",
+          "resizable": "enabled",
+          "width": ""
+        }
+      ]
+    },
+    "SIZE_LIMIT": {
+      "type": "string",
+      "defaultValue": "2MB"
+    }
+
+  },
+  "types": {
+    "@decorators.dynamicAttachmentTableType": {
+      "endpoint": "getCommonLovLookup",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.postUpload": {
+      "endpoint": "postUpload",
+      "service": "OICBucket",
+      "path": "request"
+    },
+    "dynamicAttachmentTableType": {
+      "lookup_type_code": "string",
+      "lookup_type_id": "number",
+      "lookup_type_name": "string",
+      "lookup_value_code": "string",
+      "lookup_value_id": "number",
+      "lookup_value_name": "string",
+      "attachment_count": "number",
+      "latest_doc_name": "string",
+      "latest_type": "string",
+      "latest_mime": "string",
+      "latest_description": "string",
+      "latest_created_by": "string",
+      "latest_created_date": "string"
+    },
+    "postUpload": {
+      "data": {
+        "file": "string",
+        "location": "string"
+      }
+    },
+    "ProjectDetails": {
+      "project_number": "string",
+      "project_name": "string",
+      "tender_number": "string"
+    },
+    "DocumentRowType": {
+      "document_id": "number",
+      "object_version_num": "number",
+      "document_name": "string",
+      "document_category": "string",
+      "document_type": "string",
+      "description": "string",
+      "file_size": "number",
+      "mime_type": "string",
+      "type": "string",
+      "url": "string",
+      "title": "string",
+      "appl_code": "string",
+      "transaction_id": "number",
+      "reference_type": "string",
+      "reference_id": "number",
+      "status_id": "number",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "DocumentLovType": {
+      "lov_id": "number",
+      "lov_code": "string",
+      "lov_meaning": "string",
+      "lov_category": "string"
+    }
+
+  },
+  "variables": {
+    "attachmentPopupADP": {
+      "type": "vb/ArrayDataProvider2"
+    },
+    "dynamicAttachmentTableTypeVar": {
+      "type": "dynamicAttachmentTableType"
+    },
+    "oicbucket": {
+      "type": "postUpload"
+    },
+    "projectDetailsVar": {
+      "type": "ProjectDetails"
+    },
+    "pTenderId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "rowid": {
+      "type": "string"
+    },
+    "selectedDocTab": {
+      "type": "string",
+      "defaultValue": "static-tab"
+    },
+    "ADPStaticDocs": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "dynamicAttachmentTableType",
+        "keyAttributes": "lookup_value_id"
+      }
+    },
+    "ADPDynamicDocs": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "dynamicAttachmentTableType",
+        "keyAttributes": "lookup_value_id"
+      }
+    },
+    "ADPOutputDocs": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "dynamicAttachmentTableType",
+        "keyAttributes": "lookup_value_id"
+      }
+    },
+    "ADPOtherDocs": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "dynamicAttachmentTableType",
+        "keyAttributes": "lookup_value_id"
+      }
+    },
+    "ADPDocTypesStatic": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "DocumentLovType",
+        "keyAttributes": "lov_code"
+      }
+    },
+    "ADPDocTypesDynamic": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "DocumentLovType",
+        "keyAttributes": "lov_code"
+      }
+    },
+    "ADPDocTypesOutput": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "DocumentLovType",
+        "keyAttributes": "lov_code"
+      }
+    },
+    "ADPDocTypesOther": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "DocumentLovType",
+        "keyAttributes": "lov_code"
+      }
+    },
+    "attachmentObj": {
+      "type": {
+        "P_DOCUMENT_NAME": "string",
+        "P_DOCUMENT_CATEGORY": "string",
+        "P_DOCUMENT_TYPE": "string",
+        "P_DOCUMENT_FILE": "any",
+        "P_DESCRIPTION": "string",
+        "P_APPL_CODE": "string",
+        "P_REFERENCE_TYPE": "string",
+        "P_TRANSACTION_ID": "string",
+        "P_TYPE": "string",
+        "P_TITLE": "string",
+        "P_URL": "string",
+        "P_CREATED_BY": "string"
+      },
+      "defaultValue": {
+        "P_APPL_CODE": "[[ $variables.P_APPLICATION_CODE ]]",
+        "P_CREATED_BY": "[[ $application.user.email ]]",
+        "P_TRANSACTION_ID": "[[ $variables.P_TRANSACTION_ID ]]",
+        "P_TYPE": "URL"
+      }
+    },
+    "formObj": {
+      "type": {
+        "addDialogValidate": "string"
+      }
+    },
+    "P_APPLICATION_CODE": {
+      "type": "string",
+      "required": false,
+      "input": "none",
+      "defaultValue": "Project Documents"
+    },
+    "P_SCREEN_NAME": {
+      "type": "string",
+      "defaultValue": "Project Documents",
+      "input": "none",
+      "required": false
+    },
+    "P_STATUS": {
+      "type": "string",
+      "defaultValue": "DRA"
+    },
+    "P_TRANSACTION_ID": {
+      "type": "string",
+      "required": false,
+      "input": "none"
+    },
+    "adpAttachmentFile": {
+      "type": "vb/ArrayDataProvider2"
+    },
+    "adpAttachmentText": {
+      "type": "vb/ArrayDataProvider2"
+    },
+    "adpAttachmentUrl": {
+      "type": "vb/ArrayDataProvider2"
+    },
+    "showAttachmentDialog": {
+      "type": "boolean",
+      "defaultValue": false
+    }
+
+  },
+  "chains": {},
+  "eventListeners": {
+    "addStaticDocAction": {
+      "chains": [
+        {
+          "chain": "onAddAttachment",
+          "parameters": {
+            "btnType": "FILE",
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "cancelDeleteBtnAction": {
+      "chains": [
+        {
+          "chain": "canceldeleteaction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "confirmDeleteBtnAction": {
+      "chains": [
+        {
+          "chain": "okdeleteaction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnAction": {
+      "chains": [
+        {
+          "chain": "onDeleteAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "deleteStaticRowAction": {
+      "chains": [
+        {
+          "chain": "onDeleteAttachment_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "downloadBtnAction": {
+      "chains": [
+        {
+          "chain": "ButtonActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "onCloseAttachmentPopupEvent": {
+      "chains": [
+        {
+          "chain": "onCloseAttachmentPopup",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "projectDocumentsPageSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "onClosePrimary_AC",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "projectDocumentsPageSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "onSecondary_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "spanClick": {
+      "chains": [
+        {
+          "chain": "onViewAttachmentsPopup_AC",
+          "parameters": {
+            "current": "{{ $current }}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "index": "{{ $current.index }}",
+            "key": "{{ $current.key }}",
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    },
+    "addFileBtnAction": {
+      "chains": [
+        {
+          "chain": "onAddAttachment",
+          "parameters": {
+            "btnType": "FILE",
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "addTextBtnAction": {
+      "chains": [
+        {
+          "chain": "onAddAttachment",
+          "parameters": {
+            "btnType": "TEXT",
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "addUrlBtnAction": {
+      "chains": [
+        {
+          "chain": "onAddAttachment",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "btnType": "URL",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "attachmentCancelAction": {
+      "chains": [
+        {
+          "chain": "onClickCancel",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "attachmentFilePickerSelect": {
+      "chains": [
+        {
+          "chain": "FilePickerSelectChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "files": "[[ Array.prototype.slice.call($event.detail.files) ]]",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "attachmentSaveAddAction": {
+      "chains": [
+        {
+          "chain": "onSaveAddNew",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "attachmentSaveCloseAction2": {
+      "chains": [
+        {
+          "chain": "onClickSave",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "viewStaticRowAction": {
+      "chains": [
+        {
+          "chain": "onViewAttachmentsPopup_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "viewDynamicRowAction": {
+  "chains": [
+    {
+      "chain": "onViewAttachmentsPopup_AC",
+      "parameters": {
+        "event": "{{$event}}",
+        "originalEvent": "{{$event.detail.originalEvent}}",
+        "key": "{{ $current.key }}",
+        "index": "{{ $current.index }}",
+        "current": "{{ $current }}"
+      }
+    }
+  ]
+},
+"viewOutputRowAction": {
+  "chains": [
+    {
+      "chain": "onViewAttachmentsPopup_AC",
+      "parameters": {
+        "event": "{{$event}}",
+        "originalEvent": "{{$event.detail.originalEvent}}",
+        "key": "{{ $current.key }}",
+        "index": "{{ $current.index }}",
+        "current": "{{ $current }}"
+      }
+    }
+  ]
+},
+"viewOtherRowAction": {
+  "chains": [
+    {
+      "chain": "onViewAttachmentsPopup_AC",
+      "parameters": {
+        "event": "{{$event}}",
+        "originalEvent": "{{$event.detail.originalEvent}}",
+        "key": "{{ $current.key }}",
+        "index": "{{ $current.index }}",
+        "current": "{{ $current }}"
+      }
+    }
+  ]
+}
+
+  }
+}

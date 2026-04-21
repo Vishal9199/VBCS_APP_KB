@@ -1,0 +1,42 @@
+{
+    "items": [
+        {
+            "lookup_value_id": 6814,
+            "lookup_value_code": "APPROVED_BY_TENDER_BOARD",
+            "lookup_value_name": "Approved By Tender Board"
+        },
+        {
+            "lookup_value_id": 6821,
+            "lookup_value_code": "APPROVED",
+            "lookup_value_name": "Approved"
+        },
+        {
+            "lookup_value_id": 6815,
+            "lookup_value_code": "APPROVED_BY_INTERNAL_TENDER_CO",
+            "lookup_value_name": "Approved By Internal Tender Committee"
+        },
+        {
+            "lookup_value_id": 6818,
+            "lookup_value_code": "APPROVED_BY_MINISTRY_OF_FINANC",
+            "lookup_value_name": "Approved By Ministry Of Finance"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 4,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/changecontrol/lov/ifopen?searchVal=app"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/changecontrol/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/changecontrol/lov/ifopen?searchVal=app"
+        }
+    ]
+}

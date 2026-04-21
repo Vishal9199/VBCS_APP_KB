@@ -1,0 +1,52 @@
+{
+    "items": [
+        {
+            "menu_id": 59,
+            "menu_code": "CUSTOM_ADMIN_MENU",
+            "menu_name": "Custom Admin Menu"
+        },
+        {
+            "menu_id": 654,
+            "menu_code": "FINANCE_ADMIN_MENU",
+            "menu_name": "Finance Admin Menu"
+        },
+        {
+            "menu_id": 664,
+            "menu_code": "FINANCE_VIEW_MASTER_MENU",
+            "menu_name": "Finance View Master Menu"
+        },
+        {
+            "menu_id": 667,
+            "menu_code": "FINANCE_VIEW_TRANSACTION_MENU",
+            "menu_name": "Finance View Transaction Menu"
+        },
+        {
+            "menu_id": 671,
+            "menu_code": "SCM_ADMIN_MENU",
+            "menu_name": "SCM Admin Menu"
+        },
+        {
+            "menu_id": 680,
+            "menu_code": "SCM_VIEW_MENU",
+            "menu_name": "SCM View Menu"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 6,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol/menu/lov/menu/name"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol/metadata-catalog/menu/lov/menu/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol/menu/lov/menu/name"
+        }
+    ]
+}

@@ -1,0 +1,38 @@
+{
+    "items": [
+        {
+            "dependency_id": 10223,
+            "object_version_num": 1,
+            "project_charter_id": 10216,
+            "project_charter_name": "DN in Mawalleh 11 Part 1",
+            "project_dependencies": "Dependency on Phase 1 civil works completion",
+            "dependency_details": "The pump station installation cannot commence until the pipeline laying in Zone A is complete",
+            "impacts_consequences": "Delay in Zone A will push commissioning by 4-6 weeks and impact Q3 budget allocation",
+            "ref_num": "PC-1",
+            "additional_info": "Refer to project schedule document v2.1 for milestone dependencies",
+            "created_by": "JSMITH",
+            "created_date": "2026-04-01T10:41:27.230788Z",
+            "last_updated_by": "JSMITH",
+            "last_updated_date": "2026-04-01T10:41:27.230788Z",
+            "last_updated_login": "JSMITH"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/projectcharter/dependency/getbyprojectcharterid?p_project_charter_id=o7vIo3Th4tBBJ2BqPqQMici3TAtrPI_8cizYnM4Doo69czI2vaKJHNMe88o8xwfb"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/projectcharter/dependency/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/projectcharter/dependency/getbyprojectcharterid?p_project_charter_id=o7vIo3Th4tBBJ2BqPqQMici3TAtrPI_8cizYnM4Doo69czI2vaKJHNMe88o8xwfb"
+        }
+    ]
+}

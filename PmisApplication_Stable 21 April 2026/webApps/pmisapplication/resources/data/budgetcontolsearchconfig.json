@@ -1,0 +1,25 @@
+{
+  "description": "Smart Search Configuration for Budget Control Search Page",
+  "filters": {
+    "PlanTypeFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Plan Type",
+      "options": {
+        "field": "id",
+         "optionsData": "[[ $search.filters.PlanTypeFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.PlanTypeFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+    "YearFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Year",
+      "options": {
+        "field": "display_year",
+         "optionsData": "[[ $search.filters.YearFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.YearFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    }
+  }
+}

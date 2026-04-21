@@ -1,0 +1,288 @@
+{
+    "items": [
+        {
+            "lookup_type_id": 6872,
+            "lookup_type_code": "PMIS_PDD_DYNAMIC_DOCUMENTS",
+            "lookup_type_name": "PMIS PDD Dynamic Documents",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6891,
+            "lookup_type_code": "PMIS_PDD_OTHER_DOCUMENTS",
+            "lookup_type_name": "PMIS PDD Other Documents",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6875,
+            "lookup_type_code": "PMIS_PDD_OUTPUT_DOCUMENTS",
+            "lookup_type_name": "PMIS PDD Output Documents",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6656,
+            "lookup_type_code": "PMIS_PDD_QUALITY_ASSURANCE",
+            "lookup_type_name": "PMIS PDD Quality Assurance",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6675,
+            "lookup_type_code": "PMIS_PDD_QUALITY_CONTROL",
+            "lookup_type_name": "PMIS PDD Quality Control",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6754,
+            "lookup_type_code": "PMIS_PDD_RISK_CATEGORY",
+            "lookup_type_name": "PMIS PDD Risk Category",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6779,
+            "lookup_type_code": "PMIS_PDD_RISK_LIKELIHOOD",
+            "lookup_type_name": "PMIS PDD Risk Likelihood",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6791,
+            "lookup_type_code": "PMIS_PDD_RISK_OWNER",
+            "lookup_type_name": "PMIS PDD Risk Owner",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6785,
+            "lookup_type_code": "PMIS_PDD_RISK_RESPONSE_STRATEGY",
+            "lookup_type_name": "PMIS PDD Risk Response Strategy",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6859,
+            "lookup_type_code": "PMIS_PDD_STATIC_DOCUMENTS",
+            "lookup_type_name": "PMIS PDD Static Documents",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6797,
+            "lookup_type_code": "PMIS_BUDGET_CTRL_LINES",
+            "lookup_type_name": "Pmis Budget Ctrl Lines",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6151,
+            "lookup_type_code": "PMIS_CALENDAR_TYPE",
+            "lookup_type_name": "Pmis Calendar Type",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6322,
+            "lookup_type_code": "PMIS_CONCEPT_STUDY_PHASE",
+            "lookup_type_name": "Pmis Concept Study Phase",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6341,
+            "lookup_type_code": "PMIS_CS_CONSULTANT",
+            "lookup_type_name": "Pmis Cs Consultant",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6807,
+            "lookup_type_code": "PMIS_DIRECTORATE",
+            "lookup_type_name": "Pmis Directorate",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6890,
+            "lookup_type_code": "PMIS_LESSON_CATEGORY",
+            "lookup_type_name": "Pmis Lesson Category",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6331,
+            "lookup_type_code": "PMIS_PAM_CONCEPT_STUDY_MILESTONE",
+            "lookup_type_name": "Pmis Pam Concept Study Milestone",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6456,
+            "lookup_type_code": "PMIS_PAM_FYP_FIN_STATUS",
+            "lookup_type_name": "Pmis Pam Fyp Finance Status",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6469,
+            "lookup_type_code": "PMIS_PAM_FYP_TECH_STATUS",
+            "lookup_type_name": "Pmis Pam Fyp Technical Status",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6155,
+            "lookup_type_code": "PMIS_PAM_LOCATION",
+            "lookup_type_name": "Pmis Pam Location",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6479,
+            "lookup_type_code": "PMIS_ATTACHMENT_TYPE",
+            "lookup_type_name": "Pmis Pc Attachment Type",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6609,
+            "lookup_type_code": "PMIS_PDD_ATTRIBUTE_TYPE",
+            "lookup_type_name": "Pmis Pdd Attribute Type",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6813,
+            "lookup_type_code": "PMIS_PDD_CHANGE_CONTROL_IF_OPEN",
+            "lookup_type_name": "Pmis Pdd Change Control If Open",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6687,
+            "lookup_type_code": "PMIS_PDD_CONTINUAL_IMPROVE",
+            "lookup_type_name": "Pmis Pdd Continual Improve",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6717,
+            "lookup_type_code": "PMIS_PDD_STAKEHOLDER_ENGAGEMENT",
+            "lookup_type_name": "Pmis Pdd Current Management",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6584,
+            "lookup_type_code": "PMIS_PDD_DEPT_SEC",
+            "lookup_type_name": "Pmis Pdd Department Section",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6693,
+            "lookup_type_code": "PMIS_PDD_DISCIPLINE",
+            "lookup_type_name": "Pmis Pdd Discipline",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6569,
+            "lookup_type_code": "PMIS_PDD_GEN_STATUS",
+            "lookup_type_name": "Pmis Pdd Gen Status",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6575,
+            "lookup_type_code": "PMIS_PDD_PHASE_CONTRACT",
+            "lookup_type_name": "Pmis Pdd Phase Contract",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6593,
+            "lookup_type_code": "PMIS_PDD_PROJECT_TYPE",
+            "lookup_type_name": "Pmis Pdd Project Type",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6596,
+            "lookup_type_code": "PMIS_PDD_SCHEDULE_MILESTONE",
+            "lookup_type_name": "Pmis Pdd Schedule Milestone",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6590,
+            "lookup_type_code": "PMIS_PDD_SOURCE_OF_FUND",
+            "lookup_type_name": "Pmis Pdd Source Of Fund",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6723,
+            "lookup_type_code": "PMIS_PDD_STAKEHOLDER_STATUS",
+            "lookup_type_name": "Pmis Pdd Stakeholder Status",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6152,
+            "lookup_type_code": "PMIS_PRJ_CATEGORY",
+            "lookup_type_name": "Pmis Prj Category",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6216,
+            "lookup_type_code": "PMIS_PROJECT_CATEGORY",
+            "lookup_type_name": "Pmis Project Category",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6153,
+            "lookup_type_code": "PMIS_PROJECT_TYPE",
+            "lookup_type_name": "Pmis Project Type",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6154,
+            "lookup_type_code": "PMIS_REGION",
+            "lookup_type_name": "Pmis Region",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        },
+        {
+            "lookup_type_id": 6343,
+            "lookup_type_code": "PMIS_TEST_001",
+            "lookup_type_name": "Pmis Test 001",
+            "application_code": "PMIS",
+            "application_name": "PMIS"
+        }
+    ],
+    "hasMore": false,
+    "limit": 250,
+    "offset": 0,
+    "count": 38,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol_dev/lookup/type/lov/type/name?p_lookup_prefix=pmis"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol_dev/metadata-catalog/lookup/type/lov/type/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol_dev/lookup/type/lov/type/name?p_lookup_prefix=pmis"
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+{
+    "items": [
+        {
+            "project_start_date": "2022-02-01T00:00:00Z",
+            "project_end_date": "2025-02-28T00:00:00Z",
+            "days_left": 0
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/icv/projectdetails/getbyid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/icv/projectdetails/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/icv/projectdetails/getbyid"
+        }
+    ]
+}

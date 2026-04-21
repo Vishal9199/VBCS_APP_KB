@@ -1,0 +1,451 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "aToolBarList": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Save",
+          "id": "save",
+          "icon": "oj-ux-ico-save"
+        }
+      ]
+    },
+    "bufferDPlessonlearnedTable": {
+      "type": "application:ojs/ojbufferingdataprovider",
+      "constructorParams": [
+        "{{ $variables.lessonlearnedADP }}",
+        null
+      ]
+    },
+    "count": {
+      "type": "number"
+    },
+    "getPmispddGeneralLovCommonListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PDD/getPmispddGeneralLovCommon",
+        "itemsPath": "items",
+        "responseType": "getPmispddGeneralLovCommonResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        },
+        "headers": {
+          "x-session-code": "PDD_LESSON_LEARNED"
+        },
+        "keyAttributes": "lookup_value_id"
+      }
+    },
+    "lessonlearnedADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "getPmispddLessonlearnedGetbytenderid",
+        "keyAttributes": "lesson_id"
+      }
+    },
+    "lessonRowToEdit": {
+      "type": "object"
+    },
+    "lvCurrentLessonRow": {
+      "type": "lvCurrentLessonRow",
+      "defaultValue": {
+        "last_updated_by": "[[ $application.user.userId ]]",
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_login": "[[ $application.user.userId ]]",
+        "created_by": "[[ $application.user.userId ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]"
+      }
+    },
+    "lvNextLessonValue": {
+      "type": "any"
+    },
+    "passKey": {
+      "type": "string"
+    },
+    "passPayload": {
+      "type": "string"
+    },
+    "projectDetailsVar": {
+      "type": "ProjectDetailsType"
+    },
+    "pTenderId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "headerInfoVar": {
+      "type": {
+        "projectName": "string",
+        "projectNumber": "string",
+        "tenderNumber": "string"
+      },
+      "defaultValue": {
+        "projectName": "",
+        "projectNumber": "",
+        "tenderNumber": ""
+      }
+    },
+    "rowToEdit": {
+      "type": {
+        "rowKey": "number"
+      }
+    }
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getPmispddGeneralLovCommonResponse": {
+      "endpoint": "getPmispddGeneralLovCommon",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getPmispddLessonlearnedGetbytenderid": {
+      "endpoint": "getPmispddLessonlearnedGetbytenderid",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.lvCurrentLessonRow": {
+      "endpoint": "getPmispddLessonlearnedGetbytenderid",
+      "service": "PDD",
+      "path": "response"
+    },
+    "getPmispddGeneralLovCommonResponse": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispddLessonlearnedGetbytenderid": {
+      "additional_info": "string",
+      "continuous_process": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "lesson_category": "string",
+      "lesson_category_code": "string",
+      "lesson_category_id": "number",
+      "lesson_date": "string",
+      "lesson_id": "number",
+      "lesson_impact": "string",
+      "lesson_recommendation": "string",
+      "lesson_status": "string",
+      "lesson_type": "string",
+      "logged_by": "string",
+      "object_version_num": "number",
+      "ora_project_id": "number",
+      "ora_project_name": "string",
+      "ora_project_number": "string",
+      "period": "string",
+      "tender_id": "number",
+      "tender_name": "string",
+      "tender_number": "string"
+    },
+    "ProjectDetailsType": {
+      "ora_project_id": "number",
+      "project_name": "string",
+      "project_number": "string",
+      "tender_id": "number",
+      "tender_number": "string"
+    },
+    "lvCurrentLessonRow": {
+      "additional_info": "string",
+      "continuous_process": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "lesson_category": "string",
+      "lesson_category_code": "string",
+      "lesson_category_id": "number",
+      "lesson_date": "string",
+      "lesson_id": "number",
+      "lesson_impact": "string",
+      "lesson_recommendation": "string",
+      "lesson_status": "string",
+      "lesson_type": "string",
+      "logged_by": "string",
+      "object_version_num": "number",
+      "ora_project_id": "number",
+      "ora_project_name": "string",
+      "ora_project_number": "string",
+      "period": "string",
+      "tender_id": "number",
+      "tender_name": "string",
+      "tender_number": "string"
+    }
+  },
+  "eventListeners": {
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "onAddLessonRow",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "deletePopupOpenAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "buttonAction3": {
+      "chains": [
+        {
+          "chain": "deleteDialogAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction4": {
+      "chains": [
+        {
+          "chain": "deleteNoDialogAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "lessonLearnedTableBeforeRowEdit": {
+      "chains": [
+        {
+          "chain": "TableBeforeRowEditChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "accept": "{{$event.detail.accept}}",
+            "rowContext": "{{$event.detail.rowContext}}",
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}"
+          }
+        }
+      ]
+    },
+    "lessonLearnedTableBeforeRowEditEnd": {
+      "chains": [
+        {
+          "chain": "TableBeforeRowEditEndChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "accept": "{{$event.detail.accept}}",
+            "setUpdatedItem": "{{$event.detail.setUpdatedItem}}",
+            "rowContext": "{{$event.detail.rowContext}}",
+            "cancelEdit": "{{$event.detail.cancelEdit}}",
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}",
+            "changedRow": "[[ $variables.lvCurrentLessonRow ]]"
+          }
+        }
+      ]
+    },
+    "projectstatusupdateidSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "AdvancedCreateAndEditPageTemplateSpPrimaryActionChain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "projectstatusupdateidSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "AdvancedCreateAndEditPageTemplateSpSecondaryActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "selectValueItem": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{ $current.key }}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ],
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    }
+  },
+  "constants": {
+    "lessonTableColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "template": "actionsTemplate",
+          "width": 90,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Lesson Date",
+          "field": "lesson_date",
+          "template": "lessonDateTemplate",
+          "resizable": "enabled",
+          "width": 150,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Lesson Type",
+          "field": "lesson_type",
+          "template": "lessonTypeTemplate",
+          "resizable": "enabled",
+          "width": 150,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Lesson Category",
+          "field": "lesson_category",
+          "template": "lessonCategoryTemplate",
+          "resizable": "enabled",
+          "width": 180,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Lesson Status",
+          "field": "lesson_status",
+          "template": "lessonStatusTemplate",
+          "resizable": "enabled",
+          "width": 200,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Lesson Impact",
+          "field": "lesson_impact",
+          "template": "lessonImpactTemplate",
+          "resizable": "enabled",
+          "width": 200,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Lesson Recommendation",
+          "field": "lesson_recommendation",
+          "template": "lessonRecommendationTemplate",
+          "resizable": "enabled",
+          "width": 200,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Continuous Process",
+          "field": "continuous_process",
+          "template": "continuousProcessTemplate",
+          "resizable": "enabled",
+          "width": 180,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Additional Info",
+          "field": "additional_info",
+          "template": "additionalInfoTemplate",
+          "resizable": "enabled",
+          "width": 200,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Action Holder",
+          "field": "logged_by",
+          "template": "loggedByTemplate",
+          "resizable": "enabled",
+          "width": 200,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }
+      ]
+    }
+  }
+}

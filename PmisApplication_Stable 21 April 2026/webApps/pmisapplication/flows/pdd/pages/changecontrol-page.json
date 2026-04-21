@@ -1,0 +1,707 @@
+{
+  "title": "Change Variation Control",
+  "description": "Change / Variation Control Details page with Project Details, Contract Value read-only sections and inline editable BDP table.",
+  "imports": {
+    "components": {
+      "oj-progress-bar": {
+        "path": "ojs/ojprogress-bar"
+      },
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "oj-sp/simple-create-edit/loader"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-option": {
+        "path": "ojs/ojoption"
+      },
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  },
+  "types": {
+    "@decorators.getPmispddChangecontrolLovCrResponse": {
+      "endpoint": "getPmispddChangecontrolLovCr",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getPmispddChangeControlLovCrResponse": {
+      "endpoint": "getPmispddChangeControlLovCr",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getPmispddChangecontrolLovIfopenResponse": {
+      "endpoint": "getPmispddChangecontrolLovIfopen",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getPmispddChangeControlLovStatusResponse": {
+      "endpoint": "getPmispddChangeControlLovStatus",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getPmispddChangeControlLovOpenReasonResponse": {
+      "endpoint": "getPmispddChangeControlLovOpenReason",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getPmispddStakeholderLovStatusResponse": {
+      "endpoint": "getPmispddStakeholderLovStatus",
+      "service": "PDD",
+      "path": "response"
+    },
+    "getPmispddChangecontrolLovCrResponse": {
+      "items": [
+        {
+          "change_request_id": "number",
+          "cr_number": "string"
+        }
+      ]
+    },
+    "getPmispddChangeControlLovCrResponse": {
+      "items": [
+        {
+          "change_request_id": "number",
+          "cr_number": "string"
+        }
+      ]
+    },
+    "getPmispddChangecontrolLovIfopenResponse": {
+      "items": [
+        {
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispddChangeControlLovStatusResponse": {
+      "items": [
+        {
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispddChangeControlLovOpenReasonResponse": {
+      "items": [
+        {
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispddStakeholderLovStatusResponse": {
+      "items": [
+        {
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "ProjectHeaderType": {
+      "project_id": "number",
+      "project_name": "string",
+      "project_number": "string",
+      "tender_id": "number",
+      "tender_number": "string",
+      "tender_name": "string"
+    },
+    "ChangeControlDetailType": {
+      "control_register_id": "number",
+      "object_version_num": "number",
+      "ora_project_id": "number",
+      "tender_id": "number",
+      "change_request_id": "number",
+      "cr_number": "string",
+      "vo_number": "string",
+      "change_control_number": "number",
+      "project_manager": "string",
+      "initiator": "string",
+      "time_impact": "number",
+      "original_contract_value": "number",
+      "revised_contract_amount": "number",
+      "addition_a": "number",
+      "omission_b": "number",
+      "total_change": "number",
+      "net_change": "number",
+      "net_percentage_of_change": "number",
+      "total_vol_of_change": "number",
+      "status": "string",
+      "open_reason_id": "number",
+      "open_reason_code": "string",
+      "open_reason": "string",
+      "remarks": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "CurrentChangeControlRowType": {
+      "control_register_id": "number",
+      "object_version_num": "number",
+      "ora_project_id": "number",
+      "tender_id": "number",
+      "change_request_id": "number",
+      "cr_number": "string",
+      "vo_number": "string",
+      "change_control_number": "number",
+      "project_manager": "string",
+      "initiator": "string",
+      "time_impact": "number",
+      "original_contract_value": "number",
+      "revised_contract_amount": "number",
+      "addition_a": "number",
+      "omission_b": "number",
+      "total_change": "number",
+      "net_change": "number",
+      "net_percentage_of_change": "number",
+      "total_vol_of_change": "number",
+      "status": "string",
+      "open_reason_id": "number",
+      "open_reason_code": "string",
+      "open_reason": "string",
+      "remarks": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    }
+  },
+  "variables": {
+    "aToolBar": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Save",
+          "id": "save",
+          "icon": "oj-ux-ico-save"
+        }
+      ]
+    },
+    "count": {
+      "type": "number"
+    },
+    "getPmispddChangecontrolLovCrListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PDD/getPmispddChangecontrolLovCr",
+        "keyAttributes": "change_request_id",
+        "itemsPath": "items",
+        "responseType": "getPmispddChangecontrolLovCrResponse",
+        "headers": {
+          "x-session-id": "{{ $variables.pTenderId }}"
+        },
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "cr_number"
+          ]
+        }
+      }
+    },
+    "getPmispddChangecontrolLovIfopenListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PDD/getPmispddChangecontrolLovIfopen",
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getPmispddChangecontrolLovIfopenResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        }
+      }
+    },
+    "getPmispddStakeholderLovStatusListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PDD/getPmispddStakeholderLovStatus",
+        "itemsPath": "items",
+        "responseType": "getPmispddStakeholderLovStatusResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        },
+        "keyAttributes": "lookup_value_name"
+      }
+    },
+    "original_contract_value": {
+      "type": "number",
+      "defaultValue": 5678
+    },
+    "revised_contract_amount": {
+      "type": "number",
+      "defaultValue": 5678
+    },
+    "rowToEdit": {
+      "type": {
+        "rowKey": "number"
+      }
+    },
+    "passKey": {
+      "type": "string"
+    },
+    "passPayload": {
+      "type": "string"
+    },
+    "pTenderId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "lvNextHeaderValue": {
+      "type": "number",
+      "defaultValue": 9999999
+    },
+    "getPmispddChangeControlLovCrListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PDD/getPmispddChangeControlLovCr",
+        "keyAttributes": "change_request_id",
+        "itemsPath": "items",
+        "responseType": "getPmispddChangeControlLovCrResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "cr_number"
+          ]
+        }
+      }
+    },
+    "getPmispddChangeControlLovStatusListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PDD/getPmispddChangeControlLovStatus",
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getPmispddChangeControlLovStatusResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        }
+      }
+    },
+    "getPmispddChangeControlLovOpenReasonListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PDD/getPmispddChangeControlLovOpenReason",
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getPmispddChangeControlLovOpenReasonResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        }
+      }
+    },
+    "projectHeaderVar": {
+      "type": "ProjectHeaderType"
+    },
+    "ADPChangeControlTable": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "ChangeControlDetailType",
+        "keyAttributes": "control_register_id"
+      }
+    },
+    "bufferDPChangeControlTable": {
+      "type": "application:ojs/ojbufferingdataprovider",
+      "constructorParams": [
+        "{{ $variables.ADPChangeControlTable }}",
+        null
+      ]
+    },
+    "lvCurrentChangeControlRow": {
+      "type": "CurrentChangeControlRowType"
+    },
+    "tablecolumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "template": "actionsTemplate",
+          "width": 90,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "CR No",
+          "field": "cr_number",
+          "template": "crNumberTemplate",
+          "resizable": "enabled",
+          "width": 130,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "VO No",
+          "field": "vo_number",
+          "template": "voNumberTemplate",
+          "resizable": "enabled",
+          "width": 120,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Project Manager",
+          "field": "project_manager",
+          "template": "projectManagerTemplate",
+          "resizable": "enabled",
+          "width": 160,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Initiator",
+          "field": "initiator",
+          "template": "initiatorTemplate",
+          "resizable": "enabled",
+          "width": 120,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "EOT (Days)",
+          "field": "time_impact",
+          "template": "timeImpactTemplate",
+          "resizable": "enabled",
+          "width": 100,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Addition (A) OMR",
+          "field": "addition_a",
+          "template": "additionATemplate",
+          "resizable": "enabled",
+          "width": 140,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Omission (B) OMR",
+          "field": "omission_b",
+          "template": "omissionBTemplate",
+          "resizable": "enabled",
+          "width": 140,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Total Change (C=A+B) OMR",
+          "field": "total_change",
+          "template": "totalChangeTemplate",
+          "resizable": "enabled",
+          "width": 170,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Net Change (D=A-B) OMR",
+          "field": "net_change",
+          "template": "netChangeTemplate",
+          "resizable": "enabled",
+          "width": 160,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Net Percent Change (A-B/Z)",
+          "field": "net_percentage_of_change",
+          "template": "netPercentTemplate",
+          "resizable": "enabled",
+          "width": 170,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Total Vol. of Change (E=C/Z) %",
+          "field": "total_vol_of_change",
+          "template": "totalVolTemplate",
+          "resizable": "enabled",
+          "width": 180,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "status",
+          "template": "statusTemplate",
+          "resizable": "enabled",
+          "width": 110,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "If Open",
+          "field": "open_reason",
+          "template": "ifOpenTemplate",
+          "resizable": "enabled",
+          "width": 140,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Remarks",
+          "field": "remarks",
+          "template": "remarksTemplate",
+          "resizable": "enabled",
+          "width": "",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }
+      ]
+    }
+  },
+  "metadata": {},
+  "chains": {},
+  "eventListeners": {
+    "addRowBtnAction": {
+      "chains": [
+        {
+          "chain": "Addrowaction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "cancelactionchain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "okdeleteaction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "changecontrolPageSpSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "cancelchainaction",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "changecontrolPageSpSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "secondary_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "changeControlTblBeforeRowEdit": {
+      "chains": [
+        {
+          "chain": "TableBeforeRowEditChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "accept": "{{$event.detail.accept}}",
+            "rowContext": "{{$event.detail.rowContext}}",
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}"
+          }
+        }
+      ]
+    },
+    "changeControlTblBeforeRowEditEnd": {
+      "chains": [
+        {
+          "chain": "TableBeforeRowEditEndChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "accept": "{{$event.detail.accept}}",
+            "setUpdatedItem": "{{$event.detail.setUpdatedItem}}",
+            "rowContext": "{{$event.detail.rowContext}}",
+            "cancelEdit": "{{$event.detail.cancelEdit}}",
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}",
+            "changedRow": "{{ $variables.lvCurrentChangeControlRow }}"
+          }
+        }
+      ]
+    },
+    "crnoValueItem": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain2",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{ $current.key }}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "deleteRowBtnAction": {
+      "chains": [
+        {
+          "chain": "deleteactionchain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "inputNumberValue": {
+      "chains": [
+        {
+          "chain": "InputNumberValueChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "inputNumberValue2": {
+      "chains": [
+        {
+          "chain": "InputNumberValueChangeChain1",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "openReasonSelectValueItem": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{ $current.key }}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "statusSelectValueItem": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain1",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{ $current.key }}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+
+  }
+}

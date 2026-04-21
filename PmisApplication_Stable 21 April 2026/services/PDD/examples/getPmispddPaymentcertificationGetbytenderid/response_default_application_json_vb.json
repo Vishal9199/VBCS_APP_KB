@@ -1,0 +1,49 @@
+{
+    "items": [
+        {
+            "project_id": 300000090427449,
+            "project_number": "789BEN234",
+            "project_name": "VBCS-Feb-10-1",
+            "tender_id": 17002,
+            "tender_number": "NW-RFQ-17002-2026",
+            "tender_name": "Test Tender Name 001",
+            "pr_number": "NW-PR-1944-2026",
+            "po_number": "NWS-PO-1944-2026",
+            "shipment_receipt_num": "340062",
+            "supplier_id": 300000090011645,
+            "supplier_name": "Smart Technology",
+            "receipt_date": "2026-02-11T19:31:38Z",
+            "invoice_number": "INV-PO-03",
+            "invoice_date": "2026-02-11T19:32:07Z",
+            "invoice_amount": 123456,
+            "payment_status": "Paid",
+            "source_rowid": "AAAbrDAAKAAJ/viAAM",
+            "trx_source": "Fusion",
+            "created_by": "SCM.IMPL",
+            "created_date": "2026-02-11T19:33:48Z",
+            "last_updated_by": "SCM.IMPL",
+            "last_updated_date": "2026-02-11T19:33:51Z",
+            "last_updated_login": "SCM.IMPL",
+            "project_start_date": "2024-03-01T00:00:00Z",
+            "project_end_date": "2027-03-31T00:00:00Z"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/paymentcertification/getbytenderid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/paymentcertification/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/paymentcertification/getbytenderid"
+        }
+    ]
+}

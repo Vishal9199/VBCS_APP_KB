@@ -1,0 +1,254 @@
+{
+  "metadata": {},
+  "title": "Change Request Page",
+  "description": "Add/Edit page for Change Request with Project Details (read-only), Change Initiator Data and Change Details sections.",
+  "imports": {
+    "components": {
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "oj-sp/simple-create-edit/loader"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+
+    },
+    "modules": {
+      "ojConverterNumber": {
+        "path": "ojs/ojconverter-number"
+      },
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      },
+      "ojValidationNumber": {
+        "path": "ojs/ojvalidation-number"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  },
+  "types": {
+    "@decorators.getPmispddChangeorderLovDepartmentResponse": {
+      "endpoint": "getPmispddChangeorderLovDepartment",
+      "service": "PDD",
+      "path": "response"
+    },
+    "getPmispddChangeorderLovDepartmentResponse": {
+      "items": [
+        {
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "ProjectType": {
+      "ora_project_id": "number",
+      "tender_id": "number",
+      "project_number": "string",
+      "project_name": "string",
+      "tender_number": "string"
+    },
+    "CRDetailType": {
+      "change_request_id": "number",
+      "object_version_num": "number",
+      "ora_project_id": "number",
+      "tender_id": "number",
+      "cr_number": "string",
+      "title": "string",
+      "initiator": "string",
+      "position": "string",
+      "department_id": "number",
+      "cr_date": "string",
+      "time_impact": "string",
+      "cost_impact": "number",
+      "time_frame": "string",
+      "description": "string",
+      "relation_to_original_scope": "string",
+      "importance_and_justification": "string",
+      "wf_item_type": "string",
+      "wf_item_key": "string",
+      "status_id": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "DepartmentLovType": {
+      "department_id": "number",
+      "department_name": "string"
+    }
+
+  },
+  "variables": {
+    "aToolBar": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Save",
+          "id": "save",
+          "icon": "oj-ux-ico-save"
+        },
+        {
+          "label": "Submit",
+          "id": "submit",
+          "icon": "oj-ux-ico-save-and-close"
+        },
+        {
+          "label": "About",
+          "id": "about",
+          "icon": "oj-ux-ico-information"
+        }
+      ]
+    },
+    "formValidationChangeDetails": {
+      "type": "string"
+    },
+    "formValidationInitiator": {
+      "type": "string"
+    },
+    "getPmispddChangeorderLovDepartmentListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PDD/getPmispddChangeorderLovDepartment",
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getPmispddChangeorderLovDepartmentResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        }
+      }
+    },
+    "pNavIdEncrypted": {
+      "type": "string"
+    },
+    "projectObj": {
+      "type": "ProjectType",
+      "defaultValue": {
+        "ora_project_id": 0,
+        "tender_id": 0,
+        "project_number": "",
+        "project_name": "",
+        "tender_number": ""
+      }
+    },
+    "crDetailVar": {
+      "type": "CRDetailType"
+    },
+    "pNavCode": {
+      "type": "string",
+      "defaultValue": "CREATE",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "pNavId": {
+      "type": "string",
+      "defaultValue": "0",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "getProjectSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "ChangeRequestService/getProjectDetails",
+        "keyAttributes": "ora_project_id",
+        "itemsPath": "items",
+        "responseType": "ProjectType"
+      }
+    },
+    "getDepartmentLovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "ChangeRequestService/getDepartmentLov",
+        "keyAttributes": "department_id",
+        "itemsPath": "items",
+        "responseType": "DepartmentLovType",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "department_name"
+          ]
+        }
+      }
+    },
+    "pTenderId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    }
+
+  },
+  "eventListeners": {
+    "crAddEditPageidSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "cancelactionchain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "crAddEditPageidSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "secondary_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+  }
+}

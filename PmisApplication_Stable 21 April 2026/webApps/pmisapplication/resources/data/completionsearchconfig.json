@@ -1,0 +1,49 @@
+{
+  "description": "Smart Search Configuration for Completion Search",
+  "filters": {
+    "TenderNumberFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Tender Number",
+      "options": {
+        "field": "p_tender_number",
+        "optionsData": "[[ $page.variables.getTenderLovListSDP ]]",
+        "optionsKeys": {
+          "label": "tender_number",
+          "value": "tender_number"
+        }
+      },
+      "data": {}
+    },
+    "TenderNameFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Tender Name",
+      "options": {
+        "field": "p_tender_name",
+        "optionsData": "[[ $page.variables.gettendernamelovSDP ]]",
+        "optionsKeys": {
+          "label": "tender_name",
+          "value": "tender_name"
+        }
+      },
+      "data": {}
+    },
+    "ProjectNumberFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Project Number",
+      "options": {
+        "field": "p_project_number",
+        "optionsData": "[[ $page.variables.getProjectLovListSDP ]]",
+        "optionsKeys": {
+          "label": "project_number",
+          "value": "project_number"
+        }
+      },
+      "data": {}
+    }
+  },
+  "searchOptions": {
+    "keywordField": "p_keyword",
+    "limit": "[[ $page.variables.searchObj.in_limit ]]",
+    "offset": "[[ $page.variables.searchObj.in_offset ]]"
+  }
+}

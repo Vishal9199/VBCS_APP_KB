@@ -1,0 +1,664 @@
+<div id="pageContent" class="oj-web-applayout-page">
+
+  <oj-bind-if test="[[ $constants.customRoleBasedPageMenu.indexOf($application.currentPage.id) !== -1 ]]">
+    <oj-vb-fragment bridge="[[vbBridge]]" name="customrolebasedmenu"></oj-vb-fragment>
+  </oj-bind-if>
+
+  <oj-bind-if test="[[ $constants.pagesWithMenu.indexOf($application.currentPage.id) !== -1 ]]">
+    <div class="menu-button-container" style="background-color: #084c4c;">
+      <oj-button id="menuToggleButton" on-oj-action="[[$listeners.menuToggleButtonAction]]" display="icons"
+        chroming="borderless" class="menu-toggle-btn oj-button-sm">
+        <span slot="startIcon" class="oj-ux-ico-menu"></span>
+      </oj-button>
+    </div>
+  </oj-bind-if>
+  <div class="oj-web-applayout-content-nopad oj-web-applayout-max-width">
+
+    <div class="oj-flex">
+      <oj-messages messages="[[ $variables.messageADP ]]" position.at.horizontal="center"
+        class="oj-flex-item oj-sm-12 oj-md-12" position.at.vertical="top" position.collision="flipfit"
+        position.my.horizontal="center" position.my.vertical="top" display-options.category="header">
+      </oj-messages>
+    </div>
+
+    <oj-sp-messages-toast primary-text="[[ $variables.messageToast ]]" id="messageToast"></oj-sp-messages-toast>
+
+    <!-- <div class="oj-web-applayout-content-nopad oj-web-spacing oj-web-applayout-max-width"> -->
+    <div class="oj-flex">
+      <oj-vb-content id="vbRouterContent" class="oj-flex-item" config="[[vbRouterFlow]]"></oj-vb-content>
+    </div>
+    <!-- </div> -->
+  </div>
+</div>
+
+<!-- New From Here -->
+<div class="shell-header">
+
+  <!-- Menu Toggle Button (Hamburger Icon) -->
+
+  <!-- Navigation Drawer -->
+  <oj-drawer-popup id="navigationDrawer" opened='{{ $variables.drawerOpen }}' edge="start" modality="modeless"
+    class="navigation-drawer-popup" style="width:300px">
+
+    <!-- Drawer Header -->
+    <div class="drawer-header-section">
+      <h1 class="drawer-title">PDD Search</h1>
+      <oj-button id="closeDrawerBtn" on-oj-action="[[$listeners.closeDrawerBtnAction]]" chroming="borderless"
+        class="drawer-close-btn">
+        <span class="oj-ux-ico-close icons" slot="startIcon"></span>
+      </oj-button>
+    </div>
+
+    <!-- Main Navigation Section -->
+    <!-- <oj-collapsible id="mainNavCollapsible" expanded="true" class="nav-collapsible">
+  
+      <h1 slot="header" class="collapsible-header-text">PMIS-PDD
+      </h1> -->
+
+    <oj-navigation-list class="oj-flex-item oj-sm-12 oj-md-12" drill-mode="none"
+      selection="{{ $application.variables.menuSelection }}"
+      on-selection-changed="[[$listeners.navigationListSelection]]">
+
+      <ul>
+
+        <!-- General Menu Item -->
+        <li id="pddgeneral">
+          <a href="#">
+            <span class="nav-item-icon oj-ux-ico-file"></span>
+            <span class="nav-item-text">General</span>
+          </a>
+        </li>
+
+        <!-- Attributes Menu Item -->
+        <li id="pddattribute">
+          <a href="#">
+            <span class="nav-item-icon oj-ux-ico-list"></span>
+            <span class="nav-item-text">Attributes</span>
+          </a>
+        </li>
+
+        <!-- Contract/Contact Parent Menu Item -->
+        <li id="pddcontract" class="parent-menu-item">
+          <a href="#">
+            <span class="nav-item-icon oj-ux-ico-contact-group"></span>
+            <span class="nav-item-text">Contract/Contact</span>
+            <span class="oj-navigationlist-icon-only oj-ux-ico-chevron-down nav-expand-icon"></span>
+          </a>
+          <ul>
+            <li id="pddcontract-contract">
+              <a href="#" class="child-nav-item">
+                <span class="nav-item-text">Contract</span>
+              </a>
+            </li>
+            <li id="pddcontract-contact">
+              <a href="#" class="child-nav-item">
+                <span class="nav-item-text" >Contact</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Schedule Menu Item -->
+        <li id="pddschedule">
+          <a href="#">
+            <span class="nav-item-icon oj-ux-ico-calendar"></span>
+            <span class="nav-item-text">Schedule</span>
+          </a>
+        </li>
+
+        <!-- Status Update Parent Menu Item -->
+        <li id="pddstatusupdate" class="parent-menu-item">
+          <a href="#">
+            <span class="nav-item-icon oj-ux-ico-status-update"></span>
+            <span class="nav-item-text">Status Update</span>
+            <span class="oj-navigationlist-icon-only oj-ux-ico-chevron-down nav-expand-icon"></span>
+          </a>
+          <ul>
+            <li id="pddstatusupdate-progress">
+              <a href="#" class="child-nav-item">
+                <span class="nav-item-text">Progress</span>
+              </a>
+            </li>
+            <li id="pddstatusupdate-hse">
+              <a href="#" class="child-nav-item">
+                <span class="nav-item-text">HSE</span>
+              </a>
+            </li>
+            <li id="pddstatusupdate-quality">
+              <a href="#" class="child-nav-item">
+                <span class="nav-item-text">Quality Control</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Payment Certification Details Menu Item -->
+        <li id="pddpayment">
+          <a href="#">
+            <span class="nav-item-icon oj-ux-ico-money-investment"></span>
+            <span class="nav-item-text">Payment Certification Details</span>
+          </a>
+        </li>
+
+        <!-- Budget Control Menu Item -->
+        <li id="pddbudget">
+          <a href="#">
+            <span class="nav-item-icon oj-ux-ico-coins-money"></span>
+            <span class="nav-item-text">Budget Control</span>
+          </a>
+        </li>
+
+        <!-- Stakeholder Analysis Menu Item -->
+        <li id="pddstakeholder">
+          <a href="#">
+            <span class="nav-item-icon oj-ux-ico-people-group"></span>
+            <span class="nav-item-text">Stakeholder Analysis</span>
+          </a>
+        </li>
+
+        <!-- Change Order Menu Item -->
+        <li id="pddchangeorder">
+          <a href="#">
+            <span class="nav-item-icon oj-ux-ico-exchange-h"></span>
+            <span class="nav-item-text">Change Order</span>
+          </a>
+        </li>
+
+        <!-- Change/Variation Control Register Menu Item -->
+        <li id="pddchangevariation">
+          <a href="#">
+            <span class="nav-item-icon oj-ux-ico-binding-control"></span>
+            <span class="nav-item-text">Change\Variation Control Register</span>
+          </a>
+        </li>
+
+        <!-- Risk Management Menu Item -->
+        <li id="pddriskmanage">
+          <a href="#">
+            <span class="nav-item-icon oj-ux-ico-warning-s"></span>
+            <span class="nav-item-text">Risk Management</span>
+          </a>
+        </li>
+
+        <!-- Issue Register Menu Item -->
+        <li id="pddissueregister">
+          <a href="#">
+            <span class="nav-item-icon oj-ux-ico-flag"></span>
+            <span class="nav-item-text">Issue Register</span>
+          </a>
+        </li>
+
+        <!-- Lesson Learned Menu Item -->
+        <li id="pddlesson">
+          <a href="#">
+            <span class="nav-item-icon oj-ux-ico-light-bulb"></span>
+            <span class="nav-item-text">Lesson Learned</span>
+          </a>
+        </li>
+
+        <!-- Weekly Highlights Menu Item -->
+        <li id="pddweekly">
+          <a href="#">
+            <span class="nav-item-icon oj-ux-ico-star"></span>
+            <span class="nav-item-text">Weekly Highlights</span>
+          </a>
+        </li>
+
+        <!-- In-Country Value Menu Item -->
+        <li id="pddincountryvalue">
+          <a href="#">
+            <span class="nav-item-icon oj-ux-ico-star"></span>
+            <span class="nav-item-text">In-Country Value</span>
+          </a>
+        </li>
+
+        <!-- Project List Menu Item -->
+        <!-- <li id="pddprojectlist">
+          <a href="#">
+            <span class="nav-item-icon oj-ux-ico-list"></span>
+            <span class="nav-item-text">Project List</span>
+          </a>
+        </li> -->
+
+        <!-- Project Documents Menu Item -->
+        <li id="pdddocuments">
+          <a href="#">
+            <span class="nav-item-icon oj-ux-ico-folder"></span>
+            <span class="nav-item-text">Project Documents</span>
+          </a>
+        </li>
+
+        <!-- QlikSense Dashboard Menu Item -->
+        <li id="pddqliksense">
+          <a href="#">
+            <span class="nav-item-icon oj-ux-ico-bar-chart"></span>
+            <span class="nav-item-text">QlikSense DashBoard</span>
+          </a>
+        </li>
+
+      </ul>
+
+    </oj-navigation-list>
+
+    <!-- </oj-collapsible> -->
+
+  </oj-drawer-popup>
+
+</div>
+
+<!-- <oj-drawer-popup opened='{{ $variables.popupOpen==="Y" }}' close-gesture="none" style="width:80px">
+    <div style="height:38px; margin-top:-18px;" class="menuList">
+ 
+   <h1 id="h4" style="font-size: larger; font-weight: bold;color:white; margin-bottom: 11px; margin-left: 4px; padding-top: 10px;" >Omran</h1>
+
+  <oj-button style="margin-left:260px; margin-top:-50px;" chroming="borderless">
+    <span class="oj-ux-ico-warehouse icons" slot="startIcon"></span>
+</oj-button>
+
+</div>
+
+<oj-collapsible expanded="true">
+    <oj-navigation-list class="oj-flex-item oj-sm-12 oj-md-12" display="icons"
+     selection="{{ $variables.MenuSelection }}" >
+
+  <ul>
+    
+    <li id="pddgeneral">
+      <a href="#" on-click="[[$listeners.hyperlinkClick]]">General</a>
+    </li>
+
+    <li id="pddattribute">
+      <a href="#">Attribute</a>
+    </li>
+
+  </ul>
+</oj-navigation-list>
+<h1 id="h4" slot="header" style="font-size: larger; font-weight: bold;"><oj-bind-text
+                                                                                         value="OTL"></oj-bind-text></h1>
+</oj-collapsible>
+</oj-drawer-popup> -->
+
+<!-- Shell Page HTML -->
+
+<style>
+  /**
+ * Shell Page Navigation Drawer Theme with Color: #084c4c
+ */
+
+  /* ========================================================================================================== */
+  /* Root Variables - Start */
+  /* ========================================================================================================== */
+
+  :root {
+    --shell-nav-primary-color: #084c4c;
+    --shell-nav-primary-hover: #063938;
+    --shell-nav-primary-light: #0a6060;
+  }
+
+  /* Root Variables - End */
+
+
+  /* ========================================================================================================== */
+  /* Shell Header Container - Start */
+  /* ========================================================================================================== */
+
+  .shell-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    background-color: var(--shell-nav-primary-color);
+  }
+
+  .menu-button-container {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Shell Header Container - End */
+
+
+  /* ========================================================================================================== */
+  /* Menu Toggle Button - Start */
+  /* ========================================================================================================== */
+
+  .menu-toggle-btn {
+    background-color: #084c4c !important;
+    border: 2px solid white !important;
+    border-radius: 4px;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .menu-toggle-btn:hover {
+    background-color: #084c4c !important;
+    transform: scale(1.05);
+  }
+
+  .menu-toggle-btn .oj-ux-ico-menu:before {
+    color: white !important;
+    font-size: 1.5rem;
+  }
+
+  /* Menu Toggle Button - End */
+
+
+  /* ========================================================================================================== */
+  /* Drawer Popup Container - Start */
+  /* ========================================================================================================== */
+
+  .navigation-drawer-popup {
+    background-color: #ffffff;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.2);
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Drawer Popup Container - End */
+
+
+  /* ========================================================================================================== */
+  /* Drawer Header Section - Start */
+  /* ========================================================================================================== */
+
+  .drawer-header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.25rem;
+    background-color: var(--shell-nav-primary-color);
+    border-bottom: 3px solid var(--shell-nav-primary-hover);
+    height: 30px;
+  }
+
+  .drawer-title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .drawer-close-btn {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0.25rem;
+    transition: all 0.2s ease;
+  }
+
+  .drawer-close-btn:hover {
+    transform: scale(1.1);
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    border-radius: 4px;
+  }
+
+  .drawer-close-btn .oj-ux-ico-close:before {
+    color: white !important;
+    font-size: 1.25rem;
+  }
+
+  /* Drawer Header Section - End */
+
+
+  /* ========================================================================================================== */
+  /* Navigation Collapsible Container - Start */
+  /* ========================================================================================================== */
+
+  .nav-collapsible {
+    border: none !important;
+    background-color: white;
+  }
+
+  .nav-collapsible .oj-collapsible-header {
+    background-color: #f5f5f5;
+    border-bottom: 2px solid var(--shell-nav-primary-color);
+    padding: 0.75rem 1rem;
+  }
+
+  .collapsible-header-text {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--shell-nav-primary-color);
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  /* Navigation Collapsible Container - End */
+
+
+  /* ========================================================================================================== */
+  /* Navigation List Structure - Start */
+  /* ========================================================================================================== */
+
+  .oj-navigationlist-horizontal,
+  .oj-navigationlist-vertical {
+    width: 100%;
+    background-color: white;
+  }
+
+  .oj-navigation-list ul {
+    list-style: none;
+    padding-left: 5px;
+    margin: 0;
+  }
+
+  .oj-navigationlist-vertical:not(.oj-navigationlist-icon-only) .oj-navigationlist-item {
+    border-style: solid;
+    margin-top: 0;
+    margin-left: -1rem;
+    /* margin-bottom: var(--oj-navigation-list-item-margin); */
+    margin-bottom: 0.5rem;
+  }
+
+  .oj-navigation-list>ul>li {
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  /* Navigation List Structure - End */
+
+
+  /* ========================================================================================================== */
+  /* Navigation Item Links - Start */
+  /* ========================================================================================================== */
+
+  .oj-navigationlist-item-element a {
+    display: flex;
+    align-items: center;
+    /* padding: 0.875rem 1rem; */
+    color: #333;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    /* gap: 0.75rem; */
+  }
+
+  .oj-navigationlist-item-element a:hover {
+    background-color: rgba(8, 76, 76, 0.08);
+    color: var(--shell-nav-primary-color);
+    /* padding-left: 1.25rem; */
+  }
+
+  .nav-item-icon {
+    color: var(--shell-nav-primary-color);
+    font-size: 1.1rem;
+    min-width: 24px;
+    text-align: center;
+  }
+
+  .nav-item-text {
+    flex: 1;
+    font-weight: 500;
+  }
+
+  /* Navigation Item Links - End */
+
+
+  /* ========================================================================================================== */
+  /* Parent Navigation Items with Children - Start */
+  /* ========================================================================================================== */
+
+  .parent-menu-item {
+    position: relative;
+  }
+
+  .parent-menu-item>a {
+    font-weight: 600;
+    color: var(--shell-nav-primary-color);
+  }
+
+  .nav-expand-icon {
+    color: var(--shell-nav-primary-color);
+    margin-left: auto;
+    transition: transform 0.3s ease;
+    font-size: 0.875rem;
+  }
+
+  .parent-menu-item.oj-expanded .nav-expand-icon {
+    transform: rotate(180deg);
+  }
+
+  /* Parent Navigation Items with Children - End */
+
+
+  /* ========================================================================================================== */
+  /* Child Navigation Items - Start */
+  /* ========================================================================================================== */
+
+  .parent-menu-item>ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #f8f9fa;
+  }
+
+  .parent-menu-item>ul>li {
+    border-bottom: 1px solid #e9ecef;
+    margin-bottom: -0.75rem;
+  }
+
+  .parent-menu-item>ul>li:last-child {
+    border-bottom: none;
+  }
+
+  .child-nav-item {
+    /* padding-left: 3rem !important; */
+    margin-bottom: -0.75rem;
+    font-size: 0.9rem !important;
+    color: #555 !important;
+  }
+
+  .child-nav-item:hover {
+    background-color: rgba(8, 76, 76, 0.05) !important;
+    /* padding-left: 3.25rem !important; */
+  }
+
+  .child-nav-item .nav-item-text {
+    font-weight: 400;
+  }
+
+  /* Child Navigation Items - End */
+
+
+  /* ========================================================================================================== */
+  /* Selected/Active Navigation Item - Start */
+  /* ========================================================================================================== */
+
+  .oj-navigationlist-item-element.oj-selected>a {
+    background-color: var(--shell-nav-primary-color) !important;
+    color: white !important;
+    border-left: 4px solid var(--shell-nav-primary-hover);
+    font-weight: 600;
+  }
+
+  .oj-navigationlist-item-element.oj-selected>a .nav-item-text {
+    color: white !important;
+  }
+
+  .oj-navigationlist-item-element.oj-selected>a .nav-item-icon {
+    color: white !important;
+  }
+
+  .oj-navigationlist-item-element.oj-selected>a .nav-expand-icon {
+    color: white !important;
+  }
+
+  /* Selected/Active Navigation Item - End */
+
+
+  /* ========================================================================================================== */
+  /* Scrollbar Styling - Start */
+  /* ========================================================================================================== */
+
+  .oj-collapsible-wrapper::-webkit-scrollbar,
+  .oj-navigationlist-listview::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .oj-collapsible-wrapper::-webkit-scrollbar-track,
+  .oj-navigationlist-listview::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  .oj-collapsible-wrapper::-webkit-scrollbar-thumb,
+  .oj-navigationlist-listview::-webkit-scrollbar-thumb {
+    background: var(--shell-nav-primary-color);
+    border-radius: 4px;
+  }
+
+  .oj-collapsible-wrapper::-webkit-scrollbar-thumb:hover,
+  .oj-navigationlist-listview::-webkit-scrollbar-thumb:hover {
+    background: var(--shell-nav-primary-hover);
+  }
+
+  /* Scrollbar Styling - End */
+
+
+  /* ========================================================================================================== */
+  /* Responsive Design - Mobile - Start */
+  /* ========================================================================================================== */
+
+  @media (max-width: 768px) {
+    .navigation-drawer-popup {
+      width: 280px !important;
+    }
+
+    .drawer-title {
+      font-size: 1.25rem;
+    }
+
+    .oj-navigationlist-item-element a {
+      font-size: 0.9rem;
+      /* padding: 0.75rem 0.875rem; */
+    }
+
+    .child-nav-item {
+      /* padding-left: 2.5rem !important; */
+    }
+  }
+
+  /* Responsive Design - Mobile - End */
+
+
+  /* ========================================================================================================== */
+  /* Animation Classes - Start */
+  /* ========================================================================================================== */
+
+  @keyframes slideInFromLeft {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .navigation-drawer-popup[opened] {
+    animation: slideInFromLeft 0.3s ease;
+  }
+
+  /* Animation Classes - End */
+</style>

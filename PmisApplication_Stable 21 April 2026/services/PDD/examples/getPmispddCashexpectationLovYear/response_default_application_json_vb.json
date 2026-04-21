@@ -1,0 +1,26 @@
+{
+    "items": [
+        {
+            "year_value": "2012",
+            "display_value": "2012"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/cashexpectation/lov/year?searchVal=2012"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/cashexpectation/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/cashexpectation/lov/year?searchVal=2012"
+        }
+    ]
+}

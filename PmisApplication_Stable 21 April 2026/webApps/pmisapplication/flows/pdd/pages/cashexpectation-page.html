@@ -1,0 +1,463 @@
+<div id="sampleDemo1" class="demo-padding demo-container">
+  <div id="componentDemoContent1" style="width: 1px; min-width: 100%;">
+    <div id="mainContent1">
+
+
+      <oj-sp-smart-search-page id="oj_exssp1" page-title="Cash Expectation" page-subtitle=" ">
+        <oj-flex slot="search" class="oj-sm-padding-2x" style="align-items: center;">
+          <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-space-between"
+            style="width: 100%; align-items: flex-start; padding: 0 1rem;">
+            <div style="flex: 1; margin-right: 1rem;">
+              <oj-sp-smart-search id="oj_sp_smart_search1" filter-criterion="{{ $page.variables.filterCriterion }}"
+                search-context="[[ $page.variables.searchContext ]]"
+                search-config="[[ $page.variables.searchConfiguration.provider ]]" ask-hint="search by project name ">
+              </oj-sp-smart-search>
+            </div>
+
+            <div style="display: flex; gap: 0.25rem; margin-left: 1rem; margin-top: 1px; flex-wrap: wrap;">
+              <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Reset" id="resetBtn"
+                on-oj-action="[[$listeners.resetBtnAction]]">
+                <span slot="startIcon" class="oj-ux-ico-reset"></span>
+              </oj-button>
+              <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Refresh"
+                id="refreshBtn" on-oj-action="[[$listeners.refreshBtnAction]]">
+                <span slot="startIcon" class="oj-ux-ico-refresh"></span>
+              </oj-button>
+              <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Save" id="savebtn"
+                on-oj-action="[[$listeners.savebtnAction]]">
+                <span slot="startIcon" class="oj-ux-ico-save" style="color:white;"></span>
+              </oj-button>
+            </div>
+          </div>
+        </oj-flex>
+
+
+
+        <!-- Add Button -->
+        <div class="oj-flex oj-helper-justify-content-flex-end">
+          <oj-button label="Add New Row" on-oj-action="[[$listeners.buttonAction]]">
+            <span class="oj-ux-ico-plus" slot="startIcon"></span>
+          </oj-button>
+        </div>
+
+        <!-- Table -->
+        <div>
+          <oj-table scroll-policy="loadMoreOnScroll" class="oj-flex-item oj-sm-12 oj-md-12 oj-bg-body"
+            style="overflow-x:auto" display="grid" horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+            id="lessonLearnedTable" data="[[ $page.variables.bufferDPcahExpTable.instance ]]"
+            columns="{{$constants.columnsvar}}" edit-mode="rowEdit" selection-mode.row="single"
+            edit-row="{{ $page.variables.rowToEdit }}"
+            on-oj-before-row-edit="[[$listeners.lessonLearnedTableBeforeRowEdit]]"
+            on-oj-before-row-edit-end="[[$listeners.lessonLearnedTableBeforeRowEditEnd]]">
+
+            <!-- ACTION -->
+            <template slot="Action">
+              <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                on-oj-action="[[$listeners.buttonAction5]]">
+                <span slot="startIcon" class="oj-ux-ico-edit"></span>
+              </oj-button>
+              <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                on-oj-action="[[$listeners.buttonAction2]]">
+                <span slot="startIcon" class="oj-ux-ico-trash"></span>
+              </oj-button>
+            </template>
+
+            <!-- PROJECT NAME -->
+            <!-- <template slot="Project Name">
+        <oj-bind-if test="[[$current.mode !== 'edit']]">
+          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+        </oj-bind-if>
+        <oj-bind-if test="[[$current.mode === 'edit']]">
+          <oj-input-text value="{{ $page.variables.lvCurrentcashExpRow.project_name }}"></oj-input-text>
+        </oj-bind-if>
+      </template> -->
+
+            <!-- PROJECT Name -->
+            <template slot="Project Name">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-select-single value="{{ $variables.lvCurrentcashExpRow.project_id }}" item-text="project_name"
+                  data="[[ $page.variables.getPmispddCashexpectationLovProject2ListSDP ]]" label-hint="select project "
+                  on-value-item-changed="[[$listeners.selectValueItem]]">
+                </oj-select-single>
+              </oj-bind-if>
+            </template>
+            <!-- REGION NAME -->
+            <!-- <template slot="Region Name">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-text value="{{ $page.variables.lvCurrentcashExpRow.region_name }}"></oj-input-text>
+              </oj-bind-if>
+            </template> -->
+
+            <!-- TENDER NUMBER -->
+            <!-- <template slot="Tender Number">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-text value="{{ $page.variables.lvCurrentcashExpRow.tender_number }}"></oj-input-text>
+              </oj-bind-if>
+            </template> -->
+
+
+            <!-- REGION NAME -->
+            <template slot="Region Name">
+              <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+            </template>
+
+            <!-- TENDER NUMBER -->
+            <template slot="Tender Number">
+              <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+            </template>
+            <!-- ADDITIONAL INFO -->
+            <template slot="Additional Info">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-text value="{{ $page.variables.lvCurrentcashExpRow.additional_info }}"></oj-input-text>
+              </oj-bind-if>
+            </template>
+
+            <!-- YEAR -->
+            <!-- <template slot="Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.year }}"></oj-input-number>
+              </oj-bind-if>
+            </template> -->
+
+            <!-- YEAR -->
+            <template slot="Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-select-single value="{{ $page.variables.lvCurrentcashExpRow.year }}" item-text="display_value"
+                  label-hint="Select Year" data="[[$variables.getPmispddCashexpectationLovYearListSDP]]"
+                  on-value-item-changed="[[$listeners.selectValueItem2]]">
+                </oj-select-single>
+              </oj-bind-if>
+            </template>
+
+            <!-- JAN -->
+            <template slot="Jan Curr Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.jan_curr_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <template slot="Jan Next Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.jan_next_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <!-- FEB -->
+            <template slot="Feb Curr Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.feb_curr_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <template slot="Feb Next Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.feb_next_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <!-- MAR -->
+            <template slot="Mar Curr Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.mar_curr_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <template slot="Mar Next Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.mar_next_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <!-- APR -->
+            <template slot="Apr Curr Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.apr_curr_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <template slot="Apr Next Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.apr_next_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <!-- MAY -->
+            <template slot="May Curr Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.may_curr_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <template slot="May Next Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.may_next_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <!-- JUN -->
+            <template slot="Jun Curr Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.jun_curr_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <template slot="Jun Next Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.jun_next_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <!-- JUL -->
+            <template slot="Jul Curr Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.jul_curr_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <template slot="Jul Next Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.jul_next_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <!-- AUG -->
+            <template slot="Aug Curr Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.aug_curr_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <template slot="Aug Next Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.aug_next_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <!-- SEP -->
+            <template slot="Sep Curr Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.sep_curr_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <template slot="Sep Next Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.sep_next_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <!-- OCT -->
+            <template slot="Oct Curr Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.oct_curr_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <template slot="Oct Next Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.oct_next_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <!-- NOV -->
+            <template slot="Nov Curr Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.nov_curr_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <template slot="Nov Next Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.nov_next_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <!-- DEC -->
+            <template slot="Dec Curr Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.dec_curr_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <template slot="Dec Next Year">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-number value="{{ $page.variables.lvCurrentcashExpRow.dec_next_year }}"></oj-input-number>
+              </oj-bind-if>
+            </template>
+
+            <!-- TYPE -->
+            <template slot="Type">
+              <oj-bind-if test="[[$current.mode !== 'edit']]">
+                <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.mode === 'edit']]">
+                <oj-input-text value="{{ $page.variables.lvCurrentcashExpRow.type }}"></oj-input-text>
+              </oj-bind-if>
+            </template>
+
+
+            <!-- TOTAL CURR YEAR -->
+            <template slot="Total Curr Year">
+              <oj-bind-text value="[[
+    (
+      ($current.row.jan_curr_year || 0) +
+      ($current.row.feb_curr_year || 0) +
+      ($current.row.mar_curr_year || 0) +
+      ($current.row.apr_curr_year || 0) +
+      ($current.row.may_curr_year || 0) +
+      ($current.row.jun_curr_year || 0) +
+      ($current.row.jul_curr_year || 0) +
+      ($current.row.aug_curr_year || 0) +
+      ($current.row.sep_curr_year || 0) +
+      ($current.row.oct_curr_year || 0) +
+      ($current.row.nov_curr_year || 0) +
+      ($current.row.dec_curr_year || 0)
+    ) / 12
+  ]]"></oj-bind-text>
+            </template>
+
+            <!-- TOTAL NEXT YEAR -->
+            <template slot="Total Next Year">
+              <oj-bind-text value="[[
+    (
+      ($current.row.jan_next_year || 0) +
+      ($current.row.feb_next_year || 0) +
+      ($current.row.mar_next_year || 0) +
+      ($current.row.apr_next_year || 0) +
+      ($current.row.may_next_year || 0) +
+      ($current.row.jun_next_year || 0) +
+      ($current.row.jul_next_year || 0) +
+      ($current.row.aug_next_year || 0) +
+      ($current.row.sep_next_year || 0) +
+      ($current.row.oct_next_year || 0) +
+      ($current.row.nov_next_year || 0) +
+      ($current.row.dec_next_year || 0)
+    ) / 12
+  ]]"></oj-bind-text>
+            </template>
+
+          </oj-table>
+        </div>
+      </oj-sp-smart-search-page>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Dialog -->
+<oj-dialog style="display:none; width: 500px; overflow: hidden;" dialog-title="Warning" id="delete_dialog"
+  cancel-behavior="icon" header-decoration="off" drag-affordance="title-bar" position.at.vertical="top"
+  position.my.vertical="top">
+  <div slot="body" style="margin-top: 1.5rem;">
+    <div class="oj-flex">Are you sure you want to delete the record?</div>
+  </div>
+  <div slot="footer">
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction3]]">Ok</oj-button>
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction4]]">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Progress Dialog -->
+<oj-dialog id="progressDialog" dialog-title="Processing" style="width: 300px;" cancel-behavior="none">
+  <div slot="body" style="text-align: center; padding: 2rem;">
+    <oj-progress-bar value="-1"></oj-progress-bar>
+    <p style="margin-top: 1rem;">Please wait...</p>
+  </div>
+</oj-dialog>
+
+<oj-dialog id="loadingDialog" style="width: 300px;" cancel-behavior="none" drag-affordance="title-bar"
+  header-decoration="off" position.at.vertical="top" position.my.vertical="top">
+  <div slot="body" style="text-align: center; padding: 2rem;">
+    <oj-progress-circle value="-1"></oj-progress-circle>
+    <p style="margin-top: 1rem; font-weight: 500;">Loading Expectation List Data...</p>
+  </div>
+</oj-dialog>

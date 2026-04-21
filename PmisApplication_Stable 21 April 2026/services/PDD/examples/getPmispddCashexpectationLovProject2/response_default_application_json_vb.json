@@ -1,0 +1,30 @@
+{
+    "items": [
+        {
+            "project_name": "NWS Water Supply Project",
+            "tender_number": "TND-2025-001",
+            "region_name": "Muscat-Seeb",
+            "project_number": null,
+            "project_id": 5719,
+            "type": "F"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/cashexpectation/lov/project?searchval=nws"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/cashexpectation/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/cashexpectation/lov/project?searchval=nws"
+        }
+    ]
+}

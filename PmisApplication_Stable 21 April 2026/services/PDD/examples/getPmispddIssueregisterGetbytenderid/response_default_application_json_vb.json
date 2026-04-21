@@ -1,0 +1,51 @@
+{
+    "items": [
+        {
+            "issue_id": 3489,
+            "object_version_num": 1,
+            "ora_project_id": 300000090427447,
+            "tender_id": 17001,
+            "issue_number": 1,
+            "date_raised": "2026-01-04T00:00:00Z",
+            "issue_description": "Delay in finalizing the VOs with contractor",
+            "scope": 5,
+            "time": 1,
+            "cost": 4,
+            "qhse": 2,
+            "total_score": 10,
+            "priority": "High",
+            "action": "NWS/Engineer/contractor to finalize outstanding VOs",
+            "owner": "NWS/Engineer/contractor",
+            "outcome": "Agreed to finalized by mid of February 2026",
+            "due_date_for_resolution": "2026-02-22T00:00:00Z",
+            "resolution_progress_update": "under progress",
+            "progress": 80,
+            "status": "In Progress",
+            "data_resolved": "2026-02-21T00:00:00Z",
+            "additional_info": "Test",
+            "created_by": "john.smith@nws.com",
+            "created_date": "2026-02-21T05:12:07.528988Z",
+            "last_updated_by": "john.smith@nws.com",
+            "last_updated_date": "2026-02-21T05:12:07.528988Z",
+            "last_updated_login": "john.smith@nws.com"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/issueregister/getbytenderid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/issueregister/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/issueregister/getbytenderid"
+        }
+    ]
+}

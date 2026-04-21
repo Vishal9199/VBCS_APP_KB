@@ -1,0 +1,30 @@
+{
+    "items": [
+        {
+            "transaction_id": 133937,
+            "appr_level": 2,
+            "approver_email_id": "apptestdev4@darwishholding.com",
+            "approver_idcs_id": "0c871830830244de8dc35907672ecd12"
+        },
+        {
+            "transaction_id": 133937,
+            "appr_level": 2,
+            "approver_email_id": "apptestdev2@darwishholding.com",
+            "approver_idcs_id": "758396cc8ceb4d0582474875a5cdd520"
+        }
+    ],
+    "hasMore": false,
+    "limit": 0,
+    "offset": 0,
+    "count": 2,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://dhapextest.darwishholding.com/ords/dh_cust/approval/currentlevel/approver?p_trx_id=133937&p_level=2"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://dhapextest.darwishholding.com/ords/dh_cust/metadata-catalog/approval/currentlevel/item"
+        }
+    ]
+}

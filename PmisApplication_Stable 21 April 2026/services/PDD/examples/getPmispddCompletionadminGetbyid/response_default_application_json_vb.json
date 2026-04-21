@@ -1,0 +1,48 @@
+{
+    "items": [
+        {
+            "completion_id": 4874,
+            "object_version_num": 0,
+            "ora_project_id": 300000090427447,
+            "ora_project_number": "RG5Z1-CA",
+            "ora_project_name": "RG5Z1-CA",
+            "tender_id": 17001,
+            "tender_number": "NW-RFQ-1119-2025",
+            "tender_name": "Construction of Anoxic tank at Ibra RG-CA",
+            "five_year_plan_name": "Infrastructure Development Plan 2025-2030",
+            "supplier_id": 300000090011645,
+            "supplier_name": "Smart Technology",
+            "consultant_name": "ABC Engineering Consultants",
+            "commencement_date": "2024-01-15T00:00:00Z",
+            "completion_close_flag": "N",
+            "completion_prime": 1,
+            "orig_completion_date": "2025-12-31T00:00:00Z",
+            "extended_completion_date": "2026-03-31T00:00:00Z",
+            "actual_completion_date": null,
+            "additional_info": "Project delayed due to supply chain constraints. Extension approved for 3 months.",
+            "created_by": "system_admin",
+            "created_date": "2026-02-25T12:10:38.47199Z",
+            "last_updated_by": "system_admin",
+            "last_updated_date": "2026-02-25T12:10:38.47199Z",
+            "last_updated_login": "system_admin"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/completionadmin/getbyid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/completionadmin/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/completionadmin/getbyid"
+        }
+    ]
+}

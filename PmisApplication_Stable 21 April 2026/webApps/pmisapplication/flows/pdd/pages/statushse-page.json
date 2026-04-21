@@ -1,0 +1,185 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "aToolBarList": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Save",
+          "id": "save",
+          "icon": "oj-ux-ico-save"
+        }
+      ]
+    },
+    "getPmispddStatushseGetbytenderidVar": {
+      "type": "getPmispddStatushseGetbytenderid",
+      "defaultValue": {
+        "last_updated_by": "[[ $application.user.username ]]",
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_login": "[[ $application.user.username ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "created_by": "[[ $application.user.username ]]",
+        "object_version_num": 0
+      }
+    },
+    "headerInfoVar": {
+      "type": {
+        "projectName": "string",
+        "projectNumber": "string",
+        "tenderName": "string",
+        "tenderNumber": "string"
+      }
+    },
+    "obj_num_dummy": {
+      "type": "number"
+    },
+    "periodName": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "pNavCode": {
+      "type": "string"
+    },
+    "pNavEncId": {
+      "type": "string"
+    },
+    "pNavId": {
+      "type": "string"
+    },
+    "pTenderId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getPmispddStatushseGetbytenderid": {
+      "endpoint": "getPmispddStatushseGetbytenderid",
+      "service": "PDD",
+      "path": "response"
+    },
+    "getPmispddStatushseGetbytenderid": {
+
+          "additional_info": "string",
+          "created_by": "string",
+          "created_date": "string",
+          "emergency_drills": "string",
+          "environmental_accidents": "string",
+          "fatality": "number",
+          "first_aid_cases": "string",
+          "hse_audits": "string",
+          "hse_id": "number",
+          "hse_inspections": "string",
+          "hse_meetings": "string",
+          "hse_training": "string",
+          "last_updated_by": "string",
+          "last_updated_date": "string",
+          "last_updated_login": "string",
+          "lost_time": "number",
+          "man_hours_without_lti": "number",
+          "manpower_at_project": "string",
+          "near_miss_cases": "string",
+          "no_of_omani_staff": "string",
+          "object_version_num": "number",
+          "ora_project_id": "number",
+          "ora_project_name": "string",
+          "ora_project_number": "string",
+          "period": "string",
+          "road_traffic_accidents": "string",
+          "safe_working_days": "number",
+          "site_inductions": "string",
+          "sub_contractors": "string",
+          "tender_id": "number",
+          "tender_name": "string",
+          "tender_number": "string",
+          "utility_damages": "string"
+    }
+  },
+  "eventListeners": {
+    "hseIndicatorsIdSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "AdvancedCreateAndEditPageTemplateSpPrimaryActionChain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "hseIndicatorsIdSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "AdvancedCreateAndEditPageTemplateSpSecondaryActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "inputTextValue": {
+      "chains": [
+        {
+          "chain": "aboutOKDialogBtnAC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ],
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    }
+  }
+}

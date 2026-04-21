@@ -1,0 +1,44 @@
+{
+    "items": [
+        {
+            "service_spec_id": 1045,
+            "object_version_num": null,
+            "service_spec_num": "SS-2024-001",
+            "service_spec_name": "Standard Maintenance Service",
+            "tender_number": "TND-8892",
+            "tender_name": "Annual Infrastructure Tender",
+            "budget_number": "BGT-9910",
+            "project_introduction": "Initial phase covering regional maintenance.",
+            "score_of_service": "Comprehensive coverage of all sites.",
+            "excepted_deliverables": "Monthly audits and daily logs.",
+            "expected_schedule": "Q1 2024 - Q4 2024",
+            "status_id": 26,
+            "status_code": "DRA",
+            "status_name": "Draft",
+            "additional_info": "Include safety documentation for all onsite staff.",
+            "created_by": "ADMIN_USER",
+            "created_date": "2026-01-30T14:34:59Z",
+            "last_updated_by": "ADMIN_USER",
+            "last_updated_date": "2026-01-30T14:34:59Z",
+            "last_updated_login": "LOGIN_SESSION_778"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/servicespec/getbyid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/servicespec/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/servicespec/getbyid"
+        }
+    ]
+}

@@ -1,0 +1,221 @@
+{
+  "title": "Navigation Menu Fragment",
+  "description": "Hierarchical navigation menu with drawer for project sections",
+  "variables": {
+    "drawerOpened": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "selectedNavItem": {
+      "type": "string",
+      "defaultValue": ""
+    },
+    "navigationData": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "id": "general",
+          "name": "General",
+          "path": "general"
+        },
+        {
+          "id": "attribute",
+          "name": "Attribute",
+          "path": "attribute"
+        },
+        {
+          "id": "contract-contact",
+          "name": "Contract/Contact",
+          "children": [
+            {
+              "id": "contract",
+              "name": "Contract",
+              "path": "contract"
+            },
+            {
+              "id": "contact",
+              "name": "Contact",
+              "path": "contact"
+            }
+          ]
+        },
+        {
+          "id": "schedule",
+          "name": "Schedule",
+          "path": "schedule"
+        },
+        {
+          "id": "status-update",
+          "name": "Status Update",
+          "children": [
+            {
+              "id": "progress",
+              "name": "Progress",
+              "path": "progress"
+            },
+            {
+              "id": "hse",
+              "name": "HSE",
+              "path": "hse"
+            },
+            {
+              "id": "quality-control",
+              "name": "Quality Control",
+              "path": "quality-control"
+            }
+          ]
+        },
+        {
+          "id": "payment-certification",
+          "name": "Payment Certification Details",
+          "path": "payment-certification"
+        },
+        {
+          "id": "budget-control",
+          "name": "Budget Control",
+          "path": "budget-control"
+        },
+        {
+          "id": "stakeholder-analysis",
+          "name": "Stakeholder Analysis",
+          "path": "stakeholder-analysis"
+        },
+        {
+          "id": "change-order",
+          "name": "Change Order",
+          "path": "change-order"
+        },
+        {
+          "id": "change-variation-register",
+          "name": "Change\\Variation Control Register",
+          "path": "change-variation-register"
+        },
+        {
+          "id": "risk-management",
+          "name": "Risk Management",
+          "path": "risk-management"
+        },
+        {
+          "id": "issue-register",
+          "name": "Issue Register",
+          "path": "issue-register"
+        },
+        {
+          "id": "lesson-learned",
+          "name": "Lesson Learned",
+          "path": "lesson-learned"
+        },
+        {
+          "id": "weekly-highlights",
+          "name": "Weekly Highlights",
+          "path": "weekly-highlights"
+        },
+        {
+          "id": "project-documents",
+          "name": "Project Documents",
+          "path": "project-documents"
+        },
+        {
+          "id": "qliksense-dashboard",
+          "name": "QlikSense DashBoard",
+          "path": "qliksense-dashboard"
+        }
+      ]
+    }
+  },
+  "types": {},
+  "metadata": {},
+  "eventListeners": {
+    "menuButtonAction": {
+      "chains": [
+        {
+          "chain": "openDrawerAction"
+        }
+      ]
+    },
+    "menuButtonAction2": {
+      "chains": [
+        {
+          "chain": "openDrawerAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "closeDrawerButtonAction": {
+      "chains": [
+        {
+          "chain": "closeDrawerAction"
+        }
+      ]
+    },
+    "closeDrawerButtonAction2": {
+      "chains": [
+        {
+          "chain": "closeDrawerAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "parentItemClick": {
+      "chains": [
+        {
+          "chain": "toggleParentItemChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "itemData": "{{$event.detail.itemData}}"
+          }
+        }
+      ]
+    },
+    "navItemClick": {
+      "chains": [
+        {
+          "chain": "navigateToPageChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "itemData": "{{$event.detail.itemData}}"
+          }
+        }
+      ]
+    },
+    "childItemClick": {
+      "chains": [
+        {
+          "chain": "navigateToPageChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "itemData": "{{$event.detail.itemData}}"
+          }
+        }
+      ]
+    }
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-drawer-popup": {
+        "path": "ojs/ojdrawerpopup"
+      },
+      "oj-navigation-list": {
+        "path": "ojs/ojnavigationlist"
+      },
+      "oj-bind-for-each": {
+        "path": "ojs/ojbindforeach"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      }
+    },
+    "css": [
+      "/resources/css/pddsearch-fragment.css"
+    ]
+  }
+}

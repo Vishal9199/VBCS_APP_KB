@@ -1,0 +1,76 @@
+{
+    "items": [
+        {
+            "lesson_id": 4534,
+            "object_version_num": 1,
+            "ora_project_id": 300000090427447,
+            "ora_project_number": "RG5Z1-CA",
+            "ora_project_name": "RG5Z1-CA",
+            "tender_id": 17001,
+            "tender_number": "NW-RFQ-1119-2025",
+            "tender_name": "Construction of Anoxic tank at Ibra RG-CA",
+            "period": "JAN-2026",
+            "lesson_date": "2026-02-01T00:00:00Z",
+            "lesson_type": "NEGATIVE",
+            "lesson_category_id": 6893,
+            "lesson_category_code": "SAFETY",
+            "lesson_category": "Safety",
+            "lesson_status": "Review of Pumps MAS took time between all parties",
+            "lesson_impact": "DELAY IN DELIVERY",
+            "lesson_recommendation": "to stuck with one submittal",
+            "logged_by": "THIRU",
+            "continuous_process": "CONTINUOIS",
+            "additional_info": "Additional information here",
+            "created_by": "THIRU",
+            "created_date": "2026-02-23T13:24:13.966591Z",
+            "last_updated_by": "THIRU",
+            "last_updated_date": "2026-02-23T13:24:13.966591Z",
+            "last_updated_login": "THIRU"
+        },
+        {
+            "lesson_id": 1,
+            "object_version_num": 1,
+            "ora_project_id": 300000090427447,
+            "ora_project_number": "RG5Z1-CA",
+            "ora_project_name": "RG5Z1-CA",
+            "tender_id": 17001,
+            "tender_number": "NW-RFQ-1119-2025",
+            "tender_name": "Construction of Anoxic tank at Ibra RG-CA",
+            "period": "FEB-2026",
+            "lesson_date": "2026-02-01T00:00:00Z",
+            "lesson_type": "POSITIVE",
+            "lesson_category_id": 6893,
+            "lesson_category_code": "SAFETY",
+            "lesson_category": "Safety",
+            "lesson_status": "Review of Pumps MAS took time between all parties",
+            "lesson_impact": "DELAY IN DELIVERY",
+            "lesson_recommendation": "to stuck with one submittal",
+            "logged_by": "ADMIN",
+            "continuous_process": "CONTINUOIS",
+            "additional_info": "Additional information here",
+            "created_by": "ADMIN",
+            "created_date": "2026-02-23T12:49:26.216114Z",
+            "last_updated_by": "ADMIN",
+            "last_updated_date": "2026-02-23T12:49:26.216114Z",
+            "last_updated_login": "ADMIN"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 2,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/lessonlearned/getbytenderid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/lessonlearned/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/lessonlearned/getbytenderid"
+        }
+    ]
+}

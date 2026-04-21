@@ -1,0 +1,292 @@
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div>
+        <oj-sp-advanced-create-edit id="stakeholderdetailsid" page-title="Stakeholder Details Management"
+          page-subtitle="  " display-options.responsive-padding="on" primary-action.label="Close"
+          secondary-actions="[[ $variables.aToolBar ]]"
+          on-sp-primary-action="[[$listeners.stakeholderdetailsidSpPrimaryAction]]"
+          on-sp-secondary-action="[[$listeners.stakeholderdetailsidSpSecondaryAction]]">
+
+          <div slot="main" style="padding-top: 0; margin-top: 0;">
+            <div style="margin-top: 0;">
+
+              <!-- Main Form Section - Project Details (Readonly) -->
+              <oj-collapsible id="project-details-section" expanded="true"
+                class="oj-panel oj-panel-shadow-md oj-selected" style="margin-bottom: 5px;">
+                <span slot="header" style="font-weight: bold; color: white;">Project Details</span>
+                <div style="padding: 1rem;">
+                  <oj-form-layout max-columns="3" label-edge="start" label-width="45%" colspan-wrap="wrap">
+
+                    <oj-input-text id="project-name" label-hint="Project Name" placeholder="Project Name"
+                      value="{{ $variables.projectDetailsVar.project_name }}" style="width: 16rem;"
+                      user-assistance-density="compact" disabled="true">
+                    </oj-input-text>
+
+                    <oj-input-text id="project-number" label-hint="Project Number" placeholder="Project Number"
+                      value="{{ $variables.projectDetailsVar.project_number }}" style="width: 16rem;"
+                      user-assistance-density="compact" disabled="true">
+                    </oj-input-text>
+
+                    <oj-input-text id="tender-number" label-hint="Tender Number" placeholder="Tender Number"
+                      value="{{ $variables.projectDetailsVar.tender_number }}" style="width: 16rem;"
+                      user-assistance-density="compact" disabled="true">
+                    </oj-input-text>
+
+                  </oj-form-layout>
+                </div>
+              </oj-collapsible>
+
+
+
+              <div id="sampleDemo" class="demo-padding demo-container">
+                <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+                  <div id="searchMainContent">
+                    <div class="oj-flex-bar-end oj-helper-justify-content-flex-end">
+                      <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Add Row"
+                        id="addRowBtn" on-oj-action="[[$listeners.addRowBtnAction]]">
+                        <span slot="startIcon" class="oj-ux-ico-plus"></span>
+                      </oj-button>
+                    </div>
+
+                    <!-- Stakeholder Details Section -->
+
+
+                    <!-- Inline Editable Stakeholder Table -->
+                    <div class="oj-flex">
+                      <oj-table scroll-policy="loadMoreOnScroll" class="oj-flex-item oj-sm-12 oj-md-12 oj-bg-body"
+                        display="grid" horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+                        id="stakeholderTable" data="[[ $variables.bufferDPStakeholderTable.instance ]]"
+                        columns="{{$variables.tablecolumns}}" edit-mode="rowEdit" edit-row="{{ $variables.rowToEdit }}"
+                        selection-mode.row="single" on-oj-before-row-edit="[[$listeners.stakeholderTableBeforeRowEdit]]"
+                        on-oj-before-row-edit-end="[[$listeners.stakeholderTableBeforeRowEditEnd]]">
+
+                        <!-- Actions Template -->
+                        <template slot="actionsTemplate">
+                          <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                            style="padding-left:20px;" on-oj-action="[[$listeners.buttonAction]]">
+                            <span slot="startIcon" class="oj-ux-ico-trash" role="img" style="font-size: 18px;" title="Delete Row"></span>
+                          </oj-button>
+                        </template>
+
+                        <!-- Stakeholder Name Template -->
+                        <template slot="stakeholderNameTemplate">
+                          <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                            <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                          </oj-bind-if>
+                          <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                            <oj-input-text value="{{ $variables.lvCurrentStakeholderRow.stakeholder_name }}">
+                            </oj-input-text>
+                          </oj-bind-if>
+                        </template>
+
+                        <!-- Organization Template -->
+                        <template slot="organizationTemplate">
+                          <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                            <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                          </oj-bind-if>
+                          <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                            <oj-input-text value="{{ $variables.lvCurrentStakeholderRow.organization }}">
+                            </oj-input-text>
+                          </oj-bind-if>
+                        </template>
+
+                        <!-- Contact Details Template -->
+                        <template slot="contactDetailsTemplate">
+                          <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                            <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                          </oj-bind-if>
+                          <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                            <oj-input-text value="{{ $variables.lvCurrentStakeholderRow.contact_details }}">
+                            </oj-input-text>
+                          </oj-bind-if>
+                        </template>
+
+                        <!-- Current Engagement Template (Dropdown in edit mode) -->
+                        <template slot="currentEngagementTemplate">
+                          <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                            <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                          </oj-bind-if>
+                          <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                            <oj-select-single value="{{ $variables.lvCurrentStakeholderRow.current_engagement_id }}"
+                              aria-label="current engagement" item-text="lookup_value_name"
+                              data="[[$variables.getPmispddStakeholderLovEngagementListSDP]]"
+                              on-value-item-changed="[[$listeners.selectValueItem]]"
+                              label-hint="Select current engagement">
+                              <!-- Dynamic options loaded from REST service -->
+                            </oj-select-single>
+                          </oj-bind-if>
+                        </template>
+
+                        <!-- Power Template -->
+                        <!-- <template slot="powerTemplate">
+                          <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                            <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                          </oj-bind-if>
+                          <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                            <oj-input-number value="{{ $variables.lvCurrentStakeholderRow.power }}" min="0" max="10">
+                            </oj-input-number>
+                          </oj-bind-if>
+                        </template> -->
+
+
+                        <template slot="powerTemplate">
+                          <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                            <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                          </oj-bind-if>
+                          <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                            <oj-select-single value="{{ $variables.lvCurrentStakeholderRow.power }}" aria-label="power"
+                              data="[[new oj.ArrayDataProvider([{v:1},{v:2},{v:3},{v:4},{v:5},{v:6},{v:7},{v:8},{v:9},{v:10}], {keyAttributes:'v'})]]"
+                              item-text="v" on-value-item-changed="[[$listeners.selectValueItem3]]"
+                            >
+                            </oj-select-single>
+                          </oj-bind-if>
+                        </template>
+
+                        <!-- Interest Template -->
+                        <!-- <template slot="interestTemplate">
+                          <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                            <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                          </oj-bind-if>
+                          <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                            <oj-input-number value="{{ $variables.lvCurrentStakeholderRow.interest }}" min="0" max="10">
+                            </oj-input-number>
+                          </oj-bind-if>
+                        </template> -->
+
+
+                        <template slot="interestTemplate">
+                          <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                            <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                          </oj-bind-if>
+                          <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                            <oj-select-single value="{{ $variables.lvCurrentStakeholderRow.interest }}"
+                              aria-label="interest"
+                              data="[[new oj.ArrayDataProvider([{v:1},{v:2},{v:3},{v:4},{v:5},{v:6},{v:7},{v:8},{v:9},{v:10}], {keyAttributes:'v'})]]"
+                              item-text="v" on-value-item-changed="[[$listeners.selectValueItem3]]"
+                              >
+                            </oj-select-single>
+                          </oj-bind-if>
+                        </template>
+
+                        <!-- Expectations Template -->
+                        <template slot="expectationsTemplate">
+                          <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                            <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                          </oj-bind-if>
+                          <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                            <oj-input-text value="{{ $variables.lvCurrentStakeholderRow.expectations }}">
+                            </oj-input-text>
+                          </oj-bind-if>
+                        </template>
+
+                        <!-- Approach Strategy Template -->
+                        <template slot="approachStrategyTemplate">
+                          <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                            <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                          </oj-bind-if>
+                          <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                            <oj-input-text value="{{ $variables.lvCurrentStakeholderRow.approach_strategy }}">
+                            </oj-input-text>
+                          </oj-bind-if>
+                        </template>
+
+                        <!-- Desired Engagement Template (Dropdown in edit mode) -->
+                        <template slot="desiredEngagementTemplate">
+                          <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                            <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                          </oj-bind-if>
+                          <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                            <oj-select-single value="{{ $variables.lvCurrentStakeholderRow.desired_engagement_id }}"
+                              aria-label="desired engagement" item-text="lookup_value_name"
+                              data="[[$variables.getPmispddStakeholderLovEngagementListSDP]]"
+                              on-value-item-changed="[[$listeners.selectValueItem2]]"
+                              label-hint="Select Desired Engagement">
+                              <!-- Dynamic options loaded from REST service -->
+                            </oj-select-single>
+                          </oj-bind-if>
+                        </template>
+
+                        <!-- Actions Taken Template -->
+                        <template slot="actionsTakenTemplate">
+                          <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                            <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                          </oj-bind-if>
+                          <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                            <oj-input-text value="{{ $variables.lvCurrentStakeholderRow.actions_taken }}">
+                            </oj-input-text>
+                          </oj-bind-if>
+                        </template>
+
+                        <!-- Action Date Template -->
+                        <template slot="actionDateTemplate">
+                          <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                            <oj-bind-text
+                              value="[[ $current.data ? $page.functions.formatDisplayDate($current.data) : '' ]]">
+                          </oj-bind-if>
+                          <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                            <oj-input-date value="{{ $variables.lvCurrentStakeholderRow.action_date }}">
+                            </oj-input-date>
+                          </oj-bind-if>
+                        </template>
+
+                        <!-- Status Template (Dropdown in edit mode) -->
+                        <!-- Status Template (Static options in edit mode) -->
+                        <template slot="statusTemplate">
+                          <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                            <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                          </oj-bind-if>
+                          <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                            <oj-select-single value="{{ $variables.lvCurrentStakeholderRow.status }}"
+                              aria-label="status"
+                              data="[[new oj.ArrayDataProvider([{value:'Open',label:'Open'},{value:'Close',label:'Close'}], {keyAttributes:'value'})]]"
+                              item-text="label">
+                            </oj-select-single>
+                          </oj-bind-if>
+                        </template>
+
+                      </oj-table>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </oj-sp-advanced-create-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Delete Confirmation Dialog -->
+<oj-dialog style="display:none; width: 500px; overflow: hidden;" dialog-title="Warning" id="delete_dialog"
+  cancel-behavior="icon" header-decoration="off" drag-affordance="title-bar" position.at.vertical="top"
+  position.my.vertical="top">
+  <div slot="body" style="margin-top: 1.5rem;">
+    <div class="oj-flex">Are you sure you want to delete the record?</div>
+  </div>
+  <div slot="footer">
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction3]]">Ok</oj-button>
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction2]]">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Progress Dialog -->
+<oj-dialog id="progressDialog" dialog-title="Processing" style="width: 300px;" cancel-behavior="none">
+  <div slot="body" style="text-align: center; padding: 2rem;">
+    <oj-progress-bar value="-1"></oj-progress-bar>
+    <p style="margin-top: 1rem;">Please wait...</p>
+  </div>
+</oj-dialog>
+
+<oj-dialog id="loadingDialog" style="width: 300px;" cancel-behavior="none" drag-affordance="title-bar"
+  header-decoration="off" position.at.vertical="top" position.my.vertical="top">
+  <div slot="body" style="text-align: center; padding: 2rem;">
+    <oj-progress-circle value="-1"></oj-progress-circle>
+    <p style="margin-top: 1rem; font-weight: 500;">Loading Schedule List Data...</p>
+  </div>
+</oj-dialog>

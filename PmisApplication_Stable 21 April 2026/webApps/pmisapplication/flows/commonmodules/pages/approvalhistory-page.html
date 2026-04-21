@@ -1,0 +1,251 @@
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width:1px;min-width: 100%;">
+    <div id="mainContent">
+      <oj-sp-smart-search-page page-title='[[ "Approval History " + $variables.lv_title]]' 
+        primary-action.display="off"
+        badge.status="neutral" 
+        primary-action.label="Refresh"
+        secondary-actions='[{"label":"Cancel","id":"cancel","icon":"oj-ux-ico-cancel"},{"label":"Refresh","id":"Refresh","icon":"oj-ux-ico-refresh"}]'
+        id="approval_history" 
+        on-sp-primary-action="[[$listeners.approvalHistorySpPrimaryAction]]"
+        on-sp-secondary-action="[[$listeners.approvalHistorySpSecondaryAction]]">
+        
+        <div id="sampleDemo1" class="demo-padding demo-container" style="margin-top:19px">
+          <div id="componentDemoContent2" style="width:1px;min-width: 100%;">
+            <div class="oj-panel oj-panel-shadow-md"
+              style="overflow:hidden;margin-left:20px;margin-right:20px;margin-top:-10px;">
+              <div id="mainContent1">
+                <div class="oj-flex">
+                  
+                  <!-- Approval History Table -->
+                  <oj-table 
+                    id="approvalHistoryTable"
+                    data="[[ $variables.approvalHistoryADP ]]"
+                    columns="{{ $constants.tableConstVar }}"
+                    columns-default.sortable="disabled"
+                    columns-default.resizable="enabled"
+                    class="oj-bg-body oj-sm-align-self-center oj-sm-12"
+                    display="grid"
+                    scroll-policy="loadMoreOnScroll"
+                    style="">
+                    
+                    <!-- Expand/Collapse Template -->
+                    <template slot="expand_template">
+                      <oj-bind-if test="[[ $current.row.isParent && $current.row.hasChildren ]]">
+                        <oj-button display="icons" chroming="borderless" 
+                          on-oj-action="[[ $listeners.expandRowAction ]]"
+                          class="oj-button-sm">
+                          <oj-bind-if test="[[ $variables.expandedRows[$current.row.id] ]]">
+                            <span slot="startIcon" class="oj-ux-ico-caret-down"></span>
+                          </oj-bind-if>
+                          <oj-bind-if test="[[ !$variables.expandedRows[$current.row.id] ]]">
+                            <span slot="startIcon" class="oj-ux-ico-caret-right"></span>
+                          </oj-bind-if>
+                        </oj-button>
+                      </oj-bind-if>
+                      <oj-bind-if test="[[ $current.row.isChild ]]">
+                        <span style="margin-left: 1rem; font-weight: 700; color: #6c757d;">-</span>
+                      </oj-bind-if>
+                    </template>
+                    
+                    <!-- Version Template -->
+                    <template slot="version_template">
+                      <oj-bind-if test="[[ $current.row.isParent ]]">
+                        <span style="font-weight: 700 !important; color: #212529; font-size: 14px;">
+                          <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                        </span>
+                      </oj-bind-if>
+                      <oj-bind-if test="[[ $current.row.isChild ]]">
+                        <span style="margin-left: 1rem; font-weight: 700; color: #6c757d; font-size: 13px;">
+                          <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                        </span>
+                      </oj-bind-if>
+                    </template>
+                    
+                    <!-- Level Template -->
+                    <template slot="level_template">
+                      <oj-bind-if test="[[ $current.row.isParent ]]">
+                        <span style="font-weight: 700 !important; color: #212529; font-size: 14px;">
+                          <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                        </span>
+                      </oj-bind-if>
+                      <oj-bind-if test="[[ $current.row.isChild ]]">
+                        <span style="margin-left: 1rem; font-weight: 700; color: #6c757d; font-size: 13px;">
+                          <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                        </span>
+                      </oj-bind-if>
+                    </template>
+                    
+                    <!-- Category Template -->
+                    <template slot="category_template">
+                      <oj-bind-if test="[[ $current.row.isParent ]]">
+                        <span style="font-weight: 700 !important; color: #212529; font-size: 14px;">
+                          <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                        </span>
+                      </oj-bind-if>
+                      <oj-bind-if test="[[ $current.row.isChild ]]">
+                        <span style="margin-left: 1rem; font-weight: 700; color: #6c757d; font-size: 13px;">
+                          <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                        </span>
+                      </oj-bind-if>
+                    </template>
+                    
+                    <!-- Status Template with Color Coding -->
+                    <template slot="status_template">
+                      <oj-bind-if test="[[ $current.row.isParent ]]">
+                        <!-- Parent Row Status - Bold -->
+                        <oj-bind-if test='[[ $current.data === "Open" ]]'>
+                          <span style="color: #2196f3; font-weight: 700 !important; font-size: 13px;">
+                            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                          </span>
+                        </oj-bind-if>
+                        <oj-bind-if test='[[ $current.data === "Approved" ]]'>
+                          <span style="color: darkgreen; font-weight: 700 !important; font-size: 13px;">
+                            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                          </span>
+                        </oj-bind-if>
+                        <oj-bind-if test='[[ $current.data === "Rejected" ]]'>
+                          <span style="color: #f44336; font-weight: 700 !important; font-size: 13px;">
+                            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                          </span>
+                        </oj-bind-if>
+                        <oj-bind-if test='[[ $current.data === "Withdrawn" ]]'>
+                          <span style="color: #ff9800; font-weight: 700 !important; font-size: 13px;">
+                            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                          </span>
+                        </oj-bind-if>
+                        <oj-bind-if test='[[ $current.data === "Initiated" ]]'>
+                          <span style="color: green; font-weight: 700 !important; font-size: 13px;">
+                            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                          </span>
+                        </oj-bind-if>
+                        <oj-bind-if test='[[ $current.data !== "Open" && $current.data !== "Approved" && $current.data !== "Rejected" && $current.data !== "Withdrawn" && $current.data !== "Initiated" ]]'>
+                          <span style="color: #212529; font-weight: 700 !important; font-size: 13px;">
+                            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                          </span>
+                        </oj-bind-if>
+                      </oj-bind-if>
+                      
+                      <oj-bind-if test="[[ $current.row.isChild ]]">
+                        <!-- Child Row Status - Normal Weight -->
+                        <oj-bind-if test='[[ $current.data === "Open" ]]'>
+                          <span style="color: #2196f3; font-weight: 700; margin-left: 1rem; font-size: 13px;">
+                            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                          </span>
+                        </oj-bind-if>
+                        <oj-bind-if test='[[ $current.data === "Approved" ]]'>
+                          <span style="color: darkgreen; font-weight: 700; margin-left: 1rem; font-size: 13px;">
+                            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                          </span>
+                        </oj-bind-if>
+                        <oj-bind-if test='[[ $current.data === "Rejected" ]]'>
+                          <span style="color: red; font-weight: 700; margin-left: 1rem; font-size: 13px;">
+                            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                          </span>
+                        </oj-bind-if>
+                        <oj-bind-if test='[[ $current.data === "Withdrawn" ]]'>
+                          <span style="color: #ff9800; font-weight: 700; margin-left: 1rem; font-size: 13px;">
+                            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                          </span>
+                        </oj-bind-if>
+                        <oj-bind-if test='[[ $current.data === "Initiated" ]]'>
+                          <span style="color: #2196f3; font-weight: 700; margin-left: 1rem; font-size: 13px;">
+                            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                          </span>
+                        </oj-bind-if>
+                        <oj-bind-if test='[[ $current.data !== "Open" && $current.data !== "Approved" && $current.data !== "Rejected" && $current.data !== "Withdrawn" && $current.data !== "Initiated" ]]'>
+                          <span style="color: #495057; font-weight: 700; margin-left: 1rem; font-size: 13px;">
+                            <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                          </span>
+                        </oj-bind-if>
+                      </oj-bind-if>
+                    </template>
+                    
+                  <!-- Approver Role -->
+                  <template slot="approver_role_template">
+                    <oj-bind-if test="[[ $current.row.isParent ]]">
+                      <span style="font-weight: 700 !important; color: #212529; font-size: 14px;">
+                        <oj-bind-text value="[[ $current.data || '-' ]]"></oj-bind-text>
+                      </span>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.row.isChild ]]">
+                      <span style="margin-left: 1rem; color: #495057 font-weight: 700; font-size: 13px;">
+                        <oj-bind-text value="[[ $current.row.approval_role || '-' ]]"></oj-bind-text>
+                      </span>
+                    </oj-bind-if>
+                  </template>
+                  <!-- Approver Template -->
+                  <template slot="approver_template">
+                    <oj-bind-if test="[[ $current.row.isParent ]]">
+                      <span style="font-weight: 700 !important; color: #212529; font-size: 14px;">
+                        <oj-bind-text value="[[ $current.data || '-' ]]"></oj-bind-text>
+                      </span>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.row.isChild ]]">
+                      <span style="margin-left: 1rem; color: #495057 font-weight: 700; font-size: 13px;">
+                        <oj-bind-text value="[[ $current.row.approver_name || '-' ]]"></oj-bind-text>
+                      </span>
+                    </oj-bind-if>
+                  </template>
+                  
+                  <!-- Action Date Template -->
+                  <template slot="action_date_template">
+                    <oj-bind-if test="[[ $current.row.isParent && $current.data ]]">
+                      <span style="font-weight: 700 !important;">
+                        <!-- <oj-input-date value="[[ $current.data ]]" readonly="true"
+                          converter='{"type": "datetime", "options": {"pattern":"dd/m/yyyy HH:MM a"}}'>
+                        </oj-input-date> -->
+                        <oj-input-date value="[[ $current.data ]]" readonly="true"
+                          converter='{"type":"datetime","options":{"pattern":"dd/MM/yyyy hh:mm a"}}'>
+                        </oj-input-date>
+
+                      </span>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.row.isChild && $current.row.action_date ]]">
+                      <span style="margin-left: 1rem; font-weight: 700;">
+                        <oj-input-date value="[[ $current.row.action_date ]]" readonly="true"
+                          converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy HH:mm"}}'>
+                        </oj-input-date>
+                      </span>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.row.isChild && !$current.row.action_date ]]">
+                      <span style="margin-left: 1rem; font-weight: 400;">-</span>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.row.isParent && !$current.data && $current.row.isChild && !$current.row.action_date ]]">
+                      <span style="color: #999; font-weight: 700;">-</span>
+                    </oj-bind-if>
+                  </template>
+                  
+                  <!-- Comments Template with Text Area -->
+                  <template slot="comments_template">
+                    <oj-bind-if test="[[ $current.row.isParent ]]">
+                      <oj-if test="[[ $current.row.status === 'Rejected' ]]">
+                          <oj-text-area value="[[ $current.data || '-' ]]" readonly="true" rows="1"
+                            id="commentsTextArea1"
+                            style="width: 100%; font-weight: 700; font-size: 14px; color: #f44336;"></oj-text-area>
+                      </oj-if>
+                      <oj-if test="[[ $current.row.status !== 'Rejected' ]]">
+                          <oj-text-area value="[[ $current.data || '-' ]]" readonly="true" rows="1"
+                            id="commentsTextArea1"
+                            style="width: 100%; font-weight: 700; font-size: 14px; color: #212529;"></oj-text-area>
+                      </oj-if>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.row.isChild ]]">
+                      <oj-text-area value="[[ $current.row.comments || '-' ]]" readonly="true" rows="1"
+                        style="width: 100%; margin-left: 1rem; font-weight: 700; font-size: 12px; color: #495057;"
+                        id="commentsTextArea2">
+                      </oj-text-area>
+                    </oj-bind-if>
+                  </template>
+                    
+                  </oj-table>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </oj-sp-smart-search-page>
+    </div>
+  </div>
+</div>

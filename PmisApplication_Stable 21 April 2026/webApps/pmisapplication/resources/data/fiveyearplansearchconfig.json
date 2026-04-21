@@ -1,0 +1,66 @@
+{
+  "description": "Smart Search Configuration for Five Year Plan Search Page",
+  "filters": {
+    "FyPlanNameFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "FY Plan Name",
+      "options": {
+        "field": "fy_plan_id",
+         "optionsData": "[[ $search.filters.FyPlanNameFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.FyPlanNameFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+    "RegionNameFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Region Name",
+      "options": {
+        "field": "lookup_value_id",
+         "optionsData": "[[ $search.filters.RegionNameFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.RegionNameFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+    "ProjectNameFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Project Name",
+      "options": {
+        "field": "project_id",
+         "optionsData": "[[ $search.filters.ProjectNameFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.ProjectNameFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+    "BudgetNumberFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Budget Number",
+      "options": {
+        "field": "budget_number",
+         "optionsData": "[[ $search.filters.BudgetNumberFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.BudgetNumberFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+	"CategoryFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Category Name",
+      "options": {
+        "field": "lookup_value_id",
+         "optionsData": "[[ $search.filters.CategoryFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.CategoryFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+    "ActiveFlagFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Status",
+      "options": {
+        "field": "id",
+        "optionsData": "[[ $search.filters.ActiveFlagFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.ActiveFlagFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    }
+  }
+}
+ 

@@ -1,0 +1,184 @@
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div>
+        <oj-sp-advanced-create-edit id="pddattributes" page-title="Project Details Management" page-subtitle="  "
+          display-options.responsive-padding="on" primary-action.label="Close"
+          on-sp-primary-action="[[$listeners.pddattributesSpPrimaryAction]]"
+          secondary-actions="[[ $variables.aToolBar ]]"
+          on-sp-secondary-action="[[$listeners.pddattributesSpSecondaryAction]]">
+
+          <div slot="main" style="padding-top: 0; margin-top: 0;">
+            <div style="margin-top: 0;">
+
+              <!-- Main Form Section - Project Details (Readonly) -->
+              <oj-collapsible id="project-details-section" expanded="true"
+                class="oj-panel oj-panel-shadow-md oj-selected" style="margin-bottom: 5px;">
+                <span slot="header" style="font-weight: bold; color: white;">Project Details</span>
+                <div style="padding: 1rem;">
+                  <oj-form-layout max-columns="3" label-edge="start" colspan-wrap="wrap"
+                    user-assistance-density="compact" direction="row" class="oj-formlayout-full-width">
+
+                    <oj-input-text id="project-name" label-hint="Project Name" placeholder="Project Name"
+                      value="{{ $variables.projectDetailsVar.project_name }}" style="width: 16rem;"
+                      user-assistance-density="compact" disabled="true">
+                      </>
+                    </oj-input-text>
+
+                    <oj-input-text id="project-number" label-hint="Project Number" placeholder="Project Number"
+                      value="{{ $variables.projectDetailsVar.project_number }}" style="width: 16rem;"
+                      user-assistance-density="compact" disabled="true">
+                    </oj-input-text>
+
+                    <oj-input-text id="tender-number" label-hint="Tender Number" placeholder="Tender Number"
+                      value="{{ $variables.projectDetailsVar.tender_number }}" style="width: 16rem;"
+                      user-assistance-density="compact" disabled="true">
+                    </oj-input-text>
+
+                  </oj-form-layout>
+                </div>
+              </oj-collapsible>
+
+              <div id="sampleDemo" class="demo-padding demo-container">
+                <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+                  <div id="searchMainContent">
+
+                    <div class="oj-flex-bar-end oj-helper-justify-content-flex-end">
+                      <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Add Row"
+                        on-oj-action="[[$listeners.addRowAction]]" id="addRowBtn">
+                        <span slot="startIcon" class="oj-ux-ico-plus"></span>
+                      </oj-button>
+
+                    </div>
+                    <!-- Project Component Details Section -->
+
+
+                    <!-- Modified Records Text Area -->
+
+
+                    <!-- Action Buttons -->
+
+
+                    <!-- Inline Editable Header Table -->
+                    <div class="oj-flex">
+                      <oj-table scroll-policy="loadMoreOnScroll" class="oj-flex-item oj-sm-12 oj-md-12 oj-bg-body"
+                        display="grid" horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+                        id="headerTable" data="[[ $variables.bufferDPHeaderTable.instance ]]" edit-mode="rowEdit"
+                        edit-row="{{ $variables.rowToEdit }}" selection-mode.row="single"
+                        on-oj-before-row-edit="[[$listeners.headerTableBeforeRowEdit]]"
+                        on-oj-before-row-edit-end="[[$listeners.headerTableBeforeRowEditEnd]]"
+                        columns="{{$variables.tablecolumns }}">
+
+                        <!-- Actions Template -->
+                        <template slot="actionsTemplate">
+
+                          <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                            on-oj-action="[[$listeners.buttonAction]]" style="padding-left:25px;">
+                            <!-- <span slot="startIcon" class="oj-ux-ico-edit" role="img" title="Edit Row"></span> -->
+                            <span slot="startIcon" class="oj-ux-ico-edit" role="img" title="Edit"></span>
+                          </oj-button>
+                          <!-- <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                            on-oj-action="[[$listeners.openLineDialogAction]]">
+                            <span class="oj-ux-ico-plus"></span>
+                          </oj-button> -->
+
+                        </template>
+
+                        <!-- Description Template (Dropdown in edit mode) -->
+                        <template slot="descriptionTemplate">
+                          <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                            <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                          </oj-bind-if>
+                          <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                            <oj-select-single value="{{ $variables.lvCurrentHeaderRow.activity_id }}"
+                              aria-label="activity" data="[[$variables.getPmispddLovAttributetypeListSDP]]"
+                              item-text="lookup_value_name" on-value-item-changed="[[$listeners.selectValueItem]]"
+                              label-hint="Select Description">
+                              <!-- Dynamic options loaded from REST service -->
+                            </oj-select-single>
+                          </oj-bind-if>
+                        </template>
+
+                        <!-- Quantity Template -->
+                        <template slot="quantityTemplate">
+                          <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                            <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                          </oj-bind-if>
+                          <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                            <oj-input-number value="{{ $variables.lvCurrentHeaderRow.quantity }}"></oj-input-number>
+                          </oj-bind-if>
+                        </template>
+
+                        <!-- Unit of Measurement Template -->
+                        <template slot="unitTemplate">
+                          <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                            <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                          </oj-bind-if>
+                          <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                            <oj-input-text value="{{ $variables.lvCurrentHeaderRow.unit_of_measurement }}">
+                            </oj-input-text>
+                          </oj-bind-if>
+                        </template>
+
+                        <!-- Remarks Template -->
+                        <template slot="remarksTemplate">
+                          <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                            <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                          </oj-bind-if>
+                          <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                            <oj-input-text value="{{ $variables.lvCurrentHeaderRow.activity_remark }}"></oj-input-text>
+                          </oj-bind-if>
+                        </template>
+
+                      </oj-table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </oj-sp-advanced-create-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Line Attributes Dialog -->
+<oj-dialog style="width: auto; max-height: 90vh; overflow: hidden;" dialog-title="Add Line Attribute" id="lineDialog"
+  cancel-behavior="icon" resize-behavior="resizable" drag-affordance="title-bar" position.at.vertical="top"
+  modality="modeless">
+
+  <div slot="body">
+    <oj-validation-group id="lineForm">
+      <oj-form-layout label-edge="top" direction="row" columns="2" id="lineFormLayout" max-columns="2">
+
+        <oj-select-single id="line-description" label-hint="Description"
+          value="{{ $variables.lineAttributeVar.activity_id }}" style="width: 16rem;">
+          <!-- Dynamic options loaded from REST service -->
+        </oj-select-single>
+
+        <oj-input-number id="line-quantity" label-hint="Quantity" placeholder="Quantity"
+          value="{{ $variables.lineAttributeVar.quantity }}" style="width: 16rem;">
+        </oj-input-number>
+
+        <oj-input-text id="line-unit" label-hint="Unit Of Measurement" placeholder="Unit Of Measurement"
+          value="{{ $variables.lineAttributeVar.unit_of_measurement }}" style="width: 16rem;">
+        </oj-input-text>
+
+        <oj-input-text id="line-remarks" label-hint="Remarks" placeholder="Remarks"
+          value="{{ $variables.lineAttributeVar.activity_remark }}" style="width: 16rem;">
+        </oj-input-text>
+
+      </oj-form-layout>
+    </oj-validation-group>
+  </div>
+
+  <div slot="footer">
+    <oj-button id="line-save-close">Save and Add Another</oj-button>
+    <oj-button id="line-save">Save</oj-button>
+    <oj-button id="line-cancel" on-oj-action="[[$listeners.lineCancelAction]]">Cancel</oj-button>
+  </div>
+
+</oj-dialog>

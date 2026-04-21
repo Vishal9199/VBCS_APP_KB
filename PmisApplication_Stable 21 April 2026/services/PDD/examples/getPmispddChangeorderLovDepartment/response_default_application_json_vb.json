@@ -1,0 +1,47 @@
+{
+    "items": [
+        {
+            "lookup_value_id": 6809,
+            "lookup_value_code": "OTHERS",
+            "lookup_value_name": "Others"
+        },
+        {
+            "lookup_value_id": 6810,
+            "lookup_value_code": "OPERATIONS_DIRECTORATE",
+            "lookup_value_name": "Operations Directorate"
+        },
+        {
+            "lookup_value_id": 6812,
+            "lookup_value_code": "PLANNING_AND_ASSETS_MANAGEMENT",
+            "lookup_value_name": "Planning And Assets Management"
+        },
+        {
+            "lookup_value_id": 6808,
+            "lookup_value_code": "CUSTOMER_SERVICE",
+            "lookup_value_name": "Customer Service"
+        },
+        {
+            "lookup_value_id": 6811,
+            "lookup_value_code": "PROJECT_DELIVERY_DIRECTORATE",
+            "lookup_value_name": "Project Delivery Directorate"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 5,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/changeorder/lov/department"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/changeorder/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/changeorder/lov/department"
+        }
+    ]
+}

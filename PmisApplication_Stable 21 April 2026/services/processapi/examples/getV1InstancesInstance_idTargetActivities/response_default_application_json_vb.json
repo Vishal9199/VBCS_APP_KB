@@ -1,0 +1,94 @@
+{
+    "links": [
+        {
+            "href": "https://opa-oic-dhfsoictest-1745125970397-axbrdbhb3wme-ams.process.oci.oraclecloud.com/process/api/v1/instances/0091b4c0-6ae1-11f0-a5a5-ca15e415cd1d/target-activities",
+            "rel": "self"
+        },
+        {
+            "href": "https://opa-oic-dhfsoictest-1745125970397-axbrdbhb3wme-ams.process.oci.oraclecloud.com/process/api/v1/instances/0091b4c0-6ae1-11f0-a5a5-ca15e415cd1d",
+            "rel": "parent"
+        }
+    ],
+    "activities": [
+        {
+            "activityId": "flow_88b2bd50-0af3-11ee-8126-9b05c7119143",
+            "activityName": "Start event",
+            "activityType": "formStartEvent"
+        },
+        {
+            "activityId": "flow_d44bdb1e-41d7-db31-72f1-af7f452a543d",
+            "activityName": "Call Pkg",
+            "activityType": "exclusiveGateway"
+        },
+        {
+            "activityId": "flow_f55dcaba-73bb-2f0f-b236-43f4292e41f3",
+            "activityName": "Submit Pkg",
+            "activityType": "serviceTask"
+        },
+        {
+            "activityId": "flow_60f3fcb2-5da4-11cc-d29d-269c61c18ddf",
+            "activityName": "Pkg S",
+            "activityType": "exclusiveGateway"
+        },
+        {
+            "activityId": "flow_49ab2c50-d337-9aaf-8a38-d44ea5927edb",
+            "activityName": "Data mapper",
+            "activityType": "task"
+        },
+        {
+            "activityId": "flow_fd8f6aa1-c905-f190-f1ea-f65a22eec795",
+            "activityName": "Update Instance",
+            "activityType": "serviceTask"
+        },
+        {
+            "activityId": "flow_78d2f1bb-8786-4ec5-6c91-9584ae7931fe",
+            "activityName": "Action Call",
+            "activityType": "serviceTask"
+        },
+        {
+            "activityId": "flow_88b2bd51-0af3-11ee-8126-9b05c7119143",
+            "activityName": "End event",
+            "activityType": "endEvent"
+        },
+        {
+            "activityId": "flow_4241c80f-aa41-7319-c335-58b0a6bf9a8f",
+            "activityName": "gate1",
+            "activityType": "exclusiveGateway"
+        },
+        {
+            "activityId": "flow_05e0c4cf-75d5-3d84-1a46-046ebcc9e59d",
+            "activityName": "FYI Mapping",
+            "activityType": "task"
+        },
+        {
+            "activityId": "flow_89dffd74-c9b1-a9fc-d628-58cb41188e3b",
+            "activityName": "Idcs user id api",
+            "activityType": "task"
+        },
+        {
+            "activityId": "flow_37ad0a42-f434-2dcb-54ce-b1e2a9ea4016",
+            "activityName": "Action Call 2",
+            "activityType": "serviceTask"
+        },
+        {
+            "activityId": "flow_480d24dc-67e2-3092-5d8d-0327456937a2",
+            "activityName": "Exclusive gateway 2",
+            "activityType": "exclusiveGateway"
+        },
+        {
+            "activityId": "flow_a5e1282d-d62a-fff8-2eb8-0078f283082d",
+            "activityName": "User task",
+            "activityType": "userTask"
+        },
+        {
+            "activityId": "flow_dd562766-db70-accc-355f-30c304145caa",
+            "activityName": "Transaction ords",
+            "activityType": "serviceTask"
+        },
+        {
+            "activityId": "flow_97df9b82-0a59-6de7-e3bb-6a6cace1e9b9",
+            "activityName": "Update Pkg",
+            "activityType": "serviceTask"
+        }
+    ]
+}

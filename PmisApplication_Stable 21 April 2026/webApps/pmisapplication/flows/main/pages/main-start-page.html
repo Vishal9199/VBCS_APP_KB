@@ -1,0 +1,70 @@
+<oj-sp-smart-search-page id="landing_page" page-title="Landing Page" page-subtitle=" ">
+
+  <div style="padding: 2rem;">
+
+    <oj-flex-layout direction="row" wrap="wrap" justify-content="flex-start" style="gap: 2rem;">
+
+      <!-- ========== PAM FLOW ========== -->
+      <oj-flex-layout-item class="oj-sm-12 oj-md-6 oj-lg-4">
+        <oj-panel class="oj-panel-shadow-sm">
+          <div>
+            <h4 class="oj-header-border">PAM</h4>
+          </div>
+
+          <oj-list-view id="pamList" data="[[$page.variables.pamMenuItemsADP]]" selection-mode="single"
+            style="width: 100%;" class="oj-listview-card-layout oj-listview-full-width"
+            on-oj-item-action="[[$listeners.pamListItemAction]]">
+            <template slot="itemTemplate" data-oj-as="item">
+              <oj-list-item-layout style="border-color: red;">
+                <oj-bind-text value="[[item.data.label]]"></oj-bind-text>
+              </oj-list-item-layout>
+            </template>
+          </oj-list-view>
+        </oj-panel>
+      </oj-flex-layout-item>
+
+      <!-- ========== PMIS SETUP FLOW ========== -->
+      <oj-flex-layout-item class="oj-sm-12 oj-md-6 oj-lg-4">
+        <oj-panel class="oj-panel-shadow-sm">
+          <div>
+            <h4 class="oj-header-border">PMIS Setup</h4>
+          </div>
+
+          <oj-list-view id="pmisSetupList" data="[[$page.variables.pmisSetupMenuItemsADP]]" selection-mode="single"
+            style="width: 100%;" class="oj-listview-card-layout"
+            on-oj-item-action="[[$listeners.pmisSetupListItemAction]]">
+            <template slot="itemTemplate" data-oj-as="item">
+              <oj-list-item-layout>
+                <oj-bind-text value="[[item.data.label]]"></oj-bind-text>
+              </oj-list-item-layout>
+            </template>
+          </oj-list-view>
+        </oj-panel>
+      </oj-flex-layout-item>
+
+      <!-- ================PDD ============== -->
+
+      <oj-flex-layout-item class="oj-sm-12 oj-md-6 oj-lg-4">
+        <oj-panel class="oj-panel-shadow-sm">
+          <div>
+            <h4 class="oj-header-border">PDD</h4>
+          </div>
+
+          <oj-list-view id="pddsetuplist" selection-mode="single" style="width: 100%;" class="oj-listview-card-layout"
+            data="[[ $page.variables.pddMenuItemsADP ]]"
+            on-oj-item-action="[[$listeners.pddsetuplist]]" 
+            >
+            <template slot="itemTemplate" data-oj-as="item">
+              <oj-list-item-layout>
+                <oj-bind-text value="[[item.data.label]]"></oj-bind-text>
+              </oj-list-item-layout>
+            </template>
+          </oj-list-view>
+        </oj-panel>
+      </oj-flex-layout-item>
+
+    </oj-flex-layout>
+
+  </div>
+
+</oj-sp-smart-search-page>

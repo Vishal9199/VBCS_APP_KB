@@ -1,0 +1,859 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "calendarThreeYearrangesADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "CalendarThreeYearRange",
+        "keyAttributes": "year",
+         "data": []
+      }
+    },
+    "editMode": {
+      "type": "string"
+    },
+    "enterType": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "formValidation": {
+      "type": "string"
+    },
+    "typBudgetTableADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "data": [
+          {
+            "row_id": "budget_row_1"
+          }
+        ],
+        "keyAttributes": "row_id"
+      },
+      "description": "Single row data provider for budget entry table"
+    },
+    "typBugetColumnsVar": {
+      "type": "object[]"
+    },
+    "typprojectColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "width": 75,
+          "template": "select_action_template",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Project Name",
+          "field": "project_name",
+          "resizable": "enabled",
+          "template": "fyp_plan_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Calendar Name",
+          "field": "calendar_name",
+          "resizable": "enabled",
+          "template": "fyp_plan_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Three Year Calendar Name",
+          "field": "five_year_calendar_name",
+          "resizable": "enabled",
+          "width": 159,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Budget Year",
+          "field": "year_prompt",
+          "resizable": "enabled",
+          "width": 159,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Value",
+          "field": "year_value",
+          "resizable": "enabled",
+          "width": 164,
+          "template": "start_date_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }
+      ]
+    },
+    "typprojectsADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "typprojects",
+        "keyAttributes": "project_id"
+      }
+    },
+    "getPmisLovCalendarNameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "cal_hdr_id",
+        "itemsPath": "items",
+        "responseType": "getPmisLovCalendarNameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "calendar_name"
+          ]
+        },
+        "fetchChain": "getPmisLovCalendarNameFetch"
+      }
+    },
+    "getPmisLovCalendarNameListSDP2": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "cal_hdr_id",
+        "itemsPath": "items",
+        "responseType": "getPmisLovCalendarNameResponse2",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "calendar_name"
+          ]
+        },
+        "fetchChain": "getPmisLovCalendarNameFetch2"
+      }
+    },
+    "getPmispamLovMasterplanProjectnameListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "project_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamLovMasterplanProjectnameResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "project_name"
+          ]
+        },
+        "fetchChain": "getPmispamLovMasterplanProjectnameFetch"
+      }
+    },
+    "getPmispamLovPamFinancialstatusListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamLovPamFinancialstatusResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        },
+        "fetchChain": "getPmispamLovPamFinancialstatusFetch"
+      }
+    },
+    "getPmispamLovPamMonthyearListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "month_year",
+        "itemsPath": "items",
+        "responseType": "getPmispamLovPamMonthyearResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "month_year"
+          ]
+        },
+        "fetchChain": "getPmispamLovPamMonthyearFetch"
+      }
+    },
+    "getPmispamLovPamMonthyearListSDP2": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "month_year",
+        "itemsPath": "items",
+        "responseType": "getPmispamLovPamMonthyearResponse2",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "month_year"
+          ]
+        },
+        "fetchChain": "getPmispamLovPamMonthyearFetch2"
+      }
+    },
+    "getPmispamLovPamMonthyearListSDP3": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "month_year",
+        "itemsPath": "items",
+        "responseType": "getPmispamLovPamMonthyearResponse3",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "month_year"
+          ]
+        },
+        "fetchChain": "getPmispamLovPamMonthyearFetch3"
+      }
+    },
+    "getPmispamLovPamMonthyearListSDP4": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "month_year",
+        "itemsPath": "items",
+        "responseType": "getPmispamLovPamMonthyearResponse4",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "month_year"
+          ]
+        },
+        "fetchChain": "getPmispamLovPamMonthyearFetch4"
+      }
+    },
+    "getPmispamLovPamTechnicalstatusListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamLovPamTechnicalstatusResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        },
+        "fetchChain": "getPmispamLovPamTechnicalstatusFetch"
+      }
+    },
+    "getPmispamLovPmisprojectCategoryListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamLovPmisprojectCategoryResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        },
+        "fetchChain": "getPmispamLovPmisprojectCategoryFetch"
+      }
+    },
+    "InputPlanVar": {
+      "type": {
+        "fy_calendar_id": "string",
+        "fy_plan_id": "string",
+        "fy_plan_name": "string",
+        "fyp_calendar_name": "string",
+        "master_plan_name": "string",
+        "mp_calendar_id": "string"
+      },
+      "required": true,
+      "input": "fromCaller"
+    },
+    "pNavCode": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "pNavId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "pNavPrjId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "postTypCostVar": {
+      "type": "threeyearbudgetCostdtl",
+      "defaultValue": {
+        "year_value1": 0,
+        "year_value2": 0,
+        "year_value3": 0,
+        "created_by": "[[ $application.user.email ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_by": "[[ $application.user.email ]]",
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "last_updated_login": "[[ $application.user.email ]]"
+      }
+    },
+    "postTypHdrVar": {
+      "type": "typheader",
+      "defaultValue": {
+        "project_id": 0
+      }
+    },
+    "projectCurrentRow": {
+      "type": "object"
+    },
+    "selectedkey": {
+      "type": "number"
+    },
+    "variable1": {
+      "type": "string"
+    }
+
+  },
+  "metadata": {
+    "dynamicContainerMetadata": {
+      "type": "vb/ContainerMetadataProviderDescriptor"
+    }
+  },
+  "types": {
+    "@decorators.threeyearbudgetCostdtl": {
+      "endpoint": "getPmispamFiveyearplandtlBudgetcostGetbyhdrid",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmisLovCalendarNameResponse": {
+      "endpoint": "getPmisLovCalendarName",
+      "service": "PmisSetup",
+      "path": "response"
+    },
+    "@decorators.getPmisLovCalendarNameResponse2": {
+      "endpoint": "getPmisLovCalendarName",
+      "service": "PmisSetup",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovMasterplanProjectnameResponse": {
+      "endpoint": "getPmispamLovMasterplanProjectname",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovPamFinancialstatusResponse": {
+      "endpoint": "getPmispamLovPamFinancialstatus",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovPamMonthyearResponse": {
+      "endpoint": "getPmispamLovPamMonthyear",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovPamMonthyearResponse2": {
+      "endpoint": "getPmispamLovPamMonthyear",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovPamMonthyearResponse3": {
+      "endpoint": "getPmispamLovPamMonthyear",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovPamMonthyearResponse4": {
+      "endpoint": "getPmispamLovPamMonthyear",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovPamTechnicalstatusResponse": {
+      "endpoint": "getPmispamLovPamTechnicalstatus",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovPmisprojectCategoryResponse": {
+      "endpoint": "getPmispamLovPmisprojectCategory",
+      "service": "PAM",
+      "path": "response"
+    },
+    "CalendarThreeYearRange": {
+      "year": "number",
+      "year_id": "number",
+      "cal_hdr_id": "number",
+      "year_prompt": "string",
+      "year_start": "number",
+      "display_sequence": "number",
+      "active_flag": "string"
+    },
+    "threeyearbudgetCostdtl": {
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "fy_budget_cost_id": "number",
+      "fy_calendar_id": "number",
+      "fy_id": "number",
+      "fy_plan_id": "number",
+      "fy_plan_name": "string",
+      "fyp_calendar_name": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "object_version_num": "number",
+      "project_id": "number",
+      "year_prompt1": "number",
+      "year_value1": "number",
+      "year_prompt2": "number",
+      "year_value2": "number",
+      "year_prompt3": "number",
+      "year_value3": "number"
+    },
+    "typheader": {
+      "fy_id": "number",
+      "fy_plan_id": "number",
+      "object_version_num": "number",
+      "fy_plan_name": "string",
+      "project_id": "number",
+      "project_name": "string",
+      "mp_calendar_id": "number",
+      "master_plan_name": "string",
+      "category": "string",
+      "region_id": "number",
+      "region_name": "string",
+      "parent_project_id": "number",
+      "parent_project_name": "string",
+      "project_category_id": "number",
+      "project_category_code": "string",
+      "project_category": "string",
+      "fy_calendar_id": "number",
+      "fyp_calendar_name": "string",
+      "english_project_name": "string",
+      "arabic_project_name": "string",
+      "budget_number": "string",
+      "financial_status_id": "number",
+      "financial_status_code": "string",
+      "financial_status": "string",
+      "technical_status_id": "number",
+      "technical_status_code": "string",
+      "technical_status": "string",
+      "active_flag": "string",
+      "inactive_date": "string",
+      "design_schedule": "string",
+      "execution_schedule": "string",
+      "tendor_schedule": "string",
+      "operation_schedule": "string",
+      "req_budget_val": "number",
+      "est_buget_value": "number",
+      "scp_approved_value": "number",
+      "ora_project_id": "number",
+      "ora_proj_num": "string",
+      "ora_proj_name": "string",
+      "ora_proj_mgr": "string",
+      "ora_start_date": "string",
+      "ora_end_date": "string",
+      "ora_project_status": "string",
+      "ora_proj_tmp_id": "number",
+      "ora_proj_long_name": "string",
+      "ora_proj_description": "string",
+      "ora_budget_type": "string",
+      "ora_budget_amount": "number",
+      "ora_budget_period": "string",
+      "ord_res_mem_list_id": "number",
+      "comments": "string",
+      "int_wf_item_type": "string",
+      "int_wf_item_key": "string",
+      "scp_wf_item_type": "string",
+      "scp_wf_item_key": "string",
+      "pc_wf_item_type": "string",
+      "pc_wf_item_key": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "typprojects": {
+      "project_id": "number",
+      "budget_year_id": "number",
+      "calendar_name": "string",
+      "fycp_id": "number",
+      "five_year_calendar_name": "string",
+      "project_name": "string",
+      "year_prompt": "string",
+      "year_value": "string",
+      "project_category_code": "string"
+    },
+    "getPmisLovCalendarNameResponse": {
+      "items": [
+        {
+          "cal_hdr_id": "number",
+          "calendar_name": "string",
+          "calendar_type_code": "string",
+          "calendar_type_id": "number"
+        }
+      ]
+    },
+    "getPmisLovCalendarNameResponse2": {
+      "items": [
+        {
+          "cal_hdr_id": "number",
+          "calendar_name": "string",
+          "calendar_type_code": "string"
+        }
+      ]
+    },
+    "getPmispamLovMasterplanProjectnameResponse": {
+      "items": [
+        {
+          "project_id": "number",
+          "project_long_name": "string",
+          "project_name": "string"
+        }
+      ]
+    },
+    "getPmispamLovPamFinancialstatusResponse": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispamLovPamMonthyearResponse": {
+      "items": [
+        {
+          "month_year": "string"
+        }
+      ]
+    },
+    "getPmispamLovPamMonthyearResponse2": {
+      "items": [
+        {
+          "month_year": "string"
+        }
+      ]
+    },
+    "getPmispamLovPamMonthyearResponse3": {
+      "items": [
+        {
+          "month_year": "string"
+        }
+      ]
+    },
+    "getPmispamLovPamMonthyearResponse4": {
+      "items": [
+        {
+          "month_year": "string"
+        }
+      ]
+    },
+    "getPmispamLovPamTechnicalstatusResponse": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispamLovPmisprojectCategoryResponse": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    }
+  },
+  "eventListeners": {
+    "activeFlagSwitchValue": {
+      "chains": [
+        {
+          "chain": "SwitchValueChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "booleanCheckboxComponentValue": {
+      "chains": [
+        {
+          "chain": "BooleanCheckboxComponentValueChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "onClickgetProjects",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "checkboxSetValue": {
+      "chains": [
+        {
+          "chain": "CheckboxSetValueChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "ojSsce1SpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "AdvancedCreateAndEditPageTemplateSpPrimaryActionChain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "ojSsce1SpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "AdvancedCreateAndEditPageTemplateSpSecondaryActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "projectCategoryValueItem": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "tableFirstSelectedRow": {
+      "chains": [
+        {
+          "chain": "TableFirstSelectedRowChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "rowKey": "{{$event.detail.value.key}}",
+            "rowData": "{{$event.detail.value.data}}",
+            "firstSelectedRow": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-checkboxset": {
+        "path": "ojs/ojcheckboxset"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-ext-checkbox-switch": {
+        "path": "oj-ext/checkbox-switch/loader"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-option": {
+        "path": "ojs/ojoption"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-selector": {
+        "path": "ojs/ojselector"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-sp-message-unsaved-changes": {
+        "path": "oj-sp/message-unsaved-changes/loader"
+      },
+      "oj-sp-vertical-anchor-navigator": {
+        "path": "oj-sp/vertical-anchor-navigator/loader"
+      },
+      "oj-switch": {
+        "path": "ojs/ojswitch"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ],
+    "modules": {
+      "ojConverterNumber": {
+        "path": "ojs/ojconverter-number"
+      },
+      "ojValidationNumber": {
+        "path": "ojs/ojvalidation-number"
+      }
+    }
+  },
+  "@dt": {
+    "iconClass": "vbdt-dynamic-icon-1-icoAdvancedCreateAndEdit48Svg"
+  },
+  "layouts": {
+    "containerLayout1": {
+      "label": "Container Rule Set 1",
+      "layoutType": "container",
+      "layouts": {
+        "case1": {
+          "label": "Case 1",
+          "layoutType": "container",
+          "layout": {
+            "sectionTemplateMap": {
+              "template1": "template1",
+              "template2": "template2"
+            },
+            "displayProperties": [
+              "template1",
+              "template2"
+            ]
+          }
+        }
+      },
+      "rules": [
+        "containerLayout1-rule1"
+      ]
+    },
+    "containerLayout1-rule1": {
+      "expression": "case1"
+    }
+  },
+  "templates": {
+    "template1": {
+      "title": "Section 1",
+      "description": "Sample Section 1",
+      "extensible": "byReference",
+      "@dt": {
+        "type": "section",
+        "layout": "containerLayout1"
+      },
+      "dependencies": [
+        "oj-dynamic/form/loader",
+        "oj-sp/section/loader"
+      ],
+      "labelHint": "Sample Section 1"
+    },
+    "template2": {
+      "title": "Section 2",
+      "description": "Sample Section 2",
+      "extensible": "byReference",
+      "@dt": {
+        "layout": "containerLayout1",
+        "type": "section"
+      },
+      "dependencies": [
+        "oj-dynamic/form/loader",
+        "oj-sp/section/loader"
+      ],
+      "labelHint": "Sample Section 2"
+    }
+  },
+  "constants": {
+    "projectColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "resizable": "enabled",
+          "width": 75,
+          "template": "select_action_template",
+          "headerStyle": "text-align: center; white-space: normal; min-width: 100px;",
+          "style": "text-align: center; vertical-align: middle;"
+        },
+        {
+          "headerText": "Project Name",
+          "field": "project_name",
+          "resizable": "enabled",
+          "template": "fyp_plan_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Calendar Name",
+          "field": "calendar_name",
+          "resizable": "enabled",
+          "template": "fyp_plan_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Three Year Calendar Name",
+          "field": "five_year_calendar_name",
+          "resizable": "enabled",
+          "width": 159,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Budget Year",
+          "field": "year_prompt",
+          "resizable": "enabled",
+          "width": 159,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Value",
+          "field": "year_value",
+          "resizable": "enabled",
+          "width": 164,
+          "template": "start_date_template",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }
+      ]
+    },
+    "stored_Appl_Code": {
+      "type": "string",
+      "defaultValue": "THREE_YEAR_PLAN"
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "NWS NODE REPORT",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "vb-catalog://backends/NWS_NODE_REPORT",
+            "description": "NWS NODE REPORT"
+        }
+    ],
+    "paths": {
+        "/dev/api": {
+            "post": {
+                "operationId": "postApi",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostApiRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "summary": "Example stored by VB User",
+                                    "externalValue": "./examples/postApi/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {},
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PostApiRequest": {
+                "type": "object",
+                "properties": {
+                    "REPORT_PARAMETERS": {
+                        "type": "object",
+                        "properties": {
+                            "P_PROJECT_CHARTER_ID": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "REPORT_NAME": {
+                        "type": "string"
+                    },
+                    "REPORT_TYPE": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

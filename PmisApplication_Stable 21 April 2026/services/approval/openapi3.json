@@ -1,0 +1,1583 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "ORDS CUST DEV",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "vb-catalog://backends/ORDS_CUST_DEV/pmis/approval",
+            "description": "ORDS CUST DEV"
+        }
+    ],
+    "paths": {
+        "/getactionbytrxid": {
+            "get": {
+                "operationId": "getGetactionbytrxid",
+                "parameters": [
+                    {
+                        "name": "p_transaction_id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetGetactionbytrxid"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getGetactionbytrxid/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/submit": {
+            "post": {
+                "operationId": "postSubmit",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostSubmitRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postSubmit/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {},
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/updateapproveraction": {
+            "post": {
+                "operationId": "postUpdateapproveraction",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostUpdateapproveractionRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postUpdateapproveraction/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostUpdateapproveractionResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/postUpdateapproveraction/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/update": {
+            "post": {
+                "operationId": "postUpdate",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostUpdateRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postUpdate/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostUpdateResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/postUpdate/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/getreassign/lov/idcs": {
+            "get": {
+                "operationId": "getGetreassignLovIdcs2",
+                "parameters": [
+                    {
+                        "name": "p_search",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetGetreassignLovIdcs"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/getGetreassignLovIdcs2/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/currentlevel/approver": {
+            "get": {
+                "operationId": "getCurrentlevelApprover",
+                "parameters": [
+                    {
+                        "name": "p_trx_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "p_level",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetCurrentlevelApprover"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/getCurrentlevelApprover/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/update/history": {
+            "post": {
+                "operationId": "postUpdateHistory",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostUpdateHistoryRequest"
+                            },
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postUpdateHistory/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Default response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostUpdateHistoryResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "externalValue": "./examples/postUpdateHistory/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/approval/selectgroup": {
+            "get": {
+                "operationId": "getApprovalSelectgroup",
+                "parameters": [
+                    {
+                        "name": "p_level",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetApprovalSelectgroup"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getApprovalSelectgroup/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/common/approval/action/history/dtl": {
+            "post": {
+                "operationId": "postCommonApprovalActionHistoryDtl",
+                "parameters": [
+                    {
+                        "name": "x-session-id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "vb": {
+                                    "externalValue": "./examples/postCommonApprovalActionHistoryDtl/request_application_json_vb.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostCommonApprovalActionHistoryDtlResponse"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/postCommonApprovalActionHistoryDtl/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/transaction/projectcharter/getbyhdrid": {
+            "get": {
+                "operationId": "getTransactionProjectcharterGetbyhdrid",
+                "parameters": [
+                    {
+                        "name": "p_trx_id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetTransactionProjectcharterGetbyhdrid"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getTransactionProjectcharterGetbyhdrid/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/getaction/apprrequestcode": {
+            "get": {
+                "operationId": "getGetactionApprrequestcode",
+                "parameters": [
+                    {
+                        "name": "p_transaction_id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetGetactionApprrequestcode"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getGetactionApprrequestcode/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        },
+        "/approvalhistory": {
+            "get": {
+                "operationId": "getApprovalhistory",
+                "parameters": [
+                    {
+                        "name": "p_transaction_id",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Response for default",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetApprovalhistory"
+                                },
+                                "examples": {
+                                    "vb": {
+                                        "summary": "Example stored by VB User",
+                                        "externalValue": "./examples/getApprovalhistory/response_default_application_json_vb.json"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-vb": {
+                    "actionHint": "getMany"
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "GetPmisApprovalGetactionbytrxid": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "approval_instance_num": {
+                                    "nullable": true
+                                },
+                                "action_id": {
+                                    "type": "integer"
+                                },
+                                "appr_request_id": {
+                                    "type": "integer"
+                                },
+                                "transaction_id": {
+                                    "type": "integer"
+                                },
+                                "version_number": {
+                                    "type": "integer"
+                                },
+                                "transaction_num": {
+                                    "type": "string"
+                                },
+                                "approval_category_code": {
+                                    "type": "string"
+                                },
+                                "requester_user_id": {
+                                    "type": "string"
+                                },
+                                "requester_email_id": {
+                                    "type": "string"
+                                },
+                                "approver_user_id": {
+                                    "type": "string"
+                                },
+                                "approver_email_id": {
+                                    "type": "string"
+                                },
+                                "approver_level": {
+                                    "type": "integer"
+                                },
+                                "status_code": {
+                                    "type": "string"
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "creation_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_update_date": {
+                                    "type": "string"
+                                },
+                                "last_update_login": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetGetactionbytrxid": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "approval_instance_num": {
+                                    "nullable": true
+                                },
+                                "action_id": {
+                                    "type": "integer"
+                                },
+                                "appr_request_id": {
+                                    "type": "integer"
+                                },
+                                "transaction_id": {
+                                    "type": "integer"
+                                },
+                                "version_number": {
+                                    "type": "integer"
+                                },
+                                "transaction_num": {
+                                    "type": "string"
+                                },
+                                "approval_category_code": {
+                                    "type": "string"
+                                },
+                                "requester_user_id": {
+                                    "type": "string"
+                                },
+                                "requester_email_id": {
+                                    "type": "string"
+                                },
+                                "approver_user_id": {
+                                    "type": "string"
+                                },
+                                "approver_email_id": {
+                                    "type": "string"
+                                },
+                                "approver_level": {
+                                    "type": "integer"
+                                },
+                                "status_code": {
+                                    "type": "string"
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "creation_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_update_date": {
+                                    "type": "string"
+                                },
+                                "last_update_login": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostSubmitRequest": {
+                "type": "object",
+                "properties": {
+                    "P_APPR_PROCESS": {
+                        "type": "string"
+                    },
+                    "P_TRX_ID": {
+                        "type": "integer"
+                    },
+                    "P_USER_ID": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "PostUpdateapproveractionRequest": {
+                "type": "object",
+                "properties": {
+                    "P_IDCS_EMAIL_ID": {
+                        "type": "string"
+                    },
+                    "P_IDCS_USER_ID": {
+                        "type": "string"
+                    },
+                    "P_TRANSACTION_ID": {
+                        "type": "string"
+                    },
+                    "P_COMMENTS": {
+                        "type": "string"
+                    },
+                    "P_ACTION": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostUpdateapproveractionResponse": {
+                "type": "object",
+                "properties": {
+                    "P_ERROR_CODE": {
+                        "type": "string"
+                    },
+                    "P_ERROR_MSG": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostUpdateRequest": {
+                "type": "object",
+                "properties": {
+                    "P_ACTION_CODE": {
+                        "type": "string"
+                    },
+                    "P_ACTION_ID": {
+                        "type": "integer"
+                    },
+                    "P_ACTION_USER": {
+                        "type": "string"
+                    },
+                    "P_APPR_LEVEL": {
+                        "type": "string"
+                    },
+                    "P_COMMENTS": {
+                        "type": "string"
+                    },
+                    "P_INSTANCE_NUMBER": {
+                        "type": "string"
+                    },
+                    "P_TRX_ID": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PostUpdateResponse": {
+                "type": "object",
+                "properties": {
+                    "P_ERROR_CODE": {
+                        "type": "string"
+                    },
+                    "P_ERROR_MSG": {
+                        "type": "string"
+                    }
+                }
+            },
+            "GetGetreassignLovIdcs": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "user_id": {
+                                    "type": "integer"
+                                },
+                                "idcs_user_id": {
+                                    "type": "string"
+                                },
+                                "user_name": {
+                                    "type": "string"
+                                },
+                                "person_id": {
+                                    "type": "integer",
+                                    "nullable": true
+                                },
+                                "person_number": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "person_name": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "person_email_id": {
+                                    "type": "string"
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "creation_date": {
+                                    "nullable": true
+                                },
+                                "last_updated_by": {
+                                    "nullable": true
+                                },
+                                "last_update_date": {
+                                    "nullable": true
+                                },
+                                "last_update_login": {
+                                    "nullable": true
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetCurrentlevelApprover": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "transaction_id": {
+                                    "type": "integer"
+                                },
+                                "appr_level": {
+                                    "type": "integer"
+                                },
+                                "approver_email_id": {
+                                    "type": "string"
+                                },
+                                "approver_idcs_id": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostUpdateHistoryRequest": {
+                "type": "object",
+                "properties": {
+                    "P_TRX_ID": {
+                        "type": "string"
+                    },
+                    "P_LEVEL": {
+                        "type": "string"
+                    },
+                    "P_APPR_USER_ID": {
+                        "type": "string"
+                    },
+                    "P_ACTION_ID": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "PostUpdateHistoryResponse": {
+                "type": "object",
+                "properties": {
+                    "P_ERROR_CODE": {
+                        "type": "string"
+                    },
+                    "P_ERROR_MSG": {
+                        "type": "string"
+                    }
+                }
+            },
+            "GetApprovalSelectgroup": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "hierarchy_list_id": {
+                                    "type": "integer"
+                                },
+                                "object_version_num": {
+                                    "type": "integer"
+                                },
+                                "hierarchy_id": {
+                                    "type": "integer"
+                                },
+                                "hierarchy_code": {
+                                    "type": "string"
+                                },
+                                "hierarchy_name": {
+                                    "type": "string"
+                                },
+                                "function_id": {
+                                    "type": "integer"
+                                },
+                                "function_code": {
+                                    "type": "string"
+                                },
+                                "function_name": {
+                                    "type": "string"
+                                },
+                                "category_id": {
+                                    "type": "integer"
+                                },
+                                "category_code": {
+                                    "type": "string"
+                                },
+                                "category_name": {
+                                    "type": "string"
+                                },
+                                "type_id": {
+                                    "type": "integer"
+                                },
+                                "type_code": {
+                                    "type": "string"
+                                },
+                                "type_name": {
+                                    "type": "string"
+                                },
+                                "level_num": {
+                                    "type": "integer"
+                                },
+                                "user_id": {
+                                    "nullable": true
+                                },
+                                "user_name": {
+                                    "nullable": true
+                                },
+                                "person_id": {
+                                    "nullable": true
+                                },
+                                "person_number": {
+                                    "nullable": true
+                                },
+                                "person_name": {
+                                    "nullable": true
+                                },
+                                "user_role_id": {
+                                    "type": "integer"
+                                },
+                                "approval_role_code": {
+                                    "type": "string"
+                                },
+                                "user_role_name": {
+                                    "type": "string"
+                                },
+                                "from_limit": {
+                                    "nullable": true
+                                },
+                                "to_limit": {
+                                    "nullable": true
+                                },
+                                "remarks": {
+                                    "nullable": true
+                                },
+                                "active_flag": {
+                                    "type": "string"
+                                },
+                                "attribute_json": {
+                                    "nullable": true
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "created_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_updated_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_login": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PostCommonApprovalActionHistoryDtlResponse": {
+                "type": "object",
+                "properties": {
+                    "OUT_MESSAGE": {
+                        "type": "string"
+                    },
+                    "OUT_STATUS": {
+                        "type": "string"
+                    },
+                    "P_OUTPUT": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "sno": {
+                                    "type": "integer"
+                                },
+                                "trans_id": {
+                                    "type": "integer"
+                                },
+                                "action_id": {
+                                    "type": "integer"
+                                },
+                                "version_number": {
+                                    "type": "integer"
+                                },
+                                "appr_level": {
+                                    "type": "integer"
+                                },
+                                "category": {
+                                    "type": "string"
+                                },
+                                "approval_role": {
+                                    "type": "string"
+                                },
+                                "status": {
+                                    "type": "string"
+                                },
+                                "last_action_by": {
+                                    "nullable": true
+                                },
+                                "last_action_date": {
+                                    "type": "string"
+                                },
+                                "last_action_comments": {
+                                    "nullable": true
+                                },
+                                "request_submitted_date": {
+                                    "type": "string"
+                                },
+                                "last_update_date": {
+                                    "type": "string"
+                                },
+                                "nested_history": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "approver_name": {
+                                                "nullable": true
+                                            },
+                                            "approval_role": {
+                                                "type": "string"
+                                            },
+                                            "status": {
+                                                "type": "string"
+                                            },
+                                            "action_date": {
+                                                "nullable": true
+                                            },
+                                            "comments": {
+                                                "nullable": true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetTransactionProjectcharterGetbyhdrid": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "project_charter_id": {
+                                    "type": "integer"
+                                },
+                                "object_version_num": {
+                                    "type": "integer"
+                                },
+                                "project_title": {
+                                    "type": "string"
+                                },
+                                "project_id": {
+                                    "type": "integer"
+                                },
+                                "project_charter_name": {
+                                    "type": "string"
+                                },
+                                "project_category": {
+                                    "type": "string"
+                                },
+                                "project_description": {
+                                    "type": "string"
+                                },
+                                "parent_project_charter_id": {
+                                    "type": "integer"
+                                },
+                                "ref_num": {
+                                    "type": "string"
+                                },
+                                "parent_ref_num": {
+                                    "type": "string"
+                                },
+                                "revision": {
+                                    "nullable": true
+                                },
+                                "project_objective": {
+                                    "type": "string"
+                                },
+                                "success_criteria": {
+                                    "type": "string"
+                                },
+                                "project_scope": {
+                                    "nullable": true
+                                },
+                                "strength": {
+                                    "type": "string"
+                                },
+                                "weakness": {
+                                    "type": "string"
+                                },
+                                "opportunities": {
+                                    "type": "string"
+                                },
+                                "threats": {
+                                    "type": "string"
+                                },
+                                "hse_integration_req": {
+                                    "nullable": true
+                                },
+                                "responsibilities": {
+                                    "type": "string"
+                                },
+                                "region_id": {
+                                    "type": "string"
+                                },
+                                "region_code": {
+                                    "type": "string"
+                                },
+                                "region_name": {
+                                    "type": "string"
+                                },
+                                "related_sons": {
+                                    "nullable": true
+                                },
+                                "project_number": {
+                                    "type": "string"
+                                },
+                                "principle_purpose": {
+                                    "nullable": true
+                                },
+                                "other_purpose": {
+                                    "nullable": true
+                                },
+                                "justification": {
+                                    "type": "string"
+                                },
+                                "main_feature": {
+                                    "nullable": true
+                                },
+                                "oper_philosophy": {
+                                    "nullable": true
+                                },
+                                "capex_requirement": {
+                                    "nullable": true
+                                },
+                                "location_pl": {
+                                    "nullable": true
+                                },
+                                "service_req_obj": {
+                                    "nullable": true
+                                },
+                                "overview_project": {
+                                    "nullable": true
+                                },
+                                "project_owner": {
+                                    "type": "string"
+                                },
+                                "execution_director": {
+                                    "type": "string"
+                                },
+                                "design": {
+                                    "nullable": true
+                                },
+                                "construction": {
+                                    "nullable": true
+                                },
+                                "testing_commissioning": {
+                                    "nullable": true
+                                },
+                                "design_date": {
+                                    "type": "string"
+                                },
+                                "construction_date": {
+                                    "type": "string"
+                                },
+                                "testing_commissioning_date": {
+                                    "type": "string"
+                                },
+                                "tender_award": {
+                                    "type": "string"
+                                },
+                                "estimated_capex_cost": {
+                                    "nullable": true
+                                },
+                                "estimated_opex_cost": {
+                                    "nullable": true
+                                },
+                                "procurement_assumption": {
+                                    "type": "string"
+                                },
+                                "operating_principle": {
+                                    "nullable": true
+                                },
+                                "manager_status": {
+                                    "nullable": true
+                                },
+                                "wf_item_type": {
+                                    "nullable": true
+                                },
+                                "wf_item_key": {
+                                    "nullable": true
+                                },
+                                "status_id": {
+                                    "type": "integer"
+                                },
+                                "status_code": {
+                                    "type": "string"
+                                },
+                                "status_name": {
+                                    "type": "string"
+                                },
+                                "approver_id": {
+                                    "type": "integer"
+                                },
+                                "approver_name": {
+                                    "type": "string"
+                                },
+                                "additional_info": {
+                                    "nullable": true
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "created_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_updated_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_login": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetGetactionApprrequestcode": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "approval_instance_num": {
+                                    "type": "string"
+                                },
+                                "action_id": {
+                                    "type": "integer"
+                                },
+                                "appr_request_id": {
+                                    "type": "integer"
+                                },
+                                "transaction_id": {
+                                    "type": "integer"
+                                },
+                                "version_number": {
+                                    "type": "integer"
+                                },
+                                "transaction_num": {
+                                    "type": "string"
+                                },
+                                "approval_category_code": {
+                                    "nullable": true
+                                },
+                                "appr_request_code": {
+                                    "type": "string"
+                                },
+                                "requester_user_id": {
+                                    "type": "string"
+                                },
+                                "requester_email_id": {
+                                    "type": "string"
+                                },
+                                "approver_user_id": {
+                                    "nullable": true
+                                },
+                                "approver_email_id": {
+                                    "type": "string"
+                                },
+                                "approver_level": {
+                                    "nullable": true
+                                },
+                                "status_code": {
+                                    "type": "string"
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "creation_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_update_date": {
+                                    "type": "string"
+                                },
+                                "last_update_login": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetApprovalhistory": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "row_num": {
+                                    "type": "integer"
+                                },
+                                "action_history_id": {
+                                    "type": "integer"
+                                },
+                                "action_id": {
+                                    "type": "integer"
+                                },
+                                "transaction_id": {
+                                    "type": "integer"
+                                },
+                                "transaction_num": {
+                                    "type": "string"
+                                },
+                                "status_code": {
+                                    "type": "string"
+                                },
+                                "version_number": {
+                                    "type": "integer"
+                                },
+                                "appr_hierarchy_id": {
+                                    "type": "integer"
+                                },
+                                "appr_request_code": {
+                                    "type": "string"
+                                },
+                                "appr_request_name": {
+                                    "type": "string"
+                                },
+                                "appr_category_id": {
+                                    "type": "integer"
+                                },
+                                "appr_category_code": {
+                                    "type": "string"
+                                },
+                                "appr_category_name": {
+                                    "type": "string"
+                                },
+                                "appr_type_id": {
+                                    "type": "integer"
+                                },
+                                "appr_type_code": {
+                                    "type": "string"
+                                },
+                                "appr_type_name": {
+                                    "type": "string"
+                                },
+                                "appr_level": {
+                                    "type": "integer"
+                                },
+                                "appr_role_id": {
+                                    "type": "integer"
+                                },
+                                "action_sequence_num": {
+                                    "type": "integer"
+                                },
+                                "requester_user_id": {
+                                    "type": "integer",
+                                    "nullable": true
+                                },
+                                "requester_person_number": {
+                                    "nullable": true
+                                },
+                                "requester_user": {
+                                    "nullable": true
+                                },
+                                "requester_email_disp_name": {
+                                    "nullable": true
+                                },
+                                "requester_email_address": {
+                                    "nullable": true
+                                },
+                                "approver_person_number": {
+                                    "nullable": true
+                                },
+                                "approver_user_name": {
+                                    "nullable": true
+                                },
+                                "response_user_id": {
+                                    "type": "integer"
+                                },
+                                "response_user": {
+                                    "nullable": true
+                                },
+                                "approver_email_id": {
+                                    "type": "string"
+                                },
+                                "action_type_id": {
+                                    "type": "integer"
+                                },
+                                "action_type_code": {
+                                    "type": "string"
+                                },
+                                "action_type": {
+                                    "type": "string"
+                                },
+                                "action_date": {
+                                    "type": "string"
+                                },
+                                "action_comments": {
+                                    "type": "string"
+                                },
+                                "approval_pcs_instance_num": {
+                                    "type": "string"
+                                },
+                                "created_by": {
+                                    "type": "string"
+                                },
+                                "creation_date": {
+                                    "type": "string"
+                                },
+                                "last_updated_by": {
+                                    "type": "string"
+                                },
+                                "last_update_date": {
+                                    "type": "string"
+                                },
+                                "last_update_login": {
+                                    "type": "string"
+                                },
+                                "approval_role_code": {
+                                    "type": "string"
+                                },
+                                "approval_role_name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "hasMore": {
+                        "type": "boolean"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "rel": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

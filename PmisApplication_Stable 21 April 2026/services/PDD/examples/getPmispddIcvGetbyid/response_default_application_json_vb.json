@@ -1,0 +1,41 @@
+{
+    "items": [
+        {
+            "pdd_inc_id": 5210,
+            "object_version_num": 1,
+            "ora_project_id": 1001,
+            "ora_project_number": null,
+            "ora_project_name": null,
+            "tender_id": 2005,
+            "tender_number": null,
+            "tender_name": null,
+            "perc_sme": 10.5,
+            "days_left": 45,
+            "perc_sme_month": 2.5,
+            "additional_info": "Sample additional information text goes here",
+            "created_by": "john.doe@company.com",
+            "created_date": "2026-03-02T15:56:56.027872Z",
+            "last_updated_by": "john.doe@company.com",
+            "last_updated_date": "2026-03-02T15:56:56.027872Z",
+            "last_updated_login": "john.doe@company.com"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/icv/getbyid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/icv/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/icv/getbyid"
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+{
+    "items": [
+        {
+            "lookup_value_id": 614,
+            "lookup_value_code": "H_H",
+            "lookup_value_name": "H H"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol/lookup/pmis/lov/depend/lookupvalue?p_dependent_lookup_type_code=vehicle_code&search_var=h_h"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol/metadata-catalog/lookup/pmis/lov/depend/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol/lookup/pmis/lov/depend/lookupvalue?p_dependent_lookup_type_code=vehicle_code&search_var=h_h"
+        }
+    ]
+}

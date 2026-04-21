@@ -1,0 +1,85 @@
+{
+    "description": "Smart Search Configuration for NWS PMIS Master Plan Project Details",
+    "filters": {
+        "ReferenceNumberFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Reference Number",
+            "options": {
+                "field": "mp_ref_num",
+                "optionsData": "[[ $search.filters.ReferenceNumberFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.ReferenceNumberFilter.options.optionsKeys ]]"
+            },
+            "data": {}
+        },
+        "ProjectNameFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Project Name",
+            "options": {
+                "field": "project_id",
+                "optionsData": "[[ $search.filters.ProjectNameFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.ProjectNameFilter.options.optionsKeys ]]"
+            },
+            "data": {}
+        },
+        "ProjectCategoryFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Category",
+            "options": {
+                "field": "lookup_value_name",
+                "optionsData": "[[ $search.filters.ProjectCategoryFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.ProjectCategoryFilter.options.optionsKeys ]]"
+            },
+            "data": {}
+        },
+        "RegionFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Region",
+            "options": {
+                "field": "lookup_value_code",
+                "optionsData": "[[ $search.filters.RegionFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.RegionFilter.options.optionsKeys ]]"
+            },
+            "data": {}
+        },
+        "LocationFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Location",
+            "options": {
+                "field": "lookup_value_name",
+                "optionsData": "[[ $search.filters.LocationFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.LocationFilter.options.optionsKeys ]]"
+            },
+            "data": {}
+        },
+        "StatusFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Status",
+            "options": {
+                "field": "active_flag",
+                "optionsData": "[[ $search.filters.StatusFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.StatusFilter.options.optionsKeys ]]"
+            },
+            "data": {}
+        },
+        "DateRangeFilter": {
+            "type": "oj-sp/smart-search/default-filters/DateRangeFilter",
+            "label": "Date Range",
+            "options": {
+                "field": "created_date",
+                "startDate": "[[ $page.variables.p_start_date ]]",
+                "endDate": "[[ $page.variables.p_end_date ]]",
+                "value": "",
+                "converter": {
+                    "type": "datetime",
+                    "options": {
+                        "pattern": "dd-MMM-yyyy"
+                    }
+                }
+            },
+            "data": {
+                "start": "[[ $functions.pastDate() ]]",
+                "end": "[[ $functions.todayDate() ]]"
+            }
+        }
+    }
+}

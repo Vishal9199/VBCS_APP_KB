@@ -1,0 +1,381 @@
+{
+  "title": "Project Details Management",
+  "description": "Project Details Add/Edit page with inline editable header table and dialog-based line table entry",
+  "variables": {
+    "rowToEdit": {
+  "type": {
+    "rowKey": "number"
+  }
+},
+    "aToolBar": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Save",
+          "id": "save",
+          "icon": "oj-ux-ico-save"
+        }
+      ]
+    },
+    "getPmispddLovAttributetypeListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PDD/getPmispddLovAttributetype",
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getPmispddLovAttributetypeResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        }
+      }
+    },
+    "pProjectId": {
+      "type": "string"
+    },
+    "projectDetailsVar": {
+      "type": "ProjectDetailsType"
+    },
+    "ADPHeaderTable": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "attributeHdrType",
+        "keyAttributes": "attribute_header_id"
+      }
+    },
+    "bufferDPHeaderTable": {
+      "type": "application:ojs/ojbufferingdataprovider",
+      "constructorParams": [
+        "{{ $variables.ADPHeaderTable }}",
+        null
+      ]
+    },
+    "lvCurrentHeaderRow": {
+      "type": "attributeHdrType"
+    },
+    "lvNextHeaderValue": {
+      "type": "number",
+      "defaultValue": 9999999
+    },
+    "ADPLineTable": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "LineAttributeType",
+        "keyAttributes": "attribute_line_id"
+      }
+    },
+    "lineAttributeVar": {
+      "type": "LineAttributeType"
+    },
+    "pTenderId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "selectedHeaderRowKey": {
+      "type": "any"
+    },
+    "tablecolumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "template": "actionsTemplate",
+          "width": 100,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Description",
+          "field": "activity",
+          "template": "descriptionTemplate",
+          "resizable": "enabled",
+          "width": 200,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Quantity",
+          "field": "quantity",
+          "template": "quantityTemplate",
+          "resizable": "enabled",
+          "width": 150,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Unit Of Measurement",
+          "field": "unit_of_measurement",
+          "template": "unitTemplate",
+          "resizable": "enabled",
+          "width": 180,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Remarks",
+          "field": "activity_remark",
+          "template": "remarksTemplate",
+          "resizable": "enabled",
+          "width": "",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }
+      ]
+    },
+    "tenderid": {
+      "type": "string"
+    }
+
+  },
+  "types": {
+    "@decorators.attributeHdrType": {
+      "endpoint": "getPmispddAttributesGetbytenderid",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getPmispddLovAttributetypeResponse": {
+      "endpoint": "getPmispddLovAttributetype",
+      "service": "PDD",
+      "path": "response"
+    },
+    "attributeHdrType": {
+          "activity": "string",
+          "activity_id": "number",
+          "activity_remark": "string",
+          "additional_info": "string",
+          "attribute_header_id": "number",
+          "created_by": "string",
+          "created_date": "string",
+          "last_updated_by": "string",
+          "last_updated_date": "string",
+          "last_updated_login": "string",
+          "object_version_num": "number",
+          "ora_project_id": "number",
+          "ora_project_name": "string",
+          "ora_project_number": "string",
+          "quantity": "number",
+          "tender_id": "number",
+          "tender_name": "string",
+          "tender_number": "string",
+          "unit_of_measurement": "string"    
+    },
+    "getPmispddLovAttributetypeResponse": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "ProjectDetailsType": {
+      "project_name": "string",
+      "project_number": "string",
+      "tender_number": "string"
+    },
+    "HeaderAttributeType": {
+  "activity_id": "number",
+  "activity_remark": "string",
+  "additional_info": "string",
+  "attribute_header_id": "number",
+  "created_by": "string",
+  "created_date": "string",
+  "last_updated_by": "string",
+  "last_updated_date": "string",
+  "last_updated_login": "string",
+  "object_version_num": "number",
+  "ora_project_id": "number",
+  "quantity": "number",
+  "tender_id": "number",
+  "unit_of_measurement": "string"
+},
+    "LineAttributeType": {
+      "attribute_line_id": "number",
+      "attribute_header_id": "number",
+      "activity_id": "string",
+      "quantity": "number",
+      "unit_of_measurement": "string",
+      "activity_remark": "string"
+    }
+
+  },
+  "eventListeners": {
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "ButtonActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "lineCancelAction": {
+      "chains": [
+        {
+          "chain": "canceldialogaction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "pddattributesSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "closebuttonaction",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "pddattributesSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "secondary_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "selectValueItem": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{ $current.key }}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    },
+    "headerTableBeforeRowEdit": {
+      "chains": [
+        {
+          "chain": "HeaderTableBeforeRowEditChain",
+          "parameters": {
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}"
+          }
+        }
+      ]
+    },
+    "headerTableBeforeRowEditEnd": {
+      "chains": [
+        {
+          "chain": "HeaderTableBeforeRowEditEndChain",
+          "parameters": {
+            "cancelEdit": "{{$event.detail.cancelEdit}}",
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}",
+            "updatedRow": "[[ $variables.lvCurrentHeaderRow ]]"
+          }
+        }
+      ]
+    },
+    "addRowAction": {
+      "chains": [
+        {
+          "chain": "onAddHeaderRow",
+          "parameters": {
+            "event": "{{ $event }}",
+            "originalEvent": "$event.detail.originalEvent"
+          }
+        }
+      ]
+    },
+    "openLineDialogAction": {
+      "chains": [
+        {
+          "chain": "onOpenLineDialog",
+          "parameters": {
+            "headerKey": "{{ $current.key }}"
+          }
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "oj-sp/simple-create-edit/loader"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+
+    },
+    "modules": {},
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  },
+  "metadata": {}
+}

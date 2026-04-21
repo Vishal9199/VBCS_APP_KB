@@ -1,0 +1,31 @@
+{
+  "description": "Smart Search Configuration for Future Project Lists",
+  "filters": {
+    "YearFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Year",
+      "options": {
+        "field": "year",
+        "optionsData": "[[ $page.variables.getYearLovSDP ]]",
+        "optionsKeys": {
+          "label": "display_year",
+          "value": "display_year"
+        }
+      },
+      "data": {}
+    },
+    "PlanTypeFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Plan Type",
+      "options": {
+        "field": "type",
+        "optionsData": "[[ $page.variables.ADPplanType ]]",
+        "optionsKeys": {
+          "label": "label",
+          "value": "value"
+        }
+      },
+      "data": {}
+    }
+  }
+}

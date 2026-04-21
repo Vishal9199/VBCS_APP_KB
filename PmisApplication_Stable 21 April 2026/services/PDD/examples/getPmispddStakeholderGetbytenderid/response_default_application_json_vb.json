@@ -1,0 +1,55 @@
+{
+    "items": [
+        {
+            "stakeholder_id": 3019,
+            "object_version_num": 1,
+            "line_num": 0,
+            "ora_project_id": 300000090427449,
+            "ora_project_number": "789BEN234",
+            "ora_project_name": "VBCS-Feb-10-1",
+            "tender_id": 17002,
+            "tender_number": "NW-RFQ-17002-2026",
+            "tender_name": "Test Tender Name 001",
+            "stakeholder_name": "John Michael Smith",
+            "organization": "ABC Construction Ltd",
+            "contact_details": "john.smith@abcconstruction.com",
+            "current_engagement_id": 3001,
+            "engagement_code": null,
+            "current_engagement": null,
+            "power": 4,
+            "interest": 5,
+            "expectations": "Regular project updates and milestone adherence",
+            "approach_strategy": "Monthly review meetings and weekly email reports",
+            "desired_engagement_id": 3002,
+            "desired_engagement_code": null,
+            "desired_engagement": null,
+            "actions_taken": "Kickoff meeting completed and documentation shared",
+            "action_date": "2025-02-17T00:00:00Z",
+            "status": "ACTIVE",
+            "additional_info": "Stakeholder is highly focused on sustainability initiatives and budget governance.",
+            "created_by": "ADMIN_USER",
+            "created_date": "2026-02-17T13:58:47.202001Z",
+            "last_updated_by": "ADMIN_USER",
+            "last_updated_date": "2026-02-17T13:58:47.202001Z",
+            "last_updated_login": "ADMIN_USER"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/stakeholder/getbytenderid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/stakeholder/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/stakeholder/getbytenderid"
+        }
+    ]
+}

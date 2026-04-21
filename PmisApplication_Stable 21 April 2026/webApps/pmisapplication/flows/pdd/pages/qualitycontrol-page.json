@@ -1,0 +1,659 @@
+{
+  "variables": {
+    "pTenderId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "pType": {
+      "type": "string"
+    },
+    "tempNcrValue": {
+      "type": "number"
+    },
+    "tenderId": {
+      "type": "string"
+    },
+    "period": {
+      "type": "string",
+      "description": "Temporary Value",
+      "defaultValue": "FEB-26"
+    },
+    "projectNumber": {
+      "type": "string"
+    },
+    "projectName": {
+      "type": "string"
+    },
+    "tenderNumber": {
+      "type": "string"
+    },
+    "userName": {
+      "type": "string"
+    },
+    "selectedTab": {
+      "type": "string",
+      "defaultValue": "qualityAssurance"
+    },
+    "progressDialogOpen": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "qualityAssuranceADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "qualityAssuranceType",
+        "keyAttributes": "quality_assurance_id"
+      }
+    },
+    "qualityAssuranceData": {
+      "type": "qualityAssuranceType[]",
+      "defaultValue": []
+    },
+    "qaBufferDP": {
+      "type": "application:ojs/ojbufferingdataprovider",
+      "constructorParams": [
+        "{{ $variables.qualityAssuranceADP }}",
+        null
+      ]
+    },
+    "qaCurrentRow": {
+      "type": "qualityAssuranceType"
+    },
+    "continualImproveADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "keyAttributes": "continual_improve_id",
+        "itemType": "continualImproveType"
+      }
+    },
+    "continualImproveData": {
+      "type": "continualImproveType[]",
+      "defaultValue": []
+    },
+    "ciBufferDP": {
+      "type": "application:ojs/ojbufferingdataprovider",
+      "constructorParams": [
+        "{{ $variables.continualImproveADP }}",
+        null
+      ]
+    },
+    "ciCurrentRow": {
+      "type": "continualImproveType"
+    },
+    "qualityControlADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "keyAttributes": "quality_control_id",
+        "itemType": "qualityControlType"
+      }
+    },
+    "qualityControlData": {
+      "type": "qualityControlType[]",
+      "defaultValue": []
+    },
+    "qcBufferDP": {
+      "type": "application:ojs/ojbufferingdataprovider",
+      "constructorParams": [
+        "{{ $variables.qualityControlADP }}",
+        null
+      ]
+    },
+    "qcCurrentRow": {
+      "type": "qualityControlType"
+    },
+    "disciplineADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "keyAttributes": "discipline_id",
+        "itemType": "disciplineType"
+      }
+    },
+    "disciplineData": {
+      "type": "disciplineType[]",
+      "defaultValue": []
+    },
+    "discBufferDP": {
+      "type": "application:ojs/ojbufferingdataprovider",
+      "constructorParams": [
+        "{{ $variables.disciplineADP }}",
+        null
+      ]
+    },
+    "discCurrentRow": {
+      "type": "disciplineType"
+    },
+    "qaRowToEdit": {
+      "type": {
+        "rowKey": "number"
+      }
+    },
+    "ciRowToEdit": {
+      "type": {
+        "rowKey": "number"
+      }
+    },
+    "qcRowToEdit": {
+      "type": {
+        "rowKey": "number"
+      }
+    },
+    "discRowToEdit": {
+      "type": {
+        "rowKey": "number"
+      }
+    },
+    "about": {
+        "type": "AboutType"
+    }
+
+  },
+  "types": {
+    "qualityAssuranceType": {
+      "quality_assurance_id": "number",
+      "object_version_num": "number",
+      "ora_project_id": "number",
+      "ora_project_number": "string",
+      "ora_project_name": "string",
+      "tender_id": "number",
+      "tender_number": "string",
+      "tender_name": "string",
+      "period": "string",
+      "activity_id": "number",
+      "activity_code": "string",
+      "activity_name": "string",
+      "activity_done_for_month": "string",
+      "activity_total_cumm": "number",
+      "activity_remark": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "continualImproveType": {
+      "continual_improve_id": "number",
+      "object_version_num": "number",
+      "ora_project_id": "number",
+      "ora_project_number": "string",
+      "ora_project_name": "string",
+      "tender_id": "number",
+      "tender_number": "string",
+      "tender_name": "string",
+      "period": "string",
+      "mechanism_type_id": "number",
+      "mechanism_type_code": "string",
+      "mechanism_type": "string",
+      "mechanism_for_month": "string",
+      "mechanism_total_cumm": "number",
+      "mechanism_pending_open": "string",
+      "mechanism_remarks": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "qualityControlType": {
+      "quality_control_id": "number",
+      "object_version_num": "number",
+      "ora_project_id": "number",
+      "ora_project_number": "string",
+      "ora_project_name": "string",
+      "tender_id": "number",
+      "tender_number": "string",
+      "tender_name": "string",
+      "period": "string",
+      "qc_type_id": "number",
+      "quality_control_code": "string",
+      "quality_control": "string",
+      "qc_total_month": "string",
+      "qc_satisfied_month": "string",
+      "qc_failed_month": "string",
+      "qc_total_failed": "number",
+      "qc_total_cumm": "number",
+      "qc_satisfied_cumm": "number",
+      "percent_failure": "number",
+      "failed_reason": "string",
+      "qc_remarks": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "disciplineType": {
+      "discipline_id": "number",
+      "object_version_num": "number",
+      "ora_project_id": "number",
+      "ora_project_number": "string",
+      "ora_project_name": "string",
+      "tender_id": "number",
+      "tender_number": "string",
+      "tender_name": "string",
+      "period": "string",
+      "discipline_type_id": "number",
+      "discipline_type_code": "string",
+      "discipline_type": "string",
+      "disc_total_rfi": "string",
+      "disc_approved_rfi": "string",
+      "disc_rejected_rfi": "string",
+      "disc_total_rfis": "number",
+      "disc_total_rfi_cumm": "number",
+      "disc_approved_rfi_cumm": "number",
+      "percent_rejection": "number",
+      "rejected_reason": "string",
+      "disciplines_rejected_remarks": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "AboutType": {
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    }
+  },
+  "imports": {
+    "components": {
+      "oj-panel": { "path": "ojs/ojpanel" },
+      "oj-form-layout": { "path": "ojs/ojformlayout" },
+      "oj-input-text": { "path": "ojs/ojinputtext" },
+      "oj-input-number": { "path": "ojs/ojinputnumber" },
+      "oj-label": { "path": "ojs/ojlabel" },
+      "oj-sp-advanced-create-edit": { "path": "oj-sp/advanced-create-edit/loader" },
+      "oj-tab-bar": { "path": "ojs/ojnavigationlist" },
+      "oj-switcher": { "path": "ojs/ojswitcher" },
+      "oj-table": { "path": "ojs/ojtable" },
+      "oj-text-area": { "path": "ojs/ojtextarea" },
+      "oj-button": { "path": "ojs/ojbutton" },
+      "oj-toolbar": { "path": "ojs/ojtoolbar" },
+      "oj-dialog": { "path": "ojs/ojdialog" },
+      "oj-progress-bar": { "path": "ojs/ojprogress-bar" },
+      "oj-collapsible": { "path": "ojs/ojcollapsible" },
+      "oj-bind-text": { "path": "ojs/ojbindtext" },
+      "oj-bind-if": { "path": "ojs/ojbindif" }
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  },
+  "constants": {
+    "qualityAssuranceColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        { "headerText": "Actions", "field": "", "template": "qaActionTemplate", "frozenEdge": "start", "sortable": "disabled", "resizable": "disabled", "width": 80, "headerStyle": "white-space: normal;" },
+        { "headerText": "Activity", "field": "activity_name", "template": "activityTemplate", "frozenEdge": "start", "sortable": "disabled", "resizable": "enabled", "width": 250, "headerStyle": "white-space: normal;" },
+        { "headerText": "Done For Month", "field": "activity_done_for_month", "template": "activityDoneForMonthTemplate", "sortable": "disabled", "resizable": "enabled", "width": 150, "headerStyle": "white-space: normal;" },
+        { "headerText": "Total Cumulative", "field": "activity_total_cumm", "template": "activityTotalCummTemplate", "sortable": "disabled", "resizable": "enabled", "width": 150, "headerStyle": "white-space: normal;" },
+        { "headerText": "Remark", "field": "activity_remark", "template": "activityRemarkTemplate", "sortable": "disabled", "resizable": "enabled", "width": "", "headerStyle": "white-space: normal;" }
+      ]
+    },
+    "continualImproveColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        { "headerText": "Actions", "field": "", "template": "ciActionTemplate", "frozenEdge": "start", "sortable": "disabled", "resizable": "disabled", "width": 80, "headerStyle": "white-space: normal;" },
+        { "headerText": "Mechanism Type", "field": "mechanism_type", "template": "mechanismTypeTemplate", "frozenEdge": "start", "sortable": "disabled", "resizable": "enabled", "width": 250, "headerStyle": "white-space: normal;" },
+        { "headerText": "For the Month", "field": "mechanism_for_month", "template": "mechanismForMonthTemplate", "sortable": "disabled", "resizable": "enabled", "width": 130, "headerStyle": "white-space: normal;" },
+        { "headerText": "Total (Cumulative)", "field": "mechanism_total_cumm", "template": "mechanismTotalCummTemplate", "sortable": "disabled", "resizable": "enabled", "width": 150, "headerStyle": "white-space: normal;" },
+        { "headerText": "Pending/Open", "field": "mechanism_pending_open", "template": "mechanismPendingOpenTemplate", "sortable": "disabled", "resizable": "enabled", "width": 130, "headerStyle": "white-space: normal;" },
+        { "headerText": "Closed NCR", "field": "closed_ncr", "template": "closedNcrTemplate", "sortable": "disabled", "resizable": "enabled", "width": 120, "headerStyle": "white-space: normal;" },
+        { "headerText": "Remarks", "field": "mechanism_remarks", "template": "mechanismRemarksTemplate", "sortable": "disabled", "resizable": "enabled", "width": "", "headerStyle": "white-space: normal;" }
+      ]
+    },
+    "qualityControlColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        { "headerText": "Actions", "field": "", "template": "qcActionTemplate", "frozenEdge": "start", "sortable": "disabled", "resizable": "disabled", "width": 80, "headerStyle": "white-space: normal;" },
+        { "headerText": "Type of Tests", "field": "quality_control", "template": "qualityControlTemplate", "frozenEdge": "start", "sortable": "disabled", "resizable": "enabled", "width": 180, "headerStyle": "white-space: normal;" },
+        { "headerText": "Total for the Month", "field": "qc_total_month", "template": "qcTotalMonthTemplate", "sortable": "disabled", "resizable": "enabled", "width": 140, "headerStyle": "white-space: normal;" },
+        { "headerText": "Satisfactory for the Month", "field": "qc_satisfied_month", "template": "qcSatisfiedMonthTemplate", "sortable": "disabled", "resizable": "enabled", "width": 180, "headerStyle": "white-space: normal;" },
+        { "headerText": "Failed for the Month", "field": "qc_failed_month", "template": "qcFailedMonthTemplate", "sortable": "disabled", "resizable": "enabled", "width": 150, "headerStyle": "white-space: normal;" },
+        { "headerText": "Total Cumulative(T)", "field": "qc_total_cumm", "template": "qcTotalCummTemplate", "sortable": "disabled", "resizable": "enabled", "width": 150, "headerStyle": "white-space: normal;" },
+        { "headerText": "Satisfied Cumulative", "field": "qc_satisfied_cumm", "template": "qcSatisfiedCummTemplate", "sortable": "disabled", "resizable": "enabled", "width": 160, "headerStyle": "white-space: normal;" },
+        { "headerText": "Failed Cumulative(F)", "field": "qc_total_failed", "template": "qcTotalFailedTemplate", "sortable": "disabled", "resizable": "enabled", "width": 160, "headerStyle": "white-space: normal;" },
+        { "headerText": "% Failure(F/T)*100%", "field": "percent_failure", "template": "percentFailureTemplate", "sortable": "disabled", "resizable": "enabled", "width": 140, "headerStyle": "white-space: normal;" },
+        { "headerText": "Major Reason for Failed Tests", "field": "failed_reason", "template": "failedReasonTemplate", "sortable": "disabled", "resizable": "enabled", "width": "", "headerStyle": "white-space: normal;" }
+      ]
+    },
+    "disciplineColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        { "headerText": "Actions", "field": "", "template": "discActionTemplate", "frozenEdge": "start", "sortable": "disabled", "resizable": "disabled", "width": 80, "headerStyle": "white-space: normal;" },
+        { "headerText": "Discipline", "field": "discipline_type", "template": "disciplineTypeTemplate", "frozenEdge": "start", "sortable": "disabled", "resizable": "enabled", "width": 150, "headerStyle": "white-space: normal;" },
+        { "headerText": "Total RFI", "field": "disc_total_rfi", "template": "discTotalRfiTemplate", "sortable": "disabled", "resizable": "enabled", "width": 120, "headerStyle": "white-space: normal;" },
+        { "headerText": "Approved RFI", "field": "disc_approved_rfi", "template": "discApprovedRfiTemplate", "sortable": "disabled", "resizable": "enabled", "width": 130, "headerStyle": "white-space: normal;" },
+        { "headerText": "Rejected RFI", "field": "disc_rejected_rfi", "template": "discRejectedRfiTemplate", "sortable": "disabled", "resizable": "enabled", "width": 130, "headerStyle": "white-space: normal;" },
+        { "headerText": "Discipline Total Cumulative (T)", "field": "disc_total_rfi_cumm", "template": "discTotalRfiCummTemplate", "sortable": "disabled", "resizable": "enabled", "width": 200, "headerStyle": "white-space: normal;" },
+        { "headerText": "Approved Discipline Cumulative", "field": "disc_approved_rfi_cumm", "template": "discApprovedRfiCummTemplate", "sortable": "disabled", "resizable": "enabled", "width": 220, "headerStyle": "white-space: normal;" },
+        { "headerText": "Rejected Cumulative (R)", "field": "disc_total_rfis", "template": "discTotalRfisTemplate", "sortable": "disabled", "resizable": "enabled", "width": 180, "headerStyle": "white-space: normal;" },
+        { "headerText": "% Rejection(R/T)*100", "field": "percent_rejection", "template": "percentRejectionTemplate", "sortable": "disabled", "resizable": "enabled", "width": 160, "headerStyle": "white-space: normal;" },
+        { "headerText": "Major Reasons for Rejected RFIs", "field": "rejected_reason", "template": "rejectedReasonTemplate", "sortable": "disabled", "resizable": "enabled", "width": "", "headerStyle": "white-space: normal;" }
+      ]
+    }
+  },
+  "eventListeners": {
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "onDisciplineEdit_Action",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "onQualityControlEdit_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "buttonAction3": {
+      "chains": [
+        {
+          "chain": "onContinualImproveEdit_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "buttonAction4": {
+      "chains": [
+        {
+          "chain": "onQualityAssuranceEdit_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "inputTextValue": {
+      "chains": [
+        {
+          "chain": "InputTextValueChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "inputTextValue2": {
+      "chains": [
+        {
+          "chain": "onCiForMonthChange",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "inputTextValue3": {
+      "chains": [
+        {
+          "chain": "onCiPendingChange",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "inputTextValue4": {
+      "chains": [
+        {
+          "chain": "onQcValueChange_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "qualityControlPageSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "onClosePrimary_AC",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "qualityControlPageSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "secondary_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "qualityControlTabBarSelection": {
+      "chains": [
+        {
+          "chain": "selectedTabListener",
+          "parameters": {
+            "event": "{{ $event }}",
+            "value": "{{ $event.detail.value }}",
+            "selection": "{{ $event.detail.value }}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": { "event": "{{ $event }}" },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        { "chain": "vbEnterListener",
+           "parameters": {}
+     }
+      ]
+    },
+    "addQualityAssuranceBtnAction": {
+      "chains": [ { "chain": "addQualityAssuranceRowsChain" } ]
+    },
+    "addContinualImproveBtnAction": {
+      "chains": [ { "chain": "addContinualImproveRowsChain" } ]
+    },
+    "addQualityControlBtnAction": {
+      "chains": [ { "chain": "addQualityControlRowsChain" } ]
+    },
+    "addDisciplineBtnAction": {
+      "chains": [ { "chain": "addDisciplineRowsChain" } ]
+    },
+    "saveQualityAssuranceBtnAction": {
+      "chains": [ { "chain": "saveQualityAssuranceChain" } ]
+    },
+    "saveContinualImproveBtnAction": {
+      "chains": [ { "chain": "saveContinualImproveChain" } ]
+    },
+    "saveQualityControlBtnAction": {
+      "chains": [ { "chain": "saveQualityControlChain" } ]
+    },
+    "saveDisciplineBtnAction": {
+      "chains": [ { "chain": "saveDisciplineChain" } ]
+    },
+    "qaTableBeforeRowEdit": {
+      "chains": [
+        {
+          "parameters": {
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}"
+          },
+          "chain": "qaBeforeRowEditChain"
+        }
+      ]
+    },
+    "qaTableBeforeRowEditEnd": {
+      "chains": [
+        {
+          "parameters": {
+            "cancelEdit": "{{ $event.detail.cancelEdit }}",
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}",
+            "updatedRow": "[[ $variables.qaCurrentRow ]]"
+          },
+          "chain": "qaBeforeRowEditEndChain"
+        }
+      ]
+    },
+    "ciTableBeforeRowEdit": {
+      "chains": [
+        {
+          "parameters": {
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}"
+          },
+          "chain": "ciBeforeRowEditChain"
+        }
+      ]
+    },
+    "ciTableBeforeRowEditEnd": {
+      "chains": [
+        {
+          "parameters": {
+           "cancelEdit": "{{$event.detail.cancelEdit}}",
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}",
+            "updatedRow": "[[ $variables.ciCurrentRow ]]"
+          },
+          "chain": "ciBeforeRowEditEndChain"
+        }
+      ]
+    },
+    "qcTableBeforeRowEdit": {
+      "chains": [
+        {
+          "parameters": {
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}"
+          },
+          "chain": "qcBeforeRowEditChain"
+        }
+      ]
+    },
+    "qcTableBeforeRowEditEnd": {
+      "chains": [
+        {
+          "parameters": {
+            "cancelEdit": "{{$event.detail.cancelEdit}}",
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}",
+            "updatedRow": "[[ $variables.qcCurrentRow ]]"
+          },
+          "chain": "qcBeforeRowEditEndChain"
+        }
+      ]
+    },
+    "discTableBeforeRowEdit": {
+      "chains": [
+        {
+          "parameters": {
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}"
+          },
+          "chain": "discBeforeRowEditChain"
+        }
+      ]
+    },
+    "discTableBeforeRowEditEnd": {
+      "chains": [
+        {
+          "parameters": {
+            "cancelEdit": "{{$event.detail.cancelEdit}}",
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}",
+            "updatedRow": "[[ $variables.discCurrentRow ]]"
+          },
+          "chain": "discBeforeRowEditEndChain"
+        }
+      ]
+    },
+    "onDiscValueChange": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          },
+          "chain": "onDiscValueChange_AC"
+        }
+      ]
+    }
+
+  }
+}

@@ -1,0 +1,56 @@
+{
+    "items": [
+        {
+            "change_request_id": 3413,
+            "object_version_num": 1,
+            "ora_project_id": 300000090427449,
+            "ora_project_number": "789BEN234",
+            "ora_project_name": "VBCS-Feb-10-1",
+            "tender_id": 17002,
+            "tender_number": "NW-RFQ-17002-2026",
+            "tender_name": "Test Tender Name 001",
+            "cr_number": "CR-3413",
+            "title": "Extension of Project Completion Timeline",
+            "initiator": "John Doe",
+            "position": "Project Manager",
+            "department_id": 6810,
+            "department": "Operations Directorate",
+            "cr_date": "2026-02-19T00:00:00Z",
+            "time_impact": "Extension of 30 days",
+            "cost_impact": 150000,
+            "time_frame": "March 2026 - April 2026",
+            "description": "Requesting an extension due to unforeseen site conditions and delayed material delivery.",
+            "relation_to_original_scope": "Impacts overall project schedule but does not alter scope of work.",
+            "importance_and_justification": "Necessary to ensure quality completion and avoid contractual penalties.",
+            "wf_item_type": "CR_APPROVAL_WF",
+            "wf_item_key": "CR1001",
+            "status_id": 26,
+            "status_code": "DRA",
+            "status_name": "Draft",
+            "additional_info": "Supporting documents attached including revised Gantt chart and supplier correspondence.",
+            "created_by": "SYSTEM",
+            "created_date": "2026-02-19T11:01:42.196965Z",
+            "last_updated_by": "SYSTEM",
+            "last_updated_date": "2026-02-19T11:01:42.196965Z",
+            "last_updated_login": "SYSTEM_LOGIN"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/changecontrol/lov/cr"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/changecontrol/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/changecontrol/lov/cr"
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+{
+    "items": [
+        {
+            "value": "BGT-5432",
+            "label": "Auto Generation Test 003 (BGT-5432)"
+        },
+        {
+            "value": "BGT-9090",
+            "label": "Hello World Updated Now (BGT-9090)"
+        },
+        {
+            "value": "BGT-2210",
+            "label": "Initial phase covering regional maintenance. (BGT-2210)"
+        },
+        {
+            "value": "BGT-9910",
+            "label": "Initial phase covering regional maintenance. (BGT-9910)"
+        },
+        {
+            "value": "BGT-1234",
+            "label": "Project Introduction 001 Update With New Object Version Number (BGT-1234)"
+        },
+        {
+            "value": "BGT-2317",
+            "label": "Retail Service\n\nUPDATE TEST (BGT-2317)"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 6,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/lov/servicespec/common"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/lov/servicespec/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/lov/servicespec/common"
+        }
+    ]
+}

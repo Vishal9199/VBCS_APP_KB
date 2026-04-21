@@ -1,0 +1,371 @@
+{
+
+  "title": "Approval History",
+  "description": "",
+  "variables": {
+     "approvalHistoryADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "ApprovalHistoryType",
+        "keyAttributes": "id"
+      }
+    },
+    "allRowsData": {
+      "type": "ApprovalHistoryType[]",
+      "defaultValue": []
+    },
+    "encPayload": {
+      "type": {
+        "payload": "string"
+      }
+    },
+    "expandedRows": {
+      "type": "object",
+      "defaultValue": {}
+    },
+    "inputSearchVar": {
+      "type": "string",
+      "defaultValue": ""
+    },
+    "adpSearch": {
+      "type": "vb/ArrayDataProvider2"
+    },
+    "lv_appr_request_code": {
+      "type": "string",
+      "input": "fromUrl",
+      "required": true
+    },
+    "lv_title": {
+      "type": "string",
+      "input": "fromUrl",
+      "defaultValue": "Details",
+      "required": true
+    },
+    "lv_transaction_id": {
+      "type": "string",
+      "input": "fromUrl",
+      "required": true,
+      "defaultValue": "SaO7Ezy6xuJf-TS9M7xVBzhZaYO-OOe_OS0-46BJabhCFbmGbSAefs_VWTjhkP_o"
+    },
+    "postCommonApprovalActionHistoryListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "ApprovalHistory/postCommonApprovalActionHistory",
+        "keyAttributes": "action_history_id",
+        "itemsPath": "P_OUTPUT",
+        "responseType": "postCommonApprovalActionHistoryResponse"
+      }
+    },
+    "searchObj": {
+      "type": {
+        "IN_LIMIT": "string",
+        "IN_OFFSET": "string",
+        "P_APPR_REQUEST_CODE": "string",
+        "P_TRANSACTION_ID": "string"
+      },
+      "defaultValue": {
+        "IN_LIMIT": "15",
+        "IN_OFFSET": "0"
+      }
+    },
+    "vHasMoreRecords": {
+      "type": "boolean",
+      "defaultValue": false
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.postCommonApprovalActionHistoryDtl2": {
+      "endpoint": "postCommonApprovalActionHistoryDtl2",
+      "service": "ApprovalHistory",
+      "path": "response"
+    },
+    "@decorators.postCommonApprovalActionHistoryResponse": {
+      "endpoint": "postCommonApprovalActionHistory",
+      "service": "ApprovalHistory",
+      "path": "response"
+    },
+    "ApprovalHistoryType": {
+      "approval_role": "string",
+      "id": "string",
+      "version_number": "number",
+      "appr_level": "number",
+      "category": "string",
+      "status": "string",
+      "last_action_by": "string",
+      "last_action_date": "string",
+      "last_action_comments": "string",
+      "request_submitted_date": "string",
+      "isParent": "boolean",
+      "isChild": "boolean",
+      "parentId": "string",
+      "level": "number",
+      "approver_name": "string",
+      "action_date": "string",
+      "comments": "string",
+      "hasChildren": "boolean",
+      "childCount": "number"
+
+    },
+    "postCommonApprovalActionHistoryDtl2": {
+      "P_OUTPUT": [
+        {
+          "action_id": "number",
+          "appr_level": "number",
+          "category": "string",
+          "last_action_by": "string",
+          "last_action_comments": "string",
+          "last_action_date": "string",
+          "last_update_date": "string",
+          "nested_history": [
+            {
+              "action_date": "any",
+              "approver_name": "string",
+              "comments": "any",
+              "status": "string"
+            }
+          ],
+          "request_submitted_date": "string",
+          "sno": "number",
+          "status": "string",
+          "trans_id": "number",
+          "version_number": "number"
+        }
+      ]
+    },
+    "postCommonApprovalActionHistoryResponse": {
+      "P_OUTPUT": [
+        {
+          "action_comments": "string",
+          "action_date": "string",
+          "action_history_id": "number",
+          "action_id": "number",
+          "action_sequence_num": "number",
+          "action_type": "string",
+          "action_type_code": "string",
+          "action_type_id": "number",
+          "appr_category_code": "string",
+          "appr_category_id": "number",
+          "appr_category_name": "string",
+          "appr_hierarchy_id": "number",
+          "appr_level": "number",
+          "appr_request_code": "string",
+          "appr_request_name": "string",
+          "appr_type_code": "string",
+          "appr_type_id": "number",
+          "appr_type_name": "string",
+          "approval_pcs_instance_num": "string",
+          "approver_email_id": "string",
+          "approver_user_name": "string",
+          "created_by": "string",
+          "creation_date": "string",
+          "last_update_date": "string",
+          "last_update_login": "string",
+          "last_updated_by": "string",
+          "requester_email_address": "string",
+          "requester_email_disp_name": "string",
+          "requester_user": "string",
+          "requester_user_id": "number",
+          "response_user": "string",
+          "response_user_id": "number",
+          "status_code": "string",
+          "transaction_id": "number",
+          "transaction_num": "string"
+        }
+      ]
+    }
+
+  },
+  "chains": {},
+  "eventListeners": {
+    "expandRowAction": {
+    "chains": [
+      {
+        "chain": "toggleRowExpansion",
+        "parameters": {
+          "parentId": "{{ $current.row.id }}"
+        }
+      }
+    ]
+  },
+    "approvalHistorySpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "SmartSearchPageTemplateSpPrimaryActionChain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "approvalHistorySpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "SmartSearchPageTemplateSpSecondaryActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "nxtBtnAction": {
+      "chains": [
+        {
+          "chain": "onClickNextBtn",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "preBtnAction": {
+      "chains": [
+        {
+          "chain": "onClickPreviousBtn",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-date-time": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      }
+
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/redwood-overrides.css"
+    ]
+  },
+  "constants": {
+    "tableConstVar": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "",
+          "field": "",
+          "resizable": "disabled",
+          "frozenEdge": "start",
+          "width": 50,
+          "template": "expand_template",
+          "headerStyle": "white-space: nowrap; text-align: center;",
+          "style": "text-align: center;"
+        },
+        {
+          "headerText": "Version",
+          "field": "version_number",
+          "resizable": "enabled",
+          "width": 70,
+          "template": "version_template",
+          "headerStyle": "white-space: nowrap;",
+          "style": ""
+        },
+        {
+          "headerText": "Level",
+          "field": "appr_level",
+          "resizable": "enabled",
+          "width": 65,
+          "template": "level_template",
+          "headerStyle": "white-space: nowrap;",
+          "style": ""
+        },
+        {
+          "headerText": "Category",
+          "field": "category",
+          "resizable": "enabled",
+          "width": 120,
+          "template": "category_template",
+          "headerStyle": "white-space: nowrap;",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "status",
+          "resizable": "enabled",
+          "width": 150,
+          "template": "status_template",
+          "headerStyle": "white-space: nowrap;",
+          "style": ""
+        },
+        {
+          "headerText": "Approver Role",
+          "field": "approval_role",
+          "resizable": "enabled",
+          "width": 250,
+          "template": "approver_role_template",
+          "headerStyle": "white-space: nowrap;",
+          "style": ""
+        },
+        {
+          "headerText": "Approver / Action By",
+          "field": "last_action_by",
+          "resizable": "enabled",
+          "width": 400,
+          "template": "approver_template",
+          "headerStyle": "white-space: nowrap;",
+          "style": ""
+        },
+        {
+          "headerText": "Action Date",
+          "field": "last_action_date",
+          "resizable": "enabled",
+          "width": 210,
+          "template": "action_date_template",
+          "headerStyle": "white-space: nowrap;",
+          "style": ""
+        },
+        {
+          "headerText": "Comments",
+          "field": "last_action_comments",
+          "resizable": "enabled",
+          "width": 400,
+          "template": "comments_template",
+          "headerStyle": "white-space: nowrap;",
+          "style": ""
+        }
+      ]
+    }
+  }
+}

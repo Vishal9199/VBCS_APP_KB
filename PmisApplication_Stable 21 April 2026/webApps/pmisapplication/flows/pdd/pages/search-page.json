@@ -1,0 +1,688 @@
+{
+  "title": "Project Assignment Smart Search",
+  "description": "Smart Search page for Project Assignment with encrypted payload, 8 LOV filters, and comprehensive table display",
+  "variables": {
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "TenderNameFilter": {
+              "label": "Tender Name",
+              "options": {
+                "optionsData": "[[ $page.variables.getTenderNameLovSDP ]]",
+                "optionsKeys": {
+                  "label": "name",
+                  "value": "id"
+                }
+              }
+            },
+            "TenderNumberFilter": {
+              "label": "Tender Number",
+              "options": {
+                "optionsData": "[[ $page.variables.getTenderNumberLovSDP ]]",
+                "optionsKeys": {
+                  "label": "code",
+                  "value": "id"
+                }
+              }
+            },
+            "ProjectNameFilter": {
+              "label": "Project Name",
+              "options": {
+                "optionsData": "[[ $page.variables.getProjectNameLovSDP ]]",
+                "optionsKeys": {
+                  "label": "name",
+                  "value": "id"
+                }
+              }
+            },
+            "ProjectNumberFilter": {
+              "label": "Project Number",
+              "options": {
+                "optionsData": "[[ $page.variables.getProjectNumberLovSDP ]]",
+                "optionsKeys": {
+                  "label": "code",
+                  "value": "id"
+                }
+              }
+            },
+            "GeneralManagerFilter": {
+              "label": "General Manager",
+              "options": {
+                "optionsData": "[[ $page.variables.getGeneralManagerLovSDP ]]",
+                "optionsKeys": {
+                  "label": "person_full_name",
+                  "value": "user_id"
+                }
+              }
+            },
+            "ProjectManagerFilter": {
+              "label": "Project Manager",
+              "options": {
+                "optionsData": "[[ $page.variables.getProjectManagerLovSDP ]]",
+                "optionsKeys": {
+                  "label": "person_full_name",
+                  "value": "user_id"
+                }
+              }
+            },
+            "RegionFilter": {
+              "label": "Region",
+              "options": {
+                "optionsData": "[[ $page.variables.getRegionLovSDP ]]",
+                "optionsKeys": {
+                  "label": "region_name",
+                  "value": "region_name"
+                }
+              }
+            },
+            "StatusFilter": {
+              "label": "Status",
+              "options": {
+                "optionsData": "[[ $page.variables.getStatusLovSDP ]]",
+                "optionsKeys": {
+                  "label": "status_name",
+                  "value": "status_code"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/pddsearchconfig.json' ]]"
+      }
+    },
+    "getTenderNameLovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getTenderNameSearchLovCommon",
+        "itemsPath": "items",
+        "headers": {
+          "x-session-code": "TENDER"
+        },
+        "fetchChain": "getPmispddSearchLovCommonFetch3",
+        "keyAttributes": "id"
+
+      }
+    },
+    "getTenderNumberLovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getTenderNumberSearchLovCommon",
+        "itemsPath": "items",
+        "headers": {
+          "x-session-code": "TENDER"
+        },
+        "fetchChain": "getPmispddSearchLovCommonFetch4",
+        "keyAttributes": "id"
+
+      }
+    },
+    "getProjectNameLovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getPmispddSearchLovCommon",
+        "itemsPath": "items",
+        "headers": {
+          "x-session-code": "PROJECT"
+        },
+        "fetchChain": "getPmispddSearchLovCommonFetch",
+        "keyAttributes": "id"
+
+      }
+    },
+    "getProjectNumberLovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getProjectNumberSearchLovCommon",
+        "itemsPath": "items",
+        "fetchChain": "getPmispddSearchLovCommonFetch2",
+        "keyAttributes": "id"
+
+      }
+    },
+    "getGeneralManagerLovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getPmispamLovUsers",
+        "itemsPath": "items",
+        "keyAttributes": "user_id",
+        "fetchChain": "getPmispamLovUsersFetch"
+      }
+    },
+    "getProjectManagerLovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "itemsPath": "items",
+        "responseType": "getPmispamLovUsers",
+        "keyAttributes": "user_id",
+        "fetchChain": "getProjectManagerLovFetch"
+      }
+    },
+    "getRegionLovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getPmispddSearchLovRegion",
+        "itemsPath": "items",
+        "keyAttributes": "region_name",
+        "fetchChain": "getPmispddSearchLovRegionFetch"
+      }
+    },
+    "getStatusLovSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "ProjectAssignmentService/getStatusLov",
+        "keyAttributes": "status_code",
+        "itemsPath": "items",
+        "responseType": "getStatusLovResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "status_name"
+          ]
+        }
+      }
+    },
+    "searchObj": {
+      "type": {
+        "in_limit": "string",
+        "in_offset": "string",
+        "p_keyword": "string",
+        "p_tender_id": "string",
+        "p_tender_number": "string",
+        "p_tender_name": "string",
+        "p_project_id": "string",
+        "p_project_number": "string",
+        "p_project_name": "string",
+        "p_general_manager_id": "string",
+        "p_general_manager_name": "string",
+        "p_proj_mgr_user_id": "string",
+        "p_proj_mgr_name": "string",
+        "p_region_code": "string",
+        "p_status_code": "string"
+      },
+      "defaultValue": {
+        "in_limit": "10",
+        "in_offset": "0",
+        "p_keyword": "",
+        "p_tender_id": "",
+        "p_tender_number": "",
+        "p_tender_name": "",
+        "p_project_id": "",
+        "p_project_number": "",
+        "p_project_name": "",
+        "p_general_manager_id": "",
+        "p_general_manager_name": "",
+        "p_proj_mgr_user_id": "",
+        "p_proj_mgr_name": "",
+        "p_region_code": "",
+        "p_status_code": ""
+      }
+    },
+    "projectAssignmentADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "ProjectAssignmentType",
+        "keyAttributes": "project_assignment_id"
+      }
+    },
+    "paginationText": {
+      "type": "string",
+      "defaultValue": "Showing 0 to 0 of 0 records"
+    },
+    "currentPage": {
+      "type": "number",
+      "defaultValue": 1
+    },
+    "showNavigationMenu": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "totalRecords": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "hasNextPage": {
+      "type": "string",
+      "defaultValue": "N"
+    },
+    "isSearching": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "Loading indicator for search operations"
+    },
+    "isPrevDisabled": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "Disable state for Previous button"
+    },
+    "isNextDisabled": {
+      "type": "boolean",
+      "defaultValue": true,
+      "description": "Disable state for Next button"
+    },
+    "selectedRowData": {
+      "type": "ProjectAssignmentType",
+      "description": "Stores currently selected row for edit/delete operations"
+    },
+    "encryptionKey": {
+      "type": "string",
+      "defaultValue": "YOUR_ENCRYPTION_KEY_HERE",
+      "description": "Encryption key for payload security"
+    },
+    "encryptedPayload": {
+      "type": "string",
+      "defaultValue": "",
+      "description": "Temporary storage for encrypted payload"
+    },
+    "searchResponse": {
+      "type": {
+        "out_status": "string",
+        "out_description": "string",
+        "out_has_next": "string",
+        "out_total_count": "number",
+        "out_count": "number",
+        "p_output": "any"
+      },
+      "description": "Raw response from search endpoint"
+    },
+    "pagination": {
+      "type": "object",
+      "defaultValue": {
+        "is_next": false,
+        "is_prev": true
+      }
+    },
+    "paginationDisplay": {
+      "type": "string",
+      "defaultValue": "0 - 0 of 0 items"
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getPmispamLovUsers": {
+      "endpoint": "getPmispamLovUsers",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispddSearchLovCommon": {
+      "endpoint": "getPmispddSearchLovCommon",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getPmispddSearchLovRegion": {
+      "endpoint": "getPmispddSearchLovRegion",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getProjectNumberSearchLovCommon": {
+      "endpoint": "getPmispddSearchLovCommon",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getTenderNameLovResponse": {
+      "endpoint": "getTenderNameLov",
+      "service": "ProjectAssignmentService",
+      "path": "response"
+    },
+    "@decorators.getTenderNameSearchLovCommon": {
+      "endpoint": "getPmispddSearchLovCommon",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getTenderNumberLovResponse": {
+      "endpoint": "getTenderNumberLov",
+      "service": "ProjectAssignmentService",
+      "path": "response"
+    },
+    "@decorators.getProjectNameLovResponse": {
+      "endpoint": "getProjectNameLov",
+      "service": "ProjectAssignmentService",
+      "path": "response"
+    },
+    "@decorators.getProjectNumberLovResponse": {
+      "endpoint": "getProjectNumberLov",
+      "service": "ProjectAssignmentService",
+      "path": "response"
+    },
+    "@decorators.getGeneralManagerLovResponse": {
+      "endpoint": "getGeneralManagerLov",
+      "service": "ProjectAssignmentService",
+      "path": "response"
+    },
+    "@decorators.getProjectManagerLovResponse": {
+      "endpoint": "getProjectManagerLov",
+      "service": "ProjectAssignmentService",
+      "path": "response"
+    },
+    "@decorators.getRegionLovResponse": {
+      "endpoint": "getRegionLov",
+      "service": "ProjectAssignmentService",
+      "path": "response"
+    },
+    "@decorators.getStatusLovResponse": {
+      "endpoint": "getStatusLov",
+      "service": "ProjectAssignmentService",
+      "path": "response"
+    },
+    "@decorators.getTenderNumberSearchLovCommon": {
+      "endpoint": "getPmispddSearchLovCommon",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.postPmispddSearchDtl": {
+      "endpoint": "postPmispddSearchDtl",
+      "service": "PDD",
+      "path": "response"
+    },
+    "getPmispamLovUsers": {
+      "items": [
+        {
+          "business_group_id": "number",
+          "email_address": "string",
+          "person_full_name": "string",
+          "person_id": "number",
+          "person_name": "string",
+          "person_number": "string",
+          "user_guid": "string",
+          "user_id": "number",
+          "user_name": "string"
+        }
+      ]
+    },
+    "getPmispddSearchLovCommon": {
+      "items": [
+        {
+          "code": "string",
+          "id": "number",
+          "name": "string"
+        }
+      ]
+    },
+    "getPmispddSearchLovRegion": {
+      "items": [
+        {
+          "region_name": "string"
+        }
+      ]
+    },
+    "getProjectNumberSearchLovCommon": {
+      "items": [
+        {
+          "code": "string",
+          "id": "number",
+          "name": "string"
+        }
+      ]
+    },
+    "getTenderNameLovResponse": {
+      "items": [
+        {
+          "tender_id": "number",
+          "tender_name": "string"
+        }
+      ]
+    },
+    "getTenderNameSearchLovCommon": {
+      "items": [
+        {
+          "code": "string",
+          "id": "number",
+          "name": "string"
+        }
+      ]
+    },
+    "getTenderNumberLovResponse": {
+      "items": [
+        {
+          "tender_id": "number",
+          "tender_number": "string"
+        }
+      ]
+    },
+    "getProjectNameLovResponse": {
+      "items": [
+        {
+          "project_id": "number",
+          "project_name": "string"
+        }
+      ]
+    },
+    "getProjectNumberLovResponse": {
+      "items": [
+        {
+          "project_id": "number",
+          "project_number": "string"
+        }
+      ]
+    },
+    "getGeneralManagerLovResponse": {
+      "items": [
+        {
+          "general_manager_id": "number",
+          "general_manager_name": "string"
+        }
+      ]
+    },
+    "getProjectManagerLovResponse": {
+      "items": [
+        {
+          "proj_mgr_user_id": "number",
+          "project_manager_name": "string"
+        }
+      ]
+    },
+    "getRegionLovResponse": {
+      "items": [
+        {
+          "region_code": "string",
+          "region_name": "string"
+        }
+      ]
+    },
+    "getStatusLovResponse": {
+      "items": [
+        {
+          "status_code": "string",
+          "status_name": "string"
+        }
+      ]
+    },
+    "getTenderNumberSearchLovCommon": {
+      "items": [
+        {
+          "code": "string",
+          "id": "number",
+          "name": "string"
+        }
+      ]
+    },
+    "ProjectAssignmentType": {
+      "additional_info": "any",
+      "comments": "any",
+      "created_by": "string",
+      "created_date": "string",
+      "focal_point": "string",
+      "focal_point_user_id": "number",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "line_num": "number",
+      "object_version_num": "number",
+      "ora_project_id": "number",
+      "ora_project_name": "string",
+      "ora_project_number": "string",
+      "po_number": "string",
+      "pr_number": "string",
+      "proj_engg_user_id": "number",
+      "proj_mgr_user_id": "number",
+      "project_assignment_id": "number",
+      "project_engineer_name": "string",
+      "project_id": "number",
+      "project_manager_name": "string",
+      "project_name": "string",
+      "project_number": "string",
+      "region_name": "string",
+      "senior_manager_name": "string",
+      "senior_mgr_user_id": "number",
+      "supplier_id": "number",
+      "supplier_name": "string",
+      "tender_id": "number",
+      "tender_name": "string",
+      "tender_number": "string",
+      "tender_type": "string"
+
+    }
+
+  },
+  "constants": {
+    "tableColumns": {
+      "type": "object[]",
+      "defaultValue": "[[ [\n    {\n        \"headerText\": \"Project Number\",\n        \"field\": \"ora_project_number\",\n        \"frozenEdge\": \"start\",\n        \"resizable\": \"enabled\",\n        \"width\": 200,\n        \"template\": \"project_number_template\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 200px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Project Name\",\n        \"field\": \"ora_project_name\",\n        \"frozenEdge\": \"start\",\n        \"resizable\": \"enabled\",\n        \"width\": 200,\n        \"template\": \"project_name_template\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 200px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Tender Number\",\n        \"field\": \"tender_number\",\n        \"frozenEdge\": \"start\",\n        \"resizable\": \"enabled\",\n        \"width\": 160,\n        \"template\": \"tender_number_template\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Tender Name\",\n        \"field\": \"tender_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 160,\n        \"template\": \"tender_name_template\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 160px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Tender Type\",\n        \"field\": \"tender_type\",\n        \"resizable\": \"enabled\",\n        \"width\": 180,\n        \"template\": \"tender_type_template\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Region\",\n        \"field\": \"region_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 180,\n        \"template\": \"region_template\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"General Manager\",\n        \"field\": \"senior_manager_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 180,\n        \"template\": \"senior_manager_template\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\",\n        \"style\": \"\"\n    },\n    {\n        \"headerText\": \"Project Manager\",\n        \"field\": \"project_manager_name\",\n        \"resizable\": \"enabled\",\n        \"width\": 180,\n        \"template\": \"project_manager_template\",\n        \"headerStyle\": \"white-space: nowrap; min-width: 180px;\",\n        \"style\": \"\"\n    }\n] ]]"    }
+  },
+  "eventListeners": {
+    "hyperlinkClick": {
+      "chains": [
+        {
+          "chain": "navigateToGeneral_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "resetAction"
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "refreshAction"
+        }
+      ]
+    },
+    "exportBtnAction": {
+      "chains": [
+        {
+          "chain": "exportAction"
+        }
+      ]
+    },
+    "preBtnAction": {
+      "chains": [
+        {
+          "chain": "prevPageAction"
+        }
+      ]
+    },
+    "nxtBtnAction": {
+      "chains": [
+        {
+          "chain": "nextPageAction"
+        }
+      ]
+    },
+    "hyperlinkAction": {
+      "chains": [
+        {
+          "chain": "hyperlinkAction",
+          "parameters": {
+            "rowData": "{{ $current.row }}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      },
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-toolbar": {
+        "path": "ojs/ojtoolbar"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      }
+
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    }
+  }
+}

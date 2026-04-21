@@ -1,0 +1,202 @@
+<style>
+  #project-desc .oj-text-field-container,
+  #scope-of-work .oj-text-field-container
+  {
+    min-height: 6rem !important;
+  }
+</style>
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div>
+        <oj-sp-advanced-create-edit id="pddgeneral" page-title="General Information" page-subtitle=" "
+          display-options.responsive-padding="on" primary-action.label="Close"
+          secondary-actions='[{"label":"Save","id":"save","icon":"oj-ux-ico-save"}]'
+          display-mode="light" on-sp-primary-action="[[$listeners.pddgeneralSpPrimaryAction]]"
+          on-sp-secondary-action="[[$listeners.pddgeneralSpSecondaryAction]]">
+
+          <div slot="main" style="padding-top: 0; margin-top: 0;">
+            <div style="margin-top: 0;">
+
+              <!-- Main Form Section - General Information -->
+              <oj-collapsible id="general-info-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+                style="margin-top: 0;" disabled="true">
+                <span slot="header" style="font-weight: bold; color: white;">
+                  <span style="margin-right: 0.5rem;"></span>
+                  General Information
+                </span>
+                <div style="padding: 0.25rem;">
+                  <oj-form-layout max-columns="3" label-edge="start" label-width="40%" colspan-wrap="wrap"
+                    user-assistance-density="compact" class="oj-formlayout-full-width">
+
+                    <!-- Row 1: Tender Number, Tender Name, Phase Contract Name (LOV) -->
+                    <oj-input-text id="tender-number" label-hint="Tender Number" placeholder="Enter Tender Number"
+                      value="{{ $variables.generalInfoVar.tender_number }}" style="width: 16rem;" disabled="true">
+                    </oj-input-text>
+                    
+                    <oj-input-text id="tender-name" label-hint="Tender Name" placeholder="Enter Tender Name"
+                      value="{{ $variables.generalInfoVar.tender_name }}" style="width: 16rem;" disabled="true">
+                    </oj-input-text>
+
+                    <oj-select-single id="phase-contract" label-hint="Phase Contract Name" placeholder="Select Phase Contract"
+                      value="{{ $variables.generalInfoVar.phase_of_contract_id }}" data="{{ $variables.phaseContractLOV }}"
+                      style="width: 16rem;" item-text="lookup_value_name">
+                    </oj-select-single>
+
+                    <!-- Row 2: Project Number, Project Name, Status (LOV) -->
+                    <oj-input-text id="project-number" label-hint="Project Number" placeholder="Enter Project Number"
+                      value="{{ $variables.generalInfoVar.ora_project_number }}" style="width: 16rem;" disabled="true">
+                    </oj-input-text>
+                    
+                    <oj-input-text id="project-name" label-hint="Project Name" placeholder="Enter Project Name"
+                      value="{{ $variables.generalInfoVar.ora_project_name }}" style="width: 16rem;" disabled="true">
+                    </oj-input-text>
+
+                    <oj-select-single id="status" label-hint="Status" placeholder="Select Status"
+                      value="{{ $variables.generalInfoVar.status_id }}" data="{{ $variables.statusLOV }}" style="width: 16rem;"
+                      item-text="lookup_value_name">
+                    </oj-select-single>
+
+                    <!-- Row 3: Contractor/Supervisor Name, Last Updated On, Department/Section (LOV) -->
+                    <oj-input-text id="contractor-name" label-hint="Contractor/Supervisor Name" placeholder="Contractor/Supervisor Name"
+                      value="{{ $variables.generalInfoVar.supplier_name }}" style="width: 16rem;" disabled="true">
+                    </oj-input-text>
+                    
+                    <oj-input-date id="last-updated-date" label-hint="Last Updated On" placeholder="Select Last Updated Date"
+                      value="{{ $variables.generalInfoVar.last_updated_date }}"
+                      style="width: 16rem;" disabled="true">
+                    </oj-input-date>
+
+                    <oj-select-single id="department-section" label-hint="Department/Section" placeholder="Select Department/Section"
+                      value="{{ $variables.generalInfoVar.section_id }}" data="{{ $variables.sectionLOV }}" style="width: 16rem;"
+                      item-text="lookup_value_name">
+                    </oj-select-single>
+
+                    <!-- Row 4: Original Contract Value, Anticipated Contract Value, Region (LOV) -->
+                    <oj-input-number id="original-amount" label-hint="Original Contract Value"
+                      placeholder="Enter Original Contract Value"
+                      value="{{ $variables.generalInfoVar.original_amount }}" style="width: 16rem;" min="0"
+                      converter='[[ new $imports.ojConverterNumber.IntlNumberConverter({"minimumFractionDigits":3}) ]]'
+                      class="oj-form-control-text-align-right">
+                    </oj-input-number>
+                    
+                    <oj-input-number id="anticipated-value" label-hint="Anticipated Contract Value"
+                      placeholder="Enter Anticipated Contract Value"
+                      value="{{ $variables.generalInfoVar.anticipated_contract_value }}" style="width: 16rem;" min="0"
+                      converter='[[ new $imports.ojConverterNumber.IntlNumberConverter({"minimumFractionDigits":3}) ]]'
+                      class="oj-form-control-text-align-right">
+                    </oj-input-number>
+
+                    <oj-select-single id="region" label-hint="Region" placeholder="Select Region"
+                      value="{{ $variables.generalInfoVar.region_id }}" data="{{ $variables.regionLOV }}" style="width: 16rem;"
+                      item-text="lookup_value_name">
+                    </oj-select-single>
+
+                    <!-- Row 5: SCP Approved Budget, Potential Savings, Source of Fund (LOV) -->
+                    <oj-input-number id="budget" label-hint="SCP Approved Budget"
+                      placeholder="Enter SCP Approved Budget" value="{{ $variables.generalInfoVar.budget }}"
+                      style="width: 16rem;"
+                      converter='[[ new $imports.ojConverterNumber.IntlNumberConverter({"minimumFractionDigits":3}) ]]'
+                      min="0" class="oj-form-control-text-align-right">
+                    </oj-input-number>
+                    
+                    <oj-input-number id="potential-saving" label-hint="Potential Savings"
+                      placeholder="Enter Potential Savings" value="{{ $variables.generalInfoVar.potential_saving }}"
+                      style="width: 16rem;" min="0"
+                      converter='[[ new $imports.ojConverterNumber.IntlNumberConverter({"minimumFractionDigits":3}) ]]'
+                      class="oj-form-control-text-align-right">
+                    </oj-input-number>
+
+                    <oj-select-single id="source-of-fund" label-hint="Source of Fund" placeholder="Select Source of Fund"
+                      value="{{ $variables.generalInfoVar.source_of_fund_id }}" data="{{ $variables.sourceOfFundLOV }}"
+                      style="width: 16rem;" item-text="lookup_value_name">
+                    </oj-select-single>
+
+                    <!-- Row 6: Project Description, Scope of Work, PMU (LOV) -->
+                    <oj-text-area id="project-desc" label-hint="Project Description"
+                      placeholder="Enter Project Description" value="{{ $variables.generalInfoVar.project_desc }}"
+                      rows="3" style="width: 16rem;" resize-behavior="vertical">
+                    </oj-text-area>
+
+                    <oj-text-area id="scope-of-work" label-hint="Scope of Work" placeholder="Enter Scope of Work"
+                      value="{{ $variables.generalInfoVar.scope_of_work }}" rows="3" style="width: 16rem;"
+                      resize-behavior="vertical">
+                    </oj-text-area>
+
+                    <oj-select-single id="pmu" label-hint="PMU" placeholder="Select PMU" value="{{ $variables.generalInfoVar.pmu }}"
+                      data="{{ $variables.storedSmuLov }}" style="width: 16rem;" item-text="value">
+                    </oj-select-single>
+
+                    <!-- Row 7: Empty placeholders for alignment, Project Type (LOV) in 3rd column -->
+                    <div style="width: 16rem;"></div>
+                    <div style="width: 16rem;"></div>
+                    
+                    <oj-select-single id="project-type" label-hint="Project Type" placeholder="Select Project Type"
+                      value="{{ $variables.generalInfoVar.project_type_id }}" data="{{ $variables.projectTypeLOV }}" style="width: 16rem;"
+                      item-text="lookup_value_name">
+                    </oj-select-single>
+
+                  </oj-form-layout>
+                </div>
+              </oj-collapsible>
+
+              <div class="oj-panel oj-flex oj-selected" style="margin-top: 0.25rem;">
+                <oj-table scroll-policy="loadMoreOnScroll" id="assignedUsersDetails" selection-mode.row="single"
+                  selection-mode.column="single" display="grid" horizontal-grid-visible="enabled"
+                  vertical-grid-visible="enabled" data="[[ $variables.lineDetailsADP ]]"
+                  columns="{{ $constants.lineDetailsColumns }}" class="oj-sm-12 oj-md-12 oj-lg-12"></oj-table>
+              </div>
+
+              
+
+            </div>
+          </div>
+
+        </oj-sp-advanced-create-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+<oj-dialog id="loadingDialog" style="width: 300px; overflow: hidden;" cancel-behavior="none" drag-affordance="title-bar"
+  header-decoration="off" position.at.vertical="top" position.my.vertical="top">
+  <div slot="body" style="text-align: center; padding: 2rem;">
+    <oj-progress-circle value="-1"></oj-progress-circle>
+    <p style="margin-top: 1rem; font-weight: 500;">Loading Project List Data...</p>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="About" id="aboutDialog" cancel-behavior="icon" style="width: 400px; overflow: hidden;"
+  resize-behavior="resizable" position.my.vertical="top" position.at.vertical="top" drag-affordance="title-bar"
+  header-decoration="off">
+  <div slot="body">
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-sm-12 oj-md-12">
+        <oj-form-layout label-edge='start' columns="1" style="margin-top:23px;margin-left:-20px"
+          user-assistance-density="compact" direction="column" class="oj-formlayout-full-width"
+          label-width="45%">
+          <oj-input-text label-hint="Created By:" style="margin-bottom: -6px;" value="{{ $variables.about.created_by }}"
+            readonly="true" user-assistance-density="compact">
+          </oj-input-text>
+          <oj-input-text label-hint="Created Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.created_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated By:" style="margin-bottom: -6px;"
+            value="{{ $variables.about.last_updated_by }}" readonly="true" user-assistance-density="compact"></oj-input-text>
+          <oj-input-text label-hint="Created Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.last_updated_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated Login:" value="{{ $variables.about.last_updated_login }}" style="margin-bottom: -6px;"
+            readonly="true" user-assistance-density="compact">
+          </oj-input-text>
+        </oj-form-layout>
+      </div>
+    </div>
+  </div>
+  <div slot="footer">
+    <oj-button id="aboutButtonCancel_AC" label="Ok"
+      chroming="outlined" style="margin-top:-20px !important;" on-oj-action="[[$listeners.aboutButtonCancelACAction]]"></oj-button>
+  </div>
+</oj-dialog>

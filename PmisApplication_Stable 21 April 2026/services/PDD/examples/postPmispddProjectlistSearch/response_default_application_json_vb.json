@@ -1,0 +1,25 @@
+{
+    "OUT_COUNT": 1,
+    "OUT_DESCRIPTION": "Project list records retrieved successfully.",
+    "OUT_HAS_NEXT": "N",
+    "OUT_STATUS": "SUCCESS",
+    "OUT_TOTAL_COUNT": 1,
+    "P_OUTPUT": [
+        {
+            "pdd_project_id": 1,
+            "object_version_num": 1,
+            "ora_project_id": 300000090427447,
+            "ora_project_number": "RG5Z1-CA",
+            "ora_project_name": "RG5Z1-CA",
+            "tender_id": 17001,
+            "tender_number": "NW-RFQ-1119-2025",
+            "tender_name": "Construction of Anoxic tank at Ibra RG-CA",
+            "additional_info": "Test Info",
+            "created_by": "Vishal",
+            "created_date": "2026-03-03T11:26:09.18Z",
+            "last_updated_by": "Vishal",
+            "last_updated_date": "2026-03-03T11:26:18.513Z",
+            "last_updated_login": "Vishal"
+        }
+    ]
+}

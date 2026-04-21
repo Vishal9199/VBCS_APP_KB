@@ -1,0 +1,156 @@
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div>
+        <oj-sp-advanced-create-edit id="crAddEditPageid" page-subtitle="  " display-options.responsive-padding="on"
+          primary-action.label="Close" page-title="Change Request Page" secondary-actions="[[ $variables.aToolBar ]]"
+          on-sp-primary-action="[[$listeners.crAddEditPageidSpPrimaryAction]]"
+          on-sp-secondary-action="[[$listeners.crAddEditPageidSpSecondaryAction]]">
+
+          <div slot="main" style="padding-top: 0; margin-top: 0.1rem; min-width: 100%;">
+            <div style="margin-top: 0;">
+
+
+              <!-- ============================================================ -->
+              <!-- Project Details Section (Read-Only Header) -->
+              <!-- ============================================================ -->
+              <oj-collapsible id="project-details-section" expanded="true"
+                class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 0;">
+                <span slot="header" style="font-weight: bold; color: white;">Project Details</span>
+                <div style="padding: 1rem;">
+                  <oj-form-layout max-columns="3" label-edge="start" label-width="40%" colspan-wrap="wrap">
+
+                    <oj-input-text id="projectName" label-hint="Project Name" placeholder="Project Name"
+                      value="[[$variables.projectObj.project_name]]" user-assistance-density="compact"
+                      style="width: 16rem;" disabled="true">
+                    </oj-input-text>
+
+                    <oj-input-text id="projectNumber" label-hint="Project Number" placeholder="Project Number"
+                      value="[[$variables.projectObj.project_number]]" user-assistance-density="compact"
+                      style="width: 16rem;" disabled="true">
+                    </oj-input-text>
+
+                    <oj-input-text id="tenderNumber" label-hint="Tender Number" placeholder="Tender Number"
+                      value="[[$variables.projectObj.tender_number]]" user-assistance-density="compact"
+                      style="width: 16rem;" disabled="true">
+                    </oj-input-text>
+
+                  </oj-form-layout>
+                </div>
+              </oj-collapsible>
+
+              <!-- ============================================================ -->
+              <!-- Change Initiator Data Section -->
+              <!-- ============================================================ -->
+              <oj-collapsible id="change-initiator-section" expanded="true"
+                class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 1rem;">
+                <span slot="header" style="font-weight: bold; color: white;">Change Initiator Data</span>
+                <div style="padding: 1rem;">
+                  <oj-validation-group id="initiatorValidationGroup" valid="{{ $variables.formValidationInitiator }}">
+                    <oj-form-layout max-columns="3" label-edge="start" label-width="40%" colspan-wrap="wrap">
+
+                      <oj-input-text id="initiator" label-hint="Initiator" placeholder="Initiator"
+                        value="{{ $variables.crDetailVar.initiator }}" required="true" user-assistance-density="compact"
+                        style="width: 16rem;">
+                      </oj-input-text>
+
+                      <oj-input-date id="crDate" label-hint="Date" value="{{ $variables.crDetailVar.cr_date }}"
+                        required="true" user-assistance-density="compact"
+                        converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' style="width: 16rem;">
+                      </oj-input-date>
+
+                      <oj-input-text id="position" label-hint="Position" placeholder="Position"
+                        value="{{ $variables.crDetailVar.position }}" required="true" user-assistance-density="compact"
+                        style="width: 16rem;">
+                      </oj-input-text>
+
+                      <oj-select-single id="department" label-hint="Department"
+                        value="{{ $variables.crDetailVar.department_id }}" required="true"
+                        user-assistance-density="compact" style="width: 16rem;"
+                        data="[[$variables.getPmispddChangeorderLovDepartmentListSDP]]" item-text="lookup_value_name">
+                      </oj-select-single>
+
+                      <oj-input-text id="status" label-hint="Status" placeholder="Status"
+                        value="[[$variables.crDetailVar.status_id]]" readonly="true" user-assistance-density="compact"
+                        style="width: 16rem;">
+                      </oj-input-text>
+
+                    </oj-form-layout>
+                  </oj-validation-group>
+                </div>
+              </oj-collapsible>
+
+              <!-- ============================================================ -->
+              <!-- Change Details Section -->
+              <!-- ============================================================ -->
+              <oj-collapsible id="change-details-section" expanded="true"
+                class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 1rem;">
+                <span slot="header" style="font-weight: bold; color: white;">Change Details</span>
+                <div style="padding: 1rem;">
+                  <oj-validation-group id="crFormValidationGroup" valid="{{ $variables.formValidationChangeDetails }}">
+                    <oj-form-layout max-columns="3" label-edge="start" label-width="40%" colspan-wrap="wrap">
+
+                      <oj-input-text id="crNumber" label-hint="Number" placeholder="CR Number"
+                        value="[[$variables.crDetailVar.cr_number]]" readonly="true" user-assistance-density="compact"
+                        style="width: 16rem;">
+                      </oj-input-text>
+
+                      <oj-input-text id="crTitle" label-hint="Title" placeholder="Title"
+                        value="{{ $variables.crDetailVar.title }}" user-assistance-density="compact"
+                        style="width: 16rem;">
+                      </oj-input-text>
+
+                      <oj-input-number id="timeImpact" label-hint="Time Impact (Days)" placeholder="0"
+                        value="{{ $variables.crDetailVar.time_impact }}" user-assistance-density="compact"
+                        style="width: 16rem;">
+                      </oj-input-number>
+
+                      <oj-input-number id="costImpact" label-hint="Cost Impact" placeholder="0.000"
+                        value="{{ $variables.crDetailVar.cost_impact }}"
+                        converter='{"type":"number","options":{"style":"decimal","minimumFractionDigits":3,"maximumFractionDigits":3}}'
+                        user-assistance-density="compact" style="width: 16rem;">
+                      </oj-input-number>
+
+                      <oj-input-text id="timeFrame" label-hint="Time Frame" placeholder="Time Frame"
+                        value="{{ $variables.crDetailVar.time_frame }}" required="true"
+                        user-assistance-density="compact" style="width: 16rem;">
+                      </oj-input-text>
+
+                      <oj-text-area id="crDescription" label-hint="Description" placeholder="Description"
+                        value="{{ $variables.crDetailVar.description }}" rows="3" user-assistance-density="compact"
+                        style="width: 16rem;">
+                      </oj-text-area>
+
+                      <oj-text-area id="importanceJustification" label-hint="Importance And Justification"
+                        placeholder="Importance And Justification"
+                        value="{{ $variables.crDetailVar.importance_and_justification }}" required="true" rows="3"
+                         user-assistance-density="compact" style="width: 16rem;">
+                      </oj-text-area>
+
+                      <oj-text-area id="relationOriginalScope" label-hint="Relation To Original Scope"
+                        placeholder="Relation To Original Scope"
+                        value="{{ $variables.crDetailVar.relation_to_original_scope }}" required="true" rows="3"
+                         user-assistance-density="compact" style="width: 16rem;">
+                      </oj-text-area>
+
+                    </oj-form-layout>
+                  </oj-validation-group>
+                </div>
+              </oj-collapsible>
+
+            </div>
+          </div>
+
+        </oj-sp-advanced-create-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+<oj-dialog id="loadingDialog" style="width: 300px; overflow: hidden;" cancel-behavior="none" drag-affordance="title-bar"
+  header-decoration="off" position.at.vertical="top" position.my.vertical="top">
+  <div slot="body" style="text-align: center; padding: 2rem;">
+    <oj-progress-circle value="-1"></oj-progress-circle>
+    <p style="margin-top: 1rem; font-weight: 500;">Loading Project List Data...</p>
+  </div>
+</oj-dialog>

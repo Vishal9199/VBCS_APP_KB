@@ -1,0 +1,25 @@
+{
+  "description": "Smart Search Configuration for Cash Expectation Page",
+  "filters": {
+    "ProjectNameFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Project Name",
+      "options": {
+        "field": "project_name",
+        "optionsData": "[[ $search.filters.ProjectNameFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.ProjectNameFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    },
+    "YearFilter": {
+      "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+      "label": "Year",
+      "options": {
+        "field": "display_value",
+        "optionsData": "[[ $search.filters.YearFilter.options.optionsData ]]",
+        "optionsKeys": "[[ $search.filters.YearFilter.options.optionsKeys ]]"
+      },
+      "data": {}
+    }
+  }
+}

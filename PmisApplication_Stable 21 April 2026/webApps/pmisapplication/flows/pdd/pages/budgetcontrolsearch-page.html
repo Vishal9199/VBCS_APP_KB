@@ -1,0 +1,409 @@
+<style>
+.oj-sp-header-general-overview-header-strip {
+  display: none;
+}
+.oj-ux-ico-overflow-h:before {
+  color: white !important;
+}
+</style>
+
+<div id="sampleDemo1" class="demo-padding demo-container">
+<div id="componentDemoContent1" style="width: 1px; min-width: 100%;">
+<div id="mainContent1">
+<oj-sp-smart-search-page id="oj_exssp1" page-title="Budget Control" page-subtitle=" ">
+
+<!--Search Section -->
+<oj-flex slot="search" class="oj-sm-padding-2x" style="align-items: center;">
+  <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-space-between" style="width: 100%; align-items: flex-start; padding: 0 1rem;">
+    <div style="flex: 1; margin-right: 1rem;">
+      <oj-sp-smart-search id="freq_smartsearch" search-config="[[ $variables.searchConfiguration.provider ]]"
+        search-context="[[ $variables.searchContext ]]" filter-criterion="{{ $variables.filterCriterion }}"
+        ask-hint="Search here">
+      </oj-sp-smart-search>
+    </div>
+     <div style="display: flex; gap: 0.25rem; margin-left: 1rem; margin-top: 1px; flex-wrap: wrap;">
+      <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Reset" id="resetBtn"
+        on-oj-action="[[$listeners.resetBtnAction]]"
+        >
+        <span slot="startIcon" class="oj-ux-ico-reset"></span>
+      </oj-button>
+      <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Refresh" id="refreshBtn"
+        on-oj-action="[[$listeners.refreshBtnAction]]">
+        <span slot="startIcon" class="oj-ux-ico-refresh"></span>
+      </oj-button>
+      <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Export" id="exportBtn">
+        <span slot="startIcon" class="oj-ux-ico-export-excel-data"></span>
+      </oj-button>
+      <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Close" id="createBtn"
+        on-oj-action="[[$listeners.createBtnAction]]">
+      </oj-button>
+    </div>
+  </div>
+</oj-flex>
+
+<!--Table Section -->
+<div id="sampleDemo" class="demo-padding demo-container">
+<div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+<div id="searchMainContent">
+
+
+
+<oj-collapsible id="project-info-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+                style="margin-top: 0;" disabled="true">
+                <span slot="header"
+                  style="font-weight: bold; background-color: #084c4c; color: white; padding: 0.2rem;">Project Details</span>
+                <oj-form-layout max-columns="2" label-edge="start" colspan-wrap="wrap" user-assistance-density="compact"
+                  direction="row">
+                       <oj-input-text label-hint="Project Number" disabled="true"
+                         value="{{ $variables.projectDetail.project_number }}" class=""></oj-input-text>
+                      <oj-input-text label-hint="Tender Number" 
+                        disabled="true" value="{{ $variables.projectDetail.tender_number }}"></oj-input-text>
+                      <oj-input-text label-hint="Project Name"
+                        disabled="true" value="{{ $variables.projectDetail.project_name }}"></oj-input-text>
+                      <oj-input-text label-hint="Tender Name" 
+                        disabled="true" value="{{ $variables.projectDetail.tender_name }}"></oj-input-text>
+                  </oj-form-layout>
+              </oj-collapsible>
+
+
+      <div class="oj-flex oj-panel oj-selected" style="margin-top: 0.5rem;">
+        <div class="oj-flex-bar-end oj-helper-justify-content-flex-end">
+          <oj-button id="add-project-btn" label="Add Budget" chroming="outlined"
+            on-oj-action="[[$listeners.addProjectBtnAction]]">
+            <span class="oj-ux-ico-plus" slot="startIcon"></span>
+          </oj-button>
+        </div>
+        <oj-table scroll-policy="loadMoreOnScroll" class="oj-sm-width-full oj-bg-body" display="grid"
+          horizontal-grid-visible="enabled" vertical-grid-visible="enabled" selection-mode.row="single"
+          selection-mode.column="single" id="searchFiveYearPlanTbl" columns="{{ $constants.columnsVar }}"
+          data="[[ $variables.budgetControlADP ]]"
+          on-first-selected-row-changed="[[$listeners.searchFiveYearPlanTblFirstSelectedRow]]">
+      
+          <template slot="actions">
+            <div style="display: flex; gap: 4px; justify-content: center;">
+              <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                on-oj-action="[[$listeners.buttonAction]]">
+                <span slot="startIcon" class="oj-ux-ico-edit" style="font-size: 18px;"></span>
+              </oj-button>
+              <!-- <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                on-oj-action="[[$listeners.buttonAction2]]">
+                <span slot="startIcon" class="oj-ux-ico-trash" style="font-size: 18px;"></span>
+              </oj-button> -->
+              <!-- <oj-button display="icons" chroming="borderless" class="oj-button-sm">
+                    <span slot="startIcon" class="oj-ux-ico-info"></span>
+                  </oj-button> -->
+            </div>
+          </template>
+      
+          <template slot="edit_link">
+            <a style="font-weight: bold; color: #01474d; cursor: pointer;">
+              <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+            </a>
+          </template>
+      
+          <template slot="english_project_name">
+            <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+          </template>
+      
+          <template slot="region_name">
+            <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+          </template>
+      
+          <template slot="project_name">
+            <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+          </template>
+      
+          <template slot="budget_number">
+            <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+          </template>
+      
+          <template slot="fyp_calendar_name">
+            <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+          </template>
+      
+          <template slot="financial_status">
+            <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+          </template>
+      
+          <template slot="technical_status">
+            <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+          </template>
+      
+        </oj-table>
+        <!-- Pagination Section -->
+        <div class="oj-flex oj-sm-width-full oj-sm-justify-content-center" style="margin-top: 0.25rem; gap: 1rem;">
+          <div class="oj-flex-item oj-sm-flex-initial">
+            <oj-button label="Prev" chroming="outlined" id="prevBtn" disabled="[[ $variables.pagination.is_prev ]]"
+              on-oj-action="[[$listeners.prevBtnAction]]">
+              <!-- "startIcon" class="oj-ux-ico-back"></span> -->
+              <span class="oj-ux-ico-triangle-left" slot="startIcon" style="color: white;"></span>
+            </oj-button>
+          </div>
+          <div style="display: flex; align-items: center; width: fit-content; min-width: 120px; max-width: 130px;">
+            <oj-input-text value="{{ $variables.paginationDisplay }}" id="pagination-details" disabled="true"
+              aria-label="Pagination Details"></oj-input-text>
+          </div>
+          <div class="oj-flex-item oj-sm-flex-initial">
+            <oj-button label="Next" chroming="outlined" id="nextBtn" disabled="[[ $variables.pagination.is_next ]]"
+              on-oj-action="[[$listeners.nextBtnAction]]">
+              "endIcon" class="oj-ux-ico-forward-next"></span>
+              <span class="oj-ux-ico-triangle-right" slot="endIcon" style="color: white;"></span>
+            </oj-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Budget Distribution Panel -->
+            <div class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top:12px;">
+
+              <!-- ── HEADER + BUTTONS SAME ROW ───────────────────────── -->
+              <div class="oj-flex oj-sm-align-items-center oj-sm-justify-content-space-between"
+                style="padding:12px 16px; border-bottom:1px solid #ddd; background-color: #084c4c;">
+
+                <!-- Title -->
+                <div class="oj-flex-item">
+                  <span style="font-weight:bold; color:white;">Budget Distribution Lines</span>
+                </div>
+              </div>
+
+              <!-- ── TABLE SECTION ── -->
+              <div>
+
+                <oj-table id="budgetLinesTable" columns="[[ $variables.lvBudgetTableColumns ]]"
+                  scroll-policy="loadMoreOnScroll" selection-mode.row="single" style="width:100%;" display="grid"
+                  horizontal-grid-visible="enabled" vertical-grid-visible="enabled" selection-mode.column="single"
+                  data="[[ $variables.budgetLinesADP ]]">
+
+                  <!-- ── DISABLED COLUMNS ─────────────────────────────────────── -->
+
+                  <!-- Meaning: always read-only -->
+                  <template slot="MeaningTpl">
+                    <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                  </template>
+
+                  <!-- Prior Year: always read-only -->
+                  <template slot="PriorYearTpl">
+                    <oj-bind-text
+                      value="[[$current.data != null ? $current.data.toLocaleString('en-US', {minimumFractionDigits:3, maximumFractionDigits:3}) : '0.000']]">
+                    </oj-bind-text>
+                  </template>
+
+                  <!-- Total Current Year: always read-only -->
+                  <template slot="TotalTpl">
+                    <span style="font-weight:600;">
+                      <oj-bind-text value="[[$current.data != null ? $current.data.toLocaleString('en-US', {minimumFractionDigits:3, maximumFractionDigits:3}) : '0.000']]"></oj-bind-text>
+                    </span>
+                  </template>
+
+                  <!-- Balance Next Year: always read-only -->
+                  <template slot="BalanceTpl">
+                    <span style="font-weight:600;">
+                      <oj-bind-text value="[[$current.data != null ? $current.data.toLocaleString('en-US', {minimumFractionDigits:3, maximumFractionDigits:3}) : '0.000']]"></oj-bind-text>
+                    </span>
+                  </template>
+
+                  <!-- January -->
+                  <template slot="JanTpl">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' || ($current.row.meaning_code !== 'PLAN_MONTHLY' && $current.row.meaning_code !== 'ACTUAL/FORECAST') ]]">
+                      <oj-bind-text
+                        value="[[$current.data != null ? $current.data.toLocaleString('en-US', {minimumFractionDigits:3, maximumFractionDigits:3}) : '0.000']]">
+                      </oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' && ($current.row.meaning_code === 'PLAN_MONTHLY' || $current.row.meaning_code === 'ACTUAL/FORECAST') ]]">
+                      <oj-input-number value="{{ $variables.lvBudgetCurrentRow.january }}"
+                        converter='{"type":"number","options":{"minimumFractionDigits":3,"maximumFractionDigits":3}}'
+                        style="min-width:80px;">
+                      </oj-input-number>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- February -->
+                  <template slot="FebTpl">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' || ($current.row.meaning_code !== 'PLAN_MONTHLY' && $current.row.meaning_code !== 'ACTUAL/FORECAST') ]]">
+                      <oj-bind-text
+                        value="[[$current.data != null ? $current.data.toLocaleString('en-US', {minimumFractionDigits:3, maximumFractionDigits:3}) : '0.000']]">
+                      </oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' && ($current.row.meaning_code === 'PLAN_MONTHLY' || $current.row.meaning_code === 'ACTUAL/FORECAST') ]]">
+                      <oj-input-number value="{{ $variables.lvBudgetCurrentRow.february }}"
+                        converter='{"type":"number","options":{"minimumFractionDigits":3,"maximumFractionDigits":3}}'
+                        style="min-width:80px;">
+                      </oj-input-number>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- March -->
+                  <template slot="MarTpl">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' || ($current.row.meaning_code !== 'PLAN_MONTHLY' && $current.row.meaning_code !== 'ACTUAL/FORECAST') ]]">
+                      <oj-bind-text
+                        value="[[$current.data != null ? $current.data.toLocaleString('en-US', {minimumFractionDigits:3, maximumFractionDigits:3}) : '0.000']]">
+                      </oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' && ($current.row.meaning_code === 'PLAN_MONTHLY' || $current.row.meaning_code === 'ACTUAL/FORECAST') ]]">
+                      <oj-input-number value="{{ $variables.lvBudgetCurrentRow.march }}"
+                        converter='{"type":"number","options":{"minimumFractionDigits":3,"maximumFractionDigits":3}}'
+                        style="min-width:80px;">
+                      </oj-input-number>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- April -->
+                  <template slot="AprTpl">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' || ($current.row.meaning_code !== 'PLAN_MONTHLY' && $current.row.meaning_code !== 'ACTUAL/FORECAST') ]]">
+                      <oj-bind-text
+                        value="[[$current.data != null ? $current.data.toLocaleString('en-US', {minimumFractionDigits:3, maximumFractionDigits:3}) : '0.000']]">
+                      </oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' && ($current.row.meaning_code === 'PLAN_MONTHLY' || $current.row.meaning_code === 'ACTUAL/FORECAST') ]]">
+                      <oj-input-number value="{{ $variables.lvBudgetCurrentRow.april }}"
+                        converter='{"type":"number","options":{"minimumFractionDigits":3,"maximumFractionDigits":3}}'
+                        style="min-width:80px;">
+                      </oj-input-number>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- May -->
+                  <template slot="MayTpl">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' || ($current.row.meaning_code !== 'PLAN_MONTHLY' && $current.row.meaning_code !== 'ACTUAL/FORECAST') ]]">
+                      <oj-bind-text
+                        value="[[$current.data != null ? $current.data.toLocaleString('en-US', {minimumFractionDigits:3, maximumFractionDigits:3}) : '0.000']]">
+                      </oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' && ($current.row.meaning_code === 'PLAN_MONTHLY' || $current.row.meaning_code === 'ACTUAL/FORECAST') ]]">
+                      <oj-input-number value="{{ $variables.lvBudgetCurrentRow.may }}"
+                        converter='{"type":"number","options":{"minimumFractionDigits":3,"maximumFractionDigits":3}}'
+                        style="min-width:80px;">
+                      </oj-input-number>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- June -->
+                  <template slot="JunTpl">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' || ($current.row.meaning_code !== 'PLAN_MONTHLY' && $current.row.meaning_code !== 'ACTUAL/FORECAST') ]]">
+                      <oj-bind-text
+                        value="[[$current.data != null ? $current.data.toLocaleString('en-US', {minimumFractionDigits:3, maximumFractionDigits:3}) : '0.000']]">
+                      </oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' && ($current.row.meaning_code === 'PLAN_MONTHLY' || $current.row.meaning_code === 'ACTUAL/FORECAST') ]]">
+                      <oj-input-number value="{{ $variables.lvBudgetCurrentRow.june }}"
+                        converter='{"type":"number","options":{"minimumFractionDigits":3,"maximumFractionDigits":3}}'
+                        style="min-width:80px;">
+                      </oj-input-number>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- July -->
+                  <template slot="JulTpl">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' || ($current.row.meaning_code !== 'PLAN_MONTHLY' && $current.row.meaning_code !== 'ACTUAL/FORECAST') ]]">
+                      <oj-bind-text
+                        value="[[$current.data != null ? $current.data.toLocaleString('en-US', {minimumFractionDigits:3, maximumFractionDigits:3}) : '0.000']]">
+                      </oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' && ($current.row.meaning_code === 'PLAN_MONTHLY' || $current.row.meaning_code === 'ACTUAL/FORECAST') ]]">
+                      <oj-input-number value="{{ $variables.lvBudgetCurrentRow.july }}"
+                        converter='{"type":"number","options":{"minimumFractionDigits":3,"maximumFractionDigits":3}}'
+                        style="min-width:80px;">
+                      </oj-input-number>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- August -->
+                  <template slot="AugTpl">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' || ($current.row.meaning_code !== 'PLAN_MONTHLY' && $current.row.meaning_code !== 'ACTUAL/FORECAST') ]]">
+                      <oj-bind-text
+                        value="[[$current.data != null ? $current.data.toLocaleString('en-US', {minimumFractionDigits:3, maximumFractionDigits:3}) : '0.000']]">
+                      </oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' && ($current.row.meaning_code === 'PLAN_MONTHLY' || $current.row.meaning_code === 'ACTUAL/FORECAST') ]]">
+                      <oj-input-number value="{{ $variables.lvBudgetCurrentRow.august }}"
+                        converter='{"type":"number","options":{"minimumFractionDigits":3,"maximumFractionDigits":3}}'
+                        style="min-width:80px;">
+                      </oj-input-number>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- September -->
+                  <template slot="SepTpl">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' || ($current.row.meaning_code !== 'PLAN_MONTHLY' && $current.row.meaning_code !== 'ACTUAL/FORECAST') ]]">
+                      <oj-bind-text
+                        value="[[$current.data != null ? $current.data.toLocaleString('en-US', {minimumFractionDigits:3, maximumFractionDigits:3}) : '0.000']]">
+                      </oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' && ($current.row.meaning_code === 'PLAN_MONTHLY' || $current.row.meaning_code === 'ACTUAL/FORECAST') ]]">
+                      <oj-input-number value="{{ $variables.lvBudgetCurrentRow.september }}"
+                        converter='{"type":"number","options":{"minimumFractionDigits":3,"maximumFractionDigits":3}}'
+                        style="min-width:80px;">
+                      </oj-input-number>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- October -->
+                  <template slot="OctTpl">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' || ($current.row.meaning_code !== 'PLAN_MONTHLY' && $current.row.meaning_code !== 'ACTUAL/FORECAST') ]]">
+                      <oj-bind-text
+                        value="[[$current.data != null ? $current.data.toLocaleString('en-US', {minimumFractionDigits:3, maximumFractionDigits:3}) : '0.000']]">
+                      </oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' && ($current.row.meaning_code === 'PLAN_MONTHLY' || $current.row.meaning_code === 'ACTUAL/FORECAST') ]]">
+                      <oj-input-number value="{{ $variables.lvBudgetCurrentRow.october }}"
+                        converter='{"type":"number","options":{"minimumFractionDigits":3,"maximumFractionDigits":3}}'
+                        style="min-width:80px;">
+                      </oj-input-number>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- November -->
+                  <template slot="NovTpl">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' || ($current.row.meaning_code !== 'PLAN_MONTHLY' && $current.row.meaning_code !== 'ACTUAL/FORECAST') ]]">
+                      <oj-bind-text
+                        value="[[$current.data != null ? $current.data.toLocaleString('en-US', {minimumFractionDigits:3, maximumFractionDigits:3}) : '0.000']]">
+                      </oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' && ($current.row.meaning_code === 'PLAN_MONTHLY' || $current.row.meaning_code === 'ACTUAL/FORECAST') ]]">
+                      <oj-input-number value="{{ $variables.lvBudgetCurrentRow.november }}"
+                        converter='{"type":"number","options":{"minimumFractionDigits":3,"maximumFractionDigits":3}}'
+                        style="min-width:80px;">
+                      </oj-input-number>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- December -->
+                  <template slot="DecTpl">
+                    <oj-bind-if test="[[ $current.mode === 'navigation' || ($current.row.meaning_code !== 'PLAN_MONTHLY' && $current.row.meaning_code !== 'ACTUAL/FORECAST') ]]">
+                      <oj-bind-text
+                        value="[[$current.data != null ? $current.data.toLocaleString('en-US', {minimumFractionDigits:3, maximumFractionDigits:3}) : '0.000']]">
+                      </oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' && ($current.row.meaning_code === 'PLAN_MONTHLY' || $current.row.meaning_code === 'ACTUAL/FORECAST') ]]">
+                      <oj-input-number value="{{ $variables.lvBudgetCurrentRow.december }}"
+                        converter='{"type":"number","options":{"minimumFractionDigits":3,"maximumFractionDigits":3}}'
+                        style="min-width:80px;">
+                      </oj-input-number>
+                    </oj-bind-if>
+                  </template>
+
+                </oj-table>
+
+              </div>
+
+            </div>
+
+</oj-sp-smart-search-page>
+</div>
+</div>
+</div>
+
+<oj-dialog style="display:none; width: 500px; overflow: hidden;" dialog-title="Warning" id="delete_dialog"
+  cancel-behavior="icon" header-decoration="off" drag-affordance="title-bar" position.at.vertical="top"
+  position.my.vertical="top">
+  <div slot="body" style="margin-top: 1.5rem;">
+    <div class="oj-flex">Are you sure you want to delete the record?</div>
+  </div>
+  <div slot="footer">
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction3]]">Ok</oj-button>
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction4]]">Cancel</oj-button>
+  </div>
+</oj-dialog>

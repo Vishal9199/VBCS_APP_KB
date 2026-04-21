@@ -1,0 +1,32 @@
+{
+    "items": [
+        {
+            "lookup_value_id": 6595,
+            "lookup_value_code": "WASTE_WATER",
+            "lookup_value_name": "Waste Water"
+        },
+        {
+            "lookup_value_id": 6594,
+            "lookup_value_code": "WATER",
+            "lookup_value_name": "Water"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 2,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/general/lov/common"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/general/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/general/lov/common"
+        }
+    ]
+}

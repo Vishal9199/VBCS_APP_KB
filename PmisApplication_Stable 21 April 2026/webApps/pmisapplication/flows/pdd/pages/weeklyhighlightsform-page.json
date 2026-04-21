@@ -1,0 +1,169 @@
+{
+  "metadata": {},
+  "title": "Weekly Highlights Entry",
+  "description": "Weekly Highlights Entry Add/Edit page for capturing project highlight and lowlight entries per week (Week1 to Week5) with Project Details header section.",
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-text-area": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "oj-sp/simple-create-edit/loader"
+      },
+      "oj-tab-bar": {
+        "path": "ojs/ojnavigationlist"
+      },
+      "oj-switcher": {
+        "path": "ojs/ojswitcher"
+      },
+      "oj-option": {
+        "path": "ojs/ojoption"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  },
+  "types": {
+    "HeaderInfoType": {
+      "oraProjectId": "number",
+      "projectName": "string",
+      "projectNumber": "string",
+      "tenderId": "number",
+      "tenderNumber": "string",
+      "period": "string"
+
+    },
+    "WeeklyHighlightsType": {
+      "weekly_highlights_id": "number",
+      "object_version_num": "number",
+      "ora_project_id": "number",
+      "tender_id": "number",
+      "period": "string",
+      "week1_highlight_projects": "string",
+      "week1_highlight_hse": "string",
+      "week1_lowlight_projects": "string",
+      "week1_lowlight_hse": "string",
+      "week2_highlight_projects": "string",
+      "week2_highlight_hse": "string",
+      "week2_lowlight_projects": "string",
+      "week2_lowlight_hse": "string",
+      "week3_highlight_projects": "string",
+      "week3_highlight_hse": "string",
+      "week3_lowlight_projects": "string",
+      "week3_lowlight_hse": "string",
+      "week4_highlight_projects": "string",
+      "week4_highlight_hse": "string",
+      "week4_lowlight_projects": "string",
+      "week4_lowlight_hse": "string",
+      "week5_highlight_projects": "string",
+      "week5_highlight_hse": "string",
+      "week5_lowlight_projects": "string",
+      "week5_lowlight_hse": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    }
+  },
+  "variables": {
+    "headerInfoVar": {
+      "type": "HeaderInfoType"
+    },
+    "periodName": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "pTenderId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "weeklyHighlightsVar": {
+      "type": "WeeklyHighlightsType"
+    },
+    "selectedWeekTab": {
+      "type": "string",
+      "defaultValue": "week1"
+    },
+    "op": {
+      "type": "string",
+      "defaultValue": "POST"
+    },
+    "aToolBar": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Save",
+          "id": "save",
+          "icon": "oj-ux-ico-save"
+        },
+        {
+          "label": "Notify to PMO",
+          "id": "notify",
+          "icon": "oj-ux-ico-information"
+        }
+      ]
+    }
+  },
+  "chains": {},
+  "eventListeners": {
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    },
+    "weeklyHighlightsformidSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "cancelactionchain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "weeklyHighlightsformidSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "secondary_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    }
+  }
+}

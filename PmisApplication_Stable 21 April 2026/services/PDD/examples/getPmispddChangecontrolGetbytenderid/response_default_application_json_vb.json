@@ -1,0 +1,21 @@
+{
+    "items": [],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 0,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/changecontrol/getbytenderid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/changecontrol/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/changecontrol/getbytenderid"
+        }
+    ]
+}

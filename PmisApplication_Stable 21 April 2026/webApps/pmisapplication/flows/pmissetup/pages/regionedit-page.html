@@ -1,0 +1,218 @@
+<style>
+  oj-option#region_edit_page_h_cancelAction
+  {
+    display: none !important;
+  }
+</style>
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div>
+        <oj-sp-advanced-create-edit id="region_edit_page" page-title="Region Management" page-subtitle=" "
+          display-options.responsive-padding="on" display-options.next="off" display-options.bottom-actions="on"
+          primary-action.label="Close" secondary-actions="[[ $variables.aToolGeneric ]]" display-mode="light"
+          on-sp-primary-action="[[$listeners.regionEditPageSpPrimaryAction]]"
+          on-sp-secondary-action="[[$listeners.regionEditPageSpSecondaryAction]]">
+          
+          <div slot="main" style="padding-top: 0; margin-top: 0;">
+            <div style="padding: 1rem;" class="oj-panel oj-selected">
+              <oj-validation-group id="region_validation" valid="{{ $variables.formValidVar }}">
+                <oj-form-layout max-columns="3" label-edge="start" label-width="45%" colspan-wrap="wrap" user-assistance-density="compact" direction="column">
+                  
+                  <!-- Region Name Field -->
+                  <!-- <oj-input-text 
+                    id="region-name" 
+                    label-hint="Region Name"
+                    placeholder="Region Name"
+                    value="{{ $variables.regionHeaderVar.region_name }}"
+                    style="width: 16rem;">
+                  </oj-input-text> -->
+                  
+                  <!-- Region Name with LOV (Commented for future use) -->
+                  
+                  <oj-select-single id="region-name-lov" label-hint="Region Name"
+                    value="{{ $variables.regionHeaderVar.region_id }}" style="width: 16rem;" required="true"
+                    data="[[$variables.getPmisLovRegionNameListSDP]]" item-text="lookup_value_name">
+
+                    <template slot="collectionTemplate" data-oj-as="collection">
+                      <oj-table scroll-policy="loadMoreOnScroll"
+                        columns='[{"headerText":"Region Name","field":"lookup_value_name", "sortable": "disabled"},{"headerText":"Region Short Code","field":"lookup_value_code", "sortable": "disabled"}]'
+                        selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}"
+                        on-oj-row-action="[[collection.handleRowAction]]" data="[[ collection.data ]]"
+                        selection-mode.row="single" display="grid" style="overflow: hidden;">
+                        <template slot="cellTemplate" data-oj-as="cell">
+                          <oj-bind-text value="[[String(cell.data)]]"></oj-bind-text>
+                        </template>
+                      </oj-table>
+                    </template>
+
+                  </oj-select-single>
+                 
+                  
+                  <!-- Project Number Field -->
+                  <oj-input-text 
+                    id="project-number" 
+                    label-hint="Project Number"
+                    placeholder="Project Number"
+                    value="{{ $variables.regionHeaderVar.project_id }}"
+                    style="width: 16rem;">
+                  </oj-input-text>
+                  
+                  <!-- Project Number with LOV (Commented for future use) -->
+                  
+                  <!-- <oj-select-single 
+                    id="project-number-lov" 
+                    label-hint="Project Number"
+                    value="{{ $variables.regionHeaderVar.project_id }}"
+                    style="width: 16rem;">
+                  </oj-select-single> -->
+                 
+                  
+                  <!-- Tender Number Field -->
+                  <oj-input-text 
+                    id="tender-number" 
+                    label-hint="Tender Number"
+                    placeholder="Tender Number"
+                    value="{{ $variables.regionHeaderVar.tender_number }}"
+                    style="width: 16rem;">
+                  </oj-input-text>
+                  
+                  <!-- Tender Number with LOV (Commented for future use) -->
+                  <!-- 
+                  <oj-select-single 
+                    id="tender-number-lov" 
+                    label-hint="Tender Number"
+                    value="{{ $variables.regionHeaderVar.tender_number }}"
+                    style="width: 16rem;">
+                  </oj-select-single>
+                  -->
+                  
+                  <!-- Responsible Person Field -->
+                  <!-- <oj-input-text 
+                    id="responsible-person" 
+                    label-hint="Responsible Person"
+                    placeholder="Responsible Person"
+                    value="{{ $variables.regionHeaderVar.responsible_person }}"
+                    style="width: 16rem;">
+                  </oj-input-text> -->
+                  
+                  <!-- Responsible Person with LOV (Commented for future use) -->
+                  
+                  <oj-select-single id="responsible-person-lov" label-hint="Responsible Person"
+                    value="{{ $variables.regionHeaderVar.responsible_person_id }}" style="width: 16rem;" required="true"
+                    data="[[$variables.getPmisLovRegionResponsiblePersonListSDP]]" item-text="person_full_name">
+
+                    <template slot="collectionTemplate" data-oj-as="collection">
+                      <oj-table scroll-policy="loadMoreOnScroll"
+                        columns='[{"headerText":"Person Name","field":"person_full_name","sortable":"disabled"},{"headerText":"Person Number","field":"person_number","sortable":"disabled"},{"headerText":"Email","field":"email_address","sortable":"disabled"}]'
+                        selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}"
+                        on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]"
+                        display="grid" style="overflow: hidden;" selection-mode.row="single">
+                        <template slot="cellTemplate" data-oj-as="cell">
+                          <oj-bind-text value="[[String(cell.data)]]"></oj-bind-text>
+                        </template>
+                      </oj-table>
+                    </template>
+
+                  </oj-select-single>
+                 
+                  
+                  <!-- Tender Name Field -->
+                  <oj-input-text 
+                    id="tender-name" 
+                    label-hint="Tender Name/Number"
+                    placeholder="Tender Name/Number"
+                    value="{{ $variables.regionHeaderVar.tender_number }}"
+                    style="width: 16rem;">
+                  </oj-input-text>
+                  
+                  <!-- Tender Name with LOV (Commented for future use) -->
+                  <!-- 
+                  <oj-select-single 
+                    id="tender-name-lov" 
+                    label-hint="Tender Name"
+                    value="{{ $variables.regionHeaderVar.tender_name }}"
+                    style="width: 16rem;">
+                  </oj-select-single>
+                  -->
+                  
+                </oj-form-layout>
+              </oj-validation-group>
+            </div>
+          </div>
+          
+        </oj-sp-advanced-create-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Progress Dialog -->
+<oj-dialog dialog-title="Please wait..." id="progressMsg" class="wd200" style="overflow: hidden;" 
+  position.at.vertical="top" position.my.vertical="top">
+  <div slot="body" style="margin-top: 2.1rem;">
+    <div class="oj-flex full_stretch lg_button_width">
+      <oj-progress-bar class="full_stretch oj-flex-item oj-sm-12 oj-md-12" value="-1" style="zoom: 2;"></oj-progress-bar>
+    </div>
+  </div>
+</oj-dialog>
+
+
+<!-- About Dialog -->
+<oj-dialog dialog-title="About" id="aboutDialog" cancel-behavior="icon" style="width: 420px; overflow: hidden;"
+  position.at.vertical="top" position.my.vertical="top" drag-affordance="title-bar" header-decoration="off">
+  <div slot="body">
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-sm-12 oj-md-12">
+        <oj-form-layout label-edge='start' columns="1" style="margin-top:23px; margin-left:-20px"
+          user-assistance-density="compact" direction="column" class="oj-formlayout-full-width"
+          label-width="45%">
+          
+          <oj-input-text 
+            label-hint="Created By:" 
+            style="margin-bottom: -6px;" 
+            value="{{ $variables.about.created_by }}"
+            readonly="true">
+          </oj-input-text>
+          
+          <oj-input-text 
+            label-hint="Created Date:" 
+            readonly="true" 
+            style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {"type": "datetime", "options": {"pattern": "dd-MMM-yyyy hh:mm a"}} ]]'
+            value="{{ $variables.about.created_date }}">
+          </oj-input-text>
+          
+          <oj-input-text 
+            label-hint="Last Updated By:" 
+            style="margin-bottom: -6px;"
+            value="{{ $variables.about.last_updated_by }}" 
+            readonly="true">
+          </oj-input-text>
+          
+          <oj-input-text 
+            label-hint="Last Update Date:" 
+            readonly="true" 
+            style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {"type": "datetime", "options": {"pattern": "dd-MMM-yyyy hh:mm a"}} ]]'
+            value="{{ $variables.about.last_updated_date }}">
+          </oj-input-text>
+          
+          <oj-input-text 
+            label-hint="Last Updated Login:" 
+            value="{{ $variables.about.last_updated_login }}"
+            style="margin-bottom: -6px;" 
+            readonly="true">
+          </oj-input-text>
+          
+        </oj-form-layout>
+      </div>
+    </div>
+  </div>
+  <div class="oj-flex-bar-end" slot="footer" style="margin-top: -2rem;">
+    <oj-button label="Ok" chroming="outlined" class="oj-flex-bar-end" on-oj-action="[[$listeners.buttonAction]]"></oj-button>
+  </div>
+</oj-dialog>

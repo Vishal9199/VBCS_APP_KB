@@ -1,0 +1,36 @@
+{
+    "OUT_COUNT": 1,
+    "OUT_DESCRIPTION": "Records retrieved successfully",
+    "OUT_HAS_NEXT": "N",
+    "OUT_STATUS": "SUCCESS",
+    "OUT_TOTAL_COUNT": 1,
+    "P_OUTPUT": [
+        {
+            "maintenance_id": 4917,
+            "object_version_num": 1,
+            "ora_project_id": 300000090427447,
+            "ora_project_number": "RG5Z1-CA",
+            "ora_project_name": "RG5Z1-CA",
+            "tender_id": 17001,
+            "tender_number": "NW-RFQ-1119-2025",
+            "tender_name": "Construction of Anoxic tank at Ibra RG-CA",
+            "fv_plan_name": "Five Year Maintenance Plan 2024",
+            "supplier_id": 1001,
+            "supplier_name": null,
+            "consultant_name": "Al Tamimi Consultancy LLC",
+            "contract_commencement_date": "2024-01-15T00:00:00Z",
+            "orig_completion_date": "2024-12-31T00:00:00Z",
+            "rev_completion_date": "2025-03-31T00:00:00Z",
+            "substantial_completion_date": "2025-06-30T00:00:00Z",
+            "actual_completion_date": "2025-07-15T00:00:00Z",
+            "maintenance_period": "2025-07-16T00:00:00Z",
+            "end_maintenance_period": "2026-07-15T00:00:00Z",
+            "additional_info": "Sample maintenance record for OPD project testing.",
+            "created_by": "ADMIN",
+            "created_date": "2026-02-26T08:03:23.828612Z",
+            "last_updated_by": "ADMIN",
+            "last_updated_date": "2026-02-26T08:03:23.828612Z",
+            "last_updated_login": "ADMIN"
+        }
+    ]
+}

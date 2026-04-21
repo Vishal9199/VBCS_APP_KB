@@ -1,0 +1,63 @@
+{
+    "items": [
+        {
+            "general_id": 2445,
+            "object_version_num": 1,
+            "ora_project_id": 300000090427449,
+            "ora_project_number": "789BEN234",
+            "ora_project_name": "VBCS-Feb-10-1",
+            "tender_id": 17002,
+            "tender_number": "NW-RFQ-17002-2026",
+            "tender_name": "Test Tender Name 001",
+            "phase_of_contract_id": 2,
+            "phase_contract": null,
+            "contractor_id": 98765,
+            "supplier_name": null,
+            "project_desc": "The project include construction of Pumpstation building...",
+            "original_amount": 12717437,
+            "budget": 12717437,
+            "project_type_id": 5,
+            "project_type": null,
+            "section_id": 3,
+            "section": null,
+            "sector": "Water",
+            "stage": "Construction",
+            "status_id": 26,
+            "status_code": "DRA",
+            "status_name": "Draft",
+            "comments": "Project is progressing as per schedule...",
+            "scope_of_work": "The main scope of this project is the following:\n1. Pre-Construction...",
+            "anticipated_contract_value": 12717437,
+            "source_of_fund_id": 2,
+            "source_of_fund": null,
+            "potential_saving": 150000,
+            "region_id": 6174,
+            "region": "MUS",
+            "pmu": 6,
+            "additional_info": "Contract awarded to HASSAN ALLAM CONSTRUCTION...",
+            "created_by": "JOHN.DOE",
+            "created_date": "2026-02-13T09:02:08.89514Z",
+            "last_updated_by": "JOHN.DOE",
+            "last_updated_date": "2026-02-13T09:02:08.89514Z",
+            "last_updated_login": "WEB_SESSION_12345"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/general/getbyid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/general/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/general/getbyid"
+        }
+    ]
+}

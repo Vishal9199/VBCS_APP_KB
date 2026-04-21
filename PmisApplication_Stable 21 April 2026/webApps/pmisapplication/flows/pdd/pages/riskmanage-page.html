@@ -1,0 +1,406 @@
+<style>
+  oj-c-button#riskManagementPage_h_cancelAction {
+    display: none;
+}
+</style>
+
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+
+      <oj-sp-advanced-create-edit id="riskManagementPage" page-title="Risk Management" page-subtitle=" "
+        primary-action.label="Close"
+        secondary-actions='[{"label":"save","id":"saveClose","iconClass":"oj-ux-ico-save","icon":"oj-ux-ico-save"}]'
+        on-sp-primary-action="[[$listeners.closeRiskBtnAction]]"
+        on-sp-secondary-action="[[$listeners.riskSecondaryAction]]">
+
+        <div slot="main" style="width: 100%; margin-top: -1.5rem;">
+
+          <!-- Project Information Panel -->
+          <div class="oj-panel oj-panel-shadow-md oj-selected" style="margin-bottom: 0.25rem;">
+            <div style="padding:0.1rem 0.1rem; border-bottom:1px solid #dee2e6; background-color: #084c4c;">
+              <span style="font-weight:600; font-size:1rem; color: white;">Project Information</span>
+            </div>
+            <div style="padding:1rem;">
+              <oj-form-layout label-edge="start" max-columns="3" user-assistance-density="compact"
+                class="oj-formlayout-full-width">
+                <oj-input-text label-hint="Project Number" value="[[ $variables.projectNumber ]]"
+                  class="oj-form-control-max-width-sm" disabled="true">
+                </oj-input-text>
+                <oj-input-text label-hint="Tender Number" value="[[ $variables.tenderNumber ]]"
+                  class="oj-form-control-max-width-sm" disabled="true">
+                </oj-input-text>
+                <oj-input-text label-hint="Project Name" value="[[ $variables.projectName ]]"
+                  class="oj-form-control-max-width-sm" disabled="true">
+                </oj-input-text>
+              </oj-form-layout>
+            </div>
+          </div>
+
+          <!-- Risk Details Panel -->
+          <div class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 0.1rem;">
+
+            <!-- Panel Header + Toolbar -->
+            <div class="oj-flex oj-sm-align-items-center"
+              style="padding: 0.1rem 0.1rem; border-bottom: 1px solid #dee2e6; background-color: #084c4c;">
+              <div class="oj-flex-item">
+                <span style="font-weight: bold; color: white; font-size: 1rem;">
+                  <span class="oj-ux-ico-risk-register" style="margin-right: 0.5rem;"></span>
+                  Risk Details
+                </span>
+              </div>
+              <div class="oj-flex-item oj-sm-flex-initial">
+                <oj-toolbar chroming="solid">
+                  <oj-button chroming="outlined" on-oj-action="[[$listeners.addRiskBtnAction]]">
+                    <span slot="startIcon" class="oj-ux-ico-plus"></span>
+                    Add Row
+                  </oj-button>
+                  <!-- <oj-button chroming="outlined" on-oj-action="[[$listeners.saveRiskBtnAction]]">
+                    <span slot="startIcon" class="oj-ux-ico-save" style="color: white;"></span>
+                    Save
+                  </oj-button> -->
+                </oj-toolbar>
+              </div>
+            </div>
+
+            <!-- Risk Table -->
+            <div style="padding: 0.1rem;">
+              <oj-table id="riskTable" data="[[ $page.variables.riskBufferDP.instance ]]"
+                columns="[[ $page.constants.riskColumns ]]" scroll-policy="loadMoreOnScroll"
+                horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+                edit-row="{{ $variables.lvRowToEdit }}" columns-default.sortable="disabled"
+                columns-default.resizable="enabled" class="oj-sm-width-full oj-bg-body" display="grid"
+                selection-mode.row="single" edit-mode="rowEdit"
+                on-oj-before-row-edit="[[$listeners.riskTableBeforeRowEdit]]"
+                on-oj-before-row-edit-end="[[$listeners.riskTableBeforeRowEditEnd]]">
+
+                <!-- ACTIONS -->
+                <template slot="riskActionTemplate">
+                  <div class="custom-button-align">
+                    <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                      on-oj-action="[[$listeners.riskEditBtnAction]]">
+                      <span slot="startIcon" class="oj-ux-ico-edit" style="font-size: 16px;"></span>
+                    </oj-button>
+                  </div>
+                </template>
+
+                <template slot="riskNumberTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.index + 1 ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-input-text value="[[ $current.index + 1 ]]" readonly="true" style="width:100%;"></oj-input-text>
+                  </oj-bind-if>
+                </template>
+
+                <!-- RISK CATEGORY -->
+                <template slot="riskCategoryTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-select-single id="riskCategorySelect" data="[[ $page.variables.ADPriskCategory ]]"
+                      value="{{ $page.variables.lvCurrentRow.risk_category_id }}" item-text="label"
+                      style="width:100%;" aria-label="Risk Category">
+                    </oj-select-single>
+                  </oj-bind-if>
+                </template>
+
+                <!-- RISK DESCRIPTION -->
+                <template slot="riskDescTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-text-area value="{{ $page.variables.lvCurrentRow.risk_description }}"
+                      rows="2" style="width:100%;">
+                    </oj-text-area>
+                  </oj-bind-if>
+                </template>
+
+                <!-- CAUSES -->
+                <template slot="riskCausesTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-input-text value="{{ $page.variables.lvCurrentRow.causes }}" style="width:100%;"></oj-input-text>
+                  </oj-bind-if>
+                </template>
+
+                <!-- CONSEQUENCE -->
+                <template slot="riskConsequenceTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-input-text value="{{ $page.variables.lvCurrentRow.consequence }}" style="width:100%;"></oj-input-text>
+                  </oj-bind-if>
+                </template>
+
+                <!-- EXPECTED OCCURRENCE -->
+                <template slot="riskOccurrenceTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-input-text value="{{ $page.variables.lvCurrentRow.expected_occurrence }}" style="width:100%;"></oj-input-text>
+                  </oj-bind-if>
+                </template>
+
+                <!-- LIKELIHOOD -->
+                <!-- FIX: Was data="[[$variables.getCommonLovLookupListSDP3]]" item-text="lookup_value_name" -->
+                <!-- NOW: data="[[$page.variables.ADPlikelihood]]" item-text="label"                         -->
+                <!-- Search works via textFilterAttributes:["label"] set on ADPlikelihood in JSON             -->
+                <template slot="riskLikelihoodTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-select-single id="riskLikelihoodSelect" data="[[ $page.variables.ADPlikelihood ]]"
+                      value="{{ $page.variables.lvCurrentRow.likelihood_id }}" item-text="label"
+                      aria-label="Risk Likelihood" style="width:100%;">
+                    </oj-select-single>
+                  </oj-bind-if>
+                </template>
+
+                <!-- SCOPE -->
+                <template slot="riskScopeTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-select-single id="riskScopeSelect" aria-label="Risk Scope" data="[[ $page.variables.ADPscope ]]"
+                      value="{{ $page.variables.lvCurrentRow.scope }}" item-text="label" style="width:100%;">
+                    </oj-select-single>
+                  </oj-bind-if>
+                </template>
+
+                <!-- TIME -->
+                <template slot="riskTimeTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-select-single id="riskTimeSelect" aria-label="Risk Time" data="[[ $page.variables.ADPscope ]]"
+                      value="{{ $page.variables.lvCurrentRow.time }}" item-text="label" style="width:100%;">
+                    </oj-select-single>
+                  </oj-bind-if>
+                </template>
+
+                <!-- COST -->
+                <template slot="riskCostTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-select-single id="riskCostSelect" aria-label="Risk Cost" data="[[ $page.variables.ADPscope ]]"
+                      value="{{ $page.variables.lvCurrentRow.cost }}" item-text="label" style="width:100%;">
+                    </oj-select-single>
+                  </oj-bind-if>
+                </template>
+
+                <!-- QHSE -->
+                <template slot="riskQhseTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-select-single id="riskQhseSelect" aria-label="Risk QHSE" data="[[ $page.variables.ADPscope ]]"
+                      value="{{ $page.variables.lvCurrentRow.qhse }}" item-text="label" style="width:100%;">
+                    </oj-select-single>
+                  </oj-bind-if>
+                </template>
+
+                <!-- STRENGTH -->
+                <template slot="riskStrengthTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <span class="[[ 'risk-badge risk-badge-' + ($current.data || 'minor').toLowerCase() ]]">
+                      <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                    </span>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-input-text value="{{ $page.variables.lvCurrentRow.strength }}" style="width:100%;"
+                      disabled="true"></oj-input-text>
+                  </oj-bind-if>
+                </template>
+
+                <!-- OVERALL RISK RATING -->
+                <template slot="riskRatingTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <span class="[[ 'risk-badge risk-badge-' + ($current.data || 'low').toLowerCase() ]]">
+                      <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                    </span>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-input-text value="{{ $page.variables.lvCurrentRow.overall_risk_rating }}" style="width:100%;"
+                      readonly="true"></oj-input-text>
+                  </oj-bind-if>
+                </template>
+
+                <!-- RISK RESPONSE STRATEGY -->
+                <template slot="riskStrategyTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-select-single id="riskStrategySelect" aria-label="Risk Strategy"
+                      data="[[ $page.variables.ADPstrategy ]]"
+                      value="{{ $page.variables.lvCurrentRow.risk_response_strategy }}"
+                      item-text="label" style="width:100%;">
+                    </oj-select-single>
+                  </oj-bind-if>
+                </template>
+
+                <!-- PREVENTATIVE / CONTINGENCY ACTIONS -->
+                <template slot="riskActionsTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-text-area value="{{ $page.variables.lvCurrentRow.prevent_cont_actions }}"
+                      rows="2" style="width:100%;">
+                    </oj-text-area>
+                  </oj-bind-if>
+                </template>
+
+                <!-- OWNER -->
+                <!-- FIX: Was data="[[$variables.getCommonLovLookupListSDP2]]" item-text="lookup_value_name" -->
+                <!-- NOW: data="[[$page.variables.ADPowner]]" item-text="label"                              -->
+                <!-- Search works via textFilterAttributes:["label"] set on ADPowner in JSON                 -->
+                <template slot="riskOwnerTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-select-single id="riskOwnerSelect" data="[[ $page.variables.ADPowner ]]"
+                      value="{{ $page.variables.lvCurrentRow.owner_id }}" item-text="label"
+                      aria-label="Risk Owner" style="width:100%;">
+                    </oj-select-single>
+                  </oj-bind-if>
+                </template>
+
+                <!-- ACTION OWNER -->
+                <template slot="riskActionOwnerTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-input-text value="{{ $page.variables.lvCurrentRow.action_owner }}" style="width:100%;"></oj-input-text>
+                  </oj-bind-if>
+                </template>
+
+                <!-- EXPECTED RETIREMENT -->
+                <template slot="riskRetirementTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <!-- <oj-bind-text value="[[ $current.data ]]"></oj-bind-text> -->
+                    <oj-input-date value="[[ $current.data ]]"
+                      converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' style="width:100%;"
+                      readonly="true">
+                    </oj-input-date>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-input-date value="{{ $page.variables.lvCurrentRow.expected_retirement }}"
+                      converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' style="width:100%;">
+                    </oj-input-date>
+                  </oj-bind-if>
+                </template>
+
+                <!-- STATUS -->
+                <template slot="riskStatusTemplate">
+                  <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                    <span class="[[ 'risk-status-badge risk-status-' + ($current.data || 'open').toLowerCase().replace(' ', '-') ]]">
+                      <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                    </span>
+                  </oj-bind-if>
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                    <oj-select-single id="riskStatusSelect" aria-label="Risk Status"
+                      data="[[ $page.variables.ADPstatus ]]"
+                      value="{{ $page.variables.lvCurrentRow.status }}"
+                      item-text="label" style="width:100%;">
+                    </oj-select-single>
+                  </oj-bind-if>
+                </template>
+
+                <!-- DELETE -->
+                <template slot="riskDeleteTemplate">
+                  <div class="custom-button-align">
+                    <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                      on-oj-action="[[$listeners.deleteRiskBtnAction]]">
+                      <span slot="startIcon" class="oj-ux-ico-trash" style="font-size: 16px; color: #dc3545;"></span>
+                    </oj-button>
+                  </div>
+                </template>
+
+              </oj-table>
+            </div>
+          </div>
+
+        </div>
+        <!-- End slot="main" -->
+
+      </oj-sp-advanced-create-edit>
+
+      <!-- Delete Confirmation Dialog - root level, outside oj-sp -->
+      <!-- Buttons use id attributes so onDeleteRisk.js can bind click listeners -->
+      <!-- programmatically via getElementById — same pattern as progressDialog  -->
+      <oj-dialog id="deleteConfirmDialog" cancel-behavior="none" dialog-title="Confirm Delete"
+        style="width: 420px; overflow: hidden;" drag-affordance="title-bar" header-decoration="off">
+        <div slot="body" style="padding: 1.5rem;">
+          <div class="oj-flex oj-sm-align-items-center" style="gap: 1rem;">
+            <span style="font-size: 0.95rem;">Are you sure you want to delete this risk record?</span>
+          </div>
+        </div>
+        <div slot="footer" class="oj-flex oj-sm-justify-content-flex-end" style="gap: 0.5rem; padding: 0.5rem;">
+          <oj-button id="deleteCancelBtn" chroming="outlined" display="label" label="Cancel"></oj-button>
+          <oj-button id="deleteConfirmBtn" chroming="outlined" label="Ok"></oj-button>
+        </div>
+      </oj-dialog>
+
+      <!-- Progress Dialog - root level, outside oj-sp -->
+      <oj-dialog id="progressDialog" cancel-behavior="none" dialog-title="Processing" style="width: 300px;">
+        <div slot="body" class="oj-flex oj-sm-align-items-center oj-sm-justify-content-center"
+          style="padding: 2rem; gap: 1rem;">
+          <oj-progress-circle size="sm" value="-1"></oj-progress-circle>
+          <span>Please wait...</span>
+        </div>
+      </oj-dialog>
+
+    </div>
+  </div>
+</div>
+
+<oj-dialog dialog-title="About" id="aboutDialog" cancel-behavior="icon" style="width: 450px; overflow: hidden;"
+  resize-behavior="resizable" position.my.vertical="top" position.at.vertical="top" drag-affordance="title-bar"
+  header-decoration="off">
+  <div slot="body">
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-sm-12 oj-md-12">
+        <oj-form-layout label-edge='start' columns="1" style="margin-top:23px;margin-left:-20px"
+          user-assistance-density="compact" direction="column" class="oj-formlayout-full-width"
+          label-width="45%">
+          <oj-input-text label-hint="Created By:" style="margin-bottom: -6px;" value="{{ $variables.about.created_by }}"
+            readonly="true" user-assistance-density="compact">
+          </oj-input-text>
+          <oj-input-text label-hint="Created Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.created_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated By:" style="margin-bottom: -6px;"
+            value="{{ $variables.about.last_updated_by }}" readonly="true" user-assistance-density="compact"></oj-input-text>
+          <oj-input-text label-hint="Last Updated Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.last_updated_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated Login:" value="{{ $variables.about.last_updated_login }}" style="margin-bottom: -6px;"
+            readonly="true" user-assistance-density="compact">
+          </oj-input-text>
+        </oj-form-layout>
+      </div>
+    </div>
+  </div>
+  <div slot="footer">
+    <oj-button id="aboutButtonCancel_AC" label="Ok"
+      chroming="outlined" style="margin-top:-20px !important;" on-oj-action="[[$listeners.aboutButtonCancelACAction]]"></oj-button>
+  </div>
+</oj-dialog>

@@ -1,0 +1,111 @@
+{
+    "links": [
+        {
+            "href": "https://opa-oic-dhfsoictest-1745125970397-axbrdbhb3wme-ams.process.oci.oraclecloud.com/process/api/v1/tasks/6b96452d-6637-11f0-85c6-8a34dd8bb66e",
+            "rel": "self"
+        },
+        {
+            "href": "https://opa-oic-dhfsoictest-1745125970397-axbrdbhb3wme-ams.process.oci.oraclecloud.com/process/api/v1/tasks",
+            "rel": "parent"
+        },
+        {
+            "href": "https://opa-oic-dhfsoictest-1745125970397-axbrdbhb3wme-ams.process.oci.oraclecloud.com/process/api/v1/tasks/6b96452d-6637-11f0-85c6-8a34dd8bb66e/comments",
+            "rel": "comments"
+        },
+        {
+            "href": "https://opa-oic-dhfsoictest-1745125970397-axbrdbhb3wme-ams.process.oci.oraclecloud.com/process/api/v1/tasks/6b96452d-6637-11f0-85c6-8a34dd8bb66e/documents",
+            "rel": "documents"
+        },
+        {
+            "href": "https://opa-oic-dhfsoictest-1745125970397-axbrdbhb3wme-ams.process.oci.oraclecloud.com/process/api/v1/tasks/6b96452d-6637-11f0-85c6-8a34dd8bb66e/payload",
+            "rel": "payload"
+        }
+    ],
+    "id": "6b96452d-6637-11f0-85c6-8a34dd8bb66e",
+    "title": "Action Required for Store Request -66",
+    "isAdhoc": false,
+    "priority": 2,
+    "state": "COMPLETED",
+    "substate": "CLAIMED",
+    "isEscalated": false,
+    "reason": {
+        "user": {
+            "id": "439fa7c416204a38a6716503513c357e",
+            "name": "atiq.s@4iapps.com"
+        },
+        "assignee": {
+            "id": "439fa7c416204a38a6716503513c357e",
+            "name": "atiq.s@4iapps.com"
+        },
+        "action": "COMPLETE",
+        "outcome": "APPROVE",
+        "date": "2025-07-21T13:35:20.219+00:00",
+        "comment": "APproved Test for IDCS"
+    },
+    "reasonText": "Completed with outcome APPROVE by atiq.s@4iapps.com on Mon Jul 21 13:35:20 GMT 2025 with comment: APproved Test for IDCS",
+    "assignee": {
+        "id": "439fa7c416204a38a6716503513c357e",
+        "name": "atiq.s@4iapps.com",
+        "displayName": "atiq s"
+    },
+    "outcome": "APPROVE",
+    "fromUser": {
+        "id": "439fa7c416204a38a6716503513c357e",
+        "name": "atiq.s@4iapps.com",
+        "displayName": "atiq s",
+        "type": "USER"
+    },
+    "createdBy": {
+        "id": "439fa7c416204a38a6716503513c357e",
+        "name": "atiq.s@4iapps.com",
+        "displayName": "atiq s",
+        "type": "USER"
+    },
+    "createdDate": "2025-07-21T13:34:26.273+00:00",
+    "lastUpdatedDate": "2025-07-21T13:35:20.219+00:00",
+    "finishedDate": "2025-07-21T13:35:20.334+00:00",
+    "completedDate": "2025-07-21T13:35:20.334+00:00",
+    "assignedDate": "2025-07-21T13:35:19.951+00:00",
+    "processName": "MyStructuredProcess",
+    "processDefinitionTitle": "StoreTransfer",
+    "processDefinitionDescription": "StoreTransfer",
+    "activityInstanceId": "6b95cffc-6637-11f0-85c6-8a34dd8bb66e",
+    "processInstanceId": "6931a19d-6637-11f0-85c6-8a34dd8bb66e",
+    "processDefinitionId": "36072e74-6637-11f0-a5a5-ca15e415cd1d",
+    "processDefinitionKey": "StoreTransfer--1.0--MyStructuredProcess",
+    "processExecutionId": "6931a19d-6637-11f0-85c6-8a34dd8bb66e",
+    "rootInstanceId": "6931a19d-6637-11f0-85c6-8a34dd8bb66e",
+    "rootProcessId": "6931a19d-6637-11f0-85c6-8a34dd8bb66e",
+    "taskDefinitionKey": "flow_a5e1282d-d62a-fff8-2eb8-0078f283082d",
+    "applicationName": "StoreTransfer",
+    "applicationTitle": "StoreTransfer",
+    "externalFormUrl": "https://oic-vbcs-dhfsoictest-vb-axbrdbhb3wme.builder.eu-amsterdam-1.ocp.oraclecloud.com/ic/builder/rt/ManageStoreTransfer/live/webApps/vbredwoodapp/vp/shell/store-transfer-request/transfer-request-add_edit?hdr_id=133847&hdr_method=Edit&taskId=6b96452d-6637-11f0-85c6-8a34dd8bb66e",
+    "candidateUsers": [],
+    "candidateGroups": [],
+    "availableActions": {
+        "system": [
+            {
+                "title": "VIEW_TASK_PAYLOAD",
+                "actionId": "VIEW_TASK_PAYLOAD",
+                "isCommentMandatory": false
+            },
+            {
+                "title": "VIEW_TASK",
+                "actionId": "VIEW_TASK",
+                "isCommentMandatory": false
+            },
+            {
+                "title": "ADD_DOCUMENT",
+                "actionId": "ADD_DOCUMENT",
+                "isCommentMandatory": false
+            },
+            {
+                "title": "ADD_COMMENT",
+                "actionId": "ADD_COMMENT",
+                "isCommentMandatory": false
+            }
+        ],
+        "custom": []
+    },
+    "tags": []
+}

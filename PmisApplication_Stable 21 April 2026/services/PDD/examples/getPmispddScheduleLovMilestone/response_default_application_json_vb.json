@@ -1,0 +1,82 @@
+{
+    "items": [
+        {
+            "lookup_value_id": 6601,
+            "lookup_value_code": "EXECUTION_STAGE_CONSTRUCTION",
+            "lookup_value_name": "Execution Stage - Construction"
+        },
+        {
+            "lookup_value_id": 6605,
+            "lookup_value_code": "PRELIMINARY_DESIGN_REPORT",
+            "lookup_value_name": "Preliminary Design Report"
+        },
+        {
+            "lookup_value_id": 6597,
+            "lookup_value_code": "ADDENDUM_DESIGN",
+            "lookup_value_name": "Addendum - Design"
+        },
+        {
+            "lookup_value_id": 6598,
+            "lookup_value_code": "TENDER_DOCUMENTS",
+            "lookup_value_name": "Tender Documents"
+        },
+        {
+            "lookup_value_id": 6599,
+            "lookup_value_code": "DESIGN",
+            "lookup_value_name": "Design"
+        },
+        {
+            "lookup_value_id": 6600,
+            "lookup_value_code": "EXECUTION_CONSULTANCY",
+            "lookup_value_name": "Execution - Consultancy"
+        },
+        {
+            "lookup_value_id": 6603,
+            "lookup_value_code": "MAINTENANCE_PERIOD_CONSULTANCY",
+            "lookup_value_name": "Maintenance Period - Consultancy"
+        },
+        {
+            "lookup_value_id": 6604,
+            "lookup_value_code": "OPERATION",
+            "lookup_value_name": "Operation"
+        },
+        {
+            "lookup_value_id": 6606,
+            "lookup_value_code": "PRELIMINARY_STUDY_REPORT",
+            "lookup_value_name": "Preliminary Study Report"
+        },
+        {
+            "lookup_value_id": 6607,
+            "lookup_value_code": "SUPERVISION",
+            "lookup_value_name": "Supervision"
+        },
+        {
+            "lookup_value_id": 6608,
+            "lookup_value_code": "TEST_COMMISSION_CONSTRUCTION",
+            "lookup_value_name": "Testing Commissioning - Construction"
+        },
+        {
+            "lookup_value_id": 6602,
+            "lookup_value_code": "FINAL_DESIGN_REPORT",
+            "lookup_value_name": "Final Design Report"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 12,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/schedule/lov/milestone"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/schedule/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/schedule/lov/milestone"
+        }
+    ]
+}

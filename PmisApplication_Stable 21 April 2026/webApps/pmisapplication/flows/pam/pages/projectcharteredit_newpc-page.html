@@ -1,0 +1,1037 @@
+<style>
+  oj-option#project_charter_copy_page_h_cancelAction { display: none !important; }
+  .paf-sl { display:inline-flex;align-items:center;justify-content:center;background-color:#084c4c;color:white;font-weight:bold;font-size:0.9rem;width:26px;height:26px;border-radius:3px;margin-right:0.5rem;flex-shrink:0; }
+  .paf-sh { display:flex;align-items:center;background-color:#084c4c;padding:0.45rem 0.75rem;border-radius:4px 4px 0 0;margin:-1px -1px 0 -1px; }
+  .paf-st { color:white;font-weight:bold;font-size:0.9rem; }
+  .paf-sb { padding:0.75rem; }
+  .paf-panel { border:1px solid #ccc;border-radius:4px;margin-top:0.4rem; }
+  .paf-sst { font-weight:700;color:#084c4c;font-size:0.88rem;border-bottom:1px solid #ccc;padding-bottom:3px;margin:0.7rem 0 0.4rem 0; }
+  .paf-ins { font-size:0.8rem;color:#555;font-style:italic;margin:0 0 0.5rem 0;padding:0.2rem 0 0.2rem 0.5rem;border-left:3px solid #084c4c; }
+  .paf-fl { font-size:0.82rem;font-weight:600;color:#333;margin-bottom:0.2rem; }
+  .paf-fh { font-size:0.76rem;color:#777;font-style:italic;margin:0 0 0.25rem 0; }
+  .paf-rt { width:100%;border-collapse:collapse;font-size:0.82rem;margin-top:0.3rem; }
+  .paf-rt th { background:#084c4c;color:white;padding:5px 8px;text-align:left; }
+  .paf-rt td { border:1px solid #ddd;padding:5px 8px; }
+  .paf-rt tr:nth-child(odd) td { background:#f5f5f5; }
+  .paf-at { width:100%;border-collapse:collapse;font-size:0.83rem; }
+  .paf-at th { background:#084c4c;color:white;padding:6px 10px;text-align:left; }
+  .paf-at td { border:1px solid #ccc;padding:5px 8px;vertical-align:top; }
+  .paf-sg { display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-top:0.5rem; }
+  .paf-sc { border-radius:4px;padding:0.6rem; }
+  .paf-sl2 { font-weight:bold;font-size:0.82rem;margin-bottom:0.3rem; }
+  #cp-justification .oj-text-field-container, #cp-objective .oj-text-field-container,
+  #cp-success .oj-text-field-container, #cp-scope .oj-text-field-container, #cp-procurement .oj-text-field-container,
+  #cp-sw-s .oj-text-field-container, #cp-sw-w .oj-text-field-container, #cp-sw-o .oj-text-field-container,
+  #cp-sw-t .oj-text-field-container, #cp-hse-b .oj-text-field-container,
+  #cp-hse-c .oj-text-field-container, #cp-res-d .oj-text-field-container,
+  #cp-res-h .oj-text-field-container, #cp-res-t .oj-text-field-container, #cp-ap-sig .oj-text-field-container
+  {min-height: 6rem !important; min-width: 15rem !important;}
+
+  #cp-brief .oj-text-field-container {min-height: 3rem !important; min-width: 15rem !important;}
+
+  #cp-hse-a .oj-text-field-container, #cp-hse-d .oj-text-field-container {min-height: 6rem !important; min-width: 100% !important;}
+</style>
+
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width:1px; min-width:100%;">
+    <div id="mainContent">
+      <oj-sp-advanced-create-edit id="project_charter_copy_page" page-title="Project Charter Form" page-subtitle=" " display-options.responsive-padding="on" primary-action.label="Close" on-sp-secondary-action="[[$listeners.projectCharterEditPageSpSecondaryAction]]" on-sp-primary-action="[[$listeners.projectCharterEditPageSpPrimaryAction]]" secondary-actions="[[ $variables.aToolGeneric ]]">
+        <div slot="main" style="padding-top:0; margin-top:0;">
+          <div style="margin-top:0;">
+
+            <!-- A. PROJECT DESCRIPTION -->
+            <div class="paf-panel">
+              <div class="paf-sh"><span class="paf-sl">A</span><span class="paf-st">Project Description</span></div>
+              <div class="paf-sb" style="padding:0;">
+                <table style="width:100%;border-collapse:collapse;">
+                  <colgroup><col style="width:200px;"><col></colgroup>
+                  <tbody>
+                    <tr>
+                      <td
+                        style="border:1px solid #ddd;padding:6px 10px;font-weight:600;background:#f0f7f7;font-size:0.85rem;white-space:nowrap;vertical-align:middle;">
+                        Project Title:
+                      </td>
+                    
+                      <td style="border:1px solid #ddd;padding:4px 8px;">
+                    
+                        <div style="display:flex; gap:10px; align-items:center;">
+                    
+                          <oj-input-text id="cp-title" value="{{ $variables.projectCharterVar.project_title }}"
+                            aria-label="Title" placeholder="Enter project title" user-assistance-density="compact"
+                            style="flex:1;" label-hint="Title"
+                             disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]">
+                          </oj-input-text>
+
+                          <oj-select-single id="project_lov" label-hint="Project Name" aria-label="Project Name"
+                            value="{{ $variables.projectCharterVar.project_id }}" item-text="project_name"
+                            placeholder="Project Name" data="[[ $variables.projectCharterSDP ]]"
+                            on-value-item-changed="[[$listeners.projectLovValueItem]]" style="width: 21rem;"
+                             disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]">
+
+                               <template slot="collectionTemplate" data-oj-as="collection">
+    <oj-table 
+      style="max-width:750px; max-height:300px;" 
+      id="project_lov_table" 
+      horizontal-grid-visible="disabled" 
+      vertical-grid-visible="disabled"
+      class="oj-select-results" 
+      selected.row="[[collection.selected]]"
+      current-row="{{collection.currentRow}}"
+      columns='[
+        {"headerText":"Project Name","field":"project_name"},
+        {"headerText":"Project Number","field":"budget_number"}
+      ]'
+      on-oj-row-action="[[collection.handleRowAction]]" 
+      data="[[collection.data]]">
+
+      <template slot="cellTemplate" data-oj-as="cell">
+        <oj-bind-text value="[[String(cell.data)]]"></oj-bind-text>
+      </template>
+    </oj-table>
+  </template>
+                          </oj-select-single>
+
+                          <oj-input-text id="cp-number" label-hint="Project Number"
+                            value="{{ $variables.projectCharterVar.project_number }}" aria-label="Project Number"
+                            placeholder="Enter project number" user-assistance-density="compact" style="width: 16rem;"
+                            disabled="true">
+                          </oj-input-text>
+                    
+                        </div>
+                    
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="border:1px solid #ddd;padding:6px 10px;font-weight:600;background:#f0f7f7;font-size:0.85rem;vertical-align:top;padding-top:8px;">Brief Project Description:</td>
+                      <td style="border:1px solid #ddd;padding:4px 8px;">
+                        <oj-text-area id="cp-brief" value="{{ $variables.projectCharterVar.project_description }}"
+                          placeholder="Enter a brief project description" rows="3"
+                          style="width:100%; margin-bottom: 0.25rem;" resize-behavior="vertical"
+                          user-assistance-density="compact"  disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]"
+                          ></oj-text-area>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="border:1px solid #ddd;padding:6px 10px;font-weight:600;background:#f0f7f7;font-size:0.85rem;vertical-align:top;padding-top:8px;">Parent Project Charter Number:</td>
+                      <td style="border:1px solid #ddd;padding:4px 8px;">
+                        <div style="display:flex; gap:10px; align-items:center;">
+                          <oj-select-single label-hint="Parent Project Charter Number"
+                            placeholder="Enter Parent Project Charter Number" id="parentProject"
+                            data="[[$variables.getPmispamProjectcharterLovParentprojectcharterListSDP]]"
+                            value="{{ $variables.projectCharterVar.parent_project_charter_id }}"
+                            item-text="parent_ref_num" on-value-item-changed="[[$listeners.parentProjectValueItem]]"
+                             disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]"
+                            >
+                            <template slot="collectionTemplate" data-oj-as="collection">
+                              <oj-table scroll-policy="loadMoreOnScroll" selection-mode='{"row": "single"}'
+                                columns-default='{"resizable": "disabled","sortable": "disabled"}' class="oj-select-results"
+                                columns='[{"headerText":"Parent Project Charter Ref. No","field":"parent_ref_num"}, {"headerText":"Parent Project Charter Name","field":"parent_project_charter_name"}]'
+                                on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]"
+                                selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}" horizontal-grid-visible="enabled"
+                                vertical-grid-visible="enabled" display="grid"></oj-table>
+                            </template>
+                          </oj-select-single>
+                          <oj-input-text id="parentProjectCharterName" label-hint="Parent Project Charter Name"
+                            aria-label="Parent Project Charter Name" placeholder="Parent Project Charter Name"
+                            user-assistance-density="compact" style="width:100%;" disabled="true"
+                            value="{{ $variables.display_parentPC_Name }}">
+                          </oj-input-text>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="border:1px solid #ddd;padding:6px 10px;font-weight:600;background:#f0f7f7;font-size:0.85rem;white-space:nowrap;vertical-align:middle;">Initiated By:</td>
+                      <td style="border:1px solid #ddd;padding:4px 8px;">
+                        <oj-input-text id="cp-init-by" aria-label="Initiated By" value="{{ $variables.projectCharterVar.created_by }}"
+                          placeholder="Name and title of initiator" user-assistance-density="compact" style="width:100%;" disabled="true">
+                        </oj-input-text>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style="border:1px solid #ddd;padding:6px 10px;font-weight:600;background:#f0f7f7;font-size:0.85rem;vertical-align:top;padding-top:8px;">Region:</td>
+                      <td style="border:1px solid #ddd;padding:4px 8px;">
+                        <div style="width: 100%; display: flex; gap: 10px; align-items: center;">
+                          <oj-select-single id="region" label-hint="Region"
+                            value="{{ $variables.projectCharterVar.region_id }}"
+                            data="[[ $variables.getPmisLovRegionNameListSDP ]]" item-text="lookup_value_name"
+                            on-value-item-changed="[[$listeners.regionValueItem]]" placeholder="Region Name"
+                             disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]"
+                            >
+                            <template slot="collectionTemplate" data-oj-as="collection">
+                              <oj-table scroll-policy="loadMoreOnScroll" selection-mode='{"row": "single"}'
+                                columns-default='{"resizable": "disabled","sortable": "disabled"}' class="oj-select-results"
+                                columns='[{"headerText":"Region Name","field":"lookup_value_name"}, {"headerText":"Region Code","field":"lookup_value_code"}]'
+                                on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]"
+                                selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}" horizontal-grid-visible="enabled"
+                                vertical-grid-visible="enabled" display="grid"></oj-table>
+                            </template>
+                          </oj-select-single>
+
+                  <!-- <oj-input-text id="cp-status" label-hint="Status" value="{{ $variables.projectCharterVar.status_name }}" user-assistance-density="compact" disabled="true"></oj-input-text> -->
+                  <oj-input-text id="cp-status" label-hint="Workflow Status" value="{{ $variables.projectCharterVar.workflow_status }}" user-assistance-density="compact" disabled="true"></oj-input-text>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <!-- <tr>
+                      <td
+                        style="border:1px solid #ddd;padding:6px 10px;font-weight:600;background:#f0f7f7;font-size:0.85rem;vertical-align:top;padding-top:8px;">
+                        Project Ownership & Timeline:</td>
+                      <td style="border:1px solid #ddd;padding:4px 8px;">
+                        <div style="padding: 1rem;">
+                          <div class="oj-flex oj-sm-flex-wrap-wrap" style="gap: 2rem;">
+                    
+                            <div class="oj-flex-item" style="flex: 1; min-width: 300px;">
+                    
+                              <div style="border-bottom: 2px solid #084c4c; padding-bottom: 0.25rem; margin-bottom: 0.25rem;">
+                                <h6 style="margin: 0; color: #084c4c; font-weight: 600; font-size: 0.95rem;">
+                                  <span class="oj-ux-ico-user" style="margin-right: 0.5rem;"></span>
+                                  Project Owner Information
+                                </h6>
+                              </div>
+                    
+                              <oj-form-layout max-columns="1" label-edge="start" label-width="45%" colspan-wrap="wrap"
+                                user-assistance-density="compact" direction="row">
+                    
+                                <oj-input-text id="project-owner" placeholder="Project Owner"
+                                  value="{{ $variables.projectCharterVar.project_owner }}" style="width: 100%; max-width: 20rem;"
+                                  label-hint="Project Owner">
+                                </oj-input-text>
+                    
+                                <oj-input-text id="execution-director" label-hint="Execution Director" placeholder="Execution Director"
+                                  value="{{ $variables.projectCharterVar.execution_director }}" style="width: 100%; max-width: 20rem;">
+                                </oj-input-text>
+                    
+                              </oj-form-layout>
+                    
+                            </div>
+                    
+                    
+                            <div class="oj-flex-item" style="flex: 1; min-width: 300px;">
+                    
+                              <div style="border-bottom: 2px solid #084c4c; padding-bottom: 0.25rem; margin-bottom: 0.25rem;">
+                                <h6 style="margin: 0; color: #084c4c; font-weight: 600; font-size: 0.95rem;">
+                                  <span class="oj-ux-ico-calendar" style="margin-right: 0.5rem;"></span>
+                                  Key Dates
+                                </h6>
+                              </div>
+                    
+                              <oj-form-layout max-columns="1" label-edge="start" label-width="45%" colspan-wrap="wrap"
+                                user-assistance-density="compact">
+                    
+                                <oj-input-date id="design-date" label-hint="Design" value="{{ $variables.projectCharterVar.design_date }}"
+                                  converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'
+                                  style="width: 100%; max-width: 20rem;">
+                                </oj-input-date>
+                    
+                                <oj-input-date id="construction-date" label-hint="Construction"
+                                  value="{{ $variables.projectCharterVar.construction_date }}"
+                                  converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'
+                                  style="width: 100%; max-width: 20rem;">
+                                </oj-input-date>
+                    
+                                <oj-input-date id="testing-commissioning-date" label-hint="Testing & Commissioning"
+                                  value="{{ $variables.projectCharterVar.testing_commissioning_date }}"
+                                  converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'
+                                  style="width: 100%; max-width: 20rem;">
+                                </oj-input-date>
+                    
+                                <oj-input-date id="tender-award-date" label-hint="Tender Award"
+                                  value="{{ $variables.projectCharterVar.tender_award }}"
+                                  converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'
+                                  style="width: 100%; max-width: 20rem;">
+                                </oj-input-date>
+                    
+                              </oj-form-layout>
+                    
+                            </div>
+                    
+                          </div>
+                        </div>
+                      </td>
+                    </tr> -->
+
+                    <tr>
+                      <td style="border:1px solid #ddd;padding:6px 10px;font-weight:600;background:#f0f7f7;font-size:0.85rem;white-space:nowrap;vertical-align:middle;">Date and Revision:</td>
+                      <td style="border:1px solid #ddd;padding:6px 8px;">
+                        <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;">
+                          <oj-input-date id="cp-rev-date" label-hint="Date"
+                            value="{{ $variables.projectCharterVar.created_date }}"
+                            converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}'
+                            user-assistance-density="compact" style="width:14rem;" disabled="true"></oj-input-date>
+                          <oj-input-text id="cp-ref-num" label-hint="Ref No." value="{{ $variables.projectCharterVar.ref_num }}" user-assistance-density="compact" disabled="true" style="width:11rem;"></oj-input-text>
+                          <!-- <oj-input-text id="cp-status" label-hint="Status" value="{{ $variables.projectCharterVar.status_name }}" user-assistance-density="compact" disabled="true" style="width:10rem;"></oj-input-text> -->
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- B. PURPOSE / JUSTIFICATION -->
+            <div class="paf-panel">
+              <div class="paf-sh"><span class="paf-sl">B</span><span class="paf-st">Project Purpose / Justification *</span></div>
+              <div class="paf-sb">
+                <p class="paf-ins">Describe the business case or the reason behind the existence of this project. (List &amp; attach appropriate documents, if any)</p>
+                <div class="paf-fl">Justification:</div>
+                <oj-text-area id="cp-justification" value="{{ $variables.projectCharterVar.justification }}" placeholder="Describe the business case and justification..." rows="5" style="width:100%;" 
+                  resize-behavior="vertical" user-assistance-density="compact" 
+                   disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]">
+                </oj-text-area>
+              </div>
+            </div>
+
+            <!-- C. OBJECTIVE & SUCCESS CRITERIA -->
+            <div class="paf-panel">
+              <div class="paf-sh"><span class="paf-sl">C</span><span class="paf-st">Project Objective &amp; Success Criteria</span></div>
+              <div class="paf-sb">
+                <p class="paf-ins">Objectives should be SMART: Specific, Measurable, Attainable, Realistic, and Time-bound. The PM must be able to track these objectives to determine if the project is on the path to success.</p>
+                <div class="paf-fl">Objective:</div>
+                <oj-text-area id="cp-objective" value="{{ $variables.projectCharterVar.project_objective }}" placeholder="Enter SMART project objectives..." rows="4" style="width:100%;" resize-behavior="vertical" user-assistance-density="compact"
+                 disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]"></oj-text-area>
+                <div class="paf-fl" style="margin-top:0.6rem;">Success Criteria:</div>
+                <oj-text-area id="cp-success" value="{{ $variables.projectCharterVar.success_criteria }}" placeholder="Define measurable success criteria..." rows="4" style="width:100%;" resize-behavior="vertical" user-assistance-density="compact"
+                 disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]"></oj-text-area>
+                <div style="border-top:2px solid #084c4c;margin-top:0.85rem;padding-top:0.6rem;">
+                  <div class="paf-sst">Project Scope</div>
+                  <p class="paf-ins">Describe the scope of the project. The project scope establishes the boundaries of the project. It identifies the limits of the project and defines the deliverables.</p>
+                  <oj-text-area id="cp-scope" value="{{ $variables.projectCharterVar.project_scope }}" placeholder="Describe the project scope, boundaries and deliverables..." rows="4" style="width:100%;" resize-behavior="vertical" user-assistance-density="compact"
+                   disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]"></oj-text-area>
+                </div>
+              </div>
+            </div>
+
+            <!-- D. PROJECT RISK AND DEPENDENCIES -->
+            <div class="paf-panel">
+              <div class="paf-sh"><span class="paf-sl">D</span><span class="paf-st">Project Risk and Dependencies</span></div>
+              <div class="paf-sb">
+                <p class="paf-ins">This section outlines the approach for identifying and managing high-level project risks and critical dependencies. The objective is to proactively recognize potential events or conditions that may affect project delivery and to define appropriate mitigation measures to minimize their impact on cost, schedule, scope, quality, and strategic objectives.</p>
+                <!-- Risks -->
+                <div style="display:flex;justify-content:space-between;align-items:center;margin:0.4rem 0 0.3rem 0;">
+                  <div class="paf-sst" style="margin:0;border:none;">Risks:</div>
+                  <div style="display:flex;gap:6px;">
+                    <oj-button chroming="outlined" id="cp-risk-add" on-oj-action="[[$listeners.riskAddBtnAction]]"
+                      label="Add Risk"
+                      disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) && ($variables.pNavCode === '' || $variables.enterType === 'PROJECT_CREATE') ]]"><span class="oj-ux-ico-plus" slot="startIcon"></span></oj-button>
+                    <oj-button chroming="outlined" id="cp-risk-ref" on-oj-action="[[$listeners.riskRefreshBtnAction]]" label="Refresh" disabled="[[ $variables.pNavCode === 'CREATE' || $variables.enterType === 'PROJECT_CREATE' ]]"><span class="oj-ux-ico-refresh" slot="startIcon"></span></oj-button>
+                  </div>
+                </div>
+                <oj-table id="cp-risk-tbl" data="{{ $variables.ADPmajorRisk }}" columns-default.sortable="disabled" columns-default.resizable="enabled" class="oj-sm-width-full oj-bg-body" display="grid" selection-mode.row="single" horizontal-grid-visible="enabled" vertical-grid-visible="enabled" columns="{{ $constants.majorRisksColumns }}">
+                  <template slot="risk_actions_template"><div class="custom-button-align">
+                    <oj-button display="icons" chroming="borderless" class="oj-button-sm" on-oj-action="[[$listeners.riskEditAction]]" title="Edit"
+                     disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]">
+                      <span class="oj-ux-ico-edit" slot="startIcon" style="font-size:18px;"></span>
+                    </oj-button>
+                    <oj-button display="icons" chroming="borderless" class="oj-button-sm" on-oj-action="[[$listeners.riskDeleteAction]]" title="Delete"
+                     disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]">
+                      <span class="oj-ux-ico-trash" slot="startIcon" style="font-size:18px;"></span>
+                    </oj-button></div>
+                  </template>
+                  <template slot="risk_title_template"><oj-bind-text value="[[ $current.data ]]"></oj-bind-text></template>
+                  <template slot="risk_description_template"><oj-bind-text value="[[ $current.data ]]"></oj-bind-text></template>
+                  <template slot="risk_impact_template"><oj-bind-text value="[[ $current.data ]]"></oj-bind-text></template>
+                  <template slot="risk_mitigation_template"><oj-bind-text value="[[ $current.data ]]"></oj-bind-text></template>
+                </oj-table>
+                <!-- Dependence -->
+                <div style="border-top:1px dashed #aaa;margin-top:0.85rem;padding-top:0.6rem;">
+                  <p class="paf-ins" style="margin-bottom:0.4rem;">Dependence is identified to highlight projects, assets, or commitments that rely on the timely delivery of this project. Any delay in procurement or execution may result in cascading impacts on connected infrastructure, service levels, regulatory compliance, or strategic programs.</p>
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.3rem;">
+                    <div class="paf-sst" style="margin:0;border:none;">Dependence:</div>
+                    <div style="display:flex;gap:6px;">
+                      <oj-button chroming="outlined" id="cp-dep-add"
+                        on-oj-action="[[$listeners.dependencyAddBtnAction]]" label="Add Dependency"
+                        disabled="[[ !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) && ($variables.pNavCode === '' || $variables.enterType === 'PROJECT_CREATE') ]]"><span class="oj-ux-ico-plus" slot="startIcon"></span></oj-button>
+                      <oj-button chroming="outlined" id="cp-dep-ref" on-oj-action="[[$listeners.dependencyRefreshBtnAction]]" label="Refresh" disabled="[[ $variables.pNavCode === 'CREATE' || $variables.enterType === 'PROJECT_CREATE' ]]"><span class="oj-ux-ico-refresh" slot="startIcon"></span></oj-button>
+                    </div>
+                  </div>
+                  <oj-table id="cp-dep-tbl" data="{{ $variables.ADPdependency }}" columns-default.sortable="disabled" columns-default.resizable="enabled" class="oj-sm-width-full oj-bg-body" display="grid" selection-mode.row="single" horizontal-grid-visible="enabled" vertical-grid-visible="enabled" columns="{{ $constants.dependencyColumns }}">
+                    <template slot="dependency_actions_template"><div class="custom-button-align"><oj-button display="icons" chroming="borderless" class="oj-button-sm" on-oj-action="[[$listeners.dependencyEditAction]]" title="Edit"><span class="oj-ux-ico-edit" slot="startIcon" style="font-size:18px;"></span></oj-button><oj-button display="icons" chroming="borderless" class="oj-button-sm" on-oj-action="[[$listeners.dependencyDeleteAction]]" title="Delete"><span class="oj-ux-ico-trash" slot="startIcon" style="font-size:18px;"></span></oj-button></div></template>
+                    <template slot="dependency_project_dependencies_template"><oj-bind-text value="[[ $current.data ]]"></oj-bind-text></template>
+                    <template slot="dependency_details_template"><oj-bind-text value="[[ $current.data ]]"></oj-bind-text></template>
+                    <template slot="dependency_impacts_template"><oj-bind-text value="[[ $current.data ]]"></oj-bind-text></template>
+                    <template slot="dependency_info_template"><oj-bind-text value="[[ $current.data ]]"></oj-bind-text></template>
+                  </oj-table>
+                </div>
+              </div>
+            </div>
+
+            <!-- E. PROCUREMENT STRATEGY -->
+            <div class="paf-panel">
+              <div class="paf-sh"><span class="paf-sl">E</span><span class="paf-st">Project Procurement Strategy</span></div>
+              <div class="paf-sb">
+                <p class="paf-ins">Describe the contract to be used to manage risks during the implementation of the project considering the time, budget and availability of consultants and contractors to take advantage of the opportunities summarized in SWOT analysis table to meet the objectives of the project.</p>
+                <div class="paf-fl">Procurement Strategy:</div>
+                <oj-text-area id="cp-procurement" value="{{ $variables.projectCharterVar.procurement_assumption }}" placeholder="Describe the procurement strategy..." rows="5" style="width:100%;" resize-behavior="vertical" user-assistance-density="compact"
+                 disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]">
+                 </oj-text-area>
+                <div style="border-top:1px solid #ccc;margin-top:0.85rem;padding-top:0.6rem;">
+                  <div class="paf-sst">Project SWOT Analysis</div>
+                  <div class="paf-sg">
+                    <div class="paf-sc" style="background:#e8f5e9;border-left:4px solid #2e7d32;"><div class="paf-sl2" style="color:#2e7d32;">S — Strengths</div>
+                    <oj-text-area id="cp-sw-s" label-hint="" placeholder="List project strengths..."
+                      value="{{ $variables.projectCharterVar.strength }}" rows="4" style="width:100%;" resize-behavior="vertical" user-assistance-density="compact"
+                       disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]">
+                    </oj-text-area></div>
+                    <div class="paf-sc" style="background:#fff8e1;border-left:4px solid #e65100;">
+                      <div class="paf-sl2" style="color:#e65100;">W — Weaknesses</div>
+                        <oj-text-area id="cp-sw-w" label-hint="" placeholder="List project weaknesses..." value="{{ $variables.projectCharterVar.weakness }}" 
+                          rows="4" style="width:100%;" resize-behavior="vertical" user-assistance-density="compact"
+                           disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]">
+                        </oj-text-area></div>
+                    <div class="paf-sc" style="background:#e3f2fd;border-left:4px solid #1565c0;">
+                      <div class="paf-sl2" style="color:#1565c0;">O — Opportunities</div><oj-text-area id="cp-sw-o" label-hint="" placeholder="List opportunities..." 
+                        value="{{ $variables.projectCharterVar.opportunities }}" rows="4" style="width:100%;" resize-behavior="vertical" user-assistance-density="compact"
+                         disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]">
+                        </oj-text-area></div>
+                    <div class="paf-sc" style="background:#fce4ec;border-left:4px solid #b71c1c;">
+                      <div class="paf-sl2" style="color:#b71c1c;">T — Threats</div>
+                      <oj-text-area id="cp-sw-t" label-hint="" placeholder="List threats..." 
+                        value="{{ $variables.projectCharterVar.threats }}" rows="4" style="width:100%;" resize-behavior="vertical" user-assistance-density="compact"
+                         disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]">
+                      </oj-text-area></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- F. QHSE REQUIREMENTS -->
+            <div class="paf-panel">
+              <div class="paf-sh"><span class="paf-sl">F</span><span class="paf-st">QHSE Requirements</span></div>
+              <div class="paf-sb">
+                <div class="paf-sst">1. HSE Integration Requirements</div>
+                <p class="paf-ins">The following elements are to be mandatorily covered in the Project Charter and enforced during design and tender stages:</p>
+                <div style="display:grid;grid-template-columns:1fr;gap:0.5rem;">
+                  <div>
+                    <!-- <div class="paf-fl">A. Dedicated HSE Design Integration Section:</div><p class="paf-fh">The design guidelines must include a section on "HSE Design Integration" outlining hazard identification, risk mitigation, and operational safety considerations.</p> -->
+                    <oj-text-area id="cp-hse-a" label-hint="" placeholder="Describe the HSE design integration section approach..." 
+                      value="{{ $variables.projectCharterVar.hse_integration_req }}" rows="3" style="width:100%;"
+                       disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]"
+                      resize-behavior="vertical" user-assistance-density="compact"></oj-text-area>
+                  </div>
+                  <!-- <div><div class="paf-fl">B. Design-Stage Safety Measures:</div><p class="paf-fh">Incorporate Fire Protection Design and other design-stage safety measures.</p><oj-text-area id="cp-hse-b" label-hint="" placeholder="List design-stage safety measures..." value="{{ $variables.qhseVar.hse_design_measures }}" rows="3" style="width:100%;" resize-behavior="vertical" user-assistance-density="compact"></oj-text-area></div>
+                  <div><div class="paf-fl">C. Environmental Compliance:</div><p class="paf-fh">Early application and coordination for Environmental NOCs; Site-specific EIA.</p><oj-text-area id="cp-hse-c" label-hint="" placeholder="Describe environmental compliance requirements..." value="{{ $variables.qhseVar.environmental_compliance }}" rows="3" style="width:100%;" resize-behavior="vertical" user-assistance-density="compact"></oj-text-area></div>
+                  <div><div class="paf-fl">D. Operational Risk Mitigation:</div><p class="paf-fh">Conduct HAZOP &amp; PEAZ Analysis.</p><oj-text-area id="cp-hse-d" label-hint="" placeholder="Describe operational risk mitigation approach..." value="{{ $variables.qhseVar.operational_risk }}" rows="3" style="width:100%;" resize-behavior="vertical" user-assistance-density="compact"></oj-text-area></div> -->
+                </div>
+                <div class="paf-sst" style="margin-top:0.85rem;">2. Mandatory Reference Documents</div>
+                <p class="paf-ins">Design consultants must comply with the following references:</p>
+
+                <oj-table id="mandatoryReferenceDocument" display="grid" selection-mode.row="single"
+                  horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+                  data="[[ $variables.mandatoryRefDocADP ]]" columns="{{ $constants.mandatoryRefDocColumns }}"
+                  class="oj-sm-width-full">
+                   <template slot="Actions">
+                    <div class="custom-button-align">
+                      <oj-button id="viewStaticRow" display="icons" chroming="borderless"
+                        class="doc-view-btn oj-button-sm" on-oj-action="[[$listeners.viewStaticRowAction]]"
+                         disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]">
+                        <span slot="startIcon" class="oj-ux-ico-edit"></span>
+                      </oj-button>
+                      <oj-button id="upload" display="icons" chroming="borderless" class="doc-delete-btn oj-button-sm"
+                        on-oj-action="[[$listeners.uploadAction]]"
+                         disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]">
+                        <span slot="startIcon" class="oj-ux-ico-upload"></span>
+                      </oj-button>
+                    </div>
+                  </template>
+                  <template slot="remarks">
+                    <oj-bind-text value="Mandatory"></oj-bind-text>
+                  </template>
+                  <template slot="rev">
+                    <oj-bind-text value="[[ $current.data ? $current.data : '—' ]]"></oj-bind-text>
+                  </template>
+                  <template slot="mandatoryRefDocUploadStatus">
+                    <div style="display:flex;align-items:center;justify-content:center;">
+                      <oj-bind-if test="[[ $current.row.attachment_count > 0 ]]">
+                        <span class="oj-ux-ico-check-circle" style="color:#2e7d32;font-size:1.2rem;" title="[[ $current.row.attachment_count + ' attachment(s) uploaded' ]]"></span>
+                      </oj-bind-if>
+                      <oj-bind-if test="[[ !($current.row.attachment_count > 0) ]]">
+                        <span class="oj-ux-ico-close-circle" style="color:#c62828;font-size:1.2rem;" title="No attachment uploaded"></span>
+                      </oj-bind-if>
+                    </div>
+                  </template>
+                </oj-table>
+                <div class="paf-sst" style="margin-top:0.85rem;">3. Responsibilities</div>
+                <div style="display: grid; grid-template-columns: 1fr; gap: 0.5rem;">
+                  <div>
+                    <!-- <div class="paf-fl">Design Consultant:</div><p class="paf-fh">Ensure all above HSE requirements are integrated in design deliverables and BOQs.</p> -->
+                    <oj-text-area id="cp-res-d" label-hint="" placeholder="Enter responsibilities..." value="{{ $variables.projectCharterVar.responsibilities }}" rows="3" style="width:100%;" resize-behavior="vertical" user-assistance-density="compact"
+                       disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]">
+                    </oj-text-area>
+                  </div>
+                  <!-- <div><div class="paf-fl">HSE Department (NWS):</div><p class="paf-fh">Review, verify and provide clearance at each design stage.</p><oj-text-area id="cp-res-h" label-hint="" placeholder="Enter responsibilities..." value="{{ $variables.qhseVar.responsibilities_hse }}" rows="3" style="width:100%;" resize-behavior="vertical" user-assistance-density="compact"></oj-text-area></div>
+                  <div><div class="paf-fl">Tendering Team (CPD):</div><p class="paf-fh">Incorporate all HSE elements in tender documents and evaluation criteria.</p><oj-text-area id="cp-res-t" label-hint="" placeholder="Enter responsibilities..." value="{{ $variables.qhseVar.responsibilities_tender }}" rows="3" style="width:100%;" resize-behavior="vertical" user-assistance-density="compact"></oj-text-area></div> -->
+                </div>
+              </div>
+            </div>
+
+            <!-- G. SUMMARY MILESTONE SCHEDULE -->
+            <div class="paf-panel">
+              <div class="paf-sh"><span class="paf-sl">G</span><span class="paf-st">Summary Milestone Schedule *</span></div>
+              <div class="paf-sb">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem;">
+                  <p class="paf-ins" style="margin:0;">List an estimated schedule of all high-level project milestones (* List &amp;
+                    attach appropriate documents, if any)</p>
+                  <oj-button chroming="outlined" id="cp-ms-add" on-oj-action="[[$listeners.milestoneAddBtnAction]]"
+                    label="Add Milestone"
+                     disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]">
+                    <span class="oj-ux-ico-plus" slot="startIcon"></span>
+                  </oj-button>
+                </div>
+                <oj-table id="cp-ms-tbl" data="{{ $variables.ADPmilestone }}" columns-default.sortable="disabled" columns-default.resizable="enabled" class="oj-sm-width-full oj-bg-body" display="grid" selection-mode.row="single" horizontal-grid-visible="enabled" vertical-grid-visible="enabled" columns="{{ $constants.milestoneColumns }}">
+                  <template slot="milestone_actions_template"><div class="custom-button-align">
+                    <oj-button display="icons" chroming="borderless" class="oj-button-sm" on-oj-action="[[$listeners.milestoneEditAction]]" title="Edit"
+                     disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]">
+                      <span class="oj-ux-ico-edit" slot="startIcon" style="font-size:18px;"></span>
+                    </oj-button>
+                    <oj-button display="icons" chroming="borderless" class="oj-button-sm" on-oj-action="[[$listeners.milestoneDeleteAction]]" title="Delete"
+                     disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]">
+                      <span class="oj-ux-ico-trash" slot="startIcon" style="font-size:18px;"></span>
+                    </oj-button></div></template>
+                  <template slot="milestone_name_template"><oj-bind-text value="[[ $current.data ]]"></oj-bind-text></template>
+                  <template slot="milestone_date_template">
+                    <oj-bind-text value="[[ $application.functions.dateConverion($current.data) ]]"></oj-bind-text>
+                  </template>
+                </oj-table>
+              </div>
+            </div>
+
+            <!-- H. SUMMARY BUDGET -->
+            <div class="paf-panel">
+              <div class="paf-sh"><span class="paf-sl">H</span><span class="paf-st">Summary Budget *</span></div>
+              <div class="paf-sb">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem;">
+                  <p class="paf-ins">Summarize budget containing general cost components and their planned costs.</p>
+                  <div>
+                    <oj-button chroming="outlined" id="cp-ec-add" on-oj-action="[[$listeners.estcostAddBtnAction]]" label="Add Cost"
+                    disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]">
+                      <span class="oj-ux-ico-plus" slot="startIcon"></span>
+                    </oj-button>
+                    <oj-button chroming="outlined" id="cp-ec-ref" on-oj-action="[[$listeners.estcostRefreshBtnAction]]" label="Refresh" disabled="[[ $variables.pNavCode === 'CREATE' || $variables.enterType === 'PROJECT_CREATE' ]]"><span class="oj-ux-ico-refresh" slot="startIcon"></span></oj-button>
+                  </div>
+                </div>
+                <oj-table id="cp-ec-tbl" data="{{ $variables.ADPestimateCost }}" columns-default.sortable="disabled" columns-default.resizable="enabled" class="oj-sm-width-full oj-bg-body" display="grid" selection-mode.row="single" horizontal-grid-visible="enabled" vertical-grid-visible="enabled" columns="{{ $constants.estCostColumns }}">
+                  <template slot="estcost_actions_template"><div class="custom-button-align">
+                    <oj-button display="icons" chroming="borderless" class="oj-button-sm" on-oj-action="[[$listeners.estcostEditAction]]" title="Edit"
+                     disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]">
+                      <span class="oj-ux-ico-edit" slot="startIcon" style="font-size:18px;"></span>
+                    </oj-button>
+                    <oj-button display="icons" chroming="borderless" class="oj-button-sm" on-oj-action="[[$listeners.estcostDeleteAction]]" title="Delete"
+                     disabled="[[ $variables.pNavCode !== 'CREATE' && !['DRA','RIA','RIM','WR'].includes($variables.projectCharterVar.status_code) ]]">
+                      <span class="oj-ux-ico-trash" slot="startIcon" style="font-size:18px;"></span>
+                    </oj-button></div></template>
+                  <template slot="estcost_capex_template"><oj-bind-text value="[[ $current.data || 0.000 ]]"></oj-bind-text></template>
+                  <template slot="estcost_capex_unit_template"><oj-bind-text value="[[ $current.data ]]"></oj-bind-text></template>
+                  <template slot="estcost_opex_template"><oj-bind-text value="[[ $current.data || 0.000 ]]"></oj-bind-text></template>
+                  <template slot="estcost_opex_unit_template"><oj-bind-text value="[[ $current.data ]]"></oj-bind-text></template>
+                  <template slot="estcost_info_template"><oj-bind-text value="[[ $current.data ]]"></oj-bind-text></template>
+                </oj-table>
+              </div>
+            </div>
+
+            <!-- I. PROJECT APPROVAL REQUIREMENTS -->
+            <!-- <div class="paf-panel" style="margin-bottom:0.4rem;">
+              <div class="paf-sh"><span class="paf-sl">I</span><span class="paf-st">Project Approval Requirements</span></div>
+              <div class="paf-sb">
+                <div class="paf-sst">1 - Project Initiation</div>
+                <table class="paf-at" style="margin-top:0.3rem;">
+                  <colgroup><col style="width:130px;"><col><col style="width:220px;"></colgroup>
+                  <tbody>
+                    <tr>
+                      <td style="font-weight:600;background:#f0f7f7;font-size:0.83rem;">Initiated by:</td>
+                      <td><div class="paf-fl">Name &amp; Title:</div><oj-input-text id="cp-ap-name" aria-label="Name" value="{{ $variables.projectCharterVar.project_owner }}" placeholder="Enter name and title" user-assistance-density="compact" style="width:100%;"></oj-input-text></td>
+                      <td><div class="paf-fl">Email / Phone:</div><oj-input-text id="cp-ap-contact" aria-label="Contact" value="{{ $variables.qhseVar.initiator_contact }}" placeholder="Email or phone" user-assistance-density="compact" style="width:100%;"></oj-input-text></td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight:600;background:#f0f7f7;font-size:0.83rem;">Signature:</td>
+                      <td><oj-input-text id="cp-ap-sig" value="{{ $variables.qhseVar.initiator_signature }}" aria-label="Signature" placeholder="Signature / acknowledgment" user-assistance-density="compact" style="width:100%;"></oj-input-text></td>
+                      <td><div class="paf-fl">Date:</div><oj-input-date id="cp-ap-date" aria-label="Date" value="{{ $variables.qhseVar.initiation_date }}" converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' user-assistance-density="compact" style="width:100%;"></oj-input-date></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="paf-sst" style="margin-top:0.85rem;">2 - Authorization</div>
+                <p style="font-size:0.8rem;color:#555;font-style:italic;margin:0 0 0.4rem 0;">Project Initiator or Sponsors:</p>
+                <div style="overflow-x:auto;">
+                  <table class="paf-at">
+                    <colgroup><col style="width:165px;"><col><col style="width:145px;"><col style="width:125px;"></colgroup>
+                    <thead><tr><th>Name</th><th>Role</th><th>Signature</th><th>Date</th></tr></thead>
+                    <tbody>
+                      <tr>
+                        <td><oj-input-text id="cp-au1-n" value="{{ $variables.qhseVar.auth1_name }}" aria-label="Name" placeholder="Name" user-assistance-density="compact" style="width:100%;"></oj-input-text></td>
+                        <td><div style="font-size:0.78rem;color:#444;font-style:italic;">Review by Concerned Planning Manager: Review the Project Charter and ensure that project is developed as per the need, approved master plan, price control and in consultation with all concerned stakeholders</div></td>
+                        <td><oj-input-text id="cp-au1-s" value="{{ $variables.qhseVar.auth1_signature }}" aria-label="Signature" placeholder="Signature" user-assistance-density="compact" style="width:100%;"></oj-input-text></td>
+                        <td><oj-input-date id="cp-au1-d" value="{{ $variables.qhseVar.auth1_date }}" aria-label="Date" converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' user-assistance-density="compact" style="width:100%;"></oj-input-date></td>
+                      </tr>
+                      <tr>
+                        <td><oj-input-text id="cp-au2-n" value="{{ $variables.qhseVar.auth2_name }}" aria-label="Name" placeholder="Name" user-assistance-density="compact" style="width:100%;"></oj-input-text></td>
+                        <td><div style="font-size:0.78rem;color:#444;font-style:italic;">Approved by Asset Planning GM: Ensures that project is developed as per approved master plan in consultation with all below stakeholders</div></td>
+                        <td><oj-input-text id="cp-au2-s" value="{{ $variables.qhseVar.auth2_signature }}" aria-label="Signature" placeholder="Signature" user-assistance-density="compact" style="width:100%;"></oj-input-text></td>
+                        <td><oj-input-date id="cp-au2-d" value="{{ $variables.qhseVar.auth2_date }}" aria-label="Date" converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' user-assistance-density="compact" style="width:100%;"></oj-input-date></td>
+                      </tr>
+                      <tr>
+                        <td><oj-input-text id="cp-au3-n" value="{{ $variables.qhseVar.auth3_name }}" aria-label="Name" placeholder="Name" user-assistance-density="compact" style="width:100%;"></oj-input-text></td>
+                        <td><div style="font-size:0.78rem;color:#444;font-style:italic;">Approved by Asset Engineering GM: Ensures that project is developed as per approved technical consultation with all stakeholders</div></td>
+                        <td><oj-input-text id="cp-au3-s" value="{{ $variables.qhseVar.auth3_signature }}" aria-label="Signature" placeholder="Signature" user-assistance-density="compact" style="width:100%;"></oj-input-text></td>
+                        <td><oj-input-date id="cp-au3-d" value="{{ $variables.qhseVar.auth3_date }}" aria-label="Date" converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' user-assistance-density="compact" style="width:100%;"></oj-input-date></td>
+                      </tr>
+                      <tr>
+                        <td><oj-input-text id="cp-au4-n" value="{{ $variables.qhseVar.auth4_name }}" aria-label="Name" placeholder="Name" user-assistance-density="compact" style="width:100%;"></oj-input-text></td>
+                        <td><div style="font-size:0.78rem;color:#444;font-style:italic;">Approved by Capital Projects Delivery GM / Operation GM: Ensures that, as project owner, previous concerns have been considered, and all requirements and mitigation plans are captured and to complete project as per milestone table within the budget and without LTI.</div></td>
+                        <td><oj-input-text id="cp-au4-s" value="{{ $variables.qhseVar.auth4_signature }}" aria-label="Signature" placeholder="Signature" user-assistance-density="compact" style="width:100%;"></oj-input-text></td>
+                        <td><oj-input-date id="cp-au4-d" value="{{ $variables.qhseVar.auth4_date }}" aria-label="Date" converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' user-assistance-density="compact" style="width:100%;"></oj-input-date></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div> -->
+
+          </div>
+        </div>
+      </oj-sp-advanced-create-edit>
+    </div>
+  </div>
+</div>
+
+<!-- MILESTONE DIALOG -->
+<oj-dialog style="width:420px; max-height:90vh; overflow:hidden;" dialog-title="Milestone Add/Edit" id="milestoneDialog"
+  cancel-behavior="icon" resize-behavior="resizable" drag-affordance="title-bar" position.at.vertical="top"
+  header-decoration="off">
+  <div slot="body"><oj-validation-group id="milestoneForm"><oj-form-layout label-edge="top" direction="column" max-columns="1" user-assistance-density="compact" class="oj-formlayout-full-width">
+    <oj-input-text id="cp-ms-name" label-hint="Milestones" placeholder="Enter milestone description" value="{{ $variables.milestoneVar.milestone }}" style="width:100%;" required="true"></oj-input-text>
+    <oj-input-date id="cp-ms-date" label-hint="By Target Date" value="{{ $variables.milestoneVar.by_target_date }}" converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' style="width:100%;" user-assistance-density="compact"></oj-input-date>
+  </oj-form-layout></oj-validation-group></div>
+  <div slot="footer">
+    <oj-button id="cp-ms-sv-add" on-oj-action="[[$listeners.milestoneSaveAddAnotherAction]]">Save &amp; Add</oj-button>
+    <oj-button id="cp-ms-sv" on-oj-action="[[$listeners.milestoneSaveCloseAction]]">Save &amp; Close</oj-button>
+    <oj-button id="cp-ms-cn" on-oj-action="[[$listeners.milestoneCancelAction]]">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- DEPENDENCY DIALOG -->
+<oj-dialog style="width:520px; max-height:90vh; overflow:hidden;" dialog-title="Dependence Add/Edit"
+  id="dependencyDialog" cancel-behavior="icon" resize-behavior="resizable" drag-affordance="title-bar"
+  position.at.vertical="top" header-decoration="off">
+  <div slot="body"><oj-validation-group id="dependencyForm"><oj-form-layout label-edge="top" direction="column" max-columns="1" user-assistance-density="compact" class="oj-formlayout-full-width">
+    <oj-text-area id="cp-dp-p" label-hint="Project / Issue depends on the project" placeholder="Describe what this project depends on" value="{{ $variables.dependencyVar.project_dependencies }}" rows="3" style="width:100%;" resize-behavior="vertical" required="true"></oj-text-area>
+    <oj-text-area id="cp-dp-d" label-hint="Dependency Details" placeholder="Enter dependency details" value="{{ $variables.dependencyVar.dependency_details }}" rows="3" style="width:100%;" resize-behavior="vertical"></oj-text-area>
+    <oj-text-area id="cp-dp-i" label-hint="Impacts / Consequences" placeholder="Describe impacts and consequences" value="{{ $variables.dependencyVar.impacts_consequences }}" rows="3" style="width:100%;" resize-behavior="vertical"></oj-text-area>
+    <oj-text-area id="cp-dp-a" label-hint="Additional Info" placeholder="Additional information" value="{{ $variables.dependencyVar.additional_info }}" rows="2" style="width:100%;" resize-behavior="vertical"></oj-text-area>
+  </oj-form-layout></oj-validation-group></div>
+  <div slot="footer">
+    <oj-button id="cp-dp-sv-add" on-oj-action="[[$listeners.dependencySaveAddAnotherAction]]">Save &amp; Add</oj-button>
+    <oj-button id="cp-dp-sv" on-oj-action="[[$listeners.dependencySaveCloseAction]]">Save &amp; Close</oj-button>
+    <oj-button id="cp-dp-cn" on-oj-action="[[$listeners.dependencyCancelAction]]">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- ESTIMATE COST DIALOG -->
+<oj-dialog style="width:auto; max-height:90vh; overflow:hidden;" dialog-title="Cost Add/Edit" id="estimateCostDialog"
+  cancel-behavior="icon" resize-behavior="resizable" drag-affordance="title-bar" position.at.vertical="top"
+  header-decoration="off">
+  <div slot="body"><oj-validation-group id="estimateCostForm"><oj-form-layout label-edge="start" direction="row"
+                                                                  columns="1" max-columns="2"
+                                                                  class="oj-formlayout-full-width" label-width="45%">
+    <oj-input-text id="cp-ec-cap" label-hint="Planned Cost Component" placeholder="Enter Project Cost..."
+      value="{{ $variables.estimateCostVar.est_capax_cost }}" style="width:16rem;"></oj-input-text>
+    <oj-input-number id="cp-ec-opx" 
+      label-hint="Planned Cost (RO)" 
+      placeholder="Enter Planned cost amount"
+      value="{{ $variables.estimateCostVar.est_opex_cost }}" 
+      style="width:16rem;"  min="1" step="0"></oj-input-number>
+    <!-- <oj-input-text 
+      id="cp-ec-opx" 
+      label-hint="Planned Cost (RO)" 
+      placeholder="Enter Planned cost amount"
+      value="{{ $variables.estimateCostVar.est_opex_cost }}" 
+      style="width:16rem;"></oj-input-text>  -->
+  </oj-form-layout></oj-validation-group></div>
+  <div slot="footer">
+    <oj-button id="cp-ec-sv-add" on-oj-action="[[$listeners.estcostSaveAddAnotherAction]]">Save &amp; Add</oj-button>
+    <oj-button id="cp-ec-sv" on-oj-action="[[$listeners.estcostSaveCloseAction]]">Save &amp; Close</oj-button>
+    <oj-button id="cp-ec-cn" on-oj-action="[[$listeners.estcostCancelAction]]">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- MAJOR RISK DIALOG -->
+<oj-dialog style="width:450px; max-height:90vh; overflow:hidden;" dialog-title="Risk Add/Edit" id="majorRiskDialog"
+  cancel-behavior="icon" resize-behavior="resizable" drag-affordance="title-bar" position.at.vertical="top"
+  header-decoration="off">
+  <div slot="body"><oj-validation-group id="majorRiskForm"><oj-form-layout label-edge="start" direction="column" max-columns="1" user-assistance-density="compact" class="oj-formlayout-full-width">
+    <oj-input-text id="cp-rk-t" label-hint="Risk" placeholder="Describe the risk" value="{{ $variables.majorRiskVar.major_risk_title }}" style="width:100%;" required="true"></oj-input-text>
+    <oj-input-text id="cp-rk-i" label-hint="Impact" placeholder="Impact" value="{{ $variables.majorRiskVar.impact }}" style="width:100%;" required="true"></oj-input-text>
+    <oj-input-text id="cp-rk-m" label-hint="Mitigation Strategy" placeholder="Mitigation strategy" value="{{ $variables.majorRiskVar.mitigation }}" style="width:100%;" required="true"></oj-input-text>
+    <oj-text-area id="cp-rk-d" label-hint="Description" placeholder="Additional description" value="{{ $variables.majorRiskVar.description }}" rows="3" style="width:100%;"></oj-text-area>
+  </oj-form-layout></oj-validation-group></div>
+  <div slot="footer">
+    <oj-button id="cp-rk-sv-add" on-oj-action="[[$listeners.riskSaveAddAnotherAction]]">Save &amp; Add</oj-button>
+    <oj-button id="cp-rk-sv" on-oj-action="[[$listeners.riskSaveCloseAction]]">Save &amp; Close</oj-button>
+    <oj-button id="cp-rk-cn" on-oj-action="[[$listeners.riskCancelAction]]">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- DELETE CONFIRM DIALOG -->
+<oj-dialog style="display:none;width:500px;overflow:hidden;" dialog-title="Warning" id="delete_dialog" cancel-behavior="icon" header-decoration="off" drag-affordance="title-bar" position.at.vertical="top" position.my.vertical="top">
+  <div slot="body" style="margin-top:1.5rem;"><div class="oj-flex">Are you sure you want to delete the record?</div></div>
+  <div slot="footer"><oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction2]]">Ok</oj-button><oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction]]">Cancel</oj-button></div>
+</oj-dialog>
+
+<!-- PROGRESS DIALOG -->
+<oj-dialog id="progressMsg" dialog-title="Loading..." style="width:300px;overflow:hidden;" cancel-behavior="none" modality="modal" header-decoration="off">
+  <div slot="body"><div style="text-align:center;padding:2rem;"><oj-progress-bar-circular value="-1"></oj-progress-bar-circular><p style="margin-top:1rem;">Please wait while loading...</p></div></div>
+</oj-dialog>
+
+<!-- ABOUT DIALOG -->
+<oj-dialog dialog-title="About" id="aboutDialog" cancel-behavior="icon" style="width:400px; overflow:hidden;" resize-behavior="resizable" position.my.vertical="top" position.at.vertical="top" drag-affordance="title-bar" header-decoration="off">
+  <div slot="body"><div class="oj-flex"><div class="oj-flex-item oj-sm-12 oj-md-12">
+    <oj-form-layout label-edge="start" columns="1" style="margin-top:23px;margin-left:-20px" user-assistance-density="compact" direction="column" class="oj-formlayout-full-width" label-width="45%">
+      <oj-input-text label-hint="Created By:" value="{{ $variables.about.created_by }}" readonly="true" user-assistance-density="compact"></oj-input-text>
+      <oj-input-text label-hint="Created Date:" readonly="true" user-assistance-density="compact" converter='[[ {"type":"datetime","options":{"pattern":"dd-MMM-yyyy hh:mm a"}} ]]' value="{{ $variables.about.created_date }}"></oj-input-text>
+      <oj-input-text label-hint="Last Updated By:" value="{{ $variables.about.last_updated_by }}" readonly="true" user-assistance-density="compact"></oj-input-text>
+      <oj-input-text label-hint="Last Updated Date:" readonly="true" user-assistance-density="compact" converter='[[ {"type":"datetime","options":{"pattern":"dd-MMM-yyyy hh:mm a"}} ]]' value="{{ $variables.about.last_updated_date }}"></oj-input-text>
+      <oj-input-text label-hint="Last Updated Login:" value="{{ $variables.about.last_updated_login }}" readonly="true" user-assistance-density="compact"></oj-input-text>
+    </oj-form-layout>
+  </div></div></div>
+  <div slot="footer"><oj-button id="cp-about-ok" label="Ok" chroming="outlined" style="margin-top:-20px !important;" on-oj-action="[[$listeners.aboutButtonCancelACAction]]"></oj-button></div>
+</oj-dialog>
+
+<oj-dialog dialog-title="Attachment" id="attachmentDialog" cancel-behavior="icon" style="overflow: hidden;"
+  position.at.vertical="top" position.my.vertical="top" drag-affordance="title-bar" resize-behavior="resizable"
+  header-decoration="off">
+
+  <div slot="body">
+    <oj-validation-group valid="{{ $variables.formObj.addDialogValidate }}" id="attachment-validation">
+      <oj-form-layout id="attachmentFormLayout" label-edge="start" direction="row" max-columns="2"
+        user-assistance-density="compact" class="oj-formlayout-full-width">
+
+        <oj-radioset label-hint="Type" required="true" class="oj-choice-direction-row" id="radio"
+          value="{{ $variables.attachmentObj.P_TYPE }}">
+          <oj-option value="FILE">File</oj-option>
+          <oj-option value="TEXT">Text</oj-option>
+          <oj-option value="URL">URL</oj-option>
+        </oj-radioset>
+
+        <!-- FILE Type Fields -->
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'FILE' ]]">
+          <div style="text-align:center; grid-column: 1 / -1;">
+            <oj-file-picker id="attachment-file-picker" selection-mode="single"
+              on-oj-select="[[$listeners.attachmentFilePickerSelect]]">
+              <oj-button slot="trigger" label="Upload" chroming="outlined">
+                <span slot="startIcon" class="oj-ux-ico-upload" style="color: white;"></span>
+              </oj-button>
+            </oj-file-picker>
+          </div>
+        </oj-bind-if>
+
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'FILE' ]]">
+          <oj-input-text id="attachment-file-name" label-hint="File Name" style="width:16rem;" disabled="true"
+            value="{{ $variables.attachmentObj.P_DOCUMENT_NAME }}">
+          </oj-input-text>
+        </oj-bind-if>
+
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'FILE' ]]">
+          <oj-input-text id="attachment-file-type" value="{{ $variables.attachmentObj.P_DOCUMENT_TYPE }}"
+            label-hint="File Type" style="width:16rem;" disabled="true">
+          </oj-input-text>
+        </oj-bind-if>
+
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'FILE' ]]">
+          <oj-input-text id="attachment-file-desc" value="{{ $variables.attachmentObj.P_DESCRIPTION }}"
+            label-hint="Description" style="width:16rem;">
+          </oj-input-text>
+        </oj-bind-if>
+
+        <!-- URL Type Fields -->
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'URL' ]]">
+          <oj-input-text id="attachment-url" label-hint="URL" value="{{ $variables.attachmentObj.P_URL }}"
+            required="true" style="width:16rem;">
+          </oj-input-text>
+        </oj-bind-if>
+
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'URL' ]]">
+          <oj-input-text id="attachment-url-desc" value="{{ $variables.attachmentObj.P_DESCRIPTION }}"
+            label-hint="Description" style="width:16rem;">
+          </oj-input-text>
+        </oj-bind-if>
+
+        <!-- TEXT Type Fields -->
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'TEXT' ]]">
+          <oj-input-text id="attachment-text-title" value="{{ $variables.attachmentObj.P_TITLE }}" label-hint="Title"
+            style="width:16rem;" required="true">
+          </oj-input-text>
+        </oj-bind-if>
+
+        <oj-bind-if test="[[ $variables.attachmentObj.P_TYPE === 'TEXT' ]]">
+          <oj-input-text id="attachment-text-desc" value="{{ $variables.attachmentObj.P_DESCRIPTION }}"
+            label-hint="Description" style="width:16rem;">
+          </oj-input-text>
+        </oj-bind-if>
+
+      </oj-form-layout>
+    </oj-validation-group>
+  </div>
+
+  <div slot="footer" style="display:flex; justify-content:flex-end; margin-top:0.5rem; height: 30px;">
+
+    <oj-button id="attachment-save-add" chroming="outlined" label="Save & Add"
+      style="margin-left:0.5%;margin-right:0.5%;" on-oj-action="[[$listeners.attachmentSaveAddAction]]">
+      <span class="oj-ux-ico-save" slot="startIcon" style="color: white;"></span>
+    </oj-button>
+
+    <oj-button id="attachment-save-close" chroming="outlined" label="Save & Close"
+      style="margin-left:0.5%;margin-right:0.5%;" on-oj-action="[[$listeners.attachmentSaveCloseAction2]]">
+      <span class="oj-ux-ico-save" slot="startIcon" style="color: white;"></span>
+    </oj-button>
+
+    <oj-button id="attachment-cancel" chroming="outlined" label="Cancel" style="margin-left:0.5%;margin-right:0.5%;"
+      on-oj-action="[[$listeners.attachmentCancelAction]]">
+      <span class="oj-ux-ico-cancel-s" slot="startIcon" style="color: white;"></span>
+    </oj-button>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="Attachments" id="attachmentPopup" initial-visibility="hide" resize-behavior="resizable"
+  drag-affordance="title-bar" header-decoration="off" position.my.vertical="top" position.at.vertical="top"
+  style="width: 1200px; max-width: 95vw; overflow: hidden;">
+  <div slot="body" style="padding: 0.5rem 0; overflow: hidden;">
+    <oj-table id="attachmentPopupTable" scroll-policy="loadMoreOnScroll" selection-mode.row="single" display="grid"
+      horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+      columns="{{ $constants.attachmentPopupColumns }}" data="[[ $variables.attachmentPopupADP ]]" style="width: 100%;">
+
+      <template slot="action">
+
+        <oj-button display="icons" chroming="solid" class="" id="deleteBtn" style="padding-left:15px;"
+          on-oj-action="[[$listeners.deleteBtnAction]]">
+          <span class="oj-ux-ico-trash" slot="startIcon" style="font-size: 18px;"></span>
+        </oj-button>
+
+        <oj-button display="icons" chroming="solid" class="" id="editBtn" style="padding-left:15px;"
+          on-oj-action="[[$listeners.editBtnAction]]">
+          <span class="oj-ux-ico-download" slot="startIcon" style="font-size: 18px;"></span>
+        </oj-button>
+
+      </template>
+      <template slot="ColCreatedDate">
+        <oj-bind-text value="[[$application.functions.normalizeDate($current.data)]]"></oj-bind-text>
+      </template>
+    </oj-table>
+  </div>
+  <div slot="footer" style="display: flex; justify-content: flex-end; padding: 0.5rem;">
+    <oj-button label="Ok" chroming="outlined" on-oj-action="[[$listeners.buttonAction3]]"></oj-button>
+  </div>
+</oj-dialog>
+
+
+<!-- Loading Dialog -->
+<oj-dialog id="loadingDialog" dialog-title="Processing..." modality="modal" cancel-behavior="none"
+  header-decoration="off" style="overflow: hidden;">
+  <div slot="body" class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-center">
+    <oj-progress-bar-circular indeterminate="true"></oj-progress-bar-circular>
+  </div>
+</oj-dialog>
+
+<!-- Approve Popup -->
+<!-- <oj-dialog id="approvePopUp" dialog-title="Approve" modality="modal" header-decoration="off" style="overflow: hidden;" position.at.vertical="top">
+  <div slot="body">
+    <oj-validation-group id="approveValidationGroup" valid="{{$variables.approveValid}}">
+      <oj-form-layout label-edge="start">
+        <oj-select-single id="nextApproverSelect" label-hint="Select Next Approver" 
+          data="[[$variables.nextApproverLovSDP]]" 
+          value="{{$variables.updateAction.P_NEXT_APPROVER_ID}}"
+          item-text="person_name">
+        </oj-select-single>
+        <oj-text-area id="approveComments" label-hint="Comments" 
+          value="{{$variables.updateAction.P_COMMENTS}}" rows="3">
+        </oj-text-area>
+      </oj-form-layout>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-button on-oj-action="[[$listeners.approveCancelAction]]">Cancel</oj-button>
+    <oj-button chroming="outlined" on-oj-action="[[$listeners.approveOKAction]]">Approve</oj-button>
+  </div>
+</oj-dialog> -->
+
+<!-- Approve Popup -->
+<oj-dialog id="approvePopUp" dialog-title="Approve" modality="modal" header-decoration="off" style="overflow: hidden;" position.at.vertical="top">
+  <div slot="body">
+    <oj-validation-group id="approveValidationGroup" valid="{{$variables.approveValid}}">
+      <oj-form-layout label-edge="start">
+        <!-- <div> -->
+          <oj-bind-if test="[[ $variables.showApprovalGroupLov === true ]]">
+            <oj-select-single id="approvalGroupSelect" label-hint="Approval Type" required="true"
+              on-value-item-changed="[[$listeners.approvalGroupSelectValueItem]]"
+              data="[[$variables.getApprovalSelectgroupListSDP]]" item-text="user_role_name" placeholder="Approval Type"
+              label-edge="provided" aria-label="Approval Type" user-assistance-density="compact"
+              value="{{ $variables.selectedApprovalGroup.approval_role_code }}">
+              <!-- <template slot="collectionTemplate" data-oj-as="collection">
+                <oj-table scroll-policy="loadMoreOnScroll" horizontal-grid-visible="disabled"
+                  vertical-grid-visible="disabled" selection-mode='{"row": "single"}'
+                  columns-default='{"resizable": "disabled","sortable": "disabled"}' class="oj-select-results"
+                  columns='[{"headerText":"Approval Group","field":"user_role_name"}]'
+                  on-oj-row-action="[[collection.handleRowAction]]"
+                  data="[[collection.data]]" selected.row="[[collection.selected]]"
+                  current-row="{{collection.currentRow}}">
+                </oj-table>
+              </template> -->
+            </oj-select-single>
+          </oj-bind-if>
+            <oj-bind-if
+              test="[[ $variables.selectedApprovalGroup.approval_role_code === 'PMIS_ASSET_PLANNING_GENERAL_MANAGER' ]]">
+              <oj-select-single id="nextApproverSelect" label-hint="Asset Planning GM"
+                data="[[$variables.nextApproverLovSDP]]" value="{{$variables.updateAction.P_NEXT_APPROVER_ID}}"
+                item-text="person_name" required="true">
+              </oj-select-single>
+            </oj-bind-if>
+            <oj-bind-if
+              test="[[ $variables.selectedApprovalGroup.approval_role_code === 'PMIS_CPD_OPD_GENERAL_MANAGER' ]]">
+              <oj-select-single id="nextApproverSelect" label-hint="CPD/OPD GM" data="[[$variables.nextApproverLovSDP]]"
+                value="{{$variables.updateAction.P_NEXT_APPROVER_ID}}" item-text="person_name" required="true">
+              </oj-select-single>
+            </oj-bind-if>
+            <oj-bind-if
+              test="[[ $variables.selectedApprovalGroup.approval_role_code === 'PMIS_ASSET_ENGINEERING_TEAM' ]]">
+              <oj-select-single id="nextApproverSelect" label-hint="Asset Engineering Team" data="[[$variables.nextApproverLovSDP]]"
+                value="{{$variables.updateAction.P_NEXT_APPROVER_ID}}" item-text="person_name" required="true">
+              </oj-select-single>
+            </oj-bind-if>
+
+            <oj-bind-if test="[[ $variables.updateAction.P_APPR_LEVEL === 2 ]]">
+              <oj-select-single id="nextApproverSelect2" label-hint="Asset Engineering GM"
+                data="[[$variables.nextApproverLovSDP]]" value="{{$variables.updateAction.P_NEXT_APPROVER_ID}}"
+                item-text="person_name" required="true">
+              </oj-select-single>
+            </oj-bind-if>
+            
+          <!-- </oj-bind-if> -->
+        <!-- </div> -->
+        <oj-text-area id="approveComments" label-hint="Comments" 
+          value="{{$variables.updateAction.P_COMMENTS}}" rows="3" resize-behavior="vertical">
+        </oj-text-area>
+      </oj-form-layout>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-button on-oj-action="[[$listeners.approveCancelAction]]">Cancel</oj-button>
+    <oj-button chroming="outlined" on-oj-action="[[$listeners.approveOKAction]]">Approve</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Reject Popup -->
+<oj-dialog id="RejectPopup" dialog-title="Reject" modality="modal" header-decoration="off" style="overflow: hidden;" position.at.vertical="top">
+  <div slot="body">
+    <oj-validation-group id="rejectValidationGroup" valid="{{$variables.rejectValid}}">
+      <oj-form-layout label-edge="start">
+        <oj-text-area id="rejectComments" label-hint="Comments" required="true"
+          value="{{$variables.updateAction.P_COMMENTS}}" rows="3">
+        </oj-text-area>
+      </oj-form-layout>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-button on-oj-action="[[$listeners.rejectCancelAction]]">Cancel</oj-button>
+    <oj-button chroming="outlined" on-oj-action="[[$listeners.rejectOKAction]]">Reject</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Withdraw Popup -->
+<oj-dialog id="withdrawPopup" dialog-title="Withdraw" modality="modal" header-decoration="off"
+  style="overflow: hidden;" position.at.vertical="top">
+  <div slot="body">
+    <oj-validation-group id="withdrawValidationGroup" valid="{{$variables.withdrawValid}}">
+      <oj-form-layout label-edge="start">
+        <oj-text-area id="withdrawComments" label-hint="Comments" required="true"
+          value="{{$variables.updateAction.P_COMMENTS}}" rows="3">
+        </oj-text-area>
+      </oj-form-layout>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-button on-oj-action="[[$listeners.withdrawCancelAction]]">Cancel</oj-button>
+    <oj-button chroming="outlined" on-oj-action="[[$listeners.withdrawOKAction]]">Withdraw</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Reassign Popup -->
+<oj-dialog id="ReassignPopup" dialog-title="Reassign" modality="modal" header-decoration="off"
+  style="overflow: hidden;" position.at.vertical="top">
+  <div slot="body">
+    <oj-validation-group id="reassignValidationGroup" valid="{{$variables.reassignvalid}}">
+      <oj-form-layout label-edge="start">
+        <oj-select-single id="reassignToSelect" label-hint="Reassign To" required="true"
+          data="[[$variables.nextApproverLovSDP]]" 
+          value="{{$variables.updateAction.P_NEXT_APPROVER_ID}}"
+          item-text="person_name">
+        </oj-select-single>
+        <oj-text-area id="reassignComments" label-hint="Comments" 
+          value="{{$variables.updateAction.P_COMMENTS}}" rows="3">
+        </oj-text-area>
+      </oj-form-layout>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-button on-oj-action="[[$listeners.reassignCancelAction]]">Cancel</oj-button>
+    <oj-button chroming="outlined" on-oj-action="[[$listeners.reassignOKAction]]">Reassign</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Require More Info Popup -->
+<oj-dialog id="requireMoreInfoPopup" dialog-title="Request More Information" modality="modal" header-decoration="off"
+  style="overflow: hidden;" position.at.vertical="top">
+  <div slot="body">
+    <oj-validation-group id="requireMoreInfoValidationGroup" valid="{{$variables.requireMoreFormValid}}">
+      <oj-form-layout label-edge="start">
+        <oj-text-area id="moreInfoComments" label-hint="Comments" required="true"
+          value="{{$variables.updateAction.P_COMMENTS}}" rows="3">
+        </oj-text-area>
+      </oj-form-layout>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-button on-oj-action="[[$listeners.requireMoreInfoCancelAction]]">Cancel</oj-button>
+    <oj-button chroming="outlined" on-oj-action="[[$listeners.requireMoreInfoOKAction]]">Submit</oj-button>
+  </div>
+</oj-dialog>
+
+<oj-dialog id="selectFirstApprover" dialog-title="Approver Selection" modality="modal" header-decoration="off"
+  style="overflow: hidden;" position.at.vertical="top">
+  <div slot="body">
+    <!-- <oj-validation-group id="requireMoreInfoValidationGroup" valid="{{$variables.requireMoreFormValid}}"> -->
+      <oj-form-layout label-edge="start">
+         <oj-select-single id="approverToSelect" label-hint="Asset Engineering GM" required="true"
+           data="[[$variables.nextApproverLovSDP]]" item-text="person_name"
+           value="{{ $variables.selectedApproverUser_id }}"
+           on-value-item-changed="[[$listeners.approverToSelectValueItem]]">
+        </oj-select-single>
+      </oj-form-layout>
+    <!-- </oj-validation-group> -->
+  </div>
+  <div slot="footer">
+    <oj-button on-oj-action="[[$listeners.buttonAction4]]">Cancel</oj-button>
+    <oj-button chroming="outlined" on-oj-action="[[$listeners.buttonAction5]]"
+      disabled="[[ !$variables.selectedApproverUser_id ]]">Ok</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Initiate PC Popup -->
+<oj-dialog id="ipcPopup" dialog-title="Initiate New Project Charter" modality="modal" header-decoration="off" style="overflow: hidden;" position.at.vertical="top">
+  <div slot="body">
+    Are you sure to create a new project charter?
+  </div>
+  <div slot="footer">
+    <oj-button on-oj-action="[[$listeners.buttonAction6]]">Cancel</oj-button>
+    <oj-button chroming="outlined" on-oj-action="[[$listeners.buttonAction7]]">Ok</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Close PC Popup -->
+<oj-dialog id="closePcPopup" dialog-title="Close Project Charter" modality="modal" header-decoration="off" style="overflow: hidden;" position.at.vertical="top">
+  <div slot="body">
+    Are you sure to close this project charter?
+  </div>
+  <div slot="footer">
+    <oj-button on-oj-action="[[$listeners.buttonAction8]]">Cancel</oj-button>
+    <oj-button chroming="outlined" on-oj-action="[[$listeners.buttonAction9]]">Ok</oj-button>
+  </div>
+</oj-dialog>

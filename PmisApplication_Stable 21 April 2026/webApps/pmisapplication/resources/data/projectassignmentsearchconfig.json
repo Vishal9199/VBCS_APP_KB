@@ -1,0 +1,25 @@
+ {
+    "description": "Smart Search Configuration for Project Assignment Application",
+    "filters": {
+        "TenderNumberFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Tender Number",
+            "options": {
+                "field": "tender_id",
+				"optionsData": "[[ $search.filters.TenderNumberFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.TenderNumberFilter.options.optionsKeys ]]"
+            },
+            "data": {}
+        },
+        "ProjectNumberFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Project Number",
+            "options": {
+                "field": "project_id",
+				"optionsData": "[[ $search.filters.ProjectNumberFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.ProjectNumberFilter.options.optionsKeys ]]"
+            },
+            "data": {}
+        }
+    }
+}

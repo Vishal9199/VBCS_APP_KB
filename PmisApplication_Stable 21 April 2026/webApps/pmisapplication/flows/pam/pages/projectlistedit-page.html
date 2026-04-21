@@ -1,0 +1,604 @@
+<style>
+  /* =====================================================================*/
+  /* Budget Form Styling - Start */
+  /* =======================================================================*/
+
+oj-option#project_list_edit_page_h_cancelAction
+{
+  display: none !important;
+}
+
+#project-long-name .oj-text-field-container,
+#description .oj-text-field-container,
+#budget-additional-info .oj-text-field-container {
+    min-height: 6rem !important;
+  }
+
+/* Budget form validation message warning icon */
+.oj-ux-ico-warning:before {
+  content: '\f91a';
+  color: #856404;
+}
+
+/* Budget form clear icon */
+.oj-ux-ico-eraser:before {
+  content: '\f332';
+}
+
+/* Budget form save icon */
+/* .oj-ux-ico-save:before {
+  content: '\f330';
+} */
+
+/* Budget table refresh icon */
+.oj-ux-ico-refresh:before {
+  content: '\f32f';
+}
+
+/* Budget table edit icon */
+.oj-ux-ico-edit:before {
+  content: '\f61c';
+}
+
+/* Budget table delete icon */
+.oj-ux-ico-trash:before {
+  content: '\f358';
+}
+
+/* Custom button alignment for table actions */
+.custom-button-align {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Budget form container styling */
+#cost-budget-section .oj-form-layout {
+    margin-bottom: 0;
+}
+
+/* Budget form number inputs */
+#cost-budget-section oj-input-number {
+    font-size: 14px;
+}
+
+/* Budget table styling */
+#budget-table {
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+
+/* Budget table header cells */
+#budget-table .oj-table-column-header-cell {
+    background-color: #084c4c;
+    color: white;
+    font-weight: bold;
+}
+
+/* Budget table row hover */
+#budget-table .oj-table-data-row:hover {
+    background-color: rgba(8, 76, 76, 0.05);
+}
+
+/* Validation message box */
+.budget-validation-message {
+    padding: 0.75rem;
+    background-color: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+/* Budget form help text */
+oj-select-single[id="budget-calendar"] .oj-text-field-container {
+    border-color: #084c4c;
+}
+
+/* Budget form disabled state */
+oj-input-number:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Budget form validation group */
+#budgetFormValidation {
+    width: 100%;
+}
+
+/* Budget Cost Lines Table - Start */
+/* ========================================================================================================== */
+
+.oj-switch.oj-disabled.oj-selected .oj-switch-track
+ {
+  background-color: #084c4c !important;
+ }
+
+</style>
+
+
+
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div>
+        <oj-sp-advanced-create-edit id="project_list_edit_page" page-title="Project Details" page-subtitle=" "
+          display-options.responsive-padding="on" primary-action.label="Close"
+          on-sp-primary-action="[[$listeners.projectListEditPageSpPrimaryAction]]"
+          secondary-actions="[[ $variables.aToolBar ]]"
+          on-sp-secondary-action="[[$listeners.projectListEditPageSpSecondaryAction]]">
+          
+          <div slot="main" style="padding-top: 0; margin-top: 0;">
+            <div style="margin-top: 0;">
+              
+              <!-- Project Details Section -->
+              <oj-collapsible id="project-details-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 0;">
+                <span slot="header" style="font-weight: bold; color: white;">Project Details</span>
+                <div style="padding: 1rem;">
+    <oj-validation-group valid="{{ $variables.formValidation }}">
+      <oj-form-layout max-columns="3" label-edge="start" label-width="45%" colspan-wrap="wrap"
+        user-assistance-density="compact" direction="row" class="oj-formlayout-full-width">
+        <oj-input-text id="reference-number" label-hint="Reference Number" placeholder="Reference Number"
+          value="{{ $variables.masterPlanHeaderVar.mp_ref_num }}" style="width: 16rem;" disabled="true"></oj-input-text>
+
+        <oj-input-text id="project-name" label-hint="Project Name" required="true" placeholder="Project Name"
+          value="{{ $variables.masterPlanHeaderVar.project_name }}" style="width: 16rem;"></oj-input-text>
+
+        <oj-select-single id="project-type" label-hint="Project Type" required="true"
+          value="{{ $variables.masterPlanHeaderVar.project_type_id }}" style="width: 16rem;"
+          data="[[$variables.getPmispamLovProjectTypeListSDP]]" item-text="lookup_value_name"
+          placeholder="Project Type"></oj-select-single>
+
+        <oj-input-text id="master-plan-name" label-hint="Master Plan Name" placeholder="Master Plan Name"
+          value="{{ $variables.masterPlanHeaderVar.mp_ref_plan_name }}" style="width: 16rem;" required="true"
+          disabled="[[ $variables.enterType === 'PROJECT_CREATE' ]]"></oj-input-text>
+
+        <oj-select-single id="project-category" label-hint="Category" required="true"
+          value="{{ $variables.masterPlanHeaderVar.category_id }}" item-text="lookup_value_name" style="width: 16rem;"
+          data="[[$variables.getPmispamLovProjectCategoryListSDP]]" placeholder="Category"></oj-select-single>
+                  
+                    <!-- <oj-select-single id="project-name" label-hint="Project Name" required="true"
+                      value="{{ $variables.masterPlanHeaderVar.project_id }}" style="width: 16rem;"
+                      data="[[$variables.getPmispamLovMasterplanProjectnameListSDP]]" item-text="project_name">
+                    </oj-select-single> -->
+        <oj-input-date id="created-on" label-hint="Created On" value="{{ $variables.masterPlanHeaderVar.created_date }}"
+          converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}' style="width: 16rem;" disabled="true"></oj-input-date>
+
+        <oj-select-single id="region-name" label-hint="Region Name" required="true"
+          value="{{ $variables.masterPlanHeaderVar.region_id }}" style="width: 16rem;"
+          data="[[$variables.getPmisLovRegionNameListSDP]]" item-text="lookup_value_name"
+          on-value-item-changed="[[$listeners.regionNameValueItem]]" placeholder="Region">
+          <template slot="collectionTemplate" data-oj-as="collection">
+            <oj-table scroll-policy="loadMoreOnScroll" selection-mode='{"row": "single"}'
+              columns-default='{"resizable": "disabled","sortable": "disabled"}' class="oj-select-results"
+              columns='[{"headerText":"Region Name","field":"lookup_value_name"}, {"headerText":"Region Code","field":"lookup_value_code"}]'
+              on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]"
+              selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}"
+              horizontal-grid-visible="enabled" vertical-grid-visible="enabled">
+            </oj-table>
+          </template>
+        </oj-select-single>
+
+        <oj-input-text id="region-short-code" label-hint="Region Short Code" placeholder="Region Short Code"
+          value="{{ $variables.valueFromLov.regionCode }}" style="width: 16rem;" disabled="true"></oj-input-text>
+
+        <oj-select-single id="category" label-hint="Project Category" required="true"
+          value="{{ $variables.masterPlanHeaderVar.project_category_id }}" style="width: 16rem;"
+          data="[[$variables.getPmispamLovPmisprojectCategoryListSDP]]" item-text="lookup_value_name"
+          placeholder="Project Category"></oj-select-single>
+
+        <oj-select-single id="project-location" label-hint="Project Location" required="true"
+          value="{{ $variables.masterPlanHeaderVar.project_location_id }}" style="width: 16rem;"
+          data="[[$variables.getPmispamLovMasterplanLocationListSDP]]" item-text="lookup_value_name"
+          placeholder="Project Location">
+          <template slot="collectionTemplate" data-oj-as="collection">
+            <oj-table scroll-policy="loadMoreOnScroll" selection-mode='{"row": "single"}'
+              columns-default='{"resizable": "disabled","sortable": "disabled"}' class="oj-select-results"
+              columns='[{"headerText":"Location","field":"lookup_value_name"}, {"headerText":"Region Name","field":"dependent_lookup_value_code"}, {"headerText":"Region Code","field":"dependent_lookup_value_name"}]'
+              on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]"
+              selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}"
+              horizontal-grid-visible="enabled" vertical-grid-visible="enabled">
+            </oj-table>
+          </template>
+        </oj-select-single>
+
+        <oj-switch id="five-year-flag" label-hint="Included in Five-Year Plan"
+          value="{{ $variables.masterPlanHeaderVar.five_year_prj_flag === 'Y' ? true : false }}" style="width: 16rem;"
+          class="" disabled="true">
+        </oj-switch>
+
+        <oj-switch id="active-flag" label-hint="Active"
+          value="{{ $variables.masterPlanHeaderVar.active_flag === 'Y' ? true : false }}" style="width: 16rem;"
+          on-value-changed="[[$listeners.activeFlagValue]]">
+        </oj-switch>
+
+        <oj-text-area id="project-long-name" label-hint="Project Long Name" placeholder="Project Long Name"
+          value="{{ $variables.masterPlanHeaderVar.project_long_name }}" style="width: 16rem;"
+          resize-behavior="vertical">
+        </oj-text-area>
+
+        <oj-text-area id="description" label-hint="Description" placeholder="Description"
+          value="{{ $variables.masterPlanHeaderVar.description }}" style="width: 16rem;" resize-behavior="vertical">
+        </oj-text-area>
+
+        <!-- <oj-text-area id="comments" label-hint="Comments" placeholder="Comments"
+          value="{{ $variables.masterPlanHeaderVar.comments }}" rows="5" style="width: 100%;"
+          user-assistance-density="compact"></oj-text-area> -->
+
+      </oj-form-layout>
+    </oj-validation-group>
+                </div>
+              </oj-collapsible>
+
+            <!-- Cost and Budget Details Section -->
+<oj-collapsible id="cost-budget-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 1rem;">
+  <span slot="header" style="font-weight: bold; color: white;">Cost and Budget Details</span>
+  <div style="padding: 1rem;">
+    
+    <!-- Budget Information Fields -->
+    <oj-validation-group valid="{{ $variables.formValidation2 }}">
+      <oj-form-layout max-columns="3" label-edge="start" label-width="45%" colspan-wrap="wrap"
+        user-assistance-density="compact">
+        <oj-select-single id="budget-calendar" label-hint="Budget Calendar"
+          value="{{ $variables.masterPlanHeaderVar.budget_year_id }}"
+          data="[[ $variables.getPmispamLovMasterplanDepCalendarnameListSDP ]]" item-text="calendar_name"
+          style="width: 16rem;" on-value-item-changed="[[$listeners.budgetCalendarValueItem]]" required="true"
+          disabled="[[ $variables.pNavCode === 'EDIT' || $variables.enterType === 'PROJECT_CREATE' ]]">
+          <oj-bind-slot name="help">
+              <oj-bind-text value="Select a budget calendar to define year ranges"></oj-bind-text>
+          </oj-bind-slot>
+        </oj-select-single>
+        <oj-input-number id="latest-estimate" label-hint="Latest Estimate Budget Value"
+          placeholder="Latest Estimate Budget Value" value="{{ $variables.masterPlanHeaderVar.latest_est_budget_val }}"
+          converter='{"type": "number", "options": {"style": "decimal", "minimumFractionDigits": 3, "maximumFractionDigits": 3}}'
+          style="width: 16rem;" user-assistance-density="compact" disabled="true"></oj-input-number>
+        <oj-input-number id="scp-approved" label-hint="SCP Approved Budget Value"
+          placeholder="SCP Approved Budget Value" value="{{ $variables.masterPlanHeaderVar.scp_approved_budget_val }}"
+          converter='{"type": "number", "options": {"style": "decimal", "minimumFractionDigits": 3, "maximumFractionDigits": 3}}'
+          style="width: 16rem;" disabled="true"></oj-input-number>
+      </oj-form-layout>
+    </oj-validation-group>
+
+    <!-- Dynamic Budget Allocation Form - Only shows when calendar is selected -->
+    <!-- ========================================================================================================== -->
+<!-- Dynamic Budget Allocation Table - Horizontal Layout (Replaces lines 242-395) -->
+<!-- ========================================================================================================== -->
+
+<!-- ========================================================================================================== -->
+<!-- Dynamic Budget Allocation Table - OJ-Table Implementation (Replaces lines 242-395) -->
+<!-- ========================================================================================================== -->
+
+<oj-bind-if test="[[ $variables.masterPlanHeaderVar.budget_year_id ]]">
+  <div style="margin-top: 1.5rem; padding: 1rem; background-color: #f8f9fa; border: 2px solid #084c4c; border-radius: 6px;">
+    
+    <!-- Section Header with Actions -->
+    <div style="margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+      <div>
+        <h4 style="color: #084c4c; margin: 0 0 0.5rem 0; font-size: 1.1rem;">
+          Budget Allocation by Year Range
+        </h4>
+        <span style="color: red; font-size: 0.85rem;">
+          <strong>Important:</strong> You can enter a budget value for <strong>only ONE</strong> year range; all others must be 0.
+        </span>
+      </div>
+      
+      <div style="display: flex; gap: 0.5rem;">
+        <oj-button chroming="outlined" class="oj-button-md" id="budget-clear-btn"
+          on-oj-action="[[ $listeners.budgetClearAction ]]"
+          disabled="[[ $variables.pNavCode === 'CREATE' || $variables.masterPlanHeaderVar.five_year_prj_flag === 'Y' ]]">
+          <span slot="startIcon" class="oj-ux-ico-eraser" style="color: white;"></span>
+          <span>Clear</span>
+        </oj-button>
+        
+    <!-- ************************************************************************************************************************* -->
+        <!-- The Below Button Works Perfectly Fine (Just Commented To Included In The Main Header Save Button's Action Chain) -->
+    <!-- ************************************************************************************************************************* -->
+        <!-- <oj-button chroming="outlined" class="oj-button-md" id="budget-save-btn"
+          on-oj-action="[[ $listeners.budgetSaveAction ]]"
+          disabled="[[ $variables.pNavCode === 'CREATE' || $variables.masterPlanHeaderVar.five_year_prj_flag === 'Y' ]]">
+          <span slot="startIcon" class="oj-ux-ico-save" style="color: white;"></span>
+          <span>Save</span>
+        </oj-button> -->
+      </div>
+    </div>
+
+    <!-- Validation Message Display -->
+    <oj-bind-if test="[[ $variables.budgetValidationMessage ]]">
+      <div style="margin-bottom: 1rem; padding: 0.75rem; background-color: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; display: flex; align-items: center;">
+        <span class="oj-ux-ico-warning" style="color: #856404; font-size: 1.5rem; margin-right: 0.75rem;"></span>
+        <span style="color: #856404; font-weight: 500;">
+          <oj-bind-text value="[[ $variables.budgetValidationMessage ]]"></oj-bind-text>
+        </span>
+      </div>
+    </oj-bind-if>
+
+    <!-- Project Name Header -->
+    <div
+      style="background-color: #084c4c; color: white; padding: 0.15rem; margin-bottom: 0; border-radius: 4px 4px 0 0;">
+      <h3 style="margin: 0; font-size: 1rem; font-weight: bold; color: white;">
+        <oj-bind-text value="[[ $variables.lineTableName || 'Master Plan' ]]"></oj-bind-text>
+      </h3>
+    </div>
+
+    <!-- Horizontal Budget Entry Table -->
+    <oj-validation-group id="budgetFormValidation">
+      <oj-table 
+        id="budget-entry-table"
+        data="[[ $variables.budgetEntryTableADP ]]"
+        columns="[[ $variables.budgetEntryColumnsVar ]]"
+        columns-default.sortable="disabled"
+        columns-default.resizable="enabled"
+        class="oj-sm-width-full budget-horizontal-table"
+        display="grid"
+        style="margin-top: 0; border-radius: 0 0 4px 4px;"
+        horizontal-grid-visible="enabled"
+        vertical-grid-visible="enabled" selection-mode.row="single" selection-mode.column="single">
+
+        <!-- Plan Name Template -->
+        <template slot="plan_name_template">
+          <div style="text-align: center; font-weight: 600; color: #084c4c;">
+            <oj-bind-text value="[[ $variables.masterPlanHeaderVar.mp_ref_plan_name || 'Budget 01' ]]"></oj-bind-text>
+          </div>
+        </template>
+
+        <!-- Year Value 1 Input Template -->
+        <template slot="year_value1_template">
+          <oj-bind-if test="[[ $variables.calendarYearRangesADP.data.length >= 1 ]]">
+            <oj-input-number id="year-value-1" value="{{ $variables.budgetCostLineVar.year_value1 }}" min="0"
+              converter='{"type": "number", "options": {"style": "decimal", "minimumFractionDigits": 3, "maximumFractionDigits": 3}}'
+              on-value-changed="[[ $listeners.yearValue1ChangeAction ]]" style="width: 100%;" class="budget-table-input"
+              user-assistance-density="compact"
+              disabled="[[ $variables.pNavCode === 'CREATE' || $variables.masterPlanHeaderVar.five_year_prj_flag === 'Y' ]]">
+            </oj-input-number>
+          </oj-bind-if>
+        </template>
+
+        <!-- Year Value 2 Input Template -->
+        <template slot="year_value2_template">
+          <oj-bind-if test="[[ $variables.calendarYearRangesADP.data.length >= 2 ]]">
+            <oj-input-number id="year-value-2" value="{{ $variables.budgetCostLineVar.year_value2 }}" min="0"
+              converter='{"type": "number", "options": {"style": "decimal", "minimumFractionDigits": 3, "maximumFractionDigits": 3}}'
+              on-value-changed="[[ $listeners.yearValue2ChangeAction ]]" style="width: 100%;" class="budget-table-input"
+              user-assistance-density="compact"
+              disabled="[[ $variables.pNavCode === 'CREATE' || $variables.masterPlanHeaderVar.five_year_prj_flag === 'Y' ]]">
+            </oj-input-number>
+          </oj-bind-if>
+        </template>
+
+        <!-- Year Value 3 Input Template -->
+        <template slot="year_value3_template">
+          <oj-bind-if test="[[ $variables.calendarYearRangesADP.data.length >= 3 ]]">
+            <oj-input-number id="year-value-3" value="{{ $variables.budgetCostLineVar.year_value3 }}" min="0"
+              converter='{"type": "number", "options": {"style": "decimal", "minimumFractionDigits": 3, "maximumFractionDigits": 3}}'
+              on-value-changed="[[ $listeners.yearValue3ChangeAction ]]" style="width: 100%;" class="budget-table-input"
+              user-assistance-density="compact"
+              disabled="[[ $variables.pNavCode === 'CREATE' || $variables.masterPlanHeaderVar.five_year_prj_flag === 'Y' ]]">
+            </oj-input-number>
+          </oj-bind-if>
+        </template>
+
+        <!-- Year Value 4 Input Template -->
+        <template slot="year_value4_template">
+          <oj-bind-if test="[[ $variables.calendarYearRangesADP.data.length >= 4 ]]">
+            <oj-input-number id="year-value-4" value="{{ $variables.budgetCostLineVar.year_value4 }}" min="0"
+              converter='{"type": "number", "options": {"style": "decimal", "minimumFractionDigits": 3, "maximumFractionDigits": 3}}'
+              on-value-changed="[[ $listeners.yearValue4ChangeAction ]]" style="width: 100%;" class="budget-table-input"
+              user-assistance-density="compact"
+              disabled="[[ $variables.pNavCode === 'CREATE' || $variables.masterPlanHeaderVar.five_year_prj_flag === 'Y' ]]">
+            </oj-input-number>
+          </oj-bind-if>
+        </template>
+
+        <!-- Year Value 5 Input Template -->
+        <template slot="year_value5_template">
+          <oj-bind-if test="[[ $variables.calendarYearRangesADP.data.length >= 5 ]]">
+            <oj-input-number id="year-value-5" value="{{ $variables.budgetCostLineVar.year_value5 }}" min="0"
+              converter='{"type": "number", "options": {"style": "decimal", "minimumFractionDigits": 3, "maximumFractionDigits": 3}}'
+              on-value-changed="[[ $listeners.yearValue5ChangeAction ]]" style="width: 100%;" class="budget-table-input"
+              user-assistance-density="compact"
+              disabled="[[ $variables.pNavCode === 'CREATE' || $variables.masterPlanHeaderVar.five_year_prj_flag === 'Y' ]]">
+            </oj-input-number>
+          </oj-bind-if>
+        </template>
+
+        <!-- Year Value 6 Input Template -->
+        <template slot="year_value6_template">
+          <oj-bind-if test="[[ $variables.calendarYearRangesADP.data.length >= 6 ]]">
+            <oj-input-number id="year-value-6" value="{{ $variables.budgetCostLineVar.year_value6 }}" min="0"
+              converter='{"type": "number", "options": {"style": "decimal", "minimumFractionDigits": 3, "maximumFractionDigits": 3}}'
+              on-value-changed="[[ $listeners.yearValue6ChangeAction ]]" style="width: 100%;" class="budget-table-input"
+              user-assistance-density="compact"
+              disabled="[[ $variables.pNavCode === 'CREATE' || $variables.masterPlanHeaderVar.five_year_prj_flag === 'Y' ]]">
+            </oj-input-number>
+          </oj-bind-if>
+        </template>
+
+        <!-- Year Value 7 Input Template -->
+        <template slot="year_value7_template">
+          <oj-bind-if test="[[ $variables.calendarYearRangesADP.data.length >= 7 ]]">
+            <oj-input-number id="year-value-7" value="{{ $variables.budgetCostLineVar.year_value7 }}" min="0"
+              converter='{"type": "number", "options": {"style": "decimal", "minimumFractionDigits": 3, "maximumFractionDigits": 3}}'
+              on-value-changed="[[ $listeners.yearValue7ChangeAction ]]" style="width: 100%;" class="budget-table-input"
+              user-assistance-density="compact"
+              disabled="[[ $variables.pNavCode === 'CREATE' || $variables.masterPlanHeaderVar.five_year_prj_flag === 'Y' ]]">
+            </oj-input-number>
+          </oj-bind-if>
+        </template>
+
+      </oj-table>
+    </oj-validation-group>
+
+    <!-- Additional Information Section (Below Table) -->
+    <div style="margin-top: 1rem;">
+      <oj-text-area id="budget-additional-info" label-hint="Additional Information"
+        placeholder="Enter any additional notes or comments" value="{{ $variables.budgetCostLineVar.additional_info }}"
+        rows="10" style="width: 100%;" user-assistance-density="compact" class="oj-form-control-width-md"
+        resize-behavior="both">
+      </oj-text-area>
+    </div>
+    
+  </div>
+</oj-bind-if>
+
+<!-- ========================================================================================================== -->
+<!-- Budget Cost Lines Table Section (Keep existing table starting at line 395) -->
+<!-- ========================================================================================================== -->
+
+<!-- ========================================================================================================== -->
+<!-- Budget Cost Lines Table Section (Keep existing table starting at line 395) -->
+<!-- ========================================================================================================== -->
+
+    
+  </div>
+</oj-collapsible>
+              
+              <!-- Additional Comments Section -->
+              <!-- <oj-collapsible id="additional-comments-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+                style="margin-top: 1rem;">
+                <span slot="header" style="font-weight: bold; color: white;">Additional Comments</span>
+                <div style="padding: 1rem;">
+                  <oj-form-layout max-columns="1" label-edge="start" label-width="20%" colspan-wrap="wrap"
+                    user-assistance-density="compact">
+              
+                    <oj-text-area id="comments" label-hint="Comments" placeholder="Comments"
+                      value="{{ $variables.masterPlanHeaderVar.comments }}" rows="5" style="width: 100%;"
+                      user-assistance-density="compact">
+                    </oj-text-area>
+              
+                  </oj-form-layout>
+                </div>
+              </oj-collapsible> -->
+              
+            </div>
+          </div>
+          
+        </oj-sp-advanced-create-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Budget Cost Line Dialog -->
+<oj-dialog style="width: auto; max-height: 90vh; overflow: hidden;" dialog-title="Budget Cost Details - Add/Edit"
+  id="budgetCostDialog" cancel-behavior="icon" resize-behavior="resizable" drag-affordance="title-bar"
+  position.at.vertical="top" modality="modeless">
+  <div slot="body">
+    <oj-validation-group id="budgetCostForm">
+      <oj-form-layout label-edge="top" direction="row" columns="2" id="budgetCostFormLayout" max-columns="2">
+
+        <oj-select-single id="dialog-budget-year" label-hint="Budget Year" data="[[ $variables.budgetYearListSDP ]]"
+          value="{{ $variables.budgetCostLineVar.budget_year_id }}" item-text="budget_year_name" style="width: 16rem;">
+        </oj-select-single>
+
+        <oj-input-text id="dialog-year-prompt1" label-hint="Year Prompt 1 (e.g., 2006-2010)" placeholder="Year Prompt 1"
+          value="{{ $variables.budgetCostLineVar.year_prompt1 }}" style="width: 16rem;">
+        </oj-input-text>
+
+        <oj-input-number id="dialog-year-value1" label-hint="Year Value 1" placeholder="Year Value 1"
+          value="{{ $variables.budgetCostLineVar.year_value1 }}" style="width: 16rem;">
+        </oj-input-number>
+
+        <oj-input-text id="dialog-year-prompt2" label-hint="Year Prompt 2 (e.g., 2011-2015)" placeholder="Year Prompt 2"
+          value="{{ $variables.budgetCostLineVar.year_prompt2 }}" style="width: 16rem;">
+        </oj-input-text>
+
+        <oj-input-number id="dialog-year-value2" label-hint="Year Value 2" placeholder="Year Value 2"
+          value="{{ $variables.budgetCostLineVar.year_value2 }}" style="width: 16rem;">
+        </oj-input-number>
+
+        <oj-input-text id="dialog-year-prompt3" label-hint="Year Prompt 3 (e.g., 2016-2020)" placeholder="Year Prompt 3"
+          value="{{ $variables.budgetCostLineVar.year_prompt3 }}" style="width: 16rem;">
+        </oj-input-text>
+
+        <oj-input-number id="dialog-year-value3" label-hint="Year Value 3" placeholder="Year Value 3"
+          value="{{ $variables.budgetCostLineVar.year_value3 }}" style="width: 16rem;">
+        </oj-input-number>
+
+        <oj-input-text id="dialog-year-prompt4" label-hint="Year Prompt 4 (e.g., 2021-2025)" placeholder="Year Prompt 4"
+          value="{{ $variables.budgetCostLineVar.year_prompt4 }}" style="width: 16rem;">
+        </oj-input-text>
+
+        <oj-input-number id="dialog-year-value4" label-hint="Year Value 4" placeholder="Year Value 4"
+          value="{{ $variables.budgetCostLineVar.year_value4 }}" style="width: 16rem;">
+        </oj-input-number>
+
+        <oj-input-text id="dialog-year-prompt5" label-hint="Year Prompt 5 (e.g., 2026-2030)" placeholder="Year Prompt 5"
+          value="{{ $variables.budgetCostLineVar.year_prompt5 }}" style="width: 16rem;">
+        </oj-input-text>
+
+        <oj-input-number id="dialog-year-value5" label-hint="Year Value 5" placeholder="Year Value 5"
+          value="{{ $variables.budgetCostLineVar.year_value5 }}" style="width: 16rem;">
+        </oj-input-number>
+
+        <oj-input-text id="dialog-year-prompt6" label-hint="Year Prompt 6 (e.g., 2031-2035)" placeholder="Year Prompt 6"
+          value="{{ $variables.budgetCostLineVar.year_prompt6 }}" style="width: 16rem;">
+        </oj-input-text>
+
+        <oj-input-number id="dialog-year-value6" label-hint="Year Value 6" placeholder="Year Value 6"
+          value="{{ $variables.budgetCostLineVar.year_value6 }}" style="width: 16rem;">
+        </oj-input-number>
+
+        <oj-input-text id="dialog-year-prompt7" label-hint="Year Prompt 7 (e.g., 2036-2040)" placeholder="Year Prompt 7"
+          value="{{ $variables.budgetCostLineVar.year_prompt7 }}" style="width: 16rem;">
+        </oj-input-text>
+
+        <oj-input-number id="dialog-year-value7" label-hint="Year Value 7" placeholder="Year Value 7"
+          value="{{ $variables.budgetCostLineVar.year_value7 }}" style="width: 16rem;">
+        </oj-input-number>
+
+      </oj-form-layout>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-button id="budget-save-close">Save and Add Another</oj-button>
+    <oj-button id="budget-save">Save</oj-button>
+    <oj-button id="budget-cancel">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="Please wait..." id="progressMsg" class="wd200" style="overflow: hidden;"
+  position.my.vertical="top" position.at.vertical="top">
+  <div slot="body" style="margin-top: 2.1rem;">
+    <div class="oj-flex full_stretch lg_button_width">
+      <oj-progress-bar class="full_stretch oj-flex-item oj-sm-12 oj-md-12" value="-1" style="zoom: 2;">
+      </oj-progress-bar>
+    </div>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="About" id="aboutDialog" cancel-behavior="icon" style="width: 400px; overflow: hidden;"
+  resize-behavior="resizable" position.my.vertical="top" position.at.vertical="top" drag-affordance="title-bar"
+  header-decoration="off">
+  <div slot="body">
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-sm-12 oj-md-12">
+        <oj-form-layout label-edge='start' columns="1" style="margin-top:23px;margin-left:-20px"
+          user-assistance-density="compact" direction="column" class="oj-formlayout-full-width"
+          label-width="45%">
+          <oj-input-text label-hint="Created By:" style="margin-bottom: -6px;" value="{{ $variables.about.created_by }}"
+            readonly="true" user-assistance-density="compact">
+          </oj-input-text>
+          <oj-input-text label-hint="Created Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.created_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated By:" style="margin-bottom: -6px;"
+            value="{{ $variables.about.last_updated_by }}" readonly="true" user-assistance-density="compact"></oj-input-text>
+          <oj-input-text label-hint="Created Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.last_updated_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated Login:" value="{{ $variables.about.last_updated_login }}" style="margin-bottom: -6px;"
+            readonly="true" user-assistance-density="compact">
+          </oj-input-text>
+        </oj-form-layout>
+      </div>
+    </div>
+  </div>
+  <div slot="footer">
+    <oj-button id="aboutButtonCancel_AC" label="Ok"
+      chroming="outlined" style="margin-top:-20px !important;" on-oj-action="[[$listeners.aboutButtonCancelACAction]]"></oj-button>
+  </div>
+</oj-dialog>

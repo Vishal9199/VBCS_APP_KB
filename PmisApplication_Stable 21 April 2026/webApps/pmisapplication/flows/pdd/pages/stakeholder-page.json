@@ -1,0 +1,553 @@
+{
+  "title": "Stakeholder Details Management",
+  "description": "Stakeholder Details page with Project Details form and inline editable stakeholder table",
+  "imports": {
+    "components": {
+      "oj-progress-bar": {
+        "path": "ojs/ojprogress-bar"
+      },
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-option": {
+        "path": "ojs/ojoption"
+      },
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      }
+
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  },
+  "types": {
+    "@decorators.getPmispddStakeholderLovEngagementResponse": {
+      "endpoint": "getPmispddStakeholderLovEngagement",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getPmispddStakeholderLovStatusResponse": {
+      "endpoint": "getPmispddStakeholderLovStatus",
+      "service": "PDD",
+      "path": "response"
+    },
+    "getPmispddStakeholderLovEngagementResponse": {
+      "items": [
+        {
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispddStakeholderLovStatusResponse": {
+      "items": [
+        {
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "ProjectDetailsType": {
+      "ora_project_id": "number",
+      "project_name": "string",
+      "project_number": "string",
+      "tender_id": "number",
+      "tender_number": "string"
+    },
+    "StakeholderDetailType": {
+      "stakeholder_id": "number",
+      "object_version_num": "number",
+      "line_num": "number",
+      "ora_project_id": "number",
+      "tender_id": "number",
+      "stakeholder_name": "string",
+      "organization": "string",
+      "contact_details": "string",
+      "current_engagement_id": "number",
+      "current_engagement": "string",
+      "power": "number",
+      "interest": "number",
+      "expectations": "string",
+      "approach_strategy": "string",
+      "desired_engagement_id": "number",
+      "desired_engagement": "string",
+      "actions_taken": "string",
+      "action_date": "string",
+      "status": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "CurrentStakeholderRowType": {
+      "stakeholder_id": "number",
+      "object_version_num": "number",
+      "line_num": "number",
+      "ora_project_id": "number",
+      "tender_id": "number",
+      "stakeholder_name": "string",
+      "organization": "string",
+      "contact_details": "string",
+      "current_engagement_id": "number",
+      "current_engagement": "string",
+      "power": "number",
+      "interest": "number",
+      "expectations": "string",
+      "approach_strategy": "string",
+      "desired_engagement_id": "number",
+      "desired_engagement": "string",
+      "actions_taken": "string",
+      "action_date": "string",
+      "status": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "EngagementLovType": {
+      "engagement_id": "number",
+      "engagement_name": "string"
+    }
+  },
+  "variables": {
+    "aToolBar": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Save",
+          "id": "save",
+          "icon": "oj-ux-ico-save"
+        }
+      ]
+    },
+    "count": {
+      "type": "number"
+    },
+    "rowToEdit": {
+      "type": {
+        "rowKey": "number"
+      }
+    },
+    "passKey": {
+      "type": "string"
+    },
+    "passPayload": {
+      "type": "string"
+    },
+    "getPmispddStakeholderLovEngagementListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PDD/getPmispddStakeholderLovEngagement",
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getPmispddStakeholderLovEngagementResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        }
+      }
+    },
+    "getPmispddStakeholderLovStatusListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PDD/getPmispddStakeholderLovStatus",
+        "keyAttributes": "lookup_value_id",
+        "itemsPath": "items",
+        "responseType": "getPmispddStakeholderLovStatusResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "lookup_value_name"
+          ]
+        }
+      }
+    },
+    "lvNextHeaderValue": {
+      "type": "number",
+      "defaultValue": 9999999
+    },
+    "projectDetailsVar": {
+      "type": "ProjectDetailsType"
+    },
+    "ADPStakeholderTable": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "StakeholderDetailType",
+        "keyAttributes": "stakeholder_id"
+      }
+    },
+    "bufferDPStakeholderTable": {
+      "type": "application:ojs/ojbufferingdataprovider",
+      "constructorParams": [
+        "{{ $variables.ADPStakeholderTable }}",
+        null
+      ]
+    },
+    "lvCurrentStakeholderRow": {
+      "type": "CurrentStakeholderRowType",
+      "defaultValue": {
+        "created_by": "[[ $application.user.email ]]",
+        "last_updated_by": "[[ $application.user.email ]]",
+        "last_updated_login": "[[ $application.user.email ]]"
+      }
+    },
+    "pTenderId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "stakeholderDialogVar": {
+      "type": "StakeholderDetailType"
+    },
+    "getEngagementLovSDP": {
+      "type": "vb/ServiceDataProvider2",
+      "defaultValue": {
+        "endpoint": "businessObjects/get_NWS_PMIS_ENGAGEMENT_LOV",
+        "keyAttributes": "engagement_id",
+        "itemsPath": "items",
+        "responseType": "EngagementLovType",
+        "capabilities": {
+          "fetchByKeys": {
+            "implementation": "lookup"
+          }
+        }
+      }
+    },
+    "tablecolumns": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Actions",
+          "field": "",
+          "template": "actionsTemplate",
+          "width": 90,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Stakeholder Name",
+          "field": "stakeholder_name",
+          "template": "stakeholderNameTemplate",
+          "resizable": "enabled",
+          "width": 200,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+
+        },
+        {
+          "headerText": "Organization",
+          "field": "organization",
+          "template": "organizationTemplate",
+          "resizable": "enabled",
+          "width": 200,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Contact Details",
+          "field": "contact_details",
+          "template": "contactDetailsTemplate",
+          "resizable": "enabled",
+          "width": 200,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Current Engagement",
+          "field": "current_engagement",
+          "template": "currentEngagementTemplate",
+          "resizable": "enabled",
+          "width": 180,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Power",
+          "field": "power",
+          "template": "powerTemplate",
+          "resizable": "enabled",
+          "width": 100,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Interest",
+          "field": "interest",
+          "template": "interestTemplate",
+          "resizable": "enabled",
+          "width": 100,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Expectations",
+          "field": "expectations",
+          "template": "expectationsTemplate",
+          "resizable": "enabled",
+          "width": 200,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Approach Strategy",
+          "field": "approach_strategy",
+          "template": "approachStrategyTemplate",
+          "resizable": "enabled",
+          "width": 200,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Desired Engagement",
+          "field": "desired_engagement",
+          "template": "desiredEngagementTemplate",
+          "resizable": "enabled",
+          "width": 180,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Actions Taken",
+          "field": "actions_taken",
+          "template": "actionsTakenTemplate",
+          "resizable": "enabled",
+          "width": 200,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Action Date",
+          "field": "action_date",
+          "template": "actionDateTemplate",
+          "resizable": "enabled",
+          "width": 150,
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        },
+        {
+          "headerText": "Status",
+          "field": "status",
+          "template": "statusTemplate",
+          "resizable": "enabled",
+          "width": "",
+          "headerStyle": "white-space: normal;",
+          "style": ""
+        }
+      ]
+    }
+
+  },
+  "metadata": {},
+  "chains": {},
+  "eventListeners": {
+    "addRowBtnAction": {
+      "chains": [
+        {
+          "chain": "onAddHeaderRow",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "onDeleteAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "okcancelaction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction3": {
+      "chains": [
+        {
+          "chain": "okdeleteaction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "selectValueItem": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{ $current.key }}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "selectValueItem2": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain1",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{ $current.key }}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "selectValueItem3": {
+      "chains": [
+        {
+          "chain": "onPowerInterestChangedChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{ $current.key }}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "stakeholderdetailsidSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "closeactionchain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "stakeholderdetailsidSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "secondary_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "stakeholderTableBeforeRowEdit": {
+      "chains": [
+        {
+          "chain": "TableBeforeRowEditChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "accept": "{{$event.detail.accept}}",
+            "rowContext": "{{$event.detail.rowContext}}",
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}"
+          }
+        }
+      ]
+    },
+    "stakeholderTableBeforeRowEditEnd": {
+      "chains": [
+        {
+          "chain": "TableBeforeRowEditEndChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "accept": "{{$event.detail.accept}}",
+            "setUpdatedItem": "{{$event.detail.setUpdatedItem}}",
+            "rowContext": "{{$event.detail.rowContext}}",
+            "cancelEdit": "{{$event.detail.cancelEdit}}",
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}",
+            "changedRow": "{{ $variables.lvCurrentStakeholderRow }}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+
+  }
+}

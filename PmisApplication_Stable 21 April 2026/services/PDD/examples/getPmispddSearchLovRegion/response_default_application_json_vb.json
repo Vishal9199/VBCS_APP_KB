@@ -1,0 +1,28 @@
+{
+    "items": [
+        {
+            "region_name": "Musandam"
+        },
+        {
+            "region_name": "Adh Dhahirah"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 2,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust_dev/pmispdd/search/lov/region"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust_dev/metadata-catalog/pmispdd/search/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust_dev/pmispdd/search/lov/region"
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "items": [
+        {
+            "lookup_value_id": 6724,
+            "lookup_value_code": "OPEN",
+            "lookup_value_name": "Open"
+        },
+        {
+            "lookup_value_id": 6725,
+            "lookup_value_code": "CLOSE",
+            "lookup_value_name": "Close"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 2,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/stakeholder/lov/status"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/stakeholder/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/stakeholder/lov/status"
+        }
+    ]
+}

@@ -1,0 +1,42 @@
+{
+    "items": [
+        {
+            "project_name": "Plan Feb-3-2",
+            "project_id": 1304
+        },
+        {
+            "project_name": "VBCS-Feb-10-1",
+            "project_id": 1944
+        },
+        {
+            "project_name": "Plan Feb-3-1",
+            "project_id": 1302
+        },
+        {
+            "project_name": "Plan Feb-3-4",
+            "project_id": 1338
+        },
+        {
+            "project_name": "Feb Plan -8-5",
+            "project_id": 1723
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 5,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/projectassignmentadmin/lov/project?searchval=feb"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/projectassignmentadmin/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/projectassignmentadmin/lov/project?searchval=feb"
+        }
+    ]
+}

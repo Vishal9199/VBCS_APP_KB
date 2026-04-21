@@ -1,0 +1,134 @@
+<style>
+  #paymentcertification_h_primaryAction button {
+    display: none !important;
+  }
+</style>
+
+
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+
+      <oj-sp-smart-search-page page-title='Maintenance Search' primary-action.display="on" badge.status="neutral"
+        id="paymentcertification">
+
+
+        <oj-flex class="oj-sm-padding-2x" style="align-items: center;" slot="search">
+          <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-space-between" id="smartSearchTanker"
+            style="width: 100%; align-items: flex-start; padding: 0 3rem 0rem 0rem; margin-left:0%;">
+
+            <div style="flex: 1; margin-right: 1rem;">
+              <!-- Smart Search Component -->
+
+              <oj-sp-smart-search id="tankerSmartSearch" ask-hint=" Search maintenance details here..."
+                filter-criterion="{{ $variables.filterCriterion }}"
+                search-config="[[ $variables.searchConfiguration.provider ]]"
+                search-context="[[ $variables.searchContext ]]">
+              </oj-sp-smart-search>
+            </div>
+
+            <!-- Reset Button -->
+            <div style="display: flex; margin-top: 1px; flex-wrap: wrap;">
+              <oj-button style="margin:0.125rem;height:40px;" chroming="outlined" class="oj-button-md" label="Reset"
+                id="resetBtn" on-oj-action="[[$listeners.resetBtnAction]]">
+                <span class="oj-ux-ico-reset" slot="startIcon"></span>
+              </oj-button>
+            </div>
+
+            <!-- Create Button -->
+            <div style="display: flex; margin-top: 1px; flex-wrap: wrap;">
+              <oj-button style="margin:0.125rem;height:40px;" chroming="outlined" class="oj-button-md" label="Create"
+                id="createBtn" on-oj-action="[[$listeners.createBtnAction]]">
+                <span class="oj-ux-ico-plus" slot="startIcon"></span>
+              </oj-button>
+            </div>
+          </div>
+        </oj-flex>
+
+
+        <!--Table Section -->
+        <div id="sampleDemo" class="demo-padding demo-container">
+          <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+            <div id="searchMainContent">
+              <div class="oj-flex">
+                <oj-table scroll-policy="loadMoreOnScroll" class="oj-sm-width-full oj-bg-body" display="grid"
+                  horizontal-grid-visible="enabled" vertical-grid-visible="enabled" selection-mode.row="single"
+                  id="completionTable" data="[[ $variables.tableADP ]]" columns="{{ $constants.tableColumns }}">
+
+                  <!-- ACTION COLUMN -->
+                  <template slot="Action">
+                    <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                      on-oj-action="[[$listeners.buttonAction]]">
+                      <span slot="startIcon" class="oj-ux-ico-edit" role="img" title="Edit"></span>
+                    </oj-button>
+                    <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                      on-oj-action="[[$listeners.buttonAction4]]">
+                      <span slot="startIcon" class="oj-ux-ico-trash" role="img" title="Delete"></span>
+                    </oj-button>
+                  </template>
+
+                  <!-- Date template -->
+
+                  <template slot="Date">
+                    <oj-input-date value="[[$current.data]]" readonly="true"
+                      converter='{"type": "datetime", "options": {"pattern":"dd-MM-yyyy"}}'></oj-input-date>
+                  </template>
+
+                </oj-table>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagination Section -->
+        <div class="oj-flex oj-sm-justify-content-center" style="margin-top: 0.25rem; gap: 1rem;">
+          <div class="oj-flex-item oj-sm-flex-initial">
+            <oj-button label="Prev" chroming="outlined" id="prevBtn" disabled="[[ $variables.pagination.is_prev ]]"
+              on-oj-action="[[$listeners.prevBtnAction]]">
+              "startIcon" class="oj-ux-ico-back"></span>
+              <span class="oj-ux-ico-triangle-left" slot="startIcon" style="color: white;"></span>
+            </oj-button>
+          </div>
+          <div style="display: flex; align-items: center; width: fit-content; min-width: 120px; max-width: 130px;">
+            <oj-input-text value="{{ $variables.paginationDisplay }}" id="pagination-details" disabled="true"
+              aria-label="Pagination Details"></oj-input-text>
+          </div>
+          <div class="oj-flex-item oj-sm-flex-initial">
+            <oj-button label="Next" chroming="outlined" id="nextBtn" disabled="[[ $variables.pagination.is_next ]]"
+              on-oj-action="[[$listeners.nextBtnAction]]">
+              "endIcon" class="oj-ux-ico-forward-next"></span>
+              <span class="oj-ux-ico-triangle-right" slot="endIcon" style="color: white;"></span>
+            </oj-button>
+          </div>
+        </div>
+
+
+      </oj-sp-smart-search-page>
+
+
+    </div>
+  </div>
+</div>
+
+<!-- Delete Dialog -->
+<oj-dialog style="display:none; width: 500px; overflow: hidden;" dialog-title="Warning" id="delete_dialog"
+  cancel-behavior="icon" header-decoration="off" drag-affordance="title-bar" position.at.vertical="top"
+  position.my.vertical="top">
+  <div slot="body" style="margin-top: 1.5rem;">
+    <div class="oj-flex">Are you sure you want to delete the record?</div>
+  </div>
+  <div slot="footer">
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction2]]" >Ok</oj-button>
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction3]]" >Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Loading Dialog -->
+<oj-dialog id="loadingDialog" style="width: 300px;" cancel-behavior="none" drag-affordance="title-bar"
+  header-decoration="off" position.at.vertical="top" position.my.vertical="top">
+  <div slot="body" style="text-align: center; padding: 2rem;">
+    <oj-progress-circle value="-1"></oj-progress-circle>
+    <p style="margin-top: 1rem; font-weight: 500;">Loading Maintainence Data...</p>
+  </div>
+</oj-dialog>

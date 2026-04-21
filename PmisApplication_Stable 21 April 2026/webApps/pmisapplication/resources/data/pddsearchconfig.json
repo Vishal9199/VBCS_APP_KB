@@ -1,0 +1,93 @@
+{
+    "description": "Smart Search Configuration for Project Assignment Management Application",
+    "filters": {
+        "TenderNameFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Tender Name",
+            "options": {
+                "field": "tender_name",
+                "optionsData": "[[ $search.filters.TenderNameFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.TenderNameFilter.options.optionsKeys ]]"
+            },
+            "data": {
+            }
+        },
+        "TenderNumberFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Tender Number",
+            "options": {
+                "field": "tender_number",
+                "optionsData": "[[ $search.filters.TenderNumberFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.TenderNumberFilter.options.optionsKeys ]]"
+            },
+            "data": {
+            }
+        },
+        "ProjectNameFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Project Name",
+            "options": {
+                "field": "project_name",
+                "optionsData": "[[ $search.filters.ProjectNameFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.ProjectNameFilter.options.optionsKeys ]]"
+            },
+            "data": {
+            }
+        },
+        "ProjectNumberFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Project Number",
+            "options": {
+                "field": "project_number",
+                "optionsData": "[[ $search.filters.ProjectNumberFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.ProjectNumberFilter.options.optionsKeys ]]"
+            },
+            "data": {
+            }
+        },
+        "GeneralManagerFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "General Manager",
+            "options": {
+                "field": "general_manager_name",
+                "optionsData": "[[ $search.filters.GeneralManagerFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.GeneralManagerFilter.options.optionsKeys ]]"
+            },
+            "data": {
+            }
+        },
+        "ProjectManagerFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Project Manager",
+            "options": {
+                "field": "project_manager_name",
+                "optionsData": "[[ $search.filters.ProjectManagerFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.ProjectManagerFilter.options.optionsKeys ]]"
+            },
+            "data": {
+            }
+        },
+        "RegionFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Region",
+            "options": {
+                "field": "region_name",
+                "optionsData": "[[ $search.filters.RegionFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.RegionFilter.options.optionsKeys ]]"
+            },
+            "data": {
+            }
+        },
+        "StatusFilter": {
+            "type": "oj-sp/smart-search/default-filters/SelectSingleFilter",
+            "label": "Status",
+            "options": {
+                "field": "status_name",
+                "optionsData": "[[ $search.filters.StatusFilter.options.optionsData ]]",
+                "optionsKeys": "[[ $search.filters.StatusFilter.options.optionsKeys ]]"
+            },
+            "data": {
+            }
+        }
+    }
+}

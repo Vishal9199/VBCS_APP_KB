@@ -1,0 +1,67 @@
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width:1px;min-width: 100%;">
+    <div id="mainContent">
+
+      <oj-sp-smart-search-page page-title='Payment Certification' primary-action.display="on" badge.status="neutral"
+        id="paymentcertification" primary-action.label="Close"
+        on-sp-primary-action="[[$listeners.paymentcertificationSpPrimaryAction]]">
+
+
+        <div style="padding-top: 0; margin-top: 0.1rem; min-width: 100%;">
+          <div style="margin-top: 0;">
+
+
+            <oj-collapsible id="payment-cert-details-section" expanded="true"
+              class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 1rem;">
+              <span slot="header" style="font-weight: bold; color: white;">Project Details</span>
+              <div style="margin-top: 0; padding: 1rem; border-left: 4px;">
+                <oj-form-layout max-columns="3" label-edge="start" label-width="30%" colspan-wrap="wrap">
+
+                  <oj-input-text id="paymentCertProjectName" label-hint="Project Name" placeholder="Project Name"
+                    value="{{ $variables.headerInfoVar.projectName }}" user-assistance-density="compact"
+                    style="width: 16rem;" disabled="true">
+                  </oj-input-text>
+
+                  <oj-input-text id="paymentCertProjectNumber" label-hint="Project Number" placeholder="Project Number"
+                    value="{{ $variables.headerInfoVar.projectNumber }}" user-assistance-density="compact"
+                    style="width: 16rem;" disabled="true">
+                  </oj-input-text>
+
+                  <oj-input-text id="paymentCertTenderNumber" label-hint="Tender Number" placeholder="Tender Number"
+                    value="{{ $variables.headerInfoVar.tenderNumber }}" user-assistance-density="compact"
+                    style="width: 16rem;" disabled="true">
+                  </oj-input-text>
+
+                </oj-form-layout>
+              </div>
+            </oj-collapsible>
+
+
+            <oj-collapsible id="payment-cert-table-section" expanded="true"
+              class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 1rem;">
+              <span slot="header" style="font-weight: bold; color: white;">Payment Certification Details</span>
+              <oj-table id="paymentCertTable" scroll-policy="loadMoreOnScroll" style="width:100%; margin-top:1%;"
+                data="[[$variables.getPmispddPaymentcertificationGetbytenderidListSDP]]" display="grid"
+                selection-mode.row="single" columns="{{ $constants.tableVar }}">
+
+
+                <!-- Date Template -->
+                <template slot="Date">
+                  <oj-input-date-time value='[[typeof $current.data === "string" ? $current.data : null]]'
+                    converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyy "}}' readonly="true" id="start001"
+                    aria-label="start001" style="font-size: 12px !important; ">
+                  </oj-input-date-time>
+                </template>
+              </oj-table>
+            </oj-collapsible>
+
+
+          </div>
+        </div>
+
+      </oj-sp-smart-search-page>
+
+
+    </div>
+  </div>
+</div>

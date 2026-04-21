@@ -1,0 +1,516 @@
+{
+  "metadata": {},
+  "title": "General Information Add/Edit",
+  "description": "Project General Details Management page for managing tender, project, contractor, and project configuration information with comprehensive field support.",
+  "imports": {
+    "components": {
+      "oj-button": {"path": "ojs/ojbutton"},
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-form-layout": {"path": "ojs/ojformlayout"},
+      "oj-input-date": {"path": "ojs/ojdatetimepicker"},
+      "oj-input-number": {"path": "ojs/ojinputnumber"},
+      "oj-input-text": {"path": "ojs/ojinputtext"},
+      "oj-option": {"path": "ojs/ojoption"},
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-select-single": {"path": "ojs/ojselectsingle"},
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-sp-simple-create-edit": {"path": "oj-sp/simple-create-edit/loader"},
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-text-area": {"path": "ojs/ojinputtext"},
+      "oj-collapsible": {"path": "ojs/ojcollapsible"},
+      "oj-bind-text": {"path": "ojs/ojbindtext"}
+
+    },
+    "modules": {
+      "ojConverterNumber": {
+        "path": "ojs/ojconverter-number"
+      },
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      },
+      "ojValidationNumber": {
+        "path": "ojs/ojvalidation-number"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  },
+  "types": {
+    "@decorators.getPmispddGeneralLinedtlsGetbyid": {
+      "endpoint": "getPmispddGeneralLinedtlsGetbyid",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getPmispddGeneralLovCommon": {
+      "endpoint": "getPmispddGeneralLovCommon",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getPmispddGeneralLovCommon2": {
+      "endpoint": "getPmispddGeneralLovCommon",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getPmispddGeneralLovCommon3": {
+      "endpoint": "getPmispddGeneralLovCommon",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getPmispddGeneralLovCommon4": {
+      "endpoint": "getPmispddGeneralLovCommon",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getPmispddGeneralLovCommon5": {
+      "endpoint": "getPmispddGeneralLovCommon",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getPmispddGeneralLovCommon6": {
+      "endpoint": "getPmispddGeneralLovCommon",
+      "service": "PDD",
+      "path": "response"
+    },
+    "GeneralInformation": {
+      "general_id": "number",
+      "object_version_num": "number",
+      "tender_id": "number",
+      "tender_number": "string",
+      "tender_name": "string",
+      "ora_project_id": "number",
+      "ora_project_number": "string",
+      "ora_project_name": "string",
+      "contractor_id": "number",
+      "supplier_name": "string",
+      "phase_of_contract_id": "number",
+      "phase_contract": "string",
+      "status_id": "number",
+      "status_name": "string",
+      "status_code": "string",
+      "section_id": "number",
+      "section": "string",
+      "original_amount": "number",
+      "anticipated_contract_value": "number",
+      "budget": "number",
+      "last_updated_date": "string",
+      "pct_of_sme": "number",
+      "region_id": "number",
+      "region": "string",
+      "potential_saving": "number",
+      "source_of_fund_id": "number",
+      "source_of_fund": "string",
+      "project_desc": "string",
+      "scope_of_work": "string",
+      "pmu": "number",
+      "project_type_id": "number",
+      "project_type": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_login": "string"
+    },
+    "getPmispddGeneralLinedtlsGetbyid": {
+      "additional_info": "any",
+      "comments": "any",
+      "created_by": "string",
+      "created_date": "string",
+      "focal_point": "string",
+      "focal_point_user_id": "number",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string",
+      "line_num": "number",
+      "object_version_num": "number",
+      "ora_project_id": "number",
+      "ora_project_name": "string",
+      "ora_project_number": "string",
+      "po_number": "string",
+      "pr_number": "string",
+      "proj_engg_user_id": "number",
+      "proj_mgr_user_id": "number",
+      "project_assignment_id": "number",
+      "project_engineer_name": "string",
+      "project_id": "number",
+      "project_manager_name": "string",
+      "project_name": "string",
+      "project_number": "string",
+      "region_name": "string",
+      "senior_manager_name": "string",
+      "senior_mgr_user_id": "number",
+      "supplier_id": "number",
+      "supplier_name": "string",
+      "tender_id": "number",
+      "tender_name": "string",
+      "tender_number": "string"
+    },
+    "getPmispddGeneralLovCommon": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispddGeneralLovCommon2": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispddGeneralLovCommon3": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispddGeneralLovCommon4": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispddGeneralLovCommon5": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "getPmispddGeneralLovCommon6": {
+      "items": [
+        {
+          "lookup_value_code": "string",
+          "lookup_value_id": "number",
+          "lookup_value_name": "string"
+        }
+      ]
+    },
+    "postPayload": {
+      "general_id": "number",
+      "object_version_num": "number",
+      "ora_project_id": "number",
+      "tender_id": "number",
+      "phase_of_contract_id": "number",
+      "contractor_id": "number",
+      "project_desc": "string",
+      "original_amount": "number",
+      "budget": "number",
+      "project_type_id": "number",
+      "section_id": "number",
+      "sector": "string",
+      "stage": "string",
+      "status_id": "number",
+      "comments": "string",
+      "scope_of_work": "string",
+      "anticipated_contract_value": "number",
+      "source_of_fund_id": "number",
+      "potential_saving": "number",
+      "region_id": "number",
+      "pmu": "number",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    }
+  },
+  "variables": {
+    "about": {
+      "type": {
+        "created_by": "string",
+        "created_date": "string",
+        "last_updated_by": "string",
+        "last_updated_date": "string",
+        "last_updated_login": "string"
+      }
+    },
+    "generalInfoVar": {
+      "type": "GeneralInformation",
+      "defaultValue": {
+        "object_version_num": 0,
+        "last_updated_login": "[[ $application.user.email ]]",
+        "last_updated_by": "[[ $application.user.email ]]",
+        "created_by": "[[ $application.user.email ]]",
+        "last_updated_date": "[[ $application.functions.getSysdate() ]]",
+        "created_date": "[[ $application.functions.getSysdate() ]]"
+      }
+    },
+    "lineDetailsADP": {
+      "type": "vb/ArrayDataProvider2"
+    },
+    "pageMode": {
+      "type": "string",
+      "defaultValue": "create"
+    },
+    "isEditMode": {
+      "type": "boolean",
+      "defaultValue": false
+    },
+    "phaseContractLOV": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "responseType": "getPmispddGeneralLovCommon6",
+        "itemsPath": "items",
+        "keyAttributes": "lookup_value_id",
+        "fetchChain": "getPmispddGeneralLovCommonFetch6"
+      }
+    },
+    "pNavCode": {
+      "type": "string",
+      "defaultValue": "CREATE",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "pNavId": {
+      "type": "string",
+      "defaultValue": "0",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "postPayloadVar": {
+      "type": "postPayload"
+    },
+    "projectTypeLOV": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "responseType": "getPmispddGeneralLovCommon2",
+        "itemsPath": "items",
+        "keyAttributes": "lookup_value_id",
+        "headers": {
+          "x-session-code": "PROJECT_TYPE"
+        },
+        "fetchChain": "getPmispddGeneralLovCommonFetch5"
+      }
+    },
+    "pTenderId": {
+      "type": "string",
+      "defaultValue": "0",
+      "input": "fromUrl"
+    },
+    "regionLOV": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "responseType": "getPmispddGeneralLovCommon5",
+        "itemsPath": "items",
+        "keyAttributes": "lookup_value_id",
+        "headers": {
+          "x-session-code": "PDD_REGION"
+        },
+        "fetchChain": "getPmispddGeneralLovCommonFetch4"
+      }
+    },
+    "sectionLOV": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "responseType": "getPmispddGeneralLovCommon4",
+        "itemsPath": "items",
+        "headers": {
+          "x-session-code": "DEPT_SEC"
+        },
+        "keyAttributes": "lookup_value_id",
+        "fetchChain": "getPmispddGeneralLovCommonFetch3"
+      }
+    },
+    "sourceOfFundLOV": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "responseType": "getPmispddGeneralLovCommon3",
+        "itemsPath": "items",
+        "keyAttributes": "lookup_value_id",
+        "headers": {
+          "x-session-code": "SOURCE_OF_FUND"
+        },
+        "fetchChain": "getPmispddGeneralLovCommonFetch2"
+      }
+    },
+    "statusLOV": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "responseType": "getPmispddGeneralLovCommon",
+        "itemsPath": "items",
+        "keyAttributes": "lookup_value_id",
+        "headers": {
+          "x-session-code": "GEN_STATUS"
+        },
+        "fetchChain": "getPmispddGeneralLovCommonFetch"
+      }
+    },
+    "storedSMU": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "value": 1,
+          "label": "1"
+        },
+        {
+          "value": 2,
+          "label": "2"
+        },
+        {
+          "value": 3,
+          "label": "3"
+        },
+        {
+          "value": 4,
+          "label": "4"
+        },
+        {
+          "value": 5,
+          "label": "5"
+        },
+        {
+          "value": 6,
+          "label": "6"
+        },
+        {
+          "value": 7,
+          "label": "7"
+        },
+        {
+          "value": 8,
+          "label": "8"
+        },
+        {
+          "value": 9,
+          "label": "9"
+        },
+        {
+          "value": 10,
+          "label": "10"
+        },
+        {
+          "value": 11,
+          "label": "11"
+        },
+        {
+          "value": 12,
+          "label": "12"
+        }
+      ]
+    },
+    "storedSmuLov": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "data": "{{ $variables.storedSMU }}",
+        "keyAttributes": "value"
+      }
+    }
+
+  },
+  "eventListeners": {
+    "aboutButtonCancelACAction": {
+      "chains": [
+        {
+          "chain": "onCloseAboutAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "pddgeneralSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "onClosePrimaryAction",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "pddgeneralSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "onSecondaryActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": {
+            "event": "{{ $event }}"
+          },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    }
+
+  },
+  "constants": {
+    "lineDetailsColumns": {
+      "type": "object[]",
+      "description": "[\n        {\n          \"headerText\": \"Line #\",\n          \"field\": \"line_num\",\n          \"id\": \"line_num\",\n          \"sortable\": \"enabled\",\n          \"resizable\": \"enabled\",\n          \"width\": \"80px\",\n          \"className\": \"oj-sm-padding-2x-horizontal\",\n          \"headerClassName\": \"oj-sm-padding-2x-horizontal\"\n        },\n        {\n          \"headerText\": \"Tender Number\",\n          \"field\": \"tender_number\",\n          \"id\": \"tender_number\",\n          \"sortable\": \"enabled\",\n          \"resizable\": \"enabled\",\n          \"width\": \"150px\",\n          \"className\": \"oj-sm-padding-2x-horizontal\",\n          \"headerClassName\": \"oj-sm-padding-2x-horizontal\"\n        },\n        {\n          \"headerText\": \"Tender Name\",\n          \"field\": \"tender_name\",\n          \"id\": \"tender_name\",\n          \"sortable\": \"enabled\",\n          \"resizable\": \"enabled\",\n          \"width\": \"250px\",\n          \"className\": \"oj-sm-padding-2x-horizontal\",\n          \"headerClassName\": \"oj-sm-padding-2x-horizontal\"\n        },\n        {\n          \"headerText\": \"Project Number\",\n          \"field\": \"project_number\",\n          \"id\": \"project_number\",\n          \"sortable\": \"enabled\",\n          \"resizable\": \"enabled\",\n          \"width\": \"150px\",\n          \"className\": \"oj-sm-padding-2x-horizontal\",\n          \"headerClassName\": \"oj-sm-padding-2x-horizontal\"\n        },\n        {\n          \"headerText\": \"Project Name\",\n          \"field\": \"project_name\",\n          \"id\": \"project_name\",\n          \"sortable\": \"enabled\",\n          \"resizable\": \"enabled\",\n          \"width\": \"250px\",\n          \"className\": \"oj-sm-padding-2x-horizontal\",\n          \"headerClassName\": \"oj-sm-padding-2x-horizontal\"\n        },\n        {\n          \"headerText\": \"Oracle Project Number\",\n          \"field\": \"ora_project_number\",\n          \"id\": \"ora_project_number\",\n          \"sortable\": \"enabled\",\n          \"resizable\": \"enabled\",\n          \"width\": \"180px\",\n          \"className\": \"oj-sm-padding-2x-horizontal\",\n          \"headerClassName\": \"oj-sm-padding-2x-horizontal\"\n        },\n        {\n          \"headerText\": \"Oracle Project Name\",\n          \"field\": \"ora_project_name\",\n          \"id\": \"ora_project_name\",\n          \"sortable\": \"enabled\",\n          \"resizable\": \"enabled\",\n          \"width\": \"250px\",\n          \"className\": \"oj-sm-padding-2x-horizontal\",\n          \"headerClassName\": \"oj-sm-padding-2x-horizontal\"\n        },\n        {\n          \"headerText\": \"Supplier Name\",\n          \"field\": \"supplier_name\",\n          \"id\": \"supplier_name\",\n          \"sortable\": \"enabled\",\n          \"resizable\": \"enabled\",\n          \"width\": \"200px\",\n          \"className\": \"oj-sm-padding-2x-horizontal\",\n          \"headerClassName\": \"oj-sm-padding-2x-horizontal\"\n        },\n        {\n          \"headerText\": \"Project Manager\",\n          \"field\": \"project_manager_name\",\n          \"id\": \"project_manager_name\",\n          \"sortable\": \"enabled\",\n          \"resizable\": \"enabled\",\n          \"width\": \"200px\",\n          \"className\": \"oj-sm-padding-2x-horizontal\",\n          \"headerClassName\": \"oj-sm-padding-2x-horizontal\"\n        },\n        {\n          \"headerText\": \"Project Engineer\",\n          \"field\": \"project_engineer_name\",\n          \"id\": \"project_engineer_name\",\n          \"sortable\": \"enabled\",\n          \"resizable\": \"enabled\",\n          \"width\": \"200px\",\n          \"className\": \"oj-sm-padding-2x-horizontal\",\n          \"headerClassName\": \"oj-sm-padding-2x-horizontal\"\n        },\n        {\n          \"headerText\": \"Senior Manager\",\n          \"field\": \"senior_manager_name\",\n          \"id\": \"senior_manager_name\",\n          \"sortable\": \"enabled\",\n          \"resizable\": \"enabled\",\n          \"width\": \"200px\",\n          \"className\": \"oj-sm-padding-2x-horizontal\",\n          \"headerClassName\": \"oj-sm-padding-2x-horizontal\"\n        },\n        {\n          \"headerText\": \"Focal Point\",\n          \"field\": \"focal_point\",\n          \"id\": \"focal_point\",\n          \"sortable\": \"enabled\",\n          \"resizable\": \"enabled\",\n          \"width\": \"200px\",\n          \"className\": \"oj-sm-padding-2x-horizontal\",\n          \"headerClassName\": \"oj-sm-padding-2x-horizontal\"\n        },\n        {\n          \"headerText\": \"PR Number\",\n          \"field\": \"pr_number\",\n          \"id\": \"pr_number\",\n          \"sortable\": \"enabled\",\n          \"resizable\": \"enabled\",\n          \"width\": \"150px\",\n          \"className\": \"oj-sm-padding-2x-horizontal\",\n          \"headerClassName\": \"oj-sm-padding-2x-horizontal\"\n        },\n        {\n          \"headerText\": \"PO Number\",\n          \"field\": \"po_number\",\n          \"id\": \"po_number\",\n          \"sortable\": \"enabled\",\n          \"resizable\": \"enabled\",\n          \"width\": \"150px\",\n          \"className\": \"oj-sm-padding-2x-horizontal\",\n          \"headerClassName\": \"oj-sm-padding-2x-horizontal\"\n        },\n        {\n          \"headerText\": \"Region\",\n          \"field\": \"region_name\",\n          \"id\": \"region_name\",\n          \"sortable\": \"enabled\",\n          \"resizable\": \"enabled\",\n          \"width\": \"150px\",\n          \"className\": \"oj-sm-padding-2x-horizontal\",\n          \"headerClassName\": \"oj-sm-padding-2x-horizontal\"\n        },\n        {\n          \"headerText\": \"Comments\",\n          \"field\": \"comments\",\n          \"id\": \"comments\",\n          \"sortable\": \"enabled\",\n          \"resizable\": \"enabled\",\n          \"width\": \"250px\",\n          \"className\": \"oj-sm-padding-2x-horizontal\",\n          \"headerClassName\": \"oj-sm-padding-2x-horizontal\"\n        }\n      ]",
+      "defaultValue": [
+        {
+          "headerText": "Project Manager",
+          "field": "project_manager_name",
+          "id": "project_manager_name",
+          "sortable": "enabled",
+          "resizable": "enabled",
+          "width": "",
+          "className": "oj-sm-padding-2x-horizontal",
+          "headerClassName": "oj-sm-padding-2x-horizontal"
+        },
+        {
+          "headerText": "Project Engineer",
+          "field": "project_engineer_name",
+          "id": "project_engineer_name",
+          "sortable": "enabled",
+          "resizable": "enabled",
+          "width": "",
+          "className": "oj-sm-padding-2x-horizontal",
+          "headerClassName": "oj-sm-padding-2x-horizontal"
+        },
+        {
+          "headerText": "Senior Manager",
+          "field": "senior_manager_name",
+          "id": "senior_manager_name",
+          "sortable": "enabled",
+          "resizable": "enabled",
+          "width": "",
+          "className": "oj-sm-padding-2x-horizontal",
+          "headerClassName": "oj-sm-padding-2x-horizontal"
+        },
+        {
+          "headerText": "Focal Point",
+          "field": "focal_point",
+          "id": "focal_point",
+          "sortable": "enabled",
+          "resizable": "enabled",
+          "width": "",
+          "className": "oj-sm-padding-2x-horizontal",
+          "headerClassName": "oj-sm-padding-2x-horizontal"
+        }
+      ]
+    }
+  }
+}

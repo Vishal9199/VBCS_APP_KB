@@ -1,0 +1,142 @@
+{
+    "OUT_MESSAGE": "Approval history fetched successfully",
+    "OUT_STATUS": "SUCCESS",
+    "P_OUTPUT": [
+        {
+            "sno": 1,
+            "trans_id": 10355,
+            "action_id": 149,
+            "version_number": 0,
+            "appr_level": 5,
+            "category": "Approver",
+            "approval_role": "PMIS CPD OPD General Manager",
+            "status": "Open",
+            "last_action_by": null,
+            "last_action_date": null,
+            "last_action_comments": null,
+            "request_submitted_date": "2026-04-12T07:32:42.683951Z",
+            "last_update_date": "2026-04-12T07:32:42.683951Z",
+            "nested_history": [
+                {
+                    "approver_name": null,
+                    "approval_role": "PMIS CPD OPD General Manager",
+                    "status": "Open",
+                    "action_date": null,
+                    "comments": null
+                }
+            ]
+        },
+        {
+            "sno": 2,
+            "trans_id": 10355,
+            "action_id": 149,
+            "version_number": 0,
+            "appr_level": 4,
+            "category": "Approver",
+            "approval_role": "PMIS Asset Engineering Team",
+            "status": "Open",
+            "last_action_by": null,
+            "last_action_date": null,
+            "last_action_comments": null,
+            "request_submitted_date": "2026-04-12T07:32:42.683302Z",
+            "last_update_date": "2026-04-12T07:32:42.683302Z",
+            "nested_history": [
+                {
+                    "approver_name": null,
+                    "approval_role": "PMIS Asset Engineering Team",
+                    "status": "Open",
+                    "action_date": null,
+                    "comments": null
+                }
+            ]
+        },
+        {
+            "sno": 3,
+            "trans_id": 10355,
+            "action_id": 149,
+            "version_number": 0,
+            "appr_level": 3,
+            "category": "Approver",
+            "approval_role": "PMIS Asset Engineering General Manager",
+            "status": "Open",
+            "last_action_by": null,
+            "last_action_date": null,
+            "last_action_comments": null,
+            "request_submitted_date": "2026-04-12T07:32:42.68265Z",
+            "last_update_date": "2026-04-12T07:32:42.68265Z",
+            "nested_history": [
+                {
+                    "approver_name": null,
+                    "approval_role": "PMIS Asset Engineering General Manager",
+                    "status": "Open",
+                    "action_date": null,
+                    "comments": null
+                }
+            ]
+        },
+        {
+            "sno": 4,
+            "trans_id": 10355,
+            "action_id": 149,
+            "version_number": 0,
+            "appr_level": 2,
+            "category": "Approver",
+            "approval_role": "PMIS Asset Planning General Manager",
+            "status": "Open",
+            "last_action_by": null,
+            "last_action_date": null,
+            "last_action_comments": null,
+            "request_submitted_date": "2026-04-12T07:32:42.681947Z",
+            "last_update_date": "2026-04-12T07:32:42.681947Z",
+            "nested_history": [
+                {
+                    "approver_name": null,
+                    "approval_role": "PMIS Asset Planning General Manager",
+                    "status": "Open",
+                    "action_date": null,
+                    "comments": null
+                }
+            ]
+        },
+        {
+            "sno": 5,
+            "trans_id": 10355,
+            "action_id": 149,
+            "version_number": 0,
+            "appr_level": 1,
+            "category": "Approver",
+            "approval_role": "PMIS Asset Planning Manager",
+            "status": "Open",
+            "last_action_by": null,
+            "last_action_date": null,
+            "last_action_comments": null,
+            "request_submitted_date": "2026-04-12T07:32:42.680545Z",
+            "last_update_date": "2026-04-12T07:32:42.680545Z",
+            "nested_history": [
+                {
+                    "approver_name": null,
+                    "approval_role": "PMIS Asset Planning Manager",
+                    "status": "Open",
+                    "action_date": null,
+                    "comments": null
+                }
+            ]
+        },
+        {
+            "sno": 6,
+            "trans_id": 10355,
+            "action_id": 149,
+            "version_number": 0,
+            "appr_level": 0,
+            "category": "Requestor",
+            "approval_role": "Employee Submit",
+            "status": "Initiated",
+            "last_action_by": null,
+            "last_action_date": "2026-04-12T07:32:42Z",
+            "last_action_comments": null,
+            "request_submitted_date": "2026-04-12T07:32:42.677867Z",
+            "last_update_date": "2026-04-12T07:32:42.677867Z",
+            "nested_history": []
+        }
+    ]
+}

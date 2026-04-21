@@ -1,0 +1,46 @@
+{
+    "items": [
+        {
+            "lookup_value_id": 6191,
+            "lookup_value_code": "AL_AWABI",
+            "lookup_value_name": "Al Awabi",
+            "dependent_lookup_value_id": 6172,
+            "dependent_lookup_value_code": "MCS",
+            "dependent_lookup_value_name": "Muscat-Seeb"
+        },
+        {
+            "lookup_value_id": 6250,
+            "lookup_value_code": "SEEB",
+            "lookup_value_name": "Seeb",
+            "dependent_lookup_value_id": 6172,
+            "dependent_lookup_value_code": "MCS",
+            "dependent_lookup_value_name": "Muscat-Seeb"
+        },
+        {
+            "lookup_value_id": 6286,
+            "lookup_value_code": "MUSCAT_SEEB",
+            "lookup_value_name": "Muscat Seeb",
+            "dependent_lookup_value_id": 6172,
+            "dependent_lookup_value_code": "MCS",
+            "dependent_lookup_value_name": "Muscat-Seeb"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 3,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/lov/masterplan/location?p_dependent_lookup_value_code=mcs"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/lov/masterplan/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/lov/masterplan/location?p_dependent_lookup_value_code=mcs"
+        }
+    ]
+}

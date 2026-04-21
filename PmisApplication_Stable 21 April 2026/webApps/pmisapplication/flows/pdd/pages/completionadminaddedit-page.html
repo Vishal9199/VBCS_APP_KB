@@ -1,0 +1,168 @@
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+
+      <oj-sp-advanced-create-edit id="completionAddEditId" page-title="Completion" page-subtitle=" "
+        display-options.responsive-padding="on" primary-action.label="Close"
+        on-sp-primary-action="[[$listeners.completionAddEditIdSpPrimaryAction]]"
+        secondary-actions="[[ $variables.aToolBar ]]"
+        on-sp-secondary-action="[[$listeners.completionAddEditIdSpSecondaryAction]]">
+
+        <div slot="main" style="padding-top: 0; margin-top: 0;">
+          <div style="margin-top: 0;">
+
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <!-- SECTION 1: TENDER & PROJECT INFORMATION                 -->
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <oj-collapsible id="tender-project-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+              style="margin-top: 0;">
+              <span slot="header" style="font-weight: bold; color: white;">Tender &amp; Project Information</span>
+              <div style="padding: 1rem;">
+                <oj-validation-group id="tenderProjectFormGroup" valid="{{ $variables.tenderProjectFormGroup }}">
+                  <oj-form-layout max-columns="2" label-edge="start" label-width="40%" colspan-wrap="wrap">
+
+                    <!-- Tender Number (LOV) -->
+                    <oj-select-single id="tenderNumber" label-hint="Tender Number"
+                      value="{{ $variables.completionVar.tender_id }}" item-text="tender_number"
+                      user-assistance-density="compact" required="true" style="width: 16rem;"
+                      data="[[$variables.getPmispddCompletionadminLovTendernumberListSDP]]"
+                      on-value-item-changed="[[$listeners.tenderNumberValueItem]]">
+
+                      <template slot="collectionTemplate" data-oj-as="collection">
+    <oj-table 
+      style="max-width:750px; max-height:300px;" 
+      id="project_lov_table" 
+      horizontal-grid-visible="disabled" 
+      vertical-grid-visible="disabled"
+      class="oj-select-results" 
+      selected.row="[[collection.selected]]"
+      current-row="{{collection.currentRow}}"
+      columns='[
+        
+        {"headerText":"Tender Number","field":"tender_number"},
+        {"headerText":"Tender Name","field":"tender_name"}
+      ]'
+      on-oj-row-action="[[collection.handleRowAction]]" 
+      data="[[collection.data]]">
+
+      <template slot="cellTemplate" data-oj-as="cell">
+        <oj-bind-text value="[[String(cell.data)]]"></oj-bind-text>
+      </template>
+    </oj-table>
+  </template>
+                    </oj-select-single>
+
+                    <!-- Project Name (Read-only) -->
+                    <oj-input-text id="projectName" label-hint="Project Name" placeholder="Project Name"
+                      value="{{ $variables.completionVar.ora_project_name }}" readonly="true"
+                      user-assistance-density="compact" style="width: 16rem;">
+                    </oj-input-text>
+
+                    <!-- Project Number (Read-only) -->
+                    <oj-input-text id="projectNumber" label-hint="Project Number" placeholder="Project Number"
+                      value="{{ $variables.completionVar.ora_project_number }}" readonly="true"
+                      user-assistance-density="compact" style="width: 16rem;">
+                    </oj-input-text>
+
+                    <!-- Tender Name (Read-only) -->
+                    <oj-input-text id="tenderName" label-hint="Tender Name" placeholder="Tender Name"
+                      value="{{ $variables.completionVar.tender_name }}" readonly="true"
+                      user-assistance-density="compact" style="width: 16rem;">
+                    </oj-input-text>
+
+                    <!-- Consultant -->
+                    <oj-input-text id="consultantName" label-hint="Consultant" placeholder="Enter Consultant Name"
+                      value="{{ $variables.completionVar.consultant_name }}" user-assistance-density="compact"
+                      style="width: 16rem;">
+                    </oj-input-text>
+
+                    <!-- Contractor (Read-only) -->
+                    <oj-input-text id="contractorName" label-hint="Contractor" placeholder="Contractor"
+                      value="{{ $variables.completionVar.supplier_name }}" readonly="true"
+                      user-assistance-density="compact" style="width: 16rem;">
+                    </oj-input-text>
+
+                    <!-- Completion Flag (Switch/Checkbox) -->
+              
+                    <oj-switch id="completionFlag" label-hint="Completion Flag"
+                      value="[[ $variables.completionVar.completion_close_flag === 'Y' ]]"
+                      user-assistance-density="compact" class="oj-switch"
+                      on-value-changed="[[$listeners.completionFlagValue]]">
+                    </oj-switch>
+
+                  </oj-form-layout>
+                </oj-validation-group>
+              </div>
+            </oj-collapsible>
+
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <!-- SECTION 2: CONTRACT INFORMATION                         -->
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <oj-collapsible id="contract-info-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+              style="margin-top: 1rem;">
+              <span slot="header" style="font-weight: bold; color: white;">Contract Information</span>
+              <div style="padding: 1rem;">
+                <oj-validation-group id="contractInfoFormGroup">
+                  <oj-form-layout max-columns="2" label-edge="start" label-width="40%" colspan-wrap="wrap">
+
+                    <!-- Commencement Date -->
+                    <oj-input-date id="commencementDate" label-hint="Commencement Date" placeholder="Commencement Date"
+                      value="{{ $variables.completionVar.commencement_date }}"
+                      converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}'
+                      user-assistance-density="compact" style="width: 16rem;"
+                      max="[[ $variables.completionVar.orig_completion_date ]]">
+                    </oj-input-date>
+
+                    <!-- Original Completion Date -->
+                    <oj-input-date id="origCompletionDate" label-hint="Original Completion Date"
+                      placeholder="Original Completion Date" value="{{ $variables.completionVar.orig_completion_date }}"
+                      converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}'
+                      user-assistance-density="compact" style="width: 16rem;"
+                      min="[[ $variables.completionVar.commencement_date ]]">
+                    </oj-input-date>
+
+                    <!-- Extended Completion Date -->
+                    <oj-input-date id="extendedCompletionDate" label-hint="Extended Completion Date"
+                      placeholder="Extended Completion Date"
+                      value="{{ $variables.completionVar.extended_completion_date }}"
+                      converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}'
+                      user-assistance-density="compact" style="width: 16rem;"
+                      min="[[ $variables.completionVar.commencement_date ]]">
+                    </oj-input-date>
+
+                    <!-- Actual Completion Date -->
+                    <oj-input-date id="actualCompletionDate" label-hint="Actual Completion Date"
+                      placeholder="Actual Completion Date" value="{{ $variables.completionVar.actual_completion_date }}"
+                      converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}'
+                      user-assistance-density="compact" style="width: 16rem;"
+                      min="[[ $variables.completionVar.commencement_date ]]">
+                    </oj-input-date>
+
+                  </oj-form-layout>
+                </oj-validation-group>
+              </div>
+            </oj-collapsible>
+
+          </div>
+        </div>
+
+      </oj-sp-advanced-create-edit>
+
+    </div>
+  </div>
+</div>
+
+<oj-dialog id="progressDialog" dialog-title="Processing" style="width: 300px;" cancel-behavior="none">
+  <div slot="body" style="text-align: center; padding: 2rem;">
+    <oj-progress-bar value="-1"></oj-progress-bar>
+    <p style="margin-top: 1rem;">Please wait...</p>
+  </div>
+</oj-dialog>
+
+<oj-dialog id="loadingDialog" style="width: 300px;" cancel-behavior="none" drag-affordance="title-bar"
+  header-decoration="off" position.at.vertical="top" position.my.vertical="top">
+  <div slot="body" style="text-align: center; padding: 2rem;">
+    <oj-progress-circle value="-1"></oj-progress-circle>
+    <p style="margin-top: 1rem; font-weight: 500;">Loading Completion Data...</p>
+  </div>
+</oj-dialog>

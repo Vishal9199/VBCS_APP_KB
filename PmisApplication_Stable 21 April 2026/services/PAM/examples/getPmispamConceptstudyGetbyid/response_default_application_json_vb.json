@@ -1,0 +1,57 @@
+{
+    "items": [
+        {
+            "cs_dtl_id": 1493,
+            "object_version_num": 0,
+            "project_id": 1005,
+            "project_name": "MP 001",
+            "line_num": 2,
+            "phase_id": 6323,
+            "phase_code": "CONCEPT_STUDY",
+            "phase_name": "Concept Study",
+            "milestone_id": 6337,
+            "milestone_code": "TECHNICAL_AND_MAIN_PBA",
+            "milestone": "Technical And Main Pba",
+            "cs_senior_mgr_id": 300000008962847,
+            "senior_manager_name": "Salah Ali Hilal Al Hashimi صلاح  الهاشمي",
+            "cs_planning_mgr_id": 300000008962847,
+            "planning_manager_name": "Salah Ali Hilal Al Hashimi صلاح  الهاشمي",
+            "consultant_id": 6342,
+            "consultant_code": "CONSULTANT",
+            "consultant_name": "Consultant",
+            "budget_amount": 100,
+            "planned_start_date": "2026-02-04T00:00:00Z",
+            "planned_end_date": "2026-02-18T00:00:00Z",
+            "revised_start_date": "2026-02-03T00:00:00Z",
+            "revised_end_date": "2026-02-26T00:00:00Z",
+            "actual_start_date": "2026-02-09T00:00:00Z",
+            "actual_end_date": "2026-02-19T00:00:00Z",
+            "completion_percentage": 50,
+            "remarks": "test4",
+            "additional_info": null,
+            "created_by": "vigneshkumar.m@4iapps.com",
+            "created_date": "2026-02-05T05:45:47Z",
+            "last_updated_by": "vigneshkumar.m@4iapps.com",
+            "last_updated_date": "2026-02-05T05:45:47Z",
+            "last_updated_login": "vigneshkumar.m@4iapps.com"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/conceptstudy/getbyid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/conceptstudy/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/conceptstudy/getbyid"
+        }
+    ]
+}

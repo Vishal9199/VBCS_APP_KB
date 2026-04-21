@@ -1,0 +1,835 @@
+<style>
+
+  oj-option#project_charter_edit_page_h_cancelAction
+  {
+    display: none !important;
+  }
+
+  #principle-purpose .oj-text-field-container,
+  #other-purpose .oj-text-field-container,
+  #justification .oj-text-field-container,
+  #main-feature .oj-text-field-container,
+  #operational-philosophy .oj-text-field-container,
+  #capex-requirement .oj-text-field-container,
+  #location-plan .oj-text-field-container,
+  #service-requirements .oj-text-field-container,
+  #overview-project .oj-text-field-container
+  {
+    min-height: 6rem !important;
+    min-width: 15rem !important;
+  }
+</style>
+<div id="sampleDemo" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <oj-sp-advanced-create-edit id="project_charter_edit_page" page-title="Project Charter Management"
+        page-subtitle=" " display-options.responsive-padding="on" primary-action.label="Close"
+        on-sp-secondary-action="[[$listeners.projectCharterEditPageSpSecondaryAction]]"
+        on-sp-primary-action="[[$listeners.projectCharterEditPageSpPrimaryAction]]"
+        secondary-actions="[[ $variables.aToolGeneric ]]">
+
+        <div slot="main" style="padding-top: 0; margin-top: 0;">
+          <div style="margin-top: 0;">
+
+            <!-- Project Details Section -->
+            <oj-collapsible id="project-details-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+              style="margin-top: 0;">
+              <span slot="header" style="font-weight: bold; color: white;">Project Details</span>
+              <div style="padding: 0.1rem;">
+                <oj-form-layout max-columns="3" label-edge="start" label-width="45%" colspan-wrap="wrap"
+                  user-assistance-density="compact" class="oj-formlayout-full-width" direction="row">
+
+                  <oj-input-text id="ref-num" label-hint="Reference Number" placeholder="Reference Number"
+                    value="{{ $variables.projectCharterVar.ref_num }}" style="width: 16rem;" disabled="true">
+                  </oj-input-text>
+
+                  <oj-select-single id="project_lov" label-hint="Project Name"
+                    value="{{ $variables.projectCharterVar.project_id }}" item-text="project_name" style="width: 16rem;"
+                    placeholder="Project Name" data="[[ $variables.projectCharterSDP ]]"
+                    on-value-item-changed="[[$listeners.projectLovValueItem]]">
+                    <!-- <template slot="collectionTemplate" data-oj-as="collection">
+                      <oj-table scroll-policy="loadMoreOnScroll" selection-mode='{"row": "single"}'
+                        columns-default='{"resizable": "disabled","sortable": "disabled"}' class="oj-select-results"
+                        columns='[{"headerText":"Project Name","field":"project_name"}]'
+                        on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]"
+                        selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}"
+                        horizontal-grid-visible="enabled" vertical-grid-visible="enabled" display="grid">
+                      </oj-table>
+                    </template> -->
+                  </oj-select-single>
+
+                  <!-- <oj-input-text id="projectNumber" label-hint="Project Number" placeholder="Project Number"
+                    style="width: 16rem;" disabled="true">
+                  </oj-input-text> -->
+
+                  <oj-input-text id="status" label-hint="Status" value="{{ $variables.projectCharterVar.status_name }}"
+                    style="width: 16rem;" disabled="true" placeholder="Draft"></oj-input-text>
+
+                  <oj-select-single id="region" label-hint="Region" value="{{ $variables.projectCharterVar.region_id }}"
+                    data="[[ $variables.getPmisLovRegionNameListSDP ]]" item-text="lookup_value_name" style="width: 16rem;"
+                    on-value-item-changed="[[$listeners.regionValueItem]]" placeholder="Region Name">
+                    <template slot="collectionTemplate" data-oj-as="collection">
+                      <oj-table scroll-policy="loadMoreOnScroll" selection-mode='{"row": "single"}'
+                        columns-default='{"resizable": "disabled","sortable": "disabled"}' class="oj-select-results"
+                        columns='[{"headerText":"Region Name","field":"lookup_value_name"}, {"headerText":"Region Code","field":"lookup_value_code"}]'
+                        on-oj-row-action="[[collection.handleRowAction]]" data="[[collection.data]]"
+                        selected.row="[[collection.selected]]" current-row="{{collection.currentRow}}" horizontal-grid-visible="enabled"
+                        vertical-grid-visible="enabled" display="grid"></oj-table>
+                    </template>
+                  </oj-select-single>
+
+                  <oj-input-text id="budget-number" label-hint="Project Number" placeholder="Project Number"
+                    value="{{ $variables.projectCharterVar.project_number}}" style="width: 16rem;" disabled="true">
+                  </oj-input-text>
+
+                  <!-- <oj-input-text id="related-sons" label-hint="Related SONs" placeholder="Related SONs"
+                    value="{{ $variables.projectCharterVar.related_sons }}" style="width: 16rem;">
+                  </oj-input-text> -->
+                  <oj-input-text id="workflow-status" label-hint="Workflow Status" placeholder="Workflow Status"
+                    value="{{ $variables.projectCharterVar.manager_status }}" style="width: 16rem;" disabled="true"></oj-input-text>
+
+                   <oj-select-single id="parentProjectCharter" label-hint="Parent Project Charter"
+                     value="{{ $variables.projectCharterVar.parent_project_charter_id }}" style="width: 16rem;"
+                     data="[[$variables.getPmispamProjectcharterLovParentprojectcharterListSDP]]"
+                     item-text="parent_ref_num" placeholder="Parent Project Charter">
+                  </oj-select-single>
+
+                  <oj-text-area id="projectDescription" label-hint="Project Description"
+                    placeholder="Project Description" style="width: 16rem;" resize-behavior="vertical"
+                    value="{{ $variables.projectCharterVar.project_description }}">
+                  </oj-text-area>
+
+                </oj-form-layout>
+              </div>
+            </oj-collapsible>
+
+            <!-- Purpose & Justification Section -->
+            <oj-collapsible id="purpose-justification-section" expanded="true"
+              class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 0.25rem;">
+              <span slot="header" style="font-weight: bold; color: white;">Purpose & Justification</span>
+              <div style="padding: 0.1rem;">
+                <oj-form-layout max-columns="3" label-edge="top" label-width="42%" colspan-wrap="wrap"
+                  user-assistance-density="compact" class="oj-formlayout-full-width" direction="row">
+
+                  <oj-text-area id="principle-purpose" label-hint="Principle Purpose" placeholder="Principle Purpose"
+                    value="{{ $variables.projectCharterVar.principle_purpose }}" rows="3" style="width: 16rem;"
+                    resize-behavior="vertical">
+                  </oj-text-area>
+
+                  <oj-text-area id="other-purpose" label-hint="Other Purpose" placeholder="Other Purpose"
+                    value="{{ $variables.projectCharterVar.other_purpose }}" rows="3" style="width: 16rem;"
+                    resize-behavior="vertical">
+                  </oj-text-area>
+
+                  <oj-text-area id="justification" label-hint="Justification" placeholder="Justification"
+                    value="{{ $variables.projectCharterVar.justification }}" rows="3" style="width: 16rem;"
+                    resize-behavior="vertical" class="">
+                  </oj-text-area>
+
+                  <oj-text-area id="main-feature" label-hint="Main Feature" placeholder="Main Feature"
+                    value="{{ $variables.projectCharterVar.main_feature }}" rows="3" style="width: 16rem;"
+                    resize-behavior="vertical">
+                  </oj-text-area>
+
+                  <oj-text-area id="operational-philosophy" label-hint="Operational Philosophy"
+                    placeholder="Operational Philosophy" value="{{ $variables.projectCharterVar.oper_philosophy }}"
+                    rows="3" style="width: 16rem;" resize-behavior="vertical">
+                  </oj-text-area>
+
+                  <oj-text-area id="capex-requirement" label-hint="CAPEX Requirement" placeholder="CAPEX Requirement"
+                    value="{{ $variables.projectCharterVar.capex_requirement }}" rows="3" style="width: 16rem;"
+                    resize-behavior="vertical">
+                  </oj-text-area>
+
+                  <oj-text-area id="location-plan" label-hint="Location Plan" placeholder="Location Plan"
+                    value="{{ $variables.projectCharterVar.location_pl }}" rows="3" style="width: 16rem;"
+                    resize-behavior="vertical">
+                  </oj-text-area>
+
+                  <oj-text-area id="service-requirements" label-hint="Service Requirements and Objectives"
+                    placeholder="Service Requirements and Objectives"
+                    value="{{ $variables.projectCharterVar.service_req_obj }}" rows="3" style="width: 16rem;"
+                    resize-behavior="vertical">
+                  </oj-text-area>
+
+                  <oj-text-area id="overview-project" label-hint="Overview of the Project"
+                    placeholder="Overview of the Project" value="{{ $variables.projectCharterVar.overview_project }}"
+                    rows="3" style="width: 16rem;" resize-behavior="vertical">
+                  </oj-text-area>
+
+                  <oj-text-area id="project_scope" label-hint="Project Scope" placeholder="Project Scope"
+                    rows="3" style="width: 16rem;"
+                    resize-behavior="vertical" value="{{ $variables.projectCharterVar.project_scope }}">
+                  </oj-text-area>
+
+                  <oj-text-area id="project_objective" label-hint="Project Objective"
+                    placeholder="Project Objective" rows="3" style="width: 16rem;"
+                    resize-behavior="vertical" value="{{ $variables.projectCharterVar.project_objective }}">
+                  </oj-text-area>
+
+                  <oj-text-area id="success_criteria" label-hint="Success Criteria" placeholder="Success Criteria"
+                    rows="3" style="width: 16rem;" resize-behavior="vertical"
+                    value="{{ $variables.projectCharterVar.success_criteria }}">
+                  </oj-text-area>
+
+                </oj-form-layout>
+              </div>
+            </oj-collapsible>
+
+            <!-- Project Owner Information Section -->
+            <!-- <oj-collapsible id="project-owner-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+              style="margin-top: 0.25rem;">
+              <span slot="header" style="font-weight: bold; color: white;">Project Owner Information</span>
+              <div style="padding: 0.1rem;">
+                <oj-form-layout max-columns="3" label-edge="start" label-width="45%" colspan-wrap="wrap"
+                  user-assistance-density="compact" class="oj-formlayout-full-width" direction="row">
+
+                  <oj-input-text id="project-owner" placeholder="Project Owner"
+                    value="{{ $variables.projectCharterVar.project_owner }}" style="width: 16rem;"
+                    label-hint="Project Owner">
+                  </oj-input-text>
+
+                  <oj-input-text id="execution-director" label-hint="Execution Director"
+                    placeholder="Execution Director" value="{{ $variables.projectCharterVar.execution_director }}"
+                    style="width: 16rem;">
+                  </oj-input-text>
+
+                </oj-form-layout>
+              </div>
+            </oj-collapsible> -->
+
+            <!-- Key Dates Section -->
+            <!-- <oj-collapsible id="key-dates-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+              style="margin-top: 0.25rem;">
+              <span slot="header" style="font-weight: bold; color: white;">Key Dates</span>
+              <div style="padding: 0.1rem;">
+                <oj-form-layout max-columns="3" label-edge="start" label-width="45%" colspan-wrap="wrap"
+                  user-assistance-density="compact">
+
+                  <oj-input-date id="design-date" label-hint="Design Date"
+                    value="{{ $variables.projectCharterVar.design_date }}"
+                    converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}' style="width: 16rem;">
+                  </oj-input-date>
+
+                  <oj-input-date id="construction-date" label-hint="Construction Date"
+                    value="{{ $variables.projectCharterVar.construction_date }}"
+                    converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}' style="width: 16rem;">
+                  </oj-input-date>
+
+                  <oj-input-date id="testing-commissioning-date" label-hint="Testing & Commissioning Date"
+                    value="{{ $variables.projectCharterVar.testing_commissioning_date }}"
+                    converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}' style="width: 16rem;">
+                  </oj-input-date>
+
+                  <oj-input-date id="tender-award-date" label-hint="Tender Award Date"
+                    value="{{ $variables.projectCharterVar.tender_award }}"
+                    converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}' style="width: 16rem;">
+                  </oj-input-date>
+
+                </oj-form-layout>
+              </div>
+            </oj-collapsible> -->
+
+            <!-- ========================================================================================================== -->
+<!-- SINGLE PANEL WITH LEFT-RIGHT LAYOUT: Project Owner & Key Dates -->
+<!-- ========================================================================================================== -->
+
+<div class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 0.25rem;">
+  
+  <!-- Panel Header -->
+  <div style="background-color: #084c4c; padding: 0.75rem 1rem; margin: -1px -1px 0 -1px; border-radius: 4px 4px 0 0;">
+    <h6 style="margin: 0; font-weight: bold; color: white; font-size: 1rem;">
+      <span class="oj-ux-ico-user-group" style="margin-right: 0.5rem;"></span>
+      Project Ownership & Timeline
+    </h6>
+  </div>
+  
+  <!-- Panel Content with Left-Right Layout -->
+  <div style="padding: 1rem;">
+    <div class="oj-flex oj-sm-flex-wrap-wrap" style="gap: 2rem;">
+
+      <!-- ========================================================================================================== -->
+      <!-- LEFT SECTION: Key Dates -->
+      <!-- ========================================================================================================== -->
+      <div class="oj-flex-item" style="flex: 1; min-width: 300px;">
+        
+        <!-- Section Subheader -->
+        <div style="border-bottom: 2px solid #084c4c; padding-bottom: 0.25rem; margin-bottom: 0.25rem;">
+          <h6 style="margin: 0; color: #084c4c; font-weight: 600; font-size: 0.95rem;">
+            <span class="oj-ux-ico-user" style="margin-right: 0.5rem;"></span>
+            Project Owner Information
+          </h6>
+        </div>
+        
+        <!-- Fields -->
+        <oj-form-layout max-columns="1" label-edge="start" label-width="45%" colspan-wrap="wrap"
+          user-assistance-density="compact" direction="row">
+        
+          <oj-input-text id="project-owner" placeholder="Project Owner" value="{{ $variables.projectCharterVar.project_owner }}"
+            style="width: 100%; max-width: 20rem;" label-hint="Project Owner">
+          </oj-input-text>
+        
+          <oj-input-text id="execution-director" label-hint="Execution Director" placeholder="Execution Director"
+            value="{{ $variables.projectCharterVar.execution_director }}" style="width: 100%; max-width: 20rem;">
+          </oj-input-text>
+        
+        </oj-form-layout>
+        
+      </div>
+      
+      <!-- ========================================================================================================== -->
+      <!-- RIGHT SECTION: Project Owner Information -->
+      <!-- ========================================================================================================== -->
+      <div class="oj-flex-item" style="flex: 1; min-width: 300px;">
+      
+        <!-- Section Subheader -->
+        <div style="border-bottom: 2px solid #084c4c; padding-bottom: 0.25rem; margin-bottom: 0.25rem;">
+          <h6 style="margin: 0; color: #084c4c; font-weight: 600; font-size: 0.95rem;">
+            <span class="oj-ux-ico-calendar" style="margin-right: 0.5rem;"></span>
+            Key Dates
+          </h6>
+        </div>
+      
+        <!-- Fields -->
+        <oj-form-layout max-columns="1" label-edge="start" label-width="45%" colspan-wrap="wrap"
+          user-assistance-density="compact">
+      
+          <oj-input-date id="design-date" label-hint="Design" value="{{ $variables.projectCharterVar.design_date }}"
+            converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'
+            style="width: 100%; max-width: 20rem;">
+          </oj-input-date>
+      
+          <oj-input-date id="construction-date" label-hint="Construction"
+            value="{{ $variables.projectCharterVar.construction_date }}"
+            converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'
+            style="width: 100%; max-width: 20rem;">
+          </oj-input-date>
+      
+          <oj-input-date id="testing-commissioning-date" label-hint="Testing & Commissioning"
+            value="{{ $variables.projectCharterVar.testing_commissioning_date }}"
+            converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'
+            style="width: 100%; max-width: 20rem;">
+          </oj-input-date>
+      
+          <oj-input-date id="tender-award-date" label-hint="Tender Award"
+            value="{{ $variables.projectCharterVar.tender_award }}"
+            converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'
+            style="width: 100%; max-width: 20rem;">
+          </oj-input-date>
+      
+        </oj-form-layout>
+      
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+<div style="padding: 0.1rem; margin-top: 0.25rem;" class="oj-panel oj-selected">
+ 
+  <!-- Header with Add / Refresh Buttons -->
+  <div style="display:flex; justify-content:space-between; align-items:center; background-color: #084c4c; padding: 2px 2px; border-radius: 5px;">
+    <span style="font-size: 18px; font-weight: bold; color: white;">Project Dependencies</span>
+    <div style="display:flex; gap: 8px; padding-top: 2px; margin-bottom: -0.1rem;">
+      <oj-button chroming="outlined" id="dependency-add-btn" label="Add Dependency"
+        disabled="[[ $variables.pNavCode === 'CREATE' || $variables.enterType === 'PROJECT_CREATE' ]]"
+        on-oj-action="[[$listeners.dependencyAddBtnAction]]">
+        <span class="oj-ux-ico-plus" slot="startIcon"></span>
+      </oj-button>
+      <oj-button chroming="outlined" id="dependency-refresh-btn"
+        on-oj-action="[[$listeners.dependencyRefreshBtnAction]]"
+        label="Refresh"
+        disabled="[[ $variables.pNavCode === 'CREATE' || $variables.enterType === 'PROJECT_CREATE' ]]">
+        <span class="oj-ux-ico-refresh" slot="startIcon"></span>
+      </oj-button>
+    </div>
+  </div>
+ 
+  <!-- Dependency Table -->
+  <oj-table id="dependency-table"
+    data="{{ $variables.ADPdependency }}"
+    columns-default.sortable="disabled"
+    columns-default.resizable="enabled"
+    class="oj-sm-width-full oj-bg-body"
+    display="grid"
+    selection-mode.row="single"
+    selection-mode.column="single"
+    horizontal-grid-visible="enabled"
+    vertical-grid-visible="enabled"
+    columns="{{ $constants.dependencyColumns }}">
+ 
+    <!-- Actions column template -->
+    <template slot="dependency_actions_template">
+      <div class="custom-button-align">
+        <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+          on-oj-action="[[$listeners.dependencyEditAction]]" title="Edit">
+          <span class="oj-ux-ico-edit" slot="startIcon" style="font-size: 18px;"></span>
+        </oj-button>
+        <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+          on-oj-action="[[$listeners.dependencyDeleteAction]]" title="Delete">
+          <span class="oj-ux-ico-trash" slot="startIcon" style="font-size: 18px;"></span>
+        </oj-button>
+      </div>
+    </template>
+ 
+    <template slot="dependency_project_dependencies_template">
+      <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+    </template>
+ 
+    <template slot="dependency_details_template">
+      <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+    </template>
+ 
+    <template slot="dependency_impacts_template">
+      <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+    </template>
+ 
+    <template slot="dependency_info_template">
+      <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+    </template>
+ 
+  </oj-table>
+</div>
+
+
+            <!-- Estimate Costs Section -->
+            <!-- <oj-collapsible id="estimate-costs-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+              style="margin-top: 0.25rem;"> -->
+              <!-- <span slot="header" style="font-weight: bold; color: white;">Estimate Costs</span> -->
+
+             <div style="padding: 0.1rem; margin-top: 0.25rem;" class="oj-panel oj-selected">
+  <!-- Header with Buttons -->
+  <div style="display:flex; justify-content:space-between; align-items:center; background-color: #084c4c; padding: 2px 2px; border-radius: 5px;">
+    <span style="font-size: 18px; font-weight: bold; color: white;">Project Summary Costs</span>
+
+    <!-- Action Buttons -->
+     <div style="display:flex; gap: 8px; padding-top: 2px; margin-bottom: -0.1rem;">
+      <oj-button chroming="outlined" id="estcost-add-btn" on-oj-action="[[$listeners.estcostAddBtnAction]]"
+        label="Add Costs"
+        disabled="[[ $variables.pNavCode === 'CREATE' || $variables.enterType === 'PROJECT_CREATE' ]]">
+        <span class="oj-ux-ico-plus" slot="startIcon"></span>
+      </oj-button>
+      <oj-button chroming="outlined" id="estcost-refresh-btn" on-oj-action="[[$listeners.estcostRefreshBtnAction]]"
+        label="Refresh" disabled="[[ $variables.pNavCode === 'CREATE' || $variables.enterType === 'PROJECT_CREATE' ]]">
+        <span class="oj-ux-ico-refresh" slot="startIcon"></span>
+      </oj-button>
+    </div>
+  </div>
+
+  <!-- Estimate Costs Table -->
+  <oj-table id="estimate-cost-table" data="{{ $variables.ADPestimateCost }}"
+    columns-default.sortable="disabled" columns-default.resizable="enabled"
+    class="oj-sm-width-full oj-bg-body" display="grid" selection-mode.row="single"
+    selection-mode.column="single" horizontal-grid-visible="enabled" vertical-grid-visible="enabled"
+    columns="{{ $constants.estCostColumns }}">
+
+    <template slot="estcost_actions_template">
+      <div class="custom-button-align">
+        <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+          on-oj-action="[[$listeners.estcostEditAction]]" title="Edit">
+          <span class="oj-ux-ico-edit" slot="startIcon" style="font-size: 18px;"></span>
+        </oj-button>
+        <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+          on-oj-action="[[$listeners.estcostDeleteAction]]" title="Delete">
+          <span class="oj-ux-ico-trash" slot="startIcon" style="font-size: 18px;"></span>
+        </oj-button>
+      </div>
+    </template>
+
+    <template slot="estcost_capex_template">
+      <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+    </template>
+
+    <template slot="estcost_capex_unit_template">
+      <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+    </template>
+
+    <template slot="estcost_opex_template">
+      <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+    </template>
+
+    <template slot="estcost_opex_unit_template">
+      <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+    </template>
+
+    <template slot="estcost_info_template">
+      <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+    </template>
+
+  </oj-table>
+</div>
+
+            <!-- </oj-collapsible> -->
+
+            <!-- Major Risks Section -->
+            <!-- <oj-collapsible id="major-risks-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+              style="margin-top: 0.25rem;"> -->
+              <!-- <span slot="header" style="font-weight: bold; color: white;">Major Risks</span> -->
+              <div style="padding: 0.1rem; margin-top: 0.25rem;" class="oj-panel oj-selected">
+              <!-- <span style="font-size: 18px; font-weight: bold; color: #084c4c;">Major Risks</span> -->
+
+                <!-- Action Buttons -->
+                <!-- <div style="display:flex; justify-content:flex-end; background-color: white;"
+                  class="oj-helper-justify-content-space-between">
+                  <span style="font-size: 18px; font-weight: bold; color: #084c4c;">Major Risks</span>
+                  <div style="display:flex; justify-content:flex-end; background-color: white;">
+                    <oj-button style="margin-left:0.5%; margin-right:0.5%;" chroming="outlined" id="risk-add-btn"
+                      on-oj-action="[[$listeners.riskAddBtnAction]]">
+                      <span>Add Risk Details</span>
+                    </oj-button>
+                    <oj-button style="margin-left:0.5%; margin-right:0.5%;" chroming="outlined" id="risk-refresh-btn"
+                      on-oj-action="[[$listeners.riskRefreshBtnAction]]">
+                      <span>Refresh</span>
+                    </oj-button>
+                  </div>
+                </div> -->
+                <div
+                  style="display:flex; justify-content:space-between; align-items:center; background-color: #084c4c; padding: 2px 2px; border-radius: 5px;">
+                  <span style="font-size: 18px; font-weight: bold; color: white;">Major Risks</span>
+                  <div style="display:flex; gap: 8px; padding-top: 2px; margin-bottom: -0.1rem;">
+                    <oj-button style="margin:0;" chroming="outlined" id="risk-add-btn"
+                      on-oj-action="[[$listeners.riskAddBtnAction]]" label="Add Risks"
+                      disabled="[[ $variables.pNavCode === 'CREATE' || $variables.enterType === 'PROJECT_CREATE' ]]">
+                      <span class="oj-ux-ico-plus" slot="startIcon"></span>
+                    </oj-button>
+                    <oj-button style="margin:0;" chroming="outlined" id="risk-refresh-btn"
+                      on-oj-action="[[$listeners.riskRefreshBtnAction]]" label="Refresh"
+                      disabled="[[ $variables.pNavCode === 'CREATE' || $variables.enterType === 'PROJECT_CREATE' ]]">
+                      <span class="oj-ux-ico-refresh" slot="startIcon"></span>
+                    </oj-button>
+                  </div>
+                </div>
+
+
+                <!-- Major Risks Table -->
+                <oj-table id="major-risk-table" data="{{ $variables.ADPmajorRisk }}" columns-default.sortable="disabled"
+                  columns-default.resizable="enabled" class="oj-sm-width-full oj-bg-body" display="grid"
+                  selection-mode.row="single" columns="{{ $constants.majorRisksColumns }}">
+
+                  <template slot="risk_actions_template">
+                    <div class="custom-button-align">
+                      <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                        on-oj-action="[[$listeners.riskEditAction]]" title="Edit">
+                        <span class="oj-ux-ico-edit" slot="startIcon" style="font-size: 18px;"></span>
+                      </oj-button>
+                      <oj-button display="icons" chroming="borderless" class="oj-button-sm" title="Delete"
+                        on-oj-action="[[$listeners.riskDeleteAction]]">
+                        <span class="oj-ux-ico-trash" slot="startIcon" style="font-size: 18px;"></span>
+                      </oj-button>
+                    </div>
+                  </template>
+
+                  <template slot="risk_title_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="risk_description_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="risk_impact_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                  <template slot="risk_mitigation_template">
+                    <oj-bind-text value="[[ $current.data ]]"></oj-bind-text>
+                  </template>
+
+                </oj-table>
+
+              </div>
+            </oj-collapsible>
+
+            <!-- Other Information Section -->
+            <!-- <oj-collapsible id="other-info-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+              style="margin-top: 0.25rem;"> -->
+              <!-- <span slot="header" style="font-weight: bold; color: white;">Other Information</span> -->
+              <div style="padding: 0.1rem; margin-top: 0.25rem; margin-bottom: 0.25rem;" class="oj-panel oj-selected">
+                <span style="font-size: 18px; font-weight: bold; color: #084c4c;">Other Information</span>
+                <oj-form-layout max-columns="2" label-edge="start" label-width="45%" colspan-wrap="wrap"
+                  user-assistance-density="compact" direction="row" class="oj-formlayout-full-width">
+
+                  <oj-text-area id="procurement-assumption" label-hint="Procurement Assumption"
+                    placeholder="Procurement Assumption"
+                    value="{{ $variables.projectCharterVar.procurement_assumption }}" rows="3" style="width: 16rem;"
+                    resize-behavior="vertical">
+                  </oj-text-area>
+
+                  <oj-text-area id="operating-principle" label-hint="Operating Principle"
+                    placeholder="Operating Principle" value="{{ $variables.projectCharterVar.operating_principle }}"
+                    rows="3" style="width: 16rem;" resize-behavior="vertical">
+                  </oj-text-area>
+
+                </oj-form-layout>
+              </div>
+            <!-- </oj-collapsible> -->
+
+            <!-- Image Attachment Section -->
+            <!-- <div class="demo-tabbar-container oj-panel" style="margin-top: 0.25rem;">
+              <oj-tab-bar id="attachment-tab-bar" edge="top" selection="{{ $variables.selectedAttachmentTab }}">
+                <ul>
+                  <li id="location-plan-tab">
+                    <a href="#" style="font-size: larger; font-weight: bold;" aria-controls="location-plan-content"
+                      id="location-plan-link">Location Plan</a>
+                  </li>
+                  <li id="schematic-drawings-tab">
+                    <a href="#" style="font-size: larger; font-weight: bold;" aria-controls="schematic-drawings-content"
+                      id="schematic-drawings-link">Schematic Drawings</a>
+                  </li>
+                  <li id="others-tab">
+                    <a href="#" style="font-size: larger; font-weight: bold;" aria-controls="others-content"
+                      id="others-link">Others</a>
+                  </li>
+                </ul>
+              </oj-tab-bar>
+            </div> -->
+
+            <!-- Attachment Switcher Container -->
+            <!-- <div class="demo-switcher-container oj-panel">
+              <oj-switcher value="{{ $variables.selectedAttachmentTab }}"> -->
+
+                <!-- Location Plan Tab -->
+                <!-- <div slot="location-plan-tab" id="location-plan-content" role="tabpanel"
+                  aria-labelledby="location-plan-tab">
+                  <div class="demo-content" style="padding: 1rem;">
+                    <div style="text-align: center; padding: 2rem;">
+                      <oj-button chroming="outlined">
+                        <span slot="startIcon" class="oj-ux-ico-upload" style="color: white;"></span>
+                        <span>Upload Location Plan</span>
+                      </oj-button>
+                      <p style="margin-top: 1rem; color: #6c757d;">Upload location plan images or documents</p>
+                    </div>
+                  </div>
+                </div> -->
+
+                <!-- Schematic Drawings Tab -->
+                <!-- <div slot="schematic-drawings-tab" id="schematic-drawings-content" role="tabpanel"
+                  aria-labelledby="schematic-drawings-tab">
+                  <div class="demo-content" style="padding: 1rem;">
+                    <div style="text-align: center; padding: 0.5rem;">
+                      <oj-button chroming="outlined">
+                        <span slot="startIcon" class="oj-ux-ico-upload" style="color: white;"></span>
+                        <span>Upload Schematic Drawings</span>
+                      </oj-button>
+                      <p style="margin-top: 1rem; color: #6c757d;">Upload schematic drawings and technical diagrams
+                      </p>
+                    </div>
+                  </div>
+                </div> -->
+
+                <!-- Others Tab -->
+                <!-- <div slot="others-tab" id="others-content" role="tabpanel" aria-labelledby="others-tab">
+                  <div class="demo-content" style="padding: 1rem;">
+                    <div style="text-align: center; padding: 0.5rem;">
+                      <oj-button chroming="outlined">
+                        <span slot="startIcon" class="oj-ux-ico-upload" style="color: white;"></span>
+                        <span>Upload Other Documents</span>
+                      </oj-button>
+                      <p style="margin-top: 1rem; color: #6c757d;">Upload other supporting documents and files</p>
+                    </div>
+                  </div>
+                </div> -->
+
+              <!-- </oj-switcher> -->
+            <!-- </div> -->
+
+          </div>
+        </div>
+
+      </oj-sp-advanced-create-edit>
+    </div>
+  </div>
+</div>
+
+<!-- Estimate Cost Dialog -->
+<oj-dialog style="width: auto; max-height: 90vh; overflow: hidden;" dialog-title="Estimate Cost Add/Edit"
+  id="estimateCostDialog" cancel-behavior="icon" resize-behavior="resizable" drag-affordance="title-bar"
+  position.at.vertical="top" modality="modeless" header-decoration="off">
+  <div slot="body">
+    <oj-validation-group id="estimateCostForm">
+      <oj-form-layout label-edge="top" direction="row" columns="2" id="estimateCostFormLayout" max-columns="2">
+
+        <oj-input-text id="est-capex-cost" label-hint="Est. CAPEX Cost" placeholder="Est. CAPEX Cost"
+          value="{{ $variables.estimateCostVar.est_capax_cost }}" style="width: 16rem;">
+        </oj-input-text>
+
+        <!-- <oj-input-text id="capex-unit" label-hint="CAPEX Unit" placeholder="CAPEX Unit"
+          value="{{ $variables.estimateCostVar.capax_unit }}" style="width: 16rem;">
+        </oj-input-text> -->
+
+        <oj-input-text id="est-opex-cost" label-hint="Est. OPEX Cost" placeholder="Est. OPEX Cost"
+          value="{{ $variables.estimateCostVar.est_opex_cost }}" style="width: 16rem;">
+        </oj-input-text>
+
+        <!-- <oj-input-text id="opex-unit" label-hint="OPEX Unit" placeholder="OPEX Unit"
+          value="{{ $variables.estimateCostVar.opex_unit }}" style="width: 16rem;">
+        </oj-input-text> -->
+      </oj-form-layout>
+      <!-- <oj-form-layout label-edge="top" direction="row" class="oj-formlayout-full-width">
+        <oj-text-area id="estcost-additional-info" label-hint="Additional Info" placeholder="Additional Info"
+          value="{{ $variables.estimateCostVar.additional_info }}" style="width: 100%;"
+          resize-behavior="vertical" class="oj-form-control-full-width">
+        </oj-text-area>
+      </oj-form-layout> -->
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-button id="estcost-save-close" on-oj-action="[[$listeners.estcostSaveAddAnotherAction]]">Save &amp; Add Another</oj-button>
+    <oj-button id="estcost-save" on-oj-action="[[$listeners.estcostSaveCloseAction]]">Save &amp; Close</oj-button>
+    <oj-button id="estcost-cancel" on-oj-action="[[$listeners.estcostCancelAction]]">
+      Cancel
+    </oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Major Risk Dialog -->
+<oj-dialog style="width: 450px; max-height: 90vh; overflow: hidden;" dialog-title="Major Risk Add/Edit"
+  id="majorRiskDialog" cancel-behavior="icon" resize-behavior="resizable" drag-affordance="title-bar"
+  position.at.vertical="top" modality="modeless" header-decoration="off">
+  <div slot="body">
+    <oj-validation-group id="majorRiskForm">
+      <oj-form-layout label-edge="start" direction="column" id="majorRiskFormLayout" max-columns="2"
+        user-assistance-density="compact" class="oj-formlayout-full-width">
+
+        <oj-input-text id="major-risk-title" label-hint="Major Risk Title" placeholder="Major Risk Title"
+          value="{{ $variables.majorRiskVar.major_risk_title }}" style="width: 16rem;" required="true">
+        </oj-input-text>
+
+        <oj-input-text id="risk-impact" label-hint="Impact" placeholder="Impact"
+          value="{{ $variables.majorRiskVar.impact }}" style="width: 16rem;" required="true">
+        </oj-input-text>
+
+        <oj-input-text id="risk-mitigation" label-hint="Mitigation" placeholder="Mitigation"
+          value="{{ $variables.majorRiskVar.mitigation }}" style="width: 16rem;" required="true">
+        </oj-input-text>
+        <oj-text-area id="risk-description" label-hint="Description" placeholder="Description"
+          value="{{ $variables.majorRiskVar.description }}" rows="3" style="width: 16rem;"></oj-text-area>
+        <!-- <oj-text-area id="risk-additional-info" label-hint="Additional Info" placeholder="Additional Info"
+          value="{{ $variables.majorRiskVar.additional_info }}" style="width: 100%;" label-edge="provided"
+          resize-behavior="vertical">
+        </oj-text-area> -->
+      </oj-form-layout>
+      <!-- <oj-form-layout> -->
+      <!-- </oj-form-layout> -->
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-button id="risk-save-close" on-oj-action="[[$listeners.riskSaveAddAnotherAction]]">Save &amp; Add Another</oj-button>
+    <oj-button id="risk-save" on-oj-action="[[$listeners.riskSaveCloseAction]]">Save &amp; Close</oj-button>
+    <oj-button id="risk-cancel" on-oj-action="[[$listeners.riskCancelAction]]">
+      Cancel
+    </oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Progress Dialog -->
+<oj-dialog id="progressMsg" dialog-title="Loading..." style="width: 300px; overflow: hidden;" cancel-behavior="none"
+  modality="modal" header-decoration="off">
+  <div slot="body">
+    <div style="text-align: center; padding: 2rem;">
+      <oj-progress-bar-circular value="-1">
+      </oj-progress-bar-circular>
+      <p style="margin-top: 1rem;">Please wait while loading...</p>
+    </div>
+  </div>
+</oj-dialog>
+
+<oj-dialog style="display:none; width: 500px; overflow: hidden;" dialog-title="Warning" id="delete_dialog"
+  cancel-behavior="icon" header-decoration="off" drag-affordance="title-bar" position.at.vertical="top"
+  position.my.vertical="top">
+  <div slot="body" style="margin-top: 1.5rem;">
+    <div class="oj-flex">Are you sure you want to delete the record?</div>
+  </div>
+  <div slot="footer">
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction2]]">Ok</oj-button>
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction]]">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="About" id="aboutDialog" cancel-behavior="icon" style="width: 400px; overflow: hidden;"
+  resize-behavior="resizable" position.my.vertical="top" position.at.vertical="top" drag-affordance="title-bar"
+  header-decoration="off">
+  <div slot="body">
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-sm-12 oj-md-12">
+        <oj-form-layout label-edge='start' columns="1" style="margin-top:23px;margin-left:-20px"
+          user-assistance-density="compact" direction="column" class="oj-formlayout-full-width"
+          label-width="45%">
+          <oj-input-text label-hint="Created By:" style="margin-bottom: -6px;" value="{{ $variables.about.created_by }}"
+            readonly="true" user-assistance-density="compact">
+          </oj-input-text>
+          <oj-input-text label-hint="Created Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.created_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated By:" style="margin-bottom: -6px;"
+            value="{{ $variables.about.last_updated_by }}" readonly="true" user-assistance-density="compact"></oj-input-text>
+          <oj-input-text label-hint="Created Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.last_updated_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated Login:" value="{{ $variables.about.last_updated_login }}" style="margin-bottom: -6px;"
+            readonly="true" user-assistance-density="compact">
+          </oj-input-text>
+        </oj-form-layout>
+      </div>
+    </div>
+  </div>
+  <div slot="footer">
+    <oj-button id="aboutButtonCancel_AC" label="Ok"
+      chroming="outlined" style="margin-top:-20px !important;" on-oj-action="[[$listeners.aboutButtonCancelACAction]]"></oj-button>
+  </div>
+</oj-dialog>
+
+<oj-dialog style="width: 520px; max-height: 90vh; overflow: hidden;"
+  dialog-title="Project Dependency Add/Edit"
+  id="dependencyDialog"
+  cancel-behavior="icon"
+  resize-behavior="resizable"
+  drag-affordance="title-bar"
+  position.at.vertical="top"
+  modality="modeless"
+  header-decoration="off">
+  <div slot="body">
+    <oj-validation-group id="dependencyForm">
+      <oj-form-layout label-edge="top" direction="column" id="dependencyFormLayout"
+        max-columns="1" user-assistance-density="compact" class="oj-formlayout-full-width">
+ 
+        <oj-text-area id="dep-project-dependencies"
+          label-hint="Project Dependencies"
+          placeholder="Enter project dependencies"
+          value="{{ $variables.dependencyVar.project_dependencies }}"
+          rows="3" style="width: 100%;" resize-behavior="vertical" required="true">
+        </oj-text-area>
+ 
+        <oj-text-area id="dep-dependency-details"
+          label-hint="Dependency Details"
+          placeholder="Enter dependency details"
+          value="{{ $variables.dependencyVar.dependency_details }}"
+          rows="3" style="width: 100%;" resize-behavior="vertical">
+        </oj-text-area>
+ 
+        <oj-text-area id="dep-impacts-consequences"
+          label-hint="Impacts & Consequences"
+          placeholder="Enter impacts and consequences"
+          value="{{ $variables.dependencyVar.impacts_consequences }}"
+          rows="3" style="width: 100%;" resize-behavior="vertical">
+        </oj-text-area>
+ 
+        <oj-text-area id="dep-additional-info"
+          label-hint="Additional Info"
+          placeholder="Enter additional information"
+          value="{{ $variables.dependencyVar.additional_info }}"
+          rows="3" style="width: 100%;" resize-behavior="vertical">
+        </oj-text-area>
+ 
+      </oj-form-layout>
+    </oj-validation-group>
+  </div>
+  <div slot="footer">
+    <oj-button id="dep-save-close" on-oj-action="[[$listeners.dependencySaveAddAnotherAction]]">Save &amp; Add Another</oj-button>
+    <oj-button id="dep-save" on-oj-action="[[$listeners.dependencySaveCloseAction]]">Save &amp; Close</oj-button>
+    <oj-button id="dep-cancel" on-oj-action="[[$listeners.dependencyCancelAction]]">Cancel</oj-button>
+  </div>
+</oj-dialog>

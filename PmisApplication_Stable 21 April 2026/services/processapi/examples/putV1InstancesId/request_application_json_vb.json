@@ -1,0 +1,7 @@
+{
+	"action": "TERMINATE",
+	"instanceActionProps": {
+		"reason": "Now Working",
+		"terminateChildInstances": "true"
+	}
+}

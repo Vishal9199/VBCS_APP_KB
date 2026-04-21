@@ -1,0 +1,82 @@
+{
+    "items": [
+        {
+            "project_id": 796,
+            "project_name": "3rd Project",
+            "project_long_name": "Third Project"
+        },
+        {
+            "project_id": 976,
+            "project_name": "Project A",
+            "project_long_name": "Project A"
+        },
+        {
+            "project_id": 1200,
+            "project_name": "PROJ_TEST 001",
+            "project_long_name": "TESt PRJ NAME"
+        },
+        {
+            "project_id": 1237,
+            "project_name": "OK NEW PRJ",
+            "project_long_name": "NEW OK"
+        },
+        {
+            "project_id": 978,
+            "project_name": "1",
+            "project_long_name": "1"
+        },
+        {
+            "project_id": 895,
+            "project_name": "1st Project",
+            "project_long_name": "Second Project - NEW"
+        },
+        {
+            "project_id": 1177,
+            "project_name": "Long Project(Name)",
+            "project_long_name": "Long Name(Project)"
+        },
+        {
+            "project_id": 797,
+            "project_name": "2nd Project",
+            "project_long_name": "Second Project"
+        },
+        {
+            "project_id": 818,
+            "project_name": "Urban Infrastructure Upgrade",
+            "project_long_name": "Urban Infrastructure Upgrade – Roads, Drainage, Utilities"
+        },
+        {
+            "project_id": 1005,
+            "project_name": "MP 001",
+            "project_long_name": "MP 001"
+        },
+        {
+            "project_id": 1008,
+            "project_name": "ProJeCt",
+            "project_long_name": "aaaaaaaaaaaa"
+        },
+        {
+            "project_id": 1009,
+            "project_name": "SSSSSSSSSSS",
+            "project_long_name": "12345"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 12,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/lov/pam/masterplan/project"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/lov/pam/masterplan/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/lov/pam/masterplan/project"
+        }
+    ]
+}

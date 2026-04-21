@@ -1,0 +1,171 @@
+<style>
+.oj-sp-header-general-overview-header-strip {
+  display: none;
+}
+</style>
+
+<div id="sampleDemo1" class="demo-padding demo-container">
+<div id="componentDemoContent1" style="width: 1px; min-width: 100%;">
+<div id="mainContent1">
+
+  <!-- <oj-bind-if test="[[$page.variables.vShowFragment]]">
+    <oj-vb-fragment bridge="[[vbBridge]]" name="headermenu"></oj-vb-fragment>
+  </oj-bind-if> -->
+
+<oj-sp-smart-search-page id="oj_exssp1" page-title="Calendar Admin" display-mode="light" page-subtitle=" ">
+
+<!--Search Section -->
+<oj-flex slot="search" class="oj-sm-padding-2x" style="align-items: center;">
+  <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-space-between" style="width: 100%; align-items: flex-start; padding: 0 1rem;">
+    <div style="flex: 1; margin-right: 1rem;">
+      <oj-sp-smart-search 
+        filter-criterion="{{ $variables.filterCriterion }}"
+        search-config="[[ $variables.searchConfiguration.provider ]]" 
+        search-context="[[ $variables.searchContext ]]"
+        id="pmis_calendar_smartsearch" ask-hint="Search with calendar name, type ...">
+      </oj-sp-smart-search>
+    </div>
+    <div style="display: flex; gap: 0.25rem; margin-left: 1rem; margin-top: 1px; flex-wrap: wrap;">
+      <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Reset" id="resetBtn"
+        on-oj-action="[[$listeners.resetBtnAction]]">
+        <span slot="startIcon" class="oj-ux-ico-reset"></span>
+      </oj-button>
+      <oj-button style="margin:0.125rem;" label="Refresh" chroming="outlined" id="refreshBtn"
+        on-oj-action="[[$listeners.refreshBtnAction]]">
+        <span slot="startIcon" class="oj-ux-ico-refresh"></span>
+      </oj-button>
+      <oj-button style="margin:0.125rem;" label="Export" chroming="outlined" id="exportBtn"
+        on-oj-action="[[$listeners.exportBtnAction]]">
+        <span slot="startIcon" class="oj-ux-ico-export-excel-data"></span>
+      </oj-button>
+      <oj-button style="margin:0.125rem;" chroming="outlined" label="Create" id="createBtn"
+        on-oj-action="[[$listeners.createBtnAction]]">
+        <span slot="startIcon" class="oj-ux-ico-plus"></span>
+      </oj-button>
+    </div>
+  </div>
+</oj-flex>
+
+<!--Table Section -->
+<div id="sampleDemo" class="demo-padding demo-container">
+<div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+<div id="searchMainContent">
+
+<!-- <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-space-between" style="width: 100%; align-items: flex-start; padding: 0 1rem;">
+  <div style="flex: 1; margin-right: 1rem;">
+  </div>
+  <div style="display: flex; gap: 0.25rem; margin-left: 1rem; margin-top: 1px; flex-wrap: wrap;">
+    <oj-button style="margin:0.125rem;" label="Refresh" chroming="outlined" id="refreshBtn">
+      <span slot="startIcon" class="oj-ux-ico-refresh"></span>
+    </oj-button>
+    <oj-button style="margin:0.125rem;" label="Export" chroming="outlined" id="exportBtn">
+      <span slot="startIcon" class="oj-ux-ico-export-excel-data"></span>
+    </oj-button>
+  </div>
+</div> -->
+
+<div class="oj-flex" style="margin-top: 5px;">
+<!-- oj-search-table -->
+<oj-table scroll-policy="loadMoreOnScroll" class="oj-sm-width-full oj-bg-body" display="grid"
+  horizontal-grid-visible="enabled" vertical-grid-visible="enabled" selection-mode.row="single"
+  selection-mode.column="single" id="searchCalendarTbl"
+  data="[[ $variables.calendarADP ]]" columns="{{ $constants.tableColumns }}">
+
+<!-- Template Slots -->
+<template slot="actions">
+  <div style="display: flex; gap: 4px; justify-content: center; align-items: center;">
+    <oj-button display="icons" chroming="borderless" class="oj-button-sm" on-oj-action="[[$listeners.buttonAction]]">
+      <span slot="startIcon" class="oj-ux-ico-edit" style="font-size: 18px !important;"></span>
+    </oj-button>
+    <oj-button display="icons" chroming="borderless" class="oj-button-sm" on-oj-action="[[$listeners.buttonAction2]]">
+      <span slot="startIcon" class="oj-ux-ico-trash" style="font-size: 18px !important;"></span>
+    </oj-button>
+  </div>
+</template>
+
+<template slot="calendar_type">
+  <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>  
+</template>
+
+<template slot="calendar_name">
+  <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>  
+</template>
+
+<template slot="description">
+  <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>  
+</template>
+
+<template slot="enabled_flag">
+  <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>  
+</template>
+
+<template slot="created_by">
+  <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>  
+</template>
+
+<template slot="last_updated_by">
+  <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>  
+</template>
+
+<template slot="date">
+  <oj-input-date value="[[$current.data]]" readonly="true"
+    converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'>
+  </oj-input-date>
+</template>
+
+</oj-table>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Pagination Section -->
+<div class="oj-flex oj-sm-justify-content-center" style="margin-top: 0.25rem; gap: 1rem;">
+  <div class="oj-flex-item oj-sm-flex-initial">
+    <oj-button label="Prev" chroming="outlined" id="prevBtn" disabled="[[ $variables.pagination.is_prev ]]"
+      on-oj-action="[[$listeners.prevBtnAction]]">
+      <span slot="startIcon" class="oj-ux-ico-back"></span>
+    </oj-button>
+  </div>
+  <div style="display: flex; align-items: center; gap: 5px; color: #666; font-size: 12px; border: 2px;" class="oj-bg-body">
+      <oj-bind-text
+        value="[[ (Number($variables.searchObj.in_offset)) + '-' + ((Number($variables.searchObj.in_offset)) + (Number($variables.calendarADP.data.length))) + ' of ' + $variables.totalRecords + ' items' ]]">
+      </oj-bind-text>
+    </div>
+  <!-- <oj-text-area rows="1" class="pagination-text-area"
+    style="text-align: center; font-weight: 500; border-radius: 4px; width: 120px;"
+    value="{{ 'Page' + $variables.currentPage + ' | Total: ' + [[ $variables.totalRecords ]] }}" tabindex="-1"
+    readonly="true">
+  </oj-text-area> -->
+  <div class="oj-flex-item oj-sm-flex-initial">
+    <oj-button label="Next" chroming="outlined" id="nextBtn" disabled="[[ $variables.pagination.is_next ]]"
+      on-oj-action="[[$listeners.nextBtnAction]]">
+      <span slot="endIcon" class="oj-ux-ico-forward-next"></span>
+    </oj-button>
+  </div>
+</div>
+
+</oj-sp-smart-search-page>
+</div>
+</div>
+</div>
+
+<oj-dialog id="loadingDialog" style="width: 300px;" cancel-behavior="none" drag-affordance="title-bar"
+  header-decoration="off" position.at.vertical="top" position.my.vertical="top">
+  <div slot="body" style="text-align: center; padding: 2rem;">
+    <oj-progress-circle value="-1"></oj-progress-circle>
+    <p style="margin-top: 1rem; font-weight: 500;">Loading Calendar Data...</p>
+  </div>
+</oj-dialog>
+
+<oj-dialog style="display:none; width: 500px; overflow: hidden;" dialog-title="Warning" id="delete_dialog"
+  cancel-behavior="icon" header-decoration="off" drag-affordance="title-bar" position.at.vertical="top"
+  position.my.vertical="top">
+  <div slot="body" style="margin-top: 1.5rem;">
+    <div class="oj-flex">Are you sure you want to delete the record?</div>
+  </div>
+  <div slot="footer">
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction4]]">Ok</oj-button>
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction3]]">Cancel</oj-button>
+  </div>
+</oj-dialog>

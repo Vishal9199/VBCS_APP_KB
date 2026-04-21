@@ -1,0 +1,198 @@
+{
+  "title": "",
+  "description": "",
+  "variables": {
+    "getPmispddPaymentcertificationGetbytenderidListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+        "endpoint": "PDD/getPmispddPaymentcertificationGetbytenderid",
+        "keyAttributes": "tender_id",
+        "itemsPath": "items",
+        "responseType": "getPmispddPaymentcertificationGetbytenderidResponse",
+        "headers": {
+          "x-session-id": "{{ $variables.pTenderId }}"
+        }
+      }
+    },
+    "pTenderId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "headerInfoVar": {
+      "type": {
+        "projectName": "string",
+        "projectNumber": "string",
+        "tenderNumber": "string"
+      },
+      "defaultValue": {
+        "projectName": "",
+        "projectNumber": "",
+        "tenderNumber": ""
+      }
+    }
+
+  },
+  "metadata": {},
+  "types": {
+    "@decorators.getPmispddPaymentcertificationGetbytenderidResponse": {
+      "endpoint": "getPmispddPaymentcertificationGetbytenderid",
+      "service": "PDD",
+      "path": "response"
+    },
+    "getPmispddPaymentcertificationGetbytenderidResponse": {
+      "items": [
+        {
+          "created_by": "string",
+          "created_date": "string",
+          "invoice_amount": "number",
+          "invoice_date": "string",
+          "invoice_number": "string",
+          "last_updated_by": "string",
+          "last_updated_date": "string",
+          "last_updated_login": "string",
+          "payment_status": "string",
+          "po_number": "string",
+          "pr_number": "string",
+          "project_end_date": "string",
+          "project_id": "number",
+          "project_name": "string",
+          "project_number": "string",
+          "project_start_date": "string",
+          "receipt_date": "string",
+          "shipment_receipt_num": "string",
+          "source_rowid": "string",
+          "supplier_id": "number",
+          "supplier_name": "string",
+          "tender_id": "number",
+          "tender_name": "string",
+          "tender_number": "string",
+          "trx_source": "string"
+        }
+      ]
+    }
+  },
+  "eventListeners": {
+    "paymentcertificationSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "SmartSearchPageTemplateSpPrimaryActionChain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date-time": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      }
+
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css",
+      "/resources/css/pmis-search.css"
+    ],
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    }
+  },
+  "constants": {
+    "tableVar": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "headerText": "Project Number",
+          "field": "project_number"
+        },
+        {
+          "headerText": "Project Name",
+          "field": "project_name"
+        },
+        {
+          "headerText": "Tender Number",
+          "field": "tender_number"
+        },
+        {
+          "headerText": "Tender Name",
+          "field": "tender_name"
+        },
+        {
+          "headerText": "PR Number",
+          "field": "pr_number"
+        },
+        {
+          "headerText": "PO Number",
+          "field": "po_number"
+        },
+        {
+          "headerText": "Shipment Receipt No",
+          "field": "shipment_receipt_num"
+        },
+        {
+          "headerText": "Supplier Name",
+          "field": "supplier_name"
+        },
+        {
+          "headerText": "Receipt Date",
+          "field": "receipt_date",
+          "template": "Date"
+        },
+        {
+          "headerText": "Invoice Number",
+          "field": "invoice_number"
+        },
+        {
+          "headerText": "Invoice Date",
+          "field": "invoice_date"
+        },
+        {
+          "headerText": "Invoice Amount",
+          "field": "invoice_amount"
+        },
+        {
+          "headerText": "Payment Status",
+          "field": "payment_status"
+        },
+        {
+          "headerText": "Project Start Date",
+          "field": "project_start_date",
+          "template": "Date"
+        },
+        {
+          "headerText": "Project End Date",
+          "field": "project_end_date",
+          "template": "Date"
+        }
+      ]
+    }
+  }
+}

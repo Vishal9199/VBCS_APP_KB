@@ -1,0 +1,304 @@
+{
+  "variables": {
+    "about": {
+      "type": "about"
+    },
+    "ADPrisk": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "riskType",
+        "keyAttributes": "risk_id"
+      }
+    },
+    "pTenderId": {
+      "type": "string",
+      "defaultValue": "[[ $application.variables.pTenderId ]]",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "riskBufferDP": {
+      "type": "application:ojs/ojbufferingdataprovider",
+      "constructorParams": [
+        "{{ $variables.ADPrisk }}",
+        null
+      ]
+    },
+    "lvCurrentRow": {
+      "type": "object",
+      "defaultValue": {}
+    },
+    "lvRowToEdit": {
+      "type": { "rowKey": "number" }
+    },
+    "lvNextValue": {
+      "type": "number",
+      "defaultValue": -1
+    },
+    "projectName":   { "type": "string", "defaultValue": "" },
+    "projectNumber": { "type": "string", "defaultValue": "" },
+    "tenderNumber":  { "type": "string", "defaultValue": "" },
+    "oraProjectId":  { "type": "number", "defaultValue": null },
+    "tenderId":      { "type": "number", "defaultValue": null },
+    "tenderName":    { "type": "string", "defaultValue": "" },
+    "ADPriskCategory": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "keyAttributes": "value",
+        "textFilterAttributes": ["label"]
+      }
+    },
+    "ADPlikelihood": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "keyAttributes": "value",
+        "textFilterAttributes": ["label"]
+      }
+    },
+    "ADPowner": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "keyAttributes": "value",
+        "textFilterAttributes": ["label"]
+      }
+    },
+    "ADPscope": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "keyAttributes": "value",
+        "textFilterAttributes": ["label"]
+      }
+    },
+    "ADPstatus": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "keyAttributes": "value",
+        "textFilterAttributes": ["label"]
+      }
+    },
+    "ADPstrength": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "keyAttributes": "value",
+        "textFilterAttributes": ["label"]
+      }
+    },
+    "ADPrating": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "keyAttributes": "value",
+        "textFilterAttributes": ["label"]
+      }
+    },
+    "ADPstrategy": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "keyAttributes": "value",
+        "textFilterAttributes": ["label"]
+      }
+    },
+    "ADPoccurrence": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "keyAttributes": "value",
+        "textFilterAttributes": ["label"]
+      }
+    }
+
+  },
+
+  "types": {
+    "riskType": {
+      "risk_id":                "number",
+      "object_version_num":     "number",
+      "ora_project_id":         "number",
+      "ora_project_number":     "string",
+      "ora_project_name":       "string",
+      "tender_id":              "number",
+      "tender_number":          "string",
+      "tender_name":            "string",
+      "risk_number":            "number",
+      "risk_category_id":       "number",
+      "risk_category_code":     "string",
+      "risk_category":          "string",
+      "risk_description":       "string",
+      "causes":                 "string",
+      "consequence":            "string",
+      "expected_occurrence":    "string",
+      "likelihood_id":          "number",
+      "likelihood_code":        "string",
+      "likelihood":             "string",
+      "scope":                  "number",
+      "time":                   "number",
+      "cost":                   "number",
+      "qhse":                   "number",
+      "strength":               "string",
+      "overall_risk_rating":    "string",
+      "risk_response_strategy": "string",
+      "prevent_cont_actions":   "string",
+      "owner_id":               "number",
+      "owner_code":             "string",
+      "owner":                  "string",
+      "action_owner":           "string",
+      "expected_retirement":    "string",
+      "status":                 "string",
+      "additional_info":        "string",
+      "created_by":             "string",
+      "created_date":           "string",
+      "last_updated_by":        "string",
+      "last_updated_date":      "string",
+      "last_updated_login":     "string"
+    },
+    "about": {
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    }
+  },
+
+  "constants": {
+    "riskColumns": {
+      "type": "object[]",
+      "defaultValue": [
+        { "headerText": "Actions",                          "field": "",                        "frozenEdge": "start",
+          "template": "riskActionTemplate",     "width": 90,  "sortable": "disabled",            "headerStyle": "white-space: normal;" },
+        { "headerText": "Risk Number",                     "field": "risk_number",              
+          "template": "riskNumberTemplate",
+          "width": 70,  "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" 
+     },
+        { "headerText": "Risk Category",                   "field": "risk_category",            "template": "riskCategoryTemplate",   "width": 190, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Risk Description",                "field": "risk_description",         "template": "riskDescTemplate",       "width": 200, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Causes",                          "field": "causes",                   "template": "riskCausesTemplate",     "width": 150, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Consequence(s)",                  "field": "consequence",              "template": "riskConsequenceTemplate","width": 160, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Expected Occurrence",             "field": "expected_occurrence",      "template": "riskOccurrenceTemplate", "width": 170, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Likelihood",                      "field": "likelihood",               "template": "riskLikelihoodTemplate", "width": 130, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Scope",                           "field": "scope",                    "template": "riskScopeTemplate",      "width": 80,  "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Time",                            "field": "time",                     "template": "riskTimeTemplate",       "width": 80,  "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Cost",                            "field": "cost",                     "template": "riskCostTemplate",       "width": 80,  "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "QHSE",                            "field": "qhse",                     "template": "riskQhseTemplate",       "width": 80,  "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Strength",                        "field": "strength",                 "template": "riskStrengthTemplate",   "width": 110, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Overall Risk Rating",             "field": "overall_risk_rating",      "template": "riskRatingTemplate",     "width": 160, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Risk Response Strategy",          "field": "risk_response_strategy",   "template": "riskStrategyTemplate",   "width": 190, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Preventative/Contingency Actions","field": "prevent_cont_actions",     "template": "riskActionsTemplate",    "width": 220, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Owner",                           "field": "owner",                    "template": "riskOwnerTemplate",      "width": 150, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Action Owner",                    "field": "action_owner",             "template": "riskActionOwnerTemplate","width": 140, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Expected Retirement",             "field": "expected_retirement",      "template": "riskRetirementTemplate", "width": 160, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Status",                          "field": "status",                   "template": "riskStatusTemplate",     "width": 130, "sortable": "disabled", "resizable": "enabled", "headerStyle": "white-space: normal;" },
+        { "headerText": "Delete",                          "field": "",                         "template": "riskDeleteTemplate",     "width": 80,  "sortable": "disabled",                          "headerStyle": "white-space: normal;" }
+      ]
+    }
+  },
+
+  "eventListeners": {
+    "aboutButtonCancelACAction": {
+      "chains": [
+        {
+          "chain": "onCloseAbout_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "vbAfterNavigate": {
+      "chains": [
+        {
+          "parameters": { "event": "{{ $event }}" },
+          "chain": "vbAfterNavigateListener"
+        }
+      ]
+    },
+    "riskTableBeforeRowEdit": {
+      "chains": [
+        {
+          "chain": "riskBeforeRowEditChain",
+          "parameters": {
+            "rowKey":   "{{ $event.detail.rowContext.status.rowKey }}",
+            "rowIndex": "{{ $event.detail.rowContext.status.rowIndex }}",
+            "rowData":  "{{ $event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data }}"
+          }
+        }
+      ]
+    },
+    "riskTableBeforeRowEditEnd": {
+      "chains": [
+        {
+          "chain": "riskBeforeRowEditEndChain",
+          "parameters": {
+            "cancelEdit": "{{ $event.detail.cancelEdit }}",
+            "rowKey":     "{{ $event.detail.rowContext.status.rowKey }}",
+            "rowIndex":   "{{ $event.detail.rowContext.status.rowIndex }}",
+            "rowData":    "{{ $event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data }}",
+            "updatedRow": "[[ $variables.lvCurrentRow ]]"
+          }
+        }
+      ]
+    },
+    "addRiskBtnAction": {
+      "chains": [{ "chain": "onAddRisk" }]
+    },
+    "saveRiskBtnAction": {
+      "chains": [{ "chain": "onSaveRisk" }]
+    },
+    "riskEditBtnAction": {
+      "chains": [
+        {
+          "chain": "onEditRisk",
+          "parameters": { "key": "{{ $current.key }}" }
+        }
+      ]
+    },
+    "deleteRiskBtnAction": {
+      "chains": [
+        {
+          "chain": "onDeleteRisk",
+          "parameters": {
+            "key":     "{{ $current.key }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "closeRiskBtnAction": {
+      "chains": [{ "chain": "onClosePrimary_AC" }]
+    },
+    "riskSecondaryAction": {
+      "chains": [
+        {
+          "chain": "riskSecondaryActionChain",
+          "parameters": { "actionId": "{{ $event.detail.secondaryItem}}",
+             "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "event": "{{$event}}"
+      }
+        }
+      ]
+    }
+
+  },
+
+  "imports": {
+    "components": {
+      "oj-button":                  { "path": "ojs/ojbutton" },
+      "oj-bind-if":                 { "path": "ojs/ojbindif" },
+      "oj-bind-text":               { "path": "ojs/ojbindtext" },
+      "oj-dialog":                  { "path": "ojs/ojdialog" },
+      "oj-form-layout":             { "path": "ojs/ojformlayout" },
+      "oj-input-date":              { "path": "ojs/ojdatetimepicker" },
+      "oj-input-text":              { "path": "ojs/ojinputtext" },
+      "oj-progress-circle":         { "path": "ojs/ojprogress-circle" },
+      "oj-select-single":           { "path": "ojs/ojselectsingle" },
+      "oj-sp-advanced-create-edit": { "path": "oj-sp/advanced-create-edit/loader" },
+      "oj-table":                   { "path": "ojs/ojtable" },
+      "oj-text-area":               { "path": "ojs/ojinputtext" },
+      "oj-toolbar":                 { "path": "ojs/ojtoolbar" }
+    },
+    "modules": {
+      "ojValidationDateTime": { "path": "ojs/ojvalidation-datetime" }
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  }
+}

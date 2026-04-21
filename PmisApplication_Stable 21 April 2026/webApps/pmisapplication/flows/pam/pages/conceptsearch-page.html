@@ -1,0 +1,315 @@
+<style>
+  .oj-sp-header-general-overview-header-strip {
+    display: none;
+  }
+</style>
+
+<div id="sampleDemo1" class="demo-padding demo-container">
+  <div id="componentDemoContent1" style="width: 1px; min-width: 100%;">
+    <div id="mainContent1">
+      <oj-sp-smart-search-page id="oj_exssp1" page-title="PAM Schedule Details" page-subtitle=" ">
+
+        <!--Search Section -->
+        <oj-flex slot="search" class="oj-sm-padding-2x" style="align-items: center;">
+          <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-space-between"
+            style="width: 100%; align-items: flex-start; padding: 0 1rem;">
+            <div style="flex: 1; margin-right: 1rem;">
+              <oj-sp-smart-search filter-criterion="{{ $variables.filterCriterion }}"
+                search-config="[[ $variables.searchConfiguration.provider ]]"
+                search-context="[[ $variables.searchContext ]]" id="pam_smartsearch"
+                ask-hint="Search schedule details here...">
+              </oj-sp-smart-search>
+            </div>
+            <div style="display: flex; gap: 0.25rem; margin-left: 1rem; margin-top: 1px; flex-wrap: wrap;">
+              <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Reset" id="resetBtn"
+                on-oj-action="[[$listeners.resetBtnAction]]">
+                <span slot="startIcon" class="oj-ux-ico-reset"></span>
+              </oj-button>
+              <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Refresh"
+                id="refreshBtn" on-oj-action="[[$listeners.refreshBtnAction]]">
+                <span slot="startIcon" class="oj-ux-ico-refresh"></span>
+              </oj-button>
+              <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Save" id="savebtn"
+                on-oj-action="[[$listeners.savebtnAction]]">
+                <span slot="startIcon" class="oj-ux-ico-save" style="color:white;"></span>
+              </oj-button>
+            </div>
+          </div>
+        </oj-flex>
+
+        <div class="oj-flex-bar-end oj-helper-justify-content-flex-end">
+          <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Add Row" id="addRowBtn"
+            on-oj-action="[[$listeners.addRowBtnAction]]">
+            <span slot="startIcon" class="oj-ux-ico-plus"></span>
+          </oj-button>
+        </div>
+
+        <!--Table Section -->
+        <div id="sampleDemo" class="demo-padding demo-container">
+          <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+            <div id="searchMainContent">
+              <div class="oj-flex">
+                <oj-table scroll-policy="loadMoreOnScroll" class="oj-sm-width-full oj-bg-body" display="grid"
+                  horizontal-grid-visible="enabled" vertical-grid-visible="enabled" selection-mode.row="single"
+                  edit-mode="rowEdit" id="pamScheduleTable" data="[[ $variables.bufferDPTable.instance ]]"
+                  columns="{{ $constants.columnsvar}}" edit-row="{{ $variables.rowToEdit }}"
+                  on-oj-before-row-edit="[[$listeners.pamScheduleTableBeforeRowEdit]]"
+                  on-oj-before-row-edit-end="[[$listeners.pamScheduleTableBeforeRowEditEnd]]">
+
+                  <!-- ACTION COLUMN TEMPLATE -->
+                  <template slot="Action">
+                    <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                      on-oj-action="[[$listeners.buttonAction2]]">
+                      <span slot="startIcon" class="oj-ux-ico-edit" role="img" title="Edit Row"></span>
+                    </oj-button>
+                    <oj-bind-if test="[[$current.mode!=='edit']]">
+                      <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                        on-oj-action="[[$listeners.buttonAction]]">
+                        <span slot="startIcon" class="oj-ux-ico-trash" role="img" title="Delete Row"></span>
+                      </oj-button>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[$current.mode=='edit']]">
+                      <oj-button display="icons" chroming="borderless" class="oj-button-sm"
+                        on-oj-action="[[$listeners.buttonAction]]">
+                        <span slot="startIcon" class="oj-ux-ico-trash" role="img" title="Delete Row"></span>
+                      </oj-button>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- PROJECT NAME TEMPLATE -->
+                  <template slot="Project Name">
+                    <oj-bind-if test="[[$current.mode !== 'edit']]">
+                      <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[$current.mode === 'edit']]">
+                      <oj-select-single value="{{ $variables.lvCurrentRow.project_id }}"
+                        data="[[ $variables.getProjectLovListSDP ]]" item-text="project_name" id="project"
+                        aria-label="project" on-value-item-changed="[[$listeners.projectValueItem2]]"
+                        label-hint="Select Project">
+                      </oj-select-single>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- CONSULTANT NAME TEMPLATE -->
+                  <template slot="Consultant Name">
+                    <oj-bind-if test="[[$current.mode !== 'edit']]">
+                      <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[$current.mode === 'edit']]">
+                      <oj-select-single value="{{ $variables.lvCurrentRow.consultant_id }}"
+                        data="[[ $variables.getConsultantLovListSDP ]]" item-text="lookup_value_name" id="concultant"
+                        aria-label="consultant" on-value-item-changed="[[$listeners.concultantValueItem]]"
+                        label-hint="Select Consultant">
+                      </oj-select-single>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- BUDGET AMOUNT TEMPLATE -->
+                  <template slot="Budget Amount">
+                    <oj-bind-if test="[[$current.mode !== 'edit']]">
+                      <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[$current.mode === 'edit']]">
+                      <oj-input-number value="{{ $variables.lvCurrentRow.budget_amount }}" placeholder="Enter budget">
+                      </oj-input-number>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- PHASE TEMPLATE -->
+                  <template slot="Phase">
+                    <oj-bind-if test="[[$current.mode !== 'edit']]">
+                      <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[$current.mode === 'edit']]">
+                      <oj-select-single value="{{ $variables.lvCurrentRow.phase_id }}"
+                        data="[[ $variables.getPhaseLovListSDP ]]" item-text="lookup_value_name" id="phase"
+                        aria-label="phase" on-value-item-changed="[[$listeners.phaseValueItem]]"
+                        label-hint="Select Phase">
+                      </oj-select-single>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- MILESTONE TEMPLATE -->
+                  <template slot="Milestone">
+                    <oj-bind-if test="[[$current.mode !== 'edit']]">
+                      <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[$current.mode === 'edit']]">
+                      <oj-select-single value="{{ $variables.lvCurrentRow.milestone_id }}"
+                        data="[[ $variables.getMilestoneLovListSDP ]]" item-text="lookup_value_name"
+                        id="milestone" aria-label="milestone"
+                        on-value-item-changed="[[$listeners.milestoneValueItem]]" label-hint="Select Milestone">
+                      </oj-select-single>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- SENIOR CONCEPT ENGINEER TEMPLATE -->
+                  <template slot="Senior Concept Engineer">
+                    <oj-bind-if test="[[$current.mode !== 'edit']]">
+                      <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[$current.mode === 'edit']]">
+                      <oj-select-single value="{{ $variables.lvCurrentRow.cs_senior_mgr_id }}"
+                        item-text="person_full_name" id="seniorid" data="[[$variables.getPmispamLovUsersListSDP]]"
+                        aria-label="senior manager" on-value-item-changed="[[$listeners.senioridValueItem]]"
+                        label-hint="Select Senior Manager">
+                      </oj-select-single>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- PLANNING MANAGER TEMPLATE -->
+                  <template slot="Planning Manager">
+                    <oj-bind-if test="[[$current.mode !== 'edit']]">
+                      <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[$current.mode === 'edit']]">
+                      <oj-select-single value="{{ $variables.lvCurrentRow.cs_planning_mgr_id }}"
+                        data="[[$variables.getPmispamLovUsersListSDP]]" item-text="person_full_name" id="planningid"
+                        aria-label="planning manager" on-value-item-changed="[[$listeners.panningidValueItem]]"
+                        label-hint="Select Planning Manager">
+                      </oj-select-single>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- PLANNED START DATE TEMPLATE -->
+                  <template slot="Planned Start Date">
+                    <oj-bind-if test="[[$current.mode !== 'edit']]">
+                      <oj-bind-text value="[[
+                        (function(d) {
+                          if (!d) return '';
+                          var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                          var parts = d.split('T')[0].split('-');
+                          return parts[2] + '-' + months[parseInt(parts[1], 10) - 1] + '-' + parts[0];
+                        })($current.data)
+                      ]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[$current.mode === 'edit']]">
+                      <oj-input-date value="{{ $variables.lvCurrentRow.planned_start_date }}"
+                        converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'
+                        max="[[ $variables.lvCurrentRow.planned_end_date ]]">
+                      </oj-input-date>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- PLANNED END DATE TEMPLATE -->
+                  <template slot="Planned End Date">
+                    <oj-bind-if test="[[$current.mode !== 'edit']]">
+                      <oj-bind-text value="[[
+                        (function(d) {
+                          if (!d) return '';
+                          var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                          var parts = d.split('T')[0].split('-');
+                          return parts[2] + '-' + months[parseInt(parts[1], 10) - 1] + '-' + parts[0];
+                        })($current.data)
+                      ]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[$current.mode === 'edit']]">
+                      <oj-input-date value="{{ $variables.lvCurrentRow.planned_end_date }}"
+                        converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'
+                        min="[[ $variables.lvCurrentRow.planned_start_date ]]">
+                      </oj-input-date>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- ACTUAL START DATE TEMPLATE -->
+                  <template slot="Actual Start Date">
+                    <oj-bind-if test="[[$current.mode !== 'edit']]">
+                      <oj-bind-text value="[[
+                        (function(d) {
+                          if (!d) return '';
+                          var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                          var parts = d.split('T')[0].split('-');
+                          return parts[2] + '-' + months[parseInt(parts[1], 10) - 1] + '-' + parts[0];
+                        })($current.data)
+                      ]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[$current.mode === 'edit']]">
+                      <oj-input-date value="{{ $variables.lvCurrentRow.actual_start_date }}"
+                        converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'
+                        max="[[ $variables.lvCurrentRow.actual_end_date ]]">
+                      </oj-input-date>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- ACTUAL END DATE TEMPLATE -->
+                  <template slot="Actual End Date">
+                    <oj-bind-if test="[[$current.mode !== 'edit']]">
+                      <oj-bind-text value="[[
+                        (function(d) {
+                          if (!d) return '';
+                          var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                          var parts = d.split('T')[0].split('-');
+                          return parts[2] + '-' + months[parseInt(parts[1], 10) - 1] + '-' + parts[0];
+                        })($current.data)
+                      ]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[$current.mode === 'edit']]">
+                      <oj-input-date value="{{ $variables.lvCurrentRow.actual_end_date }}"
+                        converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'
+                        min="[[ $variables.lvCurrentRow.actual_start_date ]]">
+                      </oj-input-date>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- % OF COMPLETION TEMPLATE -->
+                  <template slot="% of Completion">
+                    <oj-bind-if test="[[$current.mode !== 'edit']]">
+                      <oj-bind-text value="[[$current.data + '%']]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[$current.mode === 'edit']]">
+                      <oj-input-number value="{{ $variables.lvCurrentRow.completion_percentage }}" min="0" max="100"
+                        placeholder="0-100">
+                      </oj-input-number>
+                    </oj-bind-if>
+                  </template>
+
+                  <!-- REMARKS TEMPLATE -->
+                  <template slot="Remarks">
+                    <oj-bind-if test="[[$current.mode !== 'edit']]">
+                      <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[$current.mode === 'edit']]">
+                      <oj-input-text value="{{ $variables.lvCurrentRow.remarks }}" placeholder="Enter remarks">
+                      </oj-input-text>
+                    </oj-bind-if>
+                  </template>
+
+                </oj-table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </oj-sp-smart-search-page>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Dialog -->
+<oj-dialog style="display:none; width: 500px; overflow: hidden;" dialog-title="Warning" id="delete_dialog"
+  cancel-behavior="icon" header-decoration="off" drag-affordance="title-bar" position.at.vertical="top"
+  position.my.vertical="top">
+  <div slot="body" style="margin-top: 1.5rem;">
+    <div class="oj-flex">Are you sure you want to delete the record?</div>
+  </div>
+  <div slot="footer">
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction3]]">Ok</oj-button>
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction4]]">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+<!-- Progress Dialog -->
+<oj-dialog id="progressDialog" dialog-title="Processing" style="width: 300px;" cancel-behavior="none">
+  <div slot="body" style="text-align: center; padding: 2rem;">
+    <oj-progress-bar value="-1"></oj-progress-bar>
+    <p style="margin-top: 1rem;">Please wait...</p>
+  </div>
+</oj-dialog>
+
+<oj-dialog id="loadingDialog" style="width: 300px;" cancel-behavior="none" drag-affordance="title-bar"
+  header-decoration="off" position.at.vertical="top" position.my.vertical="top">
+  <div slot="body" style="text-align: center; padding: 2rem;">
+    <oj-progress-circle value="-1"></oj-progress-circle>
+    <p style="margin-top: 1rem; font-weight: 500;">Loading Schedule List Data...</p>
+  </div>
+</oj-dialog>

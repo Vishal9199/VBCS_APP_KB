@@ -1,0 +1,68 @@
+<oj-sp-smart-search-page page-title="Approval History" page-subtitle="" display-mode="light" primary-action.display="on"
+  badge.status="neutral" primary-action.label="Refresh" secondary-actions='[{"label":"Close","id":"close"}]'
+  on-sp-primary-action="[[$listeners.smartSearchPageTemplateSpPrimaryAction]]"
+  on-sp-secondary-action="[[$listeners.smartSearchPageTemplateSpSecondaryAction]]" id="approvalHistoryDtl">
+
+  <div id="sampleDemo" style="" class="demo-padding demo-container">
+    <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+      <div id="mainContent">
+        <div class="oj-flex oj-panel">
+          <oj-table scroll-policy="loadMoreOnScroll" class="oj-sm-width-full oj-bg-body oj-search-table" display="grid"
+            columns="{{ $constants.TableColumnList }}" data="[[ $variables.attachmentTableData ]]"
+            style="border-radius: 5px;" selection-mode.row="single" horizontal-grid-visible="enabled"
+            vertical-grid-visible="enabled">
+
+            <template slot="date">
+              <!-- <oj-input-date value="[[$current.data]]" readonly="true"
+                converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy hh:mm:ss"}}'></oj-input-date> -->
+              <oj-input-date-time value="[[$current.data]]" readonly="true"
+                converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy hh:mm a"}}'></oj-input-date-time>
+            </template>
+
+            <template slot="ActionTemplate">
+              <oj-bind-if test="[[ $current.row.action_type === 'Approved' ]]">
+                <a style="color: green; font-weight: bold; margin: 1rem;">Approved</a>
+              </oj-bind-if>
+              <oj-bind-if test="[[ $current.row.action_type === 'Rejected' ]]">
+                <a style="color: red; font-weight: bold; margin: 1rem;">Rejected</a>
+              </oj-bind-if>
+              <oj-bind-if test="[[ $current.row.action_type === 'Pending' ]]">
+                <a style="color: orange; font-weight: bold; margin: 1rem;">Pending</a>
+              </oj-bind-if>
+              <oj-bind-if test="[[ $current.row.action_type === 'Requested More Info' ]]">
+                <a style="color: brown; font-weight: bold; margin: 1rem;">Requested More Info</a>
+              </oj-bind-if>
+              <oj-bind-if test="[[ $current.row.action_type === 'Employee More Info' ]]">
+                <a style="color: brown; font-weight: bold; margin: 1rem;">Employee More Info</a>
+              </oj-bind-if>
+              <oj-bind-if test="[[ $current.row.action_type === 'Initiated' ]]">
+                <a style="color: blue; font-weight: bold; margin: 1rem;">Initialted</a>
+              </oj-bind-if>
+              <oj-bind-if test="[[ $current.row.action_type === 'Withdrawn' ]]">
+                <a style="color: blue; font-weight: bold; margin: 1rem;">Withdrawn</a>
+              </oj-bind-if>
+              <oj-bind-if test="[[ $current.row.action_type === 'Closed' ]]">
+                <a style="color: blue; font-weight: bold; margin: 1rem;">Closed</a>
+              </oj-bind-if>
+              <oj-bind-if test="[[ $current.row.action_type === 'Beaten' ]]">
+                <a style="color: blue; font-weight: bold; margin: 1rem;">Beaten</a>
+              </oj-bind-if>
+              <oj-bind-if test="[[ $current.row.action_type === 'Reassign' ]]">
+                <a style="color: blue; font-weight: bold; margin: 1rem;">Reassign</a>
+              </oj-bind-if>
+            </template>
+              
+          </oj-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</oj-sp-smart-search-page>
+
+<oj-dialog dialog-title="Please wait..." id="InProgressPopup" class="wd200">
+  <div slot="body">
+    <div class="oj-flex full_stretch lg_button_width">
+      <oj-progress-bar class="full_stretch oj-flex-item oj-sm-12 oj-md-12" value="-1"></oj-progress-bar>
+    </div>
+  </div>
+</oj-dialog>

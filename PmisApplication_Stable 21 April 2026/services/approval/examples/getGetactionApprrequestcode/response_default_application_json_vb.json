@@ -1,0 +1,43 @@
+{
+    "items": [
+        {
+            "approval_instance_num": "ba6d9f14-3c81-11f1-94a6-ce35ac0b13e0",
+            "action_id": 621,
+            "appr_request_id": 7070,
+            "transaction_id": 10620,
+            "version_number": 0,
+            "transaction_num": "0",
+            "approval_category_code": null,
+            "appr_request_code": "PMIS_PROJECT_CHARTER_ET",
+            "requester_user_id": "300000009009579",
+            "requester_email_id": "bilal.balushi@testowwsc.nama.om",
+            "approver_user_id": null,
+            "approver_email_id": "PROCESS_COMPLETED",
+            "approver_level": null,
+            "status_code": "RIA",
+            "created_by": "bilal.balushi@testowwsc.nama.om",
+            "creation_date": "2026-04-20T06:25:28.604849Z",
+            "last_updated_by": "fahad.harasi@testowwsc.nama.om",
+            "last_update_date": "2026-04-20T06:30:03.686804Z",
+            "last_update_login": "fahad.harasi@testowwsc.nama.om"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmis/approval/getaction/apprrequestcode"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmis/approval/getaction/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmis/approval/getaction/apprrequestcode"
+        }
+    ]
+}

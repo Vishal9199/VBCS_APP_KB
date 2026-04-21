@@ -1,0 +1,194 @@
+<style>
+  .oj-sp-header-general-overview-header-strip {
+    display: none;
+  }
+</style>
+
+<div id="sampleDemo1" class="demo-padding demo-container">
+  <div id="componentDemoContent1" style="width: 1px; min-width: 100%;">
+    <div id="mainContent1">
+      <oj-sp-smart-search-page page-title="Project Assignment Admin" page-subtitle=" " id="oj_exssp1">
+
+        <!--Search Section -->
+        <oj-flex slot="search" class="oj-sm-padding-2x" style="align-items: center;">
+          <div class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-space-between"
+            style="width: 100%; align-items: flex-start; padding: 0 1rem;">
+            <div style="flex: 1; margin-right: 1rem;">
+              <oj-sp-smart-search id="freq_smartsearch" ask-hint="Search Projects"
+                filter-criterion="{{ $variables.filterCriterion }}"
+                search-config="[[ $variables.searchConfiguration.provider ]]"
+                search-context="[[ $variables.searchContext ]]">
+              </oj-sp-smart-search>
+            </div>
+            <div style="display: flex; gap: 0.25rem; margin-left: 1rem; margin-top: 1px; flex-wrap: wrap;">
+              <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Reset" id="resetBtn"
+                on-oj-action="[[$listeners.resetBtnAction]]">
+                <span slot="startIcon" class="oj-ux-ico-reset"></span>
+              </oj-button>
+              <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Refresh"
+                id="refreshBtn" on-oj-action="[[$listeners.refreshBtnAction]]">
+                <span slot="startIcon" class="oj-ux-ico-refresh"></span>
+              </oj-button>
+              <oj-button style="margin:0.125rem;" chroming="outlined" class="oj-button-md" label="Save" id="saveBtn"
+                on-oj-action="[[$listeners.saveBtnAction]]">
+              </oj-button>
+            </div>
+          </div>
+        </oj-flex>
+
+        <!--Table Section -->
+        <div id="sampleDemo" class="demo-padding demo-container">
+          <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+            <div id="searchMainContent">
+
+              <div class="oj-flex-bar-end oj-helper-justify-content-flex-end">
+                <oj-button id="add-row" label="Add Row" chroming="outlined" on-oj-action="[[$listeners.addRowAction]]">
+                  <span class="oj-ux-ico-plus" slot="startIcon"></span>
+                </oj-button>
+              </div>
+              <div class="oj-flex">
+                <!-- oj-search-table -->
+                <oj-table scroll-policy="loadMoreOnScroll" class="oj-sm-width-full oj-bg-body" display="grid"
+                  horizontal-grid-visible="enabled" vertical-grid-visible="enabled" selection-mode.row="single"
+                  id="searchProjectAssignmentTbl" data="[[ $variables.projectAssignmentBDP.instance ]]"
+                  columns="{{$variables.assignmentColumns}}" edit-mode="rowEdit"
+                  on-oj-before-row-edit="[[$listeners.searchProjectAssignmentTblBeforeRowEdit]]"
+                  on-oj-before-row-edit-end="[[$listeners.searchProjectAssignmentTblBeforeRowEditEnd]]"
+                  edit-row="{{ $variables.rowToEdit }}">
+
+                  <!-- Template Slots -->
+                  <template slot="actions">
+                    <div style="display: flex; gap: 4px;">
+                      <oj-button display="icons" chroming="borderless" id="editBtn"
+                        on-oj-action="[[$listeners.editBtnAction]]">
+                        <span slot="startIcon" class="oj-ux-ico-edit"></span>
+                      </oj-button>
+                      <!-- <oj-button display="icons" chroming="borderless" id="deleteBtn"
+                        on-oj-action="[[$listeners.deleteBtnAction]]">
+                        <span slot="startIcon" class="oj-ux-ico-trash"></span>
+                      </oj-button> -->
+                    </div>
+                  </template>
+
+                  <template slot="tender_number">
+                    <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                      <oj-select-single label-hint="Tender Number" value="{{ $variables.postAssignmentVar.tender_id }}"
+                        data="[[$variables.getPmispddLovTenderListSDP]]" item-text="tender_number"
+                        on-value-item-changed="[[$listeners.selectValueItem]]"></oj-select-single>
+
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode !== 'edit' ]]">
+                      <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                    </oj-bind-if>
+                  </template>
+
+                  <template slot="project_number">
+                    
+
+                  <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                      <oj-input-text readonly="true" value="{{ $variables.postAssignmentVar.ora_project_number }}"></oj-input-text>
+                   </oj-bind-if>
+
+                   <oj-bind-if test="[[ $current.mode !== 'edit' ]]">
+                      <oj-input-text readonly="true"
+                        value="[[ $current.data ]]"></oj-input-text>
+                   </oj-bind-if>
+                  </template>
+
+                  <template slot="senior_manager_name">
+                    <oj-bind-if test="[[ $current.mode !== 'edit' ]]">
+                      <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                      <oj-select-single label-hint="Senior Manager Name"
+                        value="{{ $variables.postAssignmentVar.senior_mgr_user_id }}"
+                        data="[[$variables.getPmispamLovUsersListSDP]]" item-text="person_name"
+                        on-value-item-changed="[[$listeners.selectValueItem2]]"></oj-select-single>
+                    </oj-bind-if>
+                  </template>
+
+                  <template slot="project_manager_name">
+                    <oj-bind-if test="[[ $current.mode !== 'edit' ]]">
+                      <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                      <oj-select-single label-hint="Project Manager Name"
+                        value="{{ $variables.postAssignmentVar.proj_mgr_user_id }}"
+                        data="[[$variables.getPmispamLovUsersListSDP2]]" item-text="person_name"
+                        on-value-item-changed="[[$listeners.selectValueItem3]]"></oj-select-single>
+                    </oj-bind-if>
+                  </template>
+
+                  <template slot="project_engineer_name">
+                    <oj-bind-if test="[[ $current.mode !== 'edit' ]]">
+                      <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                      <oj-select-single label-hint="Project Engineer Name"
+                        value="{{ $variables.postAssignmentVar.proj_engg_user_id }}"
+                        data="[[$variables.getPmispamLovUsersListSDP3]]" item-text="person_name"
+                        on-value-item-changed="[[$listeners.selectValueItem4]]"></oj-select-single>
+                    </oj-bind-if>
+                  </template>
+
+                  <template slot="focal_point">
+                    <oj-bind-if test="[[ $current.mode !== 'edit' ]]">
+                      <oj-input-text readonly="true" value="[[ $current.data ]]"></oj-input-text>
+                    </oj-bind-if>
+                    <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                      <oj-select-single label-hint="Focal Point"
+                        value="{{ $variables.postAssignmentVar.focal_point_user_id }}"
+                        data="[[$variables.getPmispamLovUsersListSDP4]]" item-text="person_name"
+                        on-value-item-changed="[[$listeners.selectValueItem5]]"></oj-select-single>
+                    </oj-bind-if>
+                  </template>
+
+                </oj-table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagination Section -->
+        <!-- <div class="oj-flex oj-sm-justify-content-center" style="margin-top: 0.25rem; gap: 1rem;">
+          <div class="oj-flex-item oj-sm-flex-initial">
+            <oj-button label="Prev" chroming="outlined" id="prevBtn">
+              <span slot="startIcon" class="oj-ux-ico-back"></span>
+            </oj-button>
+          </div>
+
+          <div style="display: flex; align-items: center; width: fit-content; min-width: 120px; max-width: 130px;">
+            <oj-input-text id="pagination-details" disabled="true" aria-label="Pagination Details"></oj-input-text>
+          </div>
+          <div class="oj-flex-item oj-sm-flex-initial">
+            <oj-button label="Next" chroming="outlined" id="nextBtn" class="">
+              <span slot="endIcon" class="oj-ux-ico-forward-next"></span>
+            </oj-button>
+          </div>
+        </div> -->
+
+      </oj-sp-smart-search-page>
+    </div>
+  </div>
+</div>
+
+<oj-dialog style="display:none; width: 500px; overflow: hidden;" dialog-title="Warning" id="delete_dialog"
+  cancel-behavior="icon" header-decoration="off" drag-affordance="title-bar" position.at.vertical="top"
+  position.my.vertical="top">
+  <div slot="body" style="margin-top: 1.5rem;">
+    <div class="oj-flex">Are you sure you want to delete the record?</div>
+  </div>
+  <div slot="footer">
+    <oj-button chroming="solid" on-oj-action="[[$listeners.buttonAction]]">Ok</oj-button>
+    <oj-button chroming="solid" " on-oj-action=" [[$listeners.buttonAction2]]">Cancel</oj-button>
+  </div>
+</oj-dialog>
+
+
+<oj-dialog id="loadingDialog" style="width: 300px;" cancel-behavior="none" drag-affordance="title-bar"
+  header-decoration="off" position.at.vertical="top" position.my.vertical="top">
+  <div slot="body" style="text-align: center; padding: 2rem;">
+    <oj-progress-circle value="-1"></oj-progress-circle>
+    <p style="margin-top: 1rem; font-weight: 500;">Loading Assignment List Data...</p>
+  </div>
+</oj-dialog>

@@ -1,0 +1,4 @@
+{
+    "P_ERR_CODE": "E",
+    "P_ERR_MSG": "Failed to insert record: ORA-01400: cannot insert NULL into (\"NWS_CUST\".\"NWS_PMIS_PDD_CHANGE_CONTROL_DTL_T\".\"CREATED_BY\")"
+}

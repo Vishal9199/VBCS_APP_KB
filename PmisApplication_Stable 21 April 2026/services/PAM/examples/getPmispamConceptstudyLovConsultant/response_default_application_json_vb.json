@@ -1,0 +1,27 @@
+{
+    "items": [
+        {
+            "lookup_value_id": 6342,
+            "lookup_value_code": "CONSULTANT",
+            "lookup_value_name": "Consultant"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/conceptstudy/lov/consultant"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/conceptstudy/lov/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/conceptstudy/lov/consultant"
+        }
+    ]
+}

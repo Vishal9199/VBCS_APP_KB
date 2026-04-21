@@ -1,0 +1,67 @@
+{
+    "items": [
+        {
+            "lookup_type_id": 2900,
+            "lookup_type_code": "WS_TANKER_NORTH_BATINAH",
+            "lookup_type_name": "WS Tanker North Batinah"
+        },
+        {
+            "lookup_type_id": 2920,
+            "lookup_type_code": "WS_TANKER_NORTH_SHARQIYA",
+            "lookup_type_name": "WS Tanker North Sharqiya"
+        },
+        {
+            "lookup_type_id": 2980,
+            "lookup_type_code": "WS_TANKER_WUSTA",
+            "lookup_type_name": "WS Tanker Wusta"
+        },
+        {
+            "lookup_type_id": 2820,
+            "lookup_type_code": "WS_TANKER_DAKHALIYA",
+            "lookup_type_name": "WS Tanker Dakhaliya"
+        },
+        {
+            "lookup_type_id": 2840,
+            "lookup_type_code": "WS_TANKER_DHAHIRAH",
+            "lookup_type_name": "WS Tanker Dhahirah"
+        },
+        {
+            "lookup_type_id": 2860,
+            "lookup_type_code": "WS_TANKER_MUSANDAM",
+            "lookup_type_name": "WS Tanker Musandam"
+        },
+        {
+            "lookup_type_id": 2880,
+            "lookup_type_code": "WS_TANKER_MUSCAT",
+            "lookup_type_name": "Ws Tanker Muscat"
+        },
+        {
+            "lookup_type_id": 2946,
+            "lookup_type_code": "WS_TANKER_SOUTH_BATINAH",
+            "lookup_type_name": "Ws Tanker South Batinah"
+        },
+        {
+            "lookup_type_id": 2960,
+            "lookup_type_code": "WS_TANKER_SOUTH_SHARQIYA",
+            "lookup_type_name": "WS Tanker South Sharqiya"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 9,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol/lookup/pmis/lov/dependlookup/bytypeid?search_var=ws_tanker"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol/metadata-catalog/lookup/pmis/lov/dependlookup/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_aol/lookup/pmis/lov/dependlookup/bytypeid?search_var=ws_tanker"
+        }
+    ]
+}

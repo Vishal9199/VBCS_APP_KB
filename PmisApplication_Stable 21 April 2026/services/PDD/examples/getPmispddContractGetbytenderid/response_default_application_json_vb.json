@@ -1,0 +1,41 @@
+{
+    "items": [
+        {
+            "contract_id": 2615,
+            "object_version_num": 1,
+            "ora_project_id": 300000090427449,
+            "ora_project_number": "789BEN234",
+            "ora_project_name": "VBCS-Feb-10-1",
+            "tender_id": 17002,
+            "tender_number": "NW-RFQ-17002-2026",
+            "tender_name": "Test Tender Name 001",
+            "supplier_id": 300000090011645,
+            "supplier_name": "Smart Technology",
+            "contract_amount": "1250000.500",
+            "mobilization_start_date": "2026-03-01T00:00:00Z",
+            "mobilization_end_date": "2026-04-15T00:00:00Z",
+            "work_start_date": "2026-04-16T00:00:00Z",
+            "work_completion_date": "2027-04-15T00:00:00Z",
+            "additional_info": "Initial contract awarded after evaluation. Includes 12-month defect liability period.",
+            "created_by": "ATIq",
+            "created_date": "2026-02-15T06:43:10.999022Z",
+            "last_updated_by": "ATIq",
+            "last_updated_date": "2026-02-15T06:43:10.999022Z",
+            "last_updated_login": "ATIq-PC"
+        }
+    ],
+    "hasMore": false,
+    "limit": 0,
+    "offset": 0,
+    "count": 1,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/contract/getbytenderid"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/contract/item"
+        }
+    ]
+}

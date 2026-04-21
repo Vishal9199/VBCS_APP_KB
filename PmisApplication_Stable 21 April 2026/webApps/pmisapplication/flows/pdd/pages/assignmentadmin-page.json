@@ -1,0 +1,719 @@
+{
+  "title": "Project Assignment Smart Search",
+  "description": "Smart Search page for Project Assignment with filters for Tender Number, Project Number, Project Name, and Date Range",
+  "variables": {
+    "assignmentColumns": {
+      "type": "object[]",
+      "defaultValue": [
+          {
+            "headerText": "Actions",
+            "field": "",
+            "resizable": "enabled",
+            "template": "actions",
+            "headerStyle": "white-space: nowrap; min-width: 100px;",
+            "style": ""
+          },
+          {
+            "headerText": "Tender Number",
+            "field": "tender_number",
+            "resizable": "enabled",
+            "template": "tender_number",
+            "headerStyle": "white-space: nowrap; min-width: 160px;",
+            "style": ""
+          },
+          {
+            "headerText": "Project Number",
+            "field": "ora_project_number",
+            "resizable": "enabled",
+          "template": "project_number",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+            "style": ""
+
+          },
+          {
+            "headerText": "Senior Manager",
+            "field": "senior_manager_name",
+            "resizable": "enabled",
+            "template": "senior_manager_name",
+            "headerStyle": "white-space: nowrap; min-width: 180px;",
+            "style": ""
+          },
+          {
+            "headerText": "Project Manager",
+            "field": "project_manager_name",
+            "resizable": "enabled",
+            "template": "project_manager_name",
+            "headerStyle": "white-space: nowrap; min-width: 180px;",
+            "style": ""
+          },
+          {
+            "headerText": "Project Engineer",
+            "field": "project_engineer_name",
+            "resizable": "enabled",
+            "template": "project_engineer_name",
+            "headerStyle": "white-space: nowrap; min-width: 180px;",
+            "style": ""
+          },
+        {
+          "headerText": "Focal Point",
+          "field": "focal_point",
+          "resizable": "enabled",
+          "template": "focal_point",
+          "headerStyle": "white-space: nowrap; min-width: 160px;",
+          "style": ""
+        }
+        ]
+    },
+    "filterCriterion": {
+      "type": "any",
+      "onValueChanged": {
+        "chains": [
+          {
+            "parameters": {
+              "event": "{{ $event }}"
+            },
+            "chain": "filterCriterionListener"
+          }
+        ]
+      }
+    },
+    "getPmispamLovUsersListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "user_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamLovUsersResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "person_name"
+          ]
+        },
+        "fetchChain": "getPmispamLovUsersFetch"
+      }
+    },
+    "getPmispamLovUsersListSDP2": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "user_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamLovUsersResponse2",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "person_name"
+          ]
+        },
+        "fetchChain": "getPmispamLovUsersFetch2"
+      }
+    },
+    "getPmispamLovUsersListSDP3": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "user_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamLovUsersResponse3",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "person_name"
+          ]
+        },
+        "fetchChain": "getPmispamLovUsersFetch3"
+      }
+    },
+    "getPmispamLovUsersListSDP4": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "user_id",
+        "itemsPath": "items",
+        "responseType": "getPmispamLovUsersResponse4",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "person_name"
+          ]
+        },
+        "fetchChain": "getPmispamLovUsersFetch4"
+      }
+    },
+    "getPmispddLovTenderListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "tender_id",
+        "itemsPath": "items",
+        "responseType": "getPmispddLovTenderResponse",
+        "fetchChain": "getPmispddLovTenderFetch",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "tender_number"
+          ]
+        }
+      }
+    },
+    "getProjectNumSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getPmispddLovProjectNum",
+        "itemsPath": "items",
+        "keyAttributes": "project_id",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "project_number"
+          ]
+        },
+        "fetchChain": "getPmispddLovTenderFetch2"
+      }
+    },
+    "getTenderSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "responseType": "getPmispddLovTender",
+        "itemsPath": "items",
+        "keyAttributes": "tender_id",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "tender_number"
+          ]
+        },
+        "fetchChain": "getPmispddLovTenderFetch3"
+      }
+    },
+    "lvNextValue": {
+      "type": "number",
+      "defaultValue": -1
+    },
+    "p_key": {
+      "type": "string"
+    },
+    "postAssignmentVar": {
+      "type": "ProjectAssignmentType",
+      "defaultValue": {
+        "created_by": "[[ $application.user.email ]]",
+        "last_updated_by": "[[ $application.user.email ]]",
+        "last_updated_login": "[[ $application.user.email ]]"
+      }
+    },
+    "projectAssignmentBDP": {
+      "type": "application:ojs/ojbufferingdataprovider",
+      "constructorParams": [
+        "{{ $variables.projectAssignmentADP }}",
+        null
+      ]
+    },
+    "rowToEdit": {
+      "type": {
+        "rowKey": "number"
+      }
+    },
+    "searchContext": {
+      "type": "object",
+      "defaultValue": {
+        "$search": {
+          "filters": {
+            "TenderNumberFilter": {
+              "label": "Tender Number",
+              "options": {
+                "optionsData": "[[ $page.variables.getTenderSDP ]]",
+                "optionsKeys": {
+                  "label": "tender_number",
+                  "value": "tender_id"
+                }
+              }
+            },
+            "ProjectNumberFilter": {
+              "label": "Project Number",
+              "options": {
+                "optionsData": "[[ $page.variables.getProjectNumSDP ]]",
+                "optionsKeys": {
+                  "label": "project_number",
+                  "value": "project_id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "searchConfiguration": {
+      "type": "oj-sp/smart-search/strategies/JsonSearchConfigProviderFactory",
+      "defaultValue": {
+        "url": "[[ $application.path + 'resources/data/projectassignmentsearchconfig.json' ]]"
+      }
+    },
+    "searchObj": {
+      "type": {
+        "in_limit": "string",
+        "in_offset": "string",
+        "p_ora_project_id": "string",
+        "p_tender_id": "string",
+        "p_tender_number": "string",
+        "p_project_number": "string"
+
+      },
+      "defaultValue": {
+        "in_limit": "30",
+        "in_offset": "0",
+        "p_tender_number": "",
+        "p_project_number": ""
+      }
+    },
+    "projectAssignmentADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "ProjectAssignmentType",
+        "keyAttributes": "project_assignment_id"
+      }
+    },
+    "currentPage": {
+      "type": "number",
+      "defaultValue": 1
+    },
+    "totalRecords": {
+      "type": "number",
+      "defaultValue": 0
+    },
+    "pageSize": {
+      "type": "number",
+      "defaultValue": 30
+    }
+
+  },
+  "types": {
+    "@decorators.getPmispamLovUsersResponse": {
+      "endpoint": "getPmispamLovUsers",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovUsersResponse2": {
+      "endpoint": "getPmispamLovUsers",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovUsersResponse3": {
+      "endpoint": "getPmispamLovUsers",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispamLovUsersResponse4": {
+      "endpoint": "getPmispamLovUsers",
+      "service": "PAM",
+      "path": "response"
+    },
+    "@decorators.getPmispddLovProjectNum": {
+      "endpoint": "getPmispddLovTender",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getPmispddLovTender": {
+      "endpoint": "getPmispddLovTender",
+      "service": "PDD",
+      "path": "response"
+    },
+    "@decorators.getPmispddLovTenderResponse": {
+      "endpoint": "getPmispddLovTender",
+      "service": "PDD",
+      "path": "response"
+    },
+    "getPmispamLovUsersResponse": {
+      "items": [
+        {
+          "person_name": "string",
+          "person_number": "string",
+          "user_id": "number",
+          "user_name": "string"
+        }
+      ]
+    },
+    "getPmispamLovUsersResponse2": {
+      "items": [
+        {
+          "person_name": "string",
+          "person_number": "string",
+          "user_id": "number",
+          "user_name": "string"
+        }
+      ]
+    },
+    "getPmispamLovUsersResponse3": {
+      "items": [
+        {
+          "person_name": "string",
+          "person_number": "string",
+          "user_id": "number",
+          "user_name": "string"
+        }
+      ]
+    },
+    "getPmispamLovUsersResponse4": {
+      "items": [
+        {
+          "person_name": "string",
+          "person_number": "string",
+          "user_id": "number",
+          "user_name": "string"
+        }
+      ]
+    },
+    "getPmispddLovProjectNum": {
+      "items": [
+        {
+          "project_id": "number",
+          "project_name": "string",
+          "project_number": "string",
+          "tender_id": "number",
+          "tender_name": "string",
+          "tender_number": "string"
+        }
+      ]
+    },
+    "getPmispddLovTender": {
+      "items": [
+        {
+          "project_id": "number",
+          "project_name": "string",
+          "project_number": "string",
+          "tender_id": "number",
+          "tender_name": "string",
+          "tender_number": "string"
+        }
+      ]
+    },
+    "getPmispddLovTenderResponse": {
+      "items": [
+        {
+          "project_id": "number",
+          "project_name": "string",
+          "project_number": "string",
+          "tender_id": "number",
+          "tender_name": "string",
+          "tender_number": "string"
+        }
+      ]
+    },
+    "ProjectAssignmentType": {
+      "last_updated_login": "string",
+      "ora_project_number": "string",
+      "project_assignment_id": "number",
+      "object_version_num": "number",
+      "project_id": "number",
+      "ora_project_id": "number",
+      "project_number": "string",
+      "tender_id": "number",
+      "tender_number": "string",
+      "line_num": "number",
+      "senior_mgr_user_id": "number",
+      "senior_manager_name": "string",
+      "proj_mgr_user_id": "number",
+      "project_manager_name": "string",
+      "proj_engg_user_id": "number",
+      "project_engineer_name": "string",
+      "focal_point_user_id": "number",
+      "focal_point": "string",
+      "comments": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "project_name": "string",
+      "senior_mgr_name": "string",
+      "proj_mgr_name": "string",
+      "proj_engg_name": "string",
+      "focal_point_name": "string"
+
+    }
+
+  },
+  "metadata": {},
+  "eventListeners": {
+    "addRowAction": {
+      "chains": [
+        {
+          "chain": "addRowAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction": {
+      "chains": [
+        {
+          "chain": "onClickDelete",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "buttonAction2": {
+      "chains": [
+        {
+          "chain": "deletePopupClose",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "createBtnAction": {
+      "chains": [
+        {
+          "chain": "createactionchain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "deleteBtnAction": {
+      "chains": [
+        {
+          "chain": "DeletePopupOpen",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "editBtnAction": {
+      "chains": [
+        {
+          "chain": "editModeEnableAction",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}",
+            "key": "{{ $current.key }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "refreshBtnAction": {
+      "chains": [
+        {
+          "chain": "ButtonActionChain1",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "resetBtnAction": {
+      "chains": [
+        {
+          "chain": "ButtonActionChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "saveBtnAction": {
+      "chains": [
+        {
+          "chain": "onClickSave",
+          "parameters": {
+            "event": "{{$event}}",
+            "originalEvent": "{{$event.detail.originalEvent}}"
+          }
+        }
+      ]
+    },
+    "searchProjectAssignmentTblBeforeRowEdit": {
+      "chains": [
+        {
+          "chain": "TableBeforeRowEditChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "accept": "{{$event.detail.accept}}",
+            "rowContext": "{{$event.detail.rowContext}}",
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}"
+          }
+        }
+      ]
+    },
+    "searchProjectAssignmentTblBeforeRowEditEnd": {
+      "chains": [
+        {
+          "chain": "TableBeforeRowEditEndChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "accept": "{{$event.detail.accept}}",
+            "setUpdatedItem": "{{$event.detail.setUpdatedItem}}",
+            "rowContext": "{{$event.detail.rowContext}}",
+            "cancelEdit": "{{$event.detail.cancelEdit}}",
+            "rowKey": "{{$event.detail.rowContext.status.rowKey}}",
+            "rowIndex": "{{$event.detail.rowContext.status.rowIndex}}",
+            "rowData": "{{$event.detail.rowContext.componentElement.getDataForVisibleRow($event.detail.rowContext.status.rowIndex).data}}",
+            "changedRow": "[[ $variables.postAssignmentVar ]]"
+          }
+        }
+      ]
+    },
+    "selectValueItem": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{ $current.key }}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "selectValueItem2": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain1",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{ $current.key }}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "selectValueItem3": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain2",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{ $current.key }}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "selectValueItem4": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain3",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{ $current.key }}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "selectValueItem5": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain4",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{ $current.key }}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}",
+            "index": "{{ $current.index }}",
+            "current": "{{ $current }}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+
+  },
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-smart-search": {
+        "path": "oj-sp/smart-search/loader"
+      },
+      "oj-sp-smart-search-page": {
+        "path": "oj-sp/smart-search-page/loader"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      }
+
+    },
+    "modules": {
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-search.css"
+    ]
+  }
+}

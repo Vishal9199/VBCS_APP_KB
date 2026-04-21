@@ -1,0 +1,128 @@
+{
+    "items": [
+        {
+            "lookup_value_id": 6610,
+            "lookup_value_code": "PIPE_LINE_WORKS_(DI)",
+            "lookup_value_name": "Pipe Line Works (Di)"
+        },
+        {
+            "lookup_value_id": 6611,
+            "lookup_value_code": "PIPE_LINE_WORKS_HDPEPIPE_LINE",
+            "lookup_value_name": "Pipe Line Works Hdpepipe Line"
+        },
+        {
+            "lookup_value_id": 6612,
+            "lookup_value_code": "ELEVATED_WATER_TANKS",
+            "lookup_value_name": "Elevated Water Tanks"
+        },
+        {
+            "lookup_value_id": 6613,
+            "lookup_value_code": "RESERVOIR_WORKS",
+            "lookup_value_name": "Reservoir Works"
+        },
+        {
+            "lookup_value_id": 6614,
+            "lookup_value_code": "PUMP_STATIONS",
+            "lookup_value_name": "Pump Stations"
+        },
+        {
+            "lookup_value_id": 6615,
+            "lookup_value_code": "SUBSTATION",
+            "lookup_value_name": "Substation"
+        },
+        {
+            "lookup_value_id": 6616,
+            "lookup_value_code": "CIVIL",
+            "lookup_value_name": "Civil (Survey,Exclavation & Bedding & Back Filling)"
+        },
+        {
+            "lookup_value_id": 6617,
+            "lookup_value_code": "SCADA",
+            "lookup_value_name": "SCADA"
+        },
+        {
+            "lookup_value_id": 6625,
+            "lookup_value_code": "TENDER_DOCUMENT",
+            "lookup_value_name": "Tender Document"
+        },
+        {
+            "lookup_value_id": 6626,
+            "lookup_value_code": "OUTLINE_PRELIMINARY_DESIGN",
+            "lookup_value_name": "Outline Preliminary Design"
+        },
+        {
+            "lookup_value_id": 6627,
+            "lookup_value_code": "OUTLINE_DETAILED_DESIGN",
+            "lookup_value_name": "Outline Detailed Design"
+        },
+        {
+            "lookup_value_id": 6618,
+            "lookup_value_code": "DE-SALINATION_PLANTS",
+            "lookup_value_name": "De-Salination Plants"
+        },
+        {
+            "lookup_value_id": 6629,
+            "lookup_value_code": "SUPERVISION_CONTRACT_DB",
+            "lookup_value_name": "Supervision Contracts: DB supervision contracts"
+        },
+        {
+            "lookup_value_id": 6631,
+            "lookup_value_code": "SUPERVISION_CONTRACTS:_DBF",
+            "lookup_value_name": "Supervision Contracts: DBF supervision contracts"
+        },
+        {
+            "lookup_value_id": 6628,
+            "lookup_value_code": "OUTLINE_TENDER_DOCUMENT",
+            "lookup_value_name": "Outline Tender Document"
+        },
+        {
+            "lookup_value_id": 6630,
+            "lookup_value_code": "SUPERVISION_CONTRACTS_DETAIL",
+            "lookup_value_name": "Supervision Contracts: Detailed design supervision contracts"
+        },
+        {
+            "lookup_value_id": 6619,
+            "lookup_value_code": "DESIGN",
+            "lookup_value_name": "Design: Outline design contracts"
+        },
+        {
+            "lookup_value_id": 6620,
+            "lookup_value_code": "DESIGN_DETAILED",
+            "lookup_value_name": "Design: Detailed design contracts"
+        },
+        {
+            "lookup_value_id": 6621,
+            "lookup_value_code": "DESIGN_SUPERVISION",
+            "lookup_value_name": "Design and supervision: Outline design and supervision"
+        },
+        {
+            "lookup_value_id": 6622,
+            "lookup_value_code": "DESIGN_SUPERVISION_DETAIL",
+            "lookup_value_name": "Design and supervision: Detailed design and supervision"
+        },
+        {
+            "lookup_value_id": 6623,
+            "lookup_value_code": "PRELIMINARY_DESIGN",
+            "lookup_value_name": "Preliminary Design"
+        },
+        {
+            "lookup_value_id": 6624,
+            "lookup_value_code": "DETAILED_DESIGN",
+            "lookup_value_name": "Detailed Design"
+        }
+    ],
+    "hasMore": false,
+    "limit": 0,
+    "offset": 0,
+    "count": 22,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispdd/lov/attributetype"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispdd/lov/item"
+        }
+    ]
+}

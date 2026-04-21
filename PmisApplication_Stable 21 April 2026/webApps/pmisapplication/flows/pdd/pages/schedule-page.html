@@ -1,0 +1,278 @@
+<div id="sampleDemo" style="" class="demo-padding demo-container">
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+    <div id="mainContent">
+      <div>
+        <oj-sp-advanced-create-edit id="oj_ssce1" page-title="Project Schedule Details Management" page-subtitle=" "
+          display-options.responsive-padding="on" primary-action.label="Close"
+          secondary-actions='[{"label":"Save","id":"save","icon":"oj-ux-ico-save"}]'
+          on-sp-primary-action="[[$listeners.ojSsce1SpPrimaryAction]]"
+          on-sp-secondary-action="[[$listeners.ojSsce1SpSecondaryAction]]">
+
+          <div slot="main" style="padding-top: 0; margin-top: 0;">
+            <div style="margin-top: 0;">
+
+              <!-- Project Details Section (Fixed Panel) -->
+              <oj-collapsible id="project-details-section" expanded="true"
+                class="oj-panel oj-panel-shadow-md oj-selected" style="margin-top: 0;" disabled="true">
+                <span slot="header" style="font-weight: bold; color: white;">Project Details</span>
+                <div style="padding: 1rem;">
+                  <oj-form-layout max-columns="3" label-edge="start" label-width="45%" colspan-wrap="wrap"
+                    user-assistance-density="compact">
+
+                    <oj-input-text id="projectNumber" label-hint="Project Number" placeholder="Project Number"
+                      value="[[ $variables.headerDtls.projectNumber ]]" style="width: 16rem;" disabled="true">
+                    </oj-input-text>
+
+                    <oj-input-text id="projectName" label-hint="Project Name" placeholder="Project Name"
+                      value="[[ $variables.headerDtls.projectName ]]" style="width: 16rem;" disabled="true">
+                    </oj-input-text>
+
+                    <oj-input-text id="tenderNumber" label-hint="Tender Number" placeholder="Tender Number"
+                      value="[[ $variables.headerDtls.tenderNumber ]]" style="width: 16rem;" disabled="true">
+                    </oj-input-text>
+
+                  </oj-form-layout>
+                </div>
+              </oj-collapsible>
+
+              <!-- Schedule Section -->
+              <!-- <oj-collapsible id="schedule-section" expanded="true" class="oj-panel oj-panel-shadow-md oj-selected"
+                style="margin-top: 0.25rem;" disabled="true">
+                <span slot="header" style="font-weight: bold; color: white;">Schedule</span> -->
+                <div style="oj-flex; margin-top: 0.25rem; padding: 0.1rem;" class="oj-panel oj-selected">
+
+                  <!-- Action Buttons Row -->
+                  <!-- Header Row -->
+                  <div class="oj-flex oj-sm-justify-content-space-between oj-sm-align-items-center"
+                    style="margin-bottom: 0.5rem; background-color: #084c4c;">
+
+                    <!-- Left: Heading -->
+                    <h6 style="margin: 0; color: white;">Schedule</h6>
+
+                    <!-- Right: Add Button -->
+                    <oj-button id="addRowBtn" label="Add New Row" chroming="outlined"
+                      class="demo-button-primary oj-sm-align-self-center" on-oj-action="[[$listeners.addRowAction]]"
+                      style="margin-top: 3px; margin-right: 3px;">
+                      <span slot="startIcon" class="oj-ux-ico-plus"></span>
+                    </oj-button>
+                    <!-- </div> -->
+                  
+                    <!-- Log Button -->
+                  <!-- <div class="oj-flex-item oj-sm-12 oj-md-12"></div>
+                    <div class="oj-flex-item oj-sm-12 oj-md-1">
+                      <oj-button id="logBtn" label="Log" class="" on-oj-action="[[$listeners.logAction]]">
+                        <span slot="startIcon" class="oj-ux-ico-log" style="color: white;"></span>
+                      </oj-button>
+                    </div>
+                  </div> -->
+
+                </div>
+
+                  <!-- Inline Editable Schedule Table -->
+                  <div class="oj-flex">
+                    <oj-table scroll-policy="loadMoreOnScroll" class="oj-flex-item oj-sm-12 oj-md-12" id="scheduleTable"
+                      data="[[ $variables.bufferDPSchedule.instance ]]" style="height: 50vh;" edit-mode="rowEdit"
+                      selection-mode.row="single" on-oj-before-row-edit="[[$listeners.tblBeforeRowEdit]]"
+                      on-oj-before-row-edit-end="[[$listeners.tblBeforeRowEditEnd]]" selection-mode.column="single" display="grid"
+                      horizontal-grid-visible="enabled" vertical-grid-visible="enabled" edit-row="{{ $variables.rowToEdit }}"
+                      columns="{{ $constants.scheduleColumns }}">
+                  
+                      <!-- Action Column Template -->
+                      <template slot="Action" tabindex="-1">
+                        <oj-button display="icons" chroming="borderless" title="Edit Row" class="" tabindex="-1"
+                          on-oj-action="[[$listeners.buttonAction]]">
+                          <span class="oj-ux-ico-edit" style="font-size: 18px;"></span>
+                        </oj-button>
+                        <oj-button display="icons" chroming="borderless" on-oj-action="[[$listeners.deleteAction]]" 
+                        title="Delete Row" class="" tabindex="-1">
+                          <span class="oj-ux-ico-delete-all" style="font-size: 18px;"></span>
+                        </oj-button>
+                      </template>
+                  
+                      <!-- Milestone Column Template -->
+                      <template slot="Milestone">
+                        <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                          <oj-select-single value="{{ $variables.lvCurrentRow.milestone_id }}" data="[[ $variables.milestoneListSDP ]]"
+                            item-text="lookup_value_name" placeholder="Select Milestone" required="true" style="width: 100%;"
+                            id="milestone_lov" label-hint="Milestone">
+                            <!-- <template slot="itemTemplate" data-oj-as="item">
+                              <oj-bind-text value="[[ item.data.lookup_value_name ]]"></oj-bind-text>
+                            </template> -->
+                          </oj-select-single>
+                        </oj-bind-if>
+                      </template>
+                  
+                      <!-- Planned Start Date Column Template -->
+                      <template slot="PlannedStartDate">
+                        <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                          <!-- <oj-bind-text value="[[ $application.functions.dateConverion($current.data) || null ]]"></oj-bind-text> -->
+                          <oj-input-date value="[[ $current.data ]]" readonly="true"
+                            converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'></oj-input-date>
+                        </oj-bind-if>
+
+                        <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                          <oj-input-date value="{{ $variables.lvCurrentRow.planned_start_date }}"
+                            converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' required="true" style="width: 100%;">
+                          </oj-input-date>
+                        </oj-bind-if>
+                      </template>
+                  
+                      <!-- Planned End Date Column Template -->
+                      <template slot="PlannedEndDate">
+                        <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                          <!-- <oj-bind-text value="[[ $application.functions.dateConverion($current.data) || null ]]"></oj-bind-text> -->
+                          <oj-input-date value="[[ $current.data ]]" readonly="true" converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'>
+                          </oj-input-date>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                          <oj-input-date value="{{ $variables.lvCurrentRow.planned_end_date }}"
+                            converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' required="true" style="width: 100%;">
+                          </oj-input-date>
+                        </oj-bind-if>
+                      </template>
+                  
+                      <!-- Revised Start Date Column Template -->
+                      <template slot="RevisedStartDate">
+                        <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                          <!-- <oj-bind-text value="[[ $application.functions.dateConverion($current.data) || null ]]"></oj-bind-text> -->
+                          <oj-input-date value="[[ $current.data ]]" readonly="true"
+                          converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'></oj-input-date>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                          <oj-input-date value="{{ $variables.lvCurrentRow.revised_start_date }}"
+                            converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' style="width: 100%;">
+                          </oj-input-date>
+                        </oj-bind-if>
+                      </template>
+                  
+                      <!-- Revised End Date Column Template -->
+                      <template slot="RevisedEndDate">
+                        <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                          <!-- <oj-bind-text value="[[ $application.functions.dateConverion($current.data) || null ]]"></oj-bind-text> -->
+                          <oj-input-date value="[[ $current.data ]]" readonly="true"
+                          converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'></oj-input-date>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                          <oj-input-date value="{{ $variables.lvCurrentRow.revised_end_date }}"
+                            converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' style="width: 100%;">
+                          </oj-input-date>
+                        </oj-bind-if>
+                      </template>
+                  
+                      <!-- Actual Start Date Column Template -->
+                      <template slot="ActualStartDate">
+                        <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                          <!-- <oj-bind-text value="[[ $application.functions.dateConverion($current.data) || null ]]"></oj-bind-text> -->
+                          <oj-input-date value="[[ $current.data ]]" readonly="true"
+                          converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'></oj-input-date>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                          <oj-input-date value="{{ $variables.lvCurrentRow.actual_start_date }}"
+                            converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' style="width: 100%;">
+                          </oj-input-date>
+                        </oj-bind-if>
+                      </template>
+                  
+                      <!-- Actual End Date Column Template -->
+                      <template slot="ActualEndDate">
+                        <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                          <!-- <oj-bind-text value="[[ $application.functions.dateConverion($current.data) || null ]]"></oj-bind-text> -->
+                          <oj-input-date value="[[ $current.data ]]" readonly="true"
+                          converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'></oj-input-date>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                          <oj-input-date value="{{ $variables.lvCurrentRow.actual_end_date }}"
+                            converter='{"type":"datetime","options":{"pattern":"dd-MMM-yyyy"}}' style="width: 100%;">
+                          </oj-input-date>
+                        </oj-bind-if>
+                      </template>
+                  
+                      <!-- Last Update Date Column Template (Readonly) -->
+                      <template slot="LastUpdateDate">
+                        <!-- <oj-bind-text value="[[ $application.functions.dateConverion($current.data) || null ]]"></oj-bind-text> -->
+                        <oj-input-date value="[[ $current.data ]]" readonly="true"
+                        converter='{"type": "datetime", "options": {"pattern":"dd-MMM-yyyy"}}'></oj-input-date>
+                      </template>
+                  
+                      <!-- Remarks Column Template -->
+                      <template slot="Remarks">
+                        <oj-bind-if test="[[ $current.mode === 'navigation' ]]">
+                          <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                        </oj-bind-if>
+                        <oj-bind-if test="[[ $current.mode === 'edit' ]]">
+                          <oj-input-text value="{{ $variables.lvCurrentRow.comments }}" style="width: 100%;">
+                          </oj-input-text>
+                        </oj-bind-if>
+                      </template>
+                  
+                    </oj-table>
+                  </div>
+
+
+              <!-- </oj-collapsible> -->
+                  <!-- Modified Records Display -->
+                  <oj-text-area label-hint="Modified Records" id="bufferContent" rows="5"
+                    style="width: 100%; margin-bottom: 1rem; display: none;" readonly="true">
+                  </oj-text-area>
+
+              </div>
+            </div>
+          </div>
+        </oj-sp-advanced-create-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Dialog -->
+<oj-dialog id="deleteDialog" dialog-title="Confirm Delete" cancel-behavior="icon" resize-behavior="resizable"
+  drag-affordance="title-bar" position.at.vertical="top" style="width: 400px;">
+  <div slot="body">
+    <p>Are you sure you want to delete this schedule record?</p>
+  </div>
+  <div slot="footer">
+    <oj-button label="Yes" id="confirmDeleteBtn" chroming="callToAction" class="demo-button-primary"
+      on-oj-action="[[$listeners.confirmDeleteAction]]">
+    </oj-button>
+    <oj-button label="No" id="cancelDeleteBtn" on-oj-action="[[$listeners.cancelDeleteAction]]">
+    </oj-button>
+  </div>
+</oj-dialog>
+
+<oj-dialog dialog-title="About" id="aboutDialog" cancel-behavior="icon" style="width: 450px; overflow: hidden;"
+  resize-behavior="resizable" position.my.vertical="top" position.at.vertical="top" drag-affordance="title-bar"
+  header-decoration="off">
+  <div slot="body">
+    <div class="oj-flex">
+      <div class="oj-flex-item oj-sm-12 oj-md-12">
+        <oj-form-layout label-edge='start' columns="1" style="margin-top:23px;margin-left:-20px"
+          user-assistance-density="compact" direction="column" class="oj-formlayout-full-width"
+          label-width="45%">
+          <oj-input-text label-hint="Created By:" style="margin-bottom: -6px;" value="{{ $variables.about.created_by }}"
+            readonly="true" user-assistance-density="compact">
+          </oj-input-text>
+          <oj-input-text label-hint="Created Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.created_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated By:" style="margin-bottom: -6px;"
+            value="{{ $variables.about.last_updated_by }}" readonly="true" user-assistance-density="compact"></oj-input-text>
+          <oj-input-text label-hint="Last Updated Date:" readonly="true" style="margin-bottom: -6px;"
+            user-assistance-density="compact"
+            converter='[[ {    "type": "datetime",    "options": {        "pattern": "dd-MMM-yyyy hh:mm a"    }} ]]'
+            value="{{ $variables.about.last_updated_date }}"></oj-input-text>
+          <oj-input-text label-hint="Last Updated Login:" value="{{ $variables.about.last_updated_login }}" style="margin-bottom: -6px;"
+            readonly="true" user-assistance-density="compact">
+          </oj-input-text>
+        </oj-form-layout>
+      </div>
+    </div>
+  </div>
+  <div slot="footer">
+    <oj-button id="aboutButtonCancel_AC" label="Ok"
+      chroming="outlined" style="margin-top:-20px !important;" on-oj-action="[[$listeners.aboutButtonCancelACAction]]"></oj-button>
+  </div>
+</oj-dialog>

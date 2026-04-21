@@ -1,0 +1,255 @@
+{
+  "title": "Completion Add/Edit",
+  "description": "Add/Edit page for OPD Completion Details with Tender & Project Information and Contract Information sections.",
+  "imports": {
+    "components": {
+      "oj-button": {
+        "path": "ojs/ojbutton"
+      },
+      "oj-collapsible": {
+        "path": "ojs/ojcollapsible"
+      },
+      "oj-dialog": {
+        "path": "ojs/ojdialog"
+      },
+      "oj-form-layout": {
+        "path": "ojs/ojformlayout"
+      },
+      "oj-input-date": {
+        "path": "ojs/ojdatetimepicker"
+      },
+      "oj-input-number": {
+        "path": "ojs/ojinputnumber"
+      },
+      "oj-input-text": {
+        "path": "ojs/ojinputtext"
+      },
+      "oj-select-single": {
+        "path": "ojs/ojselectsingle"
+      },
+      "oj-sp-advanced-create-edit": {
+        "path": "oj-sp/advanced-create-edit/loader"
+      },
+      "oj-switch": {
+        "path": "ojs/ojswitch"
+      },
+      "oj-bind-text": {
+        "path": "ojs/ojbindtext"
+      },
+      "oj-bind-if": {
+        "path": "ojs/ojbindif"
+      },
+      "oj-progress-bar": {
+        "path": "ojs/ojprogress-bar"
+      },
+      "oj-progress-circle": {
+        "path": "ojs/ojprogress-circle"
+      },
+      "oj-table": {
+        "path": "ojs/ojtable"
+      },
+      "oj-validation-group": {
+        "path": "ojs/ojvalidationgroup"
+      },
+      "oj-sp-simple-create-edit": {
+        "path": "oj-sp/simple-create-edit/loader"
+      }
+
+    },
+    "modules": {
+      "ojConverterNumber": {
+        "path": "ojs/ojconverter-number"
+      },
+      "ojValidationDateTime": {
+        "path": "ojs/ojvalidation-datetime"
+      }
+    },
+    "css": [
+      "/resources/css/pmis-addedit.css"
+    ]
+  },
+  "types": {
+    "@decorators.getPmispddCompletionadminLovTendernumberResponse": {
+      "endpoint": "getPmispddCompletionadminLovTendernumber",
+      "service": "PDD",
+      "path": "response"
+    },
+    "CompletionType": {
+      "completion_id": "number",
+      "object_version_num": "number",
+      "ora_project_id": "number",
+      "ora_project_number": "string",
+      "ora_project_name": "string",
+      "tender_id": "number",
+      "tender_number": "string",
+      "tender_name": "string",
+      "five_year_plan_name": "string",
+      "supplier_id": "number",
+      "supplier_name": "string",
+      "consultant_name": "string",
+      "commencement_date": "string",
+      "completion_close_flag": "string",
+      "completion_prime": "number",
+      "orig_completion_date": "string",
+      "extended_completion_date": "string",
+      "actual_completion_date": "string",
+      "additional_info": "string",
+      "created_by": "string",
+      "created_date": "string",
+      "last_updated_by": "string",
+      "last_updated_date": "string",
+      "last_updated_login": "string"
+    },
+    "getPmispddCompletionadminLovTendernumberResponse": {
+      "items": [
+        {
+          "project_id": "number",
+          "project_name": "string",
+          "project_number": "string",
+          "supplier_id": "number",
+          "supplier_name": "string",
+          "tender_id": "number",
+          "tender_name": "string",
+          "tender_number": "string"
+        }
+      ]
+    },
+    "ProjectInfoType": {
+      "ora_project_id": "number",
+      "tender_id": "number",
+      "project_name": "string",
+      "project_number": "string",
+      "tender_number": "string",
+      "tender_name": "string",
+      "contractor_name": "string"
+    }
+  },
+  "variables": {
+    "completionVar": {
+      "type": "CompletionType",
+      "defaultValue": {
+        "completion_prime": 1,
+        "five_year_plan_name": "VBCSNEW",
+        "completion_close_flag": "N"
+      }
+    },
+    "getPmispddCompletionadminLovTendernumberListSDP": {
+      "type": "vb/ServiceDataProvider",
+      "defaultValue": {
+
+        "keyAttributes": "tender_id",
+        "itemsPath": "items",
+        "responseType": "getPmispddCompletionadminLovTendernumberResponse",
+        "transformsContext": {
+          "vb-textFilterAttributes": [
+            "tender_number",
+            "tender_name"
+          ]
+        },
+        "fetchChain": "getPmispddCompletionadminLovTendernumberFetch"
+      }
+    },
+    "pNavCode": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "pNavId": {
+      "type": "string",
+      "required": true,
+      "input": "fromUrl"
+    },
+    "pageMode": {
+      "type": "string",
+      "defaultValue": "CREATE"
+    },
+    "aToolBar": {
+      "type": "object[]",
+      "defaultValue": [
+        {
+          "label": "Save",
+          "id": "save",
+          "icon": "oj-ux-ico-save"
+        }
+      ]
+    },
+    "pNavIdEncrypted": {
+      "type": "string"
+    },
+    "tenderNumberADP": {
+      "type": "vb/ArrayDataProvider2",
+      "defaultValue": {
+        "itemType": "object",
+        "keyAttributes": "tender_id"
+      }
+    },
+    "tenderProjectFormGroup": {
+      "type": "string"
+    }
+
+  },
+  "metadata": {},
+  "eventListeners": {
+    "completionAddEditIdSpPrimaryAction": {
+      "chains": [
+        {
+          "chain": "cancelactionchain",
+          "parameters": {
+            "event": "{{$event}}"
+          }
+        }
+      ]
+    },
+    "completionAddEditIdSpSecondaryAction": {
+      "chains": [
+        {
+          "chain": "secondary_AC",
+          "parameters": {
+            "event": "{{$event}}",
+            "secondaryItem": "{{$event.detail.secondaryItem}}",
+            "actionId": "{{$event.detail.secondaryItem}}"
+          }
+        }
+      ]
+    },
+    "completionFlagValue": {
+      "chains": [
+        {
+          "chain": "SwitchValueChangeChain1",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{ $event.detail.value }}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}"
+          }
+        }
+      ]
+    },
+    "tenderNumberValueItem": {
+      "chains": [
+        {
+          "chain": "SelectValueItemChangeChain",
+          "parameters": {
+            "event": "{{$event}}",
+            "previousValue": "{{$event.detail.previousValue}}",
+            "value": "{{$event.detail.value}}",
+            "updatedFrom": "{{$event.detail.updatedFrom}}",
+            "key": "{{$event.detail.value.key}}",
+            "data": "{{$event.detail.value.data}}",
+            "metadata": "{{$event.detail.value.metadata}}",
+            "valueItem": "{{ $event.detail.value }}"
+          }
+        }
+      ]
+    },
+    "vbEnter": {
+      "chains": [
+        {
+          "parameters": {},
+          "chain": "vbEnterListener"
+        }
+      ]
+    }
+
+  }
+}

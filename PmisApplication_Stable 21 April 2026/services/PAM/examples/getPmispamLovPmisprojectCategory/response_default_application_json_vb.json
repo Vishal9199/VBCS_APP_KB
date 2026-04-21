@@ -1,0 +1,52 @@
+{
+    "items": [
+        {
+            "lookup_value_id": 6217,
+            "lookup_value_code": "SMALL",
+            "lookup_value_name": "Small"
+        },
+        {
+            "lookup_value_id": 6219,
+            "lookup_value_code": "SPONSOR",
+            "lookup_value_name": "Sponsor"
+        },
+        {
+            "lookup_value_id": 6220,
+            "lookup_value_code": "PDD",
+            "lookup_value_name": "PDD"
+        },
+        {
+            "lookup_value_id": 6222,
+            "lookup_value_code": "ADHOC",
+            "lookup_value_name": "Adhoc"
+        },
+        {
+            "lookup_value_id": 6218,
+            "lookup_value_code": "LARGE",
+            "lookup_value_name": "Large"
+        },
+        {
+            "lookup_value_id": 6221,
+            "lookup_value_code": "OPD",
+            "lookup_value_name": "OPD"
+        }
+    ],
+    "hasMore": false,
+    "limit": 25,
+    "offset": 0,
+    "count": 6,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/lov/pmisproject/category"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/metadata-catalog/pmispam/lov/pmisproject/item"
+        },
+        {
+            "rel": "first",
+            "href": "https://nwsuatapex.nws.nama.om/ords/nws_cust/pmispam/lov/pmisproject/category"
+        }
+    ]
+}
